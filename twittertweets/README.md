@@ -1,2 +1,0 @@
-# twittertweets
-auto tweet pushing
