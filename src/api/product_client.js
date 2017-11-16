@@ -1,6 +1,4 @@
-import axios from 'axios'
-import api from './index'
-import CPTApiClient from './cpt'
+import CPTApiClient from './cpt_client'
 
 class ProductApiClient extends CPTApiClient {
   constructor() {

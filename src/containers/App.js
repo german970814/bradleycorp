@@ -1,36 +1,15 @@
 import React, { Component } from 'react'
-
+import Product from '../components/Product/Product'
 import style from './App.scss'
 
-import ProductApiClient from '../api/product'
-
-export default class App extends Component {
-  constructor(props){
-    super(props)
-
-    this.state = {
-      title: ''
-    }
-  }
-
-  componentDidMount() {
-
-    return getProduct().then( product => {
-      this.setState({ title: product.data["post_title"] })
-    })
-  }
+class App extends Component {
 
   render() {
 
     return (
-      <div className={style.color}>
-        {this.state.title}
-      </div>
+      <Product />
     )
   }
 }
 
-function getProduct() {
-  let productApiClient = new ProductApiClient()
-  return productApiClient.getById(9)
-}
+export default App
