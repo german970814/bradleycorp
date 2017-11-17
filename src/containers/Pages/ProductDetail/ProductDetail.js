@@ -38,9 +38,9 @@ ProductDetail.propTypes = {
   match: PropTypes.object.isRequired
 }
 
-function getProductById ( id ) {
+function getProductById (id) {
   const productApiClient = new ProductApiClient()
-  return productApiClient.getById( id )
+  return productApiClient.getById(id)
 }
 
 export default ProductDetail
