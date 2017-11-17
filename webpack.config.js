@@ -66,7 +66,11 @@ const config = {
     }),
   ],
 
-  devtool: 'source-map'
+  devtool: 'source-map',
+
+  devServer: {
+    historyApiFallback: true,
+  }
 }
 
 module.exports = config

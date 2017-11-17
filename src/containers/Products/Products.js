@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import ProductApiClient from '../../api/product_client'
 import Product from '../../components/Product/Product'
-import style from './Products.scss'
+// import style from './Products.scss'
 
 class Products extends Component {
-  constructor(props){
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -14,20 +14,18 @@ class Products extends Component {
     this.renderProducts = this.renderProducts.bind(this)
   }
 
-  componentDidMount() {
-
+  componentDidMount () {
     return getProducts()
-      .then( products => {
+      .then(products => {
         this.setState({ products: products.data.posts })
       })
-      .catch( err => {
+      .catch(err => {
         console.log(err)
       })
   }
 
-  renderProducts() {
-
-    return this.state.products.map( product => {
+  renderProducts () {
+    return this.state.products.map(product => {
       return (
         <Product
           key={product.ID}
@@ -36,8 +34,7 @@ class Products extends Component {
     })
   }
 
-  render() {
-
+  render () {
     return (
       <ul>
         {this.renderProducts()}
@@ -46,13 +43,8 @@ class Products extends Component {
   }
 }
 
-function getProduct() {
-  let productApiClient = new ProductApiClient()
-  return productApiClient.getById(9)
-}
-
-function getProducts() {
-  let productApiClient = new ProductApiClient()
+function getProducts () {
+  const productApiClient = new ProductApiClient()
   return productApiClient.get()
 }
 
