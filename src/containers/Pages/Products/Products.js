@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import ProductApiClient from '../../api/product_client'
-import Product from '../../components/Product/Product'
+import ProductApiClient from '../../../api/product_client'
+import Product from '../../../components/Product/Product'
 // import style from './Products.scss'
 
 class Products extends Component {
