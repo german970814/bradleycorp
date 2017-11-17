@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import Products from '../Products/Products'
+import Products from '../../containers/Products/Products'
 import Home from '../Home/Home'
-// import style from './App.scss'
+// import style from './Main.scss'
 
-class App extends Component {
+class Main extends Component {
   render () {
     return (
       <Switch>
@@ -16,4 +16,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default Main
