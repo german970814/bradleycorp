@@ -1,14 +1,14 @@
 import React from 'react'
 import NavMenu from '../../components/NavMenu/NavMenu'
-import style from './Header.scss'
+import style from './Footer.scss'
 
-const Header = ({ menuItems }) => {
+const Footer = ({ menuItems }) => {
   return (
-    <header className={style.header}>
+    <footer className={style.footer}>
       <NavMenu
         menuItems={menuItems} />
-    </header>
+    </footer>
   )
 }
 
-export default Header
+export default Footer
