@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import NavMenu from '../../components/NavMenu/NavMenu'
 import style from './Header.scss'
 
@@ -9,6 +10,10 @@ const Header = ({ menuItems }) => {
         menuItems={menuItems} />
     </header>
   )
+}
+
+Header.propTypes = {
+  menuItems: PropTypes.array
 }
 
 export default Header

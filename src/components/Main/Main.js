@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import Products from '../Pages/Products/Products'
 import ProductDetail from '../../containers/Pages/ProductDetail/ProductDetail'
 import Home from '../Pages/Home/Home'
@@ -17,7 +18,7 @@ class Main extends Component {
     )
   }
 
-  ProductsWithProps() {
+  ProductsWithProps () {
     const products = this.props.products.posts || []
 
     return (
@@ -25,6 +26,10 @@ class Main extends Component {
         products={products} />
     )
   }
+}
+
+Main.propTypes = {
+  products: PropTypes.array.isRequired
 }
 
 export default Main

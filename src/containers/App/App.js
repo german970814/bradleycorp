@@ -12,21 +12,21 @@ class App extends Component {
     super(props)
 
     this.state = {
-      menuItems: [],
+      menuItems: []
 
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     const requests = this.createInitRequests()
 
     return this.sendInitRequests(requests)
-    .then( responses => {
-      this.setInitState( requests, responses )
-    })
-    .catch( err => {
-      console.log(err)
-    })
+      .then(responses => {
+        this.setInitState(requests, responses)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   render () {
@@ -42,7 +42,7 @@ class App extends Component {
     )
   }
 
-  createInitRequests() {
+  createInitRequests () {
     const productApiClient = new ProductApiClient()
 
     return {
@@ -51,20 +51,19 @@ class App extends Component {
     }
   }
 
-  sendInitRequests( requests ) {
-    return Promise.all( Object.values(requests) )
+  sendInitRequests (requests) {
+    return Promise.all(Object.values(requests))
   }
 
-  setInitState( requests, responses ) {
-    let newState = {}
+  setInitState (requests, responses) {
+    const newState = {}
 
-    Object.keys(requests).forEach( (key, index) => {
+    Object.keys(requests).forEach((key, index) => {
       newState[key] = responses[index].data
     })
 
-    return this.setState( newState )
+    return this.setState(newState)
   }
 }
-
 
 export default App

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ProductApiClient from '../../../api/product_client'
+import PropTypes from 'prop-types'
 import Product from '../../Product/Product'
 // import style from './Products.scss'
 
@@ -27,6 +27,10 @@ class Products extends Component {
       </ul>
     )
   }
+}
+
+Products.propTypes = {
+  products: PropTypes.array.isRequired
 }
 
 export default Products
