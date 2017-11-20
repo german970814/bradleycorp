@@ -12,8 +12,8 @@ class App extends Component {
     super(props)
 
     this.state = {
-      menuItems: []
-
+      menuItems: [],
+      products: {}
     }
   }
 

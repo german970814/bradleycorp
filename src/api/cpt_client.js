@@ -13,6 +13,13 @@ class CPTApiClient {
     return axios.get(url, { params })
   }
 
+  getBySlug (slug) {
+    const url = `${api.baseURL}${this.cptName}`
+    const params = { slug }
+
+    return axios.get(url, { params })
+  }
+
   get (page = 1) {
     const args = {
       'post_type': this.cptName,

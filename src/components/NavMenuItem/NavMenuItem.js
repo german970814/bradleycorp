@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 const NavMenuItem = ({ menuItem }) => {
   return (
     <li>
-      <Link to={getLinkURL(menuItem)} replace>
+      <Link to={formatLinkURL(menuItem['url'])} replace>
         {menuItem['title']}
       </Link>
     </li>
@@ -15,23 +15,6 @@ const NavMenuItem = ({ menuItem }) => {
 
 NavMenuItem.propTypes = {
   menuItem: PropTypes.object.isRequired
-}
-
-function getLinkURL (menuItem) {
-  let url = ''
-
-  switch (menuItem['type_label']) {
-    case 'Custom Link':
-      url = menuItem['url']
-      break
-    case 'Page':
-      url = menuItem['url']
-      break
-    default:
-      url = menuItem['guid']
-      break
-  }
-  return formatLinkURL(url)
 }
 
 function formatLinkURL (linkURL) {

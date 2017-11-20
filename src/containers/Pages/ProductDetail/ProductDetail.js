@@ -11,20 +11,21 @@ class ProductDetail extends Component {
       product: {}
     }
 
-    this.productId = this.props.match.params.id
+    this.getProductInfo = this.getProductInfo.bind(this)
   }
 
-  componentDidMount () {
-    return getProductById(this.productId)
-      .then(product => {
-        this.setState({ product: product.data })
-      })
-      .catch(err => {
-        console.log(err)
-      })
+  componentWillMount () {
+    this.getProductInfo()
+  }
+
+  componentDidUpdate(prevProps) {
+    if( prevProps.match.params.slug != this.props.match.params.slug ){
+      this.getProductInfo()
+    }
   }
 
   render () {
+
     return (
       <section>
         <h1>{this.state.product['post_title']}</h1>
@@ -32,15 +33,27 @@ class ProductDetail extends Component {
       </section>
     )
   }
+
+  getProductInfo() {
+    const productSlug = this.props.match.params.slug
+
+    return getProductBySlug(productSlug)
+      .then(product => {
+        return this.setState({ product: product.data })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
 }
 
 ProductDetail.propTypes = {
   match: PropTypes.object.isRequired
 }
 
-function getProductById (id) {
+function getProductBySlug (slug) {
   const productApiClient = new ProductApiClient()
-  return productApiClient.getById(id)
+  return productApiClient.getBySlug(slug)
 }
 
 export default ProductDetail

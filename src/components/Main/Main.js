@@ -8,12 +8,11 @@ import Home from '../Pages/Home/Home'
 
 class Main extends Component {
   render () {
-    console.log(this.props)
     return (
       <Switch>
         <Route exact path='/' component={Home}/>
         <Route exact path='/products' render={this.ProductsWithProps.bind(this)}/>
-        <Route path='/product/:id' component={ProductDetail}/>
+        <Route exact path='/archives/product/:slug' component={ProductDetail}/>
       </Switch>
     )
   }
@@ -29,7 +28,7 @@ class Main extends Component {
 }
 
 Main.propTypes = {
-  products: PropTypes.array.isRequired
+  products: PropTypes.object.isRequired
 }
 
 export default Main
