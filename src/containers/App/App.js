@@ -42,6 +42,11 @@ class App extends Component {
     )
   }
 
+  /*
+  * Here we add any network requests we want to be called on App init
+  * - rememeber to add a default value to the state in the constructor
+  * - the finial App state will take this shape
+  */
   createInitRequests () {
     const productApiClient = new ProductApiClient()
 
@@ -51,6 +56,9 @@ class App extends Component {
     }
   }
 
+  /*
+  * we can use this Promise to know when all init network requests are complete
+  */
   sendInitRequests (requests) {
     return Promise.all(Object.values(requests))
   }

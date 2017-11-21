@@ -17,9 +17,11 @@ class Main extends Component {
     )
   }
 
+  /*
+  * We need to pass some props from App to the routed components
+  */
   ProductsWithProps () {
     const products = this.props.products.posts || []
-
     return (
       <Products
         products={products} />

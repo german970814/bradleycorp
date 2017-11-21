@@ -18,14 +18,13 @@ class ProductDetail extends Component {
     this.getProductInfo()
   }
 
-  componentDidUpdate(prevProps) {
-    if( prevProps.match.params.slug != this.props.match.params.slug ){
+  componentDidUpdate (prevProps) {
+    if (prevProps.match.params.slug !== this.props.match.params.slug) {
       this.getProductInfo()
     }
   }
 
   render () {
-
     return (
       <section>
         <h1>{this.state.product['post_title']}</h1>
@@ -34,7 +33,7 @@ class ProductDetail extends Component {
     )
   }
 
-  getProductInfo() {
+  getProductInfo () {
     const productSlug = this.props.match.params.slug
 
     return getProductBySlug(productSlug)
