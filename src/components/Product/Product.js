@@ -9,10 +9,10 @@ const Product = ({ product }) => {
     <li>
       <h1>
         <Link to={bcorpUrl.createCPTUrl(product)} replace>
-          {product['post_title']}
+          {product.post['post_title']}
         </Link>
       </h1>
-      <p>{product['post_content']}</p>
+      <p>{product.post['post_content']}</p>
     </li>
   )
 }

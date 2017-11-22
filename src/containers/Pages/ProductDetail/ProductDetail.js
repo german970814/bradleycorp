@@ -8,7 +8,15 @@ class ProductDetail extends Component {
     super(props)
 
     this.state = {
-      product: {}
+      product: {
+        post: {},
+        meta: {
+          'product_media': {
+            'images': []
+          }
+        },
+        terms: {}
+      }
     }
 
     this.getProductInfo = this.getProductInfo.bind(this)
@@ -27,8 +35,9 @@ class ProductDetail extends Component {
   render () {
     return (
       <section>
-        <h1>{this.state.product['post_title']}</h1>
-        <p>{this.state.product['post_content']}</p>
+        <h1>{this.state.product.post['post_title']}</h1>
+        <p>{this.state.product.post['post_content']}</p>
+        <img src={this.state.product.meta['product_media']['images'][0]}></img>
       </section>
     )
   }
@@ -38,6 +47,7 @@ class ProductDetail extends Component {
 
     return getProductBySlug(productSlug)
       .then(product => {
+        console.log(product)
         return this.setState({ product: product.data })
       })
       .catch(err => {

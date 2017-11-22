@@ -28,6 +28,12 @@ class CPTApiClient {
 
     return api.query({ args })
   }
+
+  getTerms () {
+    const url = `${api.baseURL}${this.cptName}-terms`
+
+    return api.get(url)
+  }
 }
 
 export default CPTApiClient

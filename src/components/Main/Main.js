@@ -11,26 +11,10 @@ class Main extends Component {
     return (
       <Switch>
         <Route exact path='/' component={Home}/>
-        <Route exact path='/products' render={this.ProductsWithProps.bind(this)}/>
         <Route exact path='/archives/product/:slug' component={ProductDetail}/>
       </Switch>
     )
   }
-
-  /*
-  * We need to pass some props from App to the routed components
-  */
-  ProductsWithProps () {
-    const products = this.props.products.posts || []
-    return (
-      <Products
-        products={products} />
-    )
-  }
-}
-
-Main.propTypes = {
-  products: PropTypes.object.isRequired
 }
 
 export default Main

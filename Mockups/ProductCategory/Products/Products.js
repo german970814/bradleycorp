@@ -10,8 +10,20 @@ class Products extends Component {
     this.renderProducts = this.renderProducts.bind(this)
   }
 
+  componentWillMount() {
+    let newProducts = productApiClient.getProductsWithFilters( this.props.filters )
+    this.setState( products: newProducts );
+  }
+
+  componentDidUpdate (prevProps) {
+    if (prevProps.filters !== this.props.filters) {
+      let newProducts = productApiClient.getProductsWithFilters( this.props.filters )
+      this.setState( products: newProducts );
+    }
+  }
+
   renderProducts () {
-    return this.props.products.map(product => {
+    return this.state.products.map(product => {
       return (
         <Product
           key={product.ID}
@@ -19,18 +31,6 @@ class Products extends Component {
       )
     })
   }
-
-  render () {
-    return (
-      <ul>
-        {this.renderProducts()}
-      </ul>
-    )
-  }
-}
-
-Products.propTypes = {
-  products: PropTypes.array.isRequired
 }
 
 export default Products

@@ -15,7 +15,7 @@ class ProductCategory extends Component {
     let filters = {}
 
     filters.topLevelCat = this.props.category
-    filters.categories = getCategoryFilters()
+    filters.categories = getCategoryFilters() // use getTerms in product api client
 
     this.setState({ filters })
   }

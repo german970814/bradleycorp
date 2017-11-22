@@ -12,8 +12,7 @@ class App extends Component {
     super(props)
 
     this.state = {
-      menuItems: [],
-      products: {}
+      menuItems: []
     }
   }
 
@@ -45,14 +44,11 @@ class App extends Component {
   /*
   * Here we add any network requests we want to be called on App init
   * - rememeber to add a default value to the state in the constructor
-  * - the finial App state will take this shape
+  * - the final top level App state will take this shape
   */
   createInitRequests () {
-    const productApiClient = new ProductApiClient()
-
     return {
-      menuItems: NavMenuApiClient.getNavMenu(),
-      products: productApiClient.get()
+      menuItems: NavMenuApiClient.getNavMenu()
     }
   }
 
