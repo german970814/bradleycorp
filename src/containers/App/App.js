@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import NavMenuApiClient from '../../api/navMenu_client'
-import ProductApiClient from '../../api/product_client'
 import Header from '../../components/Header/Header'
 import Main from '../../components/Main/Main'
 import Footer from '../../components/Footer/Footer'
@@ -12,7 +11,8 @@ class App extends Component {
     super(props)
 
     this.state = {
-      menuItems: []
+      primaryMenu: [],
+      footerMenu: []
     }
   }
 
@@ -32,11 +32,11 @@ class App extends Component {
     return (
       <div>
         <Header
-          menuItems={this.state.menuItems} />
+          menuItems={this.state.primaryMenu} />
         <Main
           products={this.state.products} />
         <Footer
-          menuItems={this.state.menuItems} />
+          menuItems={this.state.footerMenu} />
       </div>
     )
   }
@@ -48,13 +48,16 @@ class App extends Component {
   */
   createInitRequests () {
     return {
-      menuItems: NavMenuApiClient.getNavMenu()
+      primaryMenu: NavMenuApiClient.getNavMenu('Primary'),
+      footerMenu: NavMenuApiClient.getNavMenu('Footer')
     }
   }
 
   /*
   * we can use this Promise to know when all init network requests are complete
   */
+  // TODO: there must be a better way to do this. At the moment if one request fails then then the app can't load
+  // also it wont work if the request is nested further than first child
   sendInitRequests (requests) {
     return Promise.all(Object.values(requests))
   }

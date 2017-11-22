@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import Products from '../Pages/Products/Products'
 import ProductDetail from '../../containers/Pages/ProductDetail/ProductDetail'
 import Home from '../Pages/Home/Home'
 // import style from './Main.scss'
