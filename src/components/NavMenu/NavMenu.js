@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import NavMenuItem from '../NavMenuItem/NavMenuItem'
-// import style from './NavMenu.scss'
+import style from './NavMenu.scss'
 
 class NavMenu extends Component {
   constructor (props) {
@@ -22,7 +22,8 @@ class NavMenu extends Component {
 
   render () {
     return (
-      <ul>
+      <ul className={style.navMenu}
+      >
         {this.renderNavMenu()}
       </ul>
     )

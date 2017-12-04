@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ProductApiClient from '../../../api/product_client'
 import ProductDetailException from '../../../exceptions/ProductDetailException'
+import ProductContent from './ProductContent/ProductContent'
 // import style from './ProductDetail.scss'
 
 class ProductDetail extends Component {
@@ -10,20 +11,26 @@ class ProductDetail extends Component {
 
     this.state = {
       product: {
-        post: {},
+        post: {
+          'post_title': '',
+          'post_content': ''
+        },
         meta: {
           'product_media': {
             'images': []
           }
         },
-        terms: {}
+        terms: {},
+        media: {
+          'featured_image': []
+        }
       }
     }
 
     this.getProductInfo = this.getProductInfo.bind(this)
   }
 
-  componentWillMount () {
+  componentDidMount () {
     this.getProductInfo()
   }
 
@@ -36,9 +43,10 @@ class ProductDetail extends Component {
   render () {
     return (
       <section>
-        <h1>{this.state.product.post['post_title']}</h1>
-        <p>{this.state.product.post['post_content']}</p>
-        <img src={this.state.product.meta['product_media']['images'][0]}></img>
+        <ProductContent
+          title={this.state.product.post['post_title']}
+          content={this.state.product.post['post_content']}
+          imgSrc={this.state.product.media['featured_image'][0]} />
       </section>
     )
   }
@@ -49,11 +57,9 @@ class ProductDetail extends Component {
       const product = await getProductBySlug(productSlug)
 
       return this.setState({ product: product.data })
+    } catch (err) {
+      console.log( new ProductDetailException(err) )
     }
-    catch(err) {
-      throw new ProductDetailException(err)
-    }
-
   }
 }
 

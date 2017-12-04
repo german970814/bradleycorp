@@ -2,11 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { host } from '../../api'
-// import style from './Product.scss'
+import style from './NavMenuItem.scss'
 
 const NavMenuItem = ({ menuItem }) => {
   return (
-    <li>
+    <li
+      className={style.navMenuItem} >
       <Link to={formatLinkURL(menuItem['url'])} replace>
         {menuItem['title']}
       </Link>

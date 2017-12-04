@@ -4,8 +4,7 @@ import Header from '../../components/Header/Header'
 import Main from '../../components/Main/Main'
 import Footer from '../../components/Footer/Footer'
 import AppInitException from '../../exceptions/AppInitException'
-
-// import style from './App.scss'
+import style from './App.scss'
 
 class App extends Component {
   constructor (props) {
@@ -24,7 +23,8 @@ class App extends Component {
 
   render () {
     return (
-      <div>
+      <div
+        className={style.app}>
         <Header
           menuItems={this.state.primaryMenu} />
         <Main
@@ -42,7 +42,7 @@ class App extends Component {
   */
   async getInitialState () {
     try {
-      const primaryMenuRequest = NavMenuApiClient.getNavMenu('Primary')
+      const primaryMenuRequest = NavMenuApiClient.getNavMenu('Primary1')
       const footerMenuRequest = NavMenuApiClient.getNavMenu('Footer')
 
       const primaryMenuResponse = await primaryMenuRequest
@@ -52,9 +52,8 @@ class App extends Component {
         primaryMenu: primaryMenuResponse.data,
         footerMenu: footerMenuResponse.data
       }
-    }
-    catch(err) {
-      throw new AppInitException(err)
+    } catch (err) {
+      console.log(new AppInitException(err))
       return { ...this.state }
     }
   }

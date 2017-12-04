@@ -6,6 +6,7 @@ import style from './Header.scss'
 const Header = ({ menuItems }) => {
   return (
     <header className={style.header}>
+      <div className={style.topBar}></div>
       <NavMenu
         menuItems={menuItems} />
     </header>
