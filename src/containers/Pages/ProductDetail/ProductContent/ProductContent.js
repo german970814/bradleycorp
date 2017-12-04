@@ -5,7 +5,6 @@ import ProductContentImages from './ProductContentImages/ProductContentImages'
 import style from './ProductContent.scss'
 
 class ProductContent extends Component {
-
   render () {
     return (
       <div

@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import ProductContentImagesList from './ProductContentImagesList/ProductContentImagesList'
 import style from './ProductContentImages.scss'
 
 class ProductContentImages extends Component {
-  constructor(props){
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -11,14 +12,8 @@ class ProductContentImages extends Component {
       imagesSrcList: []
     }
 
-    this.renderImagesList = this.renderImagesList.bind(this)
-    this.handleImageListItemClick = this.handleImageListItemClick.bind(this)
     this.renderSelectedImage = this.renderSelectedImage.bind(this)
     this.setInitState = this.setInitState.bind(this)
-  }
-
-  componentDidMount () {
-    this.setInitState()
   }
 
   componentDidUpdate (prevProps) {
@@ -27,7 +22,23 @@ class ProductContentImages extends Component {
     }
   }
 
-  handleImageListItemClick(e, imageSrc) {
+  setInitState () {
+    if (this.props.featuredImageSrc) {
+      return this.setState({
+        selectedImageSrc: this.props.featuredImageSrc,
+        imagesSrcList: [ this.props.featuredImageSrc, ...this.props.images.split(',') ]
+      })
+    }
+
+    const imagesSrcList = this.props.images.split(',')
+
+    return this.setState({
+      selectedImageSrc: imagesSrcList[0],
+      imagesSrcList
+    })
+  }
+
+  handleImageListItemClick (e, imageSrc) {
     e.preventDefault()
 
     this.setState({
@@ -36,27 +47,13 @@ class ProductContentImages extends Component {
     })
   }
 
-  renderImagesList() {
-    return this.state.imagesSrcList.map( (imageSrc, index) => {
-      return (
-        <li
-          key={index}
-          className={style.imageListItem}
-          onClick={(e) => this.handleImageListItemClick(e, imageSrc)} >
-          <img src={imageSrc}></img>
-        </li>
-      )
-    })
-  }
-
-  renderSelectedImage() {
+  renderSelectedImage () {
     return (
       <img src={this.state.selectedImageSrc}></img>
     )
   }
 
   render () {
-    console.log(this.state)
     return (
       <div>
         <div
@@ -65,33 +62,17 @@ class ProductContentImages extends Component {
         </div>
         <ul
           className={style.imagesList}>
-          {this.renderImagesList()}
+          <ProductContentImagesList
+            imagesSrcList={this.state.imagesSrcList}
+            listItemClickHandler={this.handleImageListItemClick.bind(this)} />
         </ul>
       </div>
     )
   }
-
-  setInitState() {
-
-    if( this.props.featuredImageSrc ) {
-      return this.setState({
-        selectedImageSrc: this.props.featuredImageSrc,
-        imagesSrcList: [ this.props.featuredImageSrc, ...this.props.images.split(",") ]
-      })
-    }
-
-    const imagesSrcList = this.props.images.split(",")
-
-    return this.setState({
-      selectedImageSrc: imagesSrcList[0],
-      imagesSrcList
-    })
-
-  }
 }
 
 ProductContentImages.propTypes = {
-  featuredImage: PropTypes.string,
+  featuredImageSrc: PropTypes.string,
   images: PropTypes.string.isRequired
 }
 

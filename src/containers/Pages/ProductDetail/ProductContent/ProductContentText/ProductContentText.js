@@ -13,6 +13,12 @@ class ProductContentText extends Component {
     this.renderMoreDetailsButtonText = this.renderMoreDetailsButtonText.bind(this)
   }
 
+  componentDidUpdate (prevProps) {
+    if (prevProps.content !== this.props.content) {
+      this.setState({ moreDetails: false })
+    }
+  }
+
   handleMoreDetailsButtonClick (e) {
     e.preventDefault()
 
