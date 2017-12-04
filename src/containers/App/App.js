@@ -3,6 +3,7 @@ import NavMenuApiClient from '../../api/navMenu_client'
 import Header from '../../components/Header/Header'
 import Main from '../../components/Main/Main'
 import Footer from '../../components/Footer/Footer'
+import AppInitException from '../../exceptions/AppInitException'
 
 // import style from './App.scss'
 
@@ -16,16 +17,9 @@ class App extends Component {
     }
   }
 
-  componentDidMount () {
-    const requests = this.createInitRequests()
-
-    return this.sendInitRequests(requests)
-      .then(responses => {
-        this.setInitState(requests, responses)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+  async componentWillMount () {
+    const initState = await this.getInitialState()
+    this.setState(initState)
   }
 
   render () {
@@ -46,30 +40,23 @@ class App extends Component {
   * - rememeber to add a default value to the state in the constructor
   * - the final top level App state will take this shape
   */
-  createInitRequests () {
-    return {
-      primaryMenu: NavMenuApiClient.getNavMenu('Primary'),
-      footerMenu: NavMenuApiClient.getNavMenu('Footer')
+  async getInitialState () {
+    try {
+      const primaryMenuRequest = NavMenuApiClient.getNavMenu('Primary')
+      const footerMenuRequest = NavMenuApiClient.getNavMenu('Footer')
+
+      const primaryMenuResponse = await primaryMenuRequest
+      const footerMenuResponse = await footerMenuRequest
+
+      return {
+        primaryMenu: primaryMenuResponse.data,
+        footerMenu: footerMenuResponse.data
+      }
     }
-  }
-
-  /*
-  * we can use this Promise to know when all init network requests are complete
-  */
-  // TODO: there must be a better way to do this. At the moment if one request fails then then the app can't load
-  // also it wont work if the request is nested further than first child
-  sendInitRequests (requests) {
-    return Promise.all(Object.values(requests))
-  }
-
-  setInitState (requests, responses) {
-    const newState = {}
-
-    Object.keys(requests).forEach((key, index) => {
-      newState[key] = responses[index].data
-    })
-
-    return this.setState(newState)
+    catch(err) {
+      throw new AppInitException(err)
+      return { ...this.state }
+    }
   }
 }
 

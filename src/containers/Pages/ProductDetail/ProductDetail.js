@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ProductApiClient from '../../../api/product_client'
+import ProductDetailException from '../../../exceptions/ProductDetailException'
 // import style from './ProductDetail.scss'
 
 class ProductDetail extends Component {
@@ -42,17 +43,17 @@ class ProductDetail extends Component {
     )
   }
 
-  getProductInfo () {
-    const productSlug = this.props.match.params.slug
+  async getProductInfo () {
+    try {
+      const productSlug = this.props.match.params.slug
+      const product = await getProductBySlug(productSlug)
 
-    return getProductBySlug(productSlug)
-      .then(product => {
-        console.log(product)
-        return this.setState({ product: product.data })
-      })
-      .catch(err => {
-        console.log(err)
-      })
+      return this.setState({ product: product.data })
+    }
+    catch(err) {
+      throw new ProductDetailException(err)
+    }
+
   }
 }
 

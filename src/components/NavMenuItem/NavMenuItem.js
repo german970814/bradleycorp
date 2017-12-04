@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import { host } from '../../api'
 // import style from './Product.scss'
 
 const NavMenuItem = ({ menuItem }) => {
@@ -18,7 +19,7 @@ NavMenuItem.propTypes = {
 }
 
 function formatLinkURL (linkURL) {
-  return linkURL.replace('http://localhost/Bradley', '')
+  return linkURL.replace(host, '')
 }
 
 export default NavMenuItem

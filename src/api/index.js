@@ -2,8 +2,9 @@ import axios from 'axios'
 
 const api = {}
 
+api.host = `http://bradley.dev`
 api.namespace = `bcorp/v1/`
-api.baseURL = `http://localhost/Bradley/index.php/wp-json/${api.namespace}`
+api.baseURL = `${api.host}/index.php/wp-json/${api.namespace}`
 api.queryRoute = `wp-query`
 
 api.query = ({ args }) => {
