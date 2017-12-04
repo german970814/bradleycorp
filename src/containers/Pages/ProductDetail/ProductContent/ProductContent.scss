@@ -9,8 +9,28 @@
   width: 50%;
 }
 
+.new {
+  margin-right: 20px;
+  color: red;
+}
+
+.sku {
+  color: grey;
+}
+
 .title {
   border-bottom: 1px solid grey;
+}
+
+.award {
+  display: inline-block;
+  margin: 10px;
+  height: 50px;
+
+  img {
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .image {

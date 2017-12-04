@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import style from './ProductContentText.scss'
 
 class ProductContentText extends Component {
   constructor (props) {
@@ -44,11 +45,13 @@ class ProductContentText extends Component {
     return (
       <div>
         {this.renderText()}
-        <button
-          onClick={this.handleMoreDetailsButtonClick.bind(this)} >
-          {this.renderMoreDetailsButtonText()}
-        </button>
-
+        <div
+          className={style.moreDetail}>
+          <button
+            onClick={this.handleMoreDetailsButtonClick.bind(this)} >
+            {this.renderMoreDetailsButtonText()}
+          </button>
+        </div>
       </div>
     )
   }

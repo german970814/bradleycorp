@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import ProductApiClient from '../../../api/product_client'
 import ProductDetailException from '../../../exceptions/ProductDetailException'
 import ProductContent from './ProductContent/ProductContent'
+import ProductTabs from './ProductTabs/ProductTabs'
 // import style from './ProductDetail.scss'
 
 class ProductDetail extends Component {
@@ -16,9 +17,12 @@ class ProductDetail extends Component {
           'post_content': ''
         },
         meta: {
+          'product_sku': undefined,
           'product_media': {
             'images': [ '' ]
-          }
+          },
+          'product_new_until': undefined,
+          'product_awards': []
         },
         terms: {},
         media: {
@@ -47,7 +51,12 @@ class ProductDetail extends Component {
           title={this.state.product.post['post_title']}
           content={this.state.product.post['post_content']}
           featuredImageSrc={this.state.product.media['featured_image'][0]}
-          images={this.state.product.meta['product_media'].images[0]} />
+          images={this.state.product.meta['product_media'].images[0]}
+          newUntil={this.state.product.meta['product_new_until']}
+          sku={this.state.product.meta['product_sku']}
+          awards={this.state.product.meta['product_awards']} />
+        <ProductTabs
+          product={this.state.product} />
       </section>
     )
   }
