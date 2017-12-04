@@ -42,7 +42,7 @@ class App extends Component {
   */
   async getInitialState () {
     try {
-      const primaryMenuRequest = NavMenuApiClient.getNavMenu('Primary1')
+      const primaryMenuRequest = NavMenuApiClient.getNavMenu('Primary')
       const footerMenuRequest = NavMenuApiClient.getNavMenu('Footer')
 
       const primaryMenuResponse = await primaryMenuRequest

@@ -4,7 +4,6 @@ import style from './ProductContent.scss'
 
 class ProductContent extends Component {
   render () {
-    console.log(this.props)
     return (
       <div
         className={style.productContent}>

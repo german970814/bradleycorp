@@ -58,7 +58,7 @@ class ProductDetail extends Component {
 
       return this.setState({ product: product.data })
     } catch (err) {
-      console.log( new ProductDetailException(err) )
+      console.log(new ProductDetailException(err))
     }
   }
 }
