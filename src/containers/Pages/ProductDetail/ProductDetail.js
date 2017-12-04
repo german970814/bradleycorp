@@ -17,12 +17,12 @@ class ProductDetail extends Component {
         },
         meta: {
           'product_media': {
-            'images': []
+            'images': [ '' ]
           }
         },
         terms: {},
         media: {
-          'featured_image': []
+          'featured_image': [ '' ]
         }
       }
     }
@@ -46,7 +46,8 @@ class ProductDetail extends Component {
         <ProductContent
           title={this.state.product.post['post_title']}
           content={this.state.product.post['post_content']}
-          imgSrc={this.state.product.media['featured_image'][0]} />
+          featuredImageSrc={this.state.product.media['featured_image'][0]}
+          images={this.state.product.meta['product_media'].images[0]} />
       </section>
     )
   }

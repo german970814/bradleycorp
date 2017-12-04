@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ProductContentText from './ProductContentText/ProductContentText'
+import ProductContentImages from './ProductContentImages/ProductContentImages'
 import style from './ProductContent.scss'
 
 class ProductContent extends Component {
+
   render () {
     return (
       <div
@@ -18,7 +20,9 @@ class ProductContent extends Component {
         </div>
         <div
           className={style.image}>
-          <img src={this.props.imgSrc}></img>
+          <ProductContentImages
+            featuredImageSrc= {this.props.featuredImageSrc}
+            images = {this.props.images} />
         </div>
       </div>
     )
@@ -28,7 +32,8 @@ class ProductContent extends Component {
 ProductContent.propTypes = {
   title: PropTypes.string.isRequired,
   content: PropTypes.string,
-  imgSrc: PropTypes.string
+  featuredImageSrc: PropTypes.string,
+  images: PropTypes.string
 }
 
 export default ProductContent
