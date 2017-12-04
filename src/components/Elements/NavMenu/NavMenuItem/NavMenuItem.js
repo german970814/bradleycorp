@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { host } from '../../api'
+import { host } from '../../../../api'
 import style from './NavMenuItem.scss'
 
 const NavMenuItem = ({ menuItem }) => {

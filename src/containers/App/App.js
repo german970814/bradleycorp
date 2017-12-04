@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import NavMenuApiClient from '../../api/navMenu_client'
-import Header from '../../components/Header/Header'
+import Header from '../../components/elements/Header/Header'
 import Main from '../../components/Main/Main'
-import Footer from '../../components/Footer/Footer'
+import Footer from '../../components/elements/Footer/Footer'
 import AppInitException from '../../exceptions/AppInitException'
 import style from './App.scss'
 

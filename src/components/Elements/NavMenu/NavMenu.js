@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import NavMenuItem from '../NavMenuItem/NavMenuItem'
+import NavMenuItem from './NavMenuItem/NavMenuItem'
 import style from './NavMenu.scss'
 
 class NavMenu extends Component {

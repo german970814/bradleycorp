@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import NavMenu from '../../components/NavMenu/NavMenu'
+import NavMenu from '../NavMenu/NavMenu'
 import style from './Header.scss'
 
 const Header = ({ menuItems }) => {
