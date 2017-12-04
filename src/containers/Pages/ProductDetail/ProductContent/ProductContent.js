@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import ProductContentText from './ProductContentText/ProductContentText'
 import style from './ProductContent.scss'
 
 class ProductContent extends Component {
@@ -12,9 +13,8 @@ class ProductContent extends Component {
           <h1
             className={style.title}>
             {this.props.title}</h1>
-          <p
-            className={style.content}>
-            {this.props.content}</p>
+          <ProductContentText
+            content = {this.props.content} />
         </div>
         <div
           className={style.image}>

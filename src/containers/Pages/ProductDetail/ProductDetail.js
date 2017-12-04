@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ProductApiClient from '../../../api/product_client'
 import ProductDetailException from '../../../exceptions/ProductDetailException'
-import ProductContent from '../../../components/Pages/ProductDetail/ProductContent/ProductContent'
+import ProductContent from './ProductContent/ProductContent'
 // import style from './ProductDetail.scss'
 
 class ProductDetail extends Component {
