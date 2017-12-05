@@ -5,7 +5,7 @@ import ProductContentImages from './ProductContentImages/ProductContentImages'
 import style from './ProductContent.scss'
 
 class ProductContent extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.renderNew = this.renderNew.bind(this)
@@ -14,8 +14,8 @@ class ProductContent extends Component {
     this.isNew = this.isNew.bind(this)
   }
 
-  renderNew() {
-    if ( this.isNew() ) {
+  renderNew () {
+    if (this.isNew()) {
       return (
         <span
           className={style.new}>
@@ -25,8 +25,8 @@ class ProductContent extends Component {
     }
   }
 
-  renderSKU() {
-    if( this.props.sku ) {
+  renderSKU () {
+    if (this.props.sku) {
       return (
         <span
           className={style.sku}>
@@ -36,10 +36,10 @@ class ProductContent extends Component {
     }
   }
 
-  renderAwards() {
-    if( this.props.awards.length > 0  ) {
-      const awardsSrcList = this.props.awards[0].split(",")
-      return awardsSrcList.map( (awardSrc, index) => {
+  renderAwards () {
+    if (this.props.awards.length > 0) {
+      const awardsSrcList = this.props.awards[0].split(',')
+      return awardsSrcList.map((awardSrc, index) => {
         return (
           <div
             key={index}
@@ -52,7 +52,6 @@ class ProductContent extends Component {
   }
 
   render () {
-    console.log(this.props)
     return (
       <div
         className={style.productContent}>
@@ -77,7 +76,7 @@ class ProductContent extends Component {
     )
   }
 
-  isNew() {
+  isNew () {
     const newUntil = new Date(this.props.newUntil)
     const now = new Date()
     return newUntil - now > 0
@@ -91,6 +90,7 @@ ProductContent.propTypes = {
   images: PropTypes.string,
   newUntil: PropTypes.string,
   awards: PropTypes.array,
+  sku: PropTypes.string
 }
 
 export default ProductContent

@@ -1,34 +1,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ProductApiClient from '../../../api/product_client'
+import productObjectShape from './productObjectShape'
 import ProductDetailException from '../../../exceptions/ProductDetailException'
 import ProductContent from './ProductContent/ProductContent'
 import ProductTabs from './ProductTabs/ProductTabs'
-// import style from './ProductDetail.scss'
+import style from './ProductDetail.scss'
 
 class ProductDetail extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      product: {
-        post: {
-          'post_title': '',
-          'post_content': ''
-        },
-        meta: {
-          'product_sku': undefined,
-          'product_media': {
-            'images': [ '' ]
-          },
-          'product_new_until': undefined,
-          'product_awards': []
-        },
-        terms: {},
-        media: {
-          'featured_image': [ '' ]
-        }
-      }
+      product: productObjectShape
     }
 
     this.getProductInfo = this.getProductInfo.bind(this)
@@ -46,18 +30,29 @@ class ProductDetail extends Component {
 
   render () {
     return (
-      <section>
-        <ProductContent
-          title={this.state.product.post['post_title']}
-          content={this.state.product.post['post_content']}
-          featuredImageSrc={this.state.product.media['featured_image'][0]}
-          images={this.state.product.meta['product_media'].images[0]}
-          newUntil={this.state.product.meta['product_new_until']}
-          sku={this.state.product.meta['product_sku']}
-          awards={this.state.product.meta['product_awards']} />
-        <ProductTabs
-          product={this.state.product} />
-      </section>
+      <div
+        className={style.productDetailPage}>
+        <section
+          className={style.content}>
+          <ProductContent
+            title={this.state.product.post['post_title']}
+            content={this.state.product.post['post_content']}
+            featuredImageSrc={this.state.product.media['featured_image'][0]}
+            images={this.state.product.meta['product_media'].images[0]}
+            newUntil={this.state.product.meta['product_new_until']}
+            sku={this.state.product.meta['product_sku']}
+            awards={this.state.product.meta['product_awards']} />
+        </section>
+
+        <section
+          className={style.tabs}>
+          <ProductTabs
+            product={this.state.product} />
+        </section>
+      </div>
+
+
+
     )
   }
 

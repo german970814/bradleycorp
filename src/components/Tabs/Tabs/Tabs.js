@@ -28,7 +28,8 @@ class Tabs extends Component {
       return React.cloneElement(child, {
         onClick: this.handleTabClick,
         tabIndex: index,
-        isActive: index === this.state.activeTabIndex
+        isActive: index === this.state.activeTabIndex,
+        tabClassName: this.props.tabClassName
       })
     })
   }
@@ -44,8 +45,8 @@ class Tabs extends Component {
 
   render () {
     return (
-      <div className="tabs">
-        <ul className="tabs-nav nav navbar-nav navbar-left">
+      <div className={`tab-wrapper ${this.props.tabWrapperClassName}`}>
+        <ul className="tabs-nav">
           {this.renderChildrenWithTabsApiAsProps()}
         </ul>
         <div className="tabs-active-content">
@@ -58,7 +59,9 @@ class Tabs extends Component {
 
 Tabs.propTypes = {
   defaultActiveTabIndex: PropTypes.number.isRequired,
-  children: PropTypes.array.isRequired
+  children: PropTypes.array.isRequired,
+  tabClassName: PropTypes.string,
+  tabWrapperClassName: PropTypes.string
 }
 
 export default Tabs

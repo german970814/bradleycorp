@@ -18,10 +18,10 @@ class Tab extends Component {
 
   render() {
     return (
-      <li className="tab">
+      <li className={`tab ${this.props.tabClassName}`}>
         <a
           onClick={(e) => { this.handleClick(e) }}>
-          CLICK
+          {this.props.text}
         </a>
       </li>
     )
@@ -31,7 +31,9 @@ class Tab extends Component {
 
 Tab.propTypes = {
   onClick: PropTypes.func,
-  tabIndex: PropTypes.number
+  tabIndex: PropTypes.number,
+  text: PropTypes.string.isRequired,
+  tabClassName: PropTypes.string
 }
 
 export default Tab
