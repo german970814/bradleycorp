@@ -12,6 +12,7 @@
 }
 
 .productDetailTabs {
+  // dont use a min height here (IE10 support)
   display: inline-flex;
   border: 1px solid lightgrey;
   width: 100px;

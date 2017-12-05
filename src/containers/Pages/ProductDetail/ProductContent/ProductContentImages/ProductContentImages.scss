@@ -6,6 +6,7 @@
   img {
     width: 100%;
     max-height: 100%;
+    // TODO: not supported IE10
     object-fit: cover;
   }
 }
@@ -24,6 +25,7 @@
   img {
     width: 100%;
     max-height: 100%;
+    // TODO: not supported IE10
     object-fit: cover;
   }
 }

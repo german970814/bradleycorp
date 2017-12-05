@@ -4,15 +4,14 @@ import getTheTabs from './theTabs'
 import Tabs from '../../../../components/Tabs/Tabs/Tabs'
 import style from './ProductTabs.scss'
 
-
 class ProductTabs extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.renderTabs = this.renderTabs.bind(this)
   }
 
-  renderTabs() {
+  renderTabs () {
     const product = this.props.product
     return getTheTabs(product)
   }

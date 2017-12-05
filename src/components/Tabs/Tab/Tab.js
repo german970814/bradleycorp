@@ -1,22 +1,20 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-
-
 class Tab extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick(e) {
+  handleClick (e) {
     e.preventDefault()
 
     this.props.onClick(this.props.tabIndex)
   }
 
-  render() {
+  render () {
     return (
       <li className={`tab ${this.props.tabClassName}`}>
         <a
@@ -26,7 +24,6 @@ class Tab extends Component {
       </li>
     )
   }
-
 }
 
 Tab.propTypes = {

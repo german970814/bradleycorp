@@ -7,12 +7,12 @@ const productObjectShape = {
     'product_sku': undefined,
     'product_media': {
       'images': [ '' ],
-      'videos': "",
+      'videos': ''
     },
     'product_new_until': undefined,
     'product_awards': [],
     'product_links': [],
-    'product_warranty': undefined,
+    'product_warranty': undefined
   },
   terms: {
     'product_category': [],
@@ -25,7 +25,7 @@ const productObjectShape = {
     'application_gallery': []
   },
   media: {
-    'featured_image': [ '' ],
+    'featured_image': [ '' ]
   }
 }
 

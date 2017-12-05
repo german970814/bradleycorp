@@ -28,7 +28,10 @@ const config = {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader?sourceMap',
-          use: 'css-loader?modules&importLoaders=1&localIdentName="[local]__[hash:base64:5]"'
+          use: [
+            'css-loader?modules&importLoaders=1&localIdentName="[local]__[hash:base64:5]"',
+            'postcss-loader'
+          ],
         }),
       },
       {
@@ -38,7 +41,8 @@ const config = {
           //resolve-url-loader may be chained before sass-loader if necessary
           use: [
             'css-loader?modules&importLoaders=1&localIdentName="[local]__[hash:base64:5]"',
-            'sass-loader?sourceMap'
+            'sass-loader?sourceMap',
+            'postcss-loader'
           ],
         })
       },

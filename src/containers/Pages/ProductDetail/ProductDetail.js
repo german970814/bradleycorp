@@ -51,8 +51,6 @@ class ProductDetail extends Component {
         </section>
       </div>
 
-
-
     )
   }
 

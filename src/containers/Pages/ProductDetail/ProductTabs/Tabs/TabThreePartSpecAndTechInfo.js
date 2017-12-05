@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 class TabThreePartSpecAndTechInfo extends Component {
-  render() {
+  render () {
     return (
       <div>ThreePartSpecAndTechInfo</div>
     )

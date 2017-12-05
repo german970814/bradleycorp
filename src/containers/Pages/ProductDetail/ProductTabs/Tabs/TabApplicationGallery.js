@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 class TabApplicationGallery extends Component {
-  render() {
+  render () {
     return (
       <div>ApplicationGallery</div>
     )
