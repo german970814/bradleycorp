@@ -21,6 +21,7 @@ class ProductTabs extends Component {
       <Tabs
         defaultActiveTabIndex={0}
         tabWrapperClassName={style.tabsWrapper}
+        activeTabClassName={style.activeTabContent}
         tabClassName={style.productDetailTabs} >
         {this.renderTabs()}
       </Tabs>

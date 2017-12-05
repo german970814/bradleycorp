@@ -49,7 +49,7 @@ class Tabs extends Component {
         <ul className="tabs-nav">
           {this.renderChildrenWithTabsApiAsProps()}
         </ul>
-        <div className="tabs-active-content">
+        <div className={`tabs-active-content ${this.props.activeTabClassName}`}>
           {this.renderActiveTabContent()}
         </div>
       </div>
@@ -61,6 +61,7 @@ Tabs.propTypes = {
   defaultActiveTabIndex: PropTypes.number.isRequired,
   children: PropTypes.array.isRequired,
   tabClassName: PropTypes.string,
+  activeTabClassName: PropTypes.string,
   tabWrapperClassName: PropTypes.string
 }
 

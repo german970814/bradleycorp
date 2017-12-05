@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import style from './Tab.scss'
 
 class Tab extends Component {
   constructor (props) {
@@ -15,12 +16,12 @@ class Tab extends Component {
   }
 
   render () {
+    const active = this.props.isActive ? style.active : ''
     return (
-      <li className={`tab ${this.props.tabClassName}`}>
-        <a
-          onClick={(e) => { this.handleClick(e) }}>
-          {this.props.text}
-        </a>
+      <li
+        className={`tab ${this.props.tabClassName} ${active}`}
+        onClick={(e) => { this.handleClick(e) }} >
+        {this.props.text}
       </li>
     )
   }
@@ -29,6 +30,7 @@ class Tab extends Component {
 Tab.propTypes = {
   onClick: PropTypes.func,
   tabIndex: PropTypes.number,
+  isActive: PropTypes.bool.isRequired,
   text: PropTypes.string.isRequired,
   tabClassName: PropTypes.string
 }

@@ -1,14 +1,17 @@
 .tabsWrapper {
 
   ul {
+    margin-bottom: 0;
+    padding-left: 0;
     width: 100%;
     height: 100px;
     text-align: center;
   }
+}
 
-  .tabs-active-content {
-    background-color: lightgrey;
-  }
+.activeTabContent {
+  padding: 20px;
+  background-color: lightgrey;
 }
 
 .productDetailTabs {
@@ -18,4 +21,10 @@
   width: 100px;
   height: 100%;
   list-style: none;
+
+}
+
+.active {
+  background-color: blue;
+  color: white;
 }
