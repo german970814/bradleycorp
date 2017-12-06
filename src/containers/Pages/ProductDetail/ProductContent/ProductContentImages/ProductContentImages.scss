@@ -10,9 +10,13 @@
   }
 }
 
-.imagesList {
+.imagesListWrapper {
   display: inline-block;
   width: 20%
+}
+
+.imagesList {
+  padding: 0;
 }
 
 .imageListItem {

@@ -14,7 +14,8 @@ function getTheTabs (product) {
     tabs = [ ...tabs,
       <Tab
         key={1}
-        text={`3-Part Spec and Technical Data`} >
+        text={`3-Part Spec and Technical Data`}
+        isActive={false} >
         <TabThreePartSpecAndTechInfo
           techInfo={product.terms['technical_info']} />
       </Tab>
@@ -28,7 +29,8 @@ function getTheTabs (product) {
     tabs = [ ...tabs,
       <Tab
         key={2}
-        text={`Design`} >
+        text={`Design`}
+        isActive={false} >
         <TabDesign
           videos={product.meta['product_media'].videos}
           links={product.meta['product_links']}
@@ -42,7 +44,8 @@ function getTheTabs (product) {
     tabs = [ ...tabs,
       <Tab
         key={3}
-        text={`Warranty`} >
+        text={`Warranty`}
+        isActive={false} >
         <TabWarranty
           warranty={product.meta['product_warranty']} />
       </Tab>
@@ -58,7 +61,8 @@ function getTheTabs (product) {
     tabs = [ ...tabs,
       <Tab
         key={4}
-        text={`Application Gallery`} >
+        text={`Application Gallery`}
+        isActive={false} >
         <TabApplicationGallery
           appGallery={product.terms['application_gallery']} />
       </Tab>
@@ -70,7 +74,8 @@ function getTheTabs (product) {
     tabs = [ ...tabs,
       <Tab
         key={5}
-        text={`BIM/Revit`} >
+        text={`BIM/Revit`}
+        isActive={false} >
         <TabBimRevit
           bimRevit={product.terms['bim_revit']} />
       </Tab>
