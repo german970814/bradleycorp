@@ -32,7 +32,7 @@ class ProductContentImages extends Component {
       })
     }
 
-    const imagesSrcList = this.props.images.split(',')
+    const imagesSrcList = props.images.split(',')
 
     return this.setState({
       selectedImageSrc: imagesSrcList[0],
@@ -89,14 +89,5 @@ ProductContentImages.propTypes = {
   featuredImageSrc: PropTypes.string,
   images: PropTypes.string.isRequired
 }
-
-/*
-<ul
-  className={style.imagesList}>
-  <ProductContentImagesList
-    imagesSrcList={this.state.imagesSrcList}
-    listItemClickHandler={this.handleImageListItemClick.bind(this)} />
-</ul>
-*/
 
 export default ProductContentImages
