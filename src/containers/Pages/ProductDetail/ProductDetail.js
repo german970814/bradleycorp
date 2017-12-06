@@ -19,12 +19,12 @@ class ProductDetail extends Component {
   }
 
   componentDidMount () {
-    this.getProductInfo()
+    this.getProductInfo(this.props)
   }
 
-  componentDidUpdate (prevProps) {
-    if (prevProps.match.params.slug !== this.props.match.params.slug) {
-      this.getProductInfo()
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.match.params.slug !== this.props.match.params.slug) {
+      this.getProductInfo(nextProps)
     }
   }
 
@@ -54,9 +54,9 @@ class ProductDetail extends Component {
     )
   }
 
-  async getProductInfo () {
+  async getProductInfo (props) {
     try {
-      const productSlug = this.props.match.params.slug
+      const productSlug = props.match.params.slug
       const product = await getProductBySlug(productSlug)
 
       return this.setState({ product: product.data })

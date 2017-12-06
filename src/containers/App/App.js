@@ -16,9 +16,8 @@ class App extends Component {
     }
   }
 
-  async componentWillMount () {
-    const initState = await this.getInitialState()
-    this.setState(initState)
+  componentDidMount() {
+    this.setInitialState()
   }
 
   render () {
@@ -40,7 +39,7 @@ class App extends Component {
   * - rememeber to add a default value to the state in the constructor
   * - the final top level App state will take this shape
   */
-  async getInitialState () {
+  async setInitialState () {
     try {
       const primaryMenuRequest = NavMenuApiClient.getNavMenu('Primary')
       const footerMenuRequest = NavMenuApiClient.getNavMenu('Footer')
@@ -48,10 +47,10 @@ class App extends Component {
       const primaryMenuResponse = await primaryMenuRequest
       const footerMenuResponse = await footerMenuRequest
 
-      return {
+      this.setState({
         primaryMenu: primaryMenuResponse.data,
         footerMenu: footerMenuResponse.data
-      }
+      })
     } catch (err) {
       console.log(new AppInitException(err))
       return { ...this.state }

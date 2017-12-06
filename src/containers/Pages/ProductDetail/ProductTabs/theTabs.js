@@ -1,5 +1,5 @@
 import React from 'react'
-import Tab from '../../../../components/Tabs/Tab/Tab'
+import Tab from '../../../Tabs/Tab/Tab'
 import TabThreePartSpecAndTechInfo from './Tabs/TabThreePartSpecAndTechInfo'
 import TabDesign from './Tabs/TabDesign'
 import TabWarranty from './Tabs/TabWarranty'

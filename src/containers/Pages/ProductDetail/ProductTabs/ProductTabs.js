@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import getTheTabs from './theTabs'
-import Tabs from '../../../../components/Tabs/Tabs/Tabs'
+import Tabs from '../../../Tabs/Tabs/Tabs'
 import style from './ProductTabs.scss'
 
 class ProductTabs extends Component {
