@@ -1,6 +1,6 @@
 import React from 'react'
 import Tab from '../../../Tabs/Tab/Tab'
-import TabThreePartSpecAndTechInfo from './Tabs/TabThreePartSpecAndTechInfo'
+import TabThreePartSpecAndTechInfo from './Tabs/TabThreePartSpecAndTechInfo/TabThreePartSpecAndTechInfo'
 import TabDesign from './Tabs/TabDesign'
 import TabWarranty from './Tabs/TabWarranty'
 import TabApplicationGallery from './Tabs/TabApplicationGallery'
@@ -17,7 +17,7 @@ function getTheTabs (product) {
         text={`3-Part Spec and Technical Data`}
         isActive={false} >
         <TabThreePartSpecAndTechInfo
-          techInfo={product.terms['technical_info']} />
+          techInfoTerms={product.terms['technical_info']} />
       </Tab>
     ]
   }

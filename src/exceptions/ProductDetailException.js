@@ -1,6 +1,6 @@
 function ProductDetailException (error) {
   this.name = 'ProductDetailException'
-  this.message = `Error getting product details. Network requests failed with message ${error}`
+  this.message = `Error getting product details. Failed with message ${error}`
 }
 
 export default ProductDetailException

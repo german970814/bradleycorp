@@ -20,6 +20,20 @@ class CPTApiClient {
     return axios.get(url, { params })
   }
 
+  getByTax (taxName, termSlug) {
+    const url = `${api.baseURL}${this.cptName}`
+    const params = { tax_name: taxName, term_slug: termSlug }
+
+    return axios.get(url, { params })
+  }
+
+  getByTaxAndTermArray (taxName, termSlugArray) {
+    const url = `${api.baseURL}${this.cptName}`
+    const params = { tax_name: taxName, term_slug_array: JSON.stringify(termSlugArray) }
+
+    return axios.get(url, { params })
+  }
+
   get (page = 1) {
     const args = {
       'post_type': this.cptName,
