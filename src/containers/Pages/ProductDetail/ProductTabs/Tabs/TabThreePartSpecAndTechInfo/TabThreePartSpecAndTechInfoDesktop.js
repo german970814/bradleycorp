@@ -10,7 +10,6 @@ class TabThreePartSpecAndTechInfoDesktop extends Component {
   }
 
   renderThreePartSpec () {
-    console.log(this.props.threePartSpec)
     return this.props.threePartSpec.map((threePartSpec, index) => {
       return (
         <li
@@ -38,7 +37,6 @@ class TabThreePartSpecAndTechInfoDesktop extends Component {
   }
 
   render () {
-    console.log(this.props)
     return (
       <div>
 

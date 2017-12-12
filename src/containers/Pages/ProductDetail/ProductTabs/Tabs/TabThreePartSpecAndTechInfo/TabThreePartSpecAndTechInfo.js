@@ -48,6 +48,7 @@ class TabThreePartSpecAndTechInfo extends Component {
       return this.setState({ threePartSpec, technicalData })
     } catch (err) {
       console.log(new TechnicalInfoException(err))
+      this.setState({ threePartSpec: [], technicalData: [] })
     }
   }
 
