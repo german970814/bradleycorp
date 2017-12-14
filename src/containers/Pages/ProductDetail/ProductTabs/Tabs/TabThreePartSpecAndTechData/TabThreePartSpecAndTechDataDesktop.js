@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-class TabThreePartSpecAndTechInfoDesktop extends Component {
+class TabThreePartSpecAndTechDataDesktop extends Component {
   constructor (props) {
     super(props)
 
@@ -63,9 +63,9 @@ class TabThreePartSpecAndTechInfoDesktop extends Component {
   }
 }
 
-TabThreePartSpecAndTechInfoDesktop.propTypes = {
+TabThreePartSpecAndTechDataDesktop.propTypes = {
   threePartSpec: PropTypes.array.isRequired,
   technicalData: PropTypes.array.isRequired
 }
 
-export default TabThreePartSpecAndTechInfoDesktop
+export default TabThreePartSpecAndTechDataDesktop

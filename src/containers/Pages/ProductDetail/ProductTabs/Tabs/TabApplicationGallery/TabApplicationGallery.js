@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import TabApplicationGalleryDesktop from './TabApplicationGalleryDesktop'
 
 class TabApplicationGallery extends Component {
   render () {
     return (
-      <div>ApplicationGallery</div>
+      <TabApplicationGalleryDesktop
+        applicationGalleries={this.props.applicationGalleries} />
     )
   }
 }
 
 TabApplicationGallery.propTypes = {
-  appGallery: PropTypes.array.isRequired
+  applicationGalleries: PropTypes.array.isRequired
 }
 
 export default TabApplicationGallery

@@ -1,83 +1,143 @@
 import React from 'react'
 import Tab from '../../../Tabs/Tab/Tab'
-import TabThreePartSpecAndTechInfo from './Tabs/TabThreePartSpecAndTechInfo/TabThreePartSpecAndTechInfo'
+import TabThreePartSpecAndTechData from './Tabs/TabThreePartSpecAndTechData/TabThreePartSpecAndTechData'
 import TabDesign from './Tabs/TabDesign/TabDesign'
-import TabWarranty from './Tabs/TabWarranty'
-import TabApplicationGallery from './Tabs/TabApplicationGallery'
-import TabBimRevit from './Tabs/TabBimRevit'
+import TabCaseStudies from './Tabs/TabCaseStudies/TabCaseStudies'
+import TabWarranty from './Tabs/TabWarranty/TabWarranty'
+import TabInstallation from './Tabs/TabInstallation/TabInstallation'
+import TabMaintenance from './Tabs/TabMaintenance/TabMaintenance'
+import TabCompliance from './Tabs/TabCompliance/TabCompliance'
+import TabApplicationGallery from './Tabs/TabApplicationGallery/TabApplicationGallery'
+import TabBimRevit from './Tabs/TabBimRevit/TabBimRevit'
 
-function getTheTabs (product) {
+function getTheTabs (tabsData) {
   let tabs = []
 
   // 3 part spec and tech info
-  if (product.terms['technical_info'].length > 0) {
+  if (tabsData['three_part_spec']['three_part_spec'].length > 0 ||
+      tabsData['three_part_spec']['technical_data'].length > 0) {
     tabs = [ ...tabs,
       <Tab
         key={1}
         text={`3-Part Spec and Technical Data`}
         isActive={false} >
-        <TabThreePartSpecAndTechInfo
-          techInfoTerms={product.terms['technical_info']} />
+        <TabThreePartSpecAndTechData
+          threePartSpec={tabsData['three_part_spec']['three_part_spec']}
+          technicalData={tabsData['three_part_spec']['technical_data']} />
       </Tab>
     ]
   }
 
   // Design
-  if (product.meta['product_media'].videos !== '' ||
-      product.meta['product_links'].length > 1 ||
-      product.terms['literature'].length > 0) {
+  if (tabsData.design.videos.length > 0 ||
+      tabsData.design.links.length > 1 ||
+      tabsData.design.literature.length > 0 ||
+      tabsData.design.colors.length > 0) {
     tabs = [ ...tabs,
       <Tab
         key={2}
         text={`Design`}
         isActive={false} >
         <TabDesign
-          videos={product.meta['product_media'].videos}
-          links={product.meta['product_links']}
-          literature={product.terms['literature']} />
+          videos={tabsData.design.videos}
+          links={tabsData.design.links}
+          literature={tabsData.design.literature}
+          colors={tabsData.design.colors} />
+      </Tab>
+    ]
+  }
+
+  // Case Studies
+  if (tabsData['case_study'].length > 0) {
+    tabs = [ ...tabs,
+      <Tab
+        key={3}
+        text={`Case Studies`}
+        isActive={false} >
+        <TabCaseStudies
+          caseStudies={tabsData['case_study']} />
       </Tab>
     ]
   }
 
   // Warranty
-  if (product.meta['product_warranty']) {
+  if (tabsData.warranty.length > 0) {
     tabs = [ ...tabs,
       <Tab
-        key={3}
+        key={4}
         text={`Warranty`}
         isActive={false} >
         <TabWarranty
-          warranty={product.meta['product_warranty']} />
+          warranty={tabsData.warranty} />
       </Tab>
     ]
   }
 
-  // Installation?
-  // Maintenance?
-  // Compliance?
-
-  // Application Gallery
-  if (product.terms['application_gallery'].length > 0) {
+  // Installation
+  if (tabsData.installation.guides.length > 0 ||
+      tabsData.installation.videos.length > 0) {
     tabs = [ ...tabs,
       <Tab
-        key={4}
+        key={5}
+        text={`Installation`}
+        isActive={false} >
+        <TabInstallation
+          guides={tabsData.installation.guides}
+          videos={tabsData.installation.videos} />
+      </Tab>
+    ]
+  }
+
+  // Maintenance
+  if (tabsData.maintenance.guides.length > 0 ||
+      tabsData.maintenance.videos.length > 0) {
+    tabs = [ ...tabs,
+      <Tab
+        key={6}
+        text={`Maintenance`}
+        isActive={false} >
+        <TabMaintenance
+          guides={tabsData.maintenance.guides}
+          videos={tabsData.maintenance.videos} />
+      </Tab>
+    ]
+  }
+
+  // Compliance
+  if (tabsData.compliance.length > 0) {
+    tabs = [ ...tabs,
+      <Tab
+        key={7}
+        text={`Compliance`}
+        isActive={false} >
+        <TabCompliance
+          compliance={tabsData.compliance} />
+      </Tab>
+    ]
+  }
+
+  // Application Gallery
+  if (tabsData['application_gallery'].length > 0) {
+    tabs = [ ...tabs,
+      <Tab
+        key={8}
         text={`Application Gallery`}
         isActive={false} >
         <TabApplicationGallery
-          appGallery={product.terms['application_gallery']} />
+          applicationGalleries={tabsData['application_gallery']} />
       </Tab>
     ]
   }
 
   // Bim Revit
-  if (product.terms['bim_revit'].length > 0) {
+  if (tabsData['bim_revit'].length > 0) {
     tabs = [ ...tabs,
       <Tab
-        key={5}
+        key={9}
         text={`BIM/Revit`}
         isActive={false} >
         <TabBimRevit
-          bimRevit={product.terms['bim_revit']} />
+          bimRevit={tabsData['bim_revit']} />
       </Tab>
     ]
   }

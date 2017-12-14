@@ -3,20 +3,21 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 class TabDesignDesktop extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.renderLinks = this.renderLinks.bind(this)
     this.renderVideos = this.renderVideos.bind(this)
     this.renderLiterature = this.renderLiterature.bind(this)
+    this.renderColors = this.renderColors.bind(this)
   }
 
-  renderLinks() {
-    return this.props.links.map( (link, index) => {
+  renderLinks () {
+    return this.props.links.map((link, index) => {
       return (
         <li
           key={index} >
-          <Link to={link.url} replace> //TODO: what if this is an external link, might need to be anchor tag
+          <Link to={link.url} replace>
             {link.text}
           </Link>
         </li>
@@ -24,8 +25,8 @@ class TabDesignDesktop extends Component {
     })
   }
 
-  renderVideos() {
-    return this.props.videos.map( (video, index) => {
+  renderVideos () {
+    return this.props.videos.map((video, index) => {
       return (
         <li
           key={index} >
@@ -35,16 +36,26 @@ class TabDesignDesktop extends Component {
     })
   }
 
-  renderLiterature() {
-    return this.props.literature.map( (literature, index) => {
-      console.log(literature)
+  renderLiterature () {
+    return this.props.literature.map((literature, index) => {
       return (
         <li
           key={index}>
           <div>
-            {literature.post["post_title"]}
+            {literature.post['post_title']}
           </div>
-          {literature.meta["literature_pdf"]}
+          {literature.meta['literature_pdf']}
+        </li>
+      )
+    })
+  }
+
+  renderColors () {
+    return this.props.colors.map((color, index) => {
+      return (
+        <li
+          key={index} >
+          {color.post['post_title']}
         </li>
       )
     })
@@ -89,7 +100,8 @@ class TabDesignDesktop extends Component {
 TabDesignDesktop.propTypes = {
   videos: PropTypes.array.isRequired,
   links: PropTypes.array.isRequired,
-  literature: PropTypes.array.isRequired
+  literature: PropTypes.array.isRequired,
+  colors: PropTypes.array.isRequired
 }
 
 export default TabDesignDesktop

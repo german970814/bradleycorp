@@ -57,22 +57,22 @@ class ProductDetail extends Component {
   async getProductInfo (props) {
     try {
       const productSlug = props.match.params.slug
-      const product = await getProductBySlug(productSlug)
+      const product = await this.getProductBySlug(productSlug)
 
       return this.setState({ product: product.data })
     } catch (err) {
       console.log(new ProductDetailException(err))
     }
   }
+
+  getProductBySlug (slug) {
+    const productApiClient = new ProductApiClient()
+    return productApiClient.getBySlug(slug)
+  }
 }
 
 ProductDetail.propTypes = {
   match: PropTypes.object.isRequired
-}
-
-function getProductBySlug (slug) {
-  const productApiClient = new ProductApiClient()
-  return productApiClient.getBySlug(slug)
 }
 
 export default ProductDetail
