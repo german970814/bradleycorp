@@ -13,6 +13,13 @@ class ProductApiClient extends CPTApiClient {
 
     return axios.get(url, { params })
   }
+
+  getProductDetailPage (slug) {
+    const url = `${api.baseURL}page/product-detail`
+    const params = { slug }
+
+    return axios.get(url, { params })
+  }
 }
 
 export default ProductApiClient

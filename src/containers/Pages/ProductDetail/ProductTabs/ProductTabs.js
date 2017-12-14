@@ -15,16 +15,16 @@ class ProductTabs extends Component {
     }
 
     this.updateTabs = this.updateTabs.bind(this)
-    this.getTheTabsData = this.getTheTabsData.bind(this)
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.product.post.ID !== this.props.product.post.ID) {
-      this.updateTabs(nextProps.product)
+    if (nextProps.productID !== this.props.productID) {
+      this.updateTabs(nextProps.tabsData)
     }
   }
 
   render () {
+    console.log('updated')
     return (
       <Tabs
         defaultActiveTabIndex={0}
@@ -36,12 +36,8 @@ class ProductTabs extends Component {
     )
   }
 
-  async updateTabs (product) {
+  updateTabs (tabsData) {
     try {
-      if (!product.post.ID || !product.meta['product_sku']) {
-        return
-      }
-      const tabsData = await this.getTheTabsData(product.meta['product_sku'])
       const tabs = getTheTabs(tabsData)
       return this.setState({ tabs })
     } catch (err) {
@@ -49,25 +45,11 @@ class ProductTabs extends Component {
       this.setState({ tabs: [] })
     }
   }
-
-  async getTheTabsData (sku) {
-    try {
-      const tabsDataRequest = await this.requestTabsData(sku)
-      return tabsDataRequest.data
-    } catch (err) {
-      console.log(new ProductDetailTabsException(err))
-      return []
-    }
-  }
-
-  requestTabsData (sku) {
-    const productApiClient = new ProductApiClient()
-    return productApiClient.getTabs(sku)
-  }
 }
 
 ProductTabs.propTypes = {
-  product: PropTypes.object.isRequired
+  productID: PropTypes.number.isRequired,
+  tabsData: PropTypes.object.isRequired
 }
 
 export default ProductTabs

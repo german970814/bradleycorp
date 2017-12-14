@@ -12,7 +12,7 @@ class ProductDetail extends Component {
     super(props)
 
     this.state = {
-      product: productObjectShape
+      productDetail: productObjectShape
     }
 
     this.getProductInfo = this.getProductInfo.bind(this)
@@ -35,19 +35,20 @@ class ProductDetail extends Component {
         <section
           className={style.content}>
           <ProductContent
-            title={this.state.product.post['post_title']}
-            content={this.state.product.post['post_content']}
-            featuredImageSrc={this.state.product.media['featured_image'][0]}
-            images={this.state.product.meta['product_media'].images[0]}
-            newUntil={this.state.product.meta['product_new_until']}
-            sku={this.state.product.meta['product_sku']}
-            awards={this.state.product.meta['product_awards']} />
+            title={this.state.productDetail.product.post['post_title']}
+            content={this.state.productDetail.product.post['post_content']}
+            featuredImageSrc={this.state.productDetail.product.media['featured_image'][0]}
+            images={this.state.productDetail.product.meta['product_media'].images[0]}
+            newUntil={this.state.productDetail.product.meta['product_new_until']}
+            sku={this.state.productDetail.product.meta['product_sku']}
+            awards={this.state.productDetail.product.meta['product_awards']} />
         </section>
 
         <section
           className={style.tabs}>
           <ProductTabs
-            product={this.state.product} />
+            productID={this.state.productDetail.product.post.ID}
+            tabsData={this.state.productDetail.tabs} />
         </section>
       </div>
 
@@ -57,17 +58,17 @@ class ProductDetail extends Component {
   async getProductInfo (props) {
     try {
       const productSlug = props.match.params.slug
-      const product = await this.getProductBySlug(productSlug)
+      const productDetail = await this.getProductDetailPage(productSlug)
 
-      return this.setState({ product: product.data })
+      return this.setState({ productDetail: productDetail.data })
     } catch (err) {
       console.log(new ProductDetailException(err))
     }
   }
 
-  getProductBySlug (slug) {
+  getProductDetailPage (slug) {
     const productApiClient = new ProductApiClient()
-    return productApiClient.getBySlug(slug)
+    return productApiClient.getProductDetailPage(slug)
   }
 }
 
