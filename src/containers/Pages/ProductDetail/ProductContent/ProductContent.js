@@ -53,22 +53,24 @@ class ProductContent extends Component {
   }
 
   renderCTA () {
-    if( ! this.props.cta ) {
+    if (!this.props.cta) {
       return
     }
 
     let buttons = []
-    if( this.props.cta['submittal_btn'] ) {
+    if (this.props.cta['submittal_btn']) {
       buttons = [ ...buttons,
         <button
+          key={1}
           className={style.submittalBtn} >
           ADD TO SUBMITTAL
         </button>
       ]
     }
-    if( this.props.cta['survey_btn'] ) {
+    if (this.props.cta['survey_btn']) {
       buttons = [ ...buttons,
         <button
+          key={2}
           className={style.surveyBtn} >
           REQUEST SITE SURVEY
         </button>
@@ -118,7 +120,7 @@ ProductContent.propTypes = {
   newUntil: PropTypes.string,
   awards: PropTypes.array,
   sku: PropTypes.string,
-  cta: PropTypes.object,
+  cta: PropTypes.object
 }
 
 export default ProductContent

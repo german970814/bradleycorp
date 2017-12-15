@@ -41,13 +41,12 @@ class ProductContentImages extends Component {
     })
   }
 
-  getImagesSrcListWithFeaturedImage( props ) {
+  getImagesSrcListWithFeaturedImage (props) {
     const imgSrcs = props.images.split(',')
-    if( imgSrcs.includes(props.featuredImageSrc) ) {
+    if (imgSrcs.includes(props.featuredImageSrc)) {
       return imgSrcs
     }
     return [ props.featuredImageSrc, ...imgSrcs ]
-
   }
 
   handleImageListItemClick (e, imageSrc) {

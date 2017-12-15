@@ -20,8 +20,8 @@ class ProductScroller extends Component {
     })
   }
 
-  renderTitle() {
-    if( this.props.title !== undefined ) {
+  renderTitle () {
+    if (this.props.title !== undefined) {
       return (
         <h2>
           {this.props.title}
