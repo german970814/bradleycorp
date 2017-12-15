@@ -5,6 +5,7 @@ import productObjectShape from './productObjectShape'
 import ProductDetailException from '../../../exceptions/ProductDetailException'
 import ProductContent from './ProductContent/ProductContent'
 import ProductTabs from './ProductTabs/ProductTabs'
+import ProductScroller from './ProductScroller/ProductScroller'
 import style from './ProductDetail.scss'
 
 class ProductDetail extends Component {
@@ -41,7 +42,8 @@ class ProductDetail extends Component {
             images={this.state.productDetail.product.meta['product_media'].images[0]}
             newUntil={this.state.productDetail.product.meta['product_new_until']}
             sku={this.state.productDetail.product.meta['product_sku']}
-            awards={this.state.productDetail.product.meta['product_awards']} />
+            awards={this.state.productDetail.product.meta['product_awards']}
+            cta={this.state.productDetail.product.meta['product_cta']} />
         </section>
 
         <section
@@ -49,6 +51,18 @@ class ProductDetail extends Component {
           <ProductTabs
             productID={this.state.productDetail.product.post.ID}
             tabsData={this.state.productDetail.tabs} />
+        </section>
+
+        <section>
+          <ProductScroller
+            title={'Frequently Purchased With'}
+            productsArray={this.state.productDetail['purchased_with']} />
+        </section>
+
+        <section>
+          <ProductScroller
+            title={'Similar Products'}
+            productsArray={this.state.productDetail['similar']} />
         </section>
       </div>
 

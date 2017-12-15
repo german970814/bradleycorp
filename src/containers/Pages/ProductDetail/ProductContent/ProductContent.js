@@ -11,6 +11,7 @@ class ProductContent extends Component {
     this.renderNew = this.renderNew.bind(this)
     this.rendeerSKU = this.renderSKU.bind(this)
     this.renderAwards = this.renderAwards.bind(this)
+    this.renderCTA = this.renderCTA.bind(this)
     this.isNew = this.isNew.bind(this)
   }
 
@@ -51,6 +52,31 @@ class ProductContent extends Component {
     }
   }
 
+  renderCTA () {
+    if( ! this.props.cta ) {
+      return
+    }
+
+    let buttons = []
+    if( this.props.cta['submittal_btn'] ) {
+      buttons = [ ...buttons,
+        <button
+          className={style.submittalBtn} >
+          ADD TO SUBMITTAL
+        </button>
+      ]
+    }
+    if( this.props.cta['survey_btn'] ) {
+      buttons = [ ...buttons,
+        <button
+          className={style.surveyBtn} >
+          REQUEST SITE SURVEY
+        </button>
+      ]
+    }
+    return buttons
+  }
+
   render () {
     return (
       <div
@@ -65,6 +91,7 @@ class ProductContent extends Component {
           <ProductContentText
             content = {this.props.content} />
           {this.renderAwards()}
+          {this.renderCTA()}
         </div>
         <div
           className={style.image}>
@@ -90,7 +117,8 @@ ProductContent.propTypes = {
   images: PropTypes.string,
   newUntil: PropTypes.string,
   awards: PropTypes.array,
-  sku: PropTypes.string
+  sku: PropTypes.string,
+  cta: PropTypes.object,
 }
 
 export default ProductContent

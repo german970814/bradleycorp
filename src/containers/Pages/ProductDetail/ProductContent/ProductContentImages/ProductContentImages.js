@@ -26,9 +26,10 @@ class ProductContentImages extends Component {
 
   setInitState (props) {
     if (props.featuredImageSrc) {
+      const imagesSrcList = this.getImagesSrcListWithFeaturedImage(props)
       return this.setState({
         selectedImageSrc: props.featuredImageSrc,
-        imagesSrcList: [ props.featuredImageSrc, ...props.images.split(',') ]
+        imagesSrcList
       })
     }
 
@@ -38,6 +39,15 @@ class ProductContentImages extends Component {
       selectedImageSrc: imagesSrcList[0],
       imagesSrcList
     })
+  }
+
+  getImagesSrcListWithFeaturedImage( props ) {
+    const imgSrcs = props.images.split(',')
+    if( imgSrcs.includes(props.featuredImageSrc) ) {
+      return imgSrcs
+    }
+    return [ props.featuredImageSrc, ...imgSrcs ]
+
   }
 
   handleImageListItemClick (e, imageSrc) {

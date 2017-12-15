@@ -14,7 +14,8 @@ const productObjectShape = {
       'product_new_until': undefined,
       'product_awards': [],
       'product_links': [],
-      'product_warranty': undefined
+      'product_warranty': undefined,
+      'product_cta': undefined,
     },
     terms: {
       'product_category': [],

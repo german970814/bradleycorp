@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { host } from '../../../../api'
 import style from './NavMenuItem.scss'
@@ -8,9 +8,12 @@ const NavMenuItem = ({ menuItem }) => {
   return (
     <li
       className={style.navMenuItem} >
-      <Link to={formatLinkURL(menuItem['url'])} replace>
+      <NavLink
+        to={formatLinkURL(menuItem['url'])}
+        replace
+        activeClassName={style.active} >
         {menuItem['title']}
-      </Link>
+      </NavLink>
     </li>
   )
 }
