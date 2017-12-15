@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Media from "react-media"
 import ProductContentText from './ProductContentText/ProductContentText'
 import ProductContentImages from './ProductContentImages/ProductContentImages'
+import ProductContentImagesDesktop from './ProductContentImages/ProductContentImagesDesktop'
 import style from './ProductContent.scss'
 
 class ProductContent extends Component {
@@ -12,6 +14,8 @@ class ProductContent extends Component {
     this.rendeerSKU = this.renderSKU.bind(this)
     this.renderAwards = this.renderAwards.bind(this)
     this.renderCTA = this.renderCTA.bind(this)
+    this.renderDesktop = this.renderDesktop.bind(this)
+    this.renderTablet = this.renderTablet.bind(this)
     this.isNew = this.isNew.bind(this)
   }
 
@@ -79,10 +83,10 @@ class ProductContent extends Component {
     return buttons
   }
 
-  render () {
+  renderDesktop () {
     return (
       <div
-        className={style.productContent}>
+        className={style.productContentDesktop}>
         <div
           className={style.details}>
           {this.renderNew()}
@@ -97,10 +101,53 @@ class ProductContent extends Component {
         </div>
         <div
           className={style.image}>
-          <ProductContentImages
+          <ProductContentImagesDesktop
             featuredImageSrc= {this.props.featuredImageSrc}
             images = {this.props.images} />
         </div>
+      </div>
+    )
+  }
+
+  renderTablet() {
+    return (
+      <div
+        className={style.productContent}>
+        <div
+          className={style.details}>
+          {this.renderNew()}
+          {this.renderSKU()}
+          <h1
+            className={style.title}>
+            {this.props.title}
+          </h1>
+          <div
+            className={style.image}>
+            <ProductContentImages
+              featuredImageSrc= {this.props.featuredImageSrc}
+              images = {this.props.images} />
+          </div>
+          <ProductContentText
+            content = {this.props.content} />
+          {this.renderAwards()}
+          {this.renderCTA()}
+        </div>
+      </div>
+    )
+  }
+
+  render() {
+    return (
+      <div>
+        <Media query={{ maxWidth: 768 }}>
+          {match =>
+            match ? (
+              this.renderTablet()
+            ) : (
+              this.renderDesktop()
+            )
+          }
+        </Media>
       </div>
     )
   }
