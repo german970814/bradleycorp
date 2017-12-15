@@ -1,31 +1,51 @@
-.productContent {
-  margin: 50px auto;
+@import "../../../../scss/partials/text-styles";
+@import "../../../../scss/partials/variables";
+
+%productDetailBtn {
+  margin: 5px auto;
   width: 100%;
+  height: 42px;
 }
 
-.productContentDesktop {
-  margin: 50px auto;
-  width: 65%;
-}
+.productContent {
+  padding: {
+    top: 40px;
+    left: 7.8125%;
+    right: 7.8125%;
+  }
 
-.details {
-  display: inline-block;
-  margin: 0px auto;
-  width: 50%;
+  width: 84.375%;
 }
 
 .new {
-  margin-right: 20px;
-  color: red;
+  margin-right: 14px;
+  font-family: $CentraleSansPro;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 3;
+  letter-spacing: 0.5px;
+  text-align: left;
+  color: $red;
 }
 
 .sku {
-  color: grey;
+  font-family: $CentraleSansPro;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 3;
+  letter-spacing: 0.5px;
+  text-align: left;
+  color: $gray;
 }
 
 .title {
-  border-bottom: 1px solid grey;
+  @extend %h1-mobile;
+  width: 100%;
+  height: auto;
+  color: $navy;
 }
+
+
 
 .award {
   display: inline-block;
@@ -41,4 +61,15 @@
 .image {
   display: inline-block;
   width: 50%;
+}
+
+.submittalBtn {
+  @extend %productDetailBtn;
+  background-color: $green;
+}
+
+.surveyBtn {
+  @extend %productDetailBtn;
+  background-color: transparent;
+  border: solid 1px $slate-grey;
 }
