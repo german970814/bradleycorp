@@ -1,0 +1,16 @@
+%positionCircle {
+  margin: 0 4px;
+  border-radius: 50%;
+  width: 7px;
+  height: 7px;
+}
+
+.active {
+  @extend %positionCircle;
+  background-color: #232d5c;
+}
+
+.notActive {
+  @extend %positionCircle;
+  background-color: #c6d4cf;
+}

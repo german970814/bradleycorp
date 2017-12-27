@@ -16,7 +16,7 @@ class ProductContentImages extends Component {
   renderImagesList () {
     const imagesSrcList = this.getImagesSrcListWithFeaturedImage()
     return imagesSrcList.map((imageSrc, index) => {
-      const style={
+      const style = {
         backgroundImage: `url(${imageSrc})`
       }
       return (
@@ -39,6 +39,7 @@ class ProductContentImages extends Component {
     return (
       <ScrollableList
         numberToDisplay={1}
+        showPosition={true}
         wrapperClassName={style.imagesListWrapper}
         listItemClassName={style.imageListItem}
         ulClassName={style.imagesList}

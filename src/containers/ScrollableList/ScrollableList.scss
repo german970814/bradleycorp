@@ -5,3 +5,13 @@
 .buttonUp {
   float: left;
 }
+
+.positionCircles {
+  padding: 0;
+  width: 100%;
+  text-align: center;
+
+  li {
+    display: inline-block;
+  }
+}

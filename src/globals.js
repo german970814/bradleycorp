@@ -5,5 +5,5 @@ const TABLETMAXWIDTH = parseInt(vars.TabletMaxWidth)
 
 module.exports = {
   MOBILEMAXWIDTH,
-  TABLETMAXWIDTH,
+  TABLETMAXWIDTH
 }
