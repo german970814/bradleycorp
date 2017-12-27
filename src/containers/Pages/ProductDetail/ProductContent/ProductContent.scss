@@ -1,5 +1,9 @@
 @import "../../../../scss/partials/text-styles";
 @import "../../../../scss/partials/variables";
+@import "../../../../scss/partials/mixins";
+
+$productContentPadding: 25px;
+$productContentPaddingTablet: 40px;
 
 %productDetailBtn {
   margin: 5px auto;
@@ -19,11 +23,19 @@
 .productContent {
   padding: {
     top: 40px;
-    left: 25px;
-    right: 25px;
+    left: $productContentPadding;
+    right: $productContentPadding;
   }
+  width: calc(100% - #{$productContentPadding} - #{$productContentPadding});
 
-  width: 84.375%;
+  @include respond-to(tablet) {
+    padding: {
+      top: 40px;
+      left: $productContentPaddingTablet;
+      right: $productContentPaddingTablet;
+    }
+    width: calc(100% - #{$productContentPaddingTablet} - #{$productContentPaddingTablet});
+  }
 }
 
 .new {
@@ -40,9 +52,15 @@
 .title {
   @extend %h1-mobile;
   margin-top: 15px;
+  margin-bottom: 17px;
   width: 100%;
   height: auto;
   color: $navy;
+
+  @extend %h1-tablet-media-query;
+  @include respond-to(tablet) {
+    margin-bottom: 32px;
+  }
 }
 
 
