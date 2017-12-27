@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import ProductContentImagesListItem from './ProductContentImagesListItem/ProductContentImagesListItem'
 import style from './ProductContentImagesDesktop.scss'
 import ScrollableList from '../../../../ScrollableList/ScrollableList'
+import ButtonDown from './ButtonDown'
+import ButtonUp from './ButtonUp'
 
 class ProductContentImages extends Component {
   constructor (props) {
@@ -74,26 +76,34 @@ class ProductContentImages extends Component {
   }
 
   renderSelectedImage () {
+    const imageStyle = {
+      backgroundImage: `url(${this.state.selectedImageSrc})`
+    }
     return (
-      <img src={this.state.selectedImageSrc}></img>
+      <div style={imageStyle} />
     )
   }
 
   render () {
     return (
-      <div>
+      [
+        <div key={1} className={style.vAlignHelper} />,
         <div
+          key={2}
           className={style.selectedImageDesktop}>
           {this.renderSelectedImage()}
-        </div>
+        </div>,
         <ScrollableList
+          key={3}
           numberToDisplay={3}
           wrapperClassName={style.imagesListWrapperDesktop}
           ulClassName={style.imagesListDesktop}
-          listItemClassName={style.imageListItemDesktop} >
+          listItemClassName={style.imageListItemDesktop}
+          buttonDown={<ButtonDown />}
+          buttonUp={<ButtonUp />} >
           {this.renderImagesList()}
         </ScrollableList>
-      </div>
+      ]
     )
   }
 }

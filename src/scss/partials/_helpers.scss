@@ -3,3 +3,10 @@
   vertical-align: middle;
   height: 100%;
 }
+
+%fitBackground {
+  height: 100%;
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:center;
+}

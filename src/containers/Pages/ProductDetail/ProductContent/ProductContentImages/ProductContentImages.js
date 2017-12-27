@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import style from './ProductContentImages.scss'
 import ScrollableList from '../../../../ScrollableList/ScrollableList'
-import ButtonUp from './ButtonUp'
-import ButtonDown from './ButtonDown'
+import ButtonLeft from './ButtonLeft'
+import ButtonRight from './ButtonRight'
 
 class ProductContentImages extends Component {
   constructor (props) {
@@ -43,8 +43,8 @@ class ProductContentImages extends Component {
         wrapperClassName={style.imagesListWrapper}
         listItemClassName={style.imageListItem}
         ulClassName={style.imagesList}
-        buttonUp={<ButtonUp />}
-        buttonDown={<ButtonDown />} >
+        buttonUp={<ButtonLeft />}
+        buttonDown={<ButtonRight />} >
         {this.renderImagesList()}
       </ScrollableList>
     )

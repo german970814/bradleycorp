@@ -57,26 +57,28 @@ class ProductContent extends Component {
     }
   }
 
-  renderCTA () {
+  renderCTA (desktop) {
     if (!this.props.cta) {
       return
     }
 
     let buttons = []
     if (this.props.cta['submittal_btn']) {
+      const styleClass = desktop ? style.submittalBtnDesktop : style.submittalBtn
       buttons = [ ...buttons,
         <button
           key={1}
-          className={style.submittalBtn} >
+          className={styleClass} >
           ADD TO SUBMITTAL
         </button>
       ]
     }
     if (this.props.cta['survey_btn']) {
+      const styleClassSurvey = desktop ? style.surveyBtnDesktop : style.surveyBtn
       buttons = [ ...buttons,
         <button
           key={2}
-          className={style.surveyBtn} >
+          className={styleClassSurvey} >
           REQUEST SITE SURVEY
         </button>
       ]
@@ -89,26 +91,28 @@ class ProductContent extends Component {
       <div
         className={style.productContentDesktop}>
         <div
-          className={style.details}>
+          className={style.detailsDesktop}>
           {this.renderNew()}
           {this.renderSKU()}
+
           <h1
-            className={style.title}>
+            className={style.titleDesktop}>
             {this.props.title}</h1>
+
           <ProductContentText
             content = {this.props.content} />
           {this.renderAwards()}
-          <div
-            className={style.ctaButtons} >
-            {this.renderCTA()}
-          </div>
 
         </div>
         <div
-          className={style.image}>
+          className={style.imageSelectorDesktop}>
           <ProductContentImagesDesktop
             featuredImageSrc= {this.props.featuredImageSrc}
             images = {this.props.images} />
+        </div>
+        <div
+          className={style.ctaButtons} >
+          {this.renderCTA(true)}
         </div>
       </div>
     )

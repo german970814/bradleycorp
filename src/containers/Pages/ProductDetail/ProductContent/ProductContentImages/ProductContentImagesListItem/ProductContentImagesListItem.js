@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import style from './ProductContentImagesListItem.scss'
 
 class ProductContentImagesListItem extends Component {
   render () {
+    const imageStyle = {
+      backgroundImage: `url(${this.props.src})`
+    }
     return (
-      <img
+      <div
         onClick={(e) => { this.props.onClick(e, this.props.src) }}
-        src={this.props.src} />
+        style={imageStyle}
+        className={style.listItem} />
     )
   }
 }

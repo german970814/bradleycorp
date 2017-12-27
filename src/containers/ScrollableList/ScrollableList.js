@@ -79,16 +79,20 @@ class ScrollableList extends Component {
       return
     }
 
-    return this.state.children.map((child, index) => {
-      return (
-        <li
-          key={index} >
-          <PositionCircle
-            selected={child.display} />
-        </li>
-
-      )
-    })
+    return (
+      <ul
+        className={style.positionCircles}>
+        {this.state.children.map((child, index) => {
+          return (
+            <li
+              key={index} >
+              <PositionCircle
+                selected={child.display} />
+            </li>
+          )
+        })}
+      </ul>
+    )
   }
 
   renderChildren () {
@@ -116,10 +120,7 @@ class ScrollableList extends Component {
           {this.renderChildren()}
         </ul>
         {this.renderButtonDown()}
-        <ul
-          className={style.positionCircles}>
-          {this.renderPositionCircles()}
-        </ul>
+        {this.renderPositionCircles()}
 
       </div>
     )
