@@ -46,14 +46,14 @@ $productContentPaddingTablet: 40px;
 .title {
   @extend %h1-mobile;
   margin-top: 15px;
-  margin-bottom: 17px;
+  margin-bottom: 10px;
   width: 100%;
   height: auto;
   color: $navy;
 
   @extend %h1-tablet-media-query;
   @include respond-to(tablet) {
-    margin-bottom: 32px;
+    margin-bottom: 27px;
   }
 }
 
@@ -70,7 +70,7 @@ $productContentPaddingTablet: 40px;
   }
 }
 
-.image {
+.imageSelector {
   width: 100%;
 }
 
@@ -89,6 +89,10 @@ $productContentPaddingTablet: 40px;
   @include respond-to(tablet) {
     width: calc(50% - 8px);
   }
+}
+
+.ctaButtons {
+  width: 100%;
 }
 
 .submittalBtn {

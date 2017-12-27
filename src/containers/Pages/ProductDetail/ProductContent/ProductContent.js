@@ -98,7 +98,11 @@ class ProductContent extends Component {
           <ProductContentText
             content = {this.props.content} />
           {this.renderAwards()}
-          {this.renderCTA()}
+          <div
+            className={style.ctaButtons} >
+            {this.renderCTA()}
+          </div>
+
         </div>
         <div
           className={style.image}>
@@ -122,16 +126,22 @@ class ProductContent extends Component {
             className={style.title}>
             {this.props.title}
           </h1>
+
           <div
-            className={style.image}>
+            className={style.imageSelector}>
             <ProductContentImages
               featuredImageSrc= {this.props.featuredImageSrc}
               images = {this.props.images} />
           </div>
+
           <ProductContentText
             content = {this.props.content} />
+
           {this.renderAwards()}
-          {this.renderCTA()}
+          <div
+            className={style.ctaButtons} >
+            {this.renderCTA()}
+          </div>
         </div>
       </div>
     )
