@@ -7,39 +7,39 @@
   height: 42px;
 }
 
+%aboveTitle {
+  display: inline;
+  font-family: $CentraleSansPro;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  text-align: left;
+}
+
 .productContent {
   padding: {
     top: 40px;
-    left: 7.8125%;
-    right: 7.8125%;
+    left: 25px;
+    right: 25px;
   }
 
   width: 84.375%;
 }
 
 .new {
+  @extend %aboveTitle;
   margin-right: 14px;
-  font-family: $CentraleSansPro;
-  font-size: 12px;
-  font-weight: bold;
-  line-height: 3;
-  letter-spacing: 0.5px;
-  text-align: left;
   color: $red;
 }
 
 .sku {
-  font-family: $CentraleSansPro;
-  font-size: 12px;
-  font-weight: bold;
-  line-height: 3;
-  letter-spacing: 0.5px;
-  text-align: left;
+  @extend %aboveTitle;
   color: $gray;
 }
 
 .title {
   @extend %h1-mobile;
+  margin-top: 15px;
   width: 100%;
   height: auto;
   color: $navy;
@@ -59,8 +59,7 @@
 }
 
 .image {
-  display: inline-block;
-  width: 50%;
+  width: 100%;
 }
 
 .submittalBtn {

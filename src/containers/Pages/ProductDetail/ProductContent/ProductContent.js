@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Media from "react-media"
+import Media from 'react-media'
 import ProductContentText from './ProductContentText/ProductContentText'
 import ProductContentImages from './ProductContentImages/ProductContentImages'
 import ProductContentImagesDesktop from './ProductContentImages/ProductContentImagesDesktop'
@@ -109,7 +109,7 @@ class ProductContent extends Component {
     )
   }
 
-  renderTablet() {
+  renderTablet () {
     return (
       <div
         className={style.productContent}>
@@ -136,7 +136,7 @@ class ProductContent extends Component {
     )
   }
 
-  render() {
+  render () {
     return (
       <div>
         <Media query={{ maxWidth: 768 }}>

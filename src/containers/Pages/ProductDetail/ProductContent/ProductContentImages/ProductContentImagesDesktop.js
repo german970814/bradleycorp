@@ -18,7 +18,7 @@ class ProductContentImages extends Component {
     this.renderImagesList = this.renderImagesList.bind(this)
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.setInitState(this.props)
   }
 
@@ -83,14 +83,14 @@ class ProductContentImages extends Component {
     return (
       <div>
         <div
-          className={style.selectedImage}>
+          className={style.selectedImageDesktop}>
           {this.renderSelectedImage()}
         </div>
         <ScrollableList
           numberToDisplay={3}
-          wrapperClassName={style.imagesListWrapper}
-          ulClassName={style.imagesList}
-          listItemClassName={style.imageListItem} >
+          wrapperClassName={style.imagesListWrapperDesktop}
+          ulClassName={style.imagesListDesktop}
+          listItemClassName={style.imageListItemDesktop} >
           {this.renderImagesList()}
         </ScrollableList>
       </div>

@@ -4,7 +4,7 @@ import style from './ProductContentImages.scss'
 import ScrollableList from '../../../../ScrollableList/ScrollableList'
 
 class ProductContentImages extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.renderImagesList = this.renderImagesList.bind(this)
@@ -33,7 +33,10 @@ class ProductContentImages extends Component {
   render () {
     return (
       <ScrollableList
-        numberToDisplay={1}>
+        numberToDisplay={1}
+        wrapperClassName={style.imagesListWrapper}
+        listItemClassName={style.listItem}
+        ulClassName={style.imagesList} >
         {this.renderImagesList()}
       </ScrollableList>
     )
