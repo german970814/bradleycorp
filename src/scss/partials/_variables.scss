@@ -17,3 +17,16 @@ $charcoal-grey: #414042;
 /* Fonts */
 
 $CentraleSansPro: 'CentraleSansPro';
+
+/* Breakpoints */
+
+$MobileMaxWidth: 768;
+$MobileMaxWidthPX: $MobileMaxWidth + px;
+
+$TabletMaxWidth: 1279;
+$TabletMaxWidthPX: $TabletMaxWidth + px;
+
+:export {
+  MobileMaxWidth: $MobileMaxWidth;
+  TabletMaxWidth: $TabletMaxWidth;
+}

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ScrollableList from '../../../ScrollableList/ScrollableList'
+import ButtonUp from './ButtonUp'
+import ButtonDown from './ButtonDown'
 
 class ProductScroller extends Component {
   constructor (props) {
@@ -35,7 +37,9 @@ class ProductScroller extends Component {
       <div>
         {this.renderTitle()}
         <ScrollableList
-          numberToDisplay={3} >
+          numberToDisplay={2}
+          buttonUp={<ButtonUp />}
+          buttonDown={<ButtonDown />} >
           {this.renderProducts()}
         </ScrollableList>
       </div>

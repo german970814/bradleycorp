@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ProductContentImagesListItem from './ProductContentImagesListItem/ProductContentImagesListItem'
-import style from './ProductContentImages.scss'
+import style from './ProductContentImagesDesktop.scss'
 import ScrollableList from '../../../../ScrollableList/ScrollableList'
 
 class ProductContentImages extends Component {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import style from './ScrollableList.scss'
 
 class ScrollableList extends Component {
   constructor (props) {
@@ -10,6 +11,8 @@ class ScrollableList extends Component {
     }
 
     this.getChildrenWithScrollableListApiAsProps = this.getChildrenWithScrollableListApiAsProps.bind(this)
+    this.renderButtonUp = this.renderButtonUp.bind(this)
+    this.renderButtonDown = this.renderButtonDown.bind(this)
     this.renderChildren = this.renderChildren.bind(this)
     this.getChildrenToDisplay = this.getChildrenToDisplay.bind(this)
     this.childrenDidUpdate = this.childrenDidUpdate.bind(this)
@@ -36,6 +39,8 @@ class ScrollableList extends Component {
   moveList (e, increment) {
     e.preventDefault()
 
+    console.log('clicked')
+
     const children = this.state.children.map((child, index, allChildren) => {
       const position = this.getPosition(child.position, increment, allChildren.length)
 
@@ -47,6 +52,26 @@ class ScrollableList extends Component {
     })
 
     return this.setState({ ...this.state, children })
+  }
+
+  renderButtonUp() {
+    return (
+      <div
+        className={style.buttonUp}
+        onClick={ (e) => { this.moveList(e, -1) } } >
+        {this.props.buttonUp}
+      </div>
+    )
+  }
+
+  renderButtonDown() {
+    return (
+      <div
+        className={style.buttonDown}
+        onClick={ (e) => { this.moveList(e, 1) } } >
+        {this.props.buttonDown}
+      </div>
+    )
   }
 
   renderChildren () {
@@ -68,18 +93,12 @@ class ScrollableList extends Component {
     return (
       <div
         className={this.props.wrapperClassName}>
-        <button
-          onClick={(e) => { this.moveList(e, -1) }}>
-          Move Up
-        </button>
+        {this.renderButtonUp()}
         <ul
           className={this.props.ulClassName}>
           {this.renderChildren()}
         </ul>
-        <button
-          onClick={(e) => { this.moveList(e, 1) }}>
-          Move Down
-        </button>
+        {this.renderButtonDown()}
       </div>
     )
   }
@@ -127,7 +146,9 @@ ScrollableList.propTypes = {
   children: PropTypes.array.isRequired,
   wrapperClassName: PropTypes.string,
   listItemClassName: PropTypes.string,
-  ulClassName: PropTypes.string
+  ulClassName: PropTypes.string,
+  buttonUp: PropTypes.element.isRequired,
+  buttonDown: PropTypes.element.isRequired,
 }
 
 export default ScrollableList

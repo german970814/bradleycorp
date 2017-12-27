@@ -23,7 +23,6 @@ class ProductTabs extends Component {
   }
 
   render () {
-    console.log('updated')
     return (
       <Tabs
         defaultActiveTabIndex={0}
