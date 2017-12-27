@@ -18,6 +18,7 @@ class ScrollableList extends Component {
     this.renderChildren = this.renderChildren.bind(this)
     this.getChildrenToDisplay = this.getChildrenToDisplay.bind(this)
     this.childrenDidUpdate = this.childrenDidUpdate.bind(this)
+    this.getPosition = this.getPosition.bind(this)
   }
 
   componentWillReceiveProps (nextProps) {
@@ -127,6 +128,11 @@ class ScrollableList extends Component {
   }
 
   getPosition (prevPos, increment, arrayLength) {
+    // we want items to cycle the other way if vertical
+    if (this.props.isVertical) {
+      increment = -increment
+    }
+
     const position = (prevPos + increment) % arrayLength
     return position < 0
       ? arrayLength + position
@@ -167,6 +173,7 @@ class ScrollableList extends Component {
 ScrollableList.propTypes = {
   numberToDisplay: PropTypes.number.isRequired,
   showPosition: PropTypes.bool,
+  isVertical: PropTypes.bool,
   children: PropTypes.array.isRequired,
   wrapperClassName: PropTypes.string,
   listItemClassName: PropTypes.string,
