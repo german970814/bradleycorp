@@ -1,4 +1,32 @@
+@import "../../../../../scss/partials/variables";
+
 .moreDetail {
+  margin-top: 30px;
+  margin-bottom: 35px;
   width: 100%;
-  padding: 10px;
+  font-family: Helvetica;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: $black;
+}
+
+.content {
+  font-family: Helvetica;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: $slate-grey;
+
+  ul {
+    padding-left: 10px;
+  }
 }

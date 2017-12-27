@@ -37,20 +37,22 @@ class ProductContentText extends Component {
 
   renderMoreDetailsButtonText () {
     return this.state.moreDetails
-      ? 'Fewer Details'
-      : 'More Details'
+      ? '- Less Detail'
+      : '+ More Detail'
   }
 
   render () {
     return (
       <div>
-        {this.renderText()}
+        <div
+          className={style.content}
+          dangerouslySetInnerHTML={{__html: this.renderText()}} />
         <div
           className={style.moreDetail}>
-          <button
+          <div
             onClick={this.handleMoreDetailsButtonClick.bind(this)} >
             {this.renderMoreDetailsButtonText()}
-          </button>
+          </div>
         </div>
       </div>
     )
