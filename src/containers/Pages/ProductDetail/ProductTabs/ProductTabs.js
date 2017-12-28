@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Media from 'react-media'
-import { TABLETMAXWIDTH } from '../../../../globals'
+import { MOBILEMAXWIDTH } from '../../../../globals'
 import ProductDetailTabsException from '../../../../exceptions/ProductDetailTabsException'
 import getTheTabs from './theTabs'
 import Tabs from '../../../Tabs/Tabs/Tabs'
@@ -27,7 +27,7 @@ class ProductTabs extends Component {
 
   render () {
     return (
-      <Media query={{ maxWidth: TABLETMAXWIDTH }}>
+      <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
         {match =>
           match ? (
             <Tabs

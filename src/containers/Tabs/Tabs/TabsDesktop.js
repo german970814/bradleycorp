@@ -33,6 +33,7 @@ class TabsDesktop extends Component {
         onClick: this.handleTabClick,
         tabIndex: index,
         isActive: index === this.state.activeTabIndex,
+        isDesktop: true,
         tabClassName: this.props.tabClassName
       })
     })

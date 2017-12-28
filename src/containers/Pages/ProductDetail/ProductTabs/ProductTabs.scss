@@ -16,8 +16,13 @@ $tabHeight: 65px;
 }
 
 .activeTabContent {
-  padding: 20px;
-  background-color: lightgrey;
+  @extend %BodyPaddingWithMediaQueries;
+  @extend %100WidthMinusBodyPaddingWithMediaQueries;
+  border: solid 1px $silver;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: $light-gray;
+  text-align: left;
 }
 
 .productDetailTabs {
@@ -54,23 +59,47 @@ $tabHeight: 65px;
 
 }
 
-// Desktop
+// Tablet-Desktop
+
+$tabHeightDesktop: 60px;
+
+.tabsWrapperDesktop {
+  margin-top: 70px;
+
+  ul {
+    @extend %BodyPaddingWithMediaQueries;
+    @extend %100WidthMinusBodyPaddingWithMediaQueries;
+    margin: 0;
+    overflow-x: scroll;
+    text-align: center;
+    white-space: nowrap;
+  }
+}
+
+.activeTabContentDesktop {
+  @extend %BodyPaddingWithMediaQueries;
+  @extend %100WidthMinusBodyPaddingWithMediaQueries;
+  border: solid 1px $silver;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background-color: $light-gray;
+  text-align: left;
+}
 
 .productDetailTabsDesktop {
-  border-bottom: 1px solid $silver;
-  height: $tabHeight;
-  font-family: CentraleSansPro;
-  font-size: 16px;
+  margin-right: 1px;
+  display: inline-block;
+  border: solid 1px $silver;
+  width: 118px;
+  height: $tabHeightDesktop;
+  font-family: $CentraleSansPro;
+  font-size: 12px;
   font-weight: bold;
-  line-height: $tabHeight;
+  line-height: $tabHeightDesktop;
   list-style: none;
-  text-align: left;
+  text-align: center;
+  white-space: normal;
   color: #2e3c6e;
-
-  &:first-child {
-    margin-top: 60px;
-    border-top: 1px solid $silver;
-  }
 
   span {
     display: inline-block;
