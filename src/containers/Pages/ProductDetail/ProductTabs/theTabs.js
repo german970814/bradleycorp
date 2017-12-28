@@ -20,7 +20,8 @@ function getTheTabs (tabsData) {
       <Tab
         key={1}
         text={`3-Part Spec and Technical Data`}
-        isActive={false} >
+        isActive={false}
+        isDesktop={false} >
         <TabThreePartSpecAndTechData
           threePartSpec={tabsData['three_part_spec']['three_part_spec']}
           technicalData={tabsData['three_part_spec']['technical_data']} />
@@ -37,7 +38,8 @@ function getTheTabs (tabsData) {
       <Tab
         key={2}
         text={`Design`}
-        isActive={false} >
+        isActive={false}
+        isDesktop={false} >
         <TabDesign
           videos={tabsData.design.videos}
           links={tabsData.design.links}
@@ -53,7 +55,8 @@ function getTheTabs (tabsData) {
       <Tab
         key={3}
         text={`Case Studies`}
-        isActive={false} >
+        isActive={false}
+        isDesktop={false} >
         <TabCaseStudies
           caseStudies={tabsData['case_study']} />
       </Tab>
@@ -66,7 +69,8 @@ function getTheTabs (tabsData) {
       <Tab
         key={4}
         text={`Warranty`}
-        isActive={false} >
+        isActive={false}
+        isDesktop={false} >
         <TabWarranty
           warranty={tabsData.warranty} />
       </Tab>
@@ -80,7 +84,8 @@ function getTheTabs (tabsData) {
       <Tab
         key={5}
         text={`Installation`}
-        isActive={false} >
+        isActive={false}
+        isDesktop={false} >
         <TabInstallation
           guides={tabsData.installation.guides}
           videos={tabsData.installation.videos} />
@@ -95,7 +100,8 @@ function getTheTabs (tabsData) {
       <Tab
         key={6}
         text={`Maintenance`}
-        isActive={false} >
+        isActive={false}
+        isDesktop={false} >
         <TabMaintenance
           guides={tabsData.maintenance.guides}
           videos={tabsData.maintenance.videos} />
@@ -109,7 +115,8 @@ function getTheTabs (tabsData) {
       <Tab
         key={7}
         text={`Compliance`}
-        isActive={false} >
+        isActive={false}
+        isDesktop={false} >
         <TabCompliance
           compliance={tabsData.compliance} />
       </Tab>
@@ -122,7 +129,8 @@ function getTheTabs (tabsData) {
       <Tab
         key={8}
         text={`Application Gallery`}
-        isActive={false} >
+        isActive={false}
+        isDesktop={false} >
         <TabApplicationGallery
           applicationGalleries={tabsData['application_gallery']} />
       </Tab>
@@ -135,7 +143,8 @@ function getTheTabs (tabsData) {
       <Tab
         key={9}
         text={`BIM/Revit`}
-        isActive={false} >
+        isActive={false}
+        isDesktop={false} >
         <TabBimRevit
           bimRevit={tabsData['bim_revit']} />
       </Tab>

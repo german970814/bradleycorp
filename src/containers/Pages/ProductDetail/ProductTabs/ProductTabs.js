@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Media from 'react-media'
+import { TABLETMAXWIDTH } from '../../../../globals'
 import ProductDetailTabsException from '../../../../exceptions/ProductDetailTabsException'
 import getTheTabs from './theTabs'
 import Tabs from '../../../Tabs/Tabs/Tabs'
+import TabsDesktop from '../../../Tabs/Tabs/TabsDesktop'
 import style from './ProductTabs.scss'
 
 class ProductTabs extends Component {
@@ -24,13 +27,27 @@ class ProductTabs extends Component {
 
   render () {
     return (
-      <Tabs
-        defaultActiveTabIndex={0}
-        tabWrapperClassName={style.tabsWrapper}
-        activeTabClassName={style.activeTabContent}
-        tabClassName={style.productDetailTabs} >
-        {this.state.tabs}
-      </Tabs>
+      <Media query={{ maxWidth: TABLETMAXWIDTH }}>
+        {match =>
+          match ? (
+            <Tabs
+              defaultActiveTabIndex={0}
+              tabWrapperClassName={style.tabsWrapper}
+              activeTabClassName={style.activeTabContent}
+              tabClassName={style.productDetailTabs} >
+              {this.state.tabs}
+            </Tabs>
+          ) : (
+            <TabsDesktop
+              defaultActiveTabIndex={0}
+              tabWrapperClassName={style.tabsWrapperDesktop}
+              activeTabClassName={style.activeTabContentDesktop}
+              tabClassName={style.productDetailTabsDesktop} >
+              {this.state.tabs}
+            </TabsDesktop>
+          )
+        }
+      </Media>
     )
   }
 

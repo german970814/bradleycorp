@@ -1,60 +1,39 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-class Tabs extends Component {
+class TabsDesktop extends Component {
   constructor (props, context) {
     super(props, context)
 
     this.state = {
-      activeTabIndex: this.props.defaultActiveTabIndex,
-      isOpen: false
+      activeTabIndex: this.props.defaultActiveTabIndex
     }
 
     this.handleTabClick = this.handleTabClick.bind(this)
-    this.openCloseTab = this.openCloseTab.bind(this)
   }
 
   componentWillReceiveProps (nextProps) {
-    this.setState({ activeTabIndex: 0, isOpen: false })
+    this.setState({ activeTabIndex: 0 })
   }
 
   handleTabClick (tabIndex) {
-    this.setState({
-      activeTabIndex: tabIndex,
-      isOpen: this.openCloseTab(tabIndex)
-    })
-  }
-
-  openCloseTab( tabIndex ) {
-    if (this.state.isOpen && (tabIndex === this.state.activeTabIndex)) {
-      return false
+    if (tabIndex === this.state.activeTabIndex) {
+      return
     }
-    return true
+
+    this.setState({
+      activeTabIndex: tabIndex
+    })
   }
 
   // Encapsulate <Tabs/> component API as props for <Tab/> children
   renderChildrenWithTabsApiAsProps () {
     return React.Children.map(this.props.children, (child, index) => {
-      const tab = React.cloneElement(child, {
+      return React.cloneElement(child, {
         onClick: this.handleTabClick,
         tabIndex: index,
         isActive: index === this.state.activeTabIndex,
         tabClassName: this.props.tabClassName
-      })
-
-      // putting the tab content after the tab in the html
-      if (tab.props.isActive && this.state.isOpen) {
-        return [
-          React.cloneElement(tab, {
-            isOpen: true
-          }),
-          (<div className={`tabs-active-content ${this.props.activeTabClassName}`}>
-            {this.renderActiveTabContent()}
-          </div>)
-        ]
-      }
-      return React.cloneElement(tab, {
-        isOpen: false
       })
     })
   }
@@ -74,12 +53,15 @@ class Tabs extends Component {
         <ul className="tabs-nav">
           {this.renderChildrenWithTabsApiAsProps()}
         </ul>
+        <div className={`tabs-active-content ${this.props.activeTabClassName}`}>
+          {this.renderActiveTabContent()}
+        </div>
       </div>
     )
   }
 }
 
-Tabs.propTypes = {
+TabsDesktop.propTypes = {
   defaultActiveTabIndex: PropTypes.number.isRequired,
   children: PropTypes.array.isRequired,
   tabClassName: PropTypes.string,
@@ -87,4 +69,4 @@ Tabs.propTypes = {
   tabWrapperClassName: PropTypes.string
 }
 
-export default Tabs
+export default TabsDesktop
