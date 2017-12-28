@@ -16,11 +16,12 @@
   color: $black;
 
   @include respond-to(desktop) {
-    margin-bottom: 26px;
+    margin-bottom: 22px;
   }
 }
 
 .content {
+  width: 100%;
   font-family: Helvetica;
   font-size: 12px;
   font-weight: normal;
@@ -33,5 +34,9 @@
 
   ul {
     padding-left: 10px;
+  }
+
+  @include respond-to(tablet) {
+    margin-top: 40px;
   }
 }

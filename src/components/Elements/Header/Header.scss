@@ -1,9 +1,36 @@
+@import "../../../scss/partials/layout";
+@import "../../../scss/partials/mixins";
+@import "../../../scss/partials/variables";
+
 .header {
-  width: 100%;
+  @extend %BodyPaddingWithMediaQueries;
+  @extend %100WidthMinusBodyPaddingWithMediaQueries;
 }
 
 .topBar {
-  height: 20px;
-  width: 100%;
-  background-color: lightgrey;
+  margin: {
+    left: -$MobileBodyPadding;
+    right: -$MobileBodyPadding;
+  }
+  width: calc(100% + $MobileBodyPadding*2);
+  height: 0px;
+  background-color: #e6e7e8;
+
+  @include respond-to(tablet){
+    margin: {
+      left: -$TabletBodyPadding;
+      right: -$TabletBodyPadding;
+    }
+    width: calc(100% + $TabletBodyPadding*2);
+    height: 27px;
+  }
+
+  @include respond-to(desktop){
+    margin: {
+      left: -$DesktopBodyPadding;
+      right: -$DesktopBodyPadding;
+    }
+    width: calc(100% + $DesktopBodyPadding*2);
+    height: 30px;
+  }
 }

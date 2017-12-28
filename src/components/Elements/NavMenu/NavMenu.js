@@ -15,7 +15,9 @@ class NavMenu extends Component {
       return (
         <NavMenuItem
           key={menuItem.ID}
-          menuItem={menuItem} />
+          menuItem={menuItem}
+          menuItemClass={this.props.menuItemClass}
+        />
       )
     })
   }
@@ -31,7 +33,11 @@ class NavMenu extends Component {
 }
 
 NavMenu.propTypes = {
-  menuItems: PropTypes.array.isRequired
+  menuItems: PropTypes.array.isRequired,
+  menuItemClass: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string
+  ])
 }
 
 export default NavMenu

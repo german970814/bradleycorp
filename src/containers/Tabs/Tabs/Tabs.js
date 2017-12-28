@@ -25,7 +25,7 @@ class Tabs extends Component {
     })
   }
 
-  openCloseTab( tabIndex ) {
+  openCloseTab (tabIndex) {
     if (this.state.isOpen && (tabIndex === this.state.activeTabIndex)) {
       return false
     }
@@ -46,9 +46,12 @@ class Tabs extends Component {
       if (tab.props.isActive && this.state.isOpen) {
         return [
           React.cloneElement(tab, {
+            key: 0,
             isOpen: true
           }),
-          (<div className={`tabs-active-content ${this.props.activeTabClassName}`}>
+          (<div
+            key={1}
+            className={`tabs-active-content ${this.props.activeTabClassName}`}>
             {this.renderActiveTabContent()}
           </div>)
         ]

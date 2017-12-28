@@ -1,8 +1,9 @@
 @import "../../../../scss/partials/text-styles";
 @import "../../../../scss/partials/variables";
 @import "../../../../scss/partials/mixins";
+@import "../../../../scss/partials/layout";
 
-$tabHeight: 70px;
+$tabHeight: 65px;
 
 .tabsWrapper {
 
@@ -20,9 +21,43 @@ $tabHeight: 70px;
 }
 
 .productDetailTabs {
+  @extend %BodyPaddingWithMediaQueries;
+  @extend %100WidthMinusBodyPaddingWithMediaQueries;
   border-bottom: 1px solid $silver;
-  padding: 0 25px;
-  width: calc(100% - 50px);
+  height: $tabHeight;
+  font-family: $CentraleSansPro;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: $tabHeight;
+  list-style: none;
+  text-align: left;
+  color: #2e3c6e;
+
+  &:first-child {
+    margin-top: 62px;
+    border-top: 1px solid $silver;
+  }
+
+  span {
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 19px);
+    line-height: normal;
+  }
+
+  img {
+    float: right;
+    width: 19px;
+    height: 11px;
+    margin: ($tabHeight - 11px)/2 0;
+  }
+
+}
+
+// Desktop
+
+.productDetailTabsDesktop {
+  border-bottom: 1px solid $silver;
   height: $tabHeight;
   font-family: CentraleSansPro;
   font-size: 16px;
@@ -33,6 +68,7 @@ $tabHeight: 70px;
   color: #2e3c6e;
 
   &:first-child {
+    margin-top: 60px;
     border-top: 1px solid $silver;
   }
 

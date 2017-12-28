@@ -1,4 +1,16 @@
-.header {
-  width: 100%;
-  background: grey;
+@import "../../../scss/partials/layout";
+
+.footer {
+  @extend %BodyPaddingWithMediaQueries;
+  @extend %100WidthMinusBodyPaddingWithMediaQueries;
+  background: black;
+  color: white;
+}
+
+.menuItem {
+  color: white;
+
+  a {
+    color: white;
+  }
 }

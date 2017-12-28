@@ -30,3 +30,9 @@ $TabletMaxWidthPX: $TabletMaxWidth + px;
   MobileMaxWidth: $MobileMaxWidth;
   TabletMaxWidth: $TabletMaxWidth;
 }
+
+/* Padding */
+
+$MobileBodyPadding: 25px;
+$TabletBodyPadding: 40px;
+$DesktopBodyPadding: 55px;
