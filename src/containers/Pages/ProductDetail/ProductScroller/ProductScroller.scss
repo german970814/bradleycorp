@@ -1,0 +1,43 @@
+@import "../../../../scss/partials/variables";
+@import "../../../../scss/partials/layout";
+@import "../../../../scss/partials/helpers";
+
+.title {
+  margin: {
+    top: 40px;
+    bottom: 19px;
+  }
+  width: 100%;
+  font-family: TradeGothic-CondTwenty;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.26;
+  letter-spacing: 1.6px;
+  text-align: center;
+  color: $black
+}
+
+.productScrollerUl {
+  @extend %BodyPaddingWithMediaQueries;
+  @extend %100WidthMinusBodyPaddingWithMediaQueries;
+  margin-top: 0;
+  text-align: center;
+}
+
+$listItemPadding: 10px;
+
+.listItem {
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px;
+  width: calc(50% - #{$listItemPadding}*2);
+  text-align: center;
+
+  @include respond-to(tablet) {
+    width: calc(100% / 3 - #{$listItemPadding}*2);
+  }
+
+  @include respond-to(desktop) {
+    width: calc(20% - #{$listItemPadding}*2);
+  }
+}

@@ -22,7 +22,8 @@ class ScrollableList extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (this.childrenDidUpdate(nextProps.children, this.props.children)) {
+    if (this.childrenDidUpdate(nextProps.children, this.props.children) ||
+    this.numberToDisplayDidUpdate(nextProps.numberToDisplay, this.props.numberToDisplay)) {
       this.setState({
         children: this.getChildrenWithScrollableListApiAsProps(nextProps)
       })
@@ -167,6 +168,10 @@ class ScrollableList extends Component {
     })
 
     return false
+  }
+
+  numberToDisplayDidUpdate (newNumber, oldNumber) {
+    return newNumber !== oldNumber
   }
 }
 

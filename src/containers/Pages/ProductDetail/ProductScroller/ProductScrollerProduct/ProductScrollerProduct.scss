@@ -1,0 +1,74 @@
+@import "../../../../../scss/partials/variables";
+@import "../../../../../scss/partials/helpers";
+@import "../../../../../scss/partials/mixins";
+
+%widthController {
+  width: 100%;
+  max-width: 150px;
+  margin: 0 auto;
+
+  @include respond-to(tablet) {
+    max-width: 170px;
+  }
+}
+
+.elementWrapper {
+  width: 100%;
+}
+
+.topIcons {
+  @extend %widthController;
+  height: 30px;
+}
+
+.new {
+  display: inline-block;
+  vertical-align: top;
+  float: left;
+  font-family: $CentraleSansPro;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #e51616;
+}
+
+.image {
+  @extend %fitBackground;
+  @extend %widthController;
+  display: inline-block;
+  margin-bottom: 3px;
+  height: 161px;
+}
+
+.sku {
+  @extend %widthController;
+  display: inline-block;
+  margin-bottom: 20px;
+  font-family: Helvetica;
+  font-size: 10px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: $steel-grey;
+}
+
+.title {
+  @extend %widthController;
+  display: inline-block;
+  font-family: $CentraleSansPro;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: $black;
+}

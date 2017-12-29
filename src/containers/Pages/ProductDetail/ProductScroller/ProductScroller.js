@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Media from 'react-media'
+import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../globals'
 import ScrollableList from '../../../ScrollableList/ScrollableList'
+import ProductScrollerProduct from './ProductScrollerProduct/ProductScrollerProduct'
 import ButtonUp from './ButtonUp'
 import ButtonDown from './ButtonDown'
+import style from './ProductScroller.scss'
 
 class ProductScroller extends Component {
   constructor (props) {
@@ -15,9 +19,9 @@ class ProductScroller extends Component {
   renderProducts () {
     return this.props.productsArray.map((product, index) => {
       return (
-        <img
+        <ProductScrollerProduct
           key={index}
-          src={product.media['featured_image'][0]} />
+          product={product} />
       )
     })
   }
@@ -25,7 +29,8 @@ class ProductScroller extends Component {
   renderTitle () {
     if (this.props.title !== undefined) {
       return (
-        <h2>
+        <h2
+          className={style.title} >
           {this.props.title}
         </h2>
       )
@@ -36,12 +41,46 @@ class ProductScroller extends Component {
     return (
       <div>
         {this.renderTitle()}
-        <ScrollableList
-          numberToDisplay={2}
-          buttonUp={<ButtonUp />}
-          buttonDown={<ButtonDown />} >
-          {this.renderProducts()}
-        </ScrollableList>
+
+        <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
+          {match =>
+            match ? (
+              <ScrollableList
+                numberToDisplay={2}
+                buttonUp={<ButtonUp />}
+                buttonDown={<ButtonDown />}
+                ulClassName={style.productScrollerUl}
+                listItemClassName={style.listItem} >
+                {this.renderProducts()}
+              </ScrollableList>
+            ) : (
+              <Media query={{ minWidth: TABLETMAXWIDTH }}>
+                {match =>
+                  match ? (
+                    <ScrollableList
+                      numberToDisplay={5}
+                      buttonUp={<ButtonUp />}
+                      buttonDown={<ButtonDown />}
+                      ulClassName={style.productScrollerUl}
+                      listItemClassName={style.listItem} >
+                      {this.renderProducts()}
+                    </ScrollableList>
+                  ) : (
+                    <ScrollableList
+                      numberToDisplay={3}
+                      buttonUp={<ButtonUp />}
+                      buttonDown={<ButtonDown />}
+                      ulClassName={style.productScrollerUl}
+                      listItemClassName={style.listItem} >
+                      {this.renderProducts()}
+                    </ScrollableList>
+                  )
+                }
+              </Media>
+            )
+          }
+        </Media>
+
       </div>
     )
   }
