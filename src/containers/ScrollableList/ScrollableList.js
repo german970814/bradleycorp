@@ -14,6 +14,9 @@ class ScrollableList extends Component {
     this.getChildrenWithScrollableListApiAsProps = this.getChildrenWithScrollableListApiAsProps.bind(this)
     this.renderButtonUp = this.renderButtonUp.bind(this)
     this.renderButtonDown = this.renderButtonDown.bind(this)
+    this.buttonUp = this.buttonUp.bind(this)
+    this.buttonDown = this.buttonDown.bind(this)
+    this.renderButtonsBelow = this.renderButtonsBelow.bind(this)
     this.renderPositionCircles = this.renderPositionCircles.bind(this)
     this.renderChildren = this.renderChildren.bind(this)
     this.getChildrenToDisplay = this.getChildrenToDisplay.bind(this)
@@ -57,19 +60,46 @@ class ScrollableList extends Component {
   }
 
   renderButtonUp () {
+    if (!this.props.positionButtonsBelow) {
+      return this.buttonUp()
+    }
+  }
+
+  renderButtonDown () {
+    if (!this.props.positionButtonsBelow) {
+      return this.buttonDown()
+    }
+  }
+
+  renderButtonsBelow () {
+    if (this.props.positionButtonsBelow) {
+      return (
+        <div
+          className={[style.buttonsBelow, this.props.buttonsBelowClassName].join(' ')}>
+          {this.buttonUp()}
+          <img
+            className={style.buttonsBelowSeparator}
+            src={require('../../images/prev-next-separator/prev-next-separator@2x.png')} />
+          {this.buttonDown()}
+        </div>
+      )
+    }
+  }
+
+  buttonUp () {
     return (
       <div
-        className={style.buttonUp}
+        className={[style.buttonUp, this.props.buttonUpContainerClassName].join(' ')}
         onClick={ (e) => { this.moveList(e, 1) } } >
         {this.props.buttonUp}
       </div>
     )
   }
 
-  renderButtonDown () {
+  buttonDown () {
     return (
       <div
-        className={style.buttonDown}
+        className={[style.buttonDown, this.props.buttonDownContainerClassName].join(' ')}
         onClick={ (e) => { this.moveList(e, -1) } } >
         {this.props.buttonDown}
       </div>
@@ -122,6 +152,7 @@ class ScrollableList extends Component {
           {this.renderChildren()}
         </ul>
         {this.renderButtonDown()}
+        {this.renderButtonsBelow()}
         {this.renderPositionCircles()}
 
       </div>
@@ -130,7 +161,7 @@ class ScrollableList extends Component {
 
   getPosition (prevPos, increment, arrayLength) {
     // we want items to cycle the other way if vertical
-    if (this.props.isVertical) {
+    if (this.props.reverseScroll) {
       increment = -increment
     }
 
@@ -178,13 +209,17 @@ class ScrollableList extends Component {
 ScrollableList.propTypes = {
   numberToDisplay: PropTypes.number.isRequired,
   showPosition: PropTypes.bool,
-  isVertical: PropTypes.bool,
+  reverseScroll: PropTypes.bool,
   children: PropTypes.array.isRequired,
   wrapperClassName: PropTypes.string,
   listItemClassName: PropTypes.string,
   ulClassName: PropTypes.string,
+  buttonUpContainerClassName: PropTypes.string,
+  buttonDownContainerClassName: PropTypes.string,
+  buttonsBelowClassName: PropTypes.string,
   buttonUp: PropTypes.element.isRequired,
-  buttonDown: PropTypes.element.isRequired
+  buttonDown: PropTypes.element.isRequired,
+  positionButtonsBelow: PropTypes.bool
 }
 
 export default ScrollableList

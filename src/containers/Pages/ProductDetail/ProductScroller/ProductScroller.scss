@@ -21,6 +21,7 @@
   @extend %BodyPaddingWithMediaQueries;
   @extend %100WidthMinusBodyPaddingWithMediaQueries;
   margin-top: 0;
+  margin-bottom: 20px;
   text-align: center;
 }
 
@@ -39,5 +40,100 @@ $listItemPadding: 10px;
 
   @include respond-to(desktop) {
     width: calc(20% - #{$listItemPadding}*2);
+  }
+}
+
+.buttonUpContainer, .buttonDownContainer {
+  float: none;
+
+  @include respond-to(tablet) {
+    display: inline-block;
+    width: 11px;
+    height: 100%;
+  }
+}
+
+.buttonsBelow {
+  @extend %BodyPaddingWithMediaQueries;
+  @extend %100WidthMinusBodyPaddingWithMediaQueries;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+%buttonsBelowText {
+  font-family: $CentraleSansPro;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: $steel-grey;
+}
+
+.prevButton {
+
+  img {
+    float: left;
+    display: inline-block;
+    vertical-align: middle;
+    width: 11px;
+    height: 19px;
+  }
+
+  span {
+    @extend %buttonsBelowText;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 19px;
+    margin-right: 4px;
+  }
+}
+
+.nextButton {
+
+  img {
+    float: right;
+    display: inline-block;
+    vertical-align: middle;
+    width: 11px;
+    height: 19px;
+  }
+
+  span {
+    @extend %buttonsBelowText;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 19px;
+    margin-left: 4px;
+  }
+}
+
+
+// Tablet-Desktop
+
+$arrowWidthTablet: 11px;
+
+.productScrollerTabletDesktop {
+  @extend %BodyPaddingWithMediaQueries;
+  @extend %100WidthMinusBodyPaddingWithMediaQueries;
+}
+
+.productScrollerUlTablet {
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 0;
+  margin-bottom: 55px;
+  padding: 0;
+  width: calc(100% - #{$arrowWidthTablet}*2);
+  text-align: center;
+}
+
+.leftButton, .rightButton {
+  width: 100%;
+
+  img {
+    width: 100%;
   }
 }

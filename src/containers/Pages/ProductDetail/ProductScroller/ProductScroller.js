@@ -4,8 +4,10 @@ import Media from 'react-media'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../globals'
 import ScrollableList from '../../../ScrollableList/ScrollableList'
 import ProductScrollerProduct from './ProductScrollerProduct/ProductScrollerProduct'
-import ButtonUp from './ButtonUp'
-import ButtonDown from './ButtonDown'
+import ButtonNext from './ButtonNext'
+import ButtonPrev from './ButtonPrev'
+import ButtonLeft from './ButtonLeft'
+import ButtonRight from './ButtonRight'
 import style from './ProductScroller.scss'
 
 class ProductScroller extends Component {
@@ -45,33 +47,53 @@ class ProductScroller extends Component {
         <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
           {match =>
             match ? (
+              // mobile
               <ScrollableList
                 numberToDisplay={2}
-                buttonUp={<ButtonUp />}
-                buttonDown={<ButtonDown />}
+                buttonUp={<ButtonPrev />}
+                buttonDown={<ButtonNext />}
+                positionButtonsBelow={true}
+                reverseScroll={true}
                 ulClassName={style.productScrollerUl}
-                listItemClassName={style.listItem} >
+                listItemClassName={style.listItem}
+                buttonUpContainerClassName={style.buttonUpContainer}
+                buttonDownContainerClassName={style.buttonDownContainer}
+                buttonsBelowClassName={style.buttonsBelow} >
                 {this.renderProducts()}
               </ScrollableList>
             ) : (
               <Media query={{ minWidth: TABLETMAXWIDTH }}>
                 {match =>
                   match ? (
+                    // desktop
                     <ScrollableList
                       numberToDisplay={5}
-                      buttonUp={<ButtonUp />}
-                      buttonDown={<ButtonDown />}
-                      ulClassName={style.productScrollerUl}
-                      listItemClassName={style.listItem} >
+                      buttonUp={<ButtonLeft />}
+                      buttonDown={<ButtonRight />}
+                      positionButtonsBelow={false}
+                      reverseScroll={true}
+                      wrapperClassName={style.productScrollerTabletDesktop}
+                      ulClassName={style.productScrollerUlTablet}
+                      listItemClassName={style.listItem}
+                      buttonUpContainerClassName={style.buttonUpContainer}
+                      buttonDownContainerClassName={style.buttonDownContainer}
+                      buttonsBelowClassName={style.buttonsBelow} >
                       {this.renderProducts()}
                     </ScrollableList>
                   ) : (
+                    // tablet
                     <ScrollableList
                       numberToDisplay={3}
-                      buttonUp={<ButtonUp />}
-                      buttonDown={<ButtonDown />}
-                      ulClassName={style.productScrollerUl}
-                      listItemClassName={style.listItem} >
+                      buttonUp={<ButtonLeft />}
+                      buttonDown={<ButtonRight />}
+                      positionButtonsBelow={false}
+                      reverseScroll={true}
+                      wrapperClassName={style.productScrollerTabletDesktop}
+                      ulClassName={style.productScrollerUlTablet}
+                      listItemClassName={style.listItem}
+                      buttonUpContainerClassName={style.buttonUpContainer}
+                      buttonDownContainerClassName={style.buttonDownContainer}
+                      buttonsBelowClassName={style.buttonsBelow} >
                       {this.renderProducts()}
                     </ScrollableList>
                   )

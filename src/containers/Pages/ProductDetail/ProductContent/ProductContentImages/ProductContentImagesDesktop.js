@@ -96,7 +96,7 @@ class ProductContentImages extends Component {
         <ScrollableList
           key={3}
           numberToDisplay={3}
-          isVertical={true}
+          reverseScroll={true}
           wrapperClassName={style.imagesListWrapperDesktop}
           ulClassName={style.imagesListDesktop}
           listItemClassName={style.imageListItemDesktop}
