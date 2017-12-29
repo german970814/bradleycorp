@@ -28,7 +28,10 @@ class TabBimRevit extends Component {
     return (
       <div
         className={[style.tabBimRevit, tabStyle.fullWidthColDesktopTab].join(' ')} >
-        {this.renderBimRevit()}
+        <ul
+          className={tabStyle.tabColUl} >
+          {this.renderBimRevit()}
+        </ul>
       </div>
     )
   }

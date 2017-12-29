@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import FileDownloadLink from '../../../../../../components/Partials/FileDownloadLink/FileDownloadLink'
 import tabStyle from '../Tabs.scss'
 import style from './TabMaintenance.scss'
 
@@ -16,7 +17,9 @@ class TabMaintenance extends Component {
       return (
         <li
           key={index} >
-          {guide['term_id']}
+          <FileDownloadLink
+            title={guide.name}
+            link={guide.description} />
         </li>
       )
     })
@@ -44,7 +47,8 @@ class TabMaintenance extends Component {
             className={tabStyle.tabColTitle} >
             {'Guides'}
           </h5>
-          <ul>
+          <ul
+            className={tabStyle.tabColUl} >
             {this.renderGuides()}
           </ul>
         </div>
@@ -55,7 +59,8 @@ class TabMaintenance extends Component {
             className={tabStyle.tabColTitle} >
             {'Videos'}
           </h5>
-          <ul>
+          <ul
+            className={tabStyle.tabColUl} >
             {this.renderVideos()}
           </ul>
         </div>

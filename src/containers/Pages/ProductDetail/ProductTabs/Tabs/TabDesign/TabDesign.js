@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import FileDownloadLink from '../../../../../../components/Partials/FileDownloadLink/FileDownloadLink'
 import tabStyle from '../Tabs.scss'
 import style from './TabDesign.scss'
 
@@ -43,10 +44,9 @@ class TabDesign extends Component {
       return (
         <li
           key={index}>
-          <div>
-            {literature.post['post_title']}
-          </div>
-          {literature.meta['literature_pdf']}
+          <FileDownloadLink
+            title={literature.post['post_title']}
+            link={literature.meta['literature_pdf']} />
         </li>
       )
     })
@@ -74,7 +74,8 @@ class TabDesign extends Component {
             className={tabStyle.tabColTitle} >
             {'Links'}
           </h5>
-          <ul>
+          <ul
+            className={tabStyle.tabColUl} >
             {this.renderLinks()}
           </ul>
         </div>
@@ -85,7 +86,8 @@ class TabDesign extends Component {
             className={tabStyle.tabColTitle} >
             {'Videos'}
           </h5>
-          <ul>
+          <ul
+            className={tabStyle.tabColUl} >
             {this.renderVideos()}
           </ul>
         </div>
@@ -96,7 +98,8 @@ class TabDesign extends Component {
             className={tabStyle.tabColTitle} >
             {'Literature'}
           </h5>
-          <ul>
+          <ul
+            className={tabStyle.tabColUl} >
             {this.renderLiterature()}
           </ul>
         </div>

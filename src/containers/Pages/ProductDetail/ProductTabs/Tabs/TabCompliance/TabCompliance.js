@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import FileDownloadLink from '../../../../../../components/Partials/FileDownloadLink/FileDownloadLink'
 import tabStyle from '../Tabs.scss'
 import style from './TabCompliance.scss'
 
@@ -15,7 +16,9 @@ class TabCompliance extends Component {
       return (
         <li
           key={index} >
-          {compliance.name}
+          <FileDownloadLink
+            title={compliance.name}
+            link={compliance.description} />
         </li>
       )
     })
@@ -29,7 +32,10 @@ class TabCompliance extends Component {
           className={tabStyle.tabColTitle}>
           {'Compliance'}
         </h5>
-        {this.renderCompliance()}
+        <ul
+          className={tabStyle.tabColUl} >
+          {this.renderCompliance()}
+        </ul>
       </div>
     )
   }

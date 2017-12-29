@@ -21,7 +21,7 @@
 .halfWidthColDesktopTab {
   @extend %allCols;
 
-  @include respond-to(tablet) {
+  @include respond-to(mobile) {
     width: 50%;
   }
 }
@@ -29,11 +29,11 @@
 .thirdWidthColDesktopTab {
   @extend %allCols;
 
-  @include respond-to(tablet) {
+  @include respond-to(mobile) {
     width: 50%;
   }
 
-  @include respond-to(desktop) {
+  @include respond-to(tablet) {
     width: calc(100% / 3);
   }
 }
@@ -43,4 +43,8 @@
   margin-top: 0;
   margin-bottom: 35px;
   color: #2f3d70;
+}
+
+.tabColUl {
+  padding: 0;
 }

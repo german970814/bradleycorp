@@ -20,6 +20,9 @@ $CentraleSansPro: 'CentraleSansPro';
 
 /* Breakpoints */
 
+$MobileWidth: 320;
+$MobileWidthPX: $MobileWidth + px;
+
 $MobileMaxWidth: 768;
 $MobileMaxWidthPX: $MobileMaxWidth + px;
 

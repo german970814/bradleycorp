@@ -29,7 +29,10 @@ class TabCaseStudies extends Component {
           className={tabStyle.tabColTitle}>
           {'Case Studies'}
         </h5>
-        {this.renderCaseStudies()}
+        <ul
+          className={tabStyle.tabColUl} >
+          {this.renderCaseStudies()}
+        </ul>
       </div>
     )
   }

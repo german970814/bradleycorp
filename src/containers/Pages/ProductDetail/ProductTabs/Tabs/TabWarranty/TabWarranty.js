@@ -29,7 +29,10 @@ class TabWarranty extends Component {
           className={tabStyle.tabColTitle} >
           {'Warranty'}
         </h5>
-        {this.renderWarranty()}
+        <ul
+          className={tabStyle.tabColUl} >
+          {this.renderWarranty()}
+        </ul>
       </div>
     )
   }

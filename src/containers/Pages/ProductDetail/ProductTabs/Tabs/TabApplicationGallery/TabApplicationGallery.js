@@ -25,7 +25,10 @@ class TabApplicationGallery extends Component {
     return (
       <div
         className={[style.tabApplicationGallery, tabStyle.fullWidthColDesktopTab].join(' ')} >
-        {this.renderApplicationGallery()}
+        <ul
+          className={tabStyle.tabColUl} >
+          {this.renderApplicationGallery()}
+        </ul>
       </div>
     )
   }

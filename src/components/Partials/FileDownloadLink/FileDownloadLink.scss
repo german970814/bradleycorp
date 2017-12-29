@@ -1,0 +1,35 @@
+@import "../../../scss/partials/variables";
+
+.container {
+  margin-bottom: 12px;
+  
+  a {
+    text-decoration: none;
+  }
+}
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 13px;
+  width: 13px;
+  height: 17px;
+}
+
+.title {
+  display: inline-block;
+  vertical-align: middle;
+  font-family: $CentraleSansPro;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.5px;
+  text-align: left;
+  color: $orange;
+
+  &.noLink {
+    color: $slate-grey;
+  }
+}

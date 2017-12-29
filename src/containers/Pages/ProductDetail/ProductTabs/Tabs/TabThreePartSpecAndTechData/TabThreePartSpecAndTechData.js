@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import tabStyle from '../Tabs.scss'
+import FileDownloadLink from '../../../../../../components/Partials/FileDownloadLink/FileDownloadLink'
 import style from './TabThreePartSpecAndTechData.scss'
 
 class TabThreePartSpecAndTechData extends Component {
@@ -16,7 +17,9 @@ class TabThreePartSpecAndTechData extends Component {
       return (
         <li
           key={index}>
-          {threePartSpec.name}
+          <FileDownloadLink
+            title={threePartSpec.name}
+            link={threePartSpec.description} />
         </li>
       )
     })
@@ -27,12 +30,9 @@ class TabThreePartSpecAndTechData extends Component {
       return (
         <li
           key={index}>
-          <div>
-            {technicalData.pdf}
-          </div>
-          <div>
-            {technicalData.title}
-          </div>
+          <FileDownloadLink
+            title={technicalData.name}
+            link={technicalData.description} />
         </li>
       )
     })
@@ -49,7 +49,8 @@ class TabThreePartSpecAndTechData extends Component {
             className={tabStyle.tabColTitle} >
             {'3 Part Spec'}
           </h5>
-          <ul>
+          <ul
+            className={tabStyle.tabColUl} >
             {this.renderThreePartSpec()}
           </ul>
         </div>
@@ -60,7 +61,8 @@ class TabThreePartSpecAndTechData extends Component {
             className={tabStyle.tabColTitle} >
             {'Technical Data'}
           </h5>
-          <ul>
+          <ul
+            className={tabStyle.tabColUl} >
             {this.renderTechnicalData()}
           </ul>
         </div>
