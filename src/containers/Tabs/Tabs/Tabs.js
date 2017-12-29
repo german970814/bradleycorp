@@ -74,7 +74,7 @@ class Tabs extends Component {
   render () {
     return (
       <div className={`tab-wrapper ${this.props.tabWrapperClassName}`}>
-        <ul className="tabs-nav">
+        <ul className={`tab-nav ${this.props.tabsUlClassName}`}>
           {this.renderChildrenWithTabsApiAsProps()}
         </ul>
       </div>
@@ -87,7 +87,8 @@ Tabs.propTypes = {
   children: PropTypes.array.isRequired,
   tabClassName: PropTypes.string,
   activeTabClassName: PropTypes.string,
-  tabWrapperClassName: PropTypes.string
+  tabWrapperClassName: PropTypes.string,
+  tabsUlClassName: PropTypes.string
 }
 
 export default Tabs

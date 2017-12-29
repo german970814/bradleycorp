@@ -1,0 +1,46 @@
+@import "../../../../../scss/partials/text-styles";
+@import "../../../../../scss/partials/variables";
+@import "../../../../../scss/partials/mixins";
+
+%allCols {
+  display: inline-block;
+  vertical-align: top;
+  margin-bottom: 35px;
+  width: 100%;
+  text-align: left;
+
+  li {
+    list-style: none;
+  }
+}
+
+.fullWidthColDesktopTab {
+  @extend %allCols;
+}
+
+.halfWidthColDesktopTab {
+  @extend %allCols;
+
+  @include respond-to(tablet) {
+    width: 50%;
+  }
+}
+
+.thirdWidthColDesktopTab {
+  @extend %allCols;
+
+  @include respond-to(tablet) {
+    width: 50%;
+  }
+
+  @include respond-to(desktop) {
+    width: calc(100% / 3);
+  }
+}
+
+.tabColTitle {
+  @extend %h5-desktop;
+  margin-top: 0;
+  margin-bottom: 35px;
+  color: #2f3d70;
+}

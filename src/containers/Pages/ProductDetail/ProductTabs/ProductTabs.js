@@ -34,7 +34,8 @@ class ProductTabs extends Component {
               defaultActiveTabIndex={0}
               tabWrapperClassName={style.tabsWrapper}
               activeTabClassName={style.activeTabContent}
-              tabClassName={style.productDetailTabs} >
+              tabClassName={style.productDetailTabs}
+              tabsUlClassName={style.productDetailTabsUl} >
               {this.state.tabs}
             </Tabs>
           ) : (
@@ -42,7 +43,8 @@ class ProductTabs extends Component {
               defaultActiveTabIndex={0}
               tabWrapperClassName={style.tabsWrapperDesktop}
               activeTabClassName={style.activeTabContentDesktop}
-              tabClassName={style.productDetailTabsDesktop} >
+              tabClassName={style.productDetailTabsDesktop}
+              tabsUlClassName={style.productDetailTabsUlDesktop} >
               {this.state.tabs}
             </TabsDesktop>
           )

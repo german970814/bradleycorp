@@ -51,7 +51,7 @@ class TabsDesktop extends Component {
   render () {
     return (
       <div className={`tab-wrapper ${this.props.tabWrapperClassName}`}>
-        <ul className="tabs-nav">
+        <ul className={`tab-nav ${this.props.tabsUlClassName}`}>
           {this.renderChildrenWithTabsApiAsProps()}
         </ul>
         <div className={`tabs-active-content ${this.props.activeTabClassName}`}>
@@ -67,7 +67,8 @@ TabsDesktop.propTypes = {
   children: PropTypes.array.isRequired,
   tabClassName: PropTypes.string,
   activeTabClassName: PropTypes.string,
-  tabWrapperClassName: PropTypes.string
+  tabWrapperClassName: PropTypes.string,
+  tabsUlClassName: PropTypes.string
 }
 
 export default TabsDesktop

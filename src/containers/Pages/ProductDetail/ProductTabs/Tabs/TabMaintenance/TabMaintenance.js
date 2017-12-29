@@ -1,13 +1,66 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import TabMaintenanceDesktop from './TabMaintenanceDesktop'
+import tabStyle from '../Tabs.scss'
+import style from './TabMaintenance.scss'
 
 class TabMaintenance extends Component {
+  constructor (props) {
+    super(props)
+
+    this.renderGuides = this.renderGuides.bind(this)
+    this.renderVideos = this.renderVideos.bind(this)
+  }
+
+  renderGuides () {
+    return this.props.guides.map((guide, index) => {
+      return (
+        <li
+          key={index} >
+          {guide['term_id']}
+        </li>
+      )
+    })
+  }
+
+  renderVideos () {
+    return this.props.videos.map((video, index) => {
+      return (
+        <li
+          key={index} >
+          <iframe src={video} />
+        </li>
+      )
+    })
+  }
+
   render () {
     return (
-      <TabMaintenanceDesktop
-        guides={this.props.guides}
-        videos={this.props.videos} />
+      <div
+        className={style.tabMaintenance} >
+
+        <div
+          className={tabStyle.halfWidthColDesktopTab} >
+          <h5
+            className={tabStyle.tabColTitle} >
+            {'Guides'}
+          </h5>
+          <ul>
+            {this.renderGuides()}
+          </ul>
+        </div>
+
+        <div
+          className={tabStyle.halfWidthColDesktopTab} >
+          <h5
+            className={tabStyle.tabColTitle} >
+            {'Videos'}
+          </h5>
+          <ul>
+            {this.renderVideos()}
+          </ul>
+        </div>
+
+      </div>
     )
   }
 }

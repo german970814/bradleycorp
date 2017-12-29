@@ -1,12 +1,32 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import TabApplicationGalleryDesktop from './TabApplicationGalleryDesktop'
+import tabStyle from '../Tabs.scss'
+import style from './TabApplicationGallery.scss'
 
 class TabApplicationGallery extends Component {
+  constructor (props) {
+    super(props)
+
+    this.renderApplicationGallery = this.renderApplicationGallery.bind(this)
+  }
+
+  renderApplicationGallery () {
+    return this.props.applicationGalleries.map((applicationGallery, index) => {
+      return (
+        <li
+          key={index} >
+          {applicationGallery.post['post_title']}
+        </li>
+      )
+    })
+  }
+
   render () {
     return (
-      <TabApplicationGalleryDesktop
-        applicationGalleries={this.props.applicationGalleries} />
+      <div
+        className={[style.tabApplicationGallery, tabStyle.fullWidthColDesktopTab].join(' ')} >
+        {this.renderApplicationGallery()}
+      </div>
     )
   }
 }

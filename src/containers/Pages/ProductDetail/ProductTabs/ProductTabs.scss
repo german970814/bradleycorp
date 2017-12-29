@@ -5,14 +5,11 @@
 
 $tabHeight: 65px;
 
-.tabsWrapper {
-
-  ul {
-    margin-bottom: 0;
-    padding-left: 0;
-    width: 100%;
-    text-align: center;
-  }
+.productDetailTabsUl {
+  margin-bottom: 0;
+  padding-left: 0;
+  width: 100%;
+  text-align: center;
 }
 
 .activeTabContent {
@@ -20,7 +17,7 @@ $tabHeight: 65px;
   @extend %100WidthMinusBodyPaddingWithMediaQueries;
   border: solid 1px $silver;
   padding-top: 30px;
-  padding-bottom: 30px;
+  padding-bottom: 25px;
   background-color: $light-gray;
   text-align: left;
 }
@@ -59,21 +56,23 @@ $tabHeight: 65px;
 
 }
 
+
+
 // Tablet-Desktop
 
 $tabHeightDesktop: 60px;
 
 .tabsWrapperDesktop {
   margin-top: 70px;
+}
 
-  ul {
-    @extend %BodyPaddingWithMediaQueries;
-    @extend %100WidthMinusBodyPaddingWithMediaQueries;
-    margin: 0;
-    overflow-x: scroll;
-    text-align: center;
-    white-space: nowrap;
-  }
+.productDetailTabsUlDesktop {
+  @extend %BodyPaddingWithMediaQueries;
+  @extend %100WidthMinusBodyPaddingWithMediaQueries;
+  margin: 0;
+  overflow-x: scroll;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .activeTabContentDesktop {
@@ -81,7 +80,7 @@ $tabHeightDesktop: 60px;
   @extend %100WidthMinusBodyPaddingWithMediaQueries;
   border: solid 1px $silver;
   padding-top: 80px;
-  padding-bottom: 80px;
+  padding-bottom: 45px;
   background-color: $light-gray;
   text-align: left;
 }
