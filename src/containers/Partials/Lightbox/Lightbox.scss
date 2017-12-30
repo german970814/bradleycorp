@@ -1,0 +1,43 @@
+@import "../../../scss/partials/helpers";
+
+$closeButtonHeight: 32px;
+
+.vAlignHelper {
+  @extend %vAlignHelper;
+}
+
+.childWrapper {
+  z-index: 100;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  padding: 0 19%;
+  width: 61%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.lightbox {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
+
+.closeButtonWrapper {
+  position: absolute;
+  bottom: -($closeButtonHeight + 40px);
+  width: 100%;
+}
+
+.closeButton {
+  margin: 0 auto;
+  width: $closeButtonHeight;
+  height: $closeButtonHeight;
+}

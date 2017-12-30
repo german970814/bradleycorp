@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import YouTube from 'react-youtube'
+import renderVideoThumbnail from '../renderVideoThumbnail'
 import ArrowThumbnail from '../../../../../../components/Partials/ArrowThumbnail/ArrowThumbnail'
 import FileDownloadLink from '../../../../../../components/Partials/FileDownloadLink/FileDownloadLink'
-import addVideoIdFromSrc from '../../../../../../components/Partials/YoutubeThumbnail/YoutubeThumbnail'
 import tabStyle from '../Tabs.scss'
 import style from './TabDesign.scss'
 
@@ -42,20 +41,10 @@ class TabDesign extends Component {
 
   renderVideos () {
     return this.props.videos.map((video, index) => {
-      const youtubeOpts = {
-        playerVars: {
-          autoplay: 0,
-          showinfo: 0
-        }
-      }
-      const YoutubeThumbnail = addVideoIdFromSrc(YouTube, video.meta['video_gallery_video'])
-
       return (
         <li
           key={index} >
-          <YoutubeThumbnail
-            className={tabStyle.videoIframe}
-            opts={youtubeOpts} />
+          {renderVideoThumbnail(video.meta['video_gallery_video'], tabStyle.videoIframe)}
         </li>
       )
     })
