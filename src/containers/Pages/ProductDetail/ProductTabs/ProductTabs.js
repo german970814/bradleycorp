@@ -4,8 +4,8 @@ import Media from 'react-media'
 import { MOBILEMAXWIDTH } from '../../../../globals'
 import ProductDetailTabsException from '../../../../exceptions/ProductDetailTabsException'
 import getTheTabs from './theTabs'
-import Tabs from '../../../Tabs/Tabs/Tabs'
-import TabsDesktop from '../../../Tabs/Tabs/TabsDesktop'
+import Tabs from '../../../Partials/Tabs/Tabs/Tabs'
+import TabsDesktop from '../../../Partials/Tabs/Tabs/TabsDesktop'
 import style from './ProductTabs.scss'
 
 class ProductTabs extends Component {

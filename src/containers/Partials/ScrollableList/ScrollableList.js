@@ -79,7 +79,7 @@ class ScrollableList extends Component {
           {this.buttonUp()}
           <img
             className={style.buttonsBelowSeparator}
-            src={require('../../images/prev-next-separator/prev-next-separator@2x.png')} />
+            src={require('../../../images/prev-next-separator/prev-next-separator@2x.png')} />
           {this.buttonDown()}
         </div>
       )

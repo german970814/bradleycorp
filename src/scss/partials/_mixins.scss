@@ -4,10 +4,14 @@
   @if $media == mobile {
     @media only screen and (min-width: $MobileWidthPX) { @content; }
   }
-  @if $media == tablet {
+  @elseif $media == tablet {
     @media only screen and (min-width: $MobileMaxWidthPX) { @content; }
   }
-  @else if $media == desktop {
+  @elseif $media == desktop {
     @media only screen and (min-width: $TabletMaxWidthPX) { @content; }
   }
+}
+
+@mixin respond-to-custom($widthPX) {
+  @media only screen and (min-width: $widthPX) { @content; }
 }

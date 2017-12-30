@@ -1,5 +1,5 @@
 import React from 'react'
-import Tab from '../../../Tabs/Tab/Tab'
+import Tab from '../../../Partials/Tabs/Tab/Tab'
 import TabThreePartSpecAndTechData from './Tabs/TabThreePartSpecAndTechData/TabThreePartSpecAndTechData'
 import TabDesign from './Tabs/TabDesign/TabDesign'
 import TabCaseStudies from './Tabs/TabCaseStudies/TabCaseStudies'

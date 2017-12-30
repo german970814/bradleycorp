@@ -22,8 +22,8 @@ class Tab extends Component {
     }
 
     return this.props.isOpen
-      ? <img src={require('../../../images/icon-arrow/icon-arrow-up@2x.png')} />
-      : <img src={require('../../../images/icon-arrow/icon-arrow-down@2x.png')} />
+      ? <img src={require('../../../../images/icon-arrow/icon-arrow-up@2x.png')} />
+      : <img src={require('../../../../images/icon-arrow/icon-arrow-down@2x.png')} />
   }
 
   render () {

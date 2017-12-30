@@ -5,14 +5,14 @@ import WordDownloadLink from './WordDownloadLink/WordDownloadLink'
 import style from './FileDownloadLink.scss'
 
 const FileDownloadLink = props => {
-  console.log(props.link.split('.').pop())
-
   switch (props.link.split('.').pop()) {
     case 'pdf':
       return (
         <PDFDownloadLink
           title={props.title}
-          link={props.link} />
+          link={props.link}
+          titleClass={props.titleClass}
+          iconClass={props.iconClass} />
       )
 
     case 'doc':
@@ -22,13 +22,15 @@ const FileDownloadLink = props => {
       return (
         <WordDownloadLink
           title={props.title}
-          link={props.link} />
+          link={props.link}
+          titleClass={props.titleClass}
+          iconClass={props.iconClass} />
       )
 
     default:
       return (
         <span
-          className={[style.title, style.noLink].join(' ')}>
+          className={[style.title, style.noLink, props.titleClass].join(' ')}>
           {props.title}
         </span>
       )
@@ -37,7 +39,9 @@ const FileDownloadLink = props => {
 
 FileDownloadLink.propTypes = {
   title: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired
+  link: PropTypes.string.isRequired,
+  titleClass: PropTypes.string,
+  iconClass: PropTypes.string
 }
 
 export default FileDownloadLink

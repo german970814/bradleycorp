@@ -19,7 +19,9 @@ class TabThreePartSpecAndTechData extends Component {
           key={index}>
           <FileDownloadLink
             title={threePartSpec.name}
-            link={threePartSpec.description} />
+            link={threePartSpec.description}
+            titleClass={tabStyle.tabTextOrange}
+            iconClass={tabStyle.wordPDFIcon} />
         </li>
       )
     })
@@ -32,7 +34,9 @@ class TabThreePartSpecAndTechData extends Component {
           key={index}>
           <FileDownloadLink
             title={technicalData.name}
-            link={technicalData.description} />
+            link={technicalData.description}
+            titleClass={tabStyle.tabTextOrange}
+            iconClass={tabStyle.wordPDFIcon} />
         </li>
       )
     })

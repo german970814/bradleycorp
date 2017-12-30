@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import YouTube from 'react-youtube'
 import FileDownloadLink from '../../../../../../components/Partials/FileDownloadLink/FileDownloadLink'
+import addVideoIdFromSrc from '../../../../../../components/Partials/YoutubeThumbnail/YoutubeThumbnail'
 import tabStyle from '../Tabs.scss'
 import style from './TabMaintenance.scss'
 
@@ -19,7 +21,9 @@ class TabMaintenance extends Component {
           key={index} >
           <FileDownloadLink
             title={guide.name}
-            link={guide.description} />
+            link={guide.description}
+            titleClass={tabStyle.tabTextOrange}
+            iconClass={tabStyle.wordPDFIcon} />
         </li>
       )
     })
@@ -27,10 +31,20 @@ class TabMaintenance extends Component {
 
   renderVideos () {
     return this.props.videos.map((video, index) => {
+      const youtubeOpts = {
+        playerVars: {
+          autoplay: 0,
+          showinfo: 0
+        }
+      }
+      const YoutubeThumbnail = addVideoIdFromSrc(YouTube, video.meta['video_gallery_video'])
+
       return (
         <li
           key={index} >
-          <iframe src={video} />
+          <YoutubeThumbnail
+            className={tabStyle.videoIframe}
+            opts={youtubeOpts} />
         </li>
       )
     })

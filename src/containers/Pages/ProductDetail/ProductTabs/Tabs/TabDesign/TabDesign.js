@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import YouTube from 'react-youtube'
+import ArrowThumbnail from '../../../../../../components/Partials/ArrowThumbnail/ArrowThumbnail'
 import FileDownloadLink from '../../../../../../components/Partials/FileDownloadLink/FileDownloadLink'
+import addVideoIdFromSrc from '../../../../../../components/Partials/YoutubeThumbnail/YoutubeThumbnail'
 import tabStyle from '../Tabs.scss'
 import style from './TabDesign.scss'
 
@@ -17,12 +20,21 @@ class TabDesign extends Component {
 
   renderLinks () {
     return this.props.links.map((link, index) => {
+      if (!link.text) {
+        return
+      }
       return (
         <li
           key={index} >
-          <Link to={link.url} replace>
-            {link.text}
-          </Link>
+          <ArrowThumbnail
+            arrowCustomClass={tabStyle.greyArrow}>
+            <Link
+              to={link.url}
+              className={tabStyle.tabTextOrange}
+              replace >
+              {link.text}
+            </Link>
+          </ArrowThumbnail>
         </li>
       )
     })
@@ -30,10 +42,20 @@ class TabDesign extends Component {
 
   renderVideos () {
     return this.props.videos.map((video, index) => {
+      const youtubeOpts = {
+        playerVars: {
+          autoplay: 0,
+          showinfo: 0
+        }
+      }
+      const YoutubeThumbnail = addVideoIdFromSrc(YouTube, video.meta['video_gallery_video'])
+
       return (
         <li
           key={index} >
-          <iframe src={video} />
+          <YoutubeThumbnail
+            className={tabStyle.videoIframe}
+            opts={youtubeOpts} />
         </li>
       )
     })
@@ -46,7 +68,9 @@ class TabDesign extends Component {
           key={index}>
           <FileDownloadLink
             title={literature.post['post_title']}
-            link={literature.meta['literature_pdf']} />
+            link={literature.meta['literature_pdf']}
+            titleClass={tabStyle.tabTextOrange}
+            iconClass={tabStyle.wordPDFIcon} />
         </li>
       )
     })
