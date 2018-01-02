@@ -16,14 +16,14 @@ class Tab extends Component {
     this.props.onClick(this.props.tabIndex)
   }
 
-  renderUpDownArrow() {
-    if( this.props.isDesktop ) {
+  renderUpDownArrow () {
+    if (this.props.isDesktop) {
       return
     }
 
     return this.props.isOpen
-           ? <img src={require('../../../images/icon-arrow/icon-arrow-up@2x.png')} />
-           : <img src={require('../../../images/icon-arrow/icon-arrow-down@2x.png')} />
+      ? <img src={require('../../../images/icon-arrow/icon-arrow-up@2x.png')} />
+      : <img src={require('../../../images/icon-arrow/icon-arrow-down@2x.png')} />
   }
 
   render () {
@@ -32,7 +32,7 @@ class Tab extends Component {
 
     return (
       <li
-        className={[tabClass,`${this.props.tabClassName} ${active}`].join(' ')}
+        className={[tabClass, `${this.props.tabClassName} ${active}`].join(' ')}
         onClick={(e) => { this.handleClick(e) }} >
         <span>{this.props.text}</span>
         {this.renderUpDownArrow()}

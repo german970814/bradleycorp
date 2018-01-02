@@ -25,7 +25,7 @@ class Tabs extends Component {
     })
   }
 
-  openCloseTab( tabIndex ) {
+  openCloseTab (tabIndex) {
     if (this.state.isOpen && (tabIndex === this.state.activeTabIndex)) {
       return false
     }
