@@ -1,4 +1,5 @@
 @import "../../../scss/partials/helpers";
+@import "../../../scss/partials/mixins";
 
 $closeButtonHeight: 32px;
 
@@ -15,10 +16,15 @@ $closeButtonHeight: 32px;
   top: 0;
   left: 0;
   z-index: 1001;
-  padding: 0 19%;
-  width: 61%;
+  padding: 0 7.5%;
+  width: 85%;
   height: 100%;
   background-color: rgba(0,0,0,0.8);
+
+  @include respond-to(tablet) {
+    padding: 0 19%;
+    width: 62%;
+  }
 }
 
 .lightbox {

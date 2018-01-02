@@ -81,3 +81,15 @@
   max-width: 100%;
   height: 158px;
 }
+
+.videoIframeLightbox {
+  width: 85vw;
+  max-width: 100%;
+  height: 47.8125vw;
+  max-height: 100%;
+
+  @include respond-to(tablet) {
+    width: 62vw;
+    height: 34.875vw;
+  }
+}

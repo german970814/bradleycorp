@@ -18,6 +18,9 @@ export default function renderVideoThumbnail (src) {
       <YoutubeThumbnail
         className={tabStyle.videoIframe}
         opts={youtubeOpts} />
+      <YoutubeThumbnail
+        className={tabStyle.videoIframeLightbox}
+        opts={youtubeOpts} />
     </LightboxYoutube>
   )
 }

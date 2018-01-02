@@ -1,16 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import LightboxException from '../../../exceptions/LightboxException'
 import style from './Lightbox.scss'
 
 class Lightbox extends Component {
   constructor (props) {
     super(props)
-
-    const numChildren = React.Children.count(props.children)
-    if (numChildren !== 2) {
-      console.log(new LightboxException('number children', numChildren))
-    }
 
     this.state = {
       isOpen: false
@@ -37,14 +31,15 @@ class Lightbox extends Component {
     })
   }
 
-  renderLightboxContent () {
+  getLightboxContent () {
     const children = React.Children.toArray(this.props.children)
+    return children[children.length -1]
+  }
 
-    if (React.Children.only(this.props.children)) {
-      return React.Children.only(this.props.children)
-    }
-
-    return children[1]
+  getChildrenWithLightboxContentRemoved() {
+    const children = React.Children.toArray(this.props.children)
+    children.pop()
+    return children
   }
 
   renderLightbox () {
@@ -55,10 +50,10 @@ class Lightbox extends Component {
           <span className={style.vAlignHelper}/>
           <div
             className={[style.lightbox, this.props.lightboxClass].join(' ')} >
-            {this.renderLightboxContent()}
+            {this.getLightboxContent()}
             <div
               className={style.closeButtonWrapper}
-              onClick={this.toggleOpen} >
+              onClick={this.closeLightbox} >
               <img
                 className={style.closeButton}
                 src={require('../../../images/icon-close/icon-close@2x.png')} />
@@ -74,7 +69,7 @@ class Lightbox extends Component {
       <div
         className={style.childWrapper}
         onClick={this.toggleOpen}>
-        {this.props.children}
+        {this.getChildrenWithLightboxContentRemoved()}
         {this.renderLightbox()}
       </div>
     )
@@ -82,7 +77,7 @@ class Lightbox extends Component {
 }
 
 Lightbox.propTypes = {
-  children: PropTypes.object.isRequired,
+  children: PropTypes.node.isRequired,
   backgroundClass: PropTypes.string,
   lightboxClass: PropTypes.string
 }

@@ -9,8 +9,8 @@ class LightboxYoutube extends Lightbox {
     this.renderChildrenWithYoutubeApi = this.renderChildrenWithYoutubeApi.bind(this)
   }
 
-  renderChildrenWithYoutubeApi () { // this expects child to be a YouTube component from react-youtube
-    return React.Children.map(this.props.children, child => {
+  renderChildrenWithYoutubeApi () { // this expects children to be YouTube components from react-youtube
+    return React.Children.map(this.getChildrenWithLightboxContentRemoved(), child => {
       return React.cloneElement(child, {
         onPlay: this.onPlay.bind(this)
       })
