@@ -1,0 +1,31 @@
+@import "./variables";
+@import "./mixins";
+
+%BodyPaddingWithMediaQueries {
+  padding: {
+    left: $MobileBodyPadding;
+    right: $MobileBodyPadding;
+  }
+  @include respond-to(tablet) {
+    padding: {
+      left: $TabletBodyPadding;
+      right: $TabletBodyPadding;
+    }
+  }
+  @include respond-to(desktop) {
+    padding: {
+      left: $DesktopBodyPadding;
+      right: $DesktopBodyPadding;
+    }
+  }
+}
+
+%100WidthMinusBodyPaddingWithMediaQueries {
+  width: calc(100% - #{$MobileBodyPadding}*2);
+  @include respond-to(tablet) {
+    width: calc(100% - #{$TabletBodyPadding}*2);
+  }
+  @include respond-to(desktop) {
+    width: calc(100% - #{$DesktopBodyPadding}*2);
+  }
+}

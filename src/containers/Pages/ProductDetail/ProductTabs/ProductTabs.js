@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Media from 'react-media'
-import { TABLETMAXWIDTH } from '../../../../globals'
+import { MOBILEMAXWIDTH } from '../../../../globals'
 import ProductDetailTabsException from '../../../../exceptions/ProductDetailTabsException'
 import getTheTabs from './theTabs'
-import Tabs from '../../../Tabs/Tabs/Tabs'
-import TabsDesktop from '../../../Tabs/Tabs/TabsDesktop'
+import Tabs from '../../../Partials/Tabs/Tabs/Tabs'
+import TabsDesktop from '../../../Partials/Tabs/Tabs/TabsDesktop'
 import style from './ProductTabs.scss'
 
 class ProductTabs extends Component {
@@ -27,14 +27,15 @@ class ProductTabs extends Component {
 
   render () {
     return (
-      <Media query={{ maxWidth: TABLETMAXWIDTH }}>
+      <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
         {match =>
           match ? (
             <Tabs
               defaultActiveTabIndex={0}
               tabWrapperClassName={style.tabsWrapper}
               activeTabClassName={style.activeTabContent}
-              tabClassName={style.productDetailTabs} >
+              tabClassName={style.productDetailTabs}
+              tabsUlClassName={style.productDetailTabsUl} >
               {this.state.tabs}
             </Tabs>
           ) : (
@@ -42,7 +43,8 @@ class ProductTabs extends Component {
               defaultActiveTabIndex={0}
               tabWrapperClassName={style.tabsWrapperDesktop}
               activeTabClassName={style.activeTabContentDesktop}
-              tabClassName={style.productDetailTabsDesktop} >
+              tabClassName={style.productDetailTabsDesktop}
+              tabsUlClassName={style.productDetailTabsUlDesktop} >
               {this.state.tabs}
             </TabsDesktop>
           )

@@ -1,30 +1,33 @@
 @import "../../../../scss/partials/text-styles";
 @import "../../../../scss/partials/variables";
 @import "../../../../scss/partials/mixins";
+@import "../../../../scss/partials/layout";
 
-$tabHeight: 70px;
+$tabHeight: 65px;
 
-.tabsWrapper {
-
-  ul {
-    margin-bottom: 0;
-    padding-left: 0;
-    width: 100%;
-    text-align: center;
-  }
+.productDetailTabsUl {
+  margin-bottom: 0;
+  padding-left: 0;
+  width: 100%;
+  text-align: center;
 }
 
 .activeTabContent {
-  padding: 20px;
-  background-color: lightgrey;
+  @extend %BodyPaddingWithMediaQueries;
+  @extend %100WidthMinusBodyPaddingWithMediaQueries;
+  border: solid 1px $silver;
+  padding-top: 30px;
+  padding-bottom: 25px;
+  background-color: $light-gray;
+  text-align: left;
 }
 
 .productDetailTabs {
+  @extend %BodyPaddingWithMediaQueries;
+  @extend %100WidthMinusBodyPaddingWithMediaQueries;
   border-bottom: 1px solid $silver;
-  padding: 0 25px;
-  width: calc(100% - 50px);
   height: $tabHeight;
-  font-family: CentraleSansPro;
+  font-family: $CentraleSansPro;
   font-size: 16px;
   font-weight: bold;
   line-height: $tabHeight;
@@ -33,8 +36,69 @@ $tabHeight: 70px;
   color: #2e3c6e;
 
   &:first-child {
+    margin-top: 62px;
     border-top: 1px solid $silver;
   }
+
+  span {
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 19px);
+    line-height: normal;
+  }
+
+  img {
+    float: right;
+    width: 19px;
+    height: 11px;
+    margin: ($tabHeight - 11px)/2 0;
+  }
+
+}
+
+
+
+// Tablet-Desktop
+
+$tabHeightDesktop: 60px;
+
+.tabsWrapperDesktop {
+  margin-top: 70px;
+}
+
+.productDetailTabsUlDesktop {
+  @extend %BodyPaddingWithMediaQueries;
+  @extend %100WidthMinusBodyPaddingWithMediaQueries;
+  margin: 0;
+  overflow-x: scroll;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.activeTabContentDesktop {
+  @extend %BodyPaddingWithMediaQueries;
+  @extend %100WidthMinusBodyPaddingWithMediaQueries;
+  border: solid 1px $silver;
+  padding-top: 80px;
+  padding-bottom: 45px;
+  background-color: $light-gray;
+  text-align: left;
+}
+
+.productDetailTabsDesktop {
+  margin-right: 1px;
+  display: inline-block;
+  border: solid 1px $silver;
+  width: 118px;
+  height: $tabHeightDesktop;
+  font-family: $CentraleSansPro;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: $tabHeightDesktop;
+  list-style: none;
+  text-align: center;
+  white-space: normal;
+  color: #2e3c6e;
 
   span {
     display: inline-block;

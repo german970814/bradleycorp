@@ -20,6 +20,9 @@ $CentraleSansPro: 'CentraleSansPro';
 
 /* Breakpoints */
 
+$MobileWidth: 320;
+$MobileWidthPX: $MobileWidth + px;
+
 $MobileMaxWidth: 768;
 $MobileMaxWidthPX: $MobileMaxWidth + px;
 
@@ -30,3 +33,9 @@ $TabletMaxWidthPX: $TabletMaxWidth + px;
   MobileMaxWidth: $MobileMaxWidth;
   TabletMaxWidth: $TabletMaxWidth;
 }
+
+/* Padding */
+
+$MobileBodyPadding: 25px;
+$TabletBodyPadding: 40px;
+$DesktopBodyPadding: 55px;

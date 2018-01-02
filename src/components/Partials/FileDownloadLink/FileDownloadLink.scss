@@ -1,0 +1,13 @@
+@import "../../../scss/partials/variables";
+
+.container {
+  margin-bottom: 12px;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.noLink {
+  color: $slate-grey;
+}

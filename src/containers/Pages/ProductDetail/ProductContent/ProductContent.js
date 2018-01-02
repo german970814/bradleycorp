@@ -17,11 +17,10 @@ class ProductContent extends Component {
     this.renderCTA = this.renderCTA.bind(this)
     this.renderDesktop = this.renderDesktop.bind(this)
     this.renderTablet = this.renderTablet.bind(this)
-    this.isNew = this.isNew.bind(this)
   }
 
   renderNew () {
-    if (this.isNew()) {
+    if (isNew(this.props.newUntil)) {
       return (
         <span
           className={style.new}>
@@ -166,12 +165,12 @@ class ProductContent extends Component {
       </div>
     )
   }
+}
 
-  isNew () {
-    const newUntil = new Date(this.props.newUntil)
-    const now = new Date()
-    return newUntil - now > 0
-  }
+export function isNew (date) {
+  const newUntil = new Date(date)
+  const now = new Date()
+  return newUntil - now > 0
 }
 
 ProductContent.propTypes = {

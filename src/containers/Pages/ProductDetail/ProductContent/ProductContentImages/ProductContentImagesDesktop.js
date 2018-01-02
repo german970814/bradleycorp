@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ProductContentImagesListItem from './ProductContentImagesListItem/ProductContentImagesListItem'
 import style from './ProductContentImagesDesktop.scss'
-import ScrollableList from '../../../../ScrollableList/ScrollableList'
+import ScrollableList from '../../../../Partials/ScrollableList/ScrollableList'
 import ButtonDown from './ButtonDown'
 import ButtonUp from './ButtonUp'
 
@@ -96,7 +96,7 @@ class ProductContentImages extends Component {
         <ScrollableList
           key={3}
           numberToDisplay={3}
-          isVertical={true}
+          reverseScroll={true}
           wrapperClassName={style.imagesListWrapperDesktop}
           ulClassName={style.imagesListDesktop}
           listItemClassName={style.imageListItemDesktop}

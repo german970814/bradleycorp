@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Divider from '../../../components/Partials/Divider/Divider'
 import ProductApiClient from '../../../api/product_client'
 import productObjectShape from './productObjectShape'
 import ProductDetailException from '../../../exceptions/ProductDetailException'
@@ -58,6 +59,9 @@ class ProductDetail extends Component {
             title={'Frequently Purchased With'}
             productsArray={this.state.productDetail['purchased_with']} />
         </section>
+
+        <Divider
+          customClass={style.divider} />
 
         <section>
           <ProductScroller

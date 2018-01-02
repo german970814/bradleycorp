@@ -1,16 +1,17 @@
 @import "./mixins";
+@import "./variables";
 
 /* Text styles */
 
 %h1-mobile {
-  font-family: CentraleSansPro;
+  font-family: $CentraleSansPro;
   font-size: 23px;
   font-weight: 300;
   text-align: left;
 }
 
 %h1-tablet {
-  font-family: CentraleSansPro;
+  font-family: $CentraleSansPro;
   font-size: 28px;
   font-weight: 300;
   letter-spacing: -1.1px;
@@ -19,7 +20,7 @@
 
 %h1-tablet-media-query {
   @include respond-to(tablet) {
-    font-family: CentraleSansPro;
+    font-family: $CentraleSansPro;
     font-size: 28px;
     font-weight: 300;
     letter-spacing: -1.1px;
@@ -28,7 +29,7 @@
 }
 
 %h1-desktop {
-  font-family: CentraleSansPro;
+  font-family: $CentraleSansPro;
   font-size: 34px;
   font-weight: 300;
   line-height: 1.06;
@@ -54,14 +55,14 @@
 }
 
 %h5-desktop {
-  font-family: CentraleSansPro;
+  font-family: $CentraleSansPro;
   font-size: 16px;
   font-weight: bold;
   text-align: left;
 }
 
 %h6-desktop {
-  font-family: CentraleSansPro;
+  font-family: $CentraleSansPro;
   font-size: 12px;
   font-weight: bold;
   text-align: center;
@@ -74,7 +75,7 @@
 }
 
 %legal {
-  font-family: CentraleSansPro;
+  font-family: $CentraleSansPro;
   font-size: 8px;
   font-weight: bold;
   text-align: right;

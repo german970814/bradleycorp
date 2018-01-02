@@ -7,7 +7,8 @@ const Footer = ({ menuItems }) => {
   return (
     <footer className={style.footer}>
       <NavMenu
-        menuItems={menuItems} />
+        menuItems={menuItems}
+        menuItemClass={style.menuItem} />
     </footer>
   )
 }

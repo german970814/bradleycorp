@@ -4,22 +4,26 @@ import PropTypes from 'prop-types'
 import { host } from '../../../../api'
 import style from './NavMenuItem.scss'
 
-const NavMenuItem = ({ menuItem }) => {
+const NavMenuItem = (props) => {
   return (
     <li
-      className={style.navMenuItem} >
+      className={[style.navMenuItem, props.menuItemClass].join(' ')} >
       <NavLink
-        to={formatLinkURL(menuItem['url'])}
+        to={formatLinkURL(props.menuItem['url'])}
         replace
         activeClassName={style.active} >
-        {menuItem['title']}
+        {props.menuItem['title']}
       </NavLink>
     </li>
   )
 }
 
 NavMenuItem.propTypes = {
-  menuItem: PropTypes.object.isRequired
+  menuItem: PropTypes.object.isRequired,
+  menuItemClass: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string
+  ])
 }
 
 function formatLinkURL (linkURL) {

@@ -1,0 +1,18 @@
+@import "../../../../scss/partials/variables";
+@import "../../../../scss/partials/mixins";
+
+.active {
+
+  @include respond-to(tablet) {
+    background-color: #2f3d70;
+
+    span {
+      font-family: $CentraleSansPro;
+      font-size: 12px;
+      font-weight: bold;
+      line-height: normal;
+      text-align: center;
+      color: #ffffff;
+    }
+  }
+}

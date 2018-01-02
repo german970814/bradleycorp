@@ -1,26 +1,12 @@
 @import "../../../../scss/partials/text-styles";
 @import "../../../../scss/partials/variables";
 @import "../../../../scss/partials/mixins";
-
-$productContentPadding: 25px;
-$productContentPaddingTablet: 40px;
+@import "../../../../scss/partials/layout";
 
 .productContent {
-  padding: {
-    top: 40px;
-    left: $productContentPadding;
-    right: $productContentPadding;
-  }
-  width: calc(100% - #{$productContentPadding} - #{$productContentPadding});
-
-  @include respond-to(tablet) {
-    padding: {
-      top: 40px;
-      left: $productContentPaddingTablet;
-      right: $productContentPaddingTablet;
-    }
-    width: calc(100% - #{$productContentPaddingTablet} - #{$productContentPaddingTablet});
-  }
+  @extend %BodyPaddingWithMediaQueries;
+  @extend %100WidthMinusBodyPaddingWithMediaQueries;
+  padding-top: 40px;
 }
 
 %aboveTitle {
@@ -47,7 +33,7 @@ $productContentPaddingTablet: 40px;
 .title {
   @extend %h1-mobile;
   margin-top: 0;
-  margin-bottom: 10px;
+  margin-bottom: 17px;
   width: 100%;
   height: auto;
   color: $navy;
@@ -69,13 +55,22 @@ $productContentPaddingTablet: 40px;
     height: 100%;
     object-fit: cover;
   }
+
+  @include respond-to(desktop){
+    margin-right: 20px;
+    margin-bottom: 20px;
+  }
 }
 
 .imageSelector {
   width: 100%;
 }
 
+$productDetailBtnTabletGap: 16px;
+
 %productDetailBtn {
+  margin-top: 23px;
+  margin-bottom: 10px;
   padding: 0;
   width: 100%;
   height: 42px;
@@ -88,19 +83,17 @@ $productContentPaddingTablet: 40px;
   text-align: center;
 
   @include respond-to(tablet) {
-    width: calc(50% - 8px);
+    width: calc(50% - #{$productDetailBtnTabletGap}/2);
   }
 }
 
 .submittalBtn {
   @extend %productDetailBtn;
-  margin-top: 23px;
-  margin-bottom: 10px;
   background-color: $green;
   color: #ffffff;
 
   @include respond-to(tablet){
-    margin-right: 16px;
+    margin-right: $productDetailBtnTabletGap;
   }
 }
 
@@ -156,8 +149,8 @@ $productContentPaddingTablet: 40px;
 
 .submittalBtnDesktop {
   @extend %productDetailBtn;
-  margin-top: 13px;
-  margin-right: 19px;
+  margin-top: 10px;
+  margin-right: 20px;
   width: 212px;
   background-color: $green;
   color: white;
@@ -165,7 +158,7 @@ $productContentPaddingTablet: 40px;
 
 .surveyBtnDesktop {
   @extend %productDetailBtn;
-  margin-top: 13px;
+  margin-top: 10px;
   border: solid 1px $slate-grey;
   width: 241px;
   background-color: transparent;
