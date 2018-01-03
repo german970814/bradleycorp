@@ -1,10 +1,10 @@
-import React, { Component }from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import debounce from 'debounce'
 import style from './Lightbox.scss'
 
 class LightboxContent extends Component {
-  constructor(props){
+  constructor (props) {
     super(props)
 
     this.handleWindowResize = debounce(this.handleWindowResize.bind(this), 200)
@@ -12,24 +12,24 @@ class LightboxContent extends Component {
 
   componentDidMount () {
     this.handleWindowResize()
-    window.addEventListener('resize', this.handleWindowResize);
+    window.addEventListener('resize', this.handleWindowResize)
   }
 
   componentWillUnmount () {
-    window.removeEventListener('resize', this.handleWindowResize);
+    window.removeEventListener('resize', this.handleWindowResize)
   }
 
   handleWindowResize () {
     this.props.updateContentSize(this.contentNode.offsetWidth, this.contentNode.offsetHeight)
   }
 
-  render() {
+  render () {
     return (
       <div
         className={style.lightbox}
         ref={node => {
           if (node !== null) {
-            this.contentNode = node;
+            this.contentNode = node
           }
         }} >
         {this.props.children}

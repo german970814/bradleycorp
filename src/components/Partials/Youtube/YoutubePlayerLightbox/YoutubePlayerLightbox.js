@@ -5,19 +5,15 @@ import addVideoIdFromSrc from '../YoutubeVideoID'
 import style from './YoutubePlayerLightbox.scss'
 
 const YoutubePlayerLightbox = props => {
-
   let height = props.lightboxSize.height
-  let width = height*1.78 // youtube aspect ratio
+  let width = height * 1.78 // youtube aspect ratio
 
   if (width > props.lightboxSize.width) {
     width = props.lightboxSize.width
-    height = width*0.5625 // youtube aspect ratio
+    height = width * 0.5625 // youtube aspect ratio
   }
 
-  let margin = (props.lightboxSize.height - height)/2
-  console.log(height)
-  console.log(props.lightboxSize.height)
-  console.log(margin)
+  const margin = (props.lightboxSize.height - height) / 2
 
   const youtubeOpts = {
     height: `${height}`,
