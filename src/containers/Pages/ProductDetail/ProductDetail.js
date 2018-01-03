@@ -41,6 +41,7 @@ class ProductDetail extends Component {
             content={this.state.productDetail.product.post['post_content']}
             featuredImageSrc={this.state.productDetail.product.media['featured_image'][0]}
             images={this.state.productDetail.product.meta['product_media'].images[0]}
+            videos={this.state.productDetail.product.meta['product_media'].videos}
             newUntil={this.state.productDetail.product.meta['product_new_until']}
             sku={this.state.productDetail.product.meta['product_sku']}
             awards={this.state.productDetail.product.meta['product_awards']}

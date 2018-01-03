@@ -9,22 +9,36 @@ class ProductContentImages extends Component {
   constructor (props) {
     super(props)
 
-    this.renderImagesList = this.renderImagesList.bind(this)
+    this.renderList = this.renderList.bind(this)
     this.getImagesSrcListWithFeaturedImage = this.getImagesSrcListWithFeaturedImage.bind(this)
   }
 
-  renderImagesList () {
+  renderList () {
     const imagesSrcList = this.getImagesSrcListWithFeaturedImage()
-    return imagesSrcList.map((imageSrc, index) => {
-      const style = {
+    const images = imagesSrcList.map((imageSrc, index) => {
+      const imageStyle = {
         backgroundImage: `url(${imageSrc})`
       }
       return (
         <div
           key={index}
-          style={style} />
+          style={imageStyle} />
       )
     })
+
+    const videos = this.props.videos.split(',').map((videoSrc, index) => {
+      const videoStyle = {
+        backgroundImage: `url(${require('../../../../../../images/icon-video/icon-video@3x.png')})`
+      }
+      return (
+        <div
+          key={index}
+          style={videoStyle}
+          className={style.videoListItem} />
+      )
+    })
+
+    return [...images, ...videos]
   }
 
   getImagesSrcListWithFeaturedImage () {
@@ -45,7 +59,7 @@ class ProductContentImages extends Component {
         ulClassName={style.imagesList}
         buttonUp={<ButtonLeft />}
         buttonDown={<ButtonRight />} >
-        {this.renderImagesList()}
+        {this.renderList()}
       </ScrollableList>
     )
   }
@@ -53,7 +67,8 @@ class ProductContentImages extends Component {
 
 ProductContentImages.propTypes = {
   featuredImageSrc: PropTypes.string,
-  images: PropTypes.string.isRequired
+  images: PropTypes.string.isRequired,
+  videos: PropTypes.string
 }
 
 export default ProductContentImages

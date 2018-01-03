@@ -16,12 +16,13 @@ class ProductContentImages extends Component {
 
     this.state = {
       selectedImageSrc: '',
-      imagesSrcList: []
+      imagesSrcList: [],
+      videosSrcList: []
     }
 
     this.renderSelectedImage = this.renderSelectedImage.bind(this)
     this.setInitState = this.setInitState.bind(this)
-    this.renderImagesList = this.renderImagesList.bind(this)
+    this.renderList = this.renderList.bind(this)
   }
 
   componentDidMount () {
@@ -36,24 +37,26 @@ class ProductContentImages extends Component {
   }
 
   setInitState (props) {
+    const videosSrcList = props.videos.split(',')
+    const imageSrcs = props.images.split(',')
+
     if (props.featuredImageSrc) {
-      const imagesSrcList = this.getImagesSrcListWithFeaturedImage(props)
+      const imagesSrcList = this.withFeaturedImage(props, imageSrcs)
       return this.setState({
         selectedImageSrc: props.featuredImageSrc,
-        imagesSrcList
+        imagesSrcList,
+        videosSrcList
       })
     }
 
-    const imagesSrcList = props.images.split(',')
-
     return this.setState({
-      selectedImageSrc: imagesSrcList[0],
-      imagesSrcList
+      selectedImageSrc: imageSrcs[0],
+      imagesSrcList: imageSrcs,
+      videosSrcList
     })
   }
 
-  getImagesSrcListWithFeaturedImage (props) {
-    const imgSrcs = props.images.split(',')
+  withFeaturedImage (props, imgSrcs) {
     if (imgSrcs.includes(props.featuredImageSrc)) {
       return imgSrcs
     }
@@ -69,8 +72,8 @@ class ProductContentImages extends Component {
     })
   }
 
-  renderImagesList () {
-    return this.state.imagesSrcList.map((imageSrc, index) => {
+  renderList () {
+    const imgs = this.state.imagesSrcList.map((imageSrc, index) => {
       return (
         <ProductContentImagesListItem
           key={index}
@@ -78,6 +81,16 @@ class ProductContentImages extends Component {
           src={imageSrc} />
       )
     })
+    const videos = this.state.videosSrcList.map((videoSrc, index) => {
+      return (
+        <ProductContentImagesListItem
+          key={`video_${index}`}
+          src={videoSrc}
+          video />
+      )
+    })
+
+    return [...imgs, ...videos]
   }
 
   renderImagesListLightbox () {
@@ -143,7 +156,7 @@ class ProductContentImages extends Component {
           listItemClassName={style.imageListItemDesktop}
           buttonDown={<ButtonDown />}
           buttonUp={<ButtonUp />} >
-          {this.renderImagesList()}
+          {this.renderList()}
         </ScrollableList>
 
       </React.Fragment>
@@ -153,7 +166,8 @@ class ProductContentImages extends Component {
 
 ProductContentImages.propTypes = {
   featuredImageSrc: PropTypes.string,
-  images: PropTypes.string.isRequired
+  images: PropTypes.string.isRequired,
+  videos: PropTypes.string
 }
 
 export default ProductContentImages

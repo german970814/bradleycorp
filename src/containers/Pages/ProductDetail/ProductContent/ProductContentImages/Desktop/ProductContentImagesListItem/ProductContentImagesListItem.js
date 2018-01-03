@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import style from './ProductContentImagesListItem.scss'
 
 class ProductContentImagesListItem extends Component {
-  render () {
+  renderImage () {
     const imageStyle = {
       backgroundImage: `url(${this.props.src})`
     }
@@ -14,11 +14,30 @@ class ProductContentImagesListItem extends Component {
         className={style.listItem} />
     )
   }
+
+  renderVideo () {
+    const imageStyle = {
+      backgroundImage: `url(${require('../../../../../../../images/icon-video/icon-video@2x.png')})`
+    }
+    return (
+      <div
+        style={imageStyle}
+        className={style.listItemVideo} />
+    )
+  }
+
+  render () {
+    if (this.props.video) {
+      return this.renderVideo()
+    }
+    return this.renderImage()
+  }
 }
 
 ProductContentImagesListItem.propTypes = {
   onClick: PropTypes.func,
-  src: PropTypes.string.isRequired
+  src: PropTypes.string.isRequired,
+  video: PropTypes.bool
 }
 
 export default ProductContentImagesListItem

@@ -52,3 +52,12 @@ $tablet-height: 428px;
     @extend %fitBackground;
   }
 }
+
+.videoListItem {
+  margin: 0 auto;
+  width: 35%;
+
+  @include respond-to(tablet) {
+    width: 20%;
+  }
+}

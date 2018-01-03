@@ -8,7 +8,8 @@ export default function renderVideoThumbnail (src) {
   const youtubeOpts = {
     playerVars: {
       showinfo: 0,
-      modestbranding: 1
+      modestbranding: 1,
+      controls: 0
     }
   }
   const YoutubeThumbnail = addVideoIdFromSrc(YouTube, src)
