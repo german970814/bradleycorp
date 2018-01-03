@@ -25,7 +25,8 @@ class ProductContentImages extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.images !== this.props.images) {
+    if (nextProps.images !== this.props.images
+    ||  nextProps.featuredImageSrc !== this.props.featuredImageSrc) {
       this.setInitState(nextProps)
     }
   }
