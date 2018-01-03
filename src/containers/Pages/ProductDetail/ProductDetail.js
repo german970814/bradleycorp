@@ -6,7 +6,7 @@ import productObjectShape from './productObjectShape'
 import ProductDetailException from '../../../exceptions/ProductDetailException'
 import ProductContent from './ProductContent/ProductContent'
 import ProductTabs from './ProductTabs/ProductTabs'
-import ProductScroller from './ProductScroller/ProductScroller'
+import ProductScroller from '../../Partials/ProductScroller/ProductScroller'
 import style from './ProductDetail.scss'
 
 class ProductDetail extends Component {
@@ -57,7 +57,10 @@ class ProductDetail extends Component {
         <section>
           <ProductScroller
             title={'Frequently Purchased With'}
-            productsArray={this.state.productDetail['purchased_with']} />
+            productsArray={this.state.productDetail['purchased_with']}
+            numberMobile={2}
+            numberTablet={3}
+            numberDesktop={5} />
         </section>
 
         <Divider
@@ -66,7 +69,10 @@ class ProductDetail extends Component {
         <section>
           <ProductScroller
             title={'Similar Products'}
-            productsArray={this.state.productDetail['similar']} />
+            productsArray={this.state.productDetail['similar']}
+            numberMobile={2}
+            numberTablet={3}
+            numberDesktop={5} />
         </section>
       </div>
 

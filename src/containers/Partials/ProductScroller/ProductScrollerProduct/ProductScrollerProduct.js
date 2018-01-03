@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { isNew } from '../../ProductContent/ProductContent'
+import { isNew } from '../../../../lib/bcorpProduct'
 import style from './ProductScrollerProduct.scss'
 
 class ProductScrollerProduct extends Component {

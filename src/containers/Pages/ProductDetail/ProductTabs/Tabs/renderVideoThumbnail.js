@@ -14,12 +14,13 @@ export default function renderVideoThumbnail (src) {
   const YoutubeThumbnail = addVideoIdFromSrc(YouTube, src)
 
   return (
-    <LightboxYoutube>
+    <LightboxYoutube
+      lightboxClass={tabStyle.videoIframeLightbox}>
       <YoutubeThumbnail
         className={tabStyle.videoIframe}
         opts={youtubeOpts} />
       <YoutubeThumbnail
-        className={tabStyle.videoIframeLightbox}
+        className={tabStyle.videoIframeLightboxContent}
         opts={youtubeOpts} />
     </LightboxYoutube>
   )

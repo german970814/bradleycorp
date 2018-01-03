@@ -1,0 +1,7 @@
+@import "../../../../../../scss/partials/helpers";
+
+.listItem {
+  @extend %fitBackground;
+  width: 100%;
+  height: 200px;
+}
