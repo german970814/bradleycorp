@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import YouTube from 'react-youtube'
+import addVideoIdFromSrc from '../../../../../../components/Partials/Youtube/YoutubeVideoID'
+import Lightbox from '../../../../../Partials/Lightbox/Lightbox'
 import ScrollableList from '../../../../../Partials/ScrollableList/ScrollableList'
 import ButtonLeft from './ButtonLeft'
 import ButtonRight from './ButtonRight'
@@ -30,11 +33,25 @@ class ProductContentImages extends Component {
       const videoStyle = {
         backgroundImage: `url(${require('../../../../../../images/icon-video/icon-video@3x.png')})`
       }
+      const youtubeOpts = {
+        playerVars: {
+          showinfo: 0,
+          modestbranding: 1,
+          controls: 0
+        }
+      }
+      const YoutubePlayer = addVideoIdFromSrc(YouTube, videoSrc)
+
       return (
-        <div
-          key={index}
-          style={videoStyle}
-          className={style.videoListItem} />
+        <Lightbox
+          key={`video_${index}`} >
+          <div
+            style={videoStyle}
+            className={style.videoListItem} />
+          <YoutubePlayer
+            opts={youtubeOpts} />
+        </Lightbox>
+
       )
     })
 

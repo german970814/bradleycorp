@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { rotate } from '../../../../../../lib/bcorpArray'
+import VerticalAlignHelper from '../../../../../../components/Partials/VerticalAlignHelper/VerticalAlignHelper'
 import ProductContentImagesListItem from './ProductContentImagesListItem/ProductContentImagesListItem'
 import ProductContentImagesListItemLightbox from './ProductContentImagesListItemLightbox/ProductContentImagesListItemLightbox'
 import ScrollableList from '../../../../../Partials/ScrollableList/ScrollableList'
@@ -113,23 +114,29 @@ class ProductContentImages extends Component {
     const imageStyle = {
       backgroundImage: `url(${this.state.selectedImageSrc})`
     }
+
     return (
-      <Lightbox
-        lightboxClass={style.lightbox} >
+      <Lightbox>
+
         <div
           style={imageStyle}
           className={style.selectedImageDesktopImage} />
-        <SimpleSlider
-          title={''}
-          numberMobile={1}
-          numberTablet={1}
-          numberDesktop={1}
-          nextPrevButtonsForMobile={false}
-          desktopWrapperClassName={style.lightboxWrapper}
-          ulClassName={style.lightboxUlClassName}
-          listItemClassName={style.lightboxListItem} >
-          {this.renderImagesListLightbox()}
-        </SimpleSlider>
+
+        <div
+          className={style.lightboxContentWrapper} >
+          <SimpleSlider
+            title={''}
+            numberMobile={1}
+            numberTablet={1}
+            numberDesktop={1}
+            nextPrevButtonsForMobile={false}
+            desktopWrapperClassName={style.lightboxWrapper}
+            ulClassName={style.lightboxUlClassName}
+            listItemClassName={style.lightboxListItem} >
+            {this.renderImagesListLightbox()}
+          </SimpleSlider>
+        </div>
+
       </Lightbox>
     )
   }
@@ -138,8 +145,7 @@ class ProductContentImages extends Component {
     return (
       <React.Fragment>
 
-        <div
-          className={style.vAlignHelper} />
+        <VerticalAlignHelper />
 
         <div
           key={2}

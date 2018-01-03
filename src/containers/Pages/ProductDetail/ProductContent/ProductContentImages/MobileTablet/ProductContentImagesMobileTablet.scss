@@ -20,14 +20,6 @@ $tablet-height: 428px;
   }
 }
 
-.vAlignHelper {
-  @extend %vAlignHelper;
-}
-
-.imagesListWrapper {
-
-}
-
 .imagesList {
   display: inline;
   float: left;
