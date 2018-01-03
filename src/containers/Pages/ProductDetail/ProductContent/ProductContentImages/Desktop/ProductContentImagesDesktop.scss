@@ -1,4 +1,4 @@
-@import "../../../../../scss/partials/helpers";
+@import "../../../../../../scss/partials/helpers";
 
 .vAlignHelper {
   @extend %vAlignHelper;
@@ -56,6 +56,25 @@
   list-style: none;
 }
 
+.lightboxWrapper {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  width: 100% !important;
+  height: 100%;
+}
+
 .lightbox {
   width: 100%;
+  height: 100%;
+}
+
+.lightboxUlClassName {
+  margin-bottom: 0 !important;
+  height: 100%;
+}
+
+.lightboxListItem {
+  padding: 0 !important;
+  height: 100%;
+  width: 100% !important;
 }

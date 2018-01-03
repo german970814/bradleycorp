@@ -87,7 +87,6 @@
   width: calc(85vw - 20px);
   max-width: 100%;
   height: calc(47.8125vw - 11px);
-  max-height: 100%;
 
   @include respond-to(tablet) {
     width: calc(62vw - 20px);

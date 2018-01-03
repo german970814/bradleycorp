@@ -11,7 +11,7 @@ class ProductContentImagesListItemLightbox extends Component {
       <div
         onClick={(e) => { this.props.onClick(e, this.props.src) }}
         style={imageStyle}
-        className={style.listItem} />
+        className={style.listItemLightbox} />
     )
   }
 }

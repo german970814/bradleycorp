@@ -4,8 +4,8 @@ import Media from 'react-media'
 import { TABLETMAXWIDTH } from '../../../../globals'
 import { isNew } from '../../../../lib/bcorpProduct'
 import ProductContentText from './ProductContentText/ProductContentText'
-import ProductContentImages from './ProductContentImages/ProductContentImages'
-import ProductContentImagesDesktop from './ProductContentImages/ProductContentImagesDesktop'
+import ProductContentImages from './ProductContentImages/MobileTablet/ProductContentImagesMobileTablet'
+import ProductContentImagesDesktop from './ProductContentImages/Desktop/ProductContentImagesDesktop'
 import style from './ProductContent.scss'
 
 class ProductContent extends Component {

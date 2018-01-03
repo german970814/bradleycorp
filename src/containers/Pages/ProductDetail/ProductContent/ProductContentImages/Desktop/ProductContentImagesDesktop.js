@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { rotate } from '../../../../../../lib/bcorpArray'
 import ProductContentImagesListItem from './ProductContentImagesListItem/ProductContentImagesListItem'
 import ProductContentImagesListItemLightbox from './ProductContentImagesListItemLightbox/ProductContentImagesListItemLightbox'
+import ScrollableList from '../../../../../Partials/ScrollableList/ScrollableList'
+import SimpleSlider from '../../../../../Partials/SimpleSlider/SimpleSlider'
+import Lightbox from '../../../../../Partials/Lightbox/Lightbox'
+import ButtonDown from '../Buttons/ButtonDown'
+import ButtonUp from '../Buttons/ButtonUp'
 import style from './ProductContentImagesDesktop.scss'
-import ScrollableList from '../../../../Partials/ScrollableList/ScrollableList'
-import SimpleSlider from '../../../../Partials/SimpleSlider/SimpleSlider'
-import Lightbox from '../../../../Partials/Lightbox/Lightbox'
-import ButtonDown from './ButtonDown'
-import ButtonUp from './ButtonUp'
 
 class ProductContentImages extends Component {
   constructor (props) {
@@ -80,7 +81,12 @@ class ProductContentImages extends Component {
   }
 
   renderImagesListLightbox () {
-    return this.state.imagesSrcList.map((imageSrc, index) => {
+    const imageSrcs = this.state.imagesSrcList
+    const selectedIndex = imageSrcs.indexOf(this.state.selectedImageSrc)
+
+    const orderedImageSrcs = rotate(imageSrcs, selectedIndex)
+
+    return orderedImageSrcs.map((imageSrc, index) => {
       return (
         <ProductContentImagesListItemLightbox
           key={index}
@@ -105,7 +111,10 @@ class ProductContentImages extends Component {
           numberMobile={1}
           numberTablet={1}
           numberDesktop={1}
-          nextPrevButtonsForMobile={false} >
+          nextPrevButtonsForMobile={false}
+          desktopWrapperClassName={style.lightboxWrapper}
+          ulClassName={style.lightboxUlClassName}
+          listItemClassName={style.lightboxListItem} >
           {this.renderImagesListLightbox()}
         </SimpleSlider>
       </Lightbox>
@@ -114,13 +123,17 @@ class ProductContentImages extends Component {
 
   render () {
     return (
-      [
-        <div key={1} className={style.vAlignHelper} />,
+      <React.Fragment>
+
+        <div
+          className={style.vAlignHelper} />
+
         <div
           key={2}
           className={style.selectedImageDesktop}>
           {this.renderSelectedImage()}
-        </div>,
+        </div>
+
         <ScrollableList
           key={3}
           numberToDisplay={3}
@@ -132,7 +145,8 @@ class ProductContentImages extends Component {
           buttonUp={<ButtonUp />} >
           {this.renderImagesList()}
         </ScrollableList>
-      ]
+
+      </React.Fragment>
     )
   }
 }

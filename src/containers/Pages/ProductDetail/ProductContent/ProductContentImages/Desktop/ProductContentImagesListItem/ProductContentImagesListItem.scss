@@ -1,0 +1,5 @@
+@import "../../../../../../../scss/partials/helpers";
+
+.listItem {
+  @extend %fitBackground;
+}

@@ -2,6 +2,7 @@
 @import "../../../scss/partials/mixins";
 
 $closeButtonHeight: 32px;
+$closeButtonDistanceBelow: 40px;
 
 .vAlignHelper {
   @extend %vAlignHelper;
@@ -35,13 +36,14 @@ $closeButtonHeight: 32px;
   display: inline-block;
   vertical-align: middle;
   margin: 0 auto;
-  max-height: 80%;
+  height: 100%;
+  max-height: calc(85% - #{$closeButtonHeight}*2 - #{$closeButtonDistanceBelow});
   text-align: center;
 }
 
 .closeButtonWrapper {
   position: absolute;
-  bottom: -($closeButtonHeight + 40px);
+  bottom: -($closeButtonHeight + $closeButtonDistanceBelow);
   width: 100%;
 }
 

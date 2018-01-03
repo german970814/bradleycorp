@@ -1,5 +1,5 @@
 import React from 'react'
-import style from './ProductContentImages.scss'
+import style from './Buttons.scss'
 
 const ButtonRight = props => {
   return (
@@ -8,7 +8,7 @@ const ButtonRight = props => {
       <span
         className={style.vAlignHelper} />
       <img
-        src={require('../../../../../images/icon-arrow/icon-arrow-r@2x.png')} />
+        src={require('../../../../../../images/icon-arrow/icon-arrow-r@2x.png')} />
     </div>
   )
 }

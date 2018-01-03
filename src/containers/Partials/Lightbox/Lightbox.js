@@ -36,8 +36,17 @@ class Lightbox extends Component {
     return children[children.length - 1]
   }
 
+  getChildrenWithLightboxApi () {
+    return React.Children.map(this.props.children, child => {
+      return React.cloneElement(child, {
+        onClick: this.toggleOpen.bind(this)
+      })
+    })
+  }
+
   getChildrenWithLightboxContentRemoved () {
-    const children = React.Children.toArray(this.props.children)
+    const childrenWithLightboxApi = this.getChildrenWithLightboxApi()
+    const children = React.Children.toArray(childrenWithLightboxApi)
     children.pop()
     return children
   }
@@ -53,7 +62,7 @@ class Lightbox extends Component {
             {this.getLightboxContent()}
             <div
               className={style.closeButtonWrapper}
-              onClick={this.closeLightbox} >
+              onClick={this.closeLightbox.bind(this)} >
               <img
                 className={style.closeButton}
                 src={require('../../../images/icon-close/icon-close@2x.png')} />
@@ -67,8 +76,7 @@ class Lightbox extends Component {
   render () {
     return (
       <div
-        className={style.childWrapper}
-        onClick={this.toggleOpen.bind(this)}>
+        className={style.childWrapper} >
         {this.getChildrenWithLightboxContentRemoved()}
         {this.renderLightbox()}
       </div>
