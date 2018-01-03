@@ -1,5 +1,5 @@
 import React from 'react'
-import style from './Buttons.scss'
+import style from './ProductContentImagesMobileTablet.scss'
 
 const ButtonLeft = props => {
   return (

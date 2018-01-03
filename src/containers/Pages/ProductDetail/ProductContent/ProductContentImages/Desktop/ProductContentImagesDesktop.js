@@ -6,8 +6,8 @@ import ProductContentImagesListItemLightbox from './ProductContentImagesListItem
 import ScrollableList from '../../../../../Partials/ScrollableList/ScrollableList'
 import SimpleSlider from '../../../../../Partials/SimpleSlider/SimpleSlider'
 import Lightbox from '../../../../../Partials/Lightbox/Lightbox'
-import ButtonDown from '../Buttons/ButtonDown'
-import ButtonUp from '../Buttons/ButtonUp'
+import ButtonDown from './ButtonDown'
+import ButtonUp from './ButtonUp'
 import style from './ProductContentImagesDesktop.scss'
 
 class ProductContentImages extends Component {

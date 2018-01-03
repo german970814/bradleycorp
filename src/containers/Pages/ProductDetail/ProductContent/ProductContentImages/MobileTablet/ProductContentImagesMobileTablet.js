@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ScrollableList from '../../../../../Partials/ScrollableList/ScrollableList'
-import ButtonLeft from '../Buttons/ButtonLeft'
-import ButtonRight from '../Buttons/ButtonRight'
+import ButtonLeft from './ButtonLeft'
+import ButtonRight from './ButtonRight'
 import style from './ProductContentImagesMobileTablet.scss'
 
 class ProductContentImages extends Component {

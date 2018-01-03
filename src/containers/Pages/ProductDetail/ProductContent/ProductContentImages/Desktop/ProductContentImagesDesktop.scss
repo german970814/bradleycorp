@@ -4,6 +4,25 @@
   @extend %vAlignHelper;
 }
 
+.buttonUp, .buttonDown {
+  display: inline-block;
+  width: 77px;
+  height: 11px;
+  text-align: center;
+
+  img {
+    height: 100%;
+  }
+}
+
+.buttonUp {
+  margin-bottom: 16px;
+}
+
+.buttonDown {
+  margin-top: 16px;
+}
+
 .selectedImageDesktop {
   display: inline-block;
   vertical-align: middle;
@@ -22,25 +41,6 @@
   display: inline-block;
   vertical-align: middle;
   width: 77px;
-}
-
-.buttonUp, .buttonDown {
-  display: inline-block;
-  width: 77px;
-  height: 11px;
-  text-align: center;
-
-  img {
-    height: 100%;
-  }
-}
-
-.buttonUp {
-  margin-bottom: 16px;
-}
-
-.buttonDown {
-  margin-top: 16px;
 }
 
 .imagesListDesktop {

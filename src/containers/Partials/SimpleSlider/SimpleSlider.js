@@ -118,7 +118,7 @@ SimpleSlider.propTypes = {
   nextPrevButtonsForMobile: PropTypes.bool.isRequired,
   desktopWrapperClassName: PropTypes.string,
   ulClassName: PropTypes.string,
-  listItemClassName: PropTypes.string,
+  listItemClassName: PropTypes.string
 }
 
 export default SimpleSlider
