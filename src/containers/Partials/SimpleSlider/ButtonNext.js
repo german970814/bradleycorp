@@ -1,5 +1,5 @@
 import React from 'react'
-import style from './ProductScroller.scss'
+import style from './SimpleSlider.scss'
 
 const ButtonNext = props => {
   return (
@@ -8,7 +8,7 @@ const ButtonNext = props => {
       <span>
         {'Next'}
       </span>
-      <img src={require('../../../../images/icon-arrow/icon-arrow-r@2x.png')} />
+      <img src={require('../../../images/icon-arrow/icon-arrow-r@2x.png')} />
     </div>
 
   )

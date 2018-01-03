@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ProductContentImagesListItem from './ProductContentImagesListItem/ProductContentImagesListItem'
+import ProductContentImagesListItemLightbox from './ProductContentImagesListItemLightbox/ProductContentImagesListItemLightbox'
 import style from './ProductContentImagesDesktop.scss'
 import ScrollableList from '../../../../Partials/ScrollableList/ScrollableList'
+import SimpleSlider from '../../../../Partials/SimpleSlider/SimpleSlider'
+import Lightbox from '../../../../Partials/Lightbox/Lightbox'
 import ButtonDown from './ButtonDown'
 import ButtonUp from './ButtonUp'
 
@@ -25,8 +28,8 @@ class ProductContentImages extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.images !== this.props.images
-    ||  nextProps.featuredImageSrc !== this.props.featuredImageSrc) {
+    if (nextProps.images !== this.props.images ||
+    nextProps.featuredImageSrc !== this.props.featuredImageSrc) {
       this.setInitState(nextProps)
     }
   }
@@ -76,12 +79,36 @@ class ProductContentImages extends Component {
     })
   }
 
+  renderImagesListLightbox () {
+    return this.state.imagesSrcList.map((imageSrc, index) => {
+      return (
+        <ProductContentImagesListItemLightbox
+          key={index}
+          onClick={this.handleImageListItemClick.bind(this)}
+          src={imageSrc} />
+      )
+    })
+  }
+
   renderSelectedImage () {
     const imageStyle = {
       backgroundImage: `url(${this.state.selectedImageSrc})`
     }
     return (
-      <div style={imageStyle} />
+      <Lightbox
+        lightboxClass={style.lightbox} >
+        <div
+          style={imageStyle}
+          className={style.selectedImageDesktopImage} />
+        <SimpleSlider
+          title={''}
+          numberMobile={1}
+          numberTablet={1}
+          numberDesktop={1}
+          nextPrevButtonsForMobile={false} >
+          {this.renderImagesListLightbox()}
+        </SimpleSlider>
+      </Lightbox>
     )
   }
 

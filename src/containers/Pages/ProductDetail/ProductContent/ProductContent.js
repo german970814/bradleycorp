@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Media from 'react-media'
 import { TABLETMAXWIDTH } from '../../../../globals'
+import { isNew } from '../../../../lib/bcorpProduct'
 import ProductContentText from './ProductContentText/ProductContentText'
 import ProductContentImages from './ProductContentImages/ProductContentImages'
 import ProductContentImagesDesktop from './ProductContentImages/ProductContentImagesDesktop'
@@ -165,12 +166,6 @@ class ProductContent extends Component {
       </div>
     )
   }
-}
-
-export function isNew (date) {
-  const newUntil = new Date(date)
-  const now = new Date()
-  return newUntil - now > 0
 }
 
 ProductContent.propTypes = {

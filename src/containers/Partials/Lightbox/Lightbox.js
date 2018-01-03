@@ -33,10 +33,10 @@ class Lightbox extends Component {
 
   getLightboxContent () {
     const children = React.Children.toArray(this.props.children)
-    return children[children.length -1]
+    return children[children.length - 1]
   }
 
-  getChildrenWithLightboxContentRemoved() {
+  getChildrenWithLightboxContentRemoved () {
     const children = React.Children.toArray(this.props.children)
     children.pop()
     return children
@@ -68,7 +68,7 @@ class Lightbox extends Component {
     return (
       <div
         className={style.childWrapper}
-        onClick={this.toggleOpen}>
+        onClick={this.toggleOpen.bind(this)}>
         {this.getChildrenWithLightboxContentRemoved()}
         {this.renderLightbox()}
       </div>
