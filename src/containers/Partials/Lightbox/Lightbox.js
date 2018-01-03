@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import LightboxException from '../../../exceptions/LightboxException'
 import style from './Lightbox.scss'
 
 class Lightbox extends Component {
   constructor (props) {
     super(props)
+
+    const numChildren = React.Children.count(props.children)
+    if (numChildren !== 2) {
+      console.log(new LightboxException('number children', numChildren))
+    }
 
     this.state = {
       isOpen: false
@@ -19,16 +25,26 @@ class Lightbox extends Component {
     })
   }
 
-  openLightbox() {
+  openLightbox () {
     this.setState({
       isOpen: true
     })
   }
 
-  closeLightbox() {
+  closeLightbox () {
     this.setState({
       isOpen: false
     })
+  }
+
+  renderLightboxContent () {
+    const children = React.Children.toArray(this.props.children)
+
+    if (React.Children.only(this.props.children)) {
+      return React.Children.only(this.props.children)
+    }
+
+    return children[1]
   }
 
   renderLightbox () {
@@ -39,7 +55,7 @@ class Lightbox extends Component {
           <span className={style.vAlignHelper}/>
           <div
             className={[style.lightbox, this.props.lightboxClass].join(' ')} >
-            {this.props.children}
+            {this.renderLightboxContent()}
             <div
               className={style.closeButtonWrapper}
               onClick={this.toggleOpen} >

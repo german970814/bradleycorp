@@ -33,7 +33,7 @@ class TabMaintenance extends Component {
       return (
         <li
           key={index} >
-          {renderVideoThumbnail(video.meta['video_gallery_video'], tabStyle.videoIframe)}
+          {renderVideoThumbnail(video.meta['video_gallery_video'])}
         </li>
       )
     })

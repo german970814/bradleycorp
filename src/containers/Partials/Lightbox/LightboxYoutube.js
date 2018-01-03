@@ -3,13 +3,13 @@ import Lightbox from './Lightbox'
 import style from './Lightbox.scss'
 
 class LightboxYoutube extends Lightbox {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
-    this.renderChildrenWithYoutubeApi - this.renderChildrenWithYoutubeApi.bind(this)
+    this.renderChildrenWithYoutubeApi = this.renderChildrenWithYoutubeApi.bind(this)
   }
 
-  renderChildrenWithYoutubeApi() { //this expects child to be a YouTube component from react-youtube
+  renderChildrenWithYoutubeApi () { // this expects child to be a YouTube component from react-youtube
     return React.Children.map(this.props.children, child => {
       return React.cloneElement(child, {
         onPlay: this.onPlay.bind(this)
@@ -17,12 +17,12 @@ class LightboxYoutube extends Lightbox {
     })
   }
 
-  onPlay(e) {
-    e.target.pauseVideo();
+  onPlay (e) {
+    e.target.pauseVideo()
     this.openLightbox()
   }
 
-  render() {
+  render () {
     return (
       <div
         className={style.childWrapper}
