@@ -5,8 +5,10 @@ import style from './ProductContentImagesListItemLightbox.scss'
 class ProductContentImagesListItemLightbox extends Component {
   render () {
     const imageStyle = {
-      backgroundImage: `url(${this.props.src})`
+      backgroundImage: `url(${this.props.src})`,
+      height: this.props.height
     }
+
     return (
       <div
         onClick={(e) => { this.props.onClick(e, this.props.src) }}
@@ -18,7 +20,9 @@ class ProductContentImagesListItemLightbox extends Component {
 
 ProductContentImagesListItemLightbox.propTypes = {
   onClick: PropTypes.func,
-  src: PropTypes.string.isRequired
+  src: PropTypes.string.isRequired,
+  height: PropTypes.number,
+  video: PropTypes.bool
 }
 
 export default ProductContentImagesListItemLightbox

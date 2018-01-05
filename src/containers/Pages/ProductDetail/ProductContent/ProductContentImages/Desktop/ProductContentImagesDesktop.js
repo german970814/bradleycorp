@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import { rotate } from '../../../../../../lib/bcorpArray'
 import VerticalAlignHelper from '../../../../../../components/Partials/VerticalAlignHelper/VerticalAlignHelper'
 import ProductContentImagesListItem from './ProductContentImagesListItem/ProductContentImagesListItem'
-import ProductContentImagesListItemLightbox from './ProductContentImagesListItemLightbox/ProductContentImagesListItemLightbox'
+import ProductContentImagesListItemLightbox from '../ProductContentImagesListItemLightbox/ProductContentImagesListItemLightbox'
 import ScrollableList from '../../../../../Partials/ScrollableList/ScrollableList'
-import SimpleSlider from '../../../../../Partials/SimpleSlider/SimpleSlider'
+import SimpleSliderLightbox from '../../../../../Partials/SimpleSlider/SimpleSliderLightbox/SimpleSliderLightbox'
 import Lightbox from '../../../../../Partials/Lightbox/Lightbox'
 import ButtonDown from './ButtonDown'
 import ButtonUp from './ButtonUp'
@@ -122,20 +122,9 @@ class ProductContentImages extends Component {
           style={imageStyle}
           className={style.selectedImageDesktopImage} />
 
-        <div
-          className={style.lightboxContentWrapper} >
-          <SimpleSlider
-            title={''}
-            numberMobile={1}
-            numberTablet={1}
-            numberDesktop={1}
-            nextPrevButtonsForMobile={false}
-            desktopWrapperClassName={style.lightboxWrapper}
-            ulClassName={style.lightboxUlClassName}
-            listItemClassName={style.lightboxListItem} >
-            {this.renderImagesListLightbox()}
-          </SimpleSlider>
-        </div>
+        <SimpleSliderLightbox>
+          {this.renderImagesListLightbox()}
+        </SimpleSliderLightbox>
 
       </Lightbox>
     )

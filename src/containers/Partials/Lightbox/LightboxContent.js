@@ -43,7 +43,6 @@ LightboxContent.propTypes = {
     PropTypes.object.isRequired,
     PropTypes.array.isRequired
   ]),
-  closeLightbox: PropTypes.func.isRequired,
   updateContentSize: PropTypes.func.isRequired
 }
 

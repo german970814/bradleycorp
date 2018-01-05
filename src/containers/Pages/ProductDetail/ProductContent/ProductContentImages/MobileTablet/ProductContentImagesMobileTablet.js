@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import YouTube from 'react-youtube'
-import addVideoIdFromSrc from '../../../../../../components/Partials/Youtube/YoutubeVideoID'
+import YoutubePlayerLightbox from '../../../../../../components/Partials/Youtube/YoutubePlayerLightbox/YoutubePlayerLightbox'
 import Lightbox from '../../../../../Partials/Lightbox/Lightbox'
+import SimpleSliderLightbox from '../../../../../Partials/SimpleSlider/SimpleSliderLightbox/SimpleSliderLightbox'
 import ScrollableList from '../../../../../Partials/ScrollableList/ScrollableList'
+import ProductContentImagesListItemLightbox from '../ProductContentImagesListItemLightbox/ProductContentImagesListItemLightbox'
 import ButtonLeft from './ButtonLeft'
 import ButtonRight from './ButtonRight'
 import style from './ProductContentImagesMobileTablet.scss'
@@ -16,6 +17,18 @@ class ProductContentImages extends Component {
     this.getImagesSrcListWithFeaturedImage = this.getImagesSrcListWithFeaturedImage.bind(this)
   }
 
+  getListForLightbox () {
+    const imagesSrcList = this.getImagesSrcListWithFeaturedImage()
+
+    return imagesSrcList.map((imageSrc, index) => {
+      return (
+        <ProductContentImagesListItemLightbox
+          key={index}
+          src={imageSrc} />
+      )
+    })
+  }
+
   renderList () {
     const imagesSrcList = this.getImagesSrcListWithFeaturedImage()
     const images = imagesSrcList.map((imageSrc, index) => {
@@ -23,9 +36,19 @@ class ProductContentImages extends Component {
         backgroundImage: `url(${imageSrc})`
       }
       return (
-        <div
-          key={index}
-          style={imageStyle} />
+        <Lightbox
+          key={index}>
+
+          <div
+            style={imageStyle}
+            className={style.fitBackground} />
+
+          <SimpleSliderLightbox>
+            {this.getListForLightbox()}
+          </SimpleSliderLightbox>
+
+        </Lightbox>
+
       )
     })
 
@@ -33,25 +56,18 @@ class ProductContentImages extends Component {
       const videoStyle = {
         backgroundImage: `url(${require('../../../../../../images/icon-video/icon-video@3x.png')})`
       }
-      const youtubeOpts = {
-        playerVars: {
-          showinfo: 0,
-          modestbranding: 1,
-          controls: 0
-        }
-      }
-      const YoutubePlayer = addVideoIdFromSrc(YouTube, videoSrc)
-
       return (
         <Lightbox
           key={`video_${index}`} >
+
           <div
             style={videoStyle}
-            className={style.videoListItem} />
-          <YoutubePlayer
-            opts={youtubeOpts} />
-        </Lightbox>
+            className={[style.videoListItem, style.fitBackground].join(' ')} />
 
+          <YoutubePlayerLightbox
+            src={videoSrc} />
+
+        </Lightbox>
       )
     })
 

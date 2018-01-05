@@ -47,7 +47,7 @@
 .award {
   display: inline-block;
   margin-right: 17px;
-  margin-bottom: 17px;
+  margin-bottom: 24px;
   margin-left: 0;
   height: 50px;
 
@@ -99,6 +99,7 @@ $productDetailBtnTabletGap: 16px;
 
 .surveyBtn {
   @extend %productDetailBtn;
+  margin: 0;
   border: solid 1px $slate-grey;
   background-color: transparent;
   color: $slate-grey;

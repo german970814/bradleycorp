@@ -25,12 +25,9 @@ class ScrollableList extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (this.childrenDidUpdate(nextProps.children, this.props.children) ||
-    this.numberToDisplayDidUpdate(nextProps.numberToDisplay, this.props.numberToDisplay)) {
-      this.setState({
-        children: this.getChildrenWithScrollableListApiAsProps(nextProps)
-      })
-    }
+    this.setState({
+      children: this.getChildrenWithScrollableListApiAsProps(nextProps)
+    })
   }
 
   getChildrenWithScrollableListApiAsProps (props) {

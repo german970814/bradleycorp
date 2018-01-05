@@ -70,7 +70,7 @@ class Lightbox extends Component {
         lightboxSize: this.state.contentSize,
         // give the child the button to close the lightbox
         lightboxCloseButton: LightboxCloseButton,
-        lightbocCloseButtonOnClick: this.closeLightbox.bind(this)
+        lightboxCloseButtonOnClick: this.closeLightbox.bind(this)
       })
     })
 

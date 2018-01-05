@@ -1,0 +1,6 @@
+@import "../../../../../../scss/partials/helpers";
+
+.listItemLightbox {
+  @extend %fitBackground;
+  width: 100%;
+}

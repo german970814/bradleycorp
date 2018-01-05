@@ -39,10 +39,6 @@ $tablet-height: 428px;
   width: 75%;
   height: 100%;
   list-style: none;
-
-  div {
-    @extend %fitBackground;
-  }
 }
 
 .videoListItem {
@@ -52,4 +48,8 @@ $tablet-height: 428px;
   @include respond-to(tablet) {
     width: 20%;
   }
+}
+
+.fitBackground {
+  @extend %fitBackground;
 }
