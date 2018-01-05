@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import VerticalAlignHelper from '../../../components/Partials/VerticalAlignHelper/VerticalAlignHelper'
-import LightboxContent from './LightboxContent'
 import LightboxCloseButton from './LightboxCloseButton'
 import style from './Lightbox.scss'
 
@@ -66,8 +65,6 @@ class Lightbox extends Component {
   getLightboxContent () {
     const childrenWithLightboxSize = React.Children.map(this.props.children, child => {
       return React.cloneElement(child, {
-        // we want lightbox content children to have access to lightbox size
-        lightboxSize: this.state.contentSize,
         // give the child the button to close the lightbox
         lightboxCloseButton: LightboxCloseButton,
         lightboxCloseButtonOnClick: this.closeLightbox.bind(this)
@@ -85,11 +82,10 @@ class Lightbox extends Component {
         <div
           className={[style.background, this.props.backgroundClass].join(' ')} >
           <VerticalAlignHelper />
-          <LightboxContent
-            closeLightbox={this.closeLightbox.bind(this)}
-            updateContentSize={this.updateContentSize.bind(this)}>
+          <div
+            className={style.lightbox} >
             {this.getLightboxContent()}
-          </LightboxContent>
+          </div>
         </div>
       )
     }

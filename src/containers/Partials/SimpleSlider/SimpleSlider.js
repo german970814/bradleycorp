@@ -119,7 +119,7 @@ SimpleSlider.propTypes = {
   numberMobile: PropTypes.number.isRequired,
   numberTablet: PropTypes.number.isRequired,
   numberDesktop: PropTypes.number.isRequired,
-  nextPrevButtonsForMobile: PropTypes.bool.isRequired,
+  nextPrevButtonsForMobile: PropTypes.bool,
   desktopWrapperClassName: PropTypes.string,
   ulClassName: PropTypes.string,
   listItemClassName: PropTypes.string

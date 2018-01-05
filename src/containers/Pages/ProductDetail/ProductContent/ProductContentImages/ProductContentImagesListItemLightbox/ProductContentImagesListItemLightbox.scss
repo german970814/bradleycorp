@@ -2,5 +2,6 @@
 
 .listItemLightbox {
   @extend %fitBackground;
-  width: 100%;
+  margin: auto 10%;
+  width: 80%;
 }

@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { rotate } from '../../../../../../lib/bcorpArray'
+import fitLightbox from '../../../../../Partials/Lightbox/fitLightbox'
 import VerticalAlignHelper from '../../../../../../components/Partials/VerticalAlignHelper/VerticalAlignHelper'
-import ProductContentImagesListItem from './ProductContentImagesListItem/ProductContentImagesListItem'
+import VerticalListItem from './VerticalListItem/VerticalListItem'
 import ProductContentImagesListItemLightbox from '../ProductContentImagesListItemLightbox/ProductContentImagesListItemLightbox'
 import ScrollableList from '../../../../../Partials/ScrollableList/ScrollableList'
 import SimpleSliderLightbox from '../../../../../Partials/SimpleSlider/SimpleSliderLightbox/SimpleSliderLightbox'
@@ -57,13 +58,6 @@ class ProductContentImages extends Component {
     })
   }
 
-  withFeaturedImage (props, imgSrcs) {
-    if (imgSrcs.includes(props.featuredImageSrc)) {
-      return imgSrcs
-    }
-    return [ props.featuredImageSrc, ...imgSrcs ]
-  }
-
   handleImageListItemClick (e, imageSrc) {
     e.preventDefault()
 
@@ -76,7 +70,7 @@ class ProductContentImages extends Component {
   renderList () {
     const imgs = this.state.imagesSrcList.map((imageSrc, index) => {
       return (
-        <ProductContentImagesListItem
+        <VerticalListItem
           key={index}
           onClick={this.handleImageListItemClick.bind(this)}
           src={imageSrc} />
@@ -84,7 +78,7 @@ class ProductContentImages extends Component {
     })
     const videos = this.state.videosSrcList.map((videoSrc, index) => {
       return (
-        <ProductContentImagesListItem
+        <VerticalListItem
           key={`video_${index}`}
           src={videoSrc}
           video />
@@ -97,14 +91,14 @@ class ProductContentImages extends Component {
   renderImagesListLightbox () {
     const imageSrcs = this.state.imagesSrcList
     const selectedIndex = imageSrcs.indexOf(this.state.selectedImageSrc)
-
     const orderedImageSrcs = rotate(imageSrcs, selectedIndex)
+
+    const ListItemWithHeight = fitLightbox(ProductContentImagesListItemLightbox, null)
 
     return orderedImageSrcs.map((imageSrc, index) => {
       return (
-        <ProductContentImagesListItemLightbox
+        <ListItemWithHeight
           key={index}
-          onClick={this.handleImageListItemClick.bind(this)}
           src={imageSrc} />
       )
     })
@@ -156,6 +150,13 @@ class ProductContentImages extends Component {
 
       </React.Fragment>
     )
+  }
+
+  withFeaturedImage (props, imgSrcs) {
+    if (imgSrcs.includes(props.featuredImageSrc)) {
+      return imgSrcs
+    }
+    return [ props.featuredImageSrc, ...imgSrcs ]
   }
 }
 

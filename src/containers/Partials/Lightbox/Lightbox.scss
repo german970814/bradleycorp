@@ -3,6 +3,10 @@
 
 $closeButtonHeight: 32px;
 $closeButtonDistanceBelow: 40px;
+$lightboxWidth: 85; // percentage
+$lightboxWidthTabletDesktop: 62; // percentage
+$lightboxHeight: 85; // percentage
+$lightboxHeightPerc: $lightboxHeight + %;
 
 .childWrapper {
   z-index: 100;
@@ -14,15 +18,15 @@ $closeButtonDistanceBelow: 40px;
   top: 0;
   left: 0;
   z-index: 1001;
-  padding: 0 7.5%;
-  width: 85%;
+  padding: 0 ((100 - $lightboxWidth)/2 + %);
+  width: $lightboxWidth + %;
   height: 100%;
   background-color: rgba(0,0,0,0.8);
   text-align: left;
 
   @include respond-to(tablet) {
-    padding: 0 19%;
-    width: 62%;
+    padding: 0 ((100 - $lightboxWidthTabletDesktop)/2 + %);
+    width: $lightboxWidthTabletDesktop + %;
     text-align: center;
   }
 }
@@ -34,7 +38,7 @@ $closeButtonDistanceBelow: 40px;
   margin: 0 auto;
   width: 100%;
   height: 100%;
-  max-height: calc(85% - #{$closeButtonHeight}*2 - #{$closeButtonDistanceBelow});
+  max-height: calc(#{$lightboxHeight + %} - #{$closeButtonHeight}*2 - #{$closeButtonDistanceBelow});
   text-align: center;
 }
 
@@ -48,4 +52,12 @@ $closeButtonDistanceBelow: 40px;
   margin: 0 auto;
   width: $closeButtonHeight;
   height: $closeButtonHeight;
+}
+
+:export {
+  LightboxHeight: $lightboxHeight;
+  LightboxWidth: $lightboxWidth;
+  LightboxWidthTabletDesktop: $lightboxWidthTabletDesktop;
+  LightboxCloseButtonHeight: $closeButtonHeight;
+  LightboxCloseButtonDistanceBelow: $closeButtonDistanceBelow;
 }

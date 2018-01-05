@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import fitLightbox from '../../../../../Partials/Lightbox/fitLightbox'
 import YoutubePlayerLightbox from '../../../../../../components/Partials/Youtube/YoutubePlayerLightbox/YoutubePlayerLightbox'
 import Lightbox from '../../../../../Partials/Lightbox/Lightbox'
 import SimpleSliderLightbox from '../../../../../Partials/SimpleSlider/SimpleSliderLightbox/SimpleSliderLightbox'
@@ -17,12 +18,21 @@ class ProductContentImages extends Component {
     this.getImagesSrcListWithFeaturedImage = this.getImagesSrcListWithFeaturedImage.bind(this)
   }
 
+  getImagesSrcListWithFeaturedImage () {
+    const imgSrcs = this.props.images.split(',')
+    if (imgSrcs.includes(this.props.featuredImageSrc)) {
+      return imgSrcs
+    }
+    return [ this.props.featuredImageSrc, ...imgSrcs ]
+  }
+
   getListForLightbox () {
     const imagesSrcList = this.getImagesSrcListWithFeaturedImage()
+    const ListItemWithHeight = fitLightbox(ProductContentImagesListItemLightbox, null)
 
     return imagesSrcList.map((imageSrc, index) => {
       return (
-        <ProductContentImagesListItemLightbox
+        <ListItemWithHeight
           key={index}
           src={imageSrc} />
       )
@@ -31,6 +41,7 @@ class ProductContentImages extends Component {
 
   renderList () {
     const imagesSrcList = this.getImagesSrcListWithFeaturedImage()
+
     const images = imagesSrcList.map((imageSrc, index) => {
       const imageStyle = {
         backgroundImage: `url(${imageSrc})`
@@ -72,14 +83,6 @@ class ProductContentImages extends Component {
     })
 
     return [...images, ...videos]
-  }
-
-  getImagesSrcListWithFeaturedImage () {
-    const imgSrcs = this.props.images.split(',')
-    if (imgSrcs.includes(this.props.featuredImageSrc)) {
-      return imgSrcs
-    }
-    return [ this.props.featuredImageSrc, ...imgSrcs ]
   }
 
   render () {

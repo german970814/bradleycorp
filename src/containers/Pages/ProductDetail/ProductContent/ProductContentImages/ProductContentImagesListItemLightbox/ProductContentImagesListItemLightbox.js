@@ -6,7 +6,7 @@ class ProductContentImagesListItemLightbox extends Component {
   render () {
     const imageStyle = {
       backgroundImage: `url(${this.props.src})`,
-      height: this.props.height
+      height: this.props.style.height
     }
 
     return (
@@ -21,7 +21,10 @@ class ProductContentImagesListItemLightbox extends Component {
 ProductContentImagesListItemLightbox.propTypes = {
   onClick: PropTypes.func,
   src: PropTypes.string.isRequired,
-  height: PropTypes.number,
+  style: PropTypes.shape({
+    width: PropTypes.number,
+    height: PropTypes.number
+  }),
   video: PropTypes.bool
 }
 

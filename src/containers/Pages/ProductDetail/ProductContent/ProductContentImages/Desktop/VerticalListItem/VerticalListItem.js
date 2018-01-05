@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import style from './ProductContentImagesListItem.scss'
+import YoutubePlayerLightbox from '../../../../../../../components/Partials/Youtube/YoutubePlayerLightbox/YoutubePlayerLightbox'
+import Lightbox from '../../../../../../Partials/Lightbox/Lightbox'
+import style from './VerticalListItem.scss'
 
-class ProductContentImagesListItem extends Component {
+class VerticalListItem extends Component {
   renderImage () {
     const imageStyle = {
       backgroundImage: `url(${this.props.src})`
@@ -16,13 +18,20 @@ class ProductContentImagesListItem extends Component {
   }
 
   renderVideo () {
-    const imageStyle = {
+    const videoStyle = {
       backgroundImage: `url(${require('../../../../../../../images/icon-video/icon-video@2x.png')})`
     }
     return (
-      <div
-        style={imageStyle}
-        className={style.listItemVideo} />
+      <Lightbox>
+
+        <div
+          style={videoStyle}
+          className={style.listItemVideo} />
+
+        <YoutubePlayerLightbox
+          src={this.props.src} />
+
+      </Lightbox>
     )
   }
 
@@ -34,10 +43,10 @@ class ProductContentImagesListItem extends Component {
   }
 }
 
-ProductContentImagesListItem.propTypes = {
+VerticalListItem.propTypes = {
   onClick: PropTypes.func,
   src: PropTypes.string.isRequired,
   video: PropTypes.bool
 }
 
-export default ProductContentImagesListItem
+export default VerticalListItem

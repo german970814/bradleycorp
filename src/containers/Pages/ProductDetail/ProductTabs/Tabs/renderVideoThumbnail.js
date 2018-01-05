@@ -1,6 +1,6 @@
 import React from 'react'
 import YouTube from 'react-youtube'
-import addVideoIdFromSrc from '../../../../../components/Partials/Youtube/YoutubeVideoID'
+import addVideoIdFromSrc from '../../../../../components/Partials/Youtube/addVideoIdFromSrc'
 import YoutubePlayerLightbox from '../../../../../components/Partials/Youtube/YoutubePlayerLightbox/YoutubePlayerLightbox'
 import LightboxYoutube from '../../../../Partials/Lightbox/LightboxYoutube'
 import tabStyle from './Tabs.scss'
