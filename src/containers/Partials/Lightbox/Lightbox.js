@@ -9,11 +9,7 @@ class Lightbox extends Component {
     super(props)
 
     this.state = {
-      isOpen: false,
-      contentSize: {
-        width: 0,
-        height: 0
-      }
+      isOpen: false
     }
 
     this.renderLightbox = this.renderLightbox.bind(this)
@@ -37,16 +33,6 @@ class Lightbox extends Component {
     })
   }
 
-  updateContentSize (width, height) {
-    this.setState({
-      ...this.state,
-      contentSize: {
-        width,
-        height
-      }
-    })
-  }
-
   getChildrenWithLightboxApi () {
     return React.Children.map(this.props.children, child => {
       return React.cloneElement(child, {
@@ -58,6 +44,10 @@ class Lightbox extends Component {
   renderChildrenWithLightboxContentRemoved () {
     const childrenWithLightboxApi = this.getChildrenWithLightboxApi()
     const children = React.Children.toArray(childrenWithLightboxApi)
+
+    if (children.length === 1) {
+      return children
+    }
     children.pop()
     return children
   }
@@ -104,7 +94,9 @@ class Lightbox extends Component {
 
 Lightbox.propTypes = {
   children: PropTypes.node.isRequired,
-  backgroundClass: PropTypes.string
+  backgroundClass: PropTypes.string,
+  closeButton: PropTypes.func,
+  closeButtonOnClick: PropTypes.func
 }
 
 export default Lightbox

@@ -55,7 +55,7 @@ class SimpleSlider extends Component {
                 buttonUp={buttonUpMobile}
                 buttonDown={buttonDownMobile}
                 positionButtonsBelow={this.props.nextPrevButtonsForMobile}
-                reverseScroll
+                reverseScroll={this.props.reverseScroll}
                 ulClassName={[style.sliderUlTablet, this.props.ulClassName].join(' ')}
                 listItemClassName={[style.listItem, this.props.listItemClassName].join(' ')}
                 buttonUpContainerClassName={buttonClassMobile}
@@ -73,7 +73,7 @@ class SimpleSlider extends Component {
                       buttonUp={<ButtonLeft />}
                       buttonDown={<ButtonRight />}
                       positionButtonsBelow={false}
-                      reverseScroll
+                      reverseScroll={this.props.reverseScroll}
                       wrapperClassName={[style.sliderTabletDesktop, this.props.desktopWrapperClassName].join(' ')}
                       ulClassName={[style.sliderUlTablet, this.props.ulClassName].join(' ')}
                       listItemClassName={[style.listItemDesktop, this.props.listItemClassName].join(' ')}
@@ -89,7 +89,7 @@ class SimpleSlider extends Component {
                       buttonUp={<ButtonLeft />}
                       buttonDown={<ButtonRight />}
                       positionButtonsBelow={false}
-                      reverseScroll
+                      reverseScroll={this.props.reverseScroll}
                       wrapperClassName={[style.sliderTabletDesktop, this.props.desktopWrapperClassName].join(' ')}
                       ulClassName={[style.sliderUlTablet, this.props.ulClassName].join(' ')}
                       listItemClassName={[style.listItemTablet, this.props.listItemClassName].join(' ')}
@@ -120,6 +120,7 @@ SimpleSlider.propTypes = {
   numberTablet: PropTypes.number.isRequired,
   numberDesktop: PropTypes.number.isRequired,
   nextPrevButtonsForMobile: PropTypes.bool,
+  reverseScroll: PropTypes.bool,
   desktopWrapperClassName: PropTypes.string,
   ulClassName: PropTypes.string,
   listItemClassName: PropTypes.string

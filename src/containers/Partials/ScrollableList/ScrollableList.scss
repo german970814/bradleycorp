@@ -1,10 +1,17 @@
 @import "../../../scss/partials/mixins";
 
-.buttonUp, .buttonDown {
+.buttonUp, .buttonDown, .buttonUpLightbox, .buttonDownLightbox {
   display: inline-block;
 }
 
-.buttonUp {
+.buttonUpLightbox, .buttonDownLightbox {
+  height: inherit;
+  & > div {
+    height: inherit;
+  }
+}
+
+.buttonUp, .buttonUpLightbox {
   float: left;
 }
 
@@ -29,4 +36,8 @@
   vertical-align: middle;
   width: 6px;
   height: 12px;
+}
+
+.inheritHeight {
+  height: inherit !important;
 }

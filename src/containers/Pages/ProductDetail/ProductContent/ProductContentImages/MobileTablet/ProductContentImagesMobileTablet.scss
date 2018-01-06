@@ -36,9 +36,13 @@ $tablet-height: 428px;
 
 .imageListItem {
   display: inline-block;
-  width: 75%;
+  width: 100%;
   height: 100%;
   list-style: none;
+}
+
+.imageDiv {
+  margin: 0 10%;
 }
 
 .videoListItem {

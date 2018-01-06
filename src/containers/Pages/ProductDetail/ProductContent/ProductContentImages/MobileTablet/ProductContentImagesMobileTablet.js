@@ -1,23 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import fitLightbox from '../../../../../Partials/Lightbox/fitLightbox'
+import ScrollableListOpensInLightbox from '../../../../../Partials/ScrollableList/ScrollableListOpensInLightbox'
 import YoutubePlayerLightbox from '../../../../../../components/Partials/Youtube/YoutubePlayerLightbox/YoutubePlayerLightbox'
-import Lightbox from '../../../../../Partials/Lightbox/Lightbox'
-import SimpleSliderLightbox from '../../../../../Partials/SimpleSlider/SimpleSliderLightbox/SimpleSliderLightbox'
-import ScrollableList from '../../../../../Partials/ScrollableList/ScrollableList'
-import ProductContentImagesListItemLightbox from '../ProductContentImagesListItemLightbox/ProductContentImagesListItemLightbox'
 import ButtonLeft from './ButtonLeft'
 import ButtonRight from './ButtonRight'
 import style from './ProductContentImagesMobileTablet.scss'
 
 class ProductContentImages extends Component {
-  constructor (props) {
-    super(props)
-
-    this.renderList = this.renderList.bind(this)
-    this.getImagesSrcListWithFeaturedImage = this.getImagesSrcListWithFeaturedImage.bind(this)
-  }
-
   getImagesSrcListWithFeaturedImage () {
     const imgSrcs = this.props.images.split(',')
     if (imgSrcs.includes(this.props.featuredImageSrc)) {
@@ -26,40 +15,27 @@ class ProductContentImages extends Component {
     return [ this.props.featuredImageSrc, ...imgSrcs ]
   }
 
-  getListForLightbox () {
-    const imagesSrcList = this.getImagesSrcListWithFeaturedImage()
-    const ListItemWithHeight = fitLightbox(ProductContentImagesListItemLightbox, null)
-
-    return imagesSrcList.map((imageSrc, index) => {
-      return (
-        <ListItemWithHeight
-          key={index}
-          src={imageSrc} />
-      )
-    })
-  }
-
   renderList () {
-    const imagesSrcList = this.getImagesSrcListWithFeaturedImage()
-
-    const images = imagesSrcList.map((imageSrc, index) => {
+    const imgSrcs = this.getImagesSrcListWithFeaturedImage()
+    const images = imgSrcs.map((imageSrc, index) => {
       const imageStyle = {
         backgroundImage: `url(${imageSrc})`
       }
       return (
-        <Lightbox
-          key={index}>
+        <React.Fragment
+          key={index} >
 
           <div
+            src={imageSrc}
             style={imageStyle}
-            className={style.fitBackground} />
+            className={[style.imageDiv, style.fitBackground].join(' ')} />
 
-          <SimpleSliderLightbox>
-            {this.getListForLightbox()}
-          </SimpleSliderLightbox>
+          <div
+            src={imageSrc}
+            style={imageStyle}
+            className={[style.imageDiv, style.fitBackground].join(' ')} />
 
-        </Lightbox>
-
+        </React.Fragment>
       )
     })
 
@@ -68,17 +44,19 @@ class ProductContentImages extends Component {
         backgroundImage: `url(${require('../../../../../../images/icon-video/icon-video@3x.png')})`
       }
       return (
-        <Lightbox
-          key={`video_${index}`} >
+        <React.Fragment
+          key={`video_${index}`}>
 
           <div
             style={videoStyle}
             className={[style.videoListItem, style.fitBackground].join(' ')} />
 
           <YoutubePlayerLightbox
-            src={videoSrc} />
+            src={videoSrc}
+            maxWidth={0.8}
+            maxWidthTablet={0.8} />
 
-        </Lightbox>
+        </React.Fragment>
       )
     })
 
@@ -87,16 +65,16 @@ class ProductContentImages extends Component {
 
   render () {
     return (
-      <ScrollableList
+      <ScrollableListOpensInLightbox
         numberToDisplay={1}
-        showPosition={true}
+        showPosition
         wrapperClassName={style.imagesListWrapper}
         listItemClassName={style.imageListItem}
         ulClassName={style.imagesList}
         buttonUp={<ButtonLeft />}
         buttonDown={<ButtonRight />} >
         {this.renderList()}
-      </ScrollableList>
+      </ScrollableListOpensInLightbox>
     )
   }
 }

@@ -27,7 +27,8 @@ class ProductScroller extends Component {
         numberMobile={2}
         numberTablet={3}
         numberDesktop={5}
-        nextPrevButtonsForMobile={true}>
+        nextPrevButtonsForMobile={true}
+        reverseScroll >
         {this.renderProducts()}
       </SimpleSlider>
     )

@@ -10,23 +10,15 @@ class ScrollableList extends Component {
     this.state = {
       children: this.getChildrenWithScrollableListApiAsProps(this.props)
     }
-
-    this.getChildrenWithScrollableListApiAsProps = this.getChildrenWithScrollableListApiAsProps.bind(this)
-    this.renderButtonUp = this.renderButtonUp.bind(this)
-    this.renderButtonDown = this.renderButtonDown.bind(this)
-    this.buttonUp = this.buttonUp.bind(this)
-    this.buttonDown = this.buttonDown.bind(this)
-    this.renderButtonsBelow = this.renderButtonsBelow.bind(this)
-    this.renderPositionCircles = this.renderPositionCircles.bind(this)
-    this.renderChildren = this.renderChildren.bind(this)
-    this.getChildrenToDisplay = this.getChildrenToDisplay.bind(this)
-    this.getPosition = this.getPosition.bind(this)
   }
 
   componentWillReceiveProps (nextProps) {
-    this.setState({
-      children: this.getChildrenWithScrollableListApiAsProps(nextProps)
-    })
+    if (this.childrenDidUpdate(nextProps.children, this.props.children) ||
+    this.numberToDisplayDidUpdate(nextProps.numberToDisplay, this.props.numberToDisplay)) {
+      this.setState({
+        children: this.getChildrenWithScrollableListApiAsProps(nextProps)
+      })
+    }
   }
 
   getChildrenWithScrollableListApiAsProps (props) {
@@ -51,6 +43,10 @@ class ScrollableList extends Component {
         display: newPosition < this.props.numberToDisplay
       }
     })
+
+    if (this.props.onPositionChange) {
+      this.props.onPositionChange(children)
+    }
 
     return this.setState({ ...this.state, children })
   }
@@ -138,21 +134,28 @@ class ScrollableList extends Component {
     })
   }
 
-  render () {
+  renderScroller (scrollerContent) {
     return (
       <div
         className={this.props.wrapperClassName}>
+
         {this.renderButtonUp()}
+
         <ul
           className={this.props.ulClassName}>
-          {this.renderChildren()}
+          {scrollerContent}
         </ul>
+
         {this.renderButtonDown()}
         {this.renderButtonsBelow()}
         {this.renderPositionCircles()}
 
       </div>
     )
+  }
+
+  render () {
+    return this.renderScroller(this.renderChildren())
   }
 
   getPosition (prevPos, increment, arrayLength) {
@@ -178,13 +181,37 @@ class ScrollableList extends Component {
       return child1.position - child2.position
     })
   }
+
+  childrenDidUpdate (newChildren, children) {
+    if (newChildren.length !== children.length) {
+      return true
+    }
+
+    children.forEach((child, index) => {
+      if (newChildren[index].type !== child.type) {
+        return true
+      }
+
+      if (newChildren[index].props !== child.props) {
+        return true
+      }
+    })
+
+    return false
+  }
+
+  numberToDisplayDidUpdate (newNumber, oldNumber) {
+    return newNumber !== oldNumber
+  }
 }
 
 ScrollableList.propTypes = {
   numberToDisplay: PropTypes.number.isRequired,
   showPosition: PropTypes.bool,
   reverseScroll: PropTypes.bool,
+  positionButtonsBelow: PropTypes.bool,
   children: PropTypes.array.isRequired,
+  onPositionChange: PropTypes.func,
   wrapperClassName: PropTypes.string,
   listItemClassName: PropTypes.string,
   ulClassName: PropTypes.string,
@@ -192,8 +219,7 @@ ScrollableList.propTypes = {
   buttonDownContainerClassName: PropTypes.string,
   buttonsBelowClassName: PropTypes.string,
   buttonUp: PropTypes.element.isRequired,
-  buttonDown: PropTypes.element.isRequired,
-  positionButtonsBelow: PropTypes.bool
+  buttonDown: PropTypes.element.isRequired
 }
 
 export default ScrollableList

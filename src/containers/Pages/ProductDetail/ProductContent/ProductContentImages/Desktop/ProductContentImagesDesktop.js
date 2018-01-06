@@ -6,13 +6,12 @@ import VerticalAlignHelper from '../../../../../../components/Partials/VerticalA
 import VerticalListItem from './VerticalListItem/VerticalListItem'
 import ProductContentImagesListItemLightbox from '../ProductContentImagesListItemLightbox/ProductContentImagesListItemLightbox'
 import ScrollableList from '../../../../../Partials/ScrollableList/ScrollableList'
-import SimpleSliderLightbox from '../../../../../Partials/SimpleSlider/SimpleSliderLightbox/SimpleSliderLightbox'
 import Lightbox from '../../../../../Partials/Lightbox/Lightbox'
 import ButtonDown from './ButtonDown'
 import ButtonUp from './ButtonUp'
 import style from './ProductContentImagesDesktop.scss'
 
-class ProductContentImages extends Component {
+class ProductContentImagesDesktop extends Component {
   constructor (props) {
     super(props)
 
@@ -89,18 +88,28 @@ class ProductContentImages extends Component {
   }
 
   renderImagesListLightbox () {
-    const imageSrcs = this.state.imagesSrcList
-    const selectedIndex = imageSrcs.indexOf(this.state.selectedImageSrc)
-    const orderedImageSrcs = rotate(imageSrcs, selectedIndex)
+    const combinedSrc = [...this.state.imagesSrcList, ...this.state.videosSrcList]
+    const selectedIndex = combinedSrc.indexOf(this.state.selectedImageSrc)
+    const orderedSrcs = rotate(combinedSrc, selectedIndex)
 
     const ListItemWithHeight = fitLightbox(ProductContentImagesListItemLightbox, null)
 
-    return orderedImageSrcs.map((imageSrc, index) => {
-      return (
-        <ListItemWithHeight
-          key={index}
-          src={imageSrc} />
-      )
+    return orderedSrcs.map((src, index) => {
+      if (this.state.imagesSrcList.indexOf(src) !== -1) {
+        return (
+          <ListItemWithHeight
+            key={index}
+            src={src} />
+        )
+      }
+      if (this.state.videosSrcList.indexOf(src) !== -1) {
+        return (
+          <ProductContentImagesListItemLightbox
+            key={index}
+            src={src}
+            video />
+        )
+      }
     })
   }
 
@@ -116,9 +125,9 @@ class ProductContentImages extends Component {
           style={imageStyle}
           className={style.selectedImageDesktopImage} />
 
-        <SimpleSliderLightbox>
-          {this.renderImagesListLightbox()}
-        </SimpleSliderLightbox>
+        <div
+          style={imageStyle}
+          className={style.selectedImageDesktopImage} />
 
       </Lightbox>
     )
@@ -160,10 +169,10 @@ class ProductContentImages extends Component {
   }
 }
 
-ProductContentImages.propTypes = {
+ProductContentImagesDesktop.propTypes = {
   featuredImageSrc: PropTypes.string,
   images: PropTypes.string.isRequired,
   videos: PropTypes.string
 }
 
-export default ProductContentImages
+export default ProductContentImagesDesktop

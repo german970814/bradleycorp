@@ -6,23 +6,36 @@ import addVideoIdFromSrc from '../addVideoIdFromSrc'
 import style from './YoutubePlayerLightbox.scss'
 
 const YoutubePlayerLightbox = props => {
-  const YoutubeFitLightbox = fitLightbox(YoutubeWithOpts, 0.5625)
+  const YoutubeFitLightbox = fitLightbox(YoutubeWithOpts, 0.5625, props.maxWidth, props.maxWidthTablet)
   const YoutubeVideoID = addVideoIdFromSrc(YoutubeFitLightbox, props.src)
-  const LightboxCloseButton = props.lightboxCloseButton
+
+  if (props.lightboxCloseButton) {
+    const LightboxCloseButton = props.lightboxCloseButton
+
+    return (
+      <div
+        className={style.videoIframeLightbox}>
+        <YoutubeVideoID
+          className={style.videoIframeLightboxContent} />
+        <LightboxCloseButton
+          onClick={props.lightboxCloseButtonOnClick} />
+      </div>
+    )
+  }
 
   return (
     <div
       className={style.videoIframeLightbox}>
       <YoutubeVideoID
         className={style.videoIframeLightboxContent} />
-      <LightboxCloseButton
-        onClick={props.lightboxCloseButtonOnClick} />
     </div>
   )
 }
 
 YoutubePlayerLightbox.propTypes = {
   src: PropTypes.string.isRequired,
+  maxWidth: PropTypes.number,
+  maxWidthTablet: PropTypes.number,
   lightboxCloseButton: PropTypes.func,
   lightboxCloseButtonOnClick: PropTypes.func
 }

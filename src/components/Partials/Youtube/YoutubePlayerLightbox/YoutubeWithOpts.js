@@ -9,7 +9,8 @@ const YoutubeWithOpts = props => {
     playerVars: {
       showinfo: 0,
       modestbranding: 1,
-      controls: 0
+      controls: 0,
+      autoplay: 1
     }
   }
   return <YouTube videoId={props.videoId} opts={opts} />
