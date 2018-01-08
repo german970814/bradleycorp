@@ -1,0 +1,40 @@
+
+$buttonWidth: 11px;
+
+.lightboxContentWrapper {
+  position: relative;
+}
+
+.buttonUp, .buttonDown {
+  height: inherit;
+}
+
+.buttonLeft, .buttonRight {
+  display: inline-block;
+  width: $buttonWidth;
+  height: inherit;
+  cursor: pointer;
+
+  img {
+    vertical-align: middle;
+    width: 100%;
+  }
+}
+
+.wrapper {
+  height: inherit;
+}
+
+.imagesList {
+  display: inline;
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: calc(100% - #{$buttonWidth} - #{$buttonWidth});
+  height: 100%;
+  text-align: center;
+}
+
+.listItem {
+  height: 100%;
+}

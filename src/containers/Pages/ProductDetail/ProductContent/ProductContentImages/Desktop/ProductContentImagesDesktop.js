@@ -4,11 +4,12 @@ import { rotate } from '../../../../../../lib/bcorpArray'
 import fitLightbox from '../../../../../Partials/Lightbox/fitLightbox'
 import VerticalAlignHelper from '../../../../../../components/Partials/VerticalAlignHelper/VerticalAlignHelper'
 import VerticalListItem from './VerticalListItem/VerticalListItem'
-import ProductContentImagesListItemLightbox from '../ProductContentImagesListItemLightbox/ProductContentImagesListItemLightbox'
 import ScrollableList from '../../../../../Partials/ScrollableList/ScrollableList'
 import Lightbox from '../../../../../Partials/Lightbox/Lightbox'
 import ButtonDown from './ButtonDown'
 import ButtonUp from './ButtonUp'
+import SelectedImageLightboxContent from './SelectedImageLightboxContent/SelectedImageLightboxContent'
+import ListItemLightbox from './SelectedImageLightboxContent/ListItemLightbox/ListItemLightbox'
 import style from './ProductContentImagesDesktop.scss'
 
 class ProductContentImagesDesktop extends Component {
@@ -23,7 +24,8 @@ class ProductContentImagesDesktop extends Component {
 
     this.renderSelectedImage = this.renderSelectedImage.bind(this)
     this.setInitState = this.setInitState.bind(this)
-    this.renderList = this.renderList.bind(this)
+    this.renderVerticalList = this.renderVerticalList.bind(this)
+    this.renderImagesListLightbox = this.renderImagesListLightbox.bind(this)
   }
 
   componentDidMount () {
@@ -57,16 +59,34 @@ class ProductContentImagesDesktop extends Component {
     })
   }
 
-  handleImageListItemClick (e, imageSrc) {
-    e.preventDefault()
-
-    this.setState({
+  updateSelectedImage (src) {
+    return this.setState({
       ...this.state,
-      selectedImageSrc: imageSrc
+      selectedImageSrc: src
     })
   }
 
-  renderList () {
+  handleImageListItemClick (e, src) {
+    if (e) {
+      e.preventDefault()
+    }
+
+    return this.updateSelectedImage(src)
+  }
+
+  handleSelectedImageScrollerPositionChange (children) {
+    const displayedChild = children.filter(child => {
+      return child.display
+    })
+
+    const displayedChildSrc = displayedChild[0].component.props.src
+
+    if (displayedChildSrc && this.state.imagesSrcList.includes(displayedChildSrc)) {
+      return this.updateSelectedImage(displayedChildSrc)
+    }
+  }
+
+  renderVerticalList () {
     const imgs = this.state.imagesSrcList.map((imageSrc, index) => {
       return (
         <VerticalListItem
@@ -92,19 +112,17 @@ class ProductContentImagesDesktop extends Component {
     const selectedIndex = combinedSrc.indexOf(this.state.selectedImageSrc)
     const orderedSrcs = rotate(combinedSrc, selectedIndex)
 
-    const ListItemWithHeight = fitLightbox(ProductContentImagesListItemLightbox, null)
-
     return orderedSrcs.map((src, index) => {
       if (this.state.imagesSrcList.indexOf(src) !== -1) {
         return (
-          <ListItemWithHeight
+          <ListItemLightbox
             key={index}
             src={src} />
         )
       }
       if (this.state.videosSrcList.indexOf(src) !== -1) {
         return (
-          <ProductContentImagesListItemLightbox
+          <ListItemLightbox
             key={index}
             src={src}
             video />
@@ -114,6 +132,9 @@ class ProductContentImagesDesktop extends Component {
   }
 
   renderSelectedImage () {
+    const SelectedImageLightboxContentFitted = fitLightbox(SelectedImageLightboxContent)
+    const items = this.renderImagesListLightbox()
+
     const imageStyle = {
       backgroundImage: `url(${this.state.selectedImageSrc})`
     }
@@ -125,9 +146,10 @@ class ProductContentImagesDesktop extends Component {
           style={imageStyle}
           className={style.selectedImageDesktopImage} />
 
-        <div
-          style={imageStyle}
-          className={style.selectedImageDesktopImage} />
+        <SelectedImageLightboxContentFitted
+          onPositionChange={this.handleSelectedImageScrollerPositionChange.bind(this)}
+          items={items} >
+        </SelectedImageLightboxContentFitted>
 
       </Lightbox>
     )
@@ -140,13 +162,11 @@ class ProductContentImagesDesktop extends Component {
         <VerticalAlignHelper />
 
         <div
-          key={2}
           className={style.selectedImageDesktop}>
           {this.renderSelectedImage()}
         </div>
 
         <ScrollableList
-          key={3}
           numberToDisplay={3}
           reverseScroll={true}
           wrapperClassName={style.imagesListWrapperDesktop}
@@ -154,7 +174,7 @@ class ProductContentImagesDesktop extends Component {
           listItemClassName={style.imageListItemDesktop}
           buttonDown={<ButtonDown />}
           buttonUp={<ButtonUp />} >
-          {this.renderList()}
+          {this.renderVerticalList()}
         </ScrollableList>
 
       </React.Fragment>

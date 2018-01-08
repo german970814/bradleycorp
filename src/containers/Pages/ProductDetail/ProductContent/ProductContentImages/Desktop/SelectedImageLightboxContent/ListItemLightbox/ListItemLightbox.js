@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import YoutubePlayerLightbox from '../../../../../../components/Partials/Youtube/YoutubePlayerLightbox/YoutubePlayerLightbox'
-import style from './ProductContentImagesListItemLightbox.scss'
+import YoutubePlayerLightbox from '../../../../../../../../components/Partials/Youtube/YoutubePlayerLightbox/YoutubePlayerLightbox'
+import style from './ListItemLightbox.scss'
 
-class ProductContentImagesListItemLightbox extends Component {
+class ListItemLightbox extends Component {
   renderImage () {
     const imageStyle = {
-      backgroundImage: `url(${this.props.src})`,
-      height: this.props.style.height
+      backgroundImage: `url(${this.props.src})`
     }
 
     return (
@@ -34,7 +33,7 @@ class ProductContentImagesListItemLightbox extends Component {
   }
 }
 
-ProductContentImagesListItemLightbox.propTypes = {
+ListItemLightbox.propTypes = {
   src: PropTypes.string.isRequired,
   style: PropTypes.shape({
     width: PropTypes.number,
@@ -43,4 +42,4 @@ ProductContentImagesListItemLightbox.propTypes = {
   video: PropTypes.bool
 }
 
-export default ProductContentImagesListItemLightbox
+export default ListItemLightbox

@@ -5,9 +5,9 @@ const addVideoIdFromSrc = (YoutubeComponent, src) => {
   return class YoutubeVideoID extends Component {
     render () {
       const videoId = youtubeParser(src)
-      return (
-        <YoutubeComponent videoId={videoId} {...this.props} />
-      )
+      return videoId
+        ? <YoutubeComponent videoId={videoId} {...this.props} />
+        : <YoutubeComponent videoId={''} {...this.props} />
     }
   }
 }
