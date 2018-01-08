@@ -13,6 +13,7 @@ const config = {
 
   output: {
     path: path.join(__dirname, 'build'),
+    publicPath: '/',
     filename: 'bundle.js'
   },
 
@@ -65,6 +66,7 @@ const config = {
     }),
     new ExtractTextPlugin({
       filename: 'main.css',
+      publicPath: '/',
       allChunks: true,
       ignoreOrder: true,
     }),
@@ -73,7 +75,12 @@ const config = {
   devtool: 'source-map',
 
   devServer: {
-    historyApiFallback: true,
+    historyApiFallback: {
+      rewrites: [
+        { from: /!(css|js|map|png|ico|jpg|woff|woff2|ttf)$/, to: '/index.html' },
+        { from: /\/assets\/(.*)$/, to: '/assets/$1' },
+      ]
+    },
   }
 }
 
