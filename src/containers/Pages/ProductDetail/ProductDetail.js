@@ -31,6 +31,7 @@ class ProductDetail extends Component {
   }
 
   render () {
+    console.log( this.state.productDetail );
     return (
       <div
         className={style.productDetailPage}>
