@@ -33,24 +33,17 @@ $listItemPadding: 10px;
   padding: 10px;
   width: calc(50% - #{$listItemPadding}*2);
   text-align: center;
-
-  @include respond-to(tablet) {
-    width: calc(100% / 3 - #{$listItemPadding}*2);
-  }
-
-  @include respond-to(desktop) {
-    width: calc(20% - #{$listItemPadding}*2);
-  }
 }
 
-.buttonUpContainer, .buttonDownContainer {
+.buttonsSidesContainer {
   float: none;
+  display: inline-block;
+  width: 11px;
+  height: 100%;
+}
 
-  @include respond-to(tablet) {
-    display: inline-block;
-    width: 11px;
-    height: 100%;
-  }
+.buttonsBelowContainer {
+  float: none;
 }
 
 .buttonsBelow {
@@ -120,6 +113,14 @@ $arrowWidthTablet: 11px;
   @extend %100WidthMinusBodyPaddingWithMediaQueries;
 }
 
+.leftButton, .rightButton {
+  width: 100%;
+
+  img {
+    width: 100%;
+  }
+}
+
 .sliderUlTablet {
   display: inline-block;
   vertical-align: middle;
@@ -130,10 +131,18 @@ $arrowWidthTablet: 11px;
   text-align: center;
 }
 
-.leftButton, .rightButton {
-  width: 100%;
+.listItemTablet {
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px;
+  width: calc(100% / 3 - #{$listItemPadding}*2);
+  text-align: center;
+}
 
-  img {
-    width: 100%;
-  }
+.listItemDesktop {
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px;
+  width: calc(20% - #{$listItemPadding}*2);
+  text-align: center;
 }

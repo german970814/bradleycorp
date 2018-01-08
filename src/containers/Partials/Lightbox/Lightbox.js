@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import VerticalAlignHelper from '../../../components/Partials/VerticalAlignHelper/VerticalAlignHelper'
+import LightboxCloseButton from './LightboxCloseButton'
 import style from './Lightbox.scss'
 
 class Lightbox extends Component {
@@ -31,15 +33,37 @@ class Lightbox extends Component {
     })
   }
 
-  getLightboxContent () {
-    const children = React.Children.toArray(this.props.children)
-    return children[children.length - 1]
+  getChildrenWithLightboxApi () {
+    return React.Children.map(this.props.children, child => {
+      return React.cloneElement(child, {
+        onClick: this.toggleOpen.bind(this)
+      })
+    })
   }
 
-  getChildrenWithLightboxContentRemoved () {
-    const children = React.Children.toArray(this.props.children)
+  renderChildrenWithLightboxContentRemoved () {
+    const childrenWithLightboxApi = this.getChildrenWithLightboxApi()
+    const children = React.Children.toArray(childrenWithLightboxApi)
+
+    if (children.length === 1) {
+      return children
+    }
     children.pop()
     return children
+  }
+
+  getLightboxContent () {
+    const childrenWithLightboxSize = React.Children.map(this.props.children, child => {
+      return React.cloneElement(child, {
+        // give the child the button to close the lightbox
+        lightboxCloseButton: LightboxCloseButton,
+        lightboxCloseButtonOnClick: this.closeLightbox.bind(this)
+      })
+    })
+
+    const children = React.Children.toArray(childrenWithLightboxSize)
+    // takes last child as lightbox content
+    return children[children.length - 1]
   }
 
   renderLightbox () {
@@ -47,17 +71,10 @@ class Lightbox extends Component {
       return (
         <div
           className={[style.background, this.props.backgroundClass].join(' ')} >
-          <span className={style.vAlignHelper}/>
+          <VerticalAlignHelper />
           <div
-            className={[style.lightbox, this.props.lightboxClass].join(' ')} >
+            className={style.lightbox} >
             {this.getLightboxContent()}
-            <div
-              className={style.closeButtonWrapper}
-              onClick={this.closeLightbox} >
-              <img
-                className={style.closeButton}
-                src={require('../../../images/icon-close/icon-close@2x.png')} />
-            </div>
           </div>
         </div>
       )
@@ -67,9 +84,8 @@ class Lightbox extends Component {
   render () {
     return (
       <div
-        className={style.childWrapper}
-        onClick={this.toggleOpen.bind(this)}>
-        {this.getChildrenWithLightboxContentRemoved()}
+        className={style.childWrapper} >
+        {this.renderChildrenWithLightboxContentRemoved()}
         {this.renderLightbox()}
       </div>
     )
@@ -79,7 +95,8 @@ class Lightbox extends Component {
 Lightbox.propTypes = {
   children: PropTypes.node.isRequired,
   backgroundClass: PropTypes.string,
-  lightboxClass: PropTypes.string
+  closeButton: PropTypes.func,
+  closeButtonOnClick: PropTypes.func
 }
 
 export default Lightbox

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import Media from 'react-media'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../globals'
 import ScrollableList from '../ScrollableList/ScrollableList'
-import ProductScrollerProduct from '../ProductScroller/ProductScrollerProduct/ProductScrollerProduct'
 import ButtonNext from './ButtonNext'
 import ButtonPrev from './ButtonPrev'
 import ButtonLeft from './ButtonLeft'
@@ -18,7 +17,8 @@ class SimpleSlider extends Component {
   }
 
   renderTitle () {
-    if (this.props.title !== undefined) {
+    if (this.props.title !== undefined &&
+    this.props.title !== '') {
       return (
         <h2
           className={style.title} >
@@ -30,15 +30,20 @@ class SimpleSlider extends Component {
 
   render () {
     const buttonUpMobile = this.props.nextPrevButtonsForMobile
-    ? <ButtonPrev />
-    : <ButtonLeft />
+      ? <ButtonPrev />
+      : <ButtonLeft />
 
-  const buttonDownMobile = this.props.nextPrevButtonsForMobile
-    ? <ButtonNext />
-    : <ButtonRight />
+    const buttonDownMobile = this.props.nextPrevButtonsForMobile
+      ? <ButtonNext />
+      : <ButtonRight />
+
+    const buttonClassMobile = this.props.nextPrevButtonsForMobile
+      ? style.buttonsBelowContainer
+      : style.buttonsSidesContainer
 
     return (
-      <div>
+      <React.Fragment>
+
         {this.renderTitle()}
 
         <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
@@ -50,11 +55,11 @@ class SimpleSlider extends Component {
                 buttonUp={buttonUpMobile}
                 buttonDown={buttonDownMobile}
                 positionButtonsBelow={this.props.nextPrevButtonsForMobile}
-                reverseScroll={true}
-                ulClassName={style.sliderUl}
-                listItemClassName={style.listItem}
-                buttonUpContainerClassName={style.buttonUpContainer}
-                buttonDownContainerClassName={style.buttonDownContainer}
+                reverseScroll={this.props.reverseScroll}
+                ulClassName={[style.sliderUlTablet, this.props.ulClassName].join(' ')}
+                listItemClassName={[style.listItem, this.props.listItemClassName].join(' ')}
+                buttonUpContainerClassName={buttonClassMobile}
+                buttonDownContainerClassName={buttonClassMobile}
                 buttonsBelowClassName={style.buttonsBelow} >
                 {this.props.children}
               </ScrollableList>
@@ -68,12 +73,12 @@ class SimpleSlider extends Component {
                       buttonUp={<ButtonLeft />}
                       buttonDown={<ButtonRight />}
                       positionButtonsBelow={false}
-                      reverseScroll={true}
-                      wrapperClassName={style.sliderTabletDesktop}
-                      ulClassName={style.sliderUlTablet}
-                      listItemClassName={style.listItem}
-                      buttonUpContainerClassName={style.buttonUpContainer}
-                      buttonDownContainerClassName={style.buttonDownContainer}
+                      reverseScroll={this.props.reverseScroll}
+                      wrapperClassName={[style.sliderTabletDesktop, this.props.desktopWrapperClassName].join(' ')}
+                      ulClassName={[style.sliderUlTablet, this.props.ulClassName].join(' ')}
+                      listItemClassName={[style.listItemDesktop, this.props.listItemClassName].join(' ')}
+                      buttonUpContainerClassName={style.buttonsSidesContainer}
+                      buttonDownContainerClassName={style.buttonsSidesContainer}
                       buttonsBelowClassName={style.buttonsBelow} >
                       {this.props.children}
                     </ScrollableList>
@@ -84,12 +89,12 @@ class SimpleSlider extends Component {
                       buttonUp={<ButtonLeft />}
                       buttonDown={<ButtonRight />}
                       positionButtonsBelow={false}
-                      reverseScroll={true}
-                      wrapperClassName={style.sliderTabletDesktop}
-                      ulClassName={style.sliderUlTablet}
-                      listItemClassName={style.listItem}
-                      buttonUpContainerClassName={style.buttonUpContainer}
-                      buttonDownContainerClassName={style.buttonDownContainer}
+                      reverseScroll={this.props.reverseScroll}
+                      wrapperClassName={[style.sliderTabletDesktop, this.props.desktopWrapperClassName].join(' ')}
+                      ulClassName={[style.sliderUlTablet, this.props.ulClassName].join(' ')}
+                      listItemClassName={[style.listItemTablet, this.props.listItemClassName].join(' ')}
+                      buttonUpContainerClassName={style.buttonsSidesContainer}
+                      buttonDownContainerClassName={style.buttonsSidesContainer}
                       buttonsBelowClassName={style.buttonsBelow} >
                       {this.props.children}
                     </ScrollableList>
@@ -100,7 +105,7 @@ class SimpleSlider extends Component {
           }
         </Media>
 
-      </div>
+      </React.Fragment>
     )
   }
 }
@@ -109,12 +114,16 @@ SimpleSlider.propTypes = {
   title: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.object.isRequired,
-    PropTypes.array.isRequired,
+    PropTypes.array.isRequired
   ]),
   numberMobile: PropTypes.number.isRequired,
   numberTablet: PropTypes.number.isRequired,
   numberDesktop: PropTypes.number.isRequired,
-  nextPrevButtonsForMobile: PropTypes.bool.isRequired
+  nextPrevButtonsForMobile: PropTypes.bool,
+  reverseScroll: PropTypes.bool,
+  desktopWrapperClassName: PropTypes.string,
+  ulClassName: PropTypes.string,
+  listItemClassName: PropTypes.string
 }
 
 export default SimpleSlider

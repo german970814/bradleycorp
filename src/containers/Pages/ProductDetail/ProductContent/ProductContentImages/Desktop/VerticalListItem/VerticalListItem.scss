@@ -1,0 +1,12 @@
+@import "../../../../../../../scss/partials/helpers";
+
+.listItem {
+  @extend %fitBackground;
+}
+
+$videoIconWidth: 51px;
+
+.listItemVideo {
+  @extend %fitBackground;
+  margin: 0 calc((100% - #{$videoIconWidth})/2);
+}

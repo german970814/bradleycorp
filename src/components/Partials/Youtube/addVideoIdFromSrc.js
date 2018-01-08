@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { youtubeParser } from '../../../lib/bcorpUrl'
 
-const addVideoIdFromSrc = (YoutubeComponent, src, openLightbox) => {
-  return class YoutubeThumbnail extends Component {
+const addVideoIdFromSrc = (YoutubeComponent, src) => {
+  return class YoutubeVideoID extends Component {
     render () {
       const videoId = youtubeParser(src)
       return (

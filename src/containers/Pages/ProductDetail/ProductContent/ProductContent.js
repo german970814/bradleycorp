@@ -4,8 +4,8 @@ import Media from 'react-media'
 import { TABLETMAXWIDTH } from '../../../../globals'
 import { isNew } from '../../../../lib/bcorpProduct'
 import ProductContentText from './ProductContentText/ProductContentText'
-import ProductContentImages from './ProductContentImages/ProductContentImages'
-import ProductContentImagesDesktop from './ProductContentImages/ProductContentImagesDesktop'
+import ProductContentImages from './ProductContentImages/MobileTablet/ProductContentImagesMobileTablet'
+import ProductContentImagesDesktop from './ProductContentImages/Desktop/ProductContentImagesDesktop'
 import style from './ProductContent.scss'
 
 class ProductContent extends Component {
@@ -100,15 +100,16 @@ class ProductContent extends Component {
             {this.props.title}</h1>
 
           <ProductContentText
-            content = {this.props.content} />
+            content={this.props.content} />
           {this.renderAwards()}
 
         </div>
         <div
           className={style.imageSelectorDesktop}>
           <ProductContentImagesDesktop
-            featuredImageSrc= {this.props.featuredImageSrc}
-            images = {this.props.images} />
+            featuredImageSrc={this.props.featuredImageSrc}
+            images={this.props.images}
+            videos={this.props.videos} />
         </div>
         <div
           className={style.ctaButtons} >
@@ -134,12 +135,13 @@ class ProductContent extends Component {
           <div
             className={style.imageSelector}>
             <ProductContentImages
-              featuredImageSrc= {this.props.featuredImageSrc}
-              images = {this.props.images} />
+              featuredImageSrc={this.props.featuredImageSrc}
+              images={this.props.images}
+              videos={this.props.videos} />
           </div>
 
           <ProductContentText
-            content = {this.props.content} />
+            content={this.props.content} />
 
           {this.renderAwards()}
           <div
@@ -173,6 +175,7 @@ ProductContent.propTypes = {
   content: PropTypes.string,
   featuredImageSrc: PropTypes.string,
   images: PropTypes.string,
+  videos: PropTypes.string,
   newUntil: PropTypes.string,
   awards: PropTypes.array,
   sku: PropTypes.string,

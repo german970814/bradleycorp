@@ -2,10 +2,11 @@
 @import "../../../scss/partials/mixins";
 
 $closeButtonHeight: 32px;
-
-.vAlignHelper {
-  @extend %vAlignHelper;
-}
+$closeButtonDistanceBelow: 40px;
+$lightboxWidth: 85; // percentage
+$lightboxWidthTabletDesktop: 62; // percentage
+$lightboxHeight: 85; // percentage
+$lightboxHeightPerc: $lightboxHeight + %;
 
 .childWrapper {
   z-index: 100;
@@ -17,15 +18,15 @@ $closeButtonHeight: 32px;
   top: 0;
   left: 0;
   z-index: 1001;
-  padding: 0 7.5%;
-  width: 85%;
+  padding: 0 ((100 - $lightboxWidth)/2 + %);
+  width: $lightboxWidth + %;
   height: 100%;
   background-color: rgba(0,0,0,0.8);
   text-align: left;
 
   @include respond-to(tablet) {
-    padding: 0 19%;
-    width: 62%;
+    padding: 0 ((100 - $lightboxWidthTabletDesktop)/2 + %);
+    width: $lightboxWidthTabletDesktop + %;
     text-align: center;
   }
 }
@@ -35,13 +36,15 @@ $closeButtonHeight: 32px;
   display: inline-block;
   vertical-align: middle;
   margin: 0 auto;
-  max-height: 80%;
+  width: 100%;
+  height: 100%;
+  max-height: calc(#{$lightboxHeight + %} - #{$closeButtonHeight}*2 - #{$closeButtonDistanceBelow});
   text-align: center;
 }
 
 .closeButtonWrapper {
   position: absolute;
-  bottom: -($closeButtonHeight + 40px);
+  bottom: -($closeButtonHeight + $closeButtonDistanceBelow);
   width: 100%;
 }
 
@@ -49,4 +52,12 @@ $closeButtonHeight: 32px;
   margin: 0 auto;
   width: $closeButtonHeight;
   height: $closeButtonHeight;
+}
+
+:export {
+  LightboxHeight: $lightboxHeight;
+  LightboxWidth: $lightboxWidth;
+  LightboxWidthTabletDesktop: $lightboxWidthTabletDesktop;
+  LightboxCloseButtonHeight: $closeButtonHeight;
+  LightboxCloseButtonDistanceBelow: $closeButtonDistanceBelow;
 }
