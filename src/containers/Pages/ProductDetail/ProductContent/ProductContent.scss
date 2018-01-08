@@ -81,6 +81,7 @@ $productDetailBtnTabletGap: 16px;
   font-weight: bold;
   letter-spacing: 0.5px;
   text-align: center;
+  cursor: pointer;
 
   @include respond-to(tablet) {
     width: calc(50% - #{$productDetailBtnTabletGap}/2);

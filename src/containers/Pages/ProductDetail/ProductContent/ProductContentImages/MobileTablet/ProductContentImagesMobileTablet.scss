@@ -9,6 +9,7 @@ $tablet-height: 428px;
   display: inline-block;
   width: $buttonWidth;
   height: $height;
+  cursor: pointer;
 
   img {
     vertical-align: middle;
@@ -43,6 +44,7 @@ $tablet-height: 428px;
 
 .imageDiv {
   margin: 0 10%;
+  cursor: pointer;
 }
 
 .videoListItem {
