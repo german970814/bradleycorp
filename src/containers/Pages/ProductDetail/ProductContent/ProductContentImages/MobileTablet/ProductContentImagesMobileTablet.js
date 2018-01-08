@@ -39,7 +39,8 @@ class ProductContentImages extends Component {
       )
     })
 
-    const videos = this.props.videos.split(',').map((videoSrc, index) => {
+    const videos = (this.props.videos && this.props.videos.length)
+    ? this.props.videos.split(',').map((videoSrc, index) => {
       const videoStyle = {
         backgroundImage: `url(${require('../../../../../../images/icon-video/icon-video@3x.png')})`
       }
@@ -59,6 +60,7 @@ class ProductContentImages extends Component {
         </React.Fragment>
       )
     })
+    : [];
 
     return [...images, ...videos]
   }
