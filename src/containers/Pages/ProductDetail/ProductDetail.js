@@ -41,11 +41,17 @@ class ProductDetail extends Component {
             title={this.state.productDetail.product.post['post_title']}
             content={this.state.productDetail.product.post['post_content']}
             featuredImageSrc={this.state.productDetail.product.media['featured_image'][0]}
-            images={this.state.productDetail.product.meta['product_media'].images[0]}
-            videos={this.state.productDetail.product.meta['product_media'].videos}
+            images={(this.state.productDetail.product.meta['product_media'])
+              ? this.state.productDetail.product.meta['product_media'].images[0]
+              : ''}
+            videos={(this.state.productDetail.product.meta['product_media'])
+              ? this.state.productDetail.product.meta['product_media'].videos
+              : ''}
             newUntil={this.state.productDetail.product.meta['product_new_until']}
             sku={this.state.productDetail.product.meta['product_sku']}
-            awards={this.state.productDetail.product.meta['product_awards']}
+            awards={(this.state.productDetail.product.meta['product_awards'])
+              ? this.state.productDetail.product.meta['product_awards']
+              : []}
             cta={this.state.productDetail.product.meta['product_cta']} />
         </section>
 
