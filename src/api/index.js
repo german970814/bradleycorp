@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const api = {}
 
-api.host = `http://bradleydev.twoxfour.com` // `http://bradley.test`
+api.host = `http://bradleydev.twoxfour.com`//`http://bradley.test`
 api.namespace = `bcorp/v1/`
 api.baseURL = `${api.host}/index.php/wp-json/${api.namespace}`
 api.queryRoute = `wp-query`
