@@ -23,7 +23,7 @@ class NavMenu extends Component {
   }
 
   render () {
-    console.log( this.props.menuItems )
+    console.log(this.props.menuItems)
     return (
       <ul className={style.navMenu}
       >

@@ -9,6 +9,12 @@ class ScrollableListOpensInLightbox extends ScrollableList {
   // NOTE: pass as children a React.Fragment element with two children
   // first child is to be displayed normally, second is to be displayed in lightbox
 
+  constructor (props) {
+    super(props)
+
+    this.renderChildren = this.renderChildren.bind(this)
+  }
+
   renderButtonUpLightbox () {
     if (!this.props.positionButtonsBelow) {
       return this.buttonUpLightbox()

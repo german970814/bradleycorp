@@ -25,11 +25,13 @@ class ProductContentImages extends Component {
         <React.Fragment
           key={index} >
 
+          {/* display in scroller */}
           <div
             src={imageSrc}
             style={imageStyle}
             className={[style.imageDiv, style.fitBackground].join(' ')} />
 
+          {/* display in lightbox scroller */}
           <div
             src={imageSrc}
             style={imageStyle}
@@ -40,27 +42,29 @@ class ProductContentImages extends Component {
     })
 
     const videos = (this.props.videos && this.props.videos.length)
-    ? this.props.videos.split(',').map((videoSrc, index) => {
-      const videoStyle = {
-        backgroundImage: `url(${require('../../../../../../images/icon-video/icon-video@3x.png')})`
-      }
-      return (
-        <React.Fragment
-          key={`video_${index}`}>
+      ? this.props.videos.split(',').map((videoSrc, index) => {
+        const videoStyle = {
+          backgroundImage: `url(${require('../../../../../../images/icon-video/icon-video@3x.png')})`
+        }
+        return (
+          <React.Fragment
+            key={`video_${index}`}>
 
-          <div
-            style={videoStyle}
-            className={[style.videoListItem, style.fitBackground].join(' ')} />
+            {/* display in scroller */}
+            <div
+              style={videoStyle}
+              className={[style.videoListItem, style.fitBackground].join(' ')} />
 
-          <YoutubePlayerLightbox
-            src={videoSrc}
-            maxWidth={0.8}
-            maxWidthTablet={0.8} />
+            {/* display in lightbox scroller */}
+            <YoutubePlayerLightbox
+              src={videoSrc}
+              maxWidth={0.8}
+              maxWidthTablet={0.8} />
 
-        </React.Fragment>
-      )
-    })
-    : [];
+          </React.Fragment>
+        )
+      })
+      : []
 
     return [...images, ...videos]
   }
