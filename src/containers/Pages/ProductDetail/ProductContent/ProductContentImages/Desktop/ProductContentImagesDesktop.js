@@ -40,8 +40,12 @@ class ProductContentImagesDesktop extends Component {
   }
 
   setInitState (props) {
-    const videosSrcList = props.videos.split(',')
-    const imageSrcs = props.images.split(',')
+    const videosSrcList = (props.videos && props.videos.length)
+      ? props.videos.split(',')
+      : []
+    const imageSrcs = (props.images && props.images.length)
+      ? props.images.split(',')
+      : []
 
     if (props.featuredImageSrc) {
       const imagesSrcList = this.withFeaturedImage(props, imageSrcs)
