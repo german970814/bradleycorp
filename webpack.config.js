@@ -78,7 +78,6 @@ const config = {
     historyApiFallback: {
       rewrites: [
         { from: /!(css|js|map|png|ico|jpg|woff|woff2|ttf)$/, to: '/index.html' },
-        { from: /\/assets\/(.*)$/, to: '/assets/$1' },
       ]
     },
   }
