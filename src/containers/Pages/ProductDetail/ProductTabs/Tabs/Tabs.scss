@@ -2,6 +2,8 @@
 @import "../../../../../scss/partials/variables";
 @import "../../../../../scss/partials/mixins";
 
+$titleMarginBottom: 35px;
+
 %allCols {
   display: inline-block;
   vertical-align: top;
@@ -45,7 +47,7 @@
 .tabColTitle {
   @extend %h5-desktop;
   margin-top: 0;
-  margin-bottom: 35px;
+  margin-bottom: $titleMarginBottom;
   color: #2f3d70;
 }
 

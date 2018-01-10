@@ -1,3 +1,18 @@
-.tabDesign {
+@import "../Tabs";
 
+$marginTopLiterature: 20px;
+
+.literature {
+  display: inline-block;
+  vertical-align: top;
+  width: 89px;
+  margin: $marginTopLiterature 10px 0px 10px;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+.literatureTitle {
+  margin-bottom: $titleMarginBottom - $marginTopLiterature;
 }

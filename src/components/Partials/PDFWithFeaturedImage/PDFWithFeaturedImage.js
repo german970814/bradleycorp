@@ -3,14 +3,21 @@ import PropTypes from 'prop-types'
 import style from './PDFWithFeaturedImage.scss'
 
 const PDFWithFeaturedImage = props => {
-  return (
-    <div
-      className={style.pdfWithFeaturedImage}>
 
+  const imageContainer = props.imageSrc
+    ? (
       <div
         className={style.imageContainer} >
         <img src={props.imageSrc} />
       </div>
+    )
+    : null
+
+  return (
+    <div
+      className={style.pdfWithFeaturedImage}>
+
+      {imageContainer}
 
       <div
         className={`${style.title} ${props.titleClassName}`} >

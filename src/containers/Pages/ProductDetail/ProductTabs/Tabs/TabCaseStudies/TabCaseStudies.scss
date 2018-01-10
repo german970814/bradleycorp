@@ -1,11 +1,15 @@
+@import "../Tabs";
+
+$designMarginTop: 20px;
+
 .colTitle {
-  margin-bottom: 15px;
+  margin-bottom: $titleMarginBottom - $designMarginTop;
 }
 
 .caseStudy {
   display: inline-block;
   width: 126px;
-  margin: 20px 10px 0px 10px;
+  margin: $designMarginTop 10px 0px 10px;
 
   &:first-child {
     margin-left: 0;
