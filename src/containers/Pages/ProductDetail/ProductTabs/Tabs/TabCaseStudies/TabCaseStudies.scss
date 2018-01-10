@@ -1,3 +1,13 @@
-.tabCaseStudies {
+.colTitle {
+  margin-bottom: 15px;
+}
 
+.caseStudy {
+  display: inline-block;
+  width: 126px;
+  margin: 20px 10px 0px 10px;
+
+  &:first-child {
+    margin-left: 0;
+  }
 }
