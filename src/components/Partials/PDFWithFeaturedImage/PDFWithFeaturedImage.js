@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import style from './PDFWithFeaturedImage.scss'
 
 const PDFWithFeaturedImage = props => {
-
   const imageContainer = props.imageSrc
     ? (
       <div

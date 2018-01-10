@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import PDFWithFeaturedImage from '../../../../../../components/Partials/PDFWithFeaturedImage/PDFWithFeaturedImage'
 import renderVideoThumbnail from '../renderVideoThumbnail'
 import ArrowThumbnail from '../../../../../../components/Partials/ArrowThumbnail/ArrowThumbnail'
-import FileDownloadLink from '../../../../../../components/Partials/FileDownloadLink/FileDownloadLink'
 import tabStyle from '../Tabs.scss'
 import style from './TabDesign.scss'
 

@@ -13,10 +13,13 @@ class TabWarranty extends Component {
   renderWarranty () {
     return this.props.warranty.map((warranty, index) => {
       return (
-        <li
-          key={index} >
-          {warranty.post['post_title']}
-        </li>
+        <div
+          key={index}
+          className={style.warranty} >
+
+          <div
+            dangerouslySetInnerHTML={{__html: warranty.post['post_content']}} />
+        </div>
       )
     })
   }
@@ -26,13 +29,10 @@ class TabWarranty extends Component {
       <div
         className={[style.tabWarranty, tabStyle.fullWidthColDesktopTab].join(' ')}>
         <h5
-          className={tabStyle.tabColTitle} >
+          className={`${tabStyle.tabColTitle} ${style.title}`} >
           {'Warranty'}
         </h5>
-        <ul
-          className={tabStyle.tabColUl} >
-          {this.renderWarranty()}
-        </ul>
+        {this.renderWarranty()}
       </div>
     )
   }
