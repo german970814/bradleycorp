@@ -9,7 +9,6 @@ import TabsDesktop from '../../../Partials/Tabs/Tabs/TabsDesktop'
 import style from './ProductTabs.scss'
 
 class ProductTabs extends Component {
-
   getTabs () {
     try {
       const tabs = getTheTabs(this.props.tabsData)

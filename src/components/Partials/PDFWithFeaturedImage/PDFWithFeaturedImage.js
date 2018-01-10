@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import style from './PDFWithFeaturedImage.scss'
 
 const PDFWithFeaturedImage = props => {
-
   return (
     <div
       className={style.pdfWithFeaturedImage}>
@@ -25,7 +24,7 @@ const PDFWithFeaturedImage = props => {
 PDFWithFeaturedImage.propTypes = {
   title: PropTypes.string,
   imageSrc: PropTypes.string,
-  titleClassName: PropTypes.string,
+  titleClassName: PropTypes.string
 }
 
 export default PDFWithFeaturedImage

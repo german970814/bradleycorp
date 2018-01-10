@@ -14,37 +14,18 @@ class TabCaseStudies extends Component {
   renderCaseStudies () {
     return this.props.caseStudies.map((caseStudy, index) => {
       return (
-        <React.Fragment>
+        <li
+          key={index}
+          className={style.caseStudy} >
 
+          <a href={caseStudy.meta['case_study_pdf']}>
+            <PDFWithFeaturedImage
+              title={caseStudy.post['post_title']}
+              imageSrc={caseStudy.media['featured_image'][0]}
+              titleClassName={tabStyle.tabTextOrange} />
+          </a>
 
-          <li
-            key={index}
-            className={style.caseStudy} >
-
-            <a href={caseStudy.meta['case_study_pdf']}>
-              <PDFWithFeaturedImage
-                title={caseStudy.post['post_title']}
-                imageSrc={caseStudy.media['featured_image'][0]}
-                titleClassName={tabStyle.tabTextOrange} />
-            </a>
-
-          </li>
-
-          <li
-            key={index}
-            className={style.caseStudy} >
-
-            <a href={caseStudy.meta['case_study_pdf']}>
-              <PDFWithFeaturedImage
-                title={caseStudy.post['post_title']}
-                imageSrc={caseStudy.media['featured_image'][0]}
-                titleClassName={tabStyle.tabTextOrange} />
-            </a>
-
-          </li>
-
-        </React.Fragment>
-
+        </li>
       )
     })
   }
