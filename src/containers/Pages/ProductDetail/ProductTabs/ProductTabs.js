@@ -9,19 +9,14 @@ import TabsDesktop from '../../../Partials/Tabs/Tabs/TabsDesktop'
 import style from './ProductTabs.scss'
 
 class ProductTabs extends Component {
-  constructor (props) {
-    super(props)
 
-    this.state = {
-      tabs: []
-    }
-
-    this.updateTabs = this.updateTabs.bind(this)
-  }
-
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.productID !== this.props.productID) {
-      this.updateTabs(nextProps.tabsData)
+  getTabs () {
+    try {
+      const tabs = getTheTabs(this.props.tabsData)
+      return tabs
+    } catch (err) {
+      console.log(new ProductDetailTabsException(err))
+      return []
     }
   }
 
@@ -36,7 +31,7 @@ class ProductTabs extends Component {
               activeTabClassName={style.activeTabContent}
               tabClassName={style.productDetailTabs}
               tabsUlClassName={style.productDetailTabsUl} >
-              {this.state.tabs}
+              {this.getTabs()}
             </Tabs>
           ) : (
             <TabsDesktop
@@ -45,22 +40,12 @@ class ProductTabs extends Component {
               activeTabClassName={style.activeTabContentDesktop}
               tabClassName={style.productDetailTabsDesktop}
               tabsUlClassName={style.productDetailTabsUlDesktop} >
-              {this.state.tabs}
+              {this.getTabs()}
             </TabsDesktop>
           )
         }
       </Media>
     )
-  }
-
-  updateTabs (tabsData) {
-    try {
-      const tabs = getTheTabs(tabsData)
-      return this.setState({ tabs })
-    } catch (err) {
-      console.log(new ProductDetailTabsException(err))
-      this.setState({ tabs: [] })
-    }
   }
 }
 
