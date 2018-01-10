@@ -17,7 +17,26 @@ class TabDesign extends Component {
     this.renderColors = this.renderColors.bind(this)
   }
 
-  renderLinks () {
+  getColumnWidth () {
+    let count = 0
+    const propsArray = [this.props.links, this.props.videos, this.props.literature]
+    propsArray.forEach(prop => {
+      if (prop.length) {
+        count++
+      }
+    })
+
+    switch(count) {
+      case 1:
+        return tabStyle.fullWidthColDesktopTab
+      case 2:
+        return tabStyle.halfWidthColDesktopTab
+      case 3:
+        return tabStyle.thirdWidthColDesktopTab
+    }
+  }
+
+  renderLinksList () {
     return this.props.links.map((link, index) => {
       if (!link.text) {
         return
@@ -39,7 +58,25 @@ class TabDesign extends Component {
     })
   }
 
-  renderVideos () {
+  renderLinks () {
+    if (this.props.links.length) {
+      return (
+        <div
+          className={this.getColumnWidth()} >
+          <h5
+            className={tabStyle.tabColTitle} >
+            {'Links'}
+          </h5>
+          <ul
+            className={tabStyle.tabColUl} >
+            {this.renderLinksList()}
+          </ul>
+        </div>
+      )
+    }
+  }
+
+  renderVideosList () {
     return this.props.videos.map((video, index) => {
       return (
         <li
@@ -50,7 +87,25 @@ class TabDesign extends Component {
     })
   }
 
-  renderLiterature () {
+  renderVideos () {
+    if (this.props.videos.length) {
+      return (
+        <div
+          className={this.getColumnWidth()} >
+          <h5
+            className={tabStyle.tabColTitle} >
+            {'Videos'}
+          </h5>
+          <ul
+            className={tabStyle.tabColUl} >
+            {this.renderVideosList()}
+          </ul>
+        </div>
+      )
+    }
+  }
+
+  renderLiteratureList () {
     return this.props.literature.map((literature, index) => {
       const imageSrc = literature.media['featured_image'] && literature.media['featured_image'].length
         ? literature.media['featured_image'][0]
@@ -72,15 +127,52 @@ class TabDesign extends Component {
     })
   }
 
-  renderColors () {
+  renderLiterature () {
+    if (this.props.literature.length) {
+      return (
+        <div
+          className={this.getColumnWidth()} >
+          <h5
+            className={`${tabStyle.tabColTitle} ${style.literatureTitle}`} >
+            {'Literature'}
+          </h5>
+          <ul
+            className={tabStyle.tabColUl} >
+            {this.renderLiteratureList()}
+          </ul>
+        </div>
+      )
+    }
+  }
+
+  renderColorsList () {
     return this.props.colors.map((color, index) => {
       return (
         <li
-          key={index} >
+          key={index}
+          className={style.color} >
           {color.post['post_title']}
         </li>
       )
     })
+  }
+
+  renderColors () {
+    if (this.props.colors.length) {
+      return (
+        <div
+          className={tabStyle.fullWidthColDesktopTab} >
+          <h5
+            className={tabStyle.tabColTitle} >
+            {'Colors'}
+          </h5>
+          <ul
+            className={tabStyle.tabColUl} >
+            {this.renderColorsList()}
+          </ul>
+        </div>
+      )
+    }
   }
 
   render () {
@@ -88,41 +180,13 @@ class TabDesign extends Component {
       <div
         className={style.tabDesign} >
 
-        <div
-          className={tabStyle.thirdWidthColDesktopTab} >
-          <h5
-            className={tabStyle.tabColTitle} >
-            {'Links'}
-          </h5>
-          <ul
-            className={tabStyle.tabColUl} >
-            {this.renderLinks()}
-          </ul>
-        </div>
+        {this.renderLinks()}
 
-        <div
-          className={tabStyle.thirdWidthColDesktopTab} >
-          <h5
-            className={tabStyle.tabColTitle} >
-            {'Videos'}
-          </h5>
-          <ul
-            className={tabStyle.tabColUl} >
-            {this.renderVideos()}
-          </ul>
-        </div>
+        {this.renderVideos()}
 
-        <div
-          className={tabStyle.thirdWidthColDesktopTab} >
-          <h5
-            className={`${tabStyle.tabColTitle} ${style.literatureTitle}`} >
-            {'Literature'}
-          </h5>
-          <ul
-            className={tabStyle.tabColUl} >
-            {this.renderLiterature()}
-          </ul>
-        </div>
+        {this.renderLiterature()}
+
+        {this.renderColors()}
 
       </div>
     )

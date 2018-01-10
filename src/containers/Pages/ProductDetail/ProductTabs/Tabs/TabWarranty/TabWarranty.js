@@ -27,7 +27,7 @@ class TabWarranty extends Component {
   render () {
     return (
       <div
-        className={[style.tabWarranty, tabStyle.fullWidthColDesktopTab].join(' ')}>
+        className={`${style.tabWarranty} ${tabStyle.fullWidthColDesktopTab}`}>
         <h5
           className={`${tabStyle.tabColTitle} ${style.title}`} >
           {'Warranty'}

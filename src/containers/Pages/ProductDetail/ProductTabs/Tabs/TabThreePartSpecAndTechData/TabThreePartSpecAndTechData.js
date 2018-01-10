@@ -12,7 +12,13 @@ class TabThreePartSpecAndTechData extends Component {
     this.renderTechnicalData = this.renderTechnicalData.bind(this)
   }
 
-  renderThreePartSpec () {
+  getColumnWidth () {
+    return this.props.threePartSpec.length && this.props.technicalData.length
+      ? tabStyle.halfWidthColDesktopTab
+      : tabStyle.fullWidthColDesktopTab
+  }
+
+  renderThreePartSpecList () {
     return this.props.threePartSpec.map((threePartSpec, index) => {
       return (
         <li
@@ -27,7 +33,25 @@ class TabThreePartSpecAndTechData extends Component {
     })
   }
 
-  renderTechnicalData () {
+  renderThreePartSpec () {
+    if (this.props.threePartSpec.length) {
+      return (
+        <div
+          className={this.getColumnWidth()} >
+          <h5
+            className={tabStyle.tabColTitle} >
+            {'3 Part Spec'}
+          </h5>
+          <ul
+            className={tabStyle.tabColUl} >
+            {this.renderThreePartSpecList()}
+          </ul>
+        </div>
+      )
+    }
+  }
+
+  renderTechnicalDataList () {
     return this.props.technicalData.map((technicalData, index) => {
       return (
         <li
@@ -42,34 +66,32 @@ class TabThreePartSpecAndTechData extends Component {
     })
   }
 
-  render () {
-    return (
-      <div
-        className={style.tabThreePartSpecAndTechData}>
-
+  renderTechnicalData () {
+    if (this.props.technicalData.length) {
+      return (
         <div
-          className={tabStyle.halfWidthColDesktopTab} >
-          <h5
-            className={tabStyle.tabColTitle} >
-            {'3 Part Spec'}
-          </h5>
-          <ul
-            className={tabStyle.tabColUl} >
-            {this.renderThreePartSpec()}
-          </ul>
-        </div>
-
-        <div
-          className={tabStyle.halfWidthColDesktopTab} >
+          className={this.getColumnWidth()} >
           <h5
             className={tabStyle.tabColTitle} >
             {'Technical Data'}
           </h5>
           <ul
             className={tabStyle.tabColUl} >
-            {this.renderTechnicalData()}
+            {this.renderTechnicalDataList()}
           </ul>
         </div>
+      )
+    }
+  }
+
+  render () {
+    return (
+      <div
+        className={style.tabThreePartSpecAndTechData}>
+
+        {this.renderThreePartSpec()}
+
+        {this.renderTechnicalData()}
 
       </div>
     )

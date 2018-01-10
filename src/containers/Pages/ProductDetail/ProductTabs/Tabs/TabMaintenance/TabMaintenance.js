@@ -13,7 +13,13 @@ class TabMaintenance extends Component {
     this.renderVideos = this.renderVideos.bind(this)
   }
 
-  renderGuides () {
+  getColumnWidth () {
+    return this.props.guides.length && this.props.videos.length
+      ? tabStyle.halfWidthColDesktopTab
+      : tabStyle.fullWidthColDesktopTab
+  }
+
+  renderGuidesList () {
     return this.props.guides.map((guide, index) => {
       return (
         <li
@@ -28,7 +34,25 @@ class TabMaintenance extends Component {
     })
   }
 
-  renderVideos () {
+  renderGuides () {
+    if (this.props.guides.length) {
+      return (
+        <div
+          className={this.getColumnWidth()} >
+          <h5
+            className={tabStyle.tabColTitle} >
+            {'Guides'}
+          </h5>
+          <ul
+            className={tabStyle.tabColUl} >
+            {this.renderGuidesList()}
+          </ul>
+        </div>
+      )
+    }
+  }
+
+  renderVideosList () {
     return this.props.videos.map((video, index) => {
       return (
         <li
@@ -39,34 +63,32 @@ class TabMaintenance extends Component {
     })
   }
 
-  render () {
-    return (
-      <div
-        className={style.tabMaintenance} >
-
+  renderVideos () {
+    if (this.props.videos.length) {
+      return (
         <div
-          className={tabStyle.halfWidthColDesktopTab} >
-          <h5
-            className={tabStyle.tabColTitle} >
-            {'Guides'}
-          </h5>
-          <ul
-            className={tabStyle.tabColUl} >
-            {this.renderGuides()}
-          </ul>
-        </div>
-
-        <div
-          className={tabStyle.halfWidthColDesktopTab} >
+          className={this.getColumnWidth()} >
           <h5
             className={tabStyle.tabColTitle} >
             {'Videos'}
           </h5>
           <ul
             className={tabStyle.tabColUl} >
-            {this.renderVideos()}
+            {this.renderVideosList()}
           </ul>
         </div>
+      )
+    }
+  }
+
+  render () {
+    return (
+      <div
+        className={style.tabMaintenance} >
+
+        {this.renderGuides()}
+
+        {this.renderVideos()}
 
       </div>
     )
