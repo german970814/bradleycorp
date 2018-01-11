@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import YouTube from 'react-youtube'
 
-const YoutubeWithOpts = props => {
+const YoutubeWithDefaultOpts = props => {
   const opts = {
     width: props.style.width,
     height: props.style.height,
@@ -16,7 +16,7 @@ const YoutubeWithOpts = props => {
   return <YouTube videoId={props.videoId} opts={opts} />
 }
 
-YoutubeWithOpts.propTypes = {
+YoutubeWithDefaultOpts.propTypes = {
   style: PropTypes.shape({
     width: PropTypes.number,
     height: PropTypes.number
@@ -24,4 +24,4 @@ YoutubeWithOpts.propTypes = {
   videoId: PropTypes.string.isRequired
 }
 
-export default YoutubeWithOpts
+export default YoutubeWithDefaultOpts

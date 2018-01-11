@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import YoutubePlayerLightbox from '../../../../../../../components/Partials/Youtube/YoutubePlayerLightbox/YoutubePlayerLightbox'
+import addVideoIdFromSrc from '../../../../../../../components/Partials/Youtube/addVideoIdFromSrc'
+import wrapYoutubeForLightbox from '../../../../../../../components/Partials/Youtube/YoutubePlayerLightbox/wrapYoutubeForLightbox'
 import Lightbox from '../../../../../../Partials/Lightbox/Lightbox'
 import style from './VerticalListItem.scss'
 
@@ -18,6 +19,7 @@ class VerticalListItem extends Component {
   }
 
   renderVideo () {
+    const YoutubePlayerLightbox = wrapYoutubeForLightbox(addVideoIdFromSrc(YouTube, this.props.src))
     const videoStyle = {
       backgroundImage: `url(${require('../../../../../../../images/icon-video/icon-video@2x.png')})`
     }
@@ -28,8 +30,7 @@ class VerticalListItem extends Component {
           style={videoStyle}
           className={style.listItemVideo} />
 
-        <YoutubePlayerLightbox
-          src={this.props.src} />
+        <YoutubePlayerLightbox />
 
       </Lightbox>
     )

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ScrollableListOpensInLightbox from '../../../../../Partials/ScrollableList/ScrollableListOpensInLightbox'
-import YoutubePlayerLightbox from '../../../../../../components/Partials/Youtube/YoutubePlayerLightbox/YoutubePlayerLightbox'
+import addVideoIdFromSrc from '../../../../../../components/Partials/Youtube/addVideoIdFromSrc'
+import wrapYoutubeForLightbox from '../../../../../../components/Partials/Youtube/YoutubePlayerLightbox/wrapYoutubeForLightbox'
 import ButtonLeft from './ButtonLeft'
 import ButtonRight from './ButtonRight'
 import style from './ProductContentImagesMobileTablet.scss'
@@ -43,6 +44,7 @@ class ProductContentImages extends Component {
 
     const videos = (this.props.videos && this.props.videos.length)
       ? this.props.videos.split(',').map((videoSrc, index) => {
+        const YoutubePlayerLightbox = wrapYoutubeForLightbox(addVideoIdFromSrc(YouTube, videoSrc))
         const videoStyle = {
           backgroundImage: `url(${require('../../../../../../images/icon-video/icon-video@3x.png')})`
         }
@@ -57,7 +59,6 @@ class ProductContentImages extends Component {
 
             {/* display in lightbox scroller */}
             <YoutubePlayerLightbox
-              src={videoSrc}
               maxWidth={0.8}
               maxWidthTablet={0.8} />
 

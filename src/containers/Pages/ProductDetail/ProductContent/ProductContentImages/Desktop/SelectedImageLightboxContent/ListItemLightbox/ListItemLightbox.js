@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import YoutubePlayerLightbox from '../../../../../../../../components/Partials/Youtube/YoutubePlayerLightbox/YoutubePlayerLightbox'
+import YouTube from 'react-youtube'
+import addVideoIdFromSrc from '../../../../../../../../components/Partials/Youtube/addVideoIdFromSrc'
+import wrapYoutubeForLightbox from '../../../../../../../../components/Partials/Youtube/YoutubePlayerLightbox/wrapYoutubeForLightbox'
 import style from './ListItemLightbox.scss'
 
 class ListItemLightbox extends Component {
@@ -17,9 +19,9 @@ class ListItemLightbox extends Component {
   }
 
   renderVideo () {
+    const YoutubePlayerLightbox = wrapYoutubeForLightbox(addVideoIdFromSrc(YouTube, this.props.src))
     return (
       <YoutubePlayerLightbox
-        src={this.props.src}
         maxWidth={0.8}
         maxWidthTablet={0.8} />
     )
