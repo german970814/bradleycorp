@@ -85,17 +85,6 @@ class TabDesign extends Component {
     }
   }
 
-  renderVideosList () {
-    return this.props.videos.map((video, index) => {
-      return (
-        <li
-          key={index} >
-          {renderVideoThumbnail(video.meta['video_gallery_video'])}
-        </li>
-      )
-    })
-  }
-
   renderVideos () {
     if (this.props.videos.length) {
       return (
@@ -107,7 +96,7 @@ class TabDesign extends Component {
           </h5>
           <ul
             className={tabStyle.tabColUl} >
-            {this.renderVideosList()}
+            {renderVideoThumbnail(this.props.videos)}
           </ul>
         </div>
       )

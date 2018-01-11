@@ -1,18 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import YoutubeWithDefaultOpts from './YoutubeWithDefaultOpts'
 import fitLightbox from '../../../../containers/Partials/Lightbox/fitLightbox'
-import addVideoIdFromSrc from '../addVideoIdFromSrc'
 import style from './YoutubePlayerLightbox.scss'
 
 const wrapYoutubeForLightbox = YouTube => {
-
   class YoutubePlayerLightbox extends Component {
-    constructor(props) {
-      super(props)
-    }
-
-    render() {
+    render () {
       const YoutubeFitLightbox = fitLightbox(YouTube, 0.5625, this.props.maxWidth, this.props.maxWidthTablet)
 
       if (this.props.lightboxCloseButton) {

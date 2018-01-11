@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import YouTube from 'react-youtube'
 import ScrollableListOpensInLightbox from '../../../../../Partials/ScrollableList/ScrollableListOpensInLightbox'
 import addVideoIdFromSrc from '../../../../../../components/Partials/Youtube/addVideoIdFromSrc'
 import wrapYoutubeForLightbox from '../../../../../../components/Partials/Youtube/YoutubePlayerLightbox/wrapYoutubeForLightbox'
