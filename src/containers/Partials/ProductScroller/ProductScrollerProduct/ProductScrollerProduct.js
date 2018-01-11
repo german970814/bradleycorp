@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import { createCPTUrl } from '../../../../lib/bcorpUrl'
 import { isNew } from '../../../../lib/bcorpProduct'
 import style from './ProductScrollerProduct.scss'
 
@@ -59,22 +61,29 @@ class ProductScrollerProduct extends Component {
       <div
         className={style.productScrollerProduct}>
 
-        <div
-          className={style.topIcons}>
-          {this.renderNew()}
-        </div>
-        <div
-          className={style.elementWrapper}>
-          {this.renderImage()}
-        </div>
-        <div
-          className={style.elementWrapper}>
-          {this.renderSKU()}
-        </div>
-        <div
-          className={style.elementWrapper}>
-          {this.renderTitle()}
-        </div>
+        <Link
+          to={`${createCPTUrl(this.props.product.post)}`}
+          replace >
+
+          <div
+            className={style.topIcons}>
+            {this.renderNew()}
+          </div>
+          <div
+            className={style.elementWrapper}>
+            {this.renderImage()}
+          </div>
+          <div
+            className={style.elementWrapper}>
+            {this.renderSKU()}
+          </div>
+          <div
+            className={style.elementWrapper}>
+            {this.renderTitle()}
+          </div>
+
+        </Link>
+
       </div>
 
     )
