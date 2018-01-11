@@ -35,7 +35,7 @@ $titleMarginBottom: 35px;
     width: 50%;
   }
 
-  @include respond-to(tablet) {
+  @include respond-to(desktop) {
     width: calc(100% / 3);
   }
 }
