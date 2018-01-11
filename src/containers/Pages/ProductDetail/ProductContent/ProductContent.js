@@ -43,16 +43,18 @@ class ProductContent extends Component {
   }
 
   renderAwards () {
-    if (this.props.awards.length > 0) {
+    if (this.props.awards.length) {
       const awardsSrcList = this.props.awards[0].split(',')
       return awardsSrcList.map((awardSrc, index) => {
-        return (
-          <div
-            key={index}
-            className={style.award}>
-            <img src={awardSrc}></img>
-          </div>
-        )
+        if (!awardSrc === '') {
+          return (
+            <div
+              key={index}
+              className={style.award}>
+              <img src={awardSrc}></img>
+            </div>
+          )
+        }
       })
     }
   }

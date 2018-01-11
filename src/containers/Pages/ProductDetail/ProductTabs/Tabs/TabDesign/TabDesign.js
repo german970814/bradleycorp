@@ -36,8 +36,8 @@ class TabDesign extends Component {
     }
   }
 
-  renderLinksList () {
-    return this.props.links.map((link, index) => {
+  renderLinksList (linksArray) {
+    return linksArray.map((link, index) => {
       if (!link.text) {
         return
       }
@@ -60,19 +60,29 @@ class TabDesign extends Component {
 
   renderLinks () {
     if (this.props.links.length) {
-      return (
-        <div
-          className={this.getColumnWidth()} >
-          <h5
-            className={tabStyle.tabColTitle} >
-            {'Links'}
-          </h5>
-          <ul
-            className={tabStyle.tabColUl} >
-            {this.renderLinksList()}
-          </ul>
-        </div>
-      )
+
+      // links array always seems to contain an empty object, so remove this
+      let links = this.props.links
+      const indexOfEmpty = links.findIndex(link => link.text === "")
+      if (indexOfEmpty !== -1) {
+        links.splice(indexOfEmpty, 1)
+      }
+
+      if (links.length) {
+        return (
+          <div
+            className={this.getColumnWidth()} >
+            <h5
+              className={tabStyle.tabColTitle} >
+              {'Links'}
+            </h5>
+            <ul
+              className={tabStyle.tabColUl} >
+              {this.renderLinksList(links)}
+            </ul>
+          </div>
+        )
+      }
     }
   }
 
