@@ -2,6 +2,7 @@
 
 .listItem {
   @extend %fitBackground;
+  cursor: pointer;
 }
 
 $videoIconWidth: 51px;

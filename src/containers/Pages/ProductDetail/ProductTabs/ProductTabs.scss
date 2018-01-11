@@ -34,6 +34,7 @@ $tabHeight: 65px;
   list-style: none;
   text-align: left;
   color: #2e3c6e;
+  cursor: pointer;
 
   &:first-child {
     margin-top: 62px;
@@ -99,6 +100,7 @@ $tabHeightDesktop: 60px;
   text-align: center;
   white-space: normal;
   color: #2e3c6e;
+  cursor: pointer;
 
   span {
     display: inline-block;

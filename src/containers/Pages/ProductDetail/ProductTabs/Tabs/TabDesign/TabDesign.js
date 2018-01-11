@@ -60,10 +60,9 @@ class TabDesign extends Component {
 
   renderLinks () {
     if (this.props.links.length) {
-
       // links array always seems to contain an empty object, so remove this
-      let links = this.props.links
-      const indexOfEmpty = links.findIndex(link => link.text === "")
+      const links = this.props.links
+      const indexOfEmpty = links.findIndex(link => link.text === '')
       if (indexOfEmpty !== -1) {
         links.splice(indexOfEmpty, 1)
       }

@@ -34,8 +34,10 @@ class Lightbox extends Component {
   }
 
   getChildrenWithLightboxApi () {
+    const lightboxChildStyle = { cursor: 'zoom-in' }
     return React.Children.map(this.props.children, child => {
       return React.cloneElement(child, {
+        style: { ...child.props.style, ...lightboxChildStyle },
         onClick: this.toggleOpen.bind(this)
       })
     })

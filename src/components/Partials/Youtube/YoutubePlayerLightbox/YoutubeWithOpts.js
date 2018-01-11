@@ -7,10 +7,10 @@ const YoutubeWithOpts = props => {
     width: props.style.width,
     height: props.style.height,
     playerVars: {
+      autoplay: 1,
       showinfo: 0,
       modestbranding: 1,
-      controls: 0,
-      autoplay: 1
+      controls: 0
     }
   }
   return <YouTube videoId={props.videoId} opts={opts} />
