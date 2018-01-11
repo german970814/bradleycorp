@@ -15,7 +15,7 @@ $tabHeight: 65px;
 .activeTabContent {
   @extend %BodyPaddingWithMediaQueries;
   @extend %100WidthMinusBodyPaddingWithMediaQueries;
-  border: solid 1px $silver;
+  border-bottom: solid 1px $silver;
   padding-top: 30px;
   padding-bottom: 25px;
   background-color: $light-gray;
@@ -79,7 +79,8 @@ $tabHeightDesktop: 60px;
 .activeTabContentDesktop {
   @extend %BodyPaddingWithMediaQueries;
   @extend %100WidthMinusBodyPaddingWithMediaQueries;
-  border: solid 1px $silver;
+  border-top: solid 1px $silver;
+  border-bottom: solid 1px $silver;
   padding-top: 80px;
   padding-bottom: 45px;
   background-color: $light-gray;
