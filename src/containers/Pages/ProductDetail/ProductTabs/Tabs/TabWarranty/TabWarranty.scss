@@ -1,4 +1,5 @@
 @import "../../../../../../scss/partials/variables";
+@import "../../../../../../scss/partials/mixins";
 @import "../Tabs";
 
 $marginTop: 20px;
@@ -7,7 +8,7 @@ $marginTop: 20px;
   margin-top: $marginTop;
 
   li {
-    margin: 10px 0;
+    margin-top: 18px;
     font-family: Helvetica;
     font-size: 12px;
     font-weight: normal;
@@ -25,8 +26,21 @@ $marginTop: 20px;
     list-style: none;
   }
 
-  ol li {
-    padding-left: 20px;
+  ol {
+    padding-left: 5%;
+
+    @include respond-to-custom(400px) {
+      padding-left: 40px;
+    }
+  }
+
+  ol > li {
+
+    padding-left: 5%;
+
+    @include respond-to-custom(400px) {
+      padding-left: 30px;
+    }
   }
 }
 

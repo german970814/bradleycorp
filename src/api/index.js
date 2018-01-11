@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const api = {}
 
-//api.host = `http://bradley.test`
+// api.host = `http://bradley.test`
 api.host = `http://bradleydev.twoxfour.com`
 api.namespace = `bcorp/v1/`
 api.baseURL = `${api.host}/index.php/wp-json/${api.namespace}`

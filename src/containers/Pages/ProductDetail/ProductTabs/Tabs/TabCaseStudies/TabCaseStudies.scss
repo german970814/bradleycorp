@@ -8,10 +8,7 @@ $designMarginTop: 20px;
 
 .caseStudy {
   display: inline-block;
+  vertical-align: top;
   width: 126px;
-  margin: $designMarginTop 10px 0px 10px;
-
-  &:first-child {
-    margin-left: 0;
-  }
+  margin: $designMarginTop 20px 0px 0px;
 }

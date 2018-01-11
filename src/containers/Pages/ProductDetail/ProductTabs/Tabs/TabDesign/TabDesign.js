@@ -26,7 +26,7 @@ class TabDesign extends Component {
       }
     })
 
-    switch(count) {
+    switch (count) {
       case 1:
         return tabStyle.fullWidthColDesktopTab
       case 2:
@@ -145,13 +145,43 @@ class TabDesign extends Component {
     }
   }
 
-  renderColorsList () {
-    return this.props.colors.map((color, index) => {
+  getColorsByMaterialType () {
+    const colorsByMaterialType = {}
+
+    this.props.colors.forEach(color => {
+      color.terms['material_type'].forEach(materialType => {
+        const termName = materialType.name
+
+        if (Object.keys(colorsByMaterialType).includes(termName)) {
+          colorsByMaterialType[termName] = [ ...colorsByMaterialType[termName], color ]
+          return
+        }
+
+        colorsByMaterialType[termName] = [ color ]
+      })
+    })
+
+    return colorsByMaterialType
+  }
+
+  renderColorsList (colors) {
+    return colors.map((color, index) => {
+      const src = color.media['featured_image'] && color.media['featured_image'].length
+        ? color.media['featured_image'][0]
+        : ''
       return (
         <li
           key={index}
           className={style.color} >
-          {color.post['post_title']}
+
+          <img
+            src={src}
+            className={style.colorImage} />
+          <div
+            className={style.colorTitle} >
+            {color.post['post_title']}
+          </div>
+
         </li>
       )
     })
@@ -159,19 +189,23 @@ class TabDesign extends Component {
 
   renderColors () {
     if (this.props.colors.length) {
-      return (
-        <div
-          className={tabStyle.fullWidthColDesktopTab} >
-          <h5
-            className={tabStyle.tabColTitle} >
-            {'Colors'}
-          </h5>
-          <ul
-            className={tabStyle.tabColUl} >
-            {this.renderColorsList()}
-          </ul>
-        </div>
-      )
+      const colorsByMaterialType = this.getColorsByMaterialType()
+      return Object.keys(colorsByMaterialType).map((materialType, index) => {
+        return (
+          <div
+            key={index}
+            className={tabStyle.fullWidthColDesktopTab} >
+            <h5
+              className={`${tabStyle.tabColTitle} ${style.colorMaterialType}`} >
+              {materialType}
+            </h5>
+            <ul
+              className={tabStyle.tabColUl} >
+              {this.renderColorsList(colorsByMaterialType[materialType])}
+            </ul>
+          </div>
+        )
+      })
     }
   }
 
