@@ -46,7 +46,7 @@ class ProductContent extends Component {
     if (this.props.awards.length) {
       const awardsSrcList = this.props.awards[0].split(',')
       return awardsSrcList.map((awardSrc, index) => {
-        if (!awardSrc === '') {
+        if (awardSrc !== '') {
           return (
             <div
               key={index}

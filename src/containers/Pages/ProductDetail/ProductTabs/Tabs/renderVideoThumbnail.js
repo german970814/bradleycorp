@@ -7,7 +7,6 @@ import LightboxYoutube from '../../../../Partials/Lightbox/LightboxYoutube'
 import tabStyle from './Tabs.scss'
 
 export default function renderVideoThumbnail (videos) {
-
   const arrayOfSrcs = videos.map(video => {
     return video.meta['video_gallery_video']
   })
@@ -24,7 +23,6 @@ export default function renderVideoThumbnail (videos) {
     const YoutubeThumbnail = addVideoIdFromSrc(YouTube, arrayOfSrcs[0])
     const YoutubePlayerLightbox = wrapYoutubeForLightbox(YoutubeThumbnail)
 
-    console.log(youtubeOpts)
     return (
       <LightboxYoutube>
 
@@ -39,7 +37,7 @@ export default function renderVideoThumbnail (videos) {
     )
   }
 
-  let videoIds = arrayOfSrcs.map(src => {
+  const videoIds = arrayOfSrcs.map(src => {
     return youtubeParser(src)
   })
   const videoIdPlayFirst = videoIds.shift()
@@ -51,7 +49,6 @@ export default function renderVideoThumbnail (videos) {
 
   const YoutubePlayerLightbox = wrapYoutubeForLightbox(YouTube)
 
-  console.log(youtubeOpts)
   return (
     <LightboxYoutube>
 
