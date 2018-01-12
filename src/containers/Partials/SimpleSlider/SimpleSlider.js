@@ -56,7 +56,8 @@ class SimpleSlider extends Component {
                 buttonDown={buttonDownMobile}
                 positionButtonsBelow={this.props.nextPrevButtonsForMobile}
                 reverseScroll={this.props.reverseScroll}
-                ulClassName={[style.sliderUlTablet, this.props.ulClassName].join(' ')}
+                wrapperClassName={style.sliderWrapper}
+                ulClassName={[style.sliderUl, this.props.ulClassName].join(' ')}
                 listItemClassName={[style.listItem, this.props.listItemClassName].join(' ')}
                 buttonUpContainerClassName={buttonClassMobile}
                 buttonDownContainerClassName={buttonClassMobile}
