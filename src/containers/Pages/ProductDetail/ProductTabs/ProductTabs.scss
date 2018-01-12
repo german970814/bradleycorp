@@ -62,6 +62,8 @@ $tabHeight: 65px;
 // Tablet-Desktop
 
 $tabHeightDesktop: 60px;
+$tabContentPaddingLeft: 11.5vw;
+$tabContentPaddingRight: 9vw;
 
 .tabsWrapperDesktop {
   margin-top: 70px;
@@ -77,12 +79,13 @@ $tabHeightDesktop: 60px;
 }
 
 .activeTabContentDesktop {
-  @extend %BodyPaddingWithMediaQueries;
-  @extend %100WidthMinusBodyPaddingWithMediaQueries;
   border-top: solid 1px $silver;
   border-bottom: solid 1px $silver;
   padding-top: 80px;
   padding-bottom: 45px;
+  padding-left: $tabContentPaddingLeft;
+  padding-right: $tabContentPaddingRight;
+  width: calc(100% - #{$tabContentPaddingLeft} - #{$tabContentPaddingRight});
   background-color: $light-gray;
   text-align: left;
 }

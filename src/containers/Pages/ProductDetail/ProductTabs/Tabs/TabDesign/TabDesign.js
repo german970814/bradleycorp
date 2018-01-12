@@ -90,14 +90,20 @@ class TabDesign extends Component {
       return (
         <div
           className={this.getColumnWidth()} >
-          <h5
-            className={tabStyle.tabColTitle} >
-            {'Videos'}
-          </h5>
-          <ul
-            className={tabStyle.tabColUl} >
-            {renderVideoThumbnail(this.props.videos)}
-          </ul>
+          <div
+            className={tabStyle.videoColMaxWidth} >
+            <h5
+              className={tabStyle.tabColTitle} >
+              {'Videos'}
+            </h5>
+            <div
+              className={tabStyle.videoApectRatioWrapper} >
+              <div
+                className={tabStyle.videoAspectRatioInside}>
+                {renderVideoThumbnail(this.props.videos)}
+              </div>
+            </div>
+          </div>
         </div>
       )
     }
