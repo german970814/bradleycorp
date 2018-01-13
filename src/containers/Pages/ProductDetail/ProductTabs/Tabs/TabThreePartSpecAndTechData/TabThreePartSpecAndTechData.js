@@ -24,8 +24,8 @@ class TabThreePartSpecAndTechData extends Component {
         <li
           key={index}>
           <FileDownloadLink
-            title={threePartSpec.name}
-            link={threePartSpec.description}
+            title={threePartSpec.post['post_title'] || ''}
+            link={threePartSpec.meta['technical_info_pdf']}
             titleClass={tabStyle.tabTextOrange}
             iconClass={tabStyle.wordPDFIcon} />
         </li>
@@ -57,8 +57,8 @@ class TabThreePartSpecAndTechData extends Component {
         <li
           key={index}>
           <FileDownloadLink
-            title={technicalData.name}
-            link={technicalData.description}
+            title={technicalData.post['post_title'] || ''}
+            link={technicalData.meta['technical_info_pdf']}
             titleClass={tabStyle.tabTextOrange}
             iconClass={tabStyle.wordPDFIcon} />
         </li>

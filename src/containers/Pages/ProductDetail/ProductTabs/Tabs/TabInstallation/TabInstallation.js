@@ -25,8 +25,8 @@ class TabInstallation extends Component {
         <li
           key={index} >
           <FileDownloadLink
-            title={guide.name}
-            link={guide.description}
+            title={guide.post['post_title'] || ''}
+            link={guide.meta['technical_info_pdf']}
             titleClass={tabStyle.tabTextOrange}
             iconClass={tabStyle.wordPDFIcon} />
         </li>

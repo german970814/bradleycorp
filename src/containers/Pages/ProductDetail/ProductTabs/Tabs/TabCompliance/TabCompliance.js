@@ -17,8 +17,8 @@ class TabCompliance extends Component {
         <li
           key={index} >
           <FileDownloadLink
-            title={compliance.name}
-            link={compliance.description}
+            title={compliance.post['post_title'] || ''}
+            link={compliance.meta['technical_info_pdf']}
             titleClass={tabStyle.tabTextOrange}
             iconClass={tabStyle.wordPDFIcon} />
         </li>
