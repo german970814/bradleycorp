@@ -20,6 +20,8 @@ class ProductTabs extends Component {
   }
 
   render () {
+    const theTabs = this.getTabs()
+    const tabWidth = `calc(${100/theTabs.length}% - 3px)`
     return (
       <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
         {match =>
@@ -30,16 +32,17 @@ class ProductTabs extends Component {
               activeTabClassName={style.activeTabContent}
               tabClassName={style.productDetailTabs}
               tabsUlClassName={style.productDetailTabsUl} >
-              {this.getTabs()}
+              {theTabs}
             </Tabs>
           ) : (
             <TabsDesktop
               defaultActiveTabIndex={0}
+              tabWidth={tabWidth}
               tabWrapperClassName={style.tabsWrapperDesktop}
               activeTabClassName={style.activeTabContentDesktop}
               tabClassName={style.productDetailTabsDesktop}
               tabsUlClassName={style.productDetailTabsUlDesktop} >
-              {this.getTabs()}
+              {theTabs}
             </TabsDesktop>
           )
         }
