@@ -21,7 +21,7 @@ class ProductTabs extends Component {
 
   render () {
     const theTabs = this.getTabs()
-    const tabWidth = `calc(${100/theTabs.length}% - 3px)`
+    const tabWidth = `calc(${100 / theTabs.length}% - 3px)`
     return (
       <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
         {match =>

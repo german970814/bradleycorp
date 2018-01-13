@@ -70,7 +70,7 @@ TabsDesktop.propTypes = {
   activeTabClassName: PropTypes.string,
   tabWrapperClassName: PropTypes.string,
   tabsUlClassName: PropTypes.string,
-  tabWidth: PropTypes.string,
+  tabWidth: PropTypes.string
 }
 
 export default TabsDesktop
