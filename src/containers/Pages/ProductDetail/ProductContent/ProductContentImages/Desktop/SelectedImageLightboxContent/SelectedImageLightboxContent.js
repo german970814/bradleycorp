@@ -7,25 +7,25 @@ import style from './SelectedImageLightboxContent.scss'
 
 const SelectedImageLightboxContent = props => {
   return (
-      <ScrollableList
-        numberToDisplay={1}
-        onPositionChange={props.onPositionChange}
-        buttonDown={<ButtonRight />}
-        buttonUp={<ButtonLeft />}
-        ulClassName={style.imagesList}
-        wrapperClassName={style.wrapper}
-        listItemClassName={style.listItem}
-        buttonUpContainerClassName={style.buttonUp}
-        buttonDownContainerClassName={style.buttonDown}
-        stopEventBubblingFromButtons >
-        {props.items}
-      </ScrollableList>
+    <ScrollableList
+      numberToDisplay={1}
+      onPositionChange={props.onPositionChange}
+      buttonDown={<ButtonRight />}
+      buttonUp={<ButtonLeft />}
+      ulClassName={style.imagesList}
+      wrapperClassName={style.wrapper}
+      listItemClassName={style.listItem}
+      buttonUpContainerClassName={style.buttonUp}
+      buttonDownContainerClassName={style.buttonDown}
+      stopEventBubblingFromButtons >
+      {props.items}
+    </ScrollableList>
   )
 }
 
 SelectedImageLightboxContent.propTypes = {
   items: PropTypes.array.isRequired,
-  onPositionChange: PropTypes.func,
+  onPositionChange: PropTypes.func
 }
 
 export default SelectedImageLightboxContent

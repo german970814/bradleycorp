@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import VerticalAlignHelper from '../../../components/Partials/VerticalAlignHelper/VerticalAlignHelper'
 import LightboxCloseButton from './LightboxCloseButton'
@@ -59,7 +60,7 @@ class Lightbox extends Component {
 
   renderLightbox () {
     if (this.state.isOpen) {
-      return (
+      return ReactDOM.createPortal((
         <div
           className={[style.background, this.props.backgroundClass].join(' ')}
           onClick={this.closeLightbox.bind(this)} >
@@ -80,7 +81,7 @@ class Lightbox extends Component {
           </div>
 
         </div>
-      )
+      ), document.getElementById('lightbox'))
     }
   }
 

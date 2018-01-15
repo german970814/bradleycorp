@@ -31,12 +31,14 @@ class VerticalListItem extends Component {
           style={videoStyle}
           className={style.listItemVideo} />
 
-          <FitLightboxYoutube>
-            {(width, height) => {
+        <FitLightboxYoutube>
+          {(width, height) => {
+            return (
               <YoutubeWithID
-                 opts={{width, height}}/>
-            }}
-          </FitLightboxYoutube>
+                opts={{width, height}}/>
+            )
+          }}
+        </FitLightboxYoutube>
 
       </Lightbox>
     )

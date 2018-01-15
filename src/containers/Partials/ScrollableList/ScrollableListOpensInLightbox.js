@@ -96,8 +96,6 @@ class ScrollableListOpensInLightbox extends ScrollableList {
 
 // we need this so we can combine props passed from both the parent ScrollableList and parent Lightbox
 const LightboxScrollerContent = props => {
-  const LightboxCloseButton = props.lightboxCloseButton
-
   return (
     <React.Fragment>
 
@@ -121,10 +119,7 @@ LightboxScrollerContent.propTypes = {
   ]),
   renderButtonUp: PropTypes.func.isRequired,
   renderButtonDown: PropTypes.func.isRequired,
-  ulClassName: PropTypes.string,
-  // from lightbox
-  lightboxCloseButton: PropTypes.func,
-  lightboxCloseButtonOnClick: PropTypes.func
+  ulClassName: PropTypes.string
 }
 
 export default ScrollableListOpensInLightbox

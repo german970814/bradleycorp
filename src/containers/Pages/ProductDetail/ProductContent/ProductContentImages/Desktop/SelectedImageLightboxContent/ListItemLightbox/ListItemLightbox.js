@@ -23,8 +23,10 @@ class ListItemLightbox extends Component {
     return (
       <FitLightboxYoutube>
         {(width, height) => {
-          <YoutubeWithID
-             opts={{width, height}}/>
+          return (
+            <YoutubeWithID
+              opts={{width, height}}/>
+          )
         }}
       </FitLightboxYoutube>
 
@@ -41,10 +43,6 @@ class ListItemLightbox extends Component {
 
 ListItemLightbox.propTypes = {
   src: PropTypes.string.isRequired,
-  style: PropTypes.shape({
-    width: PropTypes.number,
-    height: PropTypes.number
-  }),
   video: PropTypes.bool
 }
 

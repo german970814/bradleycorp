@@ -61,8 +61,10 @@ class ProductContentImages extends Component {
             {/* display in lightbox scroller */}
             <FitLightboxYoutube>
               {(width, height) => {
-                <YoutubeWithID
-                   opts={{width, height}}/>
+                return (
+                  <YoutubeWithID
+                    opts={{width, height}}/>
+                )
               }}
             </FitLightboxYoutube>
 

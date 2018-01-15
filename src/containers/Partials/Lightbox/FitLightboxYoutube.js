@@ -1,4 +1,3 @@
-import React, { Component } from 'react'
 import FitLightbox from './FitLightbox'
 
 class FitLightboxYoutube extends FitLightbox { // sets defaults for youtube

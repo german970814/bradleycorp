@@ -31,7 +31,6 @@ export default function renderVideoThumbnail (videos) {
 
         <FitLightboxYoutube>
           {(width, height) => {
-
             youtubeOpts = { ...youtubeOpts, width, height }
 
             return (
@@ -66,16 +65,15 @@ export default function renderVideoThumbnail (videos) {
 
       <FitLightboxYoutube>
 
-      {(width, height) => {
+        {(width, height) => {
+          youtubeOpts = { ...youtubeOpts, width, height }
 
-        youtubeOpts = { ...youtubeOpts, width, height }
-
-        return (
-          <Youtube
-            videoId={videoIdPlayFirst}
-            opts={youtubeOpts} />
-        )
-      }}
+          return (
+            <YouTube
+              videoId={videoIdPlayFirst}
+              opts={youtubeOpts} />
+          )
+        }}
 
       </FitLightboxYoutube>
 
