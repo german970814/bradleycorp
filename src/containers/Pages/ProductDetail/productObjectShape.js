@@ -31,7 +31,31 @@ const productObjectShape = {
       'featured_image': [ '' ]
     }
   },
-  tabs: {},
+  tabs: {
+    'three_part_spec': {
+      'three_part_spec': [],
+      'technical_data': []
+    },
+    'design': {
+      'links': [],
+      'videos': [],
+      'literature': []
+    },
+    'colors': [],
+    'case_study': [],
+    'warranty': [],
+    'installation': {
+      'guides': [],
+      'videos': []
+    },
+    'maintenance': {
+      'guides': [],
+      'videos': []
+    },
+    'compliance': [],
+    'application_gallery': [],
+    'bim_revit': []
+  },
   'purchased_with': [],
   'similar': []
 }

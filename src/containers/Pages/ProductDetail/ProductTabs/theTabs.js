@@ -7,8 +7,8 @@ import TabWarranty from './Tabs/TabWarranty/TabWarranty'
 import TabInstallation from './Tabs/TabInstallation/TabInstallation'
 import TabMaintenance from './Tabs/TabMaintenance/TabMaintenance'
 import TabCompliance from './Tabs/TabCompliance/TabCompliance'
-import TabApplicationGallery from './Tabs/TabApplicationGallery/TabApplicationGallery'
-import TabBimRevit from './Tabs/TabBimRevit/TabBimRevit'
+// import TabApplicationGallery from './Tabs/TabApplicationGallery/TabApplicationGallery'
+// import TabBimRevit from './Tabs/TabBimRevit/TabBimRevit'
 
 function getTheTabs (tabsData) {
   let tabs = []
@@ -130,7 +130,7 @@ function getTheTabs (tabsData) {
     ]
   }
 
-  // Application Gallery
+  /* Application Gallery
   if (tabsData['application_gallery'].length > 0) {
     tabs = [ ...tabs,
       <Tab
@@ -158,7 +158,7 @@ function getTheTabs (tabsData) {
           bimRevit={tabsData['bim_revit']} />
       </Tab>
     ]
-  }
+  } */
 
   return tabs
 }
