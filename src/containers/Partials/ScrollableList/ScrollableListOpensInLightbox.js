@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ScrollableList from './ScrollableList'
 import Lightbox from '../Lightbox/Lightbox'
-import fitLightbox from '../Lightbox/fitLightbox'
+import FitLightbox from '../Lightbox/FitLightbox'
 import style from './ScrollableList.scss'
 
 class ScrollableListOpensInLightbox extends ScrollableList {
@@ -48,8 +48,6 @@ class ScrollableListOpensInLightbox extends ScrollableList {
   }
 
   renderChildren () {
-    const LightboxScrollerContentFitsLightbox = fitLightbox(LightboxScrollerContent)
-
     const displayChildren = this.getChildrenToDisplay()
     const displayChildrenSorted = this.sortChildrenByPosition(displayChildren)
 
@@ -65,13 +63,24 @@ class ScrollableListOpensInLightbox extends ScrollableList {
 
             {components[0]}
 
-            <LightboxScrollerContentFitsLightbox
-              renderButtonUp={this.renderButtonUpLightbox.bind(this)}
-              renderButtonDown={this.renderButtonDownLightbox.bind(this)}
-              wrapperClassName={this.props.wrapperClassName}
-              ulClassName={this.props.ulClassName} >
-              {components[1]}
-            </LightboxScrollerContentFitsLightbox>
+            <FitLightbox>
+              {(width, height) => {
+                return (
+                  <div
+                    style={{width, height}}
+                    className={this.props.wrapperClassName} >
+
+                    <LightboxScrollerContent
+                      renderButtonUp={this.renderButtonUpLightbox.bind(this)}
+                      renderButtonDown={this.renderButtonDownLightbox.bind(this)}
+                      ulClassName={this.props.ulClassName} >
+                      {components[1]}
+                    </LightboxScrollerContent>
+
+                  </div>
+                )
+              }}
+            </FitLightbox>
 
           </Lightbox>
 
@@ -89,15 +98,8 @@ class ScrollableListOpensInLightbox extends ScrollableList {
 const LightboxScrollerContent = props => {
   const LightboxCloseButton = props.lightboxCloseButton
 
-  const dims = {
-    width: props.style.width,
-    height: props.style.height
-  }
-
   return (
-    <div
-      style={dims}
-      className={props.wrapperClassName} >
+    <React.Fragment>
 
       {props.renderButtonUp()}
 
@@ -108,10 +110,7 @@ const LightboxScrollerContent = props => {
 
       {props.renderButtonDown()}
 
-      <LightboxCloseButton
-        onClick={props.lightboxCloseButtonOnClick} />
-
-    </div>
+    </React.Fragment>
   )
 }
 
@@ -122,15 +121,10 @@ LightboxScrollerContent.propTypes = {
   ]),
   renderButtonUp: PropTypes.func.isRequired,
   renderButtonDown: PropTypes.func.isRequired,
-  wrapperClassName: PropTypes.string,
   ulClassName: PropTypes.string,
   // from lightbox
   lightboxCloseButton: PropTypes.func,
-  lightboxCloseButtonOnClick: PropTypes.func,
-  style: PropTypes.shape({
-    width: PropTypes.number,
-    height: PropTypes.number
-  })
+  lightboxCloseButtonOnClick: PropTypes.func
 }
 
 export default ScrollableListOpensInLightbox

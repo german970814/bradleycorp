@@ -2,7 +2,7 @@ import React from 'react'
 import YouTube from 'react-youtube'
 import { youtubeParser } from '../../../../../lib/bcorpUrl'
 import addVideoIdFromSrc from '../../../../../components/Partials/Youtube/addVideoIdFromSrc'
-import wrapYoutubeForLightbox from '../../../../../components/Partials/Youtube/YoutubePlayerLightbox/wrapYoutubeForLightbox'
+import FitLightboxYoutube from '../../../../Partials/Lightbox/FitLightboxYoutube'
 import LightboxYoutube from '../../../../Partials/Lightbox/LightboxYoutube'
 import tabStyle from './Tabs.scss'
 
@@ -11,7 +11,7 @@ export default function renderVideoThumbnail (videos) {
     return video.meta['video_gallery_video']
   })
 
-  const youtubeOpts = {
+  let youtubeOpts = {
     playerVars: {
       showinfo: 0,
       modestbranding: 1,
@@ -20,23 +20,32 @@ export default function renderVideoThumbnail (videos) {
   }
 
   if (arrayOfSrcs.length === 1) {
-    const YoutubeThumbnail = addVideoIdFromSrc(YouTube, arrayOfSrcs[0])
-    const YoutubePlayerLightbox = wrapYoutubeForLightbox(YoutubeThumbnail)
+    const YoutubeWithID = addVideoIdFromSrc(YouTube, arrayOfSrcs[0])
 
     return (
       <LightboxYoutube>
 
-        <YoutubeThumbnail
+        <YoutubeWithID
           className={tabStyle.videoIframe}
           opts={youtubeOpts} />
 
-        <YoutubePlayerLightbox
-          opts={youtubeOpts} />
+        <FitLightboxYoutube>
+          {(width, height) => {
+
+            youtubeOpts = { ...youtubeOpts, width, height }
+
+            return (
+              <YoutubeWithID
+                opts={youtubeOpts} />
+            )
+          }}
+        </FitLightboxYoutube>
 
       </LightboxYoutube>
     )
   }
 
+  // if there are mutliple videos we need to pass them as a playlist
   const videoIds = arrayOfSrcs.map(src => {
     return youtubeParser(src)
   })
@@ -47,8 +56,6 @@ export default function renderVideoThumbnail (videos) {
   youtubeOpts.playerVars.showinfo = 1
   youtubeOpts.playerVars.controls = 1
 
-  const YoutubePlayerLightbox = wrapYoutubeForLightbox(YouTube)
-
   return (
     <LightboxYoutube>
 
@@ -57,9 +64,20 @@ export default function renderVideoThumbnail (videos) {
         className={tabStyle.videoIframe}
         opts={youtubeOpts} />
 
-      <YoutubePlayerLightbox
-        videoId={videoIdPlayFirst}
-        opts={youtubeOpts} />
+      <FitLightboxYoutube>
+
+      {(width, height) => {
+
+        youtubeOpts = { ...youtubeOpts, width, height }
+
+        return (
+          <Youtube
+            videoId={videoIdPlayFirst}
+            opts={youtubeOpts} />
+        )
+      }}
+
+      </FitLightboxYoutube>
 
     </LightboxYoutube>
   )

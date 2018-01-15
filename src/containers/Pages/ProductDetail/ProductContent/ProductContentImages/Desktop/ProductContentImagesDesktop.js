@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { rotate } from '../../../../../../lib/bcorpArray'
-import fitLightbox from '../../../../../Partials/Lightbox/fitLightbox'
+import FitLightbox from '../../../../../Partials/Lightbox/FitLightbox'
 import VerticalAlignHelper from '../../../../../../components/Partials/VerticalAlignHelper/VerticalAlignHelper'
 import VerticalListItem from './VerticalListItem/VerticalListItem'
 import ScrollableList from '../../../../../Partials/ScrollableList/ScrollableList'
@@ -136,7 +136,6 @@ class ProductContentImagesDesktop extends Component {
   }
 
   renderSelectedImage () {
-    const SelectedImageLightboxContentFitted = fitLightbox(SelectedImageLightboxContent)
     const items = this.renderImagesListLightbox()
 
     const imageStyle = {
@@ -150,10 +149,21 @@ class ProductContentImagesDesktop extends Component {
           style={imageStyle}
           className={style.selectedImageDesktopImage} />
 
-        <SelectedImageLightboxContentFitted
-          onPositionChange={this.handleSelectedImageScrollerPositionChange.bind(this)}
-          items={items} >
-        </SelectedImageLightboxContentFitted>
+        <FitLightbox>
+          {(width, height) => {
+            return (
+              <div
+                style={{width, height}} >
+
+                <SelectedImageLightboxContent
+                  onPositionChange={this.handleSelectedImageScrollerPositionChange.bind(this)}
+                  items={items} >
+                </SelectedImageLightboxContent>
+
+              </div>
+            )
+          }}
+        </FitLightbox>
 
       </Lightbox>
     )

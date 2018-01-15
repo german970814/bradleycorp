@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import YouTube from 'react-youtube'
 import ScrollableListOpensInLightbox from '../../../../../Partials/ScrollableList/ScrollableListOpensInLightbox'
 import addVideoIdFromSrc from '../../../../../../components/Partials/Youtube/addVideoIdFromSrc'
-import wrapYoutubeForLightbox from '../../../../../../components/Partials/Youtube/YoutubePlayerLightbox/wrapYoutubeForLightbox'
+import FitLightboxYoutube from '../../../../../Partials/Lightbox/FitLightboxYoutube'
 import ButtonLeft from './ButtonLeft'
 import ButtonRight from './ButtonRight'
 import style from './ProductContentImagesMobileTablet.scss'
@@ -45,7 +45,7 @@ class ProductContentImages extends Component {
 
     const videos = (this.props.videos && this.props.videos.length)
       ? this.props.videos.split(',').map((videoSrc, index) => {
-        const YoutubePlayerLightbox = wrapYoutubeForLightbox(addVideoIdFromSrc(YouTube, videoSrc))
+        const YoutubeWithID = addVideoIdFromSrc(YouTube, videoSrc)
         const videoStyle = {
           backgroundImage: `url(${require('../../../../../../images/icon-video/icon-video@3x.png')})`
         }
@@ -59,9 +59,12 @@ class ProductContentImages extends Component {
               className={[style.videoListItem, style.fitBackground].join(' ')} />
 
             {/* display in lightbox scroller */}
-            <YoutubePlayerLightbox
-              maxWidth={0.8}
-              maxWidthTablet={0.8} />
+            <FitLightboxYoutube>
+              {(width, height) => {
+                <YoutubeWithID
+                   opts={{width, height}}/>
+              }}
+            </FitLightboxYoutube>
 
           </React.Fragment>
         )

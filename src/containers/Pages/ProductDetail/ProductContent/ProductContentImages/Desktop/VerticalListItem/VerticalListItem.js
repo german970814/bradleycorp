@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import YouTube from 'react-youtube'
 import addVideoIdFromSrc from '../../../../../../../components/Partials/Youtube/addVideoIdFromSrc'
-import wrapYoutubeForLightbox from '../../../../../../../components/Partials/Youtube/YoutubePlayerLightbox/wrapYoutubeForLightbox'
+import FitLightboxYoutube from '../../../../../../Partials/Lightbox/FitLightboxYoutube'
 import Lightbox from '../../../../../../Partials/Lightbox/Lightbox'
 import style from './VerticalListItem.scss'
 
@@ -20,7 +20,7 @@ class VerticalListItem extends Component {
   }
 
   renderVideo () {
-    const YoutubePlayerLightbox = wrapYoutubeForLightbox(addVideoIdFromSrc(YouTube, this.props.src))
+    const YoutubeWithID = addVideoIdFromSrc(YouTube, this.props.src)
     const videoStyle = {
       backgroundImage: `url(${require('../../../../../../../images/icon-video/icon-video@2x.png')})`
     }
@@ -31,7 +31,12 @@ class VerticalListItem extends Component {
           style={videoStyle}
           className={style.listItemVideo} />
 
-        <YoutubePlayerLightbox />
+          <FitLightboxYoutube>
+            {(width, height) => {
+              <YoutubeWithID
+                 opts={{width, height}}/>
+            }}
+          </FitLightboxYoutube>
 
       </Lightbox>
     )

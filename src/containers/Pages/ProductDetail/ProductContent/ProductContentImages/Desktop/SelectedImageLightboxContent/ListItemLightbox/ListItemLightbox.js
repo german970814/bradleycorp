@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import YouTube from 'react-youtube'
 import addVideoIdFromSrc from '../../../../../../../../components/Partials/Youtube/addVideoIdFromSrc'
-import wrapYoutubeForLightbox from '../../../../../../../../components/Partials/Youtube/YoutubePlayerLightbox/wrapYoutubeForLightbox'
+import FitLightboxYoutube from '../../../../../../../Partials/Lightbox/FitLightboxYoutube'
 import style from './ListItemLightbox.scss'
 
 class ListItemLightbox extends Component {
@@ -19,11 +19,15 @@ class ListItemLightbox extends Component {
   }
 
   renderVideo () {
-    const YoutubePlayerLightbox = wrapYoutubeForLightbox(addVideoIdFromSrc(YouTube, this.props.src))
+    const YoutubeWithID = addVideoIdFromSrc(YouTube, this.props.src)
     return (
-      <YoutubePlayerLightbox
-        maxWidth={0.8}
-        maxWidthTablet={0.8} />
+      <FitLightboxYoutube>
+        {(width, height) => {
+          <YoutubeWithID
+             opts={{width, height}}/>
+        }}
+      </FitLightboxYoutube>
+
     )
   }
 

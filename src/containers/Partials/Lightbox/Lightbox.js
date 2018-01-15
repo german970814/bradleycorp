@@ -33,19 +33,16 @@ class Lightbox extends Component {
     })
   }
 
-  getChildrenWithLightboxApi () {
+  renderChildrenWithLightboxAPI () {
     const lightboxChildStyle = { cursor: 'zoom-in' }
-    return React.Children.map(this.props.children, child => {
+    const childrenWithAPI = React.Children.map(this.props.children, child => {
       return React.cloneElement(child, {
         style: { ...child.props.style, ...lightboxChildStyle },
         onClick: this.toggleOpen.bind(this)
       })
     })
-  }
 
-  renderChildrenWithLightboxContentRemoved () {
-    const childrenWithLightboxApi = this.getChildrenWithLightboxApi()
-    const children = React.Children.toArray(childrenWithLightboxApi)
+    const children = React.Children.toArray(childrenWithAPI)
 
     if (children.length === 1) {
       return children
@@ -55,15 +52,7 @@ class Lightbox extends Component {
   }
 
   getLightboxContent () {
-    const childrenWithLightboxSize = React.Children.map(this.props.children, child => {
-      return React.cloneElement(child, {
-        // give the child the button to close the lightbox
-        lightboxCloseButton: LightboxCloseButton,
-        lightboxCloseButtonOnClick: this.closeLightbox.bind(this)
-      })
-    })
-
-    const children = React.Children.toArray(childrenWithLightboxSize)
+    const children = React.Children.toArray(this.props.children)
     // takes last child as lightbox content
     return children[children.length - 1]
   }
@@ -74,11 +63,22 @@ class Lightbox extends Component {
         <div
           className={[style.background, this.props.backgroundClass].join(' ')}
           onClick={this.closeLightbox.bind(this)} >
+
           <VerticalAlignHelper />
+
           <div
             className={style.lightbox} >
-            {this.getLightboxContent()}
+            <div
+              className={style.fitChildrenSize}>
+
+              {this.getLightboxContent()}
+
+              <LightboxCloseButton
+                onClick={this.closeLightbox.bind(this)} />
+
+            </div>
           </div>
+
         </div>
       )
     }
@@ -88,7 +88,7 @@ class Lightbox extends Component {
     return (
       <div
         className={style.childWrapper} >
-        {this.renderChildrenWithLightboxContentRemoved()}
+        {this.renderChildrenWithLightboxAPI()}
         {this.renderLightbox()}
       </div>
     )
