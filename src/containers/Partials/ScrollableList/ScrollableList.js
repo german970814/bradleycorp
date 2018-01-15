@@ -34,6 +34,10 @@ class ScrollableList extends Component {
   moveList (e, increment) {
     e.preventDefault()
 
+    if (this.props.stopEventBubblingFromButtons) { // stops it from calling any onClick events on the container eg close lightbox
+      e.stopPropagation()
+    }
+
     const children = this.state.children.map((child, index, allChildren) => {
       const newPosition = this.getPosition(child.position, increment, allChildren.length)
 
@@ -210,6 +214,7 @@ ScrollableList.propTypes = {
   showPosition: PropTypes.bool,
   reverseScroll: PropTypes.bool,
   positionButtonsBelow: PropTypes.bool,
+  stopEventBubblingFromButtons: PropTypes.bool,
   children: PropTypes.array.isRequired,
   onPositionChange: PropTypes.func,
   wrapperClassName: PropTypes.string,

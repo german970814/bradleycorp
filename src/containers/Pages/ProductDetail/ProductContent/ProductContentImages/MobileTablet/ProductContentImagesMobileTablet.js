@@ -80,7 +80,8 @@ class ProductContentImages extends Component {
         listItemClassName={style.imageListItem}
         ulClassName={style.imagesList}
         buttonUp={<ButtonLeft />}
-        buttonDown={<ButtonRight />} >
+        buttonDown={<ButtonRight />}
+        stopEventBubblingFromButtons >
         {this.renderList()}
       </ScrollableListOpensInLightbox>
     )

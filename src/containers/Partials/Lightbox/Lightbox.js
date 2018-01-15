@@ -72,7 +72,8 @@ class Lightbox extends Component {
     if (this.state.isOpen) {
       return (
         <div
-          className={[style.background, this.props.backgroundClass].join(' ')} >
+          className={[style.background, this.props.backgroundClass].join(' ')}
+          onClick={this.closeLightbox.bind(this)} >
           <VerticalAlignHelper />
           <div
             className={style.lightbox} >

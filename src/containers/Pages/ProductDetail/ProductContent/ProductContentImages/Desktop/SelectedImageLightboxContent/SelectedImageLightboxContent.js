@@ -27,7 +27,8 @@ const SelectedImageLightboxContent = props => {
         wrapperClassName={style.wrapper}
         listItemClassName={style.listItem}
         buttonUpContainerClassName={style.buttonUp}
-        buttonDownContainerClassName={style.buttonDown} >
+        buttonDownContainerClassName={style.buttonDown}
+        stopEventBubblingFromButtons >
         {props.items}
       </ScrollableList>
 
