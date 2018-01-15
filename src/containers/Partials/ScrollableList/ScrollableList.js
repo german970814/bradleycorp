@@ -31,13 +31,26 @@ class ScrollableList extends Component {
     })
   }
 
+  moveListToIndex (e, newIndex) { // this can only run if we have numberToDisplay set to 1
+    if (this.props.numberToDisplay !== 1) {
+      return
+    }
+
+    // each child holds it's 'distance from 0' as position, so we can just use that as the increment required to move it to 0
+    const incrementBy = this.props.reverseScroll
+      ? this.state.children[newIndex].position
+      : -this.state.children[newIndex].position
+
+    return this.moveList(e, incrementBy)
+  }
+
   moveList (e, increment) {
     e.preventDefault()
-
     if (this.props.stopEventBubblingFromButtons) { // stops it from calling any onClick events on the container eg close lightbox
       e.stopPropagation()
     }
 
+    // set new position for each child
     const children = this.state.children.map((child, index, allChildren) => {
       const newPosition = this.getPosition(child.position, increment, allChildren.length)
 
@@ -103,7 +116,7 @@ class ScrollableList extends Component {
   }
 
   renderPositionCircles () {
-    if (!this.props.showPosition) {
+    if (!this.props.showPosition || this.props.numberToDisplay !== 1) {
       return
     }
 
@@ -115,6 +128,7 @@ class ScrollableList extends Component {
             <li
               key={index} >
               <PositionCircle
+                onClick={(e) => { this.moveListToIndex(e, index) }}
                 selected={child.display} />
             </li>
           )

@@ -8,13 +8,15 @@ const PositionCircle = props => {
     : style.notActive
   return (
     <div
-      className={activeClass}>
+      className={activeClass}
+      onClick={(e) => props.onClick(e)}>
     </div>
   )
 }
 
 PositionCircle.propTypes = {
-  selected: PropTypes.bool
+  selected: PropTypes.bool,
+  onClick: PropTypes.func
 }
 
 export default PositionCircle
