@@ -6,33 +6,32 @@ class AutoGrowShrinkAnimation extends Component {
     super(props)
 
     this.state = {
-      node: undefined,
       isOpen: false
     }
   }
 
-  componentDidUpdate (prevProps) {
-    const oldHeight = `${this.state.node.clientHeight}px`
+  componentWillUpdate () {
+    const oldHeight = `${this.node.clientHeight}px`
 
     requestAnimationFrame(() => {
-      this.state.node.style.height = 'auto'
-      this.state.node.style.transition = 'height 0s'
+      this.node.style.height = 'auto'
+      this.node.style.transition = 'height 0s'
 
-      const newHeight = `${this.state.node.getBoundingClientRect().height}px`
+      const newHeight = `${this.node.getBoundingClientRect().height}px`
 
-      this.state.node.style.height = oldHeight
-      this.state.node.style.transition = 'height 0s'
+      this.node.style.height = oldHeight
+      this.node.style.transition = 'height 0s'
 
       requestAnimationFrame(() => {
-        this.state.node.style.height = newHeight
-        this.state.node.style.transition = `height ${this.props.speed || 600}ms ${this.props.easing || 'linear'}`
+        this.node.style.height = newHeight
+        this.node.style.transition = `height ${this.props.speed || 600}ms ${this.props.easing || 'linear'}`
       })
     })
   }
 
   updateNode (node) {
-    if (node && this.state.node !== node) {
-      this.setState({ node })
+    if (node && this.node !== node) {
+      this.node = node
     }
   }
 
