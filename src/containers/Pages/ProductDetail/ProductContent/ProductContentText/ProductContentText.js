@@ -22,15 +22,14 @@ class ProductContentText extends Component {
   render () {
     return (
       <AutoGrowShrinkAnimation
-        node={this.node}
         speed={600}
         easing={'cubic-bezier(0.86, 0, 0.07, 1)'} >
 
-        {(isOpen, openClose) => {
+        {(isOpen, updateNode, openClose) => {
           return (
             <div>
               <div
-                ref={(node) => { this.node = node }}
+                ref={(node) => updateNode(node)}
                 className={style.content}
                 dangerouslySetInnerHTML={{__html: this.renderText(isOpen)}} />
               <div
