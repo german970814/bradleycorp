@@ -65,25 +65,9 @@ class SimpleSlider extends Component {
                 {this.props.children}
               </ScrollableList>
             ) : (
-              <Media query={{ minWidth: TABLETMAXWIDTH }}>
+              <Media query={{ maxWidth: TABLETMAXWIDTH }}>
                 {match =>
                   match ? (
-                    // desktop
-                    <ScrollableList
-                      numberToDisplay={this.props.numberDesktop}
-                      buttonUp={<ButtonLeft />}
-                      buttonDown={<ButtonRight />}
-                      positionButtonsBelow={false}
-                      reverseScroll={this.props.reverseScroll}
-                      wrapperClassName={[style.sliderTabletDesktop, this.props.desktopWrapperClassName].join(' ')}
-                      ulClassName={[style.sliderUlTablet, this.props.ulClassName].join(' ')}
-                      listItemClassName={[style.listItemDesktop, this.props.listItemClassName].join(' ')}
-                      buttonUpContainerClassName={style.buttonsSidesContainer}
-                      buttonDownContainerClassName={style.buttonsSidesContainer}
-                      buttonsBelowClassName={style.buttonsBelow} >
-                      {this.props.children}
-                    </ScrollableList>
-                  ) : (
                     // tablet
                     <ScrollableList
                       numberToDisplay={this.props.numberTablet}
@@ -94,6 +78,22 @@ class SimpleSlider extends Component {
                       wrapperClassName={[style.sliderTabletDesktop, this.props.desktopWrapperClassName].join(' ')}
                       ulClassName={[style.sliderUlTablet, this.props.ulClassName].join(' ')}
                       listItemClassName={[style.listItemTablet, this.props.listItemClassName].join(' ')}
+                      buttonUpContainerClassName={style.buttonsSidesContainer}
+                      buttonDownContainerClassName={style.buttonsSidesContainer}
+                      buttonsBelowClassName={style.buttonsBelow} >
+                      {this.props.children}
+                    </ScrollableList>
+                  ) : (
+                    // desktop
+                    <ScrollableList
+                      numberToDisplay={this.props.numberDesktop}
+                      buttonUp={<ButtonLeft />}
+                      buttonDown={<ButtonRight />}
+                      positionButtonsBelow={false}
+                      reverseScroll={this.props.reverseScroll}
+                      wrapperClassName={[style.sliderTabletDesktop, this.props.desktopWrapperClassName].join(' ')}
+                      ulClassName={[style.sliderUlTablet, this.props.ulClassName].join(' ')}
+                      listItemClassName={[style.listItemDesktop, this.props.listItemClassName].join(' ')}
                       buttonUpContainerClassName={style.buttonsSidesContainer}
                       buttonDownContainerClassName={style.buttonsSidesContainer}
                       buttonsBelowClassName={style.buttonsBelow} >

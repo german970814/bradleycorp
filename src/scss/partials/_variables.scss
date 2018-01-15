@@ -20,14 +20,15 @@ $CentraleSansPro: 'CentraleSansPro';
 $TradeGothic: 'TradeGothic';
 
 /* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
 
-$MobileWidth: 320;
+$MobileWidth: 319;
 $MobileWidthPX: $MobileWidth + px;
 
-$MobileMaxWidth: 768;
+$MobileMaxWidth: 767;
 $MobileMaxWidthPX: $MobileMaxWidth + px;
 
-$TabletMaxWidth: 1024;
+$TabletMaxWidth: 1023;
 $TabletMaxWidthPX: $TabletMaxWidth + px;
 
 :export {

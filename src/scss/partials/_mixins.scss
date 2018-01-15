@@ -2,13 +2,13 @@
 
 @mixin respond-to($media) {
   @if $media == mobile {
-    @media only screen and (min-width: $MobileWidthPX) { @content; }
+    @media only screen and (min-width: $MobileWidth + 1 + px) { @content; }
   }
   @elseif $media == tablet {
-    @media only screen and (min-width: $MobileMaxWidthPX) { @content; }
+    @media only screen and (min-width: $MobileMaxWidth + 1 + px) { @content; }
   }
   @elseif $media == desktop {
-    @media only screen and (min-width: $TabletMaxWidthPX) { @content; }
+    @media only screen and (min-width: $TabletMaxWidthPX + 1 + px) { @content; }
   }
 }
 
