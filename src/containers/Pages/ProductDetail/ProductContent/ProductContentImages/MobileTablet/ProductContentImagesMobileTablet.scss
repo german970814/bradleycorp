@@ -33,6 +33,13 @@ $tablet-height: 428px;
   @include respond-to(tablet) {
     height: $tablet-height;
   }
+
+
+}
+
+.imagesList :global .track-wrapper,
+.imagesList :global .track {
+  height: $height;
 }
 
 .imageListItem {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import YouTube from 'react-youtube'
-import ScrollableListOpensInLightbox from '../../../../../Partials/ScrollableList/ScrollableListOpensInLightbox'
+import ScrollableList from '../../../../../Partials/ScrollableList/ScrollableList'
 import addVideoIdFromSrc from '../../../../../../components/Partials/Youtube/addVideoIdFromSrc'
 import FitLightboxYoutube from '../../../../../Partials/Lightbox/FitLightboxYoutube'
 import ButtonLeft from './ButtonLeft'
@@ -78,7 +78,7 @@ class ProductContentImages extends Component {
 
   render () {
     return (
-      <ScrollableListOpensInLightbox
+      <ScrollableList
         numberToDisplay={1}
         showPosition
         wrapperClassName={style.imagesListWrapper}
@@ -88,7 +88,7 @@ class ProductContentImages extends Component {
         buttonDown={<ButtonRight />}
         stopEventBubblingFromButtons >
         {this.renderList()}
-      </ScrollableListOpensInLightbox>
+      </ScrollableList>
     )
   }
 }

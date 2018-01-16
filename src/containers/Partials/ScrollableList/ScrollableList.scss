@@ -42,3 +42,13 @@
 .inheritHeight {
   height: inherit !important;
 }
+
+.trackWrapper {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.track {
+  transition: transform 600ms;
+}
