@@ -12,7 +12,7 @@
 %aboveTitle {
   display: inline;
   font-family: $CentraleSansPro;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
   letter-spacing: 0.5px;
   line-height: 3;
@@ -72,12 +72,13 @@ $productDetailBtnTabletGap: 16px;
   margin-top: 23px;
   margin-bottom: 10px;
   padding: 0;
+  padding-top: 1px;
   width: 100%;
   height: 42px;
   background: none;
   border: none;
   font-family: CentraleSansPro;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
   letter-spacing: 0.5px;
   text-align: center;
