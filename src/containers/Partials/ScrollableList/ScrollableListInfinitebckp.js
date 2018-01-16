@@ -24,7 +24,6 @@ class ScrollableList extends Component {
     // we want to make sure this updates when it receives new children
     if (this.childrenDidUpdate(nextProps.children, this.props.children) ||
     this.numberToDisplayDidUpdate(nextProps.numberToDisplay, this.props.numberToDisplay)) {
-
       const children = this.getChildrenWithScrollableListApiAsProps(nextProps)
       this.setState({
         children,
@@ -35,7 +34,7 @@ class ScrollableList extends Component {
     }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate () {
     console.log(this.state)
   }
 
@@ -97,9 +96,9 @@ class ScrollableList extends Component {
     // stop scroller from going off the ends if scroller isn't set to infinite
     const resultingLastDisplayedChildIndex = this.state.currentFirstIndex + this.props.numberToDisplay - reversedIncrement
     const resultingFirstDisplayedChildIndex = this.state.currentFirstIndex - reversedIncrement
-    if (! this.props.infinite
-    && (resultingLastDisplayedChildIndex > this.state.children.length
-     || resultingFirstDisplayedChildIndex < 0)) {
+    if (!this.props.infinite &&
+    (resultingLastDisplayedChildIndex > this.state.children.length ||
+     resultingFirstDisplayedChildIndex < 0)) {
       return
     }
 
@@ -120,8 +119,6 @@ class ScrollableList extends Component {
     if (this.props.onPositionChange) {
       this.props.onPositionChange(childrenSorted)
     }
-
-
 
     return this.setState({
       children: childrenSorted,
@@ -281,7 +278,7 @@ class ScrollableList extends Component {
   }
 
   getCurrentLastPosition (children) {
-    return children[children.length-1].position
+    return children[children.length - 1].position
   }
 
   getChildrenToDisplay () {

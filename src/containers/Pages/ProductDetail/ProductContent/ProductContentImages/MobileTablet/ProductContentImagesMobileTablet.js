@@ -31,13 +31,13 @@ class ProductContentImages extends Component {
           <div
             src={imageSrc}
             style={imageStyle}
-            className={[style.imageDiv, style.fitBackground].join(' ')} />
+            className={[style.imagesList, style.fitBackground].join(' ')} />
 
           {/* display in lightbox scroller */}
           <div
             src={imageSrc}
             style={imageStyle}
-            className={[style.imageDiv, style.fitBackground].join(' ')} />
+            className={[style.imagesList, style.fitBackground].join(' ')} />
 
         </React.Fragment>
       )
@@ -80,13 +80,11 @@ class ProductContentImages extends Component {
     return (
       <ScrollableList
         numberToDisplay={1}
-        showPosition
-        wrapperClassName={style.imagesListWrapper}
-        listItemClassName={style.imageListItem}
-        ulClassName={style.imagesList}
+        wrapperClassName={style.imagesList}
         buttonUp={<ButtonLeft />}
         buttonDown={<ButtonRight />}
-        stopEventBubblingFromButtons >
+        stopEventBubblingFromButtons
+        showPosition >
         {this.renderList()}
       </ScrollableList>
     )

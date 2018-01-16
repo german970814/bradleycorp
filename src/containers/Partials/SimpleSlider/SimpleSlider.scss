@@ -27,7 +27,7 @@ $listItemPaddingTabletDesktop: 40px;
   @extend %100WidthMinusBodyPaddingWithMediaQueries;
 }
 
-.sliderUl {
+.sliderWrapper :global .track-wrapper {
   width: 100%;
   margin-top: 0;
   margin-bottom: 20px;
@@ -138,7 +138,7 @@ $arrowWidthTablet: 11px;
   }
 }
 
-.sliderUlTablet {
+.sliderTabletDesktop :global .track-wrapper {
   display: inline-block;
   vertical-align: middle;
   margin-top: 0;

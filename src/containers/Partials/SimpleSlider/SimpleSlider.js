@@ -57,8 +57,6 @@ class SimpleSlider extends Component {
                 positionButtonsBelow={this.props.nextPrevButtonsForMobile}
                 reverseScroll={this.props.reverseScroll}
                 wrapperClassName={style.sliderWrapper}
-                ulClassName={[style.sliderUl, this.props.ulClassName].join(' ')}
-                listItemClassName={[style.listItem, this.props.listItemClassName].join(' ')}
                 buttonUpContainerClassName={buttonClassMobile}
                 buttonDownContainerClassName={buttonClassMobile}
                 buttonsBelowClassName={style.buttonsBelow} >
@@ -76,8 +74,6 @@ class SimpleSlider extends Component {
                       positionButtonsBelow={false}
                       reverseScroll={this.props.reverseScroll}
                       wrapperClassName={[style.sliderTabletDesktop, this.props.desktopWrapperClassName].join(' ')}
-                      ulClassName={[style.sliderUlTablet, this.props.ulClassName].join(' ')}
-                      listItemClassName={[style.listItemTablet, this.props.listItemClassName].join(' ')}
                       buttonUpContainerClassName={style.buttonsSidesContainer}
                       buttonDownContainerClassName={style.buttonsSidesContainer}
                       buttonsBelowClassName={style.buttonsBelow} >
@@ -92,8 +88,6 @@ class SimpleSlider extends Component {
                       positionButtonsBelow={false}
                       reverseScroll={this.props.reverseScroll}
                       wrapperClassName={[style.sliderTabletDesktop, this.props.desktopWrapperClassName].join(' ')}
-                      ulClassName={[style.sliderUlTablet, this.props.ulClassName].join(' ')}
-                      listItemClassName={[style.listItemDesktop, this.props.listItemClassName].join(' ')}
                       buttonUpContainerClassName={style.buttonsSidesContainer}
                       buttonDownContainerClassName={style.buttonsSidesContainer}
                       buttonsBelowClassName={style.buttonsBelow} >

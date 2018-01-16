@@ -51,4 +51,9 @@
 
 .track {
   transition: transform 600ms;
+
+  .trackItem {
+    display: inline-block;
+    height: 100%;
+  }
 }

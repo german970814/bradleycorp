@@ -10,12 +10,8 @@ class ScrollableList extends Component {
 
     this.state = {
       children: this.getChildrenWithScrollableListApiAsProps(this.props),
-      currentFirstIndex: 0,
+      currentFirstIndex: 0
     }
-  }
-
-  componentDidUpdate () {
-    console.log(this.state)
   }
 
   componentWillReceiveProps (nextProps) {
@@ -24,7 +20,7 @@ class ScrollableList extends Component {
       const children = this.getChildrenWithScrollableListApiAsProps(nextProps)
       this.setState({
         children,
-        currentFirstIndex: this.getFirstDisplayedChildIndex(children),
+        currentFirstIndex: this.getFirstDisplayedChildIndex(children)
       })
     }
   }
@@ -65,9 +61,8 @@ class ScrollableList extends Component {
     // stop scroller from going off the ends if scroller isn't set to infinite
     const resultingLastDisplayedChildIndex = this.state.currentFirstIndex + this.props.numberToDisplay - increment
     const resultingFirstDisplayedChildIndex = this.state.currentFirstIndex - increment
-    if (! this.props.infinite
-    && (resultingLastDisplayedChildIndex > this.state.children.length
-     || resultingFirstDisplayedChildIndex < 0)) {
+    if (resultingLastDisplayedChildIndex > this.state.children.length ||
+     resultingFirstDisplayedChildIndex < 0) {
       return
     }
 
@@ -88,7 +83,7 @@ class ScrollableList extends Component {
 
     return this.setState({
       children,
-      currentFirstIndex: this.getFirstDisplayedChildIndex(children),
+      currentFirstIndex: this.getFirstDisplayedChildIndex(children)
     })
   }
 
@@ -164,12 +159,12 @@ class ScrollableList extends Component {
   renderChildren (width) {
     return this.state.children.map((child, index) => {
       return (
-        <li
+        <div
           key={index}
           style={{ width }}
-          className={this.props.listItemClassName} >
+          className={style.trackItem} >
           {child.component}
-        </li>
+        </div>
       )
     })
   }
@@ -181,15 +176,12 @@ class ScrollableList extends Component {
 
         {this.renderButtonUp()}
 
-        <div
-          className={this.props.ulClassName}>
-          <ScrollableListTrack
-            elementCount={this.state.children.length}
-            numberToDisplay={this.props.numberToDisplay || 1}
-            currentIndex={this.getFirstDisplayedChildIndex(this.state.children)}>
-            {(elementWidth) => this.renderChildren(elementWidth)}
-          </ScrollableListTrack>
-        </div>
+        <ScrollableListTrack
+          elementCount={this.state.children.length}
+          numberToDisplay={this.props.numberToDisplay || 1}
+          currentIndex={this.getFirstDisplayedChildIndex(this.state.children)}>
+          {(elementWidth) => this.renderChildren(elementWidth)}
+        </ScrollableListTrack>
 
         {this.renderButtonDown()}
         {this.renderButtonsBelow()}
@@ -260,8 +252,6 @@ ScrollableList.propTypes = {
   children: PropTypes.array.isRequired,
   onPositionChange: PropTypes.func,
   wrapperClassName: PropTypes.string,
-  listItemClassName: PropTypes.string,
-  ulClassName: PropTypes.string,
   buttonUpContainerClassName: PropTypes.string,
   buttonDownContainerClassName: PropTypes.string,
   buttonsBelowClassName: PropTypes.string,

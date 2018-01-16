@@ -21,7 +21,7 @@ $tablet-height: 428px;
   }
 }
 
-.imagesList {
+.imagesList :global .track-wrapper {
   display: inline;
   float: left;
   margin: 0;
@@ -33,13 +33,14 @@ $tablet-height: 428px;
   @include respond-to(tablet) {
     height: $tablet-height;
   }
-
-
 }
 
-.imagesList :global .track-wrapper,
 .imagesList :global .track {
   height: $height;
+
+  @include respond-to(tablet) {
+    height: $tablet-height;
+  }
 }
 
 .imageListItem {
