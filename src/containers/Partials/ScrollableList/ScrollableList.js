@@ -164,13 +164,16 @@ class ScrollableList extends Component {
     )
   }
 
-  renderChildren (width) {
+  renderChildren (dimensions, vertical) {
+    const inlineStyle = this.props.vertical ? { height: dimensions } : { width: dimensions }
+    const className = this.props.vertical ? style.trackItemVertical : style.trackItem
+
     return this.state.children.map((child, index) => {
       return (
         <div
           key={index}
-          style={{ width }}
-          className={style.trackItem} >
+          style={inlineStyle}
+          className={className} >
           {child.component}
         </div>
       )
@@ -187,8 +190,9 @@ class ScrollableList extends Component {
         <ScrollableListTrack
           elementCount={this.state.children.length}
           numberToDisplay={this.props.numberToDisplay || 1}
-          currentIndex={this.getFirstDisplayedChildIndex(this.state.children)}>
-          {(elementWidth) => this.renderChildren(elementWidth)}
+          currentIndex={this.getFirstDisplayedChildIndex(this.state.children)}
+          vertical={this.props.vertical} >
+          {(elementDimension) => this.renderChildren(elementDimension)}
         </ScrollableListTrack>
 
         {this.renderButtonDown()}
@@ -257,6 +261,7 @@ ScrollableList.propTypes = {
   reverseScroll: PropTypes.bool,
   positionButtonsBelow: PropTypes.bool,
   stopEventBubblingFromButtons: PropTypes.bool,
+  vertical: PropTypes.bool,
   children: PropTypes.array.isRequired,
   onPositionChange: PropTypes.func,
   wrapperClassName: PropTypes.string,

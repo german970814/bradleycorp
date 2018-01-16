@@ -35,23 +35,6 @@ $listItemPaddingTabletDesktop: 40px;
   text-align: center;
 }
 
-.listItem {
-  @include list-item-width(2, $listItemPadding);
-  display: inline-block;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  vertical-align: top;
-  text-align: center;
-
-  &:nth-child(1) {
-    padding-right: $listItemPadding / 2;
-  }
-
-  &:nth-child(2) {
-    padding-left: $listItemPadding / 2;
-  }
-}
-
 .buttonsSidesContainer {
   float: none;
   display: inline-block;
@@ -145,23 +128,5 @@ $arrowWidthTablet: 11px;
   margin-bottom: 55px;
   padding: 0;
   width: calc(100% - #{$arrowWidthTablet}*2);
-  text-align: center;
-}
-
-.listItemTablet {
-  @include list-item-width(3, $listItemPaddingTabletDesktop);
-  display: inline-block;
-  vertical-align: top;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  text-align: center;
-}
-
-.listItemDesktop {
-  @include list-item-width(5, $listItemPaddingTabletDesktop);
-  display: inline-block;
-  vertical-align: top;
-  padding-top: 10px;
-  padding-bottom: 10px;
   text-align: center;
 }

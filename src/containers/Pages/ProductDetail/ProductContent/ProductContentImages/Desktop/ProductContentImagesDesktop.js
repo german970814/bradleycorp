@@ -182,12 +182,10 @@ class ProductContentImagesDesktop extends Component {
 
         <ScrollableList
           numberToDisplay={3}
-          reverseScroll={true}
           wrapperClassName={style.imagesListWrapperDesktop}
-          ulClassName={style.imagesListDesktop}
-          listItemClassName={style.imageListItemDesktop}
           buttonDown={<ButtonDown />}
-          buttonUp={<ButtonUp />} >
+          buttonUp={<ButtonUp />}
+          vertical >
           {this.renderVerticalList()}
         </ScrollableList>
 

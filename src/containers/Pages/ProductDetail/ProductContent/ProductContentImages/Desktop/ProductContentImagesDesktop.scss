@@ -1,5 +1,7 @@
 @import "../../../../../../scss/partials/helpers";
 
+$verticalListItemHeight: 112px;
+
 .buttonUp, .buttonDown {
   display: inline-block;
   width: 77px;
@@ -39,15 +41,8 @@
   width: 77px;
 }
 
-.imagesListDesktop {
+.imagesListWrapperDesktop :global .track-wrapper-vertical {
   margin: 0;
   padding: 0;
-}
-
-.imageListItemDesktop {
-  display: inline-block;
-  margin: 8px 0;
-  width: 100%;
-  height: 95px;
-  list-style: none;
+  height: $verticalListItemHeight*3;
 }

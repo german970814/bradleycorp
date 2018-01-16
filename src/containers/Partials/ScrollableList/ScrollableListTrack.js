@@ -36,15 +36,32 @@ class ScrollableListTrack extends Component {
     return this.state.width / this.props.numberToDisplay
   }
 
+  getTrackHeightVertical () {
+    return (this.state.height/ this.props.numberToDisplay) * this.props.elementCount
+  }
+
+  getElementHeightVertical () {
+    return this.state.height / this.props.numberToDisplay
+  }
+
   getCurrentTranslation () {
-    return (this.props.currentIndex * -this.state.width) / this.props.numberToDisplay
+    return -this.getElementWidth() * this.props.currentIndex
+  }
+
+  getCurrentTranslationVertical () {
+    return -this.getElementHeightVertical() * this.props.currentIndex
   }
 
   render () {
+    if (this.props.vertical) {
+      return this.renderVertical()
+    }
+
     return (
       <div
         ref={(node) => { this.node = node }}
         className={`${style.trackWrapper} track-wrapper`}>
+
         <div
           style={{
             width: this.getTrackWidth(),
@@ -53,16 +70,39 @@ class ScrollableListTrack extends Component {
           className={`${style.track} ${'track'}`}>
           {this.props.children(this.getElementWidth())}
         </div>
+
+      </div>
+    )
+  }
+
+  renderVertical () {
+    return (
+      <div
+        ref={(node) => { this.node = node }}
+        className={`${style.trackWrapperVertical} track-wrapper-vertical`}>
+
+        <div
+          style={{
+            height: this.getTrackHeightVertical(),
+            transform: `translate(0px, ${this.getCurrentTranslationVertical()}px)`
+          }}
+          className={`${style.trackVertical} ${'track-vertical'}`}>
+          {this.props.children(this.getElementHeightVertical())}
+        </div>
+
       </div>
     )
   }
 }
 
+
+
 ScrollableListTrack.propTypes = {
   children: PropTypes.func.isRequired,
   currentIndex: PropTypes.number.isRequired,
   elementCount: PropTypes.number.isRequired,
-  numberToDisplay: PropTypes.number.isRequired
+  numberToDisplay: PropTypes.number.isRequired,
+  vertical: PropTypes.bool
 }
 
 export default ScrollableListTrack
