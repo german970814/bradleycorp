@@ -40,10 +40,18 @@ class ScrollableList extends Component {
       return
     }
 
-    // each child holds it's 'distance from 0' as position, so we can just use that as the increment required to move it to 0
-    const incrementBy = this.props.reverseScroll
-      ? this.state.children[newIndex].position
-      : -this.state.children[newIndex].position
+    let incrementBy = 0
+
+    if (newIndex > this.state.currentFirstIndex) {
+      // if we click between the currently selected item and the end
+      // then each child holds it's 'distance from 0' as position,
+      // so we can just use that as the increment required to move it to 0
+      incrementBy = -this.state.children[newIndex].position
+    }
+
+    if (newIndex < this.state.currentFirstIndex) {
+      incrementBy = this.state.children.length - this.state.children[newIndex].position
+    }
 
     return this.moveList(e, incrementBy)
   }
