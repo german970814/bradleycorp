@@ -29,7 +29,7 @@ class TabCompliance extends Component {
   render () {
     return (
       <div
-        className={[style.tabCompliance, tabStyle.halfWidthColDesktopTab].join(' ')} >
+        className={[style.tabCompliance, tabStyle.fullWidthColDesktopTab].join(' ')} >
         <h5
           className={tabStyle.tabColTitle}>
           {'Compliance'}

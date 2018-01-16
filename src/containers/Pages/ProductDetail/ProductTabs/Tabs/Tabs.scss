@@ -114,10 +114,6 @@ $fullWidthColBreakpoint: 600px;
   height: 17px;
 }
 
-.greyArrow {
-  margin-right: 13px;
-}
-
 .videoColMaxWidth {
   @include respond-to-custom($fullWidthColBreakpoint) {
     padding-right: calc(100% - 280px);

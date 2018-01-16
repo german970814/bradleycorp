@@ -1,7 +1,22 @@
+$arrowWidth: 6px;
+$arrowMargin: 13px;
+
+.wrapper {
+  position: relative;
+  padding-left: $arrowWidth + $arrowMargin;
+}
+
+.arrowWrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+}
+
 .arrow {
   display: inline-block;
   vertical-align: middle;
-  width: 6px;
+  width: $arrowWidth;
   height: 9px;
 }
 
