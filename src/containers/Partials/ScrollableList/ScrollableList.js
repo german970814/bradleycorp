@@ -188,10 +188,13 @@ class ScrollableList extends Component {
         {this.renderButtonUp()}
 
         <ScrollableListTrack
+          moveList={this.moveList.bind(this)}
           elementCount={this.state.children.length}
           numberToDisplay={this.props.numberToDisplay || 1}
           currentIndex={this.getFirstDisplayedChildIndex(this.state.children)}
-          vertical={this.props.vertical} >
+          vertical={this.props.vertical}
+          touchMoveSensitivity={this.props.touchMoveSensitivity}
+          reverseSwipeScroll={this.props.reverseSwipeScroll} >
           {(elementDimension) => this.renderChildren(elementDimension)}
         </ScrollableListTrack>
 
@@ -257,8 +260,10 @@ class ScrollableList extends Component {
 
 ScrollableList.propTypes = {
   numberToDisplay: PropTypes.number.isRequired,
+  touchMoveSensitivity: PropTypes.number,
   showPosition: PropTypes.bool,
   reverseScroll: PropTypes.bool,
+  reverseSwipeScroll: PropTypes.bool,
   positionButtonsBelow: PropTypes.bool,
   stopEventBubblingFromButtons: PropTypes.bool,
   vertical: PropTypes.bool,

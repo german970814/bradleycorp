@@ -182,9 +182,11 @@ class ProductContentImagesDesktop extends Component {
 
         <ScrollableList
           numberToDisplay={3}
+          touchMoveSensitivity={0.3}
           wrapperClassName={style.imagesListWrapperDesktop}
           buttonDown={<ButtonDown />}
           buttonUp={<ButtonUp />}
+          reverseSwipeScroll
           vertical >
           {this.renderVerticalList()}
         </ScrollableList>

@@ -80,6 +80,7 @@ class ProductContentImages extends Component {
     return (
       <ScrollableList
         numberToDisplay={1}
+        touchMoveSensitivity={2.5}
         wrapperClassName={style.imagesList}
         buttonUp={<ButtonLeft />}
         buttonDown={<ButtonRight />}

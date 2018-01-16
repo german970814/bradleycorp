@@ -52,6 +52,7 @@ class SimpleSlider extends Component {
               // mobile
               <ScrollableList
                 numberToDisplay={this.props.numberMobile}
+                touchMoveSensitivity={1}
                 buttonUp={buttonUpMobile}
                 buttonDown={buttonDownMobile}
                 positionButtonsBelow={this.props.nextPrevButtonsForMobile}
@@ -69,6 +70,7 @@ class SimpleSlider extends Component {
                     // tablet
                     <ScrollableList
                       numberToDisplay={this.props.numberTablet}
+                      touchMoveSensitivity={1.5}
                       buttonUp={<ButtonLeft />}
                       buttonDown={<ButtonRight />}
                       positionButtonsBelow={false}
@@ -83,6 +85,7 @@ class SimpleSlider extends Component {
                     // desktop
                     <ScrollableList
                       numberToDisplay={this.props.numberDesktop}
+                      touchMoveSensitivity={2}
                       buttonUp={<ButtonLeft />}
                       buttonDown={<ButtonRight />}
                       positionButtonsBelow={false}
