@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import YouTube from 'react-youtube'
-import ScrollableList from '../../../../../Partials/ScrollableList/ScrollableList'
+import ScrollableListOpensInLightbox from '../../../../../Partials/ScrollableList/ScrollableListOpensInLightbox'
 import addVideoIdFromSrc from '../../../../../../components/Partials/Youtube/addVideoIdFromSrc'
 import FitLightboxYoutube from '../../../../../Partials/Lightbox/FitLightboxYoutube'
 import ButtonLeft from './ButtonLeft'
@@ -31,13 +31,13 @@ class ProductContentImages extends Component {
           <div
             src={imageSrc}
             style={imageStyle}
-            className={[style.imagesList, style.fitBackground].join(' ')} />
+            className={style.fitBackground} />
 
           {/* display in lightbox scroller */}
           <div
             src={imageSrc}
             style={imageStyle}
-            className={[style.imagesList, style.fitBackground].join(' ')} />
+            className={style.fitBackground} />
 
         </React.Fragment>
       )
@@ -78,16 +78,17 @@ class ProductContentImages extends Component {
 
   render () {
     return (
-      <ScrollableList
+      <ScrollableListOpensInLightbox
         numberToDisplay={1}
         touchMoveSensitivity={2.5}
         wrapperClassName={style.imagesList}
+        lightboxWrapperClassName={style.lightboxContentWrapper}
         buttonUp={<ButtonLeft />}
         buttonDown={<ButtonRight />}
         stopEventBubblingFromButtons
         showPosition >
         {this.renderList()}
-      </ScrollableList>
+      </ScrollableListOpensInLightbox>
     )
   }
 }

@@ -148,7 +148,7 @@ class ScrollableList extends Component {
 
     return (
       <ul
-        className={style.positionCircles}>
+        className={`${style.positionCircles} position-circles`}>
         {this.state.children.map((child, index) => {
           return (
             <li
@@ -163,7 +163,7 @@ class ScrollableList extends Component {
     )
   }
 
-  renderChildren (dimensions, vertical) {
+  renderChildren (dimensions) {
     const inlineStyle = this.props.vertical ? { height: dimensions } : { width: dimensions }
     const className = this.props.vertical ? style.trackItemVertical : style.trackItem
 
@@ -179,7 +179,7 @@ class ScrollableList extends Component {
     })
   }
 
-  renderScroller (scrollerContent) {
+  renderScroller () {
     return (
       <div
         className={this.props.wrapperClassName}>
@@ -190,6 +190,7 @@ class ScrollableList extends Component {
           moveList={this.moveList.bind(this)}
           elementCount={this.state.children.length}
           numberToDisplay={this.props.numberToDisplay || 1}
+          transitionSpeed={this.props.transitionSpeed}
           currentIndex={this.getFirstDisplayedChildIndex(this.state.children)}
           vertical={this.props.vertical}
           touchMoveSensitivity={this.props.touchMoveSensitivity}
@@ -206,7 +207,7 @@ class ScrollableList extends Component {
   }
 
   render () {
-    return this.renderScroller(this.renderChildren())
+    return this.renderScroller()
   }
 
   getPosition (prevPos, increment, arrayLength) {
@@ -260,6 +261,7 @@ class ScrollableList extends Component {
 ScrollableList.propTypes = {
   numberToDisplay: PropTypes.number.isRequired,
   touchMoveSensitivity: PropTypes.number,
+  transitionSpeed: PropTypes.number,
   showPosition: PropTypes.bool,
   reverseScroll: PropTypes.bool,
   reverseSwipeScroll: PropTypes.bool,
@@ -269,6 +271,7 @@ ScrollableList.propTypes = {
   children: PropTypes.array.isRequired,
   onPositionChange: PropTypes.func,
   wrapperClassName: PropTypes.string,
+  lightboxWrapperClassName: PropTypes.string,
   buttonUpContainerClassName: PropTypes.string,
   buttonDownContainerClassName: PropTypes.string,
   buttonsBelowClassName: PropTypes.string,

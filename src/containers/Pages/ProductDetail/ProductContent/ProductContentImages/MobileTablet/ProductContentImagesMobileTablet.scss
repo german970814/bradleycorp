@@ -43,16 +43,8 @@ $tablet-height: 428px;
   }
 }
 
-.imageListItem {
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-  list-style: none;
-}
-
-.imageDiv {
-  margin: 0 10%;
-  cursor: pointer;
+:global #lightbox :local .imagesList :global .position-circles {
+  display: none;
 }
 
 .videoListItem {

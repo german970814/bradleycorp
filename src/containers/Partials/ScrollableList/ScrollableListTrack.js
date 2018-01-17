@@ -11,7 +11,11 @@ class ScrollableListTrack extends Component {
   constructor (props) {
     super(props)
 
-    this.state = { width: '0', height: '0' }
+    this.state = {
+      width: '0',
+      height: '0',
+      transition: 'transform 0s'
+    }
 
     // dont debounce update of track node when called immediately after mounting
     this.initUpdateTrackNode = this.updateTrackNode.bind(this)
@@ -21,6 +25,12 @@ class ScrollableListTrack extends Component {
   componentDidMount () {
     this.initUpdateTrackNode()
     window.addEventListener('resize', this.updateTrackNode)
+
+    setTimeout(() => {
+      this.setState({
+        transition: `transform ${this.props.transitionSpeed}ms`
+      })
+    }, 100)
   }
 
   componentWillUnmount () {
@@ -70,10 +80,17 @@ class ScrollableListTrack extends Component {
     return -this.getElementWidth() * this.props.currentIndex + delta
   }
 
+  getCurrentTranslationVertical (dy) {
+    // needs to take into account both how along the track we started
+    // and how far we've swiped (if we aren't currently swiping delta will be 0)
+    const delta = this.props.reverseSwipeScroll ? -dy : dy
+    return -this.getElementHeightVertical() * this.props.currentIndex + delta
+  }
+
   getTransition (dx, dy) {
     // remove css transition if we're swiping so there isn't a delay
     if (dx === 0 && dy === 0) {
-      return undefined
+      return this.state.transition
     }
 
     return 'transform 0s'
@@ -132,7 +149,7 @@ class ScrollableListTrack extends Component {
               <div
                 style={{
                   height: this.getTrackHeightVertical(),
-                  transform: `translate(0px, ${this.getCurrentTranslation(dy)}px)`,
+                  transform: `translate(0px, ${this.getCurrentTranslationVertical(dy)}px)`,
                   transition: this.getTransition(dx, dy)
                 }}
                 className={`${style.trackVertical} ${'track-vertical'}`}
@@ -159,9 +176,14 @@ ScrollableListTrack.propTypes = {
   currentIndex: PropTypes.number.isRequired,
   elementCount: PropTypes.number.isRequired,
   numberToDisplay: PropTypes.number.isRequired,
+  transitionSpeed: PropTypes.number,
   touchMoveSensitivity: PropTypes.number,
   vertical: PropTypes.bool,
   reverseSwipeScroll: PropTypes.bool
+}
+
+ScrollableListTrack.defaultProps = {
+  transitionSpeed: 600
 }
 
 export default ScrollableListTrack
