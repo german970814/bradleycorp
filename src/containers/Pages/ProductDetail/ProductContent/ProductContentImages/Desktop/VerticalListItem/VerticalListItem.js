@@ -1,19 +1,23 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import YouTube from 'react-youtube'
+import BCorpTouch from '../../../../../../Partials/Touch/BCorpTouch'
 import addVideoIdFromSrc from '../../../../../../../components/Partials/Youtube/addVideoIdFromSrc'
 import FitLightboxYoutube from '../../../../../../Partials/Lightbox/FitLightboxYoutube'
 import Lightbox from '../../../../../../Partials/Lightbox/Lightbox'
 import style from './VerticalListItem.scss'
 
 class VerticalListItem extends Component {
+
   renderImage () {
     const imageStyle = {
       backgroundImage: `url(${this.props.src})`
     }
+
     return (
       <div
         onClick={(e) => { this.props.onClick(e, this.props.src) }}
+        onTouchEnd={(e) => { this.props.onClick(e, this.props.src) }}
         style={imageStyle}
         className={style.listItem} />
     )

@@ -4,12 +4,16 @@ import debounce from 'debounce'
 import BCorpTouch from '../Touch/BCorpTouch'
 import style from './ScrollableList.scss'
 
+/*
+  Handles the sizing and animations for the scrollable list inner track
+ */
 class ScrollableListTrack extends Component {
   constructor (props) {
     super(props)
 
     this.state = { width: '0', height: '0' }
 
+    // dont debounce update of track node when called immediately after mounting
     this.initUpdateTrackNode = this.updateTrackNode.bind(this)
     this.updateTrackNode = debounce(this.updateTrackNode.bind(this), 200)
   }
@@ -29,28 +33,17 @@ class ScrollableListTrack extends Component {
     }
   }
 
-  touchEnd (e, dx, dy) {
+  touchEnd (e, dx) {
+    // higher sensitivity means a smaller swipe moves the scroller further
     const sensitivity = this.props.touchMoveSensitivity || 1
 
-    const deltaX = this.props.reverseSwipeScroll ? -dx : dx
-    const numberToMove = (deltaX / this.getElementWidth()) * sensitivity
-    const intNumberToMove = numberToMove < 0
-      ? Math.ceil(numberToMove)
-      : Math.floor(numberToMove)
+    const delta = this.props.reverseSwipeScroll ? -dx : dx
 
-    return this.props.moveList(e, intNumberToMove)
-  }
+    // we calculate an integer number to move by
+    // using percentage of element width swiped multiplied by sensitivity
+    const numberToMove = (delta / this.getElementWidth()) * sensitivity
+    const intNumberToMove = Math.round(numberToMove)
 
-  touchEndVertical (e, dx, dy) {
-    const sensitivity = this.props.touchMoveSensitivity || 1
-
-    const deltaY = this.props.reverseSwipeScroll ? -dy : dy
-    const numberToMove = (deltaY / this.getElementWidth()) * sensitivity
-    const intNumberToMove = numberToMove < 0
-      ? Math.ceil(numberToMove)
-      : Math.floor(numberToMove)
-
-    console.log(intNumberToMove)
     return this.props.moveList(e, intNumberToMove)
   }
 
@@ -70,17 +63,15 @@ class ScrollableListTrack extends Component {
     return this.state.height / this.props.numberToDisplay
   }
 
-  getCurrentTranslation (dx, dy) {
-    const deltaX = this.props.reverseSwipeScroll ? -dx : dx
-    return -this.getElementWidth() * this.props.currentIndex + deltaX
-  }
-
-  getCurrentTranslationVertical (dx, dy) {
-    const deltaY = this.props.reverseSwipeScroll ? -dy : dy
-    return -this.getElementHeightVertical() * this.props.currentIndex + deltaY
+  getCurrentTranslation (dx) {
+    // needs to take into account both how along the track we started
+    // and how far we've swiped (if we aren't currently swiping delta will be 0)
+    const delta = this.props.reverseSwipeScroll ? -dx : dx
+    return -this.getElementWidth() * this.props.currentIndex + delta
   }
 
   getTransition (dx, dy) {
+    // remove css transition if we're swiping so there isn't a delay
     if (dx === 0 && dy === 0) {
       return undefined
     }
@@ -93,26 +84,31 @@ class ScrollableListTrack extends Component {
       return this.renderVertical()
     }
 
+    const alignText = this.state.width > this.getTrackWidth()
+      ? '0 auto'
+      : undefined
+
     return (
       <div
         ref={(node) => { this.node = node }}
         className={`${style.trackWrapper} track-wrapper`}>
 
         <BCorpTouch>
-          {(touchStart, touchMove, touchEnd, dx, dy) => {
+          {({ touchStart, touchMove, touchEndCapture, dx, dy }) => {
             return (
               <div
                 style={{
+                  margin: alignText,
                   width: this.getTrackWidth(),
-                  transform: `translate(${this.getCurrentTranslation(dx, dy)}px , 0px)`,
+                  transform: `translate(${this.getCurrentTranslation(dx)}px , 0px)`,
                   transition: this.getTransition(dx, dy)
                 }}
                 className={`${style.track} ${'track'}`}
                 onTouchStart={touchStart}
                 onTouchMove={touchMove}
-                onTouchEnd={(e) => {
-                  this.touchEnd(e, dx, dy)
-                  touchEnd()
+                onTouchEndCapture={(e) => {
+                  this.touchEnd(e, dx)
+                  touchEndCapture(e)
                 }} >
                 {this.props.children(this.getElementWidth())}
               </div>
@@ -131,20 +127,20 @@ class ScrollableListTrack extends Component {
         className={`${style.trackWrapperVertical} track-wrapper-vertical`}>
 
         <BCorpTouch>
-          {(touchStart, touchMove, touchEnd, dx, dy) => {
+          {({ touchStart, touchMove, touchEndCapture, dx, dy }) => {
             return (
               <div
                 style={{
                   height: this.getTrackHeightVertical(),
-                  transform: `translate(0px, ${this.getCurrentTranslationVertical(dx, dy)}px)`,
+                  transform: `translate(0px, ${this.getCurrentTranslation(dy)}px)`,
                   transition: this.getTransition(dx, dy)
                 }}
                 className={`${style.trackVertical} ${'track-vertical'}`}
                 onTouchStart={touchStart}
                 onTouchMove={touchMove}
-                onTouchEnd={(e) => {
-                  this.touchEndVertical(e, dx, dy)
-                  touchEnd()
+                onTouchEndCapture={(e) => {
+                  this.touchEnd(e, dy)
+                  touchEndCapture(e)
                 }} >
                 {this.props.children(this.getElementHeightVertical())}
               </div>

@@ -1,6 +1,10 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
+/*
+  A wrapper component that handles touch state for its children.
+  Allows children to get access to data about touch and swipe events occuring within the children
+ */
 class BCorpTouch extends Component {
   constructor (props) {
     super(props)
@@ -25,23 +29,34 @@ class BCorpTouch extends Component {
         x: touchObj.clientX,
         y: touchObj.clientY,
         dx: prevState.dx + (touchObj.clientX - prevState.x),
-        dy: prevState.dy + (prevState.y - touchObj.clientY),
+        dy: prevState.dy + (prevState.y - touchObj.clientY)
       }
     })
   }
 
-  touchEnd (event) {
+  touchEndCapture (event) {
+    // if we swiped then we dont want to call child click or touchEnd events
+    // so we stop propagation in the event capture phase
+    //
+    // if you want to call an onTouchEnd event, call it from onTouchEndCapture BEFORE calling this
+    if (this.state.dx !== 0 && this.state.dy !== 0) {
+      event.stopPropagation()
+    }
+
+    // return state to 0 after touch finishes
     this.setState({ x: 0, y: 0, dx: 0, dy: 0 })
   }
 
-  render() {
-    return this.props.children(
-      this.touchStart.bind(this),
-      this.touchMove.bind(this),
-      this.touchEnd.bind(this),
-      this.state.dx,
-      this.state.dy
-    )
+  render () {
+    // pass children function an object so we can pick and choose properties we want to use
+    const self = this
+    return this.props.children({
+      touchStart: self.touchStart.bind(self),
+      touchMove: self.touchMove.bind(self),
+      touchEndCapture: self.touchEndCapture.bind(self),
+      dx: self.state.dx,
+      dy: self.state.dy
+    })
   }
 }
 

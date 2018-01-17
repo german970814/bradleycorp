@@ -57,7 +57,6 @@ class ScrollableList extends Component {
   }
 
   moveList (e, increment) {
-    e.preventDefault()
     if (this.props.stopEventBubblingFromButtons) { // stops it from calling any onClick events on the container eg close lightbox
       e.stopPropagation()
     }
