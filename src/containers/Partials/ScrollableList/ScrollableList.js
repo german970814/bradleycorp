@@ -271,7 +271,6 @@ ScrollableList.propTypes = {
   children: PropTypes.array.isRequired,
   onPositionChange: PropTypes.func,
   wrapperClassName: PropTypes.string,
-  lightboxWrapperClassName: PropTypes.string,
   buttonUpContainerClassName: PropTypes.string,
   buttonDownContainerClassName: PropTypes.string,
   buttonsBelowClassName: PropTypes.string,

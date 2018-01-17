@@ -42,10 +42,6 @@ $lightboxHeightPerc: $lightboxHeight + %;
   text-align: center;
 }
 
-.fitChildrenSize {
-  position: relative;
-}
-
 .closeButtonWrapper {
   position: absolute;
   bottom: -($closeButtonHeight + $closeButtonDistanceBelow);

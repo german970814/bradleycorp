@@ -69,15 +69,12 @@ class Lightbox extends Component {
 
           <div
             className={style.lightbox} >
-            <div
-              className={style.fitChildrenSize}>
 
-              {this.getLightboxContent()}
+            {this.getLightboxContent()}
 
-              <LightboxCloseButton
-                onClick={this.closeLightbox.bind(this)} />
+            <LightboxCloseButton
+              onClick={this.closeLightbox.bind(this)} />
 
-            </div>
           </div>
 
         </div>
