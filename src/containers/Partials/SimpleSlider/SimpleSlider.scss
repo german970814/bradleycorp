@@ -106,19 +106,44 @@ $listItemPaddingTabletDesktop: 40px;
 
 // Tablet-Desktop
 
-$arrowWidthTablet: 11px;
+$arrowWidthTablet: 51px;
 
 .sliderTabletDesktop {
   @extend %BodyPaddingWithMediaQueries;
-  @extend %100WidthMinusBodyPaddingWithMediaQueries;
+  /* @extend %100WidthMinusBodyPaddingWithMediaQueries; */
+  max-width: 1066px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+
+  .buttonsSidesContainer {
+    position: absolute;
+    top: 50%;
+    height: auto;
+
+    &.buttonUp {
+      left: 0;
+    }
+    &.buttonDown {
+      right: 0;
+    }
+  }
 }
 
 .leftButton, .rightButton {
-  width: 100%;
+  width: $arrowWidthTablet;
 
   img {
-    width: 100%;
+    max-width: 11px;
+    display: inline-block;
   }
+}
+
+.leftButton  {
+  text-align: left;
+}
+.rightButton {
+  text-align: right;
 }
 
 .sliderTabletDesktop :global .track-wrapper {
