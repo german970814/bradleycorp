@@ -48,6 +48,7 @@
   font-family: $CentraleSansPro;
   font-size: 23px;
   font-weight: 300;
+  line-height: 1.22;
   font-style: normal;
   text-align: left;
 }
@@ -56,6 +57,7 @@
   font-family: $CentraleSansPro;
   font-size: 28px;
   font-weight: 300;
+  line-height: 1.21;
   letter-spacing: -1.1px;
   text-align: left;
 }
@@ -105,14 +107,17 @@
 
 %h6-desktop {
   font-family: $CentraleSansPro;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
-  text-align: center;
+  line-height: 2.77;
+  letter-spacing: 0.5px;
+  text-align: left;
+  // text-align: center;
 }
 
 %small-body-desktop {
   font-family: Helvetica;
-  font-size: 10px;
+  font-size: 12px;
   text-align: center;
 }
 
