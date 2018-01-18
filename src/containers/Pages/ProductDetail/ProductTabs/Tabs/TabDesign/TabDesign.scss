@@ -43,6 +43,7 @@ $marginTopColor: 28px;
   margin-bottom: 14px;
   width: 100%;
   height: auto;
+  border: 1px solid $thumbnail-border;
 
   @include respond-to(mobile) {
     width: 100px;
