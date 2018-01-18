@@ -7,9 +7,10 @@ const PDFWithFeaturedImage = props => {
     ? (
       <div
         className={style.imageContainer} >
-        <div
-          className={style.image}
-          style={{backgroundImage: `url(${props.imageSrc})`}} />
+
+          <img
+            className={style.image}
+            src={props.imageSrc} />
       </div>
     )
     : null
