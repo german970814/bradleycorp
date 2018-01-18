@@ -26,6 +26,7 @@ class TabThreePartSpecAndTechData extends Component {
           <FileDownloadLink
             title={threePartSpec.post['post_title'] || ''}
             link={threePartSpec.meta['technical_info_pdf']}
+            linkClass={tabStyle.tabTextOrangeLink}
             titleClass={tabStyle.tabTextOrange}
             iconClass={tabStyle.wordPDFIcon} />
         </li>
@@ -40,7 +41,7 @@ class TabThreePartSpecAndTechData extends Component {
           className={this.getColumnWidth()} >
           <h5
             className={tabStyle.tabColTitle} >
-            {'3 Part Spec'}
+            {'3-Part Spec'}
           </h5>
           <ul
             className={tabStyle.tabColUl} >
@@ -59,6 +60,7 @@ class TabThreePartSpecAndTechData extends Component {
           <FileDownloadLink
             title={technicalData.post['post_title'] || ''}
             link={technicalData.meta['technical_info_pdf']}
+            linkClass={tabStyle.tabTextOrangeLink}
             titleClass={tabStyle.tabTextOrange}
             iconClass={tabStyle.wordPDFIcon} />
         </li>
