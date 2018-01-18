@@ -90,6 +90,17 @@ $fullWidthColBreakpoint: 600px;
   color: #2f3d70;
 }
 
+.tabTextOrangeLink {
+  display: block;
+  padding-left: 26px;
+  position: relative;
+  .wordPDFIcon {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
 .tabTextOrange {
   display: inline-block;
   vertical-align: middle;
@@ -98,7 +109,7 @@ $fullWidthColBreakpoint: 600px;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
-  line-height: normal;
+  line-height: inherit;
   letter-spacing: 0.5px;
   text-align: left;
   text-decoration: none;
