@@ -11,6 +11,7 @@ const FileDownloadLink = props => {
         <PDFDownloadLink
           title={props.title}
           link={props.link}
+          linkClass={props.linkClass}
           titleClass={props.titleClass}
           iconClass={props.iconClass} />
       )
@@ -23,6 +24,7 @@ const FileDownloadLink = props => {
         <WordDownloadLink
           title={props.title}
           link={props.link}
+          linkClass={props.linkClass}
           titleClass={props.titleClass}
           iconClass={props.iconClass} />
       )
