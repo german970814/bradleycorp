@@ -17,29 +17,32 @@ class ProductContentImages extends Component {
 
   renderList () {
     const imgSrcs = this.getImagesSrcListWithFeaturedImage()
-    const images = imgSrcs.map((imageSrc, index) => {
-      const imageStyle = {
-        backgroundImage: `url(${imageSrc})`
-      }
-      return (
-        <React.Fragment
-          key={index} >
+    const images = (imgSrcs && imgSrcs[0].length)
+      ? imgSrcs.map((imageSrc, index) => {
+        const imageStyle = {
+          backgroundImage: `url(${imageSrc})`
+        }
+        console.log(imgSrcs)
+        return (
+          <React.Fragment
+            key={index} >
 
-          {/* display in scroller */}
-          <div
-            src={imageSrc}
-            style={imageStyle}
-            className={[style.imageDiv, style.fitBackground].join(' ')} />
+            {/* display in scroller */}
+            <div
+              src={imageSrc}
+              style={imageStyle}
+              className={[style.imageDiv, style.fitBackground].join(' ')} />
 
-          {/* display in lightbox scroller */}
-          <div
-            src={imageSrc}
-            style={imageStyle}
-            className={[style.imageDiv, style.fitBackground].join(' ')} />
+            {/* display in lightbox scroller */}
+            <div
+              src={imageSrc}
+              style={imageStyle}
+              className={[style.imageDiv, style.fitBackground].join(' ')} />
 
-        </React.Fragment>
-      )
-    })
+          </React.Fragment>
+        )
+      })
+      : []
 
     const videos = (this.props.videos && this.props.videos.length)
       ? this.props.videos.split(',').map((videoSrc, index) => {
