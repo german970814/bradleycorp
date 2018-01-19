@@ -40,6 +40,22 @@
   color: #e51616;
 }
 
+.complianceIcon {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 5px;
+  width: 23px;
+  height: 22px;
+  overflow: hidden;
+}
+
+.compliance {
+  display: inline-block;
+  vertical-align: top;
+  float: right;
+  text-align: right;
+}
+
 .image {
   @extend %fitBackground;
   @extend %widthController;
