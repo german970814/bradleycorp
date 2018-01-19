@@ -31,7 +31,7 @@ class ProductDetail extends Component {
   }
 
   render () {
-    console.log(React.Fragment)
+    console.log(this.state.productDetail)
     return (
       <div
         className={style.productDetailPage}>
@@ -92,7 +92,6 @@ class ProductDetail extends Component {
   }
 
   async getProductInfo (props) {
-    console.log(props)
     try {
       const productSlug = props.match.params.slug
       const productDetail = await this.getProductDetailPage(productSlug)
@@ -106,7 +105,6 @@ class ProductDetail extends Component {
   }
 
   getProductDetailPage (slug) {
-console.log(slug)
     const productApiClient = new ProductApiClient()
     return productApiClient.getProductDetailPage(slug)
   }
