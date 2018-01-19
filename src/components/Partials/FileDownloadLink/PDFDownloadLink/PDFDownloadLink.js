@@ -3,16 +3,18 @@ import PropTypes from 'prop-types'
 import sharedStyle from '../FileDownloadLink.scss'
 
 const PDFDownloadLink = props => {
+  console.log(props.titleClass)
   return (
     <div
       className={sharedStyle.container} >
-      <a href={props.link}>
+      <a href={props.link}
+        className={props.linkClass}>
         <img
           className={[sharedStyle.icon, props.iconClass].join(' ')}
           src={require('../../../../images/pdf-icon/pdf@2x.png')} />
         <span
           className={[sharedStyle.title, props.titleClass].join(' ')} >
-          {props.title}
+          <span>{props.title}</span>
         </span>
       </a>
     </div>

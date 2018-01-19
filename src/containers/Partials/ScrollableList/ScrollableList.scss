@@ -1,7 +1,30 @@
 @import "../../../scss/partials/mixins";
 
+.trackWrapper, .trackWrapperVertical {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.track {
+  height: 100%;
+}
+
+.trackItem {
+  display: inline-block;
+  float: left;
+  height: 100%;
+}
+
+.trackItemVertical {
+  display: inline-block;
+  float: left;
+  width: 100%;
+}
+
 .buttonUp, .buttonDown, .buttonUpLightbox, .buttonDownLightbox {
   display: inline-block;
+  cursor: pointer;
 }
 
 .buttonUpLightbox, .buttonDownLightbox {
@@ -13,6 +36,10 @@
 
 .buttonUp, .buttonUpLightbox {
   float: left;
+}
+
+.buttonDownLightbox {
+  float: right;
 }
 
 .positionCircles {
@@ -40,4 +67,8 @@
 
 .inheritHeight {
   height: inherit !important;
+}
+
+.lightboxInnerScroller {
+  display: inline-block;
 }

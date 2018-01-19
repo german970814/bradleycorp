@@ -22,19 +22,26 @@
 }
 
 .content {
+  overflow: hidden;
   width: 100%;
   font-family: Helvetica;
   font-size: 12px;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  line-height: 1.5;
+  line-height: 1;
   letter-spacing: normal;
   text-align: left;
   color: $slate-grey;
 
   ul {
-    padding-left: 10px;
+    padding-left: 15px;
+
+    li {
+      margin-top: 6px;
+      margin-bottom: 6px;
+      padding-left: 6px;
+    }
   }
 
   @include respond-to(tablet) {

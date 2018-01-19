@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import VerticalAlignHelper from '../../../components/Partials/VerticalAlignHelper/VerticalAlignHelper'
 import LightboxCloseButton from './LightboxCloseButton'
@@ -33,17 +34,16 @@ class Lightbox extends Component {
     })
   }
 
-  getChildrenWithLightboxApi () {
-    return React.Children.map(this.props.children, child => {
+  renderChildrenWithLightboxAPI () {
+    const lightboxChildStyle = { cursor: 'zoom-in' }
+    const childrenWithAPI = React.Children.map(this.props.children, child => {
       return React.cloneElement(child, {
+        style: { ...child.props.style, ...lightboxChildStyle },
         onClick: this.toggleOpen.bind(this)
       })
     })
-  }
 
-  renderChildrenWithLightboxContentRemoved () {
-    const childrenWithLightboxApi = this.getChildrenWithLightboxApi()
-    const children = React.Children.toArray(childrenWithLightboxApi)
+    const children = React.Children.toArray(childrenWithAPI)
 
     if (children.length === 1) {
       return children
@@ -53,31 +53,32 @@ class Lightbox extends Component {
   }
 
   getLightboxContent () {
-    const childrenWithLightboxSize = React.Children.map(this.props.children, child => {
-      return React.cloneElement(child, {
-        // give the child the button to close the lightbox
-        lightboxCloseButton: LightboxCloseButton,
-        lightboxCloseButtonOnClick: this.closeLightbox.bind(this)
-      })
-    })
-
-    const children = React.Children.toArray(childrenWithLightboxSize)
+    const children = React.Children.toArray(this.props.children)
     // takes last child as lightbox content
     return children[children.length - 1]
   }
 
   renderLightbox () {
     if (this.state.isOpen) {
-      return (
+      return ReactDOM.createPortal((
         <div
-          className={[style.background, this.props.backgroundClass].join(' ')} >
+          className={[style.background, this.props.backgroundClass].join(' ')}
+          onClick={this.closeLightbox.bind(this)} >
+
           <VerticalAlignHelper />
+
           <div
             className={style.lightbox} >
+
             {this.getLightboxContent()}
+
+            <LightboxCloseButton
+              onClick={this.closeLightbox.bind(this)} />
+
           </div>
+
         </div>
-      )
+      ), document.getElementById('lightbox'))
     }
   }
 
@@ -85,7 +86,7 @@ class Lightbox extends Component {
     return (
       <div
         className={style.childWrapper} >
-        {this.renderChildrenWithLightboxContentRemoved()}
+        {this.renderChildrenWithLightboxAPI()}
         {this.renderLightbox()}
       </div>
     )

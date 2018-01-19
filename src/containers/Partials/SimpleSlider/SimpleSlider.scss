@@ -1,6 +1,10 @@
 @import "../../../scss/partials/variables";
 @import "../../../scss/partials/layout";
 @import "../../../scss/partials/helpers";
+@import "../../../scss/partials/mixins";
+
+$listItemPadding: 20px;
+$listItemPaddingTabletDesktop: 40px;
 
 .title {
   margin: {
@@ -8,30 +12,26 @@
     bottom: 19px;
   }
   width: 100%;
-  font-family: TradeGothic-CondTwenty;
+  font-family: $TradeGothic;
   font-size: 16px;
   font-weight: bold;
   line-height: 1.26;
   letter-spacing: 1.6px;
   text-align: center;
-  color: $black
+  text-transform: uppercase;
+  color: $black;
 }
 
-.sliderUl {
+.sliderWrapper {
   @extend %BodyPaddingWithMediaQueries;
   @extend %100WidthMinusBodyPaddingWithMediaQueries;
-  margin-top: 0;
-  margin-bottom: 20px;
-  text-align: center;
 }
 
-$listItemPadding: 10px;
-
-.listItem {
-  display: inline-block;
-  vertical-align: top;
-  padding: 10px;
-  width: calc(50% - #{$listItemPadding}*2);
+.sliderWrapper :global .track-wrapper {
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 20px;
+  padding: 0;
   text-align: center;
 }
 
@@ -106,43 +106,52 @@ $listItemPadding: 10px;
 
 // Tablet-Desktop
 
-$arrowWidthTablet: 11px;
+$arrowWidthTablet: 51px;
 
 .sliderTabletDesktop {
   @extend %BodyPaddingWithMediaQueries;
-  @extend %100WidthMinusBodyPaddingWithMediaQueries;
-}
+  /* @extend %100WidthMinusBodyPaddingWithMediaQueries; */
+  max-width: 1066px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
 
-.leftButton, .rightButton {
-  width: 100%;
+  .buttonsSidesContainer {
+    position: absolute;
+    top: 50%;
+    height: auto;
 
-  img {
-    width: 100%;
+    &.buttonUp {
+      left: 0;
+    }
+    &.buttonDown {
+      right: 0;
+    }
   }
 }
 
-.sliderUlTablet {
+.leftButton, .rightButton {
+  width: $arrowWidthTablet;
+
+  img {
+    max-width: 11px;
+    display: inline-block;
+  }
+}
+
+.leftButton  {
+  text-align: left;
+}
+.rightButton {
+  text-align: right;
+}
+
+.sliderTabletDesktop :global .track-wrapper {
   display: inline-block;
   vertical-align: middle;
   margin-top: 0;
   margin-bottom: 55px;
   padding: 0;
   width: calc(100% - #{$arrowWidthTablet}*2);
-  text-align: center;
-}
-
-.listItemTablet {
-  display: inline-block;
-  vertical-align: top;
-  padding: 10px;
-  width: calc(100% / 3 - #{$listItemPadding}*2);
-  text-align: center;
-}
-
-.listItemDesktop {
-  display: inline-block;
-  vertical-align: top;
-  padding: 10px;
-  width: calc(20% - #{$listItemPadding}*2);
   text-align: center;
 }

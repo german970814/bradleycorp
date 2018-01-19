@@ -1,10 +1,6 @@
 
 $buttonWidth: 11px;
 
-.lightboxContentWrapper {
-  position: relative;
-}
-
 .buttonUp, .buttonDown {
   height: inherit;
 }
@@ -12,7 +8,7 @@ $buttonWidth: 11px;
 .buttonLeft, .buttonRight {
   display: inline-block;
   width: $buttonWidth;
-  height: inherit;
+  height: 100%;
   cursor: pointer;
 
   img {
@@ -22,19 +18,14 @@ $buttonWidth: 11px;
 }
 
 .wrapper {
-  height: inherit;
+  height: 100%;
 }
 
-.imagesList {
+.wrapper :global .track-wrapper {
   display: inline;
   float: left;
   margin: 0;
   padding: 0;
   width: calc(100% - #{$buttonWidth} - #{$buttonWidth});
-  height: 100%;
   text-align: center;
-}
-
-.listItem {
-  height: 100%;
 }

@@ -8,7 +8,7 @@ const ArrowThumbnail = props => {
       className={[style.arrowThumbnail, props.customClass].join(' ')} >
 
       <img
-        src={require('../../../images/icon-arrow/icon-arrow-r.png')}
+        src={require('../../../images/small-arrow/small-arrow@2x.png')}
         className={[style.arrow, props.arrowCustomClass].join(' ')} />
 
       <div

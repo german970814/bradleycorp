@@ -29,9 +29,13 @@ class Tab extends Component {
   render () {
     const active = this.props.isActive ? style.active : ''
     const tabClass = this.props.isDesktop ? [style.tab, style.tabDesktop].join(' ') : style.tab
+    const inlineStyle = {
+      width: this.props.tabWidth
+    }
 
     return (
       <li
+        style={inlineStyle}
         className={[tabClass, `${this.props.tabClassName} ${active}`].join(' ')}
         onClick={(e) => { this.handleClick(e) }} >
         <span>{this.props.text}</span>
@@ -48,7 +52,8 @@ Tab.propTypes = {
   isDesktop: PropTypes.bool.isRequired,
   isOpen: PropTypes.bool.isRequired,
   text: PropTypes.string.isRequired,
-  tabClassName: PropTypes.string
+  tabClassName: PropTypes.string,
+  tabWidth: PropTypes.string
 }
 
 export default Tab

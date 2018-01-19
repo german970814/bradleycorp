@@ -6,13 +6,14 @@ const WordDownloadLink = props => {
   return (
     <div
       className={sharedStyle.container} >
-      <a href={props.link}>
+      <a href={props.link}
+        className={props.linkClass}>
         <img
           className={[sharedStyle.icon, props.iconClass].join(' ')}
           src={require('../../../../images/word-icon/word@2x.png')} />
         <span
           className={[sharedStyle.title, props.titleClass].join(' ')}>
-          {props.title}
+          <span>{props.title}</span>
         </span>
       </a>
     </div>

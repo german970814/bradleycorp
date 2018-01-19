@@ -34,6 +34,7 @@ class TabsDesktop extends Component {
         tabIndex: index,
         isActive: index === this.state.activeTabIndex,
         isDesktop: true,
+        tabWidth: (child.props.style ? child.props.style.width : false) || this.props.tabWidth,
         tabClassName: this.props.tabClassName
       })
     })
@@ -68,7 +69,8 @@ TabsDesktop.propTypes = {
   tabClassName: PropTypes.string,
   activeTabClassName: PropTypes.string,
   tabWrapperClassName: PropTypes.string,
-  tabsUlClassName: PropTypes.string
+  tabsUlClassName: PropTypes.string,
+  tabWidth: PropTypes.string
 }
 
 export default TabsDesktop

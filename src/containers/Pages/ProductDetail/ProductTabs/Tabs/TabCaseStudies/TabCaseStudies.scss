@@ -1,3 +1,14 @@
-.tabCaseStudies {
+@import "../Tabs";
 
+$designMarginTop: 20px;
+
+.colTitle {
+  margin-bottom: $titleMarginBottom - $designMarginTop;
+}
+
+.caseStudy {
+  display: inline-block;
+  vertical-align: top;
+  width: 126px;
+  margin: $designMarginTop 20px 0px 0px;
 }

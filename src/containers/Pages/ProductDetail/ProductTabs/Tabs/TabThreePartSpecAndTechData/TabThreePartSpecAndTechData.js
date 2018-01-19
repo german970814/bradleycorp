@@ -12,14 +12,55 @@ class TabThreePartSpecAndTechData extends Component {
     this.renderTechnicalData = this.renderTechnicalData.bind(this)
   }
 
-  renderThreePartSpec () {
+  getColumnWidth () {
+    return this.props.threePartSpec.length && this.props.technicalData.length
+      ? tabStyle.halfWidthColDesktopTab
+      : tabStyle.fullWidthColDesktopTab
+  }
+
+  renderThreePartSpecList () {
     return this.props.threePartSpec.map((threePartSpec, index) => {
       return (
         <li
           key={index}>
           <FileDownloadLink
-            title={threePartSpec.name}
-            link={threePartSpec.description}
+            title={threePartSpec.post['post_title'] || ''}
+            link={threePartSpec.meta['technical_info_pdf']}
+            linkClass={tabStyle.tabTextOrangeLink}
+            titleClass={tabStyle.tabTextOrange}
+            iconClass={tabStyle.wordPDFIcon} />
+        </li>
+      )
+    })
+  }
+
+  renderThreePartSpec () {
+    if (this.props.threePartSpec.length) {
+      return (
+        <div
+          className={this.getColumnWidth()} >
+          <h5
+            className={tabStyle.tabColTitle} >
+            {'3-Part Spec'}
+          </h5>
+          <ul
+            className={tabStyle.tabColUl} >
+            {this.renderThreePartSpecList()}
+          </ul>
+        </div>
+      )
+    }
+  }
+
+  renderTechnicalDataList () {
+    return this.props.technicalData.map((technicalData, index) => {
+      return (
+        <li
+          key={index}>
+          <FileDownloadLink
+            title={technicalData.post['post_title'] || ''}
+            link={technicalData.meta['technical_info_pdf']}
+            linkClass={tabStyle.tabTextOrangeLink}
             titleClass={tabStyle.tabTextOrange}
             iconClass={tabStyle.wordPDFIcon} />
         </li>
@@ -28,18 +69,21 @@ class TabThreePartSpecAndTechData extends Component {
   }
 
   renderTechnicalData () {
-    return this.props.technicalData.map((technicalData, index) => {
+    if (this.props.technicalData.length) {
       return (
-        <li
-          key={index}>
-          <FileDownloadLink
-            title={technicalData.name}
-            link={technicalData.description}
-            titleClass={tabStyle.tabTextOrange}
-            iconClass={tabStyle.wordPDFIcon} />
-        </li>
+        <div
+          className={this.getColumnWidth()} >
+          <h5
+            className={tabStyle.tabColTitle} >
+            {'Technical Data'}
+          </h5>
+          <ul
+            className={tabStyle.tabColUl} >
+            {this.renderTechnicalDataList()}
+          </ul>
+        </div>
       )
-    })
+    }
   }
 
   render () {
@@ -47,29 +91,9 @@ class TabThreePartSpecAndTechData extends Component {
       <div
         className={style.tabThreePartSpecAndTechData}>
 
-        <div
-          className={tabStyle.halfWidthColDesktopTab} >
-          <h5
-            className={tabStyle.tabColTitle} >
-            {'3 Part Spec'}
-          </h5>
-          <ul
-            className={tabStyle.tabColUl} >
-            {this.renderThreePartSpec()}
-          </ul>
-        </div>
+        {this.renderThreePartSpec()}
 
-        <div
-          className={tabStyle.halfWidthColDesktopTab} >
-          <h5
-            className={tabStyle.tabColTitle} >
-            {'Technical Data'}
-          </h5>
-          <ul
-            className={tabStyle.tabColUl} >
-            {this.renderTechnicalData()}
-          </ul>
-        </div>
+        {this.renderTechnicalData()}
 
       </div>
     )

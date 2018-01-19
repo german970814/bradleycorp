@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import YoutubePlayerLightbox from '../../../../../../../../components/Partials/Youtube/YoutubePlayerLightbox/YoutubePlayerLightbox'
+import YouTube from 'react-youtube'
+import addVideoIdFromSrc from '../../../../../../../../components/Partials/Youtube/addVideoIdFromSrc'
+import FitLightboxYoutube from '../../../../../../../Partials/Lightbox/FitLightboxYoutube'
 import style from './ListItemLightbox.scss'
 
 class ListItemLightbox extends Component {
@@ -17,11 +19,17 @@ class ListItemLightbox extends Component {
   }
 
   renderVideo () {
+    const YoutubeWithID = addVideoIdFromSrc(YouTube, this.props.src)
     return (
-      <YoutubePlayerLightbox
-        src={this.props.src}
-        maxWidth={0.8}
-        maxWidthTablet={0.8} />
+      <FitLightboxYoutube>
+        {(width, height) => {
+          return (
+            <YoutubeWithID
+              opts={{width, height}}/>
+          )
+        }}
+      </FitLightboxYoutube>
+
     )
   }
 
@@ -35,10 +43,6 @@ class ListItemLightbox extends Component {
 
 ListItemLightbox.propTypes = {
   src: PropTypes.string.isRequired,
-  style: PropTypes.shape({
-    width: PropTypes.number,
-    height: PropTypes.number
-  }),
   video: PropTypes.bool
 }
 

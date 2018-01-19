@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import YouTube from 'react-youtube'
 import ScrollableListOpensInLightbox from '../../../../../Partials/ScrollableList/ScrollableListOpensInLightbox'
-import YoutubePlayerLightbox from '../../../../../../components/Partials/Youtube/YoutubePlayerLightbox/YoutubePlayerLightbox'
+import addVideoIdFromSrc from '../../../../../../components/Partials/Youtube/addVideoIdFromSrc'
+import FitLightboxYoutube from '../../../../../Partials/Lightbox/FitLightboxYoutube'
 import ButtonLeft from './ButtonLeft'
 import ButtonRight from './ButtonRight'
 import style from './ProductContentImagesMobileTablet.scss'
@@ -27,17 +29,17 @@ class ProductContentImages extends Component {
           <React.Fragment
             key={index} >
 
-            {/* display in scroller */}
-            <div
-              src={imageSrc}
-              style={imageStyle}
-              className={[style.imageDiv, style.fitBackground].join(' ')} />
+          {/* display in scroller */}
+          <div
+            src={imageSrc}
+            style={imageStyle}
+            className={style.fitBackground} />
 
-            {/* display in lightbox scroller */}
-            <div
-              src={imageSrc}
-              style={imageStyle}
-              className={[style.imageDiv, style.fitBackground].join(' ')} />
+          {/* display in lightbox scroller */}
+          <div
+            src={imageSrc}
+            style={imageStyle}
+            className={style.fitBackground} />
 
           </React.Fragment>
         )
@@ -46,6 +48,7 @@ class ProductContentImages extends Component {
 
     const videos = (this.props.videos && this.props.videos.length)
       ? this.props.videos.split(',').map((videoSrc, index) => {
+        const YoutubeWithID = addVideoIdFromSrc(YouTube, videoSrc)
         const videoStyle = {
           backgroundImage: `url(${require('../../../../../../images/icon-video/icon-video@3x.png')})`
         }
@@ -59,10 +62,14 @@ class ProductContentImages extends Component {
               className={[style.videoListItem, style.fitBackground].join(' ')} />
 
             {/* display in lightbox scroller */}
-            <YoutubePlayerLightbox
-              src={videoSrc}
-              maxWidth={0.8}
-              maxWidthTablet={0.8} />
+            <FitLightboxYoutube>
+              {(width, height) => {
+                return (
+                  <YoutubeWithID
+                    opts={{width, height}}/>
+                )
+              }}
+            </FitLightboxYoutube>
 
           </React.Fragment>
         )
@@ -76,12 +83,13 @@ class ProductContentImages extends Component {
     return (
       <ScrollableListOpensInLightbox
         numberToDisplay={1}
-        showPosition
-        wrapperClassName={style.imagesListWrapper}
-        listItemClassName={style.imageListItem}
-        ulClassName={style.imagesList}
+        touchMoveSensitivity={2.5}
+        wrapperClassName={style.imagesList}
+        lightboxWrapperClassName={style.lightboxContentWrapper}
         buttonUp={<ButtonLeft />}
-        buttonDown={<ButtonRight />} >
+        buttonDown={<ButtonRight />}
+        stopEventBubblingFromButtons
+        showPosition >
         {this.renderList()}
       </ScrollableListOpensInLightbox>
     )

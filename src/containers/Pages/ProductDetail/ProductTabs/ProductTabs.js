@@ -9,23 +9,19 @@ import TabsDesktop from '../../../Partials/Tabs/Tabs/TabsDesktop'
 import style from './ProductTabs.scss'
 
 class ProductTabs extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      tabs: []
-    }
-
-    this.updateTabs = this.updateTabs.bind(this)
-  }
-
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.productID !== this.props.productID) {
-      this.updateTabs(nextProps.tabsData)
+  getTabs () {
+    try {
+      const tabs = getTheTabs(this.props.tabsData)
+      return tabs
+    } catch (err) {
+      console.log(new ProductDetailTabsException(err))
+      return []
     }
   }
 
   render () {
+    const theTabs = this.getTabs()
+    const tabWidth = `120px`//`calc(${100 / theTabs.length}% - 3px)`
     return (
       <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
         {match =>
@@ -36,31 +32,22 @@ class ProductTabs extends Component {
               activeTabClassName={style.activeTabContent}
               tabClassName={style.productDetailTabs}
               tabsUlClassName={style.productDetailTabsUl} >
-              {this.state.tabs}
+              {theTabs}
             </Tabs>
           ) : (
             <TabsDesktop
               defaultActiveTabIndex={0}
+              tabWidth={tabWidth}
               tabWrapperClassName={style.tabsWrapperDesktop}
               activeTabClassName={style.activeTabContentDesktop}
               tabClassName={style.productDetailTabsDesktop}
               tabsUlClassName={style.productDetailTabsUlDesktop} >
-              {this.state.tabs}
+              {theTabs}
             </TabsDesktop>
           )
         }
       </Media>
     )
-  }
-
-  updateTabs (tabsData) {
-    try {
-      const tabs = getTheTabs(tabsData)
-      return this.setState({ tabs })
-    } catch (err) {
-      console.log(new ProductDetailTabsException(err))
-      this.setState({ tabs: [] })
-    }
   }
 }
 

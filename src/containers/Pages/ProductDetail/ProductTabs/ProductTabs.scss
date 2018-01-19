@@ -15,7 +15,7 @@ $tabHeight: 65px;
 .activeTabContent {
   @extend %BodyPaddingWithMediaQueries;
   @extend %100WidthMinusBodyPaddingWithMediaQueries;
-  border: solid 1px $silver;
+  border-bottom: solid 1px $silver;
   padding-top: 30px;
   padding-bottom: 25px;
   background-color: $light-gray;
@@ -34,6 +34,7 @@ $tabHeight: 65px;
   list-style: none;
   text-align: left;
   color: #2e3c6e;
+  cursor: pointer;
 
   &:first-child {
     margin-top: 62px;
@@ -61,6 +62,8 @@ $tabHeight: 65px;
 // Tablet-Desktop
 
 $tabHeightDesktop: 60px;
+$tabContentPaddingLeft: 11.5vw;
+$tabContentPaddingRight: 9vw;
 
 .tabsWrapperDesktop {
   margin-top: 70px;
@@ -76,11 +79,13 @@ $tabHeightDesktop: 60px;
 }
 
 .activeTabContentDesktop {
-  @extend %BodyPaddingWithMediaQueries;
-  @extend %100WidthMinusBodyPaddingWithMediaQueries;
-  border: solid 1px $silver;
+  border-top: solid 1px $silver;
+  border-bottom: solid 1px $silver;
   padding-top: 80px;
   padding-bottom: 45px;
+  padding-left: $tabContentPaddingLeft;
+  padding-right: $tabContentPaddingRight;
+  width: calc(100% - #{$tabContentPaddingLeft} - #{$tabContentPaddingRight});
   background-color: $light-gray;
   text-align: left;
 }
@@ -89,21 +94,25 @@ $tabHeightDesktop: 60px;
   margin-right: 1px;
   display: inline-block;
   border: solid 1px $silver;
-  width: 118px;
+  border-bottom: none;
+  min-width: 118px;
+  width: 120px;
+  max-width: 240px;
   height: $tabHeightDesktop;
   font-family: $CentraleSansPro;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
   line-height: $tabHeightDesktop;
   list-style: none;
   text-align: center;
   white-space: normal;
   color: #2e3c6e;
+  cursor: pointer;
 
   span {
     display: inline-block;
     vertical-align: middle;
-    width: calc(100% - 19px);
+    width: 118px;
     line-height: normal;
   }
 

@@ -13,30 +13,68 @@ class TabInstallation extends Component {
     this.renderVideos = this.renderVideos.bind(this)
   }
 
-  renderGuides () {
+  getColumnWidth () {
+    return this.props.guides.length && this.props.videos.length
+      ? tabStyle.halfWidthColDesktopTab
+      : tabStyle.fullWidthColDesktopTab
+  }
+
+  renderGuidesList () {
     return this.props.guides.map((guide, index) => {
       return (
         <li
           key={index} >
           <FileDownloadLink
-            title={guide.name}
-            link={guide.description}
+            title={guide.post['post_title'] || ''}
+            link={guide.meta['technical_info_pdf']}
             titleClass={tabStyle.tabTextOrange}
+            linkClass={tabStyle.tabTextOrangeLink}
             iconClass={tabStyle.wordPDFIcon} />
         </li>
       )
     })
   }
 
-  renderVideos () {
-    return this.props.videos.map((video, index) => {
+  renderGuides () {
+    if (this.props.guides.length) {
       return (
-        <li
-          key={index} >
-          {renderVideoThumbnail(video.meta['video_gallery_video'])}
-        </li>
+        <div
+          className={this.getColumnWidth()} >
+          <h5
+            className={tabStyle.tabColTitle} >
+            {'Guides'}
+          </h5>
+          <ul
+            className={tabStyle.tabColUl} >
+            {this.renderGuidesList()}
+          </ul>
+        </div>
       )
-    })
+    }
+  }
+
+  renderVideos () {
+    if (this.props.videos.length) {
+      return (
+        <div
+          className={this.getColumnWidth()} >
+          <div
+            className={tabStyle.videoColMaxWidth} >
+            <h5
+              className={tabStyle.tabColTitle} >
+              {'Videos'}
+            </h5>
+            <div
+              className={tabStyle.videoApectRatioWrapper} >
+              <div
+                className={tabStyle.videoAspectRatioInside}>
+                {renderVideoThumbnail(this.props.videos)}
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    }
   }
 
   render () {
@@ -44,29 +82,9 @@ class TabInstallation extends Component {
       <div
         className={style.tabInstallation}>
 
-        <div
-          className={tabStyle.halfWidthColDesktopTab} >
-          <h5
-            className={tabStyle.tabColTitle} >
-            {'Guides'}
-          </h5>
-          <ul
-            className={tabStyle.tabColUl} >
-            {this.renderGuides()}
-          </ul>
-        </div>
+        {this.renderGuides()}
 
-        <div
-          className={tabStyle.halfWidthColDesktopTab} >
-          <h5
-            className={tabStyle.tabColTitle} >
-            {'Videos'}
-          </h5>
-          <ul
-            className={tabStyle.tabColUl} >
-            {this.renderVideos()}
-          </ul>
-        </div>
+        {this.renderVideos()}
 
       </div>
     )

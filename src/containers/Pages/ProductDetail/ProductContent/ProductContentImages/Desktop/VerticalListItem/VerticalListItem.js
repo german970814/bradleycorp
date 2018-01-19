@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import YoutubePlayerLightbox from '../../../../../../../components/Partials/Youtube/YoutubePlayerLightbox/YoutubePlayerLightbox'
+import YouTube from 'react-youtube'
+import addVideoIdFromSrc from '../../../../../../../components/Partials/Youtube/addVideoIdFromSrc'
+import FitLightboxYoutube from '../../../../../../Partials/Lightbox/FitLightboxYoutube'
 import Lightbox from '../../../../../../Partials/Lightbox/Lightbox'
 import style from './VerticalListItem.scss'
 
@@ -9,15 +11,18 @@ class VerticalListItem extends Component {
     const imageStyle = {
       backgroundImage: `url(${this.props.src})`
     }
+
     return (
       <div
         onClick={(e) => { this.props.onClick(e, this.props.src) }}
+        onTouchEnd={(e) => { this.props.onClick(e, this.props.src) }}
         style={imageStyle}
         className={style.listItem} />
     )
   }
 
   renderVideo () {
+    const YoutubeWithID = addVideoIdFromSrc(YouTube, this.props.src)
     const videoStyle = {
       backgroundImage: `url(${require('../../../../../../../images/icon-video/icon-video@2x.png')})`
     }
@@ -28,8 +33,14 @@ class VerticalListItem extends Component {
           style={videoStyle}
           className={style.listItemVideo} />
 
-        <YoutubePlayerLightbox
-          src={this.props.src} />
+        <FitLightboxYoutube>
+          {(width, height) => {
+            return (
+              <YoutubeWithID
+                opts={{width, height}}/>
+            )
+          }}
+        </FitLightboxYoutube>
 
       </Lightbox>
     )

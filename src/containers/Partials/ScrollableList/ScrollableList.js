@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import PositionCircle from './PositionCircle/PositionCircle'
+import ScrollableListTrack from './ScrollableListTrack'
 import style from './ScrollableList.scss'
 
 class ScrollableList extends Component {
@@ -8,15 +9,18 @@ class ScrollableList extends Component {
     super(props)
 
     this.state = {
-      children: this.getChildrenWithScrollableListApiAsProps(this.props)
+      children: this.getChildrenWithScrollableListApiAsProps(this.props),
+      currentFirstIndex: 0
     }
   }
 
   componentWillReceiveProps (nextProps) {
     if (this.childrenDidUpdate(nextProps.children, this.props.children) ||
     this.numberToDisplayDidUpdate(nextProps.numberToDisplay, this.props.numberToDisplay)) {
+      const children = this.getChildrenWithScrollableListApiAsProps(nextProps)
       this.setState({
-        children: this.getChildrenWithScrollableListApiAsProps(nextProps)
+        children,
+        currentFirstIndex: this.getFirstDisplayedChildIndex(children)
       })
     }
   }
@@ -31,9 +35,45 @@ class ScrollableList extends Component {
     })
   }
 
-  moveList (e, increment) {
-    e.preventDefault()
+  moveListToIndex (e, newIndex) { // this can only run if we have numberToDisplay set to 1
+    if (this.props.numberToDisplay !== 1) {
+      return
+    }
 
+    let incrementBy = 0
+
+    if (newIndex > this.state.currentFirstIndex) {
+      // if we click between the currently selected item and the end
+      // then each child holds it's 'distance from 0' as position,
+      // so we can just use that as the increment required to move it to 0
+      incrementBy = -this.state.children[newIndex].position
+    }
+
+    if (newIndex < this.state.currentFirstIndex) {
+      incrementBy = this.state.children.length - this.state.children[newIndex].position
+    }
+
+    return this.moveList(e, incrementBy)
+  }
+
+  moveList (e, increment) {
+    if (this.props.stopEventBubblingFromButtons) { // stops it from calling any onClick events on the container eg close lightbox
+      e.stopPropagation()
+    }
+
+    if (this.props.reverseScroll) {
+      increment = -increment
+    }
+
+    // stop scroller from going off the ends if scroller isn't set to infinite
+    const resultingLastDisplayedChildIndex = this.state.currentFirstIndex + this.props.numberToDisplay - increment
+    const resultingFirstDisplayedChildIndex = this.state.currentFirstIndex - increment
+    if (resultingLastDisplayedChildIndex > this.state.children.length ||
+     resultingFirstDisplayedChildIndex < 0) {
+      return
+    }
+
+    // set new position for each child
     const children = this.state.children.map((child, index, allChildren) => {
       const newPosition = this.getPosition(child.position, increment, allChildren.length)
 
@@ -48,7 +88,10 @@ class ScrollableList extends Component {
       this.props.onPositionChange(children)
     }
 
-    return this.setState({ ...this.state, children })
+    return this.setState({
+      children,
+      currentFirstIndex: this.getFirstDisplayedChildIndex(children)
+    })
   }
 
   renderButtonsBelow () {
@@ -99,18 +142,19 @@ class ScrollableList extends Component {
   }
 
   renderPositionCircles () {
-    if (!this.props.showPosition) {
+    if (!this.props.showPosition || this.props.numberToDisplay !== 1) {
       return
     }
 
     return (
       <ul
-        className={style.positionCircles}>
+        className={`${style.positionCircles} position-circles`}>
         {this.state.children.map((child, index) => {
           return (
             <li
               key={index} >
               <PositionCircle
+                onClick={(e) => { this.moveListToIndex(e, index) }}
                 selected={child.display} />
             </li>
           )
@@ -119,32 +163,40 @@ class ScrollableList extends Component {
     )
   }
 
-  renderChildren () {
-    const displayChildren = this.getChildrenToDisplay()
-    const displayChildrenSorted = this.sortChildrenByPosition(displayChildren)
+  renderChildren (dimensions) {
+    const inlineStyle = this.props.vertical ? { height: dimensions } : { width: dimensions }
+    const className = this.props.vertical ? style.trackItemVertical : style.trackItem
 
-    return displayChildrenSorted.map((child, index) => {
+    return this.state.children.map((child, index) => {
       return (
-        <li
+        <div
           key={index}
-          className={this.props.listItemClassName} >
+          style={inlineStyle}
+          className={className} >
           {child.component}
-        </li>
+        </div>
       )
     })
   }
 
-  renderScroller (scrollerContent) {
+  renderScroller () {
     return (
       <div
         className={this.props.wrapperClassName}>
 
         {this.renderButtonUp()}
 
-        <ul
-          className={this.props.ulClassName}>
-          {scrollerContent}
-        </ul>
+        <ScrollableListTrack
+          moveList={this.moveList.bind(this)}
+          elementCount={this.state.children.length}
+          numberToDisplay={this.props.numberToDisplay || 1}
+          transitionSpeed={this.props.transitionSpeed}
+          currentIndex={this.getFirstDisplayedChildIndex(this.state.children)}
+          vertical={this.props.vertical}
+          touchMoveSensitivity={this.props.touchMoveSensitivity}
+          reverseSwipeScroll={this.props.reverseSwipeScroll} >
+          {(elementDimension) => this.renderChildren(elementDimension)}
+        </ScrollableListTrack>
 
         {this.renderButtonDown()}
         {this.renderButtonsBelow()}
@@ -155,19 +207,20 @@ class ScrollableList extends Component {
   }
 
   render () {
-    return this.renderScroller(this.renderChildren())
+    return this.renderScroller()
   }
 
   getPosition (prevPos, increment, arrayLength) {
-    // we want items to cycle the other way if vertical
-    if (this.props.reverseScroll) {
-      increment = -increment
-    }
-
     const position = (prevPos + increment) % arrayLength
     return position < 0
       ? arrayLength + position
       : position
+  }
+
+  getFirstDisplayedChildIndex (children) {
+    return children.findIndex(child => {
+      return child.display
+    })
   }
 
   getChildrenToDisplay () {
@@ -207,14 +260,17 @@ class ScrollableList extends Component {
 
 ScrollableList.propTypes = {
   numberToDisplay: PropTypes.number.isRequired,
+  touchMoveSensitivity: PropTypes.number,
+  transitionSpeed: PropTypes.number,
   showPosition: PropTypes.bool,
   reverseScroll: PropTypes.bool,
+  reverseSwipeScroll: PropTypes.bool,
   positionButtonsBelow: PropTypes.bool,
+  stopEventBubblingFromButtons: PropTypes.bool,
+  vertical: PropTypes.bool,
   children: PropTypes.array.isRequired,
   onPositionChange: PropTypes.func,
   wrapperClassName: PropTypes.string,
-  listItemClassName: PropTypes.string,
-  ulClassName: PropTypes.string,
   buttonUpContainerClassName: PropTypes.string,
   buttonDownContainerClassName: PropTypes.string,
   buttonsBelowClassName: PropTypes.string,

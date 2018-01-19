@@ -6,48 +6,25 @@ import ButtonRight from './ButtonRight'
 import style from './SelectedImageLightboxContent.scss'
 
 const SelectedImageLightboxContent = props => {
-  const LightboxCloseButton = props.lightboxCloseButton
-
-  const dims = {
-    width: props.style.width,
-    height: props.style.height
-  }
-
   return (
-    <div
-      style={dims}
-      className={style.lightboxContentWrapper} >
-
-      <ScrollableList
-        numberToDisplay={1}
-        onPositionChange={props.onPositionChange}
-        buttonDown={<ButtonRight />}
-        buttonUp={<ButtonLeft />}
-        ulClassName={style.imagesList}
-        wrapperClassName={style.wrapper}
-        listItemClassName={style.listItem}
-        buttonUpContainerClassName={style.buttonUp}
-        buttonDownContainerClassName={style.buttonDown} >
-        {props.items}
-      </ScrollableList>
-
-      <LightboxCloseButton
-        onClick={props.lightboxCloseButtonOnClick} />
-
-    </div>
+    <ScrollableList
+      numberToDisplay={1}
+      onPositionChange={props.onPositionChange}
+      buttonDown={<ButtonRight />}
+      buttonUp={<ButtonLeft />}
+      ulClassName={style.imagesList}
+      wrapperClassName={style.wrapper}
+      buttonUpContainerClassName={style.buttonUp}
+      buttonDownContainerClassName={style.buttonDown}
+      stopEventBubblingFromButtons >
+      {props.items}
+    </ScrollableList>
   )
 }
 
 SelectedImageLightboxContent.propTypes = {
   items: PropTypes.array.isRequired,
-  onPositionChange: PropTypes.func,
-  // from lightbox
-  lightboxCloseButton: PropTypes.func,
-  lightboxCloseButtonOnClick: PropTypes.func,
-  style: PropTypes.shape({
-    width: PropTypes.number,
-    height: PropTypes.number
-  })
+  onPositionChange: PropTypes.func
 }
 
 export default SelectedImageLightboxContent

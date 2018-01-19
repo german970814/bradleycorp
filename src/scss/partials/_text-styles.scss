@@ -1,3 +1,44 @@
+@font-face {
+  font-family: 'CentraleSansPro'; /*'CentraleSansProBold';*/
+  src: url('http://site.bradleydev.twoxfour.com/assets/webfonts/357BF9_0_0.eot');
+  src: url('http://site.bradleydev.twoxfour.com/assets/webfonts/357BF9_0_0.eot?#iefix') format('embedded-opentype'),url('http://site.bradleydev.twoxfour.com/assets/webfonts/357BF9_0_0.woff2') format('woff2'),url('http://site.bradleydev.twoxfour.com/assets/webfonts/357BF9_0_0.woff') format('woff'),url('http://site.bradleydev.twoxfour.com/assets/webfonts/357BF9_0_0.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'CentraleSansPro'; /*'CentraleSansProLight';*/
+  src: url('http://site.bradleydev.twoxfour.com/assets/webfonts/357BF9_1_0.eot');
+  src: url('http://site.bradleydev.twoxfour.com/assets/webfonts/357BF9_1_0.eot?#iefix') format('embedded-opentype'),url('http://site.bradleydev.twoxfour.com/assets/webfonts/357BF9_1_0.woff2') format('woff2'),url('http://site.bradleydev.twoxfour.com/assets/webfonts/357BF9_1_0.woff') format('woff'),url('http://site.bradleydev.twoxfour.com/assets/webfonts/357BF9_1_0.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CentraleSansPro'; /*'CentraleSansProLight-It';*/
+  src: url('http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_2_0.eot');
+  src: url('http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_2_0.eot?#iefix') format('embedded-opentype'),url('http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_2_0.woff2') format('woff2'),url('http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_2_0.woff') format('woff'),url('http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_2_0.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TradeGothic'; /*'TradeGothicLT-BoldCondTwenty';*/
+  src: url('http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_0_0.eot');
+  src: url('http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_0_0.eot?#iefix') format('embedded-opentype'),url('http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_0_0.woff2') format('woff2'),url('http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_0_0.woff') format('woff'),url('http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_0_0.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CentraleSansPro'; /*'CentraleSansProBold-It';*/
+  src: url('http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_1_0.eot');
+  src: url('http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_1_0.eot?#iefix') format('embedded-opentype'),url('http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_1_0.woff2') format('woff2'),url('http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_1_0.woff') format('woff'),url('http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_1_0.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+
 @import "./mixins";
 @import "./variables";
 
@@ -7,6 +48,8 @@
   font-family: $CentraleSansPro;
   font-size: 23px;
   font-weight: 300;
+  line-height: 1.22;
+  font-style: normal;
   text-align: left;
 }
 
@@ -14,6 +57,7 @@
   font-family: $CentraleSansPro;
   font-size: 28px;
   font-weight: 300;
+  line-height: 1.21;
   letter-spacing: -1.1px;
   text-align: left;
 }
@@ -63,14 +107,17 @@
 
 %h6-desktop {
   font-family: $CentraleSansPro;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
-  text-align: center;
+  line-height: 2.77;
+  letter-spacing: 0.5px;
+  text-align: left;
+  // text-align: center;
 }
 
 %small-body-desktop {
   font-family: Helvetica;
-  font-size: 10px;
+  font-size: 12px;
   text-align: center;
 }
 

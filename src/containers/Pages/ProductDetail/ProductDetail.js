@@ -96,7 +96,10 @@ class ProductDetail extends Component {
     try {
       const productSlug = props.match.params.slug
       const productDetail = await this.getProductDetailPage(productSlug)
-      return this.setState({ productDetail: productDetail.data })
+      const productDetailData = productDetail.data
+
+      // set state leaving defaults where there exists no data in the request
+      return this.setState({ productDetail: Object.assign({}, productObjectShape, productDetailData) })
     } catch (err) {
       console.log(new ProductDetailException(err))
     }

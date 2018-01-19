@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { rotate } from '../../../../../../lib/bcorpArray'
-import fitLightbox from '../../../../../Partials/Lightbox/fitLightbox'
 import VerticalAlignHelper from '../../../../../../components/Partials/VerticalAlignHelper/VerticalAlignHelper'
 import VerticalListItem from './VerticalListItem/VerticalListItem'
 import ScrollableList from '../../../../../Partials/ScrollableList/ScrollableList'
@@ -136,7 +135,6 @@ class ProductContentImagesDesktop extends Component {
   }
 
   renderSelectedImage () {
-    const SelectedImageLightboxContentFitted = fitLightbox(SelectedImageLightboxContent)
     const items = this.renderImagesListLightbox()
 
     const imageStyle = {
@@ -150,10 +148,10 @@ class ProductContentImagesDesktop extends Component {
           style={imageStyle}
           className={style.selectedImageDesktopImage} />
 
-        <SelectedImageLightboxContentFitted
+        <SelectedImageLightboxContent
           onPositionChange={this.handleSelectedImageScrollerPositionChange.bind(this)}
           items={items} >
-        </SelectedImageLightboxContentFitted>
+        </SelectedImageLightboxContent>
 
       </Lightbox>
     )
@@ -172,12 +170,12 @@ class ProductContentImagesDesktop extends Component {
 
         <ScrollableList
           numberToDisplay={3}
-          reverseScroll={true}
+          touchMoveSensitivity={0.3}
           wrapperClassName={style.imagesListWrapperDesktop}
-          ulClassName={style.imagesListDesktop}
-          listItemClassName={style.imageListItemDesktop}
           buttonDown={<ButtonDown />}
-          buttonUp={<ButtonUp />} >
+          buttonUp={<ButtonUp />}
+          reverseSwipeScroll
+          vertical >
           {this.renderVerticalList()}
         </ScrollableList>
 
