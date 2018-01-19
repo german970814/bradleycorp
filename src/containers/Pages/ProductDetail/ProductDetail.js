@@ -31,7 +31,7 @@ class ProductDetail extends Component {
   }
 
   render () {
-    console.log(this.state.productDetail)
+    console.log(React.Fragment)
     return (
       <div
         className={style.productDetailPage}>
@@ -62,36 +62,40 @@ class ProductDetail extends Component {
             tabsData={this.state.productDetail.tabs} />
         </section>
 
-        <section>
-          <ProductScroller
-            title={'Frequently Purchased With'}
-            productsArray={this.state.productDetail['purchased_with']}
-            numberMobile={2}
-            numberTablet={3}
-            numberDesktop={5} />
-        </section>
+        {(this.state.productDetail['purchased_with'].length)
+          ? <section>
+            <ProductScroller
+              title={'Frequently Purchased With'}
+              productsArray={this.state.productDetail['purchased_with']}
+              numberMobile={2}
+              numberTablet={3}
+              numberDesktop={5} />
+          </section>
+          : ''}
 
-        <Divider
-          customClass={style.divider} />
+        {(this.state.productDetail['similar'].length)
+          ? <div><Divider
+            customClass={style.divider} />
 
-        <section>
-          <ProductScroller
-            title={'Similar Products'}
-            productsArray={this.state.productDetail['similar']}
-            numberMobile={2}
-            numberTablet={3}
-            numberDesktop={5} />
-        </section>
+          <section>
+            <ProductScroller
+              title={'Similar Products'}
+              productsArray={this.state.productDetail['similar']}
+              numberMobile={2}
+              numberTablet={3}
+              numberDesktop={5} />
+          </section></div>
+          : ''}
       </div>
 
     )
   }
 
   async getProductInfo (props) {
+    console.log(props)
     try {
       const productSlug = props.match.params.slug
       const productDetail = await this.getProductDetailPage(productSlug)
-
       return this.setState({ productDetail: productDetail.data })
     } catch (err) {
       console.log(new ProductDetailException(err))
@@ -99,6 +103,7 @@ class ProductDetail extends Component {
   }
 
   getProductDetailPage (slug) {
+console.log(slug)
     const productApiClient = new ProductApiClient()
     return productApiClient.getProductDetailPage(slug)
   }
