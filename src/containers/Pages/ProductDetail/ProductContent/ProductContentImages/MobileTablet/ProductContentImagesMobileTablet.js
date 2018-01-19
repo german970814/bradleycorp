@@ -24,7 +24,6 @@ class ProductContentImages extends Component {
         const imageStyle = {
           backgroundImage: `url(${imageSrc})`
         }
-        console.log(imgSrcs)
         return (
           <React.Fragment
             key={index} >
