@@ -7,24 +7,26 @@ import style from './TabCompliance.scss'
 class TabCompliance extends Component {
   constructor (props) {
     super(props)
-
+console.log(props)
     this.renderCompliance = this.renderCompliance.bind(this)
   }
 
   renderCompliance () {
-    return this.props.compliance.map((compliance, index) => {
-      return (
-        <li
-          key={index} >
-          <FileDownloadLink
-            title={compliance.post['post_title'] || ''}
-            link={compliance.meta['technical_info_pdf']}
-            titleClass={tabStyle.tabTextOrange}
-            linkClass={tabStyle.tabTextOrangeLink}
-            iconClass={tabStyle.wordPDFIcon} />
-        </li>
-      )
-    })
+    if ( this.props.compliance.compliance.length ) {
+      return this.props.compliance.compliance.map((compliance, index) => {
+        return (
+          <li
+            key={index} >
+            <FileDownloadLink
+              title={compliance.post['post_title'] || ''}
+              link={compliance.meta['technical_info_pdf']}
+              titleClass={tabStyle.tabTextOrange}
+              linkClass={tabStyle.tabTextOrangeLink}
+              iconClass={tabStyle.wordPDFIcon} />
+          </li>
+        )
+      })
+    }
   }
 
   render () {
