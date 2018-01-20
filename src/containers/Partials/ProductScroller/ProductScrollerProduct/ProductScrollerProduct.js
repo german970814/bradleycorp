@@ -64,8 +64,9 @@ class ProductScrollerProduct extends Component {
         if ( 3 > _i ){
           const __i = <span
             key={i}
-            className={style.complianceIcon}>
-            {i}
+            className={style.complianceIcon}
+            title={i+' Compliant'}>
+            <i>Icon</i>
           </span>;
           _icons.push(__i);
         }
