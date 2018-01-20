@@ -8,7 +8,7 @@
     @media only screen and (min-width: $MobileMaxWidth + 1 + px) { @content; }
   }
   @elseif $media == desktop {
-    @media only screen and (min-width: $TabletMaxWidthPX + 1 + px) { @content; }
+    @media only screen and (min-width: $TabletMaxWidth + 1 + px) { @content; }
   }
 }
 
