@@ -18,7 +18,7 @@ class TabCompliance extends Component {
     if ( this.props.compliance.compliance.length ) {
       return (
         <div
-          className={tabStyle.halfWidthColDesktopTab} >
+          className={[tabStyle.halfWidthColDesktopTab, style.complianceSide].join(' ')} >
           <h5
             className={tabStyle.tabColTitle}>
             {'Compliance'}
@@ -52,7 +52,7 @@ class TabCompliance extends Component {
     if ( this.props.compliance.compliance_icons.length ) {
       return (
         <div
-          className={tabStyle.halfWidthColDesktopTab} >
+          className={[tabStyle.halfWidthColDesktopTab, style.iconSide].join(' ')} >
 
           <ul
             className={tabStyle.tabColUl} >

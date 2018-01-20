@@ -1,11 +1,17 @@
 .tabCompliance {
 
+	/* must be inside 'tabCompliance' so it can override
+	the values given by class 'halfWidthColDesktopTab' */
+	.iconSide {
+		margin-left: 0px;
+	}
 }
+
 
 .complianceIcon {
 	display: inline-block;
 	vertical-align: middle;
-	width: 51px;
+	width: auto;
 	height: 50px;
 	margin-right: 30px;
 	margin-top: 20px;
@@ -15,7 +21,7 @@
 	}
 
 	img {
-		max-width: 100%;
-		height: auto;
+		width: auto;
+		max-height: 100%;
 	}
 }
