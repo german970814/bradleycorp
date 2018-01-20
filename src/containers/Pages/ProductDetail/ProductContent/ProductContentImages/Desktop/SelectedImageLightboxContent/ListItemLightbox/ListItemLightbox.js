@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import YouTube from 'react-youtube'
 import { youtubeParser } from '../../../../../../../../lib/bcorpUrl'
+import LIGHTBOXSIZES from '../../../../../../../Partials/Lightbox/lightboxVars'
 import FixedAspectRatioBox from '../../../../../../../../components/Partials/FixedAspectRatioBox/FixedAspectRatioBox'
 import style from './ListItemLightbox.scss'
 
@@ -21,7 +22,8 @@ class ListItemLightbox extends Component {
   renderVideo () {
     const videoId = youtubeParser(this.props.src) || ''
     return (
-      <FixedAspectRatioBox>
+      <FixedAspectRatioBox
+        maxHeight={LIGHTBOXSIZES.heightMinusCloseButton} >
         <YouTube
           videoId={videoId}
           opts={{

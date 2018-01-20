@@ -4,9 +4,12 @@ import VerticalAlignHelper from '../VerticalAlignHelper/VerticalAlignHelper'
 import style from './FixedAspectRatioBox.scss'
 
 const FixedAspectRatioBox = props => {
-  const aspectRatio = props.aspectRatio < 1
-    ? `${props.aspectRatio * 100}%`
-    : `${props.aspectRatio}%`
+  const aspectRatio100 = props.aspectRatio < 1
+    ? props.aspectRatio * 100
+    : props.aspectRatio
+
+  const aspectRatio = `${aspectRatio100}%`
+  const aspectRatioInverse = 100 / aspectRatio100
 
   return (
     <React.Fragment>
@@ -23,7 +26,17 @@ const FixedAspectRatioBox = props => {
         <div
           className={`${style.aspectRatioBoxContent} aspect-ratio-box-content`} >
 
-          {props.children}
+          {/* this height controller div takes over the sizing when window height becomes significantly smaller than width */}
+          <div
+            style={{
+              maxHeight: `calc(${props.maxHeight})`,
+              maxWidth: `calc((${props.maxHeight}) * ${aspectRatioInverse})`
+            }}
+            className={`${style.aspectRatioBoxHeightController} aspect-ratio-box-height-controller`} >
+
+            {props.children}
+
+          </div>
 
         </div>
 
@@ -38,12 +51,19 @@ FixedAspectRatioBox.propTypes = {
     PropTypes.object,
     PropTypes.array
   ]).isRequired,
+  maxHeight: PropTypes.string,
   aspectRatio: PropTypes.number,
   verticalAlign: PropTypes.oneOf(['top', 'middle', 'bottom'])
 }
 
 FixedAspectRatioBox.defaultProps = {
-  aspectRatio: 56.25, /* defaults to youtube aspect ratio */
+  maxHeight: '100vh',
+  /*
+    if we want to pass a calc() string, pass the contents of the calc only
+    eg. 'calc(100vh - 20px)' => '100vh - 20px'
+   */
+  aspectRatio: 56.25,
+  /* defaults to youtube aspect ratio */
   verticalAlign: 'middle'
 }
 

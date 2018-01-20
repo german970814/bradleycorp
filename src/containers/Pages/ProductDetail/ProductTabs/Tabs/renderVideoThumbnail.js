@@ -1,6 +1,7 @@
 import React from 'react'
 import YouTube from 'react-youtube'
 import { youtubeParser } from '../../../../../lib/bcorpUrl'
+import LIGHTBOXSIZES from '../../../../Partials/Lightbox/lightboxVars'
 import LightboxYoutube from '../../../../Partials/Lightbox/LightboxYoutube'
 import FixedAspectRatioBox from '../../../../../components/Partials/FixedAspectRatioBox/FixedAspectRatioBox'
 import tabStyle from './Tabs.scss'
@@ -31,7 +32,8 @@ export default function renderVideoThumbnail (videos) {
           className={tabStyle.videoIframe}
           opts={youtubeOpts} />
 
-        <FixedAspectRatioBox>
+        <FixedAspectRatioBox
+          maxHeight={LIGHTBOXSIZES.heightMinusCloseButton} >
           <YouTube
             videoId={videoId}
             opts={youtubeOpts} />
@@ -64,7 +66,8 @@ export default function renderVideoThumbnail (videos) {
         className={tabStyle.videoIframe}
         opts={youtubeOpts} />
 
-      <FixedAspectRatioBox>
+      <FixedAspectRatioBox
+        maxHeight={LIGHTBOXSIZES.heightMinusCloseButton} >
         <YouTube
           videoId={videoIdPlayFirst}
           opts={youtubeOpts} />

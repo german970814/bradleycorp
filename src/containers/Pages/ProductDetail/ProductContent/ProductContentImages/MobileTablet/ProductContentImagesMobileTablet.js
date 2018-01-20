@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import YouTube from 'react-youtube'
 import { youtubeParser } from '../../../../../../lib/bcorpUrl'
 import FixedAspectRatioBox from '../../../../../../components/Partials/FixedAspectRatioBox/FixedAspectRatioBox'
+import LIGHTBOXSIZES from '../../../../../Partials/Lightbox/lightboxVars'
 import ScrollableListOpensInLightbox from '../../../../../Partials/ScrollableList/ScrollableListOpensInLightbox'
 import ButtonLeft from './ButtonLeft'
 import ButtonRight from './ButtonRight'
@@ -61,7 +62,8 @@ class ProductContentImages extends Component {
               className={[style.videoListItem, style.fitBackground].join(' ')} />
 
             {/* display in lightbox scroller */}
-            <FixedAspectRatioBox>
+            <FixedAspectRatioBox
+              maxHeight={LIGHTBOXSIZES.heightMinusCloseButton}>
               <YouTube
                 videoId={videoId}
                 opts={{
