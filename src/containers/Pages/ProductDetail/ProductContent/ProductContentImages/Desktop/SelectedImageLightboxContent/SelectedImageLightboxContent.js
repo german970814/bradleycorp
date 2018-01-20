@@ -14,7 +14,6 @@ const SelectedImageLightboxContent = props => {
       buttonUp={<ButtonLeft />}
       ulClassName={style.imagesList}
       wrapperClassName={style.wrapper}
-      listItemClassName={style.listItem}
       buttonUpContainerClassName={style.buttonUp}
       buttonDownContainerClassName={style.buttonDown}
       stopEventBubblingFromButtons >

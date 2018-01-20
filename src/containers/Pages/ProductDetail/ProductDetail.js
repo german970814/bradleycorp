@@ -62,26 +62,30 @@ class ProductDetail extends Component {
             tabsData={this.state.productDetail.tabs} />
         </section>
 
-        <section>
-          <ProductScroller
-            title={'Frequently Purchased With'}
-            productsArray={this.state.productDetail['purchased_with']}
-            numberMobile={2}
-            numberTablet={3}
-            numberDesktop={5} />
-        </section>
+        {(this.state.productDetail['purchased_with'].length)
+          ? <section>
+            <ProductScroller
+              title={'Frequently Purchased With'}
+              productsArray={this.state.productDetail['purchased_with']}
+              numberMobile={2}
+              numberTablet={3}
+              numberDesktop={5} />
+          </section>
+          : ''}
 
-        <Divider
-          customClass={style.divider} />
+        {(this.state.productDetail['similar'].length)
+          ? <div><Divider
+            customClass={style.divider} />
 
-        <section>
-          <ProductScroller
-            title={'Similar Products'}
-            productsArray={this.state.productDetail['similar']}
-            numberMobile={2}
-            numberTablet={3}
-            numberDesktop={5} />
-        </section>
+          <section>
+            <ProductScroller
+              title={'Similar Products'}
+              productsArray={this.state.productDetail['similar']}
+              numberMobile={2}
+              numberTablet={3}
+              numberDesktop={5} />
+          </section></div>
+          : ''}
       </div>
 
     )

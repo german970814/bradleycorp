@@ -1,4 +1,4 @@
-@import "../../../scss/partials/helpers";
+@import "../../../scss/partials/variables";
 
 .pdfWithFeaturedImage {
   width: 100%;
@@ -14,8 +14,10 @@
 }
 
 .image {
-  @extend %fitBackground;
-  background-position: left;
+  display: inline-block;
+  border: 1px solid $thumbnail-border;
+  max-width: 100%;
+  height: auto;
 }
 
 .title {

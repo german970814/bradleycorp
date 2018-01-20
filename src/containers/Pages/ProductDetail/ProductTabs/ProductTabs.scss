@@ -96,10 +96,11 @@ $tabContentPaddingRight: 9vw;
   border: solid 1px $silver;
   border-bottom: none;
   min-width: 118px;
+  width: 120px;
   max-width: 240px;
   height: $tabHeightDesktop;
   font-family: $CentraleSansPro;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
   line-height: $tabHeightDesktop;
   list-style: none;
@@ -111,7 +112,7 @@ $tabContentPaddingRight: 9vw;
   span {
     display: inline-block;
     vertical-align: middle;
-    width: calc(100% - 19px);
+    width: 118px;
     line-height: normal;
   }
 

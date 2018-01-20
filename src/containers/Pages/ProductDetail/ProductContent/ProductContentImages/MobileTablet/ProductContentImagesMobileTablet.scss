@@ -21,7 +21,7 @@ $tablet-height: 428px;
   }
 }
 
-.imagesList {
+.imagesList :global .track-wrapper {
   display: inline;
   float: left;
   margin: 0;
@@ -35,16 +35,16 @@ $tablet-height: 428px;
   }
 }
 
-.imageListItem {
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-  list-style: none;
+.imagesList :global .track {
+  height: $height;
+
+  @include respond-to(tablet) {
+    height: $tablet-height;
+  }
 }
 
-.imageDiv {
-  margin: 0 10%;
-  cursor: pointer;
+:global #lightbox :local .imagesList :global .position-circles {
+  display: none;
 }
 
 .videoListItem {

@@ -19,29 +19,31 @@ class ProductContentImages extends Component {
 
   renderList () {
     const imgSrcs = this.getImagesSrcListWithFeaturedImage()
-    const images = imgSrcs.map((imageSrc, index) => {
-      const imageStyle = {
-        backgroundImage: `url(${imageSrc})`
-      }
-      return (
-        <React.Fragment
-          key={index} >
+    const images = (imgSrcs && imgSrcs[0].length)
+      ? imgSrcs.map((imageSrc, index) => {
+        const imageStyle = {
+          backgroundImage: `url(${imageSrc})`
+        }
+        return (
+          <React.Fragment
+            key={index} >
 
           {/* display in scroller */}
           <div
             src={imageSrc}
             style={imageStyle}
-            className={[style.imageDiv, style.fitBackground].join(' ')} />
+            className={style.fitBackground} />
 
           {/* display in lightbox scroller */}
           <div
             src={imageSrc}
             style={imageStyle}
-            className={[style.imageDiv, style.fitBackground].join(' ')} />
+            className={style.fitBackground} />
 
-        </React.Fragment>
-      )
-    })
+          </React.Fragment>
+        )
+      })
+      : []
 
     const videos = (this.props.videos && this.props.videos.length)
       ? this.props.videos.split(',').map((videoSrc, index) => {
@@ -80,13 +82,13 @@ class ProductContentImages extends Component {
     return (
       <ScrollableListOpensInLightbox
         numberToDisplay={1}
-        showPosition
-        wrapperClassName={style.imagesListWrapper}
-        listItemClassName={style.imageListItem}
-        ulClassName={style.imagesList}
+        touchMoveSensitivity={2.5}
+        wrapperClassName={style.imagesList}
+        lightboxWrapperClassName={style.lightboxContentWrapper}
         buttonUp={<ButtonLeft />}
         buttonDown={<ButtonRight />}
-        stopEventBubblingFromButtons >
+        stopEventBubblingFromButtons
+        showPosition >
         {this.renderList()}
       </ScrollableListOpensInLightbox>
     )

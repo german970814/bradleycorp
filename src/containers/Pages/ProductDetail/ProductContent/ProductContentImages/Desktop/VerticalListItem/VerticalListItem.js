@@ -11,9 +11,11 @@ class VerticalListItem extends Component {
     const imageStyle = {
       backgroundImage: `url(${this.props.src})`
     }
+
     return (
       <div
         onClick={(e) => { this.props.onClick(e, this.props.src) }}
+        onTouchEnd={(e) => { this.props.onClick(e, this.props.src) }}
         style={imageStyle}
         className={style.listItem} />
     )

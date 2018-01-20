@@ -27,29 +27,12 @@ $listItemPaddingTabletDesktop: 40px;
   @extend %100WidthMinusBodyPaddingWithMediaQueries;
 }
 
-.sliderUl {
+.sliderWrapper :global .track-wrapper {
   width: 100%;
   margin-top: 0;
   margin-bottom: 20px;
   padding: 0;
   text-align: center;
-}
-
-.listItem {
-  @include list-item-width(2, $listItemPadding);
-  display: inline-block;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  vertical-align: top;
-  text-align: center;
-
-  &:nth-child(1) {
-    padding-right: $listItemPadding / 2;
-  }
-
-  &:nth-child(2) {
-    padding-left: $listItemPadding / 2;
-  }
 }
 
 .buttonsSidesContainer {
@@ -123,45 +106,52 @@ $listItemPaddingTabletDesktop: 40px;
 
 // Tablet-Desktop
 
-$arrowWidthTablet: 11px;
+$arrowWidthTablet: 51px;
 
 .sliderTabletDesktop {
   @extend %BodyPaddingWithMediaQueries;
-  @extend %100WidthMinusBodyPaddingWithMediaQueries;
-}
+  /* @extend %100WidthMinusBodyPaddingWithMediaQueries; */
+  max-width: 1066px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
 
-.leftButton, .rightButton {
-  width: 100%;
+  .buttonsSidesContainer {
+    position: absolute;
+    top: 50%;
+    height: auto;
 
-  img {
-    width: 100%;
+    &.buttonUp {
+      left: 0;
+    }
+    &.buttonDown {
+      right: 0;
+    }
   }
 }
 
-.sliderUlTablet {
+.leftButton, .rightButton {
+  width: $arrowWidthTablet;
+
+  img {
+    max-width: 11px;
+    display: inline-block;
+  }
+}
+
+.leftButton  {
+  text-align: left;
+}
+.rightButton {
+  text-align: right;
+}
+
+.sliderTabletDesktop :global .track-wrapper {
   display: inline-block;
   vertical-align: middle;
   margin-top: 0;
   margin-bottom: 55px;
   padding: 0;
   width: calc(100% - #{$arrowWidthTablet}*2);
-  text-align: center;
-}
-
-.listItemTablet {
-  @include list-item-width(3, $listItemPaddingTabletDesktop);
-  display: inline-block;
-  vertical-align: top;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  text-align: center;
-}
-
-.listItemDesktop {
-  @include list-item-width(5, $listItemPaddingTabletDesktop);
-  display: inline-block;
-  vertical-align: top;
-  padding-top: 10px;
-  padding-bottom: 10px;
   text-align: center;
 }

@@ -52,13 +52,12 @@ class SimpleSlider extends Component {
               // mobile
               <ScrollableList
                 numberToDisplay={this.props.numberMobile}
+                touchMoveSensitivity={1}
                 buttonUp={buttonUpMobile}
                 buttonDown={buttonDownMobile}
                 positionButtonsBelow={this.props.nextPrevButtonsForMobile}
                 reverseScroll={this.props.reverseScroll}
                 wrapperClassName={style.sliderWrapper}
-                ulClassName={[style.sliderUl, this.props.ulClassName].join(' ')}
-                listItemClassName={[style.listItem, this.props.listItemClassName].join(' ')}
                 buttonUpContainerClassName={buttonClassMobile}
                 buttonDownContainerClassName={buttonClassMobile}
                 buttonsBelowClassName={style.buttonsBelow} >
@@ -71,13 +70,12 @@ class SimpleSlider extends Component {
                     // tablet
                     <ScrollableList
                       numberToDisplay={this.props.numberTablet}
+                      touchMoveSensitivity={1.5}
                       buttonUp={<ButtonLeft />}
                       buttonDown={<ButtonRight />}
                       positionButtonsBelow={false}
                       reverseScroll={this.props.reverseScroll}
                       wrapperClassName={[style.sliderTabletDesktop, this.props.desktopWrapperClassName].join(' ')}
-                      ulClassName={[style.sliderUlTablet, this.props.ulClassName].join(' ')}
-                      listItemClassName={[style.listItemTablet, this.props.listItemClassName].join(' ')}
                       buttonUpContainerClassName={style.buttonsSidesContainer}
                       buttonDownContainerClassName={style.buttonsSidesContainer}
                       buttonsBelowClassName={style.buttonsBelow} >
@@ -87,13 +85,12 @@ class SimpleSlider extends Component {
                     // desktop
                     <ScrollableList
                       numberToDisplay={this.props.numberDesktop}
+                      touchMoveSensitivity={2}
                       buttonUp={<ButtonLeft />}
                       buttonDown={<ButtonRight />}
                       positionButtonsBelow={false}
                       reverseScroll={this.props.reverseScroll}
                       wrapperClassName={[style.sliderTabletDesktop, this.props.desktopWrapperClassName].join(' ')}
-                      ulClassName={[style.sliderUlTablet, this.props.ulClassName].join(' ')}
-                      listItemClassName={[style.listItemDesktop, this.props.listItemClassName].join(' ')}
                       buttonUpContainerClassName={style.buttonsSidesContainer}
                       buttonDownContainerClassName={style.buttonsSidesContainer}
                       buttonsBelowClassName={style.buttonsBelow} >

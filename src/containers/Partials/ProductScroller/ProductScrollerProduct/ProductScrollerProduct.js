@@ -13,6 +13,7 @@ class ProductScrollerProduct extends Component {
     this.renderNew = this.renderNew.bind(this)
     this.renderSKU = this.renderSKU.bind(this)
     this.renderTitle = this.renderTitle.bind(this)
+    this.renderCompliance = this.renderCompliance.bind(this)
   }
 
   renderNew () {
@@ -56,6 +57,29 @@ class ProductScrollerProduct extends Component {
     )
   }
 
+  renderCompliance () {
+    if (this.props.product.meta['product_compliance']) {
+      let _icons = [], _i = 0;
+      for (var i in this.props.product.meta['product_compliance']) {
+        if ( 3 > _i ){
+          const __i = <span
+            key={i}
+            className={style.complianceIcon}>
+            {i}
+          </span>;
+          _icons.push(__i);
+        }
+        _i++;
+      }
+      return (
+        <span
+          className={style.compliance}>
+          {_icons}
+        </span>
+      )
+    }
+  }
+
   render () {
     return (
       <div
@@ -68,6 +92,7 @@ class ProductScrollerProduct extends Component {
           <div
             className={style.topIcons}>
             {this.renderNew()}
+            {this.renderCompliance()}
           </div>
           <div
             className={style.elementWrapper}>

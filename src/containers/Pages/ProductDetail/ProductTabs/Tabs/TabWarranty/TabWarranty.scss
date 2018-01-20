@@ -7,18 +7,21 @@ $marginTop: 20px;
 .warranty {
   margin-top: $marginTop;
 
-  li {
-    margin-top: 18px;
+  p, li {
+    margin-bottom: 18px;
     font-family: Helvetica;
     font-size: 12px;
     font-weight: normal;
     font-style: normal;
     font-stretch: normal;
     line-height: normal;
-    list-style: unset;
     letter-spacing: normal;
     text-align: left;
     color: $slate-grey;
+  }
+
+  li {
+    list-style: unset;
   }
 
   ul {

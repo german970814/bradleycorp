@@ -19,7 +19,7 @@ function getTheTabs (tabsData) {
     tabs = [ ...tabs,
       <Tab
         key={1}
-        text={`3-Part Spec and Technical Data`}
+        text={`3-Part Spec & Technical Data`}
         isActive={false}
         isDesktop={false}
         isOpen={false} >
