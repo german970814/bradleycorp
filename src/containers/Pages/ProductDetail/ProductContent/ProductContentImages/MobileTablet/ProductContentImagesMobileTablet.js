@@ -63,7 +63,11 @@ class ProductContentImages extends Component {
             {/* display in lightbox scroller */}
             <FixedAspectRatioBox>
               <YouTube
-                videoId={videoId} />
+                videoId={videoId}
+                opts={{
+                  width: '100%',
+                  height: '100%'
+                }} />
             </FixedAspectRatioBox>
 
           </React.Fragment>

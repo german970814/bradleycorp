@@ -23,7 +23,11 @@ class ListItemLightbox extends Component {
     return (
       <FixedAspectRatioBox>
         <YouTube
-          videoId={videoId}/>
+          videoId={videoId}
+          opts={{
+            width: '100%',
+            height: '100%'
+          }} />
       </FixedAspectRatioBox>
     )
   }

@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import VerticalAlignHelper from '../VerticalAlignHelper/VerticalAlignHelper'
 import style from './FixedAspectRatioBox.scss'
 
 const FixedAspectRatioBox = props => {
@@ -8,20 +9,27 @@ const FixedAspectRatioBox = props => {
     : `${props.aspectRatio}%`
 
   return (
-    <div
-      style={{
-        paddingTop: aspectRatio
-      }}
-      className={`${style.aspectRatioBox} aspect-ratio-box`} >
+    <React.Fragment>
+
+      <VerticalAlignHelper />
 
       <div
-        className={`${style.aspectRatioBoxContent} aspect-ratio-box-content`} >
+        style={{
+          paddingTop: aspectRatio,
+          verticalAlign: props.verticalAlign
+        }}
+        className={`${style.aspectRatioBox} aspect-ratio-box`} >
 
-        {props.children}
+        <div
+          className={`${style.aspectRatioBoxContent} aspect-ratio-box-content`} >
+
+          {props.children}
+
+        </div>
 
       </div>
 
-    </div>
+    </React.Fragment>
   )
 }
 
@@ -30,11 +38,13 @@ FixedAspectRatioBox.propTypes = {
     PropTypes.object,
     PropTypes.array
   ]).isRequired,
-  aspectRatio: PropTypes.number
+  aspectRatio: PropTypes.number,
+  verticalAlign: PropTypes.oneOf(['top', 'middle', 'bottom'])
 }
 
 FixedAspectRatioBox.defaultProps = {
-  aspectRatio: 56.25 // defaults to youtube aspect ratio
+  aspectRatio: 56.25, /* defaults to youtube aspect ratio */
+  verticalAlign: 'middle'
 }
 
 export default FixedAspectRatioBox
