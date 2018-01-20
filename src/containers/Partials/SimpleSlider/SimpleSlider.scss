@@ -8,7 +8,7 @@ $listItemPaddingTabletDesktop: 40px;
 
 .title {
   margin: {
-    top: 40px;
+    top: 60px;
     bottom: 19px;
   }
   width: 100%;
@@ -106,17 +106,17 @@ $listItemPaddingTabletDesktop: 40px;
 
 // Tablet-Desktop
 
-$arrowWidthTablet: 51px;
+$arrowWidthTablet: 11px;
 
 .sliderTabletDesktop {
   @extend %BodyPaddingWithMediaQueries;
-  /* @extend %100WidthMinusBodyPaddingWithMediaQueries; */
+  @extend %100WidthMinusBodyPaddingWithMediaQueries;
   max-width: 1066px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
 
-  .buttonsSidesContainer {
+  /* .buttonsSidesContainer {
     position: absolute;
     top: 50%;
     height: auto;
@@ -127,31 +127,42 @@ $arrowWidthTablet: 51px;
     &.buttonDown {
       right: 0;
     }
-  }
+  } */
 }
 
 .leftButton, .rightButton {
-  width: $arrowWidthTablet;
+  /* width: $arrowWidthTablet; */
+  width: 100%;
 
   img {
-    max-width: 11px;
-    display: inline-block;
+    /* max-width: 11px;
+    display: inline-block; */
+    width: 100%;
   }
 }
 
-.leftButton  {
+/* .leftButton  {
   text-align: left;
 }
 .rightButton {
   text-align: right;
-}
-
+} */
+$marginRightAndLeft: 60px;
 .sliderTabletDesktop :global .track-wrapper {
   display: inline-block;
   vertical-align: middle;
   margin-top: 0;
-  margin-bottom: 55px;
+  margin-bottom: 60px;
+  margin-left: $marginRightAndLeft;
+  margin-right: $marginRightAndLeft;
   padding: 0;
-  width: calc(100% - #{$arrowWidthTablet}*2);
+  width: calc(100% - #{$arrowWidthTablet+$marginRightAndLeft}*2);
   text-align: center;
+
+  @include respond-to(desktop) {
+    $marginRightAndLeft: 40px;
+    margin-left: $marginRightAndLeft;
+    margin-right: $marginRightAndLeft;
+    width: calc(100% - #{$arrowWidthTablet+$marginRightAndLeft}*2);
+  }
 }
