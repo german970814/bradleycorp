@@ -1,7 +1,6 @@
 import React from 'react'
 import YouTube from 'react-youtube'
 import { youtubeParser } from '../../../../../lib/bcorpUrl'
-import addVideoIdFromSrc from '../../../../../components/Partials/Youtube/addVideoIdFromSrc'
 import LightboxYoutube from '../../../../Partials/Lightbox/LightboxYoutube'
 import FixedAspectRatioBox from '../../../../../components/Partials/FixedAspectRatioBox/FixedAspectRatioBox'
 import tabStyle from './Tabs.scss'
@@ -22,17 +21,19 @@ export default function renderVideoThumbnail (videos) {
   }
 
   if (arrayOfSrcs.length === 1) {
-    const YoutubeWithID = addVideoIdFromSrc(YouTube, arrayOfSrcs[0])
-
+    // if we only have one video src, no need to make a playlist
+    const videoId = youtubeParser(arrayOfSrcs[0]) || ''
     return (
       <LightboxYoutube>
 
-        <YoutubeWithID
+        <YouTube
+          videoId={videoId}
           className={tabStyle.videoIframe}
           opts={youtubeOpts} />
 
         <FixedAspectRatioBox>
-          <YoutubeWithID
+          <YouTube
+            videoId={videoId}
             opts={youtubeOpts} />
         </FixedAspectRatioBox>
 
@@ -41,6 +42,10 @@ export default function renderVideoThumbnail (videos) {
   }
 
   // if there are mutliple videos we need to pass them as a playlist
+  //
+  // we get the video ids
+  // then use the first one from the list as the videoId prop
+  // the rest are passed as a 'playlist' property to the playerVars object
   const videoIds = arrayOfSrcs.map(src => {
     return youtubeParser(src)
   })

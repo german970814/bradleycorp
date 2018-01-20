@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import YouTube from 'react-youtube'
-import addVideoIdFromSrc from '../../../../../../../components/Partials/Youtube/addVideoIdFromSrc'
+import { youtubeParser } from '../../../../../../../lib/bcorpUrl'
 import FixedAspectRatioBox from '../../../../../../../components/Partials/FixedAspectRatioBox/FixedAspectRatioBox'
 import Lightbox from '../../../../../../Partials/Lightbox/Lightbox'
 import style from './VerticalListItem.scss'
@@ -22,7 +22,7 @@ class VerticalListItem extends Component {
   }
 
   renderVideo () {
-    const YoutubeWithID = addVideoIdFromSrc(YouTube, this.props.src)
+    const videoId = youtubeParser(this.props.src) || ''
     const videoStyle = {
       backgroundImage: `url(${require('../../../../../../../images/icon-video/icon-video@2x.png')})`
     }
@@ -34,7 +34,8 @@ class VerticalListItem extends Component {
           className={style.listItemVideo} />
 
         <FixedAspectRatioBox>
-          <YoutubeWithID />
+          <YouTube
+            videoId={videoId} />
         </FixedAspectRatioBox>
 
       </Lightbox>

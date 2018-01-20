@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import YouTube from 'react-youtube'
-import addVideoIdFromSrc from '../../../../../../../../components/Partials/Youtube/addVideoIdFromSrc'
+import { youtubeParser } from '../../../../../../../../lib/bcorpUrl'
 import FixedAspectRatioBox from '../../../../../../../../components/Partials/FixedAspectRatioBox/FixedAspectRatioBox'
 import style from './ListItemLightbox.scss'
 
@@ -19,10 +19,11 @@ class ListItemLightbox extends Component {
   }
 
   renderVideo () {
-    const YoutubeWithID = addVideoIdFromSrc(YouTube, this.props.src)
+    const videoId = youtubeParser(this.props.src) || ''
     return (
       <FixedAspectRatioBox>
-        <YoutubeWithID />
+        <YouTube
+          videoId={videoId}/>
       </FixedAspectRatioBox>
     )
   }

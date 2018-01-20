@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import YouTube from 'react-youtube'
-import ScrollableListOpensInLightbox from '../../../../../Partials/ScrollableList/ScrollableListOpensInLightbox'
-import addVideoIdFromSrc from '../../../../../../components/Partials/Youtube/addVideoIdFromSrc'
+import { youtubeParser } from '../../../../../../lib/bcorpUrl'
 import FixedAspectRatioBox from '../../../../../../components/Partials/FixedAspectRatioBox/FixedAspectRatioBox'
+import ScrollableListOpensInLightbox from '../../../../../Partials/ScrollableList/ScrollableListOpensInLightbox'
 import ButtonLeft from './ButtonLeft'
 import ButtonRight from './ButtonRight'
 import style from './ProductContentImagesMobileTablet.scss'
@@ -47,7 +47,7 @@ class ProductContentImages extends Component {
 
     const videos = (this.props.videos && this.props.videos.length)
       ? this.props.videos.split(',').map((videoSrc, index) => {
-        const YoutubeWithID = addVideoIdFromSrc(YouTube, videoSrc)
+        const videoId = youtubeParser(videoSrc) || ''
         const videoStyle = {
           backgroundImage: `url(${require('../../../../../../images/icon-video/icon-video@3x.png')})`
         }
@@ -62,7 +62,8 @@ class ProductContentImages extends Component {
 
             {/* display in lightbox scroller */}
             <FixedAspectRatioBox>
-              <YoutubeWithID />
+              <YouTube
+                videoId={videoId} />
             </FixedAspectRatioBox>
 
           </React.Fragment>

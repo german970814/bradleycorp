@@ -7,8 +7,6 @@ const FixedAspectRatioBox = props => {
     ? `${props.aspectRatio * 100}%`
     : `${props.aspectRatio}%`
 
-  console.log(props.children)
-
   return (
     <div
       style={{
