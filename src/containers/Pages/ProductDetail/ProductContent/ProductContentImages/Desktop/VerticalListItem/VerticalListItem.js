@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import YouTube from 'react-youtube'
 import addVideoIdFromSrc from '../../../../../../../components/Partials/Youtube/addVideoIdFromSrc'
-import FitLightboxYoutube from '../../../../../../Partials/Lightbox/FitLightboxYoutube'
+import FixedAspectRatioBox from '../../../../../../../components/Partials/FixedAspectRatioBox/FixedAspectRatioBox'
 import Lightbox from '../../../../../../Partials/Lightbox/Lightbox'
 import style from './VerticalListItem.scss'
 
@@ -33,14 +33,9 @@ class VerticalListItem extends Component {
           style={videoStyle}
           className={style.listItemVideo} />
 
-        <FitLightboxYoutube>
-          {(width, height) => {
-            return (
-              <YoutubeWithID
-                opts={{width, height}}/>
-            )
-          }}
-        </FitLightboxYoutube>
+        <FixedAspectRatioBox>
+          <YoutubeWithID />
+        </FixedAspectRatioBox>
 
       </Lightbox>
     )

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import YouTube from 'react-youtube'
 import ScrollableListOpensInLightbox from '../../../../../Partials/ScrollableList/ScrollableListOpensInLightbox'
 import addVideoIdFromSrc from '../../../../../../components/Partials/Youtube/addVideoIdFromSrc'
-import FitLightboxYoutube from '../../../../../Partials/Lightbox/FitLightboxYoutube'
+import FixedAspectRatioBox from '../../../../../../components/Partials/FixedAspectRatioBox/FixedAspectRatioBox'
 import ButtonLeft from './ButtonLeft'
 import ButtonRight from './ButtonRight'
 import style from './ProductContentImagesMobileTablet.scss'
@@ -61,14 +61,9 @@ class ProductContentImages extends Component {
               className={[style.videoListItem, style.fitBackground].join(' ')} />
 
             {/* display in lightbox scroller */}
-            <FitLightboxYoutube>
-              {(width, height) => {
-                return (
-                  <YoutubeWithID
-                    opts={{width, height}}/>
-                )
-              }}
-            </FitLightboxYoutube>
+            <FixedAspectRatioBox>
+              <YoutubeWithID />
+            </FixedAspectRatioBox>
 
           </React.Fragment>
         )

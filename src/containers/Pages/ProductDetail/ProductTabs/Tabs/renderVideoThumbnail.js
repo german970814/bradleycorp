@@ -2,8 +2,8 @@ import React from 'react'
 import YouTube from 'react-youtube'
 import { youtubeParser } from '../../../../../lib/bcorpUrl'
 import addVideoIdFromSrc from '../../../../../components/Partials/Youtube/addVideoIdFromSrc'
-import FitLightboxYoutube from '../../../../Partials/Lightbox/FitLightboxYoutube'
 import LightboxYoutube from '../../../../Partials/Lightbox/LightboxYoutube'
+import FixedAspectRatioBox from '../../../../../components/Partials/FixedAspectRatioBox/FixedAspectRatioBox'
 import tabStyle from './Tabs.scss'
 
 export default function renderVideoThumbnail (videos) {
@@ -11,7 +11,9 @@ export default function renderVideoThumbnail (videos) {
     return video.meta['video_gallery_video']
   })
 
-  let youtubeOpts = {
+  const youtubeOpts = {
+    width: '100%', /* width and height 100% to fit aspect ratio wrapper */
+    height: '100%',
     playerVars: {
       showinfo: 0,
       modestbranding: 1,
@@ -29,16 +31,10 @@ export default function renderVideoThumbnail (videos) {
           className={tabStyle.videoIframe}
           opts={youtubeOpts} />
 
-        <FitLightboxYoutube>
-          {(width, height) => {
-            youtubeOpts = { ...youtubeOpts, width, height }
-
-            return (
-              <YoutubeWithID
-                opts={youtubeOpts} />
-            )
-          }}
-        </FitLightboxYoutube>
+        <FixedAspectRatioBox>
+          <YoutubeWithID
+            opts={youtubeOpts} />
+        </FixedAspectRatioBox>
 
       </LightboxYoutube>
     )
@@ -63,19 +59,11 @@ export default function renderVideoThumbnail (videos) {
         className={tabStyle.videoIframe}
         opts={youtubeOpts} />
 
-      <FitLightboxYoutube>
-
-        {(width, height) => {
-          youtubeOpts = { ...youtubeOpts, width, height }
-
-          return (
-            <YouTube
-              videoId={videoIdPlayFirst}
-              opts={youtubeOpts} />
-          )
-        }}
-
-      </FitLightboxYoutube>
+      <FixedAspectRatioBox>
+        <YouTube
+          videoId={videoIdPlayFirst}
+          opts={youtubeOpts} />
+      </FixedAspectRatioBox>
 
     </LightboxYoutube>
   )
