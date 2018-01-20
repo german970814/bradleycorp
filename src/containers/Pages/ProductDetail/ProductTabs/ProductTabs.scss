@@ -79,15 +79,21 @@ $tabContentPaddingRight: 9vw;
 }
 
 .activeTabContentDesktop {
+  @extend %100WidthMinusBodyPaddingWithMediaQueries;
   border-top: solid 1px $silver;
   border-bottom: solid 1px $silver;
   padding-top: 80px;
   padding-bottom: 45px;
-  padding-left: $tabContentPaddingLeft;
-  padding-right: $tabContentPaddingRight;
-  width: calc(100% - #{$tabContentPaddingLeft} - #{$tabContentPaddingRight});
+  padding-left: $TabletBodyPadding;
+  padding-right: $TabletBodyPadding;
   background-color: $light-gray;
   text-align: left;
+
+  @include respond-to(desktop) {
+    padding-left: $tabContentPaddingLeft;
+    padding-right: $tabContentPaddingRight;
+    width: calc(100% - #{$tabContentPaddingLeft} - #{$tabContentPaddingRight});
+  }
 }
 
 .productDetailTabsDesktop {
