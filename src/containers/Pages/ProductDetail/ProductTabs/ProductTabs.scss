@@ -63,7 +63,7 @@ $tabHeight: 65px;
 
 $tabHeightDesktop: 60px;
 $tabContentPaddingLeft: 11.5vw;
-$tabContentPaddingRight: 9vw;
+$tabContentPaddingRight: 11.5vw;
 
 .tabsWrapperDesktop {
   margin-top: 70px;
@@ -79,13 +79,12 @@ $tabContentPaddingRight: 9vw;
 }
 
 .activeTabContentDesktop {
+  @extend %BodyPaddingWithMediaQueries;
   @extend %100WidthMinusBodyPaddingWithMediaQueries;
-  border-top: solid 1px $silver;
-  border-bottom: solid 1px $silver;
   padding-top: 80px;
   padding-bottom: 45px;
-  padding-left: $TabletBodyPadding;
-  padding-right: $TabletBodyPadding;
+  border-top: solid 1px $silver;
+  border-bottom: solid 1px $silver;
   background-color: $light-gray;
   text-align: left;
 
