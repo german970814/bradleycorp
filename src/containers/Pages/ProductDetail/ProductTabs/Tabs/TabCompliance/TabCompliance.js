@@ -7,7 +7,7 @@ import style from './TabCompliance.scss'
 class TabCompliance extends Component {
   constructor (props) {
     super(props)
-console.log(props)
+
     this.renderCompliance = this.renderCompliance.bind(this)
   }
 
