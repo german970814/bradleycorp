@@ -114,9 +114,10 @@ function getTheTabs (tabsData) {
       </Tab>
     ]
   }
-
+console.log(tabsData.compliance)
   // Compliance
-  if (tabsData.compliance.length > 0) {
+  if (tabsData.compliance.compliance.length > 0 ||
+      tabsData.compliance.compliance_icons.length > 0) {
     tabs = [ ...tabs,
       <Tab
         key={7}
