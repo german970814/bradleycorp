@@ -4,7 +4,6 @@ import AutoGrowShrinkAnimation from '../../../../Partials/AutoGrowShrinkAnimatio
 import style from './ProductContentText.scss'
 
 class ProductContentText extends Component {
-
   renderText (isOpen) {
     if (!this.props.content) {
       return
@@ -21,7 +20,7 @@ class ProductContentText extends Component {
   }
 
   render () {
-    const _text = (400 < this.props.content.length)
+    const _text = (this.props.content.length > 400)
       ? <AutoGrowShrinkAnimation
         speed={600}
         easing={'cubic-bezier(0.86, 0, 0.07, 1)'} >
@@ -47,7 +46,7 @@ class ProductContentText extends Component {
       </AutoGrowShrinkAnimation>
       : <div
         className={style.content}
-        dangerouslySetInnerHTML={{__html: this.props.content}} />;
+        dangerouslySetInnerHTML={{__html: this.props.content}} />
     return (
       _text
     )

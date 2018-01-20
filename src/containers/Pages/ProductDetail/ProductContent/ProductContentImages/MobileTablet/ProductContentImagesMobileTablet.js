@@ -28,17 +28,17 @@ class ProductContentImages extends Component {
           <React.Fragment
             key={index} >
 
-          {/* display in scroller */}
-          <div
-            src={imageSrc}
-            style={imageStyle}
-            className={style.fitBackground} />
+            {/* display in scroller */}
+            <div
+              src={imageSrc}
+              style={imageStyle}
+              className={style.fitBackground} />
 
-          {/* display in lightbox scroller */}
-          <div
-            src={imageSrc}
-            style={imageStyle}
-            className={style.fitBackground} />
+            {/* display in lightbox scroller */}
+            <div
+              src={imageSrc}
+              style={imageStyle}
+              className={style.fitBackground} />
 
           </React.Fragment>
         )

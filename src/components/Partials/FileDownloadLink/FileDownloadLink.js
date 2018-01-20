@@ -43,7 +43,8 @@ FileDownloadLink.propTypes = {
   title: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
   titleClass: PropTypes.string,
-  iconClass: PropTypes.string
+  iconClass: PropTypes.string,
+  linkClass: PropTypes.string
 }
 
 export default FileDownloadLink

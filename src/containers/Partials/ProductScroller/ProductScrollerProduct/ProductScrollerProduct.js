@@ -59,17 +59,18 @@ class ProductScrollerProduct extends Component {
 
   renderCompliance () {
     if (this.props.product.meta['product_compliance']) {
-      let _icons = [], _i = 0;
+      const _icons = []
+      let _i = 0
       for (var i in this.props.product.meta['product_compliance']) {
-        if ( 3 > _i ){
+        if (_i < 3) {
           const __i = <span
             key={i}
             className={style.complianceIcon}>
             {i}
-          </span>;
-          _icons.push(__i);
+          </span>
+          _icons.push(__i)
         }
-        _i++;
+        _i++
       }
       return (
         <span
