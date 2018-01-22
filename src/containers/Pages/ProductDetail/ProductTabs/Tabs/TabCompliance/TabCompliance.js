@@ -15,7 +15,7 @@ class TabCompliance extends Component {
   }
 
   renderCompliance () {
-    if ( this.props.compliance.compliance.length ) {
+    if (this.props.compliance.compliance.length) {
       return (
         <div
           className={[tabStyle.halfWidthColDesktopTab, style.complianceSide].join(' ')} >
@@ -49,7 +49,7 @@ class TabCompliance extends Component {
   }
 
   renderComplianceIcons () {
-    if ( this.props.compliance.compliance_icons.length ) {
+    if (this.props.compliance.compliance_icons.length) {
       return (
         <div
           className={[tabStyle.halfWidthColDesktopTab, style.iconSide].join(' ')} >
@@ -65,9 +65,9 @@ class TabCompliance extends Component {
 
   renderComplianceIconsHtml () {
     return this.props.compliance.compliance_icons.map((icon, index) => {
-      if ( 'undefined' === typeof icon.media
-        && ! icon.media.featured_image.length ) {
-        return;
+      if (typeof icon.media === 'undefined' &&
+        !icon.media.featured_image.length) {
+        return
       }
       return (
         <li
@@ -79,7 +79,7 @@ class TabCompliance extends Component {
               className={style.complianceLink}
               target="_blank" >
               <img
-              src={icon.media.featured_image[0]} />
+                src={icon.media.featured_image[0]} />
             </a>
             : <img
               src={icon.media.featured_image[0]} />}
@@ -91,24 +91,12 @@ class TabCompliance extends Component {
   render () {
     return (
       <div
-<<<<<<< HEAD
-        className={[style.tabCompliance, tabStyle.fullWidthColDesktopTab].join(' ')} >
-        <h5
-          className={tabStyle.tabColTitle}>
-          {'Compliance'}
-        </h5>
-        <ul
-          className={tabStyle.tabColUl} >
-          {this.renderCompliance()}
-        </ul>
-=======
         className={style.tabCompliance} >
 
         {this.renderCompliance()}
 
         {this.renderComplianceIcons()}
 
->>>>>>> origin/roami
       </div>
     )
   }

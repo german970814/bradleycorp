@@ -27,7 +27,7 @@ $fullWidthColBreakpoint: 600px;
   @extend .fullWidthColDesktopTab;
 
   @include respond-to-custom($fullWidthColBreakpoint) {
-    width: calc(50% - (#{$marginBetweenColumns} / 2));
+    width: calc((50% - (#{$marginBetweenColumns} / 2)) - 1px);
 
     &:nth-child(odd) {
       margin-right: $marginBetweenColumns / 2;
@@ -43,7 +43,7 @@ $fullWidthColBreakpoint: 600px;
   @extend .fullWidthColDesktopTab;
 
   @include respond-to-custom($fullWidthColBreakpoint) {
-    width: calc((100% - #{$marginBetweenColumns}) / 2);
+    width: calc(((100% - #{$marginBetweenColumns}) / 2) - 1px);
 
     &:nth-child(3n + 1) {
       margin-right: $marginBetweenColumns / 2;
@@ -61,7 +61,7 @@ $fullWidthColBreakpoint: 600px;
   }
 
   @include respond-to(desktop) {
-    width: calc((100% - (#{$marginBetweenColumns} * 2)) / 3);
+    width: calc(((100% - (#{$marginBetweenColumns} * 2)) / 3) - 1px);
 
     &:nth-child(3n + 1) {
       margin-right: $marginBetweenColumns / 2;
