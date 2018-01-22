@@ -65,10 +65,18 @@ class ProductScrollerProduct extends Component {
         if (_i < 3) {
           const __i = <span
             key={i}
+<<<<<<< HEAD
             className={style.complianceIcon}>
             {i}
           </span>
           _icons.push(__i)
+=======
+            className={style.complianceIcon}
+            title={i+' Compliant'}>
+            <i>Icon</i>
+          </span>;
+          _icons.push(__i);
+>>>>>>> origin/roami
         }
         _i++
       }

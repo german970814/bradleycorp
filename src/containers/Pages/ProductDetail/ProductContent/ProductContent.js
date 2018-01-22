@@ -13,7 +13,7 @@ class ProductContent extends Component {
     super(props)
 
     this.renderNew = this.renderNew.bind(this)
-    this.rendeerSKU = this.renderSKU.bind(this)
+    this.renderSKU = this.renderSKU.bind(this)
     this.renderAwards = this.renderAwards.bind(this)
     this.renderCTA = this.renderCTA.bind(this)
     this.renderDesktop = this.renderDesktop.bind(this)

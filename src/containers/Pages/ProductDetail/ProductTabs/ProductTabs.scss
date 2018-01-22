@@ -63,7 +63,7 @@ $tabHeight: 65px;
 
 $tabHeightDesktop: 60px;
 $tabContentPaddingLeft: 11.5vw;
-$tabContentPaddingRight: 9vw;
+$tabContentPaddingRight: 11.5vw;
 
 .tabsWrapperDesktop {
   margin-top: 70px;
@@ -79,15 +79,20 @@ $tabContentPaddingRight: 9vw;
 }
 
 .activeTabContentDesktop {
-  border-top: solid 1px $silver;
-  border-bottom: solid 1px $silver;
+  @extend %BodyPaddingWithMediaQueries;
+  @extend %100WidthMinusBodyPaddingWithMediaQueries;
   padding-top: 80px;
   padding-bottom: 45px;
-  padding-left: $tabContentPaddingLeft;
-  padding-right: $tabContentPaddingRight;
-  width: calc(100% - #{$tabContentPaddingLeft} - #{$tabContentPaddingRight});
+  border-top: solid 1px $silver;
+  border-bottom: solid 1px $silver;
   background-color: $light-gray;
   text-align: left;
+
+  @include respond-to(desktop) {
+    padding-left: $tabContentPaddingLeft;
+    padding-right: $tabContentPaddingRight;
+    width: calc(100% - #{$tabContentPaddingLeft} - #{$tabContentPaddingRight});
+  }
 }
 
 .productDetailTabsDesktop {
