@@ -7,9 +7,7 @@ const srcDir = path.join(__dirname, 'src')
 const config = {
   context: srcDir,
 
-  entry: {
-    index: './index.js'
-  },
+  entry: ["babel-polyfill", "./index.js"],
 
   output: {
     path: path.join(__dirname, 'build'),
