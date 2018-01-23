@@ -61,14 +61,26 @@ class ProductScrollerProduct extends Component {
     if (this.props.product.meta['product_compliance']) {
       const _icons = []
       let _i = 0
-      for (var i in this.props.product.meta['product_compliance']) {
+      for (var compliance in this.props.product.meta['product_compliance']) {
+        // limit number of icons to 3
         if (_i < 3) {
-          const __i = <span
-            key={i}
-            className={style.complianceIcon}
-            title={i + ' Compliant'}>
-            <i>Icon</i>
-          </span>
+          const iconSrc = this.getIconSrc(compliance)
+          // move on if the icon image doesnt exist or hasn't been assigned
+          if (!iconSrc) {
+            continue
+          }
+
+          const title = `${compliance} Compliant`
+          const __i = (
+            <span
+              key={compliance}
+              className={style.complianceIconWrapper}
+              title={title}>
+              <img
+                src={iconSrc}
+                className={style.complianceIcon} />
+            </span>
+          )
           _icons.push(__i)
         }
         _i++
@@ -114,6 +126,46 @@ class ProductScrollerProduct extends Component {
       </div>
 
     )
+  }
+
+  getIconSrc (compliance) {
+    switch (compliance) {
+      case 'ADA':
+        return require('../../../../images/compliance-icons/ada-web-icon@2x.png')
+
+      case 'Barrier Free':
+        return require('../../../../images/compliance-icons/bf-web-icon@2x.png')
+
+      case 'Advocate':
+        return require('../../../../images/compliance-icons/advocate-web-icon@2x.png')
+
+      case 'Aerix Plus':
+        return require('../../../../images/compliance-icons/aerix-plus-web-icon@2x.png')
+
+      case 'Aerix':
+        return require('../../../../images/compliance-icons/aerix-web-icon@2x.png')
+
+      case 'Diplomat':
+        return require('../../../../images/compliance-icons/diplomat-web-icon@2x.png')
+
+      case 'Frequency':
+        return require('../../../../images/compliance-icons/frequency-web-icon@2x.png')
+
+      case 'Halo':
+        return require('../../../../images/compliance-icons/halo-web-icon@2x.png')
+
+      case 'Navigator':
+        return require('../../../../images/compliance-icons/navigator-web-icon@2x.png')
+
+      case 'Verge':
+        return require('../../../../images/compliance-icons/verge-web-icon@2x.png')
+
+      case 'Keltech':
+        return require('../../../../images/compliance-icons/keltech-web-icon@2x.png')
+
+      default:
+        return false
+    }
   }
 }
 

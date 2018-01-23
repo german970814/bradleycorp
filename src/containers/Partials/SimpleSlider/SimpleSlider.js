@@ -57,7 +57,7 @@ class SimpleSlider extends Component {
                 buttonDown={buttonDownMobile}
                 positionButtonsBelow={this.props.nextPrevButtonsForMobile}
                 reverseScroll={this.props.reverseScroll}
-                wrapperClassName={style.sliderWrapper}
+                wrapperClassName={`${style.sliderWrapper} ${this.props.wrapperClassName}`}
                 buttonUpContainerClassName={buttonClassMobile}
                 buttonDownContainerClassName={buttonClassMobile}
                 buttonsBelowClassName={style.buttonsBelow} >
@@ -75,7 +75,7 @@ class SimpleSlider extends Component {
                       buttonDown={<ButtonRight />}
                       positionButtonsBelow={false}
                       reverseScroll={this.props.reverseScroll}
-                      wrapperClassName={[style.sliderTabletDesktop, this.props.desktopWrapperClassName].join(' ')}
+                      wrapperClassName={`${style.sliderTabletDesktop} ${this.props.desktopWrapperClassName}`}
                       buttonUpContainerClassName={style.buttonsSidesContainer}
                       buttonDownContainerClassName={style.buttonsSidesContainer}
                       buttonsBelowClassName={style.buttonsBelow} >
@@ -90,7 +90,7 @@ class SimpleSlider extends Component {
                       buttonDown={<ButtonRight />}
                       positionButtonsBelow={false}
                       reverseScroll={this.props.reverseScroll}
-                      wrapperClassName={[style.sliderTabletDesktop, this.props.desktopWrapperClassName].join(' ')}
+                      wrapperClassName={`${style.sliderTabletDesktop} ${this.props.desktopWrapperClassName}`}
                       buttonUpContainerClassName={style.buttonsSidesContainer}
                       buttonDownContainerClassName={style.buttonsSidesContainer}
                       buttonsBelowClassName={style.buttonsBelow} >
@@ -119,6 +119,7 @@ SimpleSlider.propTypes = {
   numberDesktop: PropTypes.number.isRequired,
   nextPrevButtonsForMobile: PropTypes.bool,
   reverseScroll: PropTypes.bool,
+  wrapperClassName: PropTypes.string,
   desktopWrapperClassName: PropTypes.string,
   ulClassName: PropTypes.string,
   listItemClassName: PropTypes.string

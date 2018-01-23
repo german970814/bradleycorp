@@ -165,14 +165,17 @@ class ScrollableList extends Component {
 
   renderChildren (dimensions) {
     const inlineStyle = this.props.vertical ? { height: dimensions } : { width: dimensions }
-    const className = this.props.vertical ? style.trackItemVertical : style.trackItem
+    const className = this.props.vertical
+      ? `${style.trackItemVertical} track-item-vertical`
+      : `${style.trackItem} track-item`
 
     return this.state.children.map((child, index) => {
       return (
         <div
           key={index}
           style={inlineStyle}
-          className={className} >
+          className={className}
+          data-index={index} >
           {child.component}
         </div>
       )

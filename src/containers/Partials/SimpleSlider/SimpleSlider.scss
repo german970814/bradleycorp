@@ -3,8 +3,9 @@
 @import "../../../scss/partials/helpers";
 @import "../../../scss/partials/mixins";
 
-$listItemPadding: 20px;
-$listItemPaddingTabletDesktop: 40px;
+// simple slider list items should use these as paddings
+$distanceBetweenItems: 20px;
+$distanceBetweenItemsTabletDesktop: 45px;
 
 .title {
   margin: {
@@ -28,10 +29,14 @@ $listItemPaddingTabletDesktop: 40px;
 }
 
 .sliderWrapper :global .track-wrapper {
-  width: 100%;
+  margin: {
+    right: -$distanceBetweenItems / 2;
+    left: -$distanceBetweenItems / 2;
+  }
   margin-top: 0;
   margin-bottom: 20px;
   padding: 0;
+  width: calc(100% + #{$distanceBetweenItems});
   text-align: center;
 }
 
@@ -147,7 +152,7 @@ $arrowWidthTablet: 11px;
 .rightButton {
   text-align: right;
 } */
-$marginRightAndLeft: 60px;
+$marginRightAndLeft: 60px - ($distanceBetweenItemsTabletDesktop / 2);
 .sliderTabletDesktop :global .track-wrapper {
   display: inline-block;
   vertical-align: middle;
@@ -160,7 +165,7 @@ $marginRightAndLeft: 60px;
   text-align: center;
 
   @include respond-to(desktop) {
-    $marginRightAndLeft: 40px;
+    $marginRightAndLeft: 40px - ($distanceBetweenItemsTabletDesktop / 2);
     margin-left: $marginRightAndLeft;
     margin-right: $marginRightAndLeft;
     width: calc(100% - #{$arrowWidthTablet+$marginRightAndLeft}*2);
