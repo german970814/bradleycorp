@@ -2,28 +2,13 @@
 @import "../../../scss/partials/mixins";
 @import "../../../scss/partials/variables";
 
-.header {
-  @extend %BodyPaddingWithMediaQueries;
-  @extend %100WidthMinusBodyPaddingWithMediaQueries;
-}
-
 .topBar {
   margin: {
-    left: -$MobileBodyPadding;
-    right: -$MobileBodyPadding;
+    left: -$TabletBodyPadding;
+    right: -$TabletBodyPadding;
   }
-  width: calc(100% + $MobileBodyPadding*2);
-  height: 0px;
-  background-color: #e6e7e8;
-
-  @include respond-to(tablet){
-    margin: {
-      left: -$TabletBodyPadding;
-      right: -$TabletBodyPadding;
-    }
-    width: calc(100% + $TabletBodyPadding*2);
-    height: 27px;
-  }
+  width: calc(100% + $TabletBodyPadding*2);
+  height: 27px;
 
   @include respond-to(desktop){
     margin: {
