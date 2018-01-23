@@ -1,7 +1,13 @@
+import { host } from '../api'
+
 const bcorpUrl = {}
 
 bcorpUrl.createCPTUrl = post => {
   return `/${post['post_type']}/${post['post_name']}`
+}
+
+bcorpUrl.removeHostFromUrl = url => {
+  return url.replace(host, '')
 }
 
 bcorpUrl.youtubeParser = url => {

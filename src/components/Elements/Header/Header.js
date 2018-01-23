@@ -4,6 +4,7 @@ import Media from 'react-media'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../globals'
 import HeaderMobile from './HeaderMobile/HeaderMobile'
 import HeaderTablet from './HeaderTablet/HeaderTablet'
+import HeaderDesktop from './HeaderDesktop/HeaderDesktop'
 
 const Header = ({ menuItems }) => {
   return (
@@ -22,7 +23,7 @@ const Header = ({ menuItems }) => {
                   menuItems={menuItems} />
               ) : (
                 // desktop
-                <HeaderTablet
+                <HeaderDesktop
                   menuItems={menuItems} />
               )
             }
