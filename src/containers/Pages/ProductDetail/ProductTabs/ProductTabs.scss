@@ -2,6 +2,7 @@
 @import "../../../../scss/partials/variables";
 @import "../../../../scss/partials/mixins";
 @import "../../../../scss/partials/layout";
+@import "../../../../scss/partials/grid";
 
 $tabHeight: 65px;
 
@@ -20,6 +21,7 @@ $tabHeight: 65px;
   padding-bottom: 25px;
   background-color: $light-gray;
   text-align: left;
+  @include row()
 }
 
 .productDetailTabs {
@@ -81,6 +83,7 @@ $tabContentPaddingRight: 11.5vw;
 .activeTabContentDesktop {
   @extend %BodyPaddingWithMediaQueries;
   @extend %100WidthMinusBodyPaddingWithMediaQueries;
+  @include row()
   padding-top: 80px;
   padding-bottom: 45px;
   border-top: solid 1px $silver;

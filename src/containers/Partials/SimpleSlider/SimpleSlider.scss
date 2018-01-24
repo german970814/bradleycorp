@@ -116,23 +116,34 @@ $arrowWidthTablet: 11px;
 .sliderTabletDesktop {
   @extend %BodyPaddingWithMediaQueries;
   @extend %100WidthMinusBodyPaddingWithMediaQueries;
-  max-width: 1066px;
+  position: relative;
+  max-width: 1075px; /* override "BodyMaxWithMediaQueries" as per design */
+
+}
+
+.buttonsSidesContainer {
+  position: absolute;
+  top: 50%;
+  height: auto;
+  margin-top: -9.5px;
+  z-index: 99;
+}
+
+.buttonUp {
+  left: 55px;
+}
+
+.buttonDown {
+  right: 55px;
+}
+
+.sliderTabletDesktop :global .track-wrapper {
+  display: block;
+  width: inherit;
   margin-left: auto;
   margin-right: auto;
-  position: relative;
-
-  /* .buttonsSidesContainer {
-    position: absolute;
-    top: 50%;
-    height: auto;
-
-    &.buttonUp {
-      left: 0;
-    }
-    &.buttonDown {
-      right: 0;
-    }
-  } */
+  margin-bottom: 60px;
+  box-sizing: border-box;
 }
 
 .leftButton, .rightButton {
@@ -143,31 +154,5 @@ $arrowWidthTablet: 11px;
     /* max-width: 11px;
     display: inline-block; */
     width: 100%;
-  }
-}
-
-/* .leftButton  {
-  text-align: left;
-}
-.rightButton {
-  text-align: right;
-} */
-$marginRightAndLeft: 60px - ($distanceBetweenItemsTabletDesktop / 2);
-.sliderTabletDesktop :global .track-wrapper {
-  display: inline-block;
-  vertical-align: middle;
-  margin-top: 0;
-  margin-bottom: 60px;
-  margin-left: $marginRightAndLeft;
-  margin-right: $marginRightAndLeft;
-  padding: 0;
-  width: calc(100% - #{$arrowWidthTablet+$marginRightAndLeft}*2);
-  text-align: center;
-
-  @include respond-to(desktop) {
-    $marginRightAndLeft: 40px - ($distanceBetweenItemsTabletDesktop / 2);
-    margin-left: $marginRightAndLeft;
-    margin-right: $marginRightAndLeft;
-    width: calc(100% - #{$arrowWidthTablet+$marginRightAndLeft}*2);
   }
 }

@@ -62,7 +62,9 @@ class ScrollableListTrack extends Component {
   }
 
   getElementWidth () {
-    return this.state.width / this.props.numberToDisplay
+    // return this.state.width / this.props.numberToDisplay
+    const perc = (100 / this.props.numberToDisplay) / 100
+    return (this.state.width * perc)
   }
 
   getTrackHeightVertical () {

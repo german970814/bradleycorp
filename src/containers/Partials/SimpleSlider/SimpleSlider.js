@@ -21,7 +21,7 @@ class SimpleSlider extends Component {
     this.props.title !== '') {
       return (
         <h2
-          className={style.title} >
+          className={[style.title, style.buttonUp].join(' ')} >
           {this.props.title}
         </h2>
       )
@@ -76,8 +76,8 @@ class SimpleSlider extends Component {
                       positionButtonsBelow={false}
                       reverseScroll={this.props.reverseScroll}
                       wrapperClassName={`${style.sliderTabletDesktop} ${this.props.desktopWrapperClassName}`}
-                      buttonUpContainerClassName={style.buttonsSidesContainer}
-                      buttonDownContainerClassName={style.buttonsSidesContainer}
+                      buttonUpContainerClassName={[style.buttonsSidesContainer, style.buttonUp].join(' ')}
+                      buttonDownContainerClassName={[style.buttonsSidesContainer, style.buttonDown].join(' ')}
                       buttonsBelowClassName={style.buttonsBelow} >
                       {this.props.children}
                     </ScrollableList>
@@ -91,8 +91,8 @@ class SimpleSlider extends Component {
                       positionButtonsBelow={false}
                       reverseScroll={this.props.reverseScroll}
                       wrapperClassName={`${style.sliderTabletDesktop} ${this.props.desktopWrapperClassName}`}
-                      buttonUpContainerClassName={style.buttonsSidesContainer}
-                      buttonDownContainerClassName={style.buttonsSidesContainer}
+                      buttonUpContainerClassName={[style.buttonsSidesContainer, style.buttonUp].join(' ')}
+                      buttonDownContainerClassName={[style.buttonsSidesContainer, style.buttonDown].join(' ')}
                       buttonsBelowClassName={style.buttonsBelow} >
                       {this.props.children}
                     </ScrollableList>

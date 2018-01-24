@@ -2,17 +2,18 @@
 @import "../../../../../scss/partials/variables";
 @import "../../../../../scss/partials/mixins";
 @import "../../../../../scss/partials/helpers";
+@import "../../../../../scss/partials/layout";
+@import "../../../../../scss/partials/grid";
 
 $titleMarginBottom: 35px;
 $marginBetweenColumns: 75px;
 $fullWidthColBreakpoint: 600px;
 
 %allCols {
-  display: inline-block;
-  vertical-align: top;
   margin-bottom: 35px;
-  width: 100%;
   text-align: left;
+  // display: inline-block;
+  // vertical-align: top;
 
   li {
     list-style: none;
@@ -20,61 +21,81 @@ $fullWidthColBreakpoint: 600px;
 }
 
 .fullWidthColDesktopTab {
-  @extend %allCols;
+  @include col(1) {
+    @extend %allCols;
+  }
 }
 
 .halfWidthColDesktopTab {
-  @extend .fullWidthColDesktopTab;
+  @include col(2) {
+    @extend %allCols;
+  }
 
   @include respond-to-custom($fullWidthColBreakpoint) {
-    width: calc((50% - (#{$marginBetweenColumns} / 2)) - 1px);
+    // width: calc((50% - (#{$marginBetweenColumns} / 2)) - 1px);
 
     &:nth-child(odd) {
-      margin-right: $marginBetweenColumns / 2;
+      padding-right: $marginBetweenColumns / 2;
     }
 
     &:nth-child(even) {
-      margin-left: $marginBetweenColumns / 2;
+      padding-left: $marginBetweenColumns / 2;
     }
   }
 }
 
 .thirdWidthColDesktopTab {
-  @extend .fullWidthColDesktopTab;
+  // do mobile
+  @include col(1) {
+    @extend %allCols;
+  }
 
+  // custom column breakpoint
   @include respond-to-custom($fullWidthColBreakpoint) {
-    width: calc(((100% - #{$marginBetweenColumns}) / 2) - 1px);
+    // width: calc(((100% - #{$marginBetweenColumns}) / 2) - 1px);
 
     &:nth-child(3n + 1) {
-      margin-right: $marginBetweenColumns / 2;
+      @include col(2) {
+        padding-right: $marginBetweenColumns / 2;
+      }
     }
 
     &:nth-child(3n + 2) {
-      margin-left: $marginBetweenColumns / 2;
+      @include col(2) {
+        padding-left: $marginBetweenColumns / 2;
+      }
     }
 
     &:nth-child(3n + 0) { // every third column will be full width
-      width: 100%;
-      margin-left: 0;
-      margin-right: 0;
+      @include col(1) {
+        padding-left: 0;
+        padding-right: 0;
+      }
     }
   }
 
+  // desktop breakpoint
   @include respond-to(desktop) {
-    width: calc(((100% - (#{$marginBetweenColumns} * 2)) / 3) - 1px);
+    // width: calc(((100% - (#{$marginBetweenColumns} * 2)) / 3) - 1px);
 
     &:nth-child(3n + 1) {
-      margin-right: $marginBetweenColumns / 2;
+      @include col(3) {
+        padding-right: $marginBetweenColumns / 2;
+      }
     }
 
     &:nth-child(3n + 2) {
-      margin-right: $marginBetweenColumns / 2;
-      margin-left: $marginBetweenColumns / 2;
+      @include col(3) {
+        padding-right: $marginBetweenColumns / 2;
+        padding-left: $marginBetweenColumns / 2;
+      }
     }
 
     &:nth-child(3n + 0) {
-      width: calc((100% - (#{$marginBetweenColumns} * 2)) / 3);
-      margin-left: $marginBetweenColumns / 2;
+      // width: get-col-width(3);
+      @include col(3) {
+        padding-left: $marginBetweenColumns / 2;
+      }
     }
   }
 }
@@ -127,7 +148,7 @@ $fullWidthColBreakpoint: 600px;
 
 .videoColMaxWidth {
   @include respond-to-custom($fullWidthColBreakpoint) {
-    padding-right: calc(100% - 280px);
+    // padding-right: calc(100% - 280px);
   }
 }
 
