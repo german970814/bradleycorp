@@ -30,11 +30,7 @@ class MenuItems extends Component {
       return null
     }
 
-    return (
-      <React.Fragment>
-        {this.renderMenuItems()}
-      </React.Fragment>
-    )
+    return this.renderMenuItems()
   }
 }
 

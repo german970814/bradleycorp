@@ -1,20 +1,21 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import NavMenu from '../NavMenu/NavMenu'
 import style from './Footer.scss'
 
-const Footer = ({ menuItems }) => {
-  return (
-    <footer className={style.footer}>
-      <NavMenu
-        menuItems={menuItems}
-        menuItemClass={style.menuItem} />
-    </footer>
-  )
+class Footer extends Component {
+  render () {
+    return (
+      <footer className={style.footer}>
+      </footer>
+    )
+  }
 }
 
 Footer.propTypes = {
-  menuItems: PropTypes.array
+  menu1: PropTypes.array,
+  menu2: PropTypes.array,
+  menu3: PropTypes.array,
+  socialMediaIcons: PropTypes.array
 }
 
 export default Footer
