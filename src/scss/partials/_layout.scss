@@ -13,6 +13,11 @@
     }
   }
   @include respond-to(desktop) {
+    max-width: 1066px;
+    margin: {
+      left: auto;
+      right: auto;
+    }
     padding: {
       left: $DesktopBodyPadding;
       right: $DesktopBodyPadding;
