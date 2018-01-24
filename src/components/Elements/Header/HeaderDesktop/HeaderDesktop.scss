@@ -9,10 +9,12 @@ $topBarTextFontSize: 13px;
 
 .topBar {
   @extend %BodyPaddingWithMediaQueries;
-  @extend %100WidthMinusBodyPaddingWithMediaQueries;
   height: 30px;
-  background-color: $topBarColor;
   text-align: right;
+}
+
+.topBarColor {
+  background-color: $topBarColor;
 }
 
 %topBarText {
@@ -73,7 +75,6 @@ $spaceBetweenMenuItems: 34px;
 
 .bottomBar {
   @extend %BodyPaddingWithMediaQueries;
-  @extend %100WidthMinusBodyPaddingWithMediaQueries;
   position: relative;
   height: 60px;
 }

@@ -9,26 +9,29 @@ const HeaderDesktop = props => {
     <header className={style.header}>
 
       <div
-        className={style.topBar} >
-
+        className={style.topBarColor} >
         <div
-          className={style.user} >
-          <VerticalAlignHelper />
-          <img
-            src={require('../../../../images/avatar/avatar@2x.png')}
-            className={style.avatar} />
-          <div className={style.userText}>{'LOGIN'}</div>
-        </div>
+          className={style.topBar} >
 
-        <div
-          className={style.country} >
-          <VerticalAlignHelper />
-          <img
-            src={require('../../../../images/flag/flag@2x.png')}
-            className={style.flag} />
-          <div className={style.countryText}>{'USA'}</div>
-        </div>
+          <div
+            className={style.user} >
+            <VerticalAlignHelper />
+            <img
+              src={require('../../../../images/avatar/avatar@2x.png')}
+              className={style.avatar} />
+            <div className={style.userText}>{'LOGIN'}</div>
+          </div>
 
+          <div
+            className={style.country} >
+            <VerticalAlignHelper />
+            <img
+              src={require('../../../../images/flag/flag@2x.png')}
+              className={style.flag} />
+            <div className={style.countryText}>{'USA'}</div>
+          </div>
+
+        </div>
       </div>
 
       <div

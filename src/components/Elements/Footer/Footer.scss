@@ -2,7 +2,6 @@
 
 .footer {
   @extend %BodyPaddingWithMediaQueries;
-  @extend %100WidthMinusBodyPaddingWithMediaQueries;
   background: black;
   color: white;
 }
