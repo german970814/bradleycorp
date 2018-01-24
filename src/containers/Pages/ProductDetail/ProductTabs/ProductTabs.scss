@@ -20,6 +20,7 @@ $tabHeight: 65px;
   padding-bottom: 25px;
   background-color: $light-gray;
   text-align: left;
+  @include row()
 }
 
 .productDetailTabs {
@@ -81,6 +82,7 @@ $tabContentPaddingRight: 11.5vw;
 .activeTabContentDesktop {
   @extend %BodyPaddingWithMediaQueries;
   @extend %100WidthMinusBodyPaddingWithMediaQueries;
+  @include row()
   padding-top: 80px;
   padding-bottom: 45px;
   border-top: solid 1px $silver;
