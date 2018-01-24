@@ -1,0 +1,57 @@
+@import "./variables";
+
+//
+// Column Grid
+//
+// Build column layouts
+
+// row
+@mixin row() {
+  @content;
+
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+}
+
+// column grid
+@mixin col( $cols: 2 ) {
+  display: block;
+  float: left;
+  min-height: 1px;
+  width: get-col-width($cols);
+  @content;
+  box-sizing: border-box;
+}
+
+@function get-col-width( $n ) {
+  @return (100 / $n)+%;
+}
+
+// inline grid
+@mixin inline-col( $cols: 1, $valign: top ) {
+  display: inline-block;
+  // set the width
+  width: get-inline-col-width($cols);
+  // set vertical-align
+  @if ($valign == top) {
+    vertical-align: top;
+  }
+  @elseif ($valign == middle) {
+    vertical-align: middle;
+  }
+  @elseif ($valign == bottom) {
+    vertical-align: bottom;
+  }
+  // set margins
+
+  // output any content - allows overrides
+  @content;
+  box-sizing: border-box;
+}
+
+@function get-inline-col-width( $n ) {
+  @return ((100 / $n) - 0.1)+%;
+}
