@@ -3,7 +3,6 @@
 
 .divider {
   @extend %BodyPaddingWithMediaQueries;
-  @extend %100WidthMinusBodyPaddingWithMediaQueries;
 }
 
 .color {

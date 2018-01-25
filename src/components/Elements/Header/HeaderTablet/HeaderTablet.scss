@@ -8,7 +8,6 @@ $flagHeight: 10px;
 
 .topBar {
   @extend %BodyPaddingWithMediaQueries;
-  @extend %100WidthMinusBodyPaddingWithMediaQueries;
   height: 27px;
   background-color: $topBarColor;
   text-align: right;
@@ -62,7 +61,6 @@ $flagHeight: 10px;
 
 .bottomBar {
   @extend %BodyPaddingWithMediaQueries;
-  @extend %100WidthMinusBodyPaddingWithMediaQueries;
   position: relative;
   height: 64px;
 }

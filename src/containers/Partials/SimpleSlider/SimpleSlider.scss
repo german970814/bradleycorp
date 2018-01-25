@@ -25,7 +25,6 @@ $distanceBetweenItemsTabletDesktop: 45px;
 
 .sliderWrapper {
   @extend %BodyPaddingWithMediaQueries;
-  @extend %100WidthMinusBodyPaddingWithMediaQueries;
 }
 
 .sliderWrapper :global .track-wrapper {
@@ -53,7 +52,6 @@ $distanceBetweenItemsTabletDesktop: 45px;
 
 .buttonsBelow {
   @extend %BodyPaddingWithMediaQueries;
-  @extend %100WidthMinusBodyPaddingWithMediaQueries;
   margin-bottom: 25px;
   text-align: center;
 }
@@ -115,7 +113,6 @@ $arrowWidthTablet: 11px;
 
 .sliderTabletDesktop {
   @extend %BodyPaddingWithMediaQueries;
-  @extend %100WidthMinusBodyPaddingWithMediaQueries;
   position: relative;
   max-width: 1075px; /* override "BodyMaxWithMediaQueries" as per design */
 

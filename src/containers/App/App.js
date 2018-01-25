@@ -10,10 +10,18 @@ class App extends Component {
   constructor (props) {
     super(props)
 
-    this.state = {
+    const defaults = {
       primaryMenu: [],
-      footerMenu: []
+      footer: {
+        menu_1: [],
+        menu_2: [],
+        menu_3: [],
+        social_media_icons: []
+      }
     }
+
+    this.defaults = defaults
+    this.state = defaults
   }
 
   componentDidMount () {
@@ -24,12 +32,18 @@ class App extends Component {
     return (
       <div
         className={style.app}>
+
         <Header
           menuItems={this.state.primaryMenu} />
-        <Main
-          products={this.state.products} />
+
+        <Main />
+
         <Footer
-          menuItems={this.state.footerMenu} />
+          menu1={this.state.footer['menu_1']}
+          menu2={this.state.footer['menu_2']}
+          menu3={this.state.footer['menu_3']}
+          socialMediaIcons={this.state.footer['social_media_icons']} />
+
       </div>
     )
   }
@@ -41,15 +55,28 @@ class App extends Component {
   */
   async setInitialState () {
     try {
+      // TODO: split these requests so we set state after each one and don't have to wait for them all.
       const primaryMenuRequest = NavMenuApiClient.getNavMenu('Primary')
-      // const footerMenuRequest = NavMenuApiClient.getNavMenu('Footer')
+      const footerMenuRequest = NavMenuApiClient.getNavMenu('Footer Column 1')
+      const footerMenuRequest2 = NavMenuApiClient.getNavMenu('Footer Column 2')
+      const footerMenuRequest3 = NavMenuApiClient.getNavMenu('Footer Column 3')
 
       const primaryMenuResponse = await primaryMenuRequest
-      // const footerMenuResponse = await footerMenuRequest
+      const footerResponse = await footerMenuRequest
+      const footerResponse2 = await footerMenuRequest2
+      const footerResponse3 = await footerMenuRequest3
+
+      // once we have the complete footer endpoint we can remove this footer object
+      // and put footerResponse.data in Object.assign
+      const footer = {
+        menu_1: footerResponse.data,
+        menu_2: footerResponse2.data,
+        menu_3: footerResponse3.data
+      }
 
       this.setState({
         primaryMenu: primaryMenuResponse.data,
-        // footerMenu: footerMenuResponse.data
+        footer: Object.assign({}, this.defaults.footer, footer)
       })
     } catch (err) {
       console.log(new AppInitException(err))

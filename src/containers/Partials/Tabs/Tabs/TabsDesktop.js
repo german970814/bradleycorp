@@ -52,12 +52,17 @@ class TabsDesktop extends Component {
   render () {
     return (
       <div className={`tab-wrapper ${this.props.tabWrapperClassName}`}>
+
         <ul className={`tab-nav ${this.props.tabsUlClassName}`}>
           {this.renderChildrenWithTabsApiAsProps()}
         </ul>
-        <div className={`tabs-active-content ${this.props.activeTabClassName}`}>
-          {this.renderActiveTabContent()}
+
+        <div className={'tabs-active-content-background-color'} >
+          <div className={`tabs-active-content ${this.props.activeTabClassName}`}>
+            {this.renderActiveTabContent()}
+          </div>
         </div>
+
       </div>
     )
   }

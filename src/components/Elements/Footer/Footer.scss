@@ -1,16 +1,80 @@
 @import "../../../scss/partials/layout";
+@import "../../../scss/partials/variables";
+@import "../../../scss/partials/mixins";
 
-.footer {
-  @extend %BodyPaddingWithMediaQueries;
-  @extend %100WidthMinusBodyPaddingWithMediaQueries;
+.footerColor {
   background: black;
   color: white;
 }
 
-.menuItem {
-  color: white;
+.footerWrapper {
+  @extend %BodyPaddingWithMediaQueries;
+}
 
-  a {
-    color: white;
+$logoHeight: 60px;
+$logoHeightTablet: 55px;
+
+$footerSectionTopBottomPadding: 30px;
+$footerSectionTopPaddingTablet: 50px;
+$footerSectionBottomPaddingTablet: 40px;
+
+$menuItemsGap: 18px;
+$menuItemFontSize: 10px;
+
+.footerSection {
+  padding: ($footerSectionTopBottomPadding - $menuItemsGap) 0px;
+
+  @include respond-to(tablet) {
+    padding-top: $footerSectionTopPaddingTablet;
+    padding-bottom: $footerSectionBottomPaddingTablet;
+  }
+}
+
+.logoWrapper {
+  display: block;
+  padding-top: $footerSectionTopBottomPadding;
+  padding-bottom: $menuItemsGap / 2;
+  height: $logoHeight;
+
+  @include respond-to(tablet) {
+    padding-top: $footerSectionTopPaddingTablet;
+    height: $logoHeightTablet;
+  }
+}
+
+.logo {
+  width: $logoHeight;
+  height: $logoHeight;
+
+  @include respond-to(tablet) {
+    width: $logoHeightTablet;
+    height: $logoHeightTablet;
+  }
+}
+
+.menuItem {
+  padding: ($menuItemsGap / 2) 0;
+  color: white;
+  font-family: $CentraleSansPro;
+  font-size: $menuItemFontSize;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: $menuItemFontSize;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+
+  @include respond-to(tablet) {
+    padding-right: 30px;
+  }
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: $charcoal-grey;
+
+  @include respond-to(tablet) {
+    display: none;
   }
 }
