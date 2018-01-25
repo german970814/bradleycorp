@@ -1,0 +1,8 @@
+// since we get two elements in the fragment
+// hide the first one in the lightbox so the second is pushed up
+:global #lightbox :local .trackItem,
+:global #lightbox :local .trackItemVertical {
+  > :first-child {
+    display: none;
+  }
+}
