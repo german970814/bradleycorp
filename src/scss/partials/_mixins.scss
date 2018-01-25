@@ -31,18 +31,3 @@
 @mixin respond-to-max-custom($widthPX) {
   @media only screen and (max-width: $widthPX) { @content; }
 }
-
-
-@mixin list-item-width($numItems, $paddingBetweenPX) { // assumes padding only between items
-  padding-right: $paddingBetweenPX / 2;
-  padding-left: $paddingBetweenPX / 2;
-  width: calc((100% - (#{$paddingBetweenPX} * (#{$numItems} - 1))) / #{$numItems});
-
-  &:first-child {
-    padding-left: 0px;
-  }
-
-  &:last-child {
-    padding-right: 0px;
-  }
-}

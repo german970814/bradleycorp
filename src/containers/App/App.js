@@ -55,16 +55,23 @@ class App extends Component {
   */
   async setInitialState () {
     try {
+      // TODO: split these requests so we set state after each one and don't have to wait for them all.
       const primaryMenuRequest = NavMenuApiClient.getNavMenu('Primary')
-      const footerMenuRequest = NavMenuApiClient.getNavMenu('Footer')
+      const footerMenuRequest = NavMenuApiClient.getNavMenu('Footer Column 1')
+      const footerMenuRequest2 = NavMenuApiClient.getNavMenu('Footer Column 2')
+      const footerMenuRequest3 = NavMenuApiClient.getNavMenu('Footer Column 3')
 
       const primaryMenuResponse = await primaryMenuRequest
       const footerResponse = await footerMenuRequest
+      const footerResponse2 = await footerMenuRequest2
+      const footerResponse3 = await footerMenuRequest3
 
       // once we have the complete footer endpoint we can remove this footer object
       // and put footerResponse.data in Object.assign
       const footer = {
-        menu_1: footerResponse.data
+        menu_1: footerResponse.data,
+        menu_2: footerResponse2.data,
+        menu_3: footerResponse3.data
       }
 
       this.setState({

@@ -1,0 +1,49 @@
+/*
+  Need to split this up from _grid,
+  otherwise everytime we include _grid somewhere
+  all the globals get built again
+ */
+
+@import "./grid";
+
+//
+// GLOBAL CSS
+//
+// Add a new one only when you need it. Trying to keep css minimal
+
+
+//TODO: make sure these are not defined globally anywhere else
+
+:global {
+  .row {
+    @include row();
+  }
+
+  .col1 {
+    @include col(1);
+  }
+
+  .col2 {
+    @include col(2);
+  }
+
+  // globals with media queries
+
+  .col1-tablet {
+    @include respond-to(tablet) {
+      @include col(1);
+    }
+  }
+
+  .col2-tablet {
+    @include respond-to(tablet) {
+      @include col(2);
+    }
+  }
+
+  .col6-tablet {
+    @include respond-to(tablet) {
+      @include col(6);
+    }
+  }
+}
