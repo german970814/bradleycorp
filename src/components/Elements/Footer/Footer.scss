@@ -9,6 +9,10 @@
 
 .footerWrapper {
   @extend %BodyPaddingWithMediaQueries;
+
+  @include respond-to(tablet) {
+    position: relative;
+  }
 }
 
 $logoHeight: 60px;
@@ -19,14 +23,16 @@ $footerSectionTopPaddingTablet: 50px;
 $footerSectionBottomPaddingTablet: 40px;
 
 $menuItemsGap: 18px;
+$menuItemsGapTablet: 20px;
 $menuItemFontSize: 10px;
 
 .footerSection {
   padding: ($footerSectionTopBottomPadding - $menuItemsGap) 0px;
 
   @include respond-to(tablet) {
-    padding-top: $footerSectionTopPaddingTablet;
-    padding-bottom: $footerSectionBottomPaddingTablet;
+    padding-top: $footerSectionTopPaddingTablet - ($menuItemsGapTablet / 2);
+    padding-bottom: $footerSectionBottomPaddingTablet - ($menuItemsGapTablet / 2);
+    min-height: 200px;
   }
 }
 
@@ -65,7 +71,73 @@ $menuItemFontSize: 10px;
   text-transform: uppercase;
 
   @include respond-to(tablet) {
+    padding: ($menuItemsGapTablet / 2) 0;
     padding-right: 30px;
+  }
+
+  @include respond-to(desktop) {
+    padding-right: 50px;
+  }
+}
+
+.menuItemBottomSection {
+  color: $gray;
+}
+
+.socialMediaIconsWrapper .footerSection {
+  text-align: right;
+
+  @include respond-to(desktop) {
+    margin-left: -45px;
+  }
+}
+
+.footerSection .socialMediaIcon {
+  padding: ($menuItemsGap / 2) 0;
+  padding-right: 15px;
+  height: 18px;
+
+  &:last-child {
+    padding-right: 0 !important;
+  }
+
+  @include respond-to(tablet) {
+    display: inline-block;
+    float: none;
+    padding-right: 0;
+    padding-left: 15px;
+  }
+}
+
+// hide tablet social media icons
+.socialMediaIconsWrapperTablet {
+  @include respond-to(desktop) {
+    display: none !important;
+  }
+}
+
+// show desktop social media icons
+.socialMediaIconsWrapperDesktop {
+  @extend .socialMediaIconsWrapper;
+
+  @include respond-to-max(desktop) {
+    display: none !important;
+  }
+}
+
+.blogLinksDesktop {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding-bottom: $footerSectionBottomPaddingTablet - ($menuItemsGapTablet / 2);
+  text-align: right;
+
+  .menuItem {
+    padding-right: $TabletBodyPadding;
+
+    @include respond-to(desktop) {
+      padding-right: $DesktopBodyPadding;
+    }
   }
 }
 
