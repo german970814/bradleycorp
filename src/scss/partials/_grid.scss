@@ -18,6 +18,7 @@
   margin-right: $offset;
   // insert the content
   @content;
+  display: block;
   // clear floats required
   // so this runs last
   &:after {
@@ -33,7 +34,7 @@
   float: left;
   min-height: 1px;
   width: get-col-width($cols);
-  //
+  // add gutter if any
   @if ( $gutter ) {
     margin-left:  $gutter;
     margin-right: $gutter;
