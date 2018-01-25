@@ -3,9 +3,11 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { removeHostFromUrl } from '../../../lib/bcorpUrl'
 import Copyright from './Copyright/Copyright'
-// import Media from 'react-media'
-// import { MOBILEMAXWIDTH } from '../../../globals'
-// import FooterMobile from './FooterMobile/FooterMobile'
+import Media from 'react-media'
+import { MOBILEMAXWIDTH } from '../../../globals'
+import LoginItems from './FooterBottomSection/LoginItems'
+import BlogLinks from './FooterBottomSection/BlogLinks'
+import SocialMediaIcons from './FooterBottomSection/SocialMediaIcons'
 import style from './Footer.scss'
 
 class Footer extends Component {
@@ -31,32 +33,23 @@ class Footer extends Component {
       return
     }
 
-    return (
-      <React.Fragment>
-
-        <div className={`row ${style.footerSection}`} >
-          {
-            menuItems.map((menuItem, index) => {
-              return (
-                <div
-                  key={index}
-                  className={'col1'} >
-                  <div
-                    className={style.menuItem} >
-                    <Link
-                      to={removeHostFromUrl(menuItem['url']) || '#'}
-                      replace >
-                      {menuItem['title']}
-                    </Link>
-                  </div>
-                </div>
-              )
-            })
-          }
-        </div>
-        <div className={style.divider} />
-
-      </React.Fragment>
+    return this.footerSection(
+      menuItems.map((menuItem, index) => {
+        return (
+          <div
+            key={index}
+            className={'col1'} >
+            <div
+              className={style.menuItem} >
+              <Link
+                to={removeHostFromUrl(menuItem['url']) || '#'}
+                replace >
+                {menuItem['title']}
+              </Link>
+            </div>
+          </div>
+        )
+      })
     )
   }
 
@@ -67,29 +60,84 @@ class Footer extends Component {
       return
     }
 
+    return this.footerSection(
+      menuItems.map((menuItem, index) => {
+        return (
+          <div
+            key={index}
+            className={'col2 col1-tablet'} >
+            <div
+              className={style.menuItem} >
+              <Link
+                to={removeHostFromUrl(menuItem['url']) || '#'}
+                replace >
+                {menuItem['title']}
+              </Link>
+            </div>
+          </div>
+        )
+      })
+    )
+  }
+
+  renderFooterBottomSectionMobile () {
+    return (
+      <React.Fragment>
+
+        <div className={'col1'} >
+          {this.footerSection(<LoginItems />)}
+        </div>
+
+        <div className={'col1'} >
+          {this.footerSection(<BlogLinks />)}
+        </div>
+
+        <div className={'col1'} >
+          {this.footerSection(<SocialMediaIcons />)}
+        </div>
+
+      </React.Fragment>
+    )
+  }
+
+  renderFooterBottomSectionTabletDesktop () {
+    return (
+      <div className={'col3-tablet'} >
+        <div className={'row'} >
+
+          <div className={'col2'} >
+            {this.footerSection(<LoginItems />)}
+          </div>
+
+          {/* We need to show different social media icons for tablet and desktop */}
+
+          {/* tablet icons */}
+          <div className={`col2 ${style.socialMediaIconsWrapper} ${style.socialMediaIconsWrapperTablet}`} >
+            {this.footerSection(<SocialMediaIcons tablet />)}
+          </div>
+
+          {/* desktop icons */}
+          <div className={`col2 ${style.socialMediaIconsWrapper} ${style.socialMediaIconsWrapperDesktop}`} >
+            {this.footerSection(<SocialMediaIcons />)}
+          </div>
+
+        </div>
+
+        <div className={style.blogLinksDesktop} >
+          <BlogLinks />
+        </div>
+      </div>
+    )
+  }
+
+  footerSection (content) {
     return (
       <React.Fragment>
 
         <div className={`row ${style.footerSection}`} >
-          {
-            menuItems.map((menuItem, index) => {
-              return (
-                <div
-                  key={index}
-                  className={'col2 col1-tablet'} >
-                  <div
-                    className={style.menuItem} >
-                    <Link
-                      to={removeHostFromUrl(menuItem['url']) || '#'}
-                      replace >
-                      {menuItem['title']}
-                    </Link>
-                  </div>
-                </div>
-              )
-            })
-          }
+          {content}
         </div>
+
         <div className={style.divider} />
 
       </React.Fragment>
@@ -117,25 +165,14 @@ class Footer extends Component {
             {this.renderMenu1Col(this.props.menu3)}
           </div>
 
-          {/* <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
-            {match =>
-              match ? (
-                // mobile
-                <FooterMobile
-                  menu1={props.menu1}
-                  menu2={props.menu2}
-                  menu3={props.menu3}
-                  socialMediaIcons={props.socialMediaIcons} />
-              ) : (
-                // tablet - desktop
-                <FooterMobile
-                  menu1={props.menu1}
-                  menu2={props.menu2}
-                  menu3={props.menu3}
-                  socialMediaIcons={props.socialMediaIcons} />
-              )
+          <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
+            { match => {
+              return match
+                ? this.renderFooterBottomSectionMobile()
+                : this.renderFooterBottomSectionTabletDesktop()
             }
-          </Media> */}
+            }
+          </Media>
 
         </div>
 
