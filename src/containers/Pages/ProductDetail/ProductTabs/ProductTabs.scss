@@ -90,11 +90,12 @@ $tabContentPaddingRight: 11.5vw;
   border-bottom: solid 1px $silver;
   background-color: $light-gray;
   text-align: left;
+  box-sizing: border-box;
 
   @include respond-to(desktop) {
     padding-left: $tabContentPaddingLeft;
     padding-right: $tabContentPaddingRight;
-    width: calc(100% - #{$tabContentPaddingLeft} - #{$tabContentPaddingRight});
+    width: 100%;
   }
 }
 
