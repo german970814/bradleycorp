@@ -42,14 +42,14 @@ class App extends Component {
   async setInitialState () {
     try {
       const primaryMenuRequest = NavMenuApiClient.getNavMenu('Primary')
-      const footerMenuRequest = NavMenuApiClient.getNavMenu('Footer')
+      // const footerMenuRequest = NavMenuApiClient.getNavMenu('Footer')
 
       const primaryMenuResponse = await primaryMenuRequest
-      const footerMenuResponse = await footerMenuRequest
+      // const footerMenuResponse = await footerMenuRequest
 
       this.setState({
         primaryMenu: primaryMenuResponse.data,
-        footerMenu: footerMenuResponse.data
+        // footerMenu: footerMenuResponse.data
       })
     } catch (err) {
       console.log(new AppInitException(err))
