@@ -12,7 +12,7 @@
  * @param  {mixed} $offset: 0px can be px or %. used to offset the row on bot left and right to account for the columns margin.
  * @return {string}             the css required to prperly clear floats around floating columns and offset their margins
  */
-@mixin row( $offset: 0px ) {
+@mixin row( $offset: auto ) {
   // set the offset
   // can be ox or %
   margin-left: $offset;
