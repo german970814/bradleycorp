@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
@@ -7,12 +8,20 @@ const srcDir = path.join(__dirname, 'src')
 const config = {
   context: srcDir,
 
-  entry: ["babel-polyfill", "./index.js"],
+  entry: {
+    main: ["babel-polyfill", "./index.js"],
+    vendor: [
+      'react',
+      'react-router-dom',
+      'axios',
+      'prop-types'
+    ]
+  },
 
   output: {
     path: path.join(__dirname, 'build'),
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: '[name].[chunkhash].js'
   },
 
   module: {
@@ -68,6 +77,13 @@ const config = {
       allChunks: true,
       ignoreOrder: true,
     }),
+    new webpack.HashedModuleIdsPlugin(), // ensures vendor bundle hash only changes when it needs to
+    new webpack.optimize.CommonsChunkPlugin({ // vendor must be included before manifest
+      name: 'vendor'
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest'
+    })
   ],
 
   devtool: 'source-map',
