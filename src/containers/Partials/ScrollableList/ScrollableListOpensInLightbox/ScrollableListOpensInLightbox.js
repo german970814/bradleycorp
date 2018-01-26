@@ -1,6 +1,8 @@
 import React from 'react'
+import VerticalAlignHelper from '../../../../components/Partials/VerticalAlignHelper/VerticalAlignHelper'
 import ScrollableList from '../ScrollableList'
 import Lightbox from '../../Lightbox/Lightbox'
+import style from './ScrollableListOpensInLightbox.scss'
 
 // ScrollableListOpensInLightbox expects children to be a collection of elements like below:
 // Two elements wrapped in a React Fragment
@@ -14,7 +16,7 @@ import Lightbox from '../../Lightbox/Lightbox'
 // <Element 2 />
 //
 // </React.Fragment>
-// 
+//
 class ScrollableListOpensInLightbox extends ScrollableList {
   render () {
     return (
@@ -22,7 +24,10 @@ class ScrollableListOpensInLightbox extends ScrollableList {
 
         {super.render()}
 
-        {super.render()}
+        <div className={style.scrollableListOpensInLightbox}>
+          <VerticalAlignHelper />
+          {super.render()}
+        </div>
 
       </Lightbox>
     )

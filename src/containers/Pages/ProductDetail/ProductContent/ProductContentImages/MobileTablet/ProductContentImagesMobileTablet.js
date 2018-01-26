@@ -33,13 +33,13 @@ class ProductContentImages extends Component {
             <div
               src={imageSrc}
               style={imageStyle}
-              className={style.fitBackground} />
+              className={`${style.fitBackground} ${style.scrollerImage}`} />
 
             {/* display in lightbox scroller */}
             <div
               src={imageSrc}
               style={imageStyle}
-              className={style.fitBackground} />
+              className={`${style.fitBackground} ${style.scrollerImage}`} />
 
           </React.Fragment>
         )
@@ -62,15 +62,17 @@ class ProductContentImages extends Component {
               className={[style.videoListItem, style.fitBackground].join(' ')} />
 
             {/* display in lightbox scroller */}
-            <FixedAspectRatioBox
-              maxHeight={LIGHTBOXSIZES.heightMinusCloseButton}>
-              <YouTube
-                videoId={videoId}
-                opts={{
-                  width: '100%',
-                  height: '100%'
-                }} />
-            </FixedAspectRatioBox>
+            <div className={style.videoLightboxPadding} >
+              <FixedAspectRatioBox
+                maxHeight={LIGHTBOXSIZES.heightMinusCloseButton}>
+                <YouTube
+                  videoId={videoId}
+                  opts={{
+                    width: '100%',
+                    height: '100%'
+                  }} />
+              </FixedAspectRatioBox>
+            </div>
 
           </React.Fragment>
         )
