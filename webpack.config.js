@@ -19,6 +19,7 @@ const config = {
       'react',
       'react-dom',
       'react-router-dom',
+      'react-loadable',
       'axios',
       'prop-types',
       'lodash'
@@ -104,6 +105,7 @@ const config = {
        turn on to create an interactive treemap visualization of the contents of all our bundles
 
        these plugins are going to really help us as the app grows
+       and we split it into multiple chunks
        to make sure common components and vendor packages
        aren't being requested multiple times without need
       */
