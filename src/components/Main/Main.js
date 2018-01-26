@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Loadable from 'react-loadable'
+import Loading from '../Partials/Loading/Loading'
 import Home from '../Pages/Home/Home'
-
-const Loading = props => {
-  // TODO: we'll change this when we have the designs available
-  return <div>Loading...</div>
-}
 
 const ProductDetailLoadable = Loadable({
   loader: () => import('../../containers/Pages/ProductDetail/ProductDetail'),

@@ -1,13 +1,26 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Loadable from 'react-loadable'
+import Loading from '../../../../components/Partials/Loading/Loading'
 import Media from 'react-media'
 import { TABLETMAXWIDTH } from '../../../../globals'
 import { isNew } from '../../../../lib/bcorpProduct'
 import ProductContentText from './ProductContentText/ProductContentText'
 import ProductContentImages from './ProductContentImages/MobileTablet/ProductContentImagesMobileTablet'
-import ProductContentImagesDesktop from './ProductContentImages/Desktop/ProductContentImagesDesktop'
 import style from './ProductContent.scss'
 
+/*
+  Only need to load the desktop version of the image slider when they need it
+ */
+const ProductContentImagesDesktopLoadable = Loadable({
+  loader: () => import('./ProductContentImages/Desktop/ProductContentImagesDesktop'),
+  loading: Loading
+})
+
+/*
+  The top section of the Product Detail page
+  Contains the page up until the tabs
+ */
 class ProductContent extends Component {
   constructor (props) {
     super(props)
@@ -108,7 +121,7 @@ class ProductContent extends Component {
         </div>
         <div
           className={style.imageSelectorDesktop}>
-          <ProductContentImagesDesktop
+          <ProductContentImagesDesktopLoadable
             featuredImageSrc={this.props.featuredImageSrc}
             images={this.props.images}
             videos={this.props.videos} />
