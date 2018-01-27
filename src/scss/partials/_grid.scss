@@ -12,11 +12,12 @@
  * @param  {mixed} $offset: 0px can be px or %. used to offset the row on bot left and right to account for the columns margin.
  * @return {string}             the css required to prperly clear floats around floating columns and offset their margins
  */
-@mixin row( $offset: auto ) {
+@mixin row( $offset: null ) {
   // set the offset
-  // can be ox or %
-  margin-left: $offset;
-  margin-right: $offset;
+  @if ( $offset ) {
+    margin-left:  $offset+%;
+    margin-right: $offset+%;
+  }
   // insert the content
   @content;
   display: block;
@@ -34,19 +35,23 @@
   display: block;
   float: left;
   min-height: 1px;
-  width: get-col-width($cols);
+  width: get-col-width($cols, $gutter);
   // add gutter if any
   @if ( $gutter ) {
-    margin-left:  $gutter;
-    margin-right: $gutter;
+    margin-left:  $gutter+%;
+    margin-right: $gutter+%;
   }
   @content;
   // always goes last
   box-sizing: border-box;
 }
 
-@function get-col-width( $n ) {
-  @return (100 / $n)+%;
+@function get-col-width( $n, $gutter: null ) {
+  $width: (100 / $n);
+  @if( $gutter ) {
+    $width: ($width - $gutter);
+  }
+  @return $width+%;
 }
 
 // inline grid
