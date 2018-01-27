@@ -81,6 +81,10 @@ $tabContentPaddingRight: 11.5vw;
   overflow-x: scroll;
   text-align: center;
   white-space: nowrap;
+
+  @include respond-to(desktop) {
+    overflow-x: hidden;
+  }
 }
 
 .activeTabContentDesktop {
@@ -92,8 +96,8 @@ $tabContentPaddingRight: 11.5vw;
   box-sizing: border-box;
 
   @include respond-to(desktop) {
-    padding-left: $tabContentPaddingLeft;
-    padding-right: $tabContentPaddingRight;
+    // padding-left: $tabContentPaddingLeft;
+    // padding-right: $tabContentPaddingRight;
     width: 100%;
   }
 }
