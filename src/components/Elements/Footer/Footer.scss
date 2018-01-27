@@ -78,6 +78,10 @@ $menuItemFontSize: 10px;
   @include respond-to(desktop) {
     padding-right: 50px;
   }
+
+  a {
+    color: white !important;
+  }
 }
 
 .menuItemBottomSection {
