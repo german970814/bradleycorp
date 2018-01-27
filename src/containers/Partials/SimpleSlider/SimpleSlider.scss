@@ -9,8 +9,8 @@ $distanceBetweenItemsTabletDesktop: 45px;
 
 .title {
   margin: {
-    top: 60px;
-    bottom: 19px;
+    top: 40px;
+    bottom: 40px;
   }
   width: 100%;
   font-family: $TradeGothic;
@@ -21,6 +21,20 @@ $distanceBetweenItemsTabletDesktop: 45px;
   text-align: center;
   text-transform: uppercase;
   color: $black;
+
+  @include respond-to(tablet) {
+    margin: {
+      top: 60px;
+      bottom: 50px;
+    }
+  }
+
+  @include respond-to(desktop) {
+    margin: {
+      top: 60px;
+      bottom: 40px;
+    }
+  }
 }
 
 .sliderWrapper {
