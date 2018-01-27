@@ -4,7 +4,7 @@ body {
   overflow-x: hidden;
   margin: 0;
   font-family: Helvetica;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.5;
   text-align: left;
 }
@@ -13,4 +13,9 @@ a {
   color: unset;
   cursor: pointer;
   text-decoration: none;
+}
+
+/* IE fix */
+img {
+	border: 0;
 }
