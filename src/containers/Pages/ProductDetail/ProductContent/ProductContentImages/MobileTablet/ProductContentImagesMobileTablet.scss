@@ -2,8 +2,11 @@
 @import "../../../../../../scss/partials/mixins";
 
 $buttonWidth: 11px;
+
 $height: 220px;
 $tablet-height: 428px;
+
+$scrollerItemSidePadding: 5%; // needs to stay as a %ge
 
 .buttonLeft, .buttonRight {
   display: inline-block;
@@ -43,10 +46,6 @@ $tablet-height: 428px;
   }
 }
 
-:global #lightbox :local .imagesList :global .position-circles {
-  display: none;
-}
-
 .videoListItem {
   margin: 0 auto;
   width: 35%;
@@ -56,6 +55,32 @@ $tablet-height: 428px;
   }
 }
 
+.scrollerImage {
+  padding: 0 $scrollerItemSidePadding;
+}
+
 .fitBackground {
   @extend %fitBackground;
+}
+
+/*
+ lightbox content styling
+ */
+
+:global #lightbox :local .imagesList {
+  display: inline-block;
+  width: 100%;
+}
+
+:global #lightbox :local .videoLightboxPadding {
+  display: inline-block;
+  padding-left: $scrollerItemSidePadding;
+  padding-right: $scrollerItemSidePadding;
+  width: 100% - ($scrollerItemSidePadding * 2);
+  height: 100%;
+}
+
+// hide position circles
+:global #lightbox :local .imagesList :global .position-circles {
+  display: none;
 }

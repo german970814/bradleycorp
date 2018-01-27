@@ -1,4 +1,5 @@
 @import "../../../scss/partials/mixins";
+@import "./ScrollableListOpensInLightbox/ScrollableListOpensInLightbox";
 
 .trackWrapper, .trackWrapperVertical {
   overflow: hidden;
@@ -23,24 +24,13 @@
   width: 100%;
 }
 
-.buttonUp, .buttonDown, .buttonUpLightbox, .buttonDownLightbox {
+.buttonUp, .buttonDown {
   display: inline-block;
   cursor: pointer;
 }
 
-.buttonUpLightbox, .buttonDownLightbox {
-  height: inherit;
-  & > div {
-    height: inherit;
-  }
-}
-
-.buttonUp, .buttonUpLightbox {
+.buttonUp {
   float: left;
-}
-
-.buttonDownLightbox {
-  float: right;
 }
 
 .positionCircles {
@@ -64,12 +54,4 @@
   vertical-align: middle;
   width: 6px;
   height: 12px;
-}
-
-.inheritHeight {
-  height: inherit !important;
-}
-
-.lightboxInnerScroller {
-  display: inline-block;
 }

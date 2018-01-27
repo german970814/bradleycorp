@@ -1,15 +1,20 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import ProductDetail from '../../containers/Pages/ProductDetail/ProductDetail'
+import Loadable from 'react-loadable'
+import Loading from '../Partials/Loading/Loading'
 import Home from '../Pages/Home/Home'
-// import style from './Main.scss'
+
+const ProductDetailLoadable = Loadable({
+  loader: () => import('../../containers/Pages/ProductDetail/ProductDetail'),
+  loading: Loading
+})
 
 class Main extends Component {
   render () {
     return (
       <Switch>
         <Route exact path='/' component={Home}/>
-        <Route exact path='/product/:slug' component={ProductDetail}/>
+        <Route exact path='/product/:slug' component={ProductDetailLoadable}/>
       </Switch>
     )
   }
