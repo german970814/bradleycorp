@@ -21,12 +21,12 @@ $marginTop: 20px;
   }
 
   li {
-    list-style: unset;
+    list-style: circle;
   }
 
   ul {
     padding: 0;
-    list-style: none;
+    // list-style: none;
   }
 
   ol {
@@ -40,6 +40,8 @@ $marginTop: 20px;
   ol > li {
 
     padding-left: 5%;
+
+    list-style: decimal;
 
     @include respond-to-custom(400px) {
       padding-left: 30px;
