@@ -119,7 +119,7 @@ class ScrollableListTrack extends Component {
                 style={{
                   margin: alignText,
                   width: this.getTrackWidth(),
-                  transform: `translate(${this.getCurrentTranslation(dx)}px , 0px)`,
+                  transform: `translate3d(${this.getCurrentTranslation(dx)}px , 0px, 0px)`,
                   transition: this.getTransition(dx, dy)
                 }}
                 className={`${style.track} ${'track'}`}
@@ -151,7 +151,7 @@ class ScrollableListTrack extends Component {
               <div
                 style={{
                   height: this.getTrackHeightVertical(),
-                  transform: `translate(0px, ${this.getCurrentTranslationVertical(dy)}px)`,
+                  transform: `translate3d(0px, ${this.getCurrentTranslationVertical(dy)}px, 0px)`,
                   transition: this.getTransition(dx, dy)
                 }}
                 className={`${style.trackVertical} ${'track-vertical'}`}

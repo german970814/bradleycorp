@@ -14,6 +14,7 @@ class AutoGrowShrinkAnimation extends Component {
     const oldHeight = `${this.node.clientHeight}px`
 
     requestAnimationFrame(() => {
+      this.node.style.transform = 'translateZ(0)' // adds hardware acceleration to the animation - improves quality
       this.node.style.height = 'auto'
       this.node.style.transition = 'height 0s'
 
