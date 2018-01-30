@@ -26,7 +26,10 @@ $marginTop: 20px;
 
   ul {
     padding: 0;
-    // list-style: none;
+  }
+
+  ul > li {
+    list-style: none;
   }
 
   ol {
