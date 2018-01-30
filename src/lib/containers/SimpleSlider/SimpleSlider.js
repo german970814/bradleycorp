@@ -9,19 +9,16 @@ import ButtonLeft from './ButtonLeft'
 import ButtonRight from './ButtonRight'
 import style from './SimpleSlider.scss'
 
+/**
+ * Wraps the ScrollableList component with media queries and default button elements
+ */
 class SimpleSlider extends Component {
-  constructor (props) {
-    super(props)
-
-    this.renderTitle = this.renderTitle.bind(this)
-  }
-
   renderTitle () {
     if (this.props.title !== undefined &&
     this.props.title !== '') {
       return (
         <h2
-          className={[style.title, style.buttonUp].join(' ')} >
+          className={`${style.title} ${style.buttonUp}`} >
           {this.props.title}
         </h2>
       )
@@ -94,20 +91,52 @@ class SimpleSlider extends Component {
 }
 
 SimpleSlider.propTypes = {
-  title: PropTypes.string,
+  /**
+   * Array of JSX elements for the scroller
+   */
   children: PropTypes.oneOfType([
     PropTypes.object.isRequired,
     PropTypes.array.isRequired
   ]),
-  numberMobile: PropTypes.number.isRequired,
-  numberTablet: PropTypes.number.isRequired,
-  numberDesktop: PropTypes.number.isRequired,
+  /**
+   * Optional title to be displayed above the scroller
+   */
+  title: PropTypes.string,
+  /**
+   * Number of elements to display in the scroller on mobile sized devices
+   */
+  numberMobile: PropTypes.number,
+  /**
+   * Number of elements to display in the scroller on tablet sized devices
+   */
+  numberTablet: PropTypes.number,
+  /**
+   * Number of elements to display in the scroller on desktop sized devices
+   */
+  numberDesktop: PropTypes.number,
+  /**
+   * Display <Prev / Next> buttons underneath the slider on mobile
+   * rather than buttons at the side
+   */
   nextPrevButtonsForMobile: PropTypes.bool,
+  /**
+   * Reverse the direction of scroll on clicking the buttons
+   */
   reverseScroll: PropTypes.bool,
+  /**
+   * Custom class name for the scroller's wrapper node on mobile
+   */
   wrapperClassName: PropTypes.string,
-  desktopWrapperClassName: PropTypes.string,
-  ulClassName: PropTypes.string,
-  listItemClassName: PropTypes.string
+  /**
+   * Custom class name for the scroller's wrapper node on tablet and desktop
+   */
+  desktopWrapperClassName: PropTypes.string
+}
+
+SimpleSlider.defaultProps = {
+  numberMobile: 2,
+  numberTablet: 3,
+  numberDesktop: 5
 }
 
 export default SimpleSlider

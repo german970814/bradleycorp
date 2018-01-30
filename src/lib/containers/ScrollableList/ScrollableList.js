@@ -5,7 +5,7 @@ import ScrollableListTrack from './ScrollableListTrack'
 import style from './ScrollableList.scss'
 
 /**
- * Takes an array of JSX elements and two button elements and arranges them into a swipable scroller
+ * Takes an array of JSX elements and two button elements and arranges them into a swipeable scroller
  */
 class ScrollableList extends Component {
   constructor (props) {
@@ -330,7 +330,7 @@ ScrollableList.propTypes = {
   /*
     The number of elements to display at a time in the scroller
    */
-  numberToDisplay: PropTypes.number.isRequired,
+  numberToDisplay: PropTypes.number,
   /*
     Value of 1 means you have to swipe the distance of the width of 1 element to move the scroller by 1
    */
