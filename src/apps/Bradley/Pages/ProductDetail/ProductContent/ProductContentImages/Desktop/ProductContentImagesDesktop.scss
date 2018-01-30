@@ -1,0 +1,48 @@
+@import "../../../../../../../scss/partials/helpers";
+
+$verticalListItemHeight: 112px;
+
+.buttonUp, .buttonDown {
+  display: inline-block;
+  width: 77px;
+  height: 11px;
+  text-align: center;
+
+  img {
+    height: 100%;
+  }
+}
+
+.buttonUp {
+  margin-bottom: 16px;
+}
+
+.buttonDown {
+  margin-top: 16px;
+}
+
+.selectedImageDesktop {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 2%;
+  padding: 0;
+  padding-left: 2%;
+  width: 71%;
+  height: 100%;
+}
+
+.selectedImageDesktopImage {
+  @extend %fitBackground;
+}
+
+.imagesListWrapperDesktop {
+  display: inline-block;
+  vertical-align: middle;
+  width: 77px;
+}
+
+.imagesListWrapperDesktop :global .track-wrapper-vertical {
+  margin: 0;
+  padding: 0;
+  height: $verticalListItemHeight*3;
+}

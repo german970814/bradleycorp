@@ -1,0 +1,64 @@
+@import "../../../../../../../scss/partials/variables";
+@import "../../../../../../../scss/partials/mixins";
+@import "../Tabs";
+
+$marginTopLiterature: 20px;
+$marginTopColor: 28px;
+
+.literature {
+  display: inline-block;
+  vertical-align: top;
+  width: 86px;
+  margin: $marginTopLiterature 20px 0px 0px;
+}
+
+.literatureTitle {
+  margin-bottom: $titleMarginBottom - $marginTopLiterature;
+}
+
+.color {
+  display: inline-block;
+  vertical-align: top;
+  margin: $marginTopColor 20px 0px 0px;
+  width: calc(50% - 10px);
+
+  &:nth-child(even) {
+    margin-right: 0;
+  }
+
+  @include respond-to(mobile) {
+    width: 100px;
+
+    &:nth-child(even) {
+      margin-right: 20px;
+    }
+  }
+}
+
+.colorMaterialType {
+  margin-bottom: $titleMarginBottom - $marginTopColor;
+}
+
+.colorImage {
+  margin-bottom: 14px;
+  width: 100%;
+  height: auto;
+  border: 1px solid $thumbnail-border;
+
+  @include respond-to(mobile) {
+    width: 100px;
+    height: 100px;
+  };
+}
+
+.colorTitle {
+  font-family: $CentraleSansPro;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: $black;
+}

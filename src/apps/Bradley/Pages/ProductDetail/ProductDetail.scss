@@ -1,0 +1,6 @@
+@import "../../../../scss/partials/layout";
+
+.divider {
+  @extend %BodyPaddingWithMediaQueries;
+  margin-top: 5px;
+}
