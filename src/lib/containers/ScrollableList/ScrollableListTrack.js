@@ -45,13 +45,13 @@ class ScrollableListTrack extends Component {
 
   touchEnd (e, dx) {
     // higher sensitivity means a smaller swipe moves the scroller further
-    const sensitivity = this.props.touchMoveSensitivity || 1
+    const { touchMoveSensitivity } = this.props
 
     const delta = this.props.reverseSwipeScroll ? -dx : dx
 
     // we calculate an integer number to move by
     // using percentage of element width swiped multiplied by sensitivity
-    const numberToMove = (delta / this.getElementWidth()) * sensitivity
+    const numberToMove = (delta / this.getElementWidth()) * touchMoveSensitivity
     const intNumberToMove = Math.round(numberToMove)
 
     return this.props.moveList(e, intNumberToMove)
@@ -182,10 +182,6 @@ ScrollableListTrack.propTypes = {
   touchMoveSensitivity: PropTypes.number,
   vertical: PropTypes.bool,
   reverseSwipeScroll: PropTypes.bool
-}
-
-ScrollableListTrack.defaultProps = {
-  transitionSpeed: 600
 }
 
 export default ScrollableListTrack

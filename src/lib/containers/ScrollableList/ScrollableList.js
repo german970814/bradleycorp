@@ -4,17 +4,31 @@ import PositionCircle from './PositionCircle/PositionCircle'
 import ScrollableListTrack from './ScrollableListTrack'
 import style from './ScrollableList.scss'
 
+/**
+ * Takes an array of JSX elements and two button elements and arranges them into a swipable scroller
+ */
 class ScrollableList extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
+      /**
+       * Array or children objects,
+       * each holding their scroller position, display bool, and component to display
+       * @type {[object]}
+       */
       children: this.getChildrenWithScrollableListApiAsProps(this.props),
+      /**
+       * The index of the first child from left to right that's currently being displayed
+       * eg if we have 3 children being displayed, it should be the furthest left.
+       * @type {[number]}
+       */
       currentFirstIndex: 0
     }
   }
 
   componentWillReceiveProps (nextProps) {
+    // check if we need to update the scroller's children
     if (this.childrenDidUpdate(nextProps.children, this.props.children) ||
     this.numberToDisplayDidUpdate(nextProps.numberToDisplay, this.props.numberToDisplay)) {
       const children = this.getChildrenWithScrollableListApiAsProps(nextProps)
@@ -25,6 +39,15 @@ class ScrollableList extends Component {
     }
   }
 
+  /**
+   * Takes children from this.props and assigns them to an initial object
+   * with position and display meta data
+   *
+   * The child component is stored in the component object property
+   *
+   * @param  {[object]} props component props
+   * @return {[object]}       child element with meta data
+   */
   getChildrenWithScrollableListApiAsProps (props) {
     return React.Children.map(props.children, (child, index) => {
       return {
@@ -35,7 +58,16 @@ class ScrollableList extends Component {
     })
   }
 
-  moveListToIndex (e, newIndex) { // this can only run if we have numberToDisplay set to 1
+  /**
+   * Move scroller to a given index
+   * works by working out the increment required then passes it to moveList
+   *
+   * Only runs if numberToDisplay === 1
+   * @param  {[object]} e        Javascript event
+   * @param  {[number]} newIndex Index to move to
+   * @return {[void]}            Calls moveList
+   */
+  moveListToIndex (e, newIndex) {
     if (this.props.numberToDisplay !== 1) {
       return
     }
@@ -56,6 +88,12 @@ class ScrollableList extends Component {
     return this.moveList(e, incrementBy)
   }
 
+  /**
+   * Move the scroller by a given (positive or negative) increment
+   * @param  {[object]} e         Javascript event
+   * @param  {[number]} increment Number of items to move by (positive or negative)
+   * @return {[void]}             Sets new component state with objects in new position
+   */
   moveList (e, increment) {
     if (this.props.stopEventBubblingFromButtons) { // stops it from calling any onClick events on the container eg close lightbox
       e.stopPropagation()
@@ -84,6 +122,7 @@ class ScrollableList extends Component {
       }
     })
 
+    // call the onPositionChange callback passing childrne in new position
     if (this.props.onPositionChange) {
       this.props.onPositionChange(children)
     }
@@ -98,7 +137,7 @@ class ScrollableList extends Component {
     if (this.props.positionButtonsBelow) {
       return (
         <div
-          className={[style.buttonsBelow, this.props.buttonsBelowClassName].join(' ')}>
+          className={`${style.buttonsBelow} buttons-below`}>
           {this.buttonUp()}
           <img
             className={style.buttonsBelowSeparator}
@@ -118,7 +157,7 @@ class ScrollableList extends Component {
   buttonUp () {
     return (
       <div
-        className={[style.buttonUp, this.props.buttonUpContainerClassName].join(' ')}
+        className={`${style.buttonUp} button-up`}
         onClick={ (e) => { this.moveList(e, 1) } } >
         {this.props.buttonUp}
       </div>
@@ -134,7 +173,7 @@ class ScrollableList extends Component {
   buttonDown () {
     return (
       <div
-        className={[style.buttonDown, this.props.buttonDownContainerClassName].join(' ')}
+        className={`${style.buttonDown} button-down`}
         onClick={ (e) => { this.moveList(e, -1) } } >
         {this.props.buttonDown}
       </div>
@@ -163,6 +202,16 @@ class ScrollableList extends Component {
     )
   }
 
+  /**
+   * Extracts children from state and
+   * renders them with given dimensions
+   *
+   * This function is designed to take dimensions from
+   * and be passed as children to ScrollableListTrack
+   *
+   * @param  {[number]} dimensions height or width, depending on if it's a vertical scroller
+   * @return {[array]}            array of JSX elements with their width (or height) set
+   */
   renderChildren (dimensions) {
     const inlineStyle = this.props.vertical ? { height: dimensions } : { width: dimensions }
     const className = this.props.vertical
@@ -192,7 +241,7 @@ class ScrollableList extends Component {
         <ScrollableListTrack
           moveList={this.moveList.bind(this)}
           elementCount={this.state.children.length}
-          numberToDisplay={this.props.numberToDisplay || 1}
+          numberToDisplay={this.props.numberToDisplay}
           transitionSpeed={this.props.transitionSpeed}
           currentIndex={this.getFirstDisplayedChildIndex(this.state.children)}
           vertical={this.props.vertical}
@@ -212,6 +261,10 @@ class ScrollableList extends Component {
   render () {
     return this.renderScroller()
   }
+
+  /**
+   * HELPER FUNCTIONS
+   */
 
   getPosition (prevPos, increment, arrayLength) {
     const position = (prevPos + increment) % arrayLength
@@ -262,23 +315,71 @@ class ScrollableList extends Component {
 }
 
 ScrollableList.propTypes = {
-  numberToDisplay: PropTypes.number.isRequired,
-  touchMoveSensitivity: PropTypes.number,
-  transitionSpeed: PropTypes.number,
-  showPosition: PropTypes.bool,
-  reverseScroll: PropTypes.bool,
-  reverseSwipeScroll: PropTypes.bool,
-  positionButtonsBelow: PropTypes.bool,
-  stopEventBubblingFromButtons: PropTypes.bool,
-  vertical: PropTypes.bool,
+  /*
+    Array of JSX elements to be displayed in the scroller
+   */
   children: PropTypes.array.isRequired,
-  onPositionChange: PropTypes.func,
-  wrapperClassName: PropTypes.string,
-  buttonUpContainerClassName: PropTypes.string,
-  buttonDownContainerClassName: PropTypes.string,
-  buttonsBelowClassName: PropTypes.string,
+  /*
+    JSX element to be displayed as the 'up' button
+   */
   buttonUp: PropTypes.element.isRequired,
-  buttonDown: PropTypes.element.isRequired
+  /*
+    JSX element to be displayed as the 'down' button
+   */
+  buttonDown: PropTypes.element.isRequired,
+  /*
+    The number of elements to display at a time in the scroller
+   */
+  numberToDisplay: PropTypes.number.isRequired,
+  /*
+    Value of 1 means you have to swipe the distance of the width of 1 element to move the scroller by 1
+   */
+  touchMoveSensitivity: PropTypes.number,
+  /*
+    Speed of transition in ms
+   */
+  transitionSpeed: PropTypes.number,
+  /*
+    Show position circles under scroller
+    (automatically disabled if slider shows more than one element at a time)
+   */
+  showPosition: PropTypes.bool,
+  /*
+    Reverse direction of scroll
+   */
+  reverseScroll: PropTypes.bool,
+  /*
+    Reverse direction of motion on swipe
+   */
+  reverseSwipeScroll: PropTypes.bool,
+  /*
+    Postion buttonUp and buttonDown below the scroller.
+    If false they will be displayed to the sides.
+   */
+  positionButtonsBelow: PropTypes.bool,
+  /*
+    Prevent events originating from scroller buttons from bubbling
+   */
+  stopEventBubblingFromButtons: PropTypes.bool,
+  /*
+    Display the scroller vertically
+   */
+  vertical: PropTypes.bool,
+  /*
+    Callback for when the position of the scroller changes
+    Will be passed an argument of the next children state (array)
+   */
+  onPositionChange: PropTypes.func,
+  /*
+    Custom class name for the top level wrapper div
+   */
+  wrapperClassName: PropTypes.string
+}
+
+ScrollableList.defaultProps = {
+  numberToDisplay: 1,
+  touchMoveSensitivity: 1,
+  transitionSpeed: 600
 }
 
 export default ScrollableList

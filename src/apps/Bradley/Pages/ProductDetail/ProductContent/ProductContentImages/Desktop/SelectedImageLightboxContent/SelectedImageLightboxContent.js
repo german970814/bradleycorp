@@ -12,10 +12,7 @@ const SelectedImageLightboxContent = props => {
       onPositionChange={props.onPositionChange}
       buttonDown={<ButtonRight />}
       buttonUp={<ButtonLeft />}
-      ulClassName={style.imagesList}
       wrapperClassName={style.wrapper}
-      buttonUpContainerClassName={style.buttonUp}
-      buttonDownContainerClassName={style.buttonDown}
       stopEventBubblingFromButtons >
       {props.items}
     </ScrollableList>
