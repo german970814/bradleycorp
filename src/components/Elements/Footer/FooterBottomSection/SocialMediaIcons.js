@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import SocialMediaIcon from '../../../Partials/SocialMediaIcon/SocialMediaIcon'
+import SocialMediaIcon from '../../../../lib/components/SocialMediaIcon/SocialMediaIcon'
 import style from '../Footer.scss'
 
 const SocialMediaIcons = ({ tablet }) => {

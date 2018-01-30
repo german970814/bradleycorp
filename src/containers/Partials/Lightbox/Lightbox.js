@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import VerticalAlignHelper from '../../../components/Partials/VerticalAlignHelper/VerticalAlignHelper'
+import VerticalAlignHelper from '../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import LightboxCloseButton from './LightboxCloseButton'
 import style from './Lightbox.scss'
 

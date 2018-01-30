@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Divider from '../../../components/Partials/Divider/Divider'
+import Divider from '../../../lib/components/Divider/Divider'
 import ProductApiClient from '../../../api/product_client'
 import productObjectShape from './productObjectShape'
 import ProductDetailException from '../../../exceptions/ProductDetailException'

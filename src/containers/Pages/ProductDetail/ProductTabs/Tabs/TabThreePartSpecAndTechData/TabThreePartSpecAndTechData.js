@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import tabStyle from '../Tabs.scss'
-import FileDownloadLink from '../../../../../../components/Partials/FileDownloadLink/FileDownloadLink'
+import FileDownloadLink from '../../../../../../lib/components/FileDownloadLink/FileDownloadLink'
 import style from './TabThreePartSpecAndTechData.scss'
 
 class TabThreePartSpecAndTechData extends Component {

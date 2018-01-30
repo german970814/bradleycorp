@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import VerticalAlignHelper from '../../../Partials/VerticalAlignHelper/VerticalAlignHelper'
+import VerticalAlignHelper from '../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import MenuItems from './MenuItems'
 import style from './HeaderDesktop.scss'
 

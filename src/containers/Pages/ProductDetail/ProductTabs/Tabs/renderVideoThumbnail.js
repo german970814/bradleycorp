@@ -3,7 +3,7 @@ import YouTube from 'react-youtube'
 import { youtubeParser } from '../../../../../lib/bcorpUrl'
 import LIGHTBOXSIZES from '../../../../Partials/Lightbox/lightboxVars'
 import LightboxYoutube from '../../../../Partials/Lightbox/LightboxYoutube'
-import FixedAspectRatioBox from '../../../../../components/Partials/FixedAspectRatioBox/FixedAspectRatioBox'
+import FixedAspectRatioBox from '../../../../../lib/components/FixedAspectRatioBox/FixedAspectRatioBox'
 import tabStyle from './Tabs.scss'
 
 export default function renderVideoThumbnail (videos) {

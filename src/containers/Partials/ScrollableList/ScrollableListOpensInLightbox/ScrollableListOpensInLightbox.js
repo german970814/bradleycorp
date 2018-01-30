@@ -1,5 +1,5 @@
 import React from 'react'
-import VerticalAlignHelper from '../../../../components/Partials/VerticalAlignHelper/VerticalAlignHelper'
+import VerticalAlignHelper from '../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import ScrollableList from '../ScrollableList'
 import Lightbox from '../../Lightbox/Lightbox'
 import style from './ScrollableListOpensInLightbox.scss'

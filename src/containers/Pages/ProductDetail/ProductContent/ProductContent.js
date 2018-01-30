@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Loadable from 'react-loadable'
-import Loading from '../../../../components/Partials/Loading/Loading'
+import Loading from '../../../../lib/components/Loading/Loading'
 import Media from 'react-media'
 import { TABLETMAXWIDTH } from '../../../../globals'
 import { isNew } from '../../../../lib/bcorpProduct'

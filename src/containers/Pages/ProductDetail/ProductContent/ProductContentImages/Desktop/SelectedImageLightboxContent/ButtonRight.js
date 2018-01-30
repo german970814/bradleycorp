@@ -1,5 +1,5 @@
 import React from 'react'
-import VerticalAlignHelper from '../../../../../../../components/Partials/VerticalAlignHelper/VerticalAlignHelper'
+import VerticalAlignHelper from '../../../../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import style from './SelectedImageLightboxContent.scss'
 
 const ButtonRight = props => {

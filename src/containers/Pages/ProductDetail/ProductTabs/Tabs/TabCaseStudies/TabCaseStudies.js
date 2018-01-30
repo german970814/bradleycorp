@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import PDFWithFeaturedImage from '../../../../../../components/Partials/PDFWithFeaturedImage/PDFWithFeaturedImage'
+import PDFWithFeaturedImage from '../../../../../../lib/components/PDFWithFeaturedImage/PDFWithFeaturedImage'
 import tabStyle from '../Tabs.scss'
 import style from './TabCaseStudies.scss'
 

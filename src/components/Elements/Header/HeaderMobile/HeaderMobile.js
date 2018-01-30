@@ -1,8 +1,6 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
-// import NavMenu from '../NavMenu/NavMenu'
-import BurgerMenu from '../../../Partials/BurgerMenu/BurgerMenu'
-import VerticalAlignHelper from '../../../Partials/VerticalAlignHelper/VerticalAlignHelper'
+import BurgerMenu from '../../../../lib/components/BurgerMenu/BurgerMenu'
+import VerticalAlignHelper from '../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import style from './HeaderMobile.scss'
 
 const HeaderMobile = props => {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import FileDownloadLink from '../../../../../../components/Partials/FileDownloadLink/FileDownloadLink'
+import FileDownloadLink from '../../../../../../lib/components/FileDownloadLink/FileDownloadLink'
 import tabStyle from '../Tabs.scss'
 import style from './TabCompliance.scss'
 

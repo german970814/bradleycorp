@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import renderVideoThumbnail from '../renderVideoThumbnail'
-import FileDownloadLink from '../../../../../../components/Partials/FileDownloadLink/FileDownloadLink'
+import FileDownloadLink from '../../../../../../lib/components/FileDownloadLink/FileDownloadLink'
 import tabStyle from '../Tabs.scss'
 import style from './TabInstallation.scss'
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import YouTube from 'react-youtube'
 import { youtubeParser } from '../../../../../../../lib/bcorpUrl'
 import LIGHTBOXSIZES from '../../../../../../Partials/Lightbox/lightboxVars'
-import FixedAspectRatioBox from '../../../../../../../components/Partials/FixedAspectRatioBox/FixedAspectRatioBox'
+import FixedAspectRatioBox from '../../../../../../../lib/components/FixedAspectRatioBox/FixedAspectRatioBox'
 import Lightbox from '../../../../../../Partials/Lightbox/Lightbox'
 import style from './VerticalListItem.scss'
 

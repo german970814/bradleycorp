@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import PDFWithFeaturedImage from '../../../../../../components/Partials/PDFWithFeaturedImage/PDFWithFeaturedImage'
+import PDFWithFeaturedImage from '../../../../../../lib/components/PDFWithFeaturedImage/PDFWithFeaturedImage'
 import renderVideoThumbnail from '../renderVideoThumbnail'
-import ArrowThumbnail from '../../../../../../components/Partials/ArrowThumbnail/ArrowThumbnail'
+import ArrowThumbnail from '../../../../../../lib/components/ArrowThumbnail/ArrowThumbnail'
 import tabStyle from '../Tabs.scss'
 import style from './TabDesign.scss'
 

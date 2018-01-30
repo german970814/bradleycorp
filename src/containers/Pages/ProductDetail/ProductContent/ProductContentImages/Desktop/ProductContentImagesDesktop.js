@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { rotate } from '../../../../../../lib/bcorpArray'
-import VerticalAlignHelper from '../../../../../../components/Partials/VerticalAlignHelper/VerticalAlignHelper'
+import VerticalAlignHelper from '../../../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import VerticalListItem from './VerticalListItem/VerticalListItem'
 import ScrollableList from '../../../../../Partials/ScrollableList/ScrollableList'
 import Lightbox from '../../../../../Partials/Lightbox/Lightbox'
