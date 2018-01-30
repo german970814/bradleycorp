@@ -6,7 +6,7 @@ import productObjectShape from './productObjectShape'
 import ProductDetailException from '../../../exceptions/ProductDetailException'
 import ProductContent from './ProductContent/ProductContent'
 import ProductTabs from './ProductTabs/ProductTabs'
-import ProductScroller from '../../Partials/ProductScroller/ProductScroller'
+import ProductScroller from '../../../lib/containers/ProductScroller/ProductScroller'
 import style from './ProductDetail.scss'
 
 class ProductDetail extends Component {

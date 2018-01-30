@@ -1,8 +1,8 @@
 import React from 'react'
 import YouTube from 'react-youtube'
 import { youtubeParser } from '../../../../../lib/bcorpUrl'
-import LIGHTBOXSIZES from '../../../../Partials/Lightbox/lightboxVars'
-import LightboxYoutube from '../../../../Partials/Lightbox/LightboxYoutube'
+import LIGHTBOXSIZES from '../../../../../lib/containers/Lightbox/lightboxVars'
+import LightboxYoutube from '../../../../../lib/containers/Lightbox/LightboxYoutube'
 import FixedAspectRatioBox from '../../../../../lib/components/FixedAspectRatioBox/FixedAspectRatioBox'
 import tabStyle from './Tabs.scss'
 

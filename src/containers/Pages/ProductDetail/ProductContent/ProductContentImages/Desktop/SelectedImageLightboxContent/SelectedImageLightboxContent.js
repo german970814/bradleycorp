@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import ScrollableList from '../../../../../../Partials/ScrollableList/ScrollableList'
+import ScrollableList from '../../../../../../../lib/containers/ScrollableList/ScrollableList'
 import ButtonLeft from './ButtonLeft'
 import ButtonRight from './ButtonRight'
 import style from './SelectedImageLightboxContent.scss'

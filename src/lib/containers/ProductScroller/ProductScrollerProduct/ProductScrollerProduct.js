@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { createCPTUrl } from '../../../../lib/bcorpUrl'
-import { isNew } from '../../../../lib/bcorpProduct'
+import { createCPTUrl } from '../../../bcorpUrl'
+import { isNew } from '../../../bcorpProduct'
 import style from './ProductScrollerProduct.scss'
 
 class ProductScrollerProduct extends Component {

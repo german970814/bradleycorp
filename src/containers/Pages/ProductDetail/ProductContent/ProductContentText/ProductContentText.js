@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import AutoGrowShrinkAnimation from '../../../../Partials/AutoGrowShrinkAnimation/AutoGrowShrinkAnimation'
+import AutoGrowShrinkAnimation from '../../../../../lib/containers/AutoGrowShrinkAnimation/AutoGrowShrinkAnimation'
 import style from './ProductContentText.scss'
 
 class ProductContentText extends Component {

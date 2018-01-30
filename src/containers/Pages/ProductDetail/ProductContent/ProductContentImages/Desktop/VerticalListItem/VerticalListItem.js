@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import YouTube from 'react-youtube'
 import { youtubeParser } from '../../../../../../../lib/bcorpUrl'
-import LIGHTBOXSIZES from '../../../../../../Partials/Lightbox/lightboxVars'
+import LIGHTBOXSIZES from '../../../../../../../lib/containers/Lightbox/lightboxVars'
 import FixedAspectRatioBox from '../../../../../../../lib/components/FixedAspectRatioBox/FixedAspectRatioBox'
-import Lightbox from '../../../../../../Partials/Lightbox/Lightbox'
+import Lightbox from '../../../../../../../lib/containers/Lightbox/Lightbox'
 import style from './VerticalListItem.scss'
 
 class VerticalListItem extends Component {
