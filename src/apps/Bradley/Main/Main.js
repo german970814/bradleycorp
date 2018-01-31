@@ -9,12 +9,18 @@ const ProductDetailLoadable = Loadable({
   loading: Loading
 })
 
+const CustomizableLoadable = Loadable({
+  loader: () => import('../Pages/Customizable/Customizable'),
+  loading: Loading
+})
+
 class Main extends Component {
   render () {
     return (
       <Switch>
         <Route exact path='/' component={Home}/>
         <Route exact path='/product/:slug' component={ProductDetailLoadable}/>
+        <Route exact path='/test-module-page' component={CustomizableLoadable}/>
       </Switch>
     )
   }
