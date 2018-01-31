@@ -6,7 +6,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const Visualizer = require('webpack-visualizer-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
-const srcDir = path.join(__dirname, 'src')
+const srcDir = path.join(__dirname, 'src/apps/Bradley')
 
 const config = {
   context: srcDir,

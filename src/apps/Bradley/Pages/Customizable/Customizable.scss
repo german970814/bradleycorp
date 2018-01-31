@@ -1,0 +1,5 @@
+@import "../../../../scss/partials/layout";
+
+.customizable {
+  @extend %BodyPaddingWithMediaQueries;
+}

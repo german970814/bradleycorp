@@ -1,0 +1,32 @@
+
+$buttonWidth: 11px;
+
+.wrapper {
+  height: 100%;
+}
+
+.wrapper :global .track-wrapper {
+  display: inline;
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: calc(100% - #{$buttonWidth} - #{$buttonWidth});
+  text-align: center;
+}
+
+.wrapper :global .button-up,
+.wrapper :global .button-down {
+  height: inherit;
+}
+
+.buttonLeft, .buttonRight {
+  display: inline-block;
+  width: $buttonWidth;
+  height: 100%;
+  cursor: pointer;
+
+  img {
+    vertical-align: middle;
+    width: 100%;
+  }
+}
