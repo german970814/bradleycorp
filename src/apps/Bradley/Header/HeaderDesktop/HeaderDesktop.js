@@ -37,8 +37,6 @@ const HeaderDesktop = props => {
       <div
         className={style.bottomBar} >
 
-        <VerticalAlignHelper />
-
         <div
           className={style.logoWrapper} >
           <div

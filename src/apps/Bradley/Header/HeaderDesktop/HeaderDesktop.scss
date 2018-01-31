@@ -69,7 +69,7 @@ $topBarTextFontSize: 13px;
 
 $logoWidth: 65px;
 $magnifyingGlassWidth: 19px;
-$menuSideMargin: 50px;
+$menuSideMargin: 127px;
 
 $spaceBetweenMenuItems: 34px;
 
@@ -110,10 +110,12 @@ $spaceBetweenMenuItems: 34px;
 }
 
 .menuItems {
-  display: inline-block;
-  margin-right: $magnifyingGlassWidth + $menuSideMargin;
-  margin-left: $logoWidth + $menuSideMargin;
-  width: calc(100% - #{$magnifyingGlassWidth + $menuSideMargin} - #{$logoWidth + $menuSideMargin});
+  display: block;
+  box-sizing: border-box;
+  float: left;
+  padding-right: $magnifyingGlassWidth + $menuSideMargin;
+  padding-left: $logoWidth + $menuSideMargin;
+  width: 100%;
   height: 100%;
   text-align: left;
 }
