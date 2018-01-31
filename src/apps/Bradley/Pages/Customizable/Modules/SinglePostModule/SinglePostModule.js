@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import CPTApiClient from '../../../../../../api/cpt_client'
 import FixedAspectRatioBox from '../../../../../../lib/components/FixedAspectRatioBox/FixedAspectRatioBox'
+import VerticalAlignHelper from '../../../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import moduleStyle from '../Modules.scss'
 import style from './SinglePostModule.scss'
 
@@ -50,7 +51,7 @@ class SinglePostModule extends Component {
     const src = this.state.media['featured_image'][0]
 
     return (
-      <div className={style.imageWrapper} >
+      <div className={style.imagePadding} >
         <FixedAspectRatioBox
           aspectRatio={180 / 270} >
           <div
@@ -89,24 +90,39 @@ class SinglePostModule extends Component {
 
   renderButtons () {
     return (
-      <div className={style.buttonsWrapper} >
-        <button className={style.letsTalk}>{"LET'S TALK"}</button>
-        <button className={style.learnMore}>{'LEARN MORE'}</button>
+      <div className={`row ${style.buttonsWrapper}`} >
+
+        <div className={`col1 col2-tablet ${style.button}`} >
+          <button className={style.letsTalk}>{"LET'S TALK"}</button>
+        </div>
+
+        <div className={`col1 col2-tablet ${style.button}`} >
+          <button className={style.learnMore}>{'LEARN MORE'}</button>
+        </div>
+
       </div>
     )
   }
 
   render () {
     return (
-      <div className={`${moduleStyle.module} ${style.singlePostModule}`}>
+      <div className={`${moduleStyle.module} ${style.singlePostModule} row`}>
 
-        {this.renderImage()}
+        <div className={`col1 col2-tablet ${style.stretchToHeight}`} >
+          {this.renderImage()}
+        </div>
 
-        {this.renderTitle()}
+        <div className={`col1 col2-tablet ${style.stretchToHeight}`} >
 
-        {this.renderContent()}
+          <VerticalAlignHelper />
 
-        {this.renderButtons()}
+          <div className={style.contentWrapper} >
+            {this.renderTitle()}
+            {this.renderContent()}
+            {this.renderButtons()}
+          </div>
+
+        </div>
 
       </div>
     )

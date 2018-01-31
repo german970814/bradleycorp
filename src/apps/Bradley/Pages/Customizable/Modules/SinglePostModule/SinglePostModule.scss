@@ -1,12 +1,29 @@
 @import "../../../../../../scss/partials/helpers";
 @import "../../../../../../scss/partials/variables";
+@import "../../../../../../scss/partials/mixins";
 
-.imageWrapper {
+.stretchToHeight {
+  height: 100%;
+}
+
+.imagePadding {
   margin-bottom: 40px;
+
+  @include respond-to(tablet) {
+    margin-bottom: 0;
+    padding-right: 40px;
+    height: 100%;
+  }
 }
 
 .image {
   @extend %coverBackgorund;
+}
+
+.contentWrapper {
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
 }
 
 .title {
@@ -21,6 +38,12 @@
   text-align: left;
   text-transform: uppercase;
   color: $black;
+
+  @include respond-to(tablet) {
+    font-size: 36px;
+    line-height: 1;
+    letter-spacing: 3.6px;
+  }
 }
 
 .content {
@@ -38,11 +61,35 @@
 }
 
 $buttonHeight: 42px;
-%button {
-  display: block;
+$buttonWidth: 150px;
+$buttonGutter: 10px;
+
+.buttonsWrapper {
+  @include respond-to(tablet) {
+    max-width: 2 * $buttonWidth + 2 * $buttonGutter;
+  }
+}
+
+.button {
   margin-bottom: 10px;
-  width: 100%;
   height: $buttonHeight;
+  text-align: center;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  @include respond-to(tablet) {
+    float: left;
+    margin-bottom: 0;
+    padding-right: $buttonGutter;
+    width: $buttonWidth;
+  }
+}
+
+%buttonShared {
+  width: 100%;
+  height: 100%;
   font-family: $CentraleSansPro;
   font-size: 13px;
   font-weight: bold;
@@ -50,22 +97,17 @@ $buttonHeight: 42px;
   font-stretch: normal;
   line-height: $buttonHeight;
   letter-spacing: 0.5px;
-  text-align: center;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
 }
 
 .letsTalk {
-  @extend %button;
+  @extend %buttonShared;
   border: none;
   background-color: $orange;
   color: #ffffff;
 }
 
 .learnMore {
-  @extend %button;
+  @extend %buttonShared;
   background-color: white;
   border: solid 1px $slate-grey;
   color: $slate-grey;
