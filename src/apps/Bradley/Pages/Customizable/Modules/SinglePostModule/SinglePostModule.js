@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import CPTApiClient from '../../../../../../api/cpt_client'
+import FixedAspectRatioBox from '../../../../../../lib/components/FixedAspectRatioBox/FixedAspectRatioBox'
+import moduleStyle from '../Modules.scss'
+import style from './SinglePostModule.scss'
 
 /**
  * Single Post Module Component
@@ -38,9 +41,75 @@ class SinglePostModule extends Component {
     }
   }
 
+  renderImage () {
+    if (!this.state.media['featured_image'] ||
+    this.state.media['featured_image'].length === 0) {
+      return
+    }
+
+    const src = this.state.media['featured_image'][0]
+
+    return (
+      <div className={style.imageWrapper} >
+        <FixedAspectRatioBox
+          aspectRatio={180 / 270} >
+          <div
+            style={{
+              backgroundImage: `url(${src})`
+            }}
+            className={style.image} />
+        </FixedAspectRatioBox>
+      </div>
+    )
+  }
+
+  renderTitle () {
+    if (!this.state.post['post_title']) {
+      return
+    }
+
+    return (
+      <div className={style.title} >
+        {this.state.post['post_title']}
+      </div>
+    )
+  }
+
+  renderContent () {
+    if (!this.state.post['post_content']) {
+      return
+    }
+
+    return (
+      <div className={style.content} >
+        {this.state.post['post_content']}
+      </div>
+    )
+  }
+
+  renderButtons () {
+    return (
+      <div className={style.buttonsWrapper} >
+        <button className={style.letsTalk}>{"LET'S TALK"}</button>
+        <button className={style.learnMore}>{'LEARN MORE'}</button>
+      </div>
+    )
+  }
+
   render () {
-    console.log(this.state)
-    return <div>{this.state.post.ID}</div>
+    return (
+      <div className={`${moduleStyle.module} ${style.singlePostModule}`}>
+
+        {this.renderImage()}
+
+        {this.renderTitle()}
+
+        {this.renderContent()}
+
+        {this.renderButtons()}
+
+      </div>
+    )
   }
 
   /**
