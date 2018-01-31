@@ -106,7 +106,7 @@ class SinglePostModule extends Component {
 
   render () {
     return (
-      <div className={`${moduleStyle.module} ${style.singlePostModule} row`}>
+      <div className={`row ${moduleStyle.module}`}>
 
         <div className={`col1 col2-tablet ${style.stretchToHeight}`} >
           {this.renderImage()}
