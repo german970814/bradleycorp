@@ -51,9 +51,9 @@ const HeaderDesktop = props => {
 
         <div
           className={style.menuItems} >
-          <VerticalAlignHelper />
           <MenuItems
             menuItems={props.menuItems} />
+          <VerticalAlignHelper />
         </div>
 
         <div

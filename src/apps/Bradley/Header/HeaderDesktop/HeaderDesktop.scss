@@ -115,7 +115,7 @@ $spaceBetweenMenuItems: 34px;
   margin-left: $logoWidth + $menuSideMargin;
   width: calc(100% - #{$magnifyingGlassWidth + $menuSideMargin} - #{$logoWidth + $menuSideMargin});
   height: 100%;
-  text-align: center;
+  text-align: left;
 }
 
 .menuItem {
@@ -124,6 +124,10 @@ $spaceBetweenMenuItems: 34px;
   margin: {
     left: $spaceBetweenMenuItems / 2;
     right: $spaceBetweenMenuItems / 2;
+  }
+
+  &:first-child {
+    margin-left: 0;
   }
 
   a {
@@ -136,5 +140,6 @@ $spaceBetweenMenuItems: 34px;
     letter-spacing: normal;
     color: $slate-grey;
     text-decoration: none;
+    text-transform: uppercase;
   }
 }
