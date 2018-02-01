@@ -63,7 +63,7 @@ $distanceBetweenItemsTabletDesktop: 45px;
 
 .sliderWrapper :global .buttons-below :local {
   @extend %BodyPaddingWithMediaQueries;
-  margin-bottom: 25px;
+  margin-bottom: 40px;
   text-align: center;
 }
 

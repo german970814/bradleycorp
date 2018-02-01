@@ -27,6 +27,25 @@
     @include col(2);
   }
 
+  .col3 {
+    @include col(3) {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    };
+  }
+
+  .col4 {
+    @include col(4);
+  }
+
+  .col5 {
+    @include col(5);
+  }
+
+  .col6 {
+    @include col(6);
+  }
+
   // globals with media queries
 
   .col1-tablet {

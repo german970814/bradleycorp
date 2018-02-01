@@ -38,8 +38,8 @@
   width: get-col-width($cols, $gutter);
   // add gutter if any
   @if ( $gutter ) {
-    margin-left:  $gutter+%;
-    margin-right: $gutter+%;
+    margin-left:  ($gutter * -1)+%;
+    margin-right: ($gutter * -1)+%;
   }
   @content;
   // always goes last
