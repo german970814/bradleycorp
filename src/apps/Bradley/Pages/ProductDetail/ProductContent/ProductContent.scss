@@ -37,7 +37,7 @@
   height: auto;
   color: $navy;
 
-  @extend %h1-tablet-media-query;
+  @extend %h1-tablet;
   @include respond-to(tablet) {
     margin-bottom: 27px;
   }

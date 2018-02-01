@@ -54,21 +54,17 @@
 }
 
 %h1-tablet {
-  font-family: $CentraleSansPro;
+  @extend %h1-mobile;
   font-size: 28px;
-  font-weight: 300;
   line-height: 1.21;
   letter-spacing: -1.1px;
-  text-align: left;
 }
 
 %h1-desktop {
-  font-family: $CentraleSansPro;
+  @extend %h1-tablet;
   font-size: 34px;
-  font-weight: 300;
   line-height: 1.06;
   letter-spacing: -1.4px;
-  text-align: left;
 }
 
 %h4-tablet-mobile {
@@ -80,12 +76,10 @@
 }
 
 %h4-desktop {
-  font-family: $TradeGothic-CondTwenty;
-  font-size: 18.1px;
-  font-weight: bold;
+  @extend %h4-tablet-mobile;
+  font-size: 18px;
   line-height: 1.11;
   letter-spacing: 1.8px;
-  text-align: center;
 }
 
 %h5-desktop {
@@ -96,7 +90,7 @@
 }
 
 %h6-desktop {
-  font-family: CentraleSansPro;
+  font-family: $CentraleSansPro;
   font-size: 13px;
   font-weight: bold;
   line-height: 2.77;
@@ -117,10 +111,9 @@
 }
 
 %small-body-desktop {
-  font-family: Helvetica;
+  @extend %body;
   font-size: 12px;
   text-align: center;
-  color: $steel-grey;
 }
 
 %legal {

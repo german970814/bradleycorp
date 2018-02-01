@@ -5,11 +5,15 @@ h1 {
   @extend %h1-mobile;
 
   @include respond-to(tablet) {
-    @extend %h1-tablet;
+    font-size: 28px;
+    line-height: 1.21;
+    letter-spacing: -1.1px;
   }
 
   @include respond-to(desktop) {
-    @extend %h1-desktop;
+    font-size: 34px;
+    line-height: 1.06;
+    letter-spacing: -1.4px;
   }
 }
 
@@ -17,20 +21,18 @@ h4 {
   @extend %h4-tablet-mobile;
 
   @include respond-to(desktop) {
-    @extend %h4-desktop;
+    font-size: 18px;
+    line-height: 1.11;
+    letter-spacing: 1.8px;
   }
 }
 
 h5 {
-  @include respond-to(desktop) {
-    @extend %h5-desktop;
-  }
+  @extend %h5-desktop;
 }
 
 h6 {
-  @include respond-to(desktop) {
-    @extend %h6-desktop;
-  }
+  @extend %h6-desktop;
 }
 
 body {
@@ -38,9 +40,7 @@ body {
 }
 
 .small-body {
-  @include respond-to(desktop) {
-    @extend %small-body-desktop;
-  }
+  @extend %small-body-desktop;
 }
 
 .legal {
