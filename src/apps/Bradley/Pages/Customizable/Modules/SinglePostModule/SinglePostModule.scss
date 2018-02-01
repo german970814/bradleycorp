@@ -6,6 +6,16 @@
   height: 100%;
 }
 
+.singlePostModule {
+  @extend %coverBackgorund;
+  width: auto;
+
+  // remove background on mobile
+  @include respond-to-max(tablet) {
+    background: none !important;
+  }
+}
+
 .imagePadding {
   margin-bottom: 40px;
 
@@ -28,7 +38,7 @@
 
 .title {
   margin-bottom: 30px;
-  font-family: TradeGothic-CondTwenty;
+  font-family: TradeGothic;
   font-size: 27px;
   font-weight: bold;
   font-style: normal;

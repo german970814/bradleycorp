@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import CPTApiClient from '../../../../../../api/cpt_client'
+import { nWords } from '../../../../../../lib/bcorpString'
+import { MOBILEMAXWIDTH } from '../../../../../../globals'
 import FixedAspectRatioBox from '../../../../../../lib/components/FixedAspectRatioBox/FixedAspectRatioBox'
-import VerticalAlignHelper from '../../../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
+import Media from 'react-media'
 import moduleStyle from '../Modules.scss'
 import style from './SinglePostModule.scss'
 
@@ -21,7 +23,8 @@ class SinglePostModule extends Component {
       post: {
         ID: 1,
         'post_title': '',
-        'post_content': ''
+        'post_content': '',
+        'post_excerpt': ''
       },
       media: {
         'featured_image': ['', 0, 0, false]
@@ -51,16 +54,35 @@ class SinglePostModule extends Component {
     const src = this.state.media['featured_image'][0]
 
     return (
-      <div className={style.imagePadding} >
-        <FixedAspectRatioBox
-          aspectRatio={180 / 270} >
-          <div
-            style={{
-              backgroundImage: `url(${src})`
-            }}
-            className={style.image} />
-        </FixedAspectRatioBox>
-      </div>
+      <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
+        {match =>
+          match ? (
+          // mobile
+            <div className={style.imagePadding } >
+              <FixedAspectRatioBox
+                aspectRatio={180 / 270} >
+                <div
+                  style={{
+                    backgroundImage: `url(${src})`
+                  }}
+                  className={style.image} />
+              </FixedAspectRatioBox>
+            </div>
+          ) : (
+          // tablet desktop need a different aspect ratio
+            <div className={style.imagePadding } >
+              <FixedAspectRatioBox
+                aspectRatio={300 / 311} >
+                <div
+                  style={{
+                    backgroundImage: `url(${src})`
+                  }}
+                  className={style.image} />
+              </FixedAspectRatioBox>
+            </div>
+          )
+        }
+      </Media>
     )
   }
 
@@ -77,15 +99,28 @@ class SinglePostModule extends Component {
   }
 
   renderContent () {
-    if (!this.state.post['post_content']) {
+    const excerpt = this.getExcerpt()
+    if (!excerpt) {
       return
     }
 
     return (
       <div className={style.content} >
-        {this.state.post['post_content']}
+        {excerpt}
       </div>
     )
+  }
+
+  getExcerpt () {
+    const { post } = this.state
+
+    if (post['post_excerpt'] && post['post_excerpt'] !== '') {
+      return post['post_excerpt']
+    }
+
+    if (post['post_content'] && post['post_content'] !== '') {
+      return nWords(post['post_content'], 22)
+    }
   }
 
   renderButtons () {
@@ -104,17 +139,25 @@ class SinglePostModule extends Component {
     )
   }
 
+  getBackgroundImage () {
+    return this.props.background
+      ? `url(${this.props.background})`
+      : `url(${require('../../../../../../images/marble-background/shutterstock-109902944.png')})`
+  }
+
   render () {
     return (
-      <div className={`row ${moduleStyle.module}`}>
+      <div
+        style={{
+          backgroundImage: this.getBackgroundImage()
+        }}
+        className={`row ${style.singlePostModule} ${moduleStyle.module}`}>
 
         <div className={`col1 col2-tablet ${style.stretchToHeight}`} >
           {this.renderImage()}
         </div>
 
         <div className={`col1 col2-tablet ${style.stretchToHeight}`} >
-
-          <VerticalAlignHelper />
 
           <div className={style.contentWrapper} >
             {this.renderTitle()}
@@ -149,6 +192,9 @@ class SinglePostModule extends Component {
 SinglePostModule.propTypes = {
   postID: PropTypes.number.isRequired,
   accentColor: PropTypes.string,
+  /**
+   * The image src as a sting
+   */
   background: PropTypes.string,
   skin: PropTypes.string
 }
