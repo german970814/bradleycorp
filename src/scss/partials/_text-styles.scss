@@ -49,7 +49,7 @@
   font-size: 23px;
   font-weight: 300;
   line-height: 1.22;
-  font-style: normal;
+  letter-spacing: -0.9px;
   text-align: left;
 }
 
@@ -62,16 +62,6 @@
   text-align: left;
 }
 
-%h1-tablet-media-query {
-  @include respond-to(tablet) {
-    font-family: $CentraleSansPro;
-    font-size: 28px;
-    font-weight: 300;
-    letter-spacing: -1.1px;
-    text-align: left;
-  }
-}
-
 %h1-desktop {
   font-family: $CentraleSansPro;
   font-size: 34px;
@@ -82,7 +72,7 @@
 }
 
 %h4-tablet-mobile {
-  font-family: TradeGothic-CondTwenty;
+  font-family: $TradeGothic-CondTwenty;
   font-size: 16px;
   font-weight: bold;
   letter-spacing: 1.6px;
@@ -90,7 +80,7 @@
 }
 
 %h4-desktop {
-  font-family: TradeGothic-CondTwenty;
+  font-family: $TradeGothic-CondTwenty;
   font-size: 18.1px;
   font-weight: bold;
   line-height: 1.11;
@@ -106,19 +96,31 @@
 }
 
 %h6-desktop {
-  font-family: $CentraleSansPro;
+  font-family: CentraleSansPro;
   font-size: 13px;
   font-weight: bold;
   line-height: 2.77;
   letter-spacing: 0.5px;
   text-align: left;
-  // text-align: center;
+}
+
+%body {
+  font-family: Helvetica;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+  text-align: left;
+  color: $slate-grey;
 }
 
 %small-body-desktop {
   font-family: Helvetica;
   font-size: 12px;
   text-align: center;
+  color: $steel-grey;
 }
 
 %legal {

@@ -1,13 +1,5 @@
 @import "./partials/grid-globals";
-
-body {
-  overflow-x: hidden;
-  margin: 0;
-  font-family: Helvetica;
-  font-size: 14px;
-  line-height: 1.5;
-  text-align: left;
-}
+@import "./partials/text-styles-globals";
 
 a {
   color: unset;

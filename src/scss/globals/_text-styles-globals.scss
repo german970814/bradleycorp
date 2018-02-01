@@ -1,0 +1,48 @@
+@import "../partials/text-styles";
+@import "../partials/mixins";
+
+h1 {
+  @extend %h1-mobile;
+
+  @include respond-to(tablet) {
+    @extend %h1-tablet;
+  }
+
+  @include respond-to(desktop) {
+    @extend %h1-desktop;
+  }
+}
+
+h4 {
+  @extend %h4-tablet-mobile;
+
+  @include respond-to(desktop) {
+    @extend %h4-desktop;
+  }
+}
+
+h5 {
+  @include respond-to(desktop) {
+    @extend %h5-desktop;
+  }
+}
+
+h6 {
+  @include respond-to(desktop) {
+    @extend %h6-desktop;
+  }
+}
+
+body {
+  @extend %body;
+}
+
+.small-body {
+  @include respond-to(desktop) {
+    @extend %small-body-desktop;
+  }
+}
+
+.legal {
+  @extend %legal;
+}
