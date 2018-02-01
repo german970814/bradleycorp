@@ -1,5 +1,6 @@
 import React from 'react'
 import SinglePostModule from './Modules/SinglePostModule/SinglePostModule'
+import MultiPostButtonModule from './Modules/MultiPostButtonModule/MultiPostButtonModule'
 import style from './Customizable.scss'
 
 const Customizable = props => {
@@ -17,11 +18,19 @@ const Customizable = props => {
 
   return (
     <div className={style.customizable} >
+
+      <MultiPostButtonModule
+        title={'Design Tools'}
+        postIDs={[126, 126, 126]}
+        accentColor={'#ffffff'}
+        background={''}
+        skin={'light'} />
+
       <SinglePostModule
         postID={126}
         accentColor={'#ffffff'}
         background={''}
-        skin={''} />
+        skin={'light'} />
     </div>
   )
 }

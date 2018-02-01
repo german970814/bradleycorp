@@ -88,9 +88,10 @@ class ProductContent extends Component {
         : style.productDetailBtn
 
       buttons = [ ...buttons,
-        <div className={wrapperStyle} >
+        <div
+          key={1}
+          className={wrapperStyle} >
           <button
-            key={1}
             className={styleClass} >
             ADD TO SUBMITTAL
           </button>
@@ -103,9 +104,10 @@ class ProductContent extends Component {
         : style.productDetailBtn
 
       buttons = [ ...buttons,
-        <div className={`${wrapperStyle} ${style.surveyWrapper}`} >
+        <div
+          key={2}
+          className={`${wrapperStyle} ${style.surveyWrapper}`} >
           <button
-            key={2}
             className={`button-border-slate-grey ${styleClassSurvey}`} >
             REQUEST SITE SURVEY
           </button>
