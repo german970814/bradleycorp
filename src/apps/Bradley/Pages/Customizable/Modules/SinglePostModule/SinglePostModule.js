@@ -153,11 +153,11 @@ class SinglePostModule extends Component {
         }}
         className={`row ${style.singlePostModule} ${moduleStyle.module}`}>
 
-        <div className={`col1 col2-tablet ${style.stretchToHeight} ${style.imageCol}`} >
+        <div className={`col1 inline-col2-middle-tablet ${style.stretchToHeight} ${style.imageCol}`} >
           {this.renderImage()}
         </div>
 
-        <div className={`col1 col2-tablet ${style.stretchToHeight} ${style.contentCol}`} >
+        <div className={`col1 inline-col2-middle-tablet ${style.stretchToHeight} ${style.contentCol}`} >
 
           <div className={style.contentWrapper} >
             {this.renderTitle()}

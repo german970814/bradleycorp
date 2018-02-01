@@ -52,4 +52,12 @@
       @include col(6);
     }
   }
+
+  .inline-col2-middle-tablet {
+    @include respond-to(tablet) {
+      @include inline-col(2, middle) {
+        float: none;
+      }
+    }
+  }
 }
