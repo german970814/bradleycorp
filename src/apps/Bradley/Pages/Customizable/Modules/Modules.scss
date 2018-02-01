@@ -10,4 +10,9 @@
     padding-top: 57px;
     padding-bottom: 57px;
   }
+
+  @include respond-to(desktop) {
+    padding: 59px 107px;
+    max-width: unset;
+  }
 }

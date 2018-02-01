@@ -153,11 +153,11 @@ class SinglePostModule extends Component {
         }}
         className={`row ${style.singlePostModule} ${moduleStyle.module}`}>
 
-        <div className={`col1 col2-tablet ${style.stretchToHeight}`} >
+        <div className={`col1 col2-tablet ${style.stretchToHeight} ${style.imageCol}`} >
           {this.renderImage()}
         </div>
 
-        <div className={`col1 col2-tablet ${style.stretchToHeight}`} >
+        <div className={`col1 col2-tablet ${style.stretchToHeight} ${style.contentCol}`} >
 
           <div className={style.contentWrapper} >
             {this.renderTitle()}
@@ -190,6 +190,9 @@ class SinglePostModule extends Component {
 }
 
 SinglePostModule.propTypes = {
+  /*
+   * ID of the post to display
+   */
   postID: PropTypes.number.isRequired,
   accentColor: PropTypes.string,
   /**

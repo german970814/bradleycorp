@@ -1,6 +1,7 @@
 @import "../../../../../../scss/partials/helpers";
 @import "../../../../../../scss/partials/variables";
 @import "../../../../../../scss/partials/mixins";
+@import "../../../../../../scss/partials/grid";
 
 .stretchToHeight {
   height: 100%;
@@ -16,6 +17,18 @@
   }
 }
 
+.imageCol {
+  @include respond-to(desktop) {
+    width: 45.4% !important;
+  }
+}
+
+.contentCol {
+  @include respond-to(desktop) {
+    width: 54.6% !important;
+  }
+}
+
 .imagePadding {
   margin-bottom: 40px;
 
@@ -23,6 +36,10 @@
     margin-bottom: 0;
     padding-right: 40px;
     height: 100%;
+  }
+
+  @include respond-to(desktop) {
+    padding-right: 64px;
   }
 }
 
