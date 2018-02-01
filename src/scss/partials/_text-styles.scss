@@ -45,6 +45,8 @@
 /* Text styles */
 
 %h1-mobile {
+  margin-top: 0;
+  margin-bottom: 0;
   font-family: $CentraleSansPro;
   font-size: 23px;
   font-weight: 300;
@@ -68,6 +70,8 @@
 }
 
 %h4-tablet-mobile {
+  margin-top: 0;
+  margin-bottom: 0;
   font-family: $TradeGothic-CondTwenty;
   font-size: 16px;
   font-weight: bold;
@@ -83,6 +87,8 @@
 }
 
 %h5-desktop {
+  margin-top: 0;
+  margin-bottom: 0;
   font-family: $CentraleSansPro;
   font-size: 16px;
   font-weight: bold;
@@ -90,6 +96,8 @@
 }
 
 %h6-desktop {
+  margin-top: 0;
+  margin-bottom: 0;
   font-family: $CentraleSansPro;
   font-size: 13px;
   font-weight: bold;

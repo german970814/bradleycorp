@@ -36,10 +36,10 @@ class ProductContent extends Component {
   renderNew () {
     if (isNew(this.props.newUntil)) {
       return (
-        <span
+        <h6
           className={style.new}>
           NEW!
-        </span>
+        </h6>
       )
     }
   }
@@ -47,10 +47,10 @@ class ProductContent extends Component {
   renderSKU () {
     if (this.props.sku) {
       return (
-        <span
+        <h6
           className={style.sku}>
           {`MODEL ${this.props.sku}`}
-        </span>
+        </h6>
       )
     }
   }
@@ -112,7 +112,8 @@ class ProductContent extends Component {
 
           <h1
             className={style.titleDesktop}>
-            {this.props.title}</h1>
+            {this.props.title}
+          </h1>
 
           <ProductContentText
             content={this.props.content} />

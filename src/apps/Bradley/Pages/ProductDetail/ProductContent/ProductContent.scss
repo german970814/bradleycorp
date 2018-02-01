@@ -10,12 +10,7 @@
 
 %aboveTitle {
   display: inline;
-  font-family: $CentraleSansPro;
-  font-size: 13px;
-  font-weight: bold;
-  letter-spacing: 0.5px;
   line-height: 1;
-  text-align: left;
 }
 
 .new {
@@ -30,14 +25,12 @@
 }
 
 .title {
-  @extend %h1-mobile;
   margin-top: 17px;
   margin-bottom: 17px;
   width: 100%;
   height: auto;
   color: $navy;
 
-  @extend %h1-tablet;
   @include respond-to(tablet) {
     margin-bottom: 27px;
   }
@@ -121,7 +114,6 @@ $productDetailBtnTabletGap: 16px;
 }
 
 .titleDesktop {
-  @extend %h1-desktop;
   position: relative;
   margin-top: 17px;
   margin-bottom: 40px;

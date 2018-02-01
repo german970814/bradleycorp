@@ -17,10 +17,10 @@ class SimpleSlider extends Component {
     if (this.props.title !== undefined &&
     this.props.title !== '') {
       return (
-        <h2
+        <h4
           className={`${style.title} ${style.buttonUp}`} >
           {this.props.title}
-        </h2>
+        </h4>
       )
     }
   }

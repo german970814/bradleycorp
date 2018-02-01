@@ -1,6 +1,11 @@
 @import "./globals/grid-globals";
 @import "./globals/text-styles-globals";
 
+body {
+  overflow-x: hidden;
+  margin: 0;
+}
+
 a {
   color: unset;
   cursor: pointer;

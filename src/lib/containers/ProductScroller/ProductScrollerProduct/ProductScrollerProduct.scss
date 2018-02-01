@@ -90,12 +90,9 @@
   color: $steel-grey;
 }
 
-.title {
+h6.title {
   @extend %widthController;
   display: inline-block;
-  font-family: $CentraleSansPro;
-  font-size: 13px;
-  font-weight: bold;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;

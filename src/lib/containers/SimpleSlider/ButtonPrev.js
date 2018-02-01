@@ -6,9 +6,9 @@ const ButtonPrev = props => {
     <div
       className={style.prevButton}>
       <img src={require('../../../images/icon-arrow/icon-arrow-l@2x.png')} />
-      <span>
+      <h6>
         {'Prev'}
-      </span>
+      </h6>
     </div>
   )
 }

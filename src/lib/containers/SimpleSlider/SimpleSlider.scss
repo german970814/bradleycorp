@@ -7,18 +7,13 @@
 $distanceBetweenItems: 20px;
 $distanceBetweenItemsTabletDesktop: 45px;
 
-.title {
+h4.title {
   margin: {
     top: 40px;
     bottom: 40px;
   }
   width: 100%;
-  font-family: $TradeGothic;
-  font-size: 16px;
-  font-weight: bold;
   line-height: 1.26;
-  letter-spacing: 1.6px;
-  text-align: center;
   text-transform: uppercase;
   color: $black;
 
@@ -27,6 +22,7 @@ $distanceBetweenItemsTabletDesktop: 45px;
       top: 60px;
       bottom: 50px;
     }
+    line-height: normal;
   }
 
   @include respond-to(desktop) {
@@ -34,6 +30,7 @@ $distanceBetweenItemsTabletDesktop: 45px;
       top: 60px;
       bottom: 40px;
     }
+    line-height: 1.11;
   }
 }
 
@@ -73,9 +70,6 @@ $distanceBetweenItemsTabletDesktop: 45px;
 }
 
 %buttonsBelowText {
-  font-family: $CentraleSansPro;
-  font-size: 13px;
-  font-weight: bold;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
@@ -94,7 +88,7 @@ $distanceBetweenItemsTabletDesktop: 45px;
     height: 19px;
   }
 
-  span {
+  h6 {
     @extend %buttonsBelowText;
     display: inline-block;
     vertical-align: middle;
@@ -113,7 +107,7 @@ $distanceBetweenItemsTabletDesktop: 45px;
     height: 19px;
   }
 
-  span {
+  h6 {
     @extend %buttonsBelowText;
     display: inline-block;
     vertical-align: middle;

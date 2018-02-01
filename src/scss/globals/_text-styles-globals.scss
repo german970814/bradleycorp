@@ -39,10 +39,10 @@ body {
   @extend %body;
 }
 
-.small-body {
+:global .small-body :local {
   @extend %small-body-desktop;
 }
 
-.legal {
+:global .legal :local {
   @extend %legal;
 }

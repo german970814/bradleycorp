@@ -50,10 +50,10 @@ class ProductScrollerProduct extends Component {
 
   renderTitle () {
     return (
-      <span
+      <h6
         className={style.title}>
         {this.props.product.post['post_title']}
-      </span>
+      </h6>
     )
   }
 

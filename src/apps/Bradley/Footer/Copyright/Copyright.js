@@ -11,16 +11,16 @@ const Copyright = props => {
       <div className={`row ${style.copyrightWrapper}`} >
 
         <div className={`col1 col2-tablet ${style.copyrightCol}`} >
-          <div className={style.menuItem} >
+          <div className={`legal ${style.menuItem}`} >
             {`${String.fromCharCode(169)} 2018 Bradley Corporation`}
           </div>
-          <div className={style.menuItem} >
+          <div className={`legal ${style.menuItem}`} >
             <Link
               to={'#'} >
               {'Legal Statement'}
             </Link>
           </div>
-          <div className={style.menuItem} >
+          <div className={`legal ${style.menuItem}`} >
             <Link
               to={'#'} >
               {'Privacy Policy'}
@@ -29,7 +29,7 @@ const Copyright = props => {
         </div>
 
         <div className={`col1 col2-tablet ${style.colRight} ${style.copyrightCol}`} >
-          <div className={style.menuItem} >
+          <div className={`legal ${style.menuItem}`} >
             {`The Bradley Logo and registered trademarks are owned by TheBradley Corporation${String.fromCharCode(174)}`}
           </div>
         </div>
