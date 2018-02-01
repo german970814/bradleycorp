@@ -78,7 +78,7 @@ class MultiPostButtonModule extends Component {
 
       const posts = [ ...this.state.posts, Object.assign({}, this.defaultState, postData) ]
 
-      return this.setState( { posts } )
+      return this.setState({ posts })
     } catch (err) {
       console.log(err)
     }
