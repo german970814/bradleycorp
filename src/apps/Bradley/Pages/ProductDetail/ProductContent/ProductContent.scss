@@ -60,43 +60,22 @@
 
 $productDetailBtnTabletGap: 16px;
 
-%productDetailBtn {
-  margin-top: 23px;
+.ctaButtons {
+  margin-top: 16px;
+}
+
+.buttonWrapper {
   margin-bottom: 10px;
-  padding: 0;
-  padding-top: 1px;
-  width: 100%;
-  height: 42px;
-  background: none;
-  border: none;
-  font-family: CentraleSansPro;
-  font-size: 13px;
-  font-weight: bold;
-  letter-spacing: 0.5px;
-  text-align: center;
-  cursor: pointer;
 
   @include respond-to(tablet) {
-    width: calc(50% - #{$productDetailBtnTabletGap}/2);
+    &:first-child {
+      padding-right: $productDetailBtnTabletGap / 2;
+    }
+
+    &:last-child {
+      padding-left: $productDetailBtnTabletGap / 2;
+    }
   }
-}
-
-.submittalBtn {
-  @extend %productDetailBtn;
-  background-color: $green;
-  color: #ffffff;
-
-  @include respond-to(tablet){
-    margin-right: $productDetailBtnTabletGap;
-  }
-}
-
-.surveyBtn {
-  @extend %productDetailBtn;
-  margin: 0;
-  border: solid 1px $slate-grey;
-  background-color: transparent;
-  color: $slate-grey;
 }
 
 // Desktop
@@ -139,21 +118,13 @@ $productDetailBtnTabletGap: 16px;
   height: 428px;
 }
 
-.submittalBtnDesktop {
-  @extend %productDetailBtn;
+.buttonWrapperDesktop {
+  float: left;
   margin-top: 10px;
   margin-right: 20px;
   width: 212px;
-  background-color: $green;
-  color: white;
 }
 
-.surveyBtnDesktop {
-  @extend %productDetailBtn;
-  margin-top: 10px;
-  border: solid 1px $slate-grey;
+.surveyWrapper {
   width: 241px;
-  background-color: transparent;
-  color: $slate-grey;
-
 }

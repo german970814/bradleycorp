@@ -78,7 +78,6 @@
   line-height: 1.5;
 }
 
-$buttonHeight: 42px;
 $buttonWidth: 150px;
 $buttonGutter: 10px;
 
@@ -90,7 +89,6 @@ $buttonGutter: 10px;
 
 .button {
   margin-bottom: 10px;
-  height: $buttonHeight;
   text-align: center;
 
   &:last-child {
@@ -103,30 +101,4 @@ $buttonGutter: 10px;
     padding-right: $buttonGutter;
     width: $buttonWidth;
   }
-}
-
-%buttonShared {
-  width: 100%;
-  height: 100%;
-  font-family: $CentraleSansPro;
-  font-size: 13px;
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: $buttonHeight;
-  letter-spacing: 0.5px;
-}
-
-.letsTalk {
-  @extend %buttonShared;
-  border: none;
-  background-color: $orange;
-  color: #ffffff;
-}
-
-.learnMore {
-  @extend %buttonShared;
-  background-color: white;
-  border: solid 1px $slate-grey;
-  color: $slate-grey;
 }

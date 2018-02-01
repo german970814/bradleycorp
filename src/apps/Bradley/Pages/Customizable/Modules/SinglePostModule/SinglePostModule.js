@@ -128,11 +128,11 @@ class SinglePostModule extends Component {
       <div className={`row ${style.buttonsWrapper}`} >
 
         <div className={`col1 col2-tablet ${style.button}`} >
-          <button className={style.letsTalk}>{"LET'S TALK"}</button>
+          <button className={`button-orange ${style.letsTalk}`}>{"LET'S TALK"}</button>
         </div>
 
         <div className={`col1 col2-tablet ${style.button}`} >
-          <button className={style.learnMore}>{'LEARN MORE'}</button>
+          <button className={`button-border-slate-grey ${style.learnMore}`}>{'LEARN MORE'}</button>
         </div>
 
       </div>

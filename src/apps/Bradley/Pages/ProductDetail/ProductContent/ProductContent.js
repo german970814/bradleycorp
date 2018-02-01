@@ -77,25 +77,39 @@ class ProductContent extends Component {
       return
     }
 
+    const wrapperStyle = desktop
+      ? style.buttonWrapperDesktop
+      : `col1 col2-tablet ${style.buttonWrapper}`
+
     let buttons = []
     if (this.props.cta['submittal_btn']) {
-      const styleClass = desktop ? style.submittalBtnDesktop : style.submittalBtn
+      const styleClass = desktop
+        ? style.submittalBtnDesktop
+        : style.productDetailBtn
+
       buttons = [ ...buttons,
-        <button
-          key={1}
-          className={styleClass} >
-          ADD TO SUBMITTAL
-        </button>
+        <div className={wrapperStyle} >
+          <button
+            key={1}
+            className={styleClass} >
+            ADD TO SUBMITTAL
+          </button>
+        </div>
       ]
     }
     if (this.props.cta['survey_btn']) {
-      const styleClassSurvey = desktop ? style.surveyBtnDesktop : style.surveyBtn
+      const styleClassSurvey = desktop
+        ? style.surveyBtnDesktop
+        : style.productDetailBtn
+
       buttons = [ ...buttons,
-        <button
-          key={2}
-          className={styleClassSurvey} >
-          REQUEST SITE SURVEY
-        </button>
+        <div className={`${wrapperStyle} ${style.surveyWrapper}`} >
+          <button
+            key={2}
+            className={`button-border-slate-grey ${styleClassSurvey}`} >
+            REQUEST SITE SURVEY
+          </button>
+        </div>
       ]
     }
     return buttons
@@ -128,7 +142,7 @@ class ProductContent extends Component {
             videos={this.props.videos} />
         </div>
         <div
-          className={style.ctaButtons} >
+          className={`row ${style.ctaButtons}`} >
           {this.renderCTA(true)}
         </div>
       </div>
@@ -161,7 +175,7 @@ class ProductContent extends Component {
 
           {this.renderAwards()}
           <div
-            className={style.ctaButtons} >
+            className={`row ${style.ctaButtons}`} >
             {this.renderCTA()}
           </div>
         </div>
