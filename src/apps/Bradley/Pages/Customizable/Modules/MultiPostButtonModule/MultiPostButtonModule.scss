@@ -1,0 +1,21 @@
+@import "../../../../../../scss/partials/variables";
+@import "../../../../../../scss/partials/mixins";
+
+.multiPostButtonModule {
+  background-color: $light-gray;
+}
+
+h5.title {
+  margin-bottom: 27px;
+  text-align: center;
+  color: #2f3d70;
+
+  @include respond-to(tablet) {
+    color: #2e3c6e;
+  }
+
+  @include respond-to(desktop) {
+    font-size: 22px;
+    color: $navy;
+  }
+}

@@ -1,0 +1,54 @@
+@import "../../../../../../../scss/partials/helpers";
+@import "../../../../../../../scss/partials/variables";
+@import "../../../../../../../scss/partials/mixins";
+
+.postColumnWrapper {
+  margin-top: 30px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    button {
+      margin-bottom: 0;
+    }
+
+    :global .divider :local {
+      display: none;
+    }
+  }
+
+  @include respond-to(tablet) {
+    margin-top: 0px;
+    padding: 0 5.2%;
+
+    :global .divider :local {
+      display: none;
+    }
+  }
+}
+
+.imageWrapper {
+  margin-bottom: 24px;
+}
+
+.image {
+  @extend %coverBackground;
+}
+
+.title {
+  margin-bottom: 21px;
+  text-transform: uppercase;
+  color: $black;
+}
+
+.content {
+  margin-bottom: 27px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.button {
+  margin-bottom: 30px;
+}

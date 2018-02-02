@@ -1,0 +1,5 @@
+@import "../../../../scss/partials/helpers";
+
+.image {
+  @extend %coverBackground;
+}

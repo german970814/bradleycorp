@@ -8,7 +8,7 @@
 }
 
 .singlePostModule {
-  @extend %coverBackgorund;
+  @extend %coverBackground;
   width: auto;
 
   // remove background on mobile
@@ -41,10 +41,6 @@
   @include respond-to(desktop) {
     padding-right: 64px;
   }
-}
-
-.image {
-  @extend %coverBackgorund;
 }
 
 .contentWrapper {

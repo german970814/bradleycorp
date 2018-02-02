@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import CPTApiClient from '../../../../../../api/cpt_client'
-import { nWords } from '../../../../../../lib/bcorpString'
-import { MOBILEMAXWIDTH } from '../../../../../../globals'
-import FixedAspectRatioBox from '../../../../../../lib/components/FixedAspectRatioBox/FixedAspectRatioBox'
-import Media from 'react-media'
+import { getExcerpt } from '../../../../../../lib/bcorpPost'
+import ImageFrame from '../../../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import moduleStyle from '../Modules.scss'
 import style from './SinglePostModule.scss'
 
@@ -54,35 +52,13 @@ class SinglePostModule extends Component {
     const src = this.state.media['featured_image'][0]
 
     return (
-      <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
-        {match =>
-          match ? (
-          // mobile
-            <div className={style.imagePadding } >
-              <FixedAspectRatioBox
-                aspectRatio={180 / 270} >
-                <div
-                  style={{
-                    backgroundImage: `url(${src})`
-                  }}
-                  className={style.image} />
-              </FixedAspectRatioBox>
-            </div>
-          ) : (
-          // tablet desktop need a different aspect ratio
-            <div className={style.imagePadding } >
-              <FixedAspectRatioBox
-                aspectRatio={300 / 311} >
-                <div
-                  style={{
-                    backgroundImage: `url(${src})`
-                  }}
-                  className={style.image} />
-              </FixedAspectRatioBox>
-            </div>
-          )
-        }
-      </Media>
+      <div className={style.imagePadding } >
+        <ImageFrame
+          src={src}
+          aspectRatio={180 / 270}
+          aspectRatioTablet={300 / 311}
+          aspectRatioDesktop={386 / 420} />
+      </div>
     )
   }
 
@@ -99,7 +75,9 @@ class SinglePostModule extends Component {
   }
 
   renderContent () {
-    const excerpt = this.getExcerpt()
+    const { post } = this.state
+    const excerpt = getExcerpt(post['post_excerpt'], post['post_content'], 22)
+
     if (!excerpt) {
       return
     }
@@ -109,18 +87,6 @@ class SinglePostModule extends Component {
         {excerpt}
       </div>
     )
-  }
-
-  getExcerpt () {
-    const { post } = this.state
-
-    if (post['post_excerpt'] && post['post_excerpt'] !== '') {
-      return post['post_excerpt']
-    }
-
-    if (post['post_content'] && post['post_content'] !== '') {
-      return nWords(post['post_content'], 22)
-    }
   }
 
   renderButtons () {

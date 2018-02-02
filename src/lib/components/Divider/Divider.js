@@ -3,9 +3,14 @@ import PropTypes from 'prop-types'
 import style from './Divider.scss'
 
 const Divider = props => {
+  const inlineStyle = props.fullWidth
+    ? { width: '100%', paddingLeft: '0px', paddingRight: '0px' }
+    : undefined
+
   return (
     <div
-      className={`${style.divider} ${props.customClass}`} >
+      style={inlineStyle}
+      className={`divider ${style.divider} ${props.customClass}`} >
       <div
         style={{
           color: props.color
@@ -17,7 +22,8 @@ const Divider = props => {
 
 Divider.propTypes = {
   customClass: PropTypes.string,
-  color: PropTypes.string
+  color: PropTypes.string,
+  fullWidth: PropTypes.bool
 }
 
 export default Divider
