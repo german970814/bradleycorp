@@ -9,7 +9,7 @@
 
 .footerWrapper {
   @extend %BodyPaddingWithMediaQueries;
-
+  max-width: 100%;
   @include respond-to(tablet) {
     position: relative;
   }
@@ -17,6 +17,7 @@
 
 $logoHeight: 60px;
 $logoHeightTablet: 55px;
+$logoHeightDesktop: 70px;
 
 $footerSectionTopBottomPadding: 30px;
 $footerSectionTopPaddingTablet: 50px;
@@ -46,6 +47,11 @@ $menuItemFontSize: 10px;
     padding-top: $footerSectionTopPaddingTablet;
     height: $logoHeightTablet;
   }
+
+  @include respond-to(desktop) {
+    padding-top: $footerSectionTopPaddingTablet;
+    height: $logoHeightDesktop;
+  }
 }
 
 .logo {
@@ -56,6 +62,10 @@ $menuItemFontSize: 10px;
     width: $logoHeightTablet;
     height: $logoHeightTablet;
   }
+  @include respond-to(tablet) {
+    width: $logoHeightDesktop;
+    height: $logoHeightDesktop;
+  }
 }
 
 .menuItem {
@@ -64,7 +74,7 @@ $menuItemFontSize: 10px;
   font-family: $CentraleSansPro;
   font-size: $menuItemFontSize;
   font-weight: bold;
-  line-height: $menuItemFontSize;
+  line-height: 1.3;
   letter-spacing: 0.2px;
   text-transform: uppercase;
 
