@@ -11,11 +11,13 @@ const LoginItems = props => {
 
       <FooterBottomSectionItem
         link={'#'}
-        title={'ANSWERNET'} />
+        title={'ANSWERNET'}
+        padlock />
 
       <FooterBottomSectionItem
         link={'#'}
-        title={'BRADZONE'} />
+        title={'BRADZONE'}
+        padlock />
 
     </React.Fragment>
   )
