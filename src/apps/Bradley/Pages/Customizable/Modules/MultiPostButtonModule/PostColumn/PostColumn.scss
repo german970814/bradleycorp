@@ -2,6 +2,8 @@
 @import "../../../../../../../scss/partials/variables";
 @import "../../../../../../../scss/partials/mixins";
 
+@import "../MultiPostButtonModule";
+
 .postColumnWrapper {
   margin-top: 30px;
 
@@ -21,10 +23,27 @@
 
   @include respond-to(tablet) {
     margin-top: 0px;
-    padding: 0 5.2%;
+    margin-bottom: 0px;
+    padding: 0 $tabletGutter;
 
     :global .divider :local {
       display: none;
+    }
+
+    &::before {
+      content: " ";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      transform: translateX(-$tabletGutter);
+      background-color: $silver;
+    }
+
+    &:first-child {
+      &::before {
+        width: 0;
+      }
     }
   }
 }
@@ -41,6 +60,10 @@
   margin-bottom: 21px;
   text-transform: uppercase;
   color: $black;
+
+  @include respond-to(tablet) {
+    margin-bottom: 29px;
+  }
 }
 
 .content {
@@ -51,4 +74,8 @@
 
 .button {
   margin-bottom: 30px;
+
+  @include respond-to(tablet) {
+    margin-bottom: 0;
+  }
 }

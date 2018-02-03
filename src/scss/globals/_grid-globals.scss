@@ -79,4 +79,12 @@
       }
     }
   }
+
+  .inline-col3-top-tablet {
+    @include respond-to(tablet) {
+      @include inline-col(3, top) {
+        float: none;
+      }
+    }
+  }
 }

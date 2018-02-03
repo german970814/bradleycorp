@@ -75,13 +75,23 @@ class MultiPostButtonModule extends Component {
     })
   }
 
+  getBackgroundImage () {
+    return this.props.background
+      ? `url(${this.props.background})`
+      : `url(${require('../../../../../../images/marble-background/shutterstock-109902944.png')})`
+  }
+
   render () {
     return (
-      <div className={`row ${moduleStyle.module} ${style.multiPostButtonModule}`} >
+      <div
+        style={{
+          backgroundImage: this.getBackgroundImage()
+        }}
+        className={`row ${moduleStyle.module} ${style.multiPostButtonModule}`} >
 
         {this.renderTitle()}
 
-        <div className={'row'} >
+        <div className={`row ${style.columnsRow}`} >
           {this.renderCols()}
         </div>
 

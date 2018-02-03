@@ -1,9 +1,21 @@
 @import "../../../../../../scss/partials/variables";
 @import "../../../../../../scss/partials/mixins";
+@import "../../../../../../scss/partials/helpers";
+
+$tabletGutter: 5.2vw;
 
 .multiPostButtonModule {
-  background-color: $light-gray;
+  @extend %coverBackground;
+  width: auto;
+
+  // background is light gray on mobile
+  @include respond-to-max(tablet) {
+    background-image: none !important;
+    background-color: $light-gray !important;
+  }
 }
+
+
 
 h5.title {
   margin-bottom: 27px;
@@ -17,5 +29,13 @@ h5.title {
   @include respond-to(desktop) {
     font-size: 22px;
     color: $navy;
+  }
+}
+
+.columnsRow {
+  @include respond-to(tablet) {
+    float: left;
+    position: relative;
+    margin: auto (-$tabletGutter);
   }
 }
