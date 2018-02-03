@@ -3,6 +3,7 @@
 @import "../../../../../../scss/partials/helpers";
 
 $tabletGutter: 5.2vw;
+$desktopGutter: 4.296875vw;
 
 .multiPostButtonModule {
   @extend %coverBackground;
@@ -12,6 +13,10 @@ $tabletGutter: 5.2vw;
   @include respond-to-max(tablet) {
     background-image: none !important;
     background-color: $light-gray !important;
+  }
+
+  @include respond-to(desktop) {
+    padding: 60px $desktopGutter;
   }
 }
 
@@ -37,5 +42,9 @@ h5.title {
     float: left;
     position: relative;
     margin: auto (-$tabletGutter);
+  }
+
+  @include respond-to(desktop) {
+    margin: auto (-$desktopGutter);
   }
 }

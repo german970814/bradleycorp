@@ -46,10 +46,23 @@
       }
     }
   }
+
+  @include respond-to(desktop) {
+    padding: 0 $desktopGutter;
+
+    &::before {
+      transform: translateX(-$desktopGutter);
+    }
+  }
 }
 
 .imageWrapper {
   margin-bottom: 24px;
+
+  @include respond-to(desktop) {
+    margin: 0 auto 27px auto;
+    max-width: 400px;
+  }
 }
 
 .image {
@@ -62,7 +75,11 @@
   color: $black;
 
   @include respond-to(tablet) {
-    margin-bottom: 29px;
+    margin-bottom: 20px;
+  }
+
+  @include respond-to(desktop) {
+    margin-bottom: 23px;
   }
 }
 
@@ -70,6 +87,14 @@
   margin-bottom: 27px;
   line-height: 1.5;
   text-align: center;
+
+  @include respond-to(tablet) {
+    margin-bottom: 36px;
+  }
+
+  @include respond-to(desktop) {
+    margin-bottom: 37px;
+  }
 }
 
 .button {
@@ -77,5 +102,11 @@
 
   @include respond-to(tablet) {
     margin-bottom: 0;
+  }
+
+  @include respond-to(desktop) {
+    display: block;
+    margin: 0 auto;
+    width: 154px;
   }
 }
