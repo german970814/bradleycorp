@@ -13,6 +13,7 @@ const HeaderDesktop = props => {
         <div
           className={style.topBar} >
 
+          {/*
           <div
             className={style.user} >
             <VerticalAlignHelper />
@@ -21,6 +22,7 @@ const HeaderDesktop = props => {
               className={style.avatar} />
             <div className={style.userText}>{'LOGIN'}</div>
           </div>
+          */}
 
           <div
             className={style.country} >

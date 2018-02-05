@@ -12,6 +12,7 @@ const HeaderTablet = props => {
 
         <VerticalAlignHelper />
 
+        {/*
         <div
           className={style.user} >
           <img
@@ -19,6 +20,7 @@ const HeaderTablet = props => {
             className={style.avatar} />
           <span className={style.userText}>{'LOGIN'}</span>
         </div>
+        */}
 
         <div
           className={style.country} >
