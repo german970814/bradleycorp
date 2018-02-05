@@ -51,13 +51,15 @@
   // right column
   &.colRight {
     padding-bottom: 0;
-    @include respond-to(tablet) {
-      text-align: right;
-    }
 
     .menuItem {
       float: none;
       line-height: 1.5;
+      text-align: left;
+
+      @include respond-to(tablet) {
+        text-align: right;
+      }
     }
   }
 }
