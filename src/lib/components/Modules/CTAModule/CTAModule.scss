@@ -1,0 +1,46 @@
+@import "../../../../scss/partials/layout";
+@import "../../../../scss/partials/mixins";
+@import "../../../../scss/partials/variables";
+
+.CTAModule {
+  @extend %BodyPaddingWithMediaQueries;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  text-align: center;
+
+  :last-child {
+    padding-bottom: 0;
+  }
+}
+
+.title {
+  padding-bottom: 20px;
+  text-align: center;
+  color: $black;
+
+  @include respond-to(tablet) {
+    padding-bottom: 28px;
+    font-size: 20px;
+  }
+
+  @include respond-to(desktop) {
+    padding-bottom: 38px;
+    font-size: 24px;
+  }
+}
+
+.text {
+  padding-bottom: 37px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.button {
+  text-transform:  uppercase;
+
+  @include respond-to(tablet) {
+    padding-right: 30px;
+    padding-left: 30px;
+    width: auto;
+  }
+}

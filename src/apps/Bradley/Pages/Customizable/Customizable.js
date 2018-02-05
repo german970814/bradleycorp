@@ -1,6 +1,7 @@
 import React from 'react'
 import SinglePostModule from './Modules/SinglePostModule/SinglePostModule'
 import MultiPostButtonModule from './Modules/MultiPostButtonModule/MultiPostButtonModule'
+import CTAModule from '../../../../lib/components/Modules/CTAModule/CTAModule'
 import style from './Customizable.scss'
 
 const Customizable = props => {
@@ -16,8 +17,16 @@ const Customizable = props => {
    *
    */
 
+  const CTAText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+
   return (
     <div className={style.customizable} >
+
+      <CTAModule
+        title={'Careers'}
+        text={CTAText}
+        link={'/'}
+        linkText={'Current Openings'} />
 
       <MultiPostButtonModule
         title={'Design Tools'}
@@ -31,6 +40,7 @@ const Customizable = props => {
         accentColor={'#ffffff'}
         background={''}
         skin={'light'} />
+
     </div>
   )
 }
