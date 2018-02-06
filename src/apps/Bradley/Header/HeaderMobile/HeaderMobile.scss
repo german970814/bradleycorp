@@ -5,7 +5,7 @@
   height: 64px;
 }
 
-.burgerMenuWrapper, .magnifyingGlassWrapper {
+.burgerMenuWrapper {
   display: inline-block;
   vertical-align: middle;
   width: 30%;
@@ -25,21 +25,6 @@
 }
 
 .logoImage {
-  width: 100%;
-  height: 100%;
-}
-
-.magnifyingGlassWrapper {
-  text-align: right;
-}
-
-.magnifyingGlass {
-  display: inline-block;
-  width: 22px;
-  height: 22px;
-}
-
-.magnifyingGlassImage {
   width: 100%;
   height: 100%;
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import VerticalAlignHelper from '../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import MenuItems from './MenuItems'
+import SearchIcon from '../SearchIcon/SearchIcon'
 import style from './HeaderDesktop.scss'
 
 const HeaderDesktop = props => {
@@ -56,15 +57,7 @@ const HeaderDesktop = props => {
           <VerticalAlignHelper />
         </div>
 
-        <div
-          className={style.magnifyingGlassWrapper} >
-          <div
-            className={style.magnifyingGlass} >
-            <img
-              src={require('../../../../images/magnifying-glass/magnifying-glass@2x.png')}
-              className={style.magnifyingGlassImage} />
-          </div>
-        </div>
+        <SearchIcon />
 
       </div>
 

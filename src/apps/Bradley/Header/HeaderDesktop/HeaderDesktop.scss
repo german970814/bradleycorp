@@ -96,21 +96,6 @@ $spaceBetweenMenuItems: 34px;
   height: 100%;
 }
 
-.magnifyingGlassWrapper {
-  position: absolute;
-  right: 0px;
-  bottom: 0px;
-  margin-right: $DesktopBodyPadding;
-  margin-bottom: 20px;
-  width: 19px;
-  height: 19px;
-}
-
-.magnifyingGlassImage {
-  width: 100%;
-  height: 100%;
-}
-
 .menuItems {
   display: block;
   box-sizing: border-box;

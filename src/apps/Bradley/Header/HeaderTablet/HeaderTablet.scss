@@ -65,42 +65,31 @@ $flagHeight: 10px;
   height: 64px;
 }
 
-.burgerMenuWrapper, .magnifyingGlassWrapper {
+.burgerMenuWrapper {
   display: inline-block;
   vertical-align: middle;
-  width: 50%;
-}
-
-.magnifyingGlassWrapper {
-  text-align: right;
-}
-
-.magnifyingGlass {
-  display: inline-block;
-  width: 22px;
-  height: 22px;
-}
-
-.magnifyingGlassImage {
-  width: 100%;
-  height: 100%;
+  width: 30%;
 }
 
 .logoWrapper {
+  position: relative;
+  display: inline-block;
+  vertical-align: bottom;
+  width: 40%;
+  padding-bottom: 8px;
+}
+
+.logo {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-}
-
-.logo {
-  margin: 0 auto;
-  margin-bottom: 16px;
-  width: 56px;
-  height: 56px;
+  text-align: center;
 }
 
 .logoImage {
-  width: 100%;
-  height: 100%;
+  margin: 0 auto;
+  margin-bottom: 17px;
+  width: 56px;
+  height: 56px;
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import BurgerMenu from '../../../../lib/components/BurgerMenu/BurgerMenu'
 import VerticalAlignHelper from '../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
+import SearchIcon from '../SearchIcon/SearchIcon'
 import style from './HeaderTablet.scss'
 
 const HeaderTablet = props => {
@@ -52,15 +53,7 @@ const HeaderTablet = props => {
           </div>
         </div>
 
-        <div
-          className={style.magnifyingGlassWrapper} >
-          <div
-            className={style.magnifyingGlass} >
-            <img
-              src={require('../../../../images/magnifying-glass/magnifying-glass@2x.png')}
-              className={style.magnifyingGlassImage} />
-          </div>
-        </div>
+        <SearchIcon />
 
       </div>
 

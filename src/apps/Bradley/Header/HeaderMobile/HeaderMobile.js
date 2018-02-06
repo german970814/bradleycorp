@@ -1,6 +1,7 @@
 import React from 'react'
 import BurgerMenu from '../../../../lib/components/BurgerMenu/BurgerMenu'
 import VerticalAlignHelper from '../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
+import SearchIcon from '../SearchIcon/SearchIcon'
 import style from './HeaderMobile.scss'
 
 const HeaderMobile = props => {
@@ -24,15 +25,7 @@ const HeaderMobile = props => {
         </div>
       </div>
 
-      <div
-        className={style.magnifyingGlassWrapper} >
-        <div
-          className={style.magnifyingGlass} >
-          <img
-            src={require('../../../../images/magnifying-glass/magnifying-glass@2x.png')}
-            className={style.magnifyingGlassImage} />
-        </div>
-      </div>
+      <SearchIcon />
 
     </header>
   )
