@@ -1,6 +1,7 @@
 @import "./globals/grid-globals";
 @import "./globals/text-styles-globals";
 @import "./globals/buttons-globals";
+@import "./globals/hamburgers/hamburgers";
 
 body {
   overflow-x: hidden;
@@ -11,6 +12,13 @@ a {
   color: unset;
   cursor: pointer;
   text-decoration: none;
+}
+
+:global .noSelectBackground {
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+
 }
 
 /* IE fix */
