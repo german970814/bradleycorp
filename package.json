@@ -17,6 +17,7 @@
     "babel-eslint": "^8.2.1",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "core-js": "^2.5.3",
     "debounce": "^1.1.0",
     "npm-run-all": "^4.1.2",
     "path": "^0.12.7",

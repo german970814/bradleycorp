@@ -16,6 +16,7 @@ const config = {
     vendor: [
       // vendors added here will be included in vendor chunk
       // so they only get requested once and can easily be cached
+      'core-js',
       'react',
       'react-dom',
       'react-router-dom',
