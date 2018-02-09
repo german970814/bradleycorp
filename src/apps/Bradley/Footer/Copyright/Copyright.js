@@ -30,7 +30,7 @@ const Copyright = props => {
 
         <div className={`col1 col2-tablet ${style.colRight} ${style.copyrightCol}`} >
           <div className={`legal ${style.menuItem}`} >
-            {`The Bradley Logo and registered trademarks are owned by TheBradley Corporation${String.fromCharCode(174)}`}
+            {`The Bradley Logo and registered trademarks are owned by The Bradley Corporation${String.fromCharCode(174)}`}
           </div>
         </div>
 
