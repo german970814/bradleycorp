@@ -1,0 +1,12 @@
+@import "../../../../scss/partials/grid";
+
+.customizable {
+
+  :global .bcorp-row {
+    @include row();
+    height: 200px;
+    border: 2px solid black;
+  }
+
+
+}

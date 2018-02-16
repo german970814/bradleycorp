@@ -1,10 +1,70 @@
-import React from 'react'
+import React,  { Component } from 'react'
+import PropTypes from 'prop-types'
+import CustomPageApiClient from '../../../../api/customPage_client'
+import { validChain } from '../../../../lib/bcorpObject'
 import SinglePostModule from './Modules/SinglePostModule/SinglePostModule'
 import MultiPostButtonModule from './Modules/MultiPostButtonModule/MultiPostButtonModule'
 import CTAModule from '../../../../lib/components/Modules/CTAModule/CTAModule'
 import style from './Customizable.scss'
 
-const Customizable = props => {
+class Customizable extends Component {
+  constructor (props) {
+    super(props)
+
+    this.defaultState = {
+      content: '',
+      rows: []
+    }
+
+    this.state = this.defaultState
+  }
+
+  componentDidMount () {
+    if (!validChain(this.props, 'match', 'params', 'slug')) {
+      return
+    }
+
+    const { slug } = this.props.match.params
+    this.getPage( slug )
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (!validChain(this.props, 'match', 'params', 'slug') ||
+      !validChain(nextProps, 'match', 'params', 'slug') ) {
+      return
+    }
+
+    if (nextProps.match.params.slug !== this.props.match.params.slug) {
+      this.getPage(nextProps.match.params.slug)
+    }
+  }
+
+  render () {
+
+    return (
+      <div
+        className={style.customizable}
+        dangerouslySetInnerHTML={{__html: this.state.content}} />
+    )
+  }
+
+  componentDidUpdate () {
+    // put modules in here
+  }
+
+
+  async getPage (slug) {
+    try {
+      const customPageAPIClient = new CustomPageApiClient()
+      const page = await customPageAPIClient.getBySlug(slug)
+      const pageData = page.data
+
+      // set state leaving defaults where there exists no data in the request
+      return this.setState(Object.assign({}, this.defaultState, pageData))
+    } catch (err) {
+      console.log(err)
+    }
+  }
   /**
    *
    * This will eventually do the following:
@@ -17,7 +77,7 @@ const Customizable = props => {
    *
    */
 
-  const CTAText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  /*const CTAText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
 
   return (
     <div className={style.customizable} >
@@ -42,7 +102,11 @@ const Customizable = props => {
         skin={'light'} />
 
     </div>
-  )
+  )*/
+}
+
+Customizable.propTypes = {
+  match: PropTypes.object.isRequired
 }
 
 export default Customizable

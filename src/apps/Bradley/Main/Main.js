@@ -20,7 +20,7 @@ class Main extends Component {
       <Switch>
         <Route exact path='/' component={Home}/>
         <Route exact path='/product/:slug' component={ProductDetailLoadable}/>
-        <Route exact path='/test-module-page' component={CustomizableLoadable}/>
+        <Route exact path='/:slug' component={CustomizableLoadable}/>
       </Switch>
     )
   }
