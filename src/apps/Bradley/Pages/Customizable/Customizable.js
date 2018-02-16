@@ -1,10 +1,10 @@
-import React,  { Component } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import CustomPageApiClient from '../../../../api/customPage_client'
 import { validChain } from '../../../../lib/bcorpObject'
-import SinglePostModule from './Modules/SinglePostModule/SinglePostModule'
-import MultiPostButtonModule from './Modules/MultiPostButtonModule/MultiPostButtonModule'
-import CTAModule from '../../../../lib/components/Modules/CTAModule/CTAModule'
+// import SinglePostModule from './Modules/SinglePostModule/SinglePostModule'
+// import MultiPostButtonModule from './Modules/MultiPostButtonModule/MultiPostButtonModule'
+// import CTAModule from '../../../../lib/components/Modules/CTAModule/CTAModule'
 import style from './Customizable.scss'
 
 class Customizable extends Component {
@@ -25,12 +25,12 @@ class Customizable extends Component {
     }
 
     const { slug } = this.props.match.params
-    this.getPage( slug )
+    this.getPage(slug)
   }
 
   componentWillReceiveProps (nextProps) {
     if (!validChain(this.props, 'match', 'params', 'slug') ||
-      !validChain(nextProps, 'match', 'params', 'slug') ) {
+      !validChain(nextProps, 'match', 'params', 'slug')) {
       return
     }
 
@@ -40,7 +40,6 @@ class Customizable extends Component {
   }
 
   render () {
-
     return (
       <div
         className={style.customizable}
@@ -51,7 +50,6 @@ class Customizable extends Component {
   componentDidUpdate () {
     // put modules in here
   }
-
 
   async getPage (slug) {
     try {
@@ -77,7 +75,7 @@ class Customizable extends Component {
    *
    */
 
-  /*const CTAText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  /* const CTAText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
 
   return (
     <div className={style.customizable} >
@@ -102,7 +100,7 @@ class Customizable extends Component {
         skin={'light'} />
 
     </div>
-  )*/
+  ) */
 }
 
 Customizable.propTypes = {
