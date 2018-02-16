@@ -4,15 +4,9 @@
 
   .bcorp-row {
     @include row();
-    height: 200px;
-    border: 2px solid black;
   }
 
   .bcorp-column {
-    height: 200px;
-    border: 2px solid white;
-    background-color: grey;
-
     &[data-col-width="12"] {
       @include col(1);
     }

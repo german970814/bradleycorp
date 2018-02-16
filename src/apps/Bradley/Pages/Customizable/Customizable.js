@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import CustomPageApiClient from '../../../../api/customPage_client'
 import { validChain } from '../../../../lib/bcorpObject'
-// import SinglePostModule from './Modules/SinglePostModule/SinglePostModule'
-// import MultiPostButtonModule from './Modules/MultiPostButtonModule/MultiPostButtonModule'
-// import CTAModule from '../../../../lib/components/Modules/CTAModule/CTAModule'
+import ModuleFactory from './Modules/ModuleFactory'
+import CustomizableContentMarkup from './CustomizableContentMarkup'
 import style from './Customizable.scss'
 
 class Customizable extends Component {
@@ -13,7 +13,8 @@ class Customizable extends Component {
 
     this.defaultState = {
       content: '',
-      rows: []
+      rows: [],
+      htmlIsSet: false
     }
 
     this.state = this.defaultState
@@ -39,16 +40,41 @@ class Customizable extends Component {
     }
   }
 
+  renderPortals () {
+    if (this.state.htmlIsSet) {
+      return this.state.rows.map(row => {
+        const rowNode = document.querySelector(`[data-row-id="${row.atts['row_id']}"]`)
+        const columnNodes = Array.from(rowNode.querySelectorAll(`.bcorp-column`))
+
+        return columnNodes.map((columnNode, index) => {
+          const colData = row.columns[index]
+          const moduleNodes = Array.from(columnNode.getElementsByClassName(`bcorp-module`))
+
+          return moduleNodes.map((moduleNode, index) => {
+            const moduleData = colData.modules[index]
+
+            return ReactDOM.createPortal((
+              <ModuleFactory data={moduleData} />
+            ), moduleNode)
+          })
+        })
+      })
+    }
+  }
+
   render () {
     return (
-      <div
-        className={style.customizable}
-        dangerouslySetInnerHTML={{__html: this.state.content}} />
+      <div className={style.customizable}>
+        <CustomizableContentMarkup content={this.state.content} />
+        {this.renderPortals()}
+      </div>
     )
   }
 
-  componentDidUpdate () {
-    // put modules in here
+  componentDidUpdate (prevProps, prevState) {
+    if (prevState.content !== this.state.content) {
+      this.setState({ htmlIsSet: true })
+    }
   }
 
   async getPage (slug) {
@@ -63,44 +89,6 @@ class Customizable extends Component {
       console.log(err)
     }
   }
-  /**
-   *
-   * This will eventually do the following:
-   *
-   * 1. request custom page data, receiving the page content as a string of shortcodes
-   *
-   * 2. map each shortcode into the correct module passing shortcode atts as props
-   *
-   * 3. each module component will be rendered inside a layout (row/col) component
-   *
-   */
-
-  /* const CTAText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-
-  return (
-    <div className={style.customizable} >
-
-      <CTAModule
-        title={'Careers'}
-        text={CTAText}
-        link={'/'}
-        linkText={'Current Openings'} />
-
-      <MultiPostButtonModule
-        title={'Design Tools'}
-        postIDs={[126, 126, 126]}
-        accentColor={'#ffffff'}
-        background={''}
-        skin={'light'} />
-
-      <SinglePostModule
-        postID={126}
-        accentColor={'#ffffff'}
-        background={''}
-        skin={'light'} />
-
-    </div>
-  ) */
 }
 
 Customizable.propTypes = {
