@@ -28,7 +28,7 @@ class SinglePostModule extends Component {
       media: {
         'featured_image': ['', 0, 0, false]
       },
-      node: {}
+      node: undefined
     }
     this.defaultState = defaultState
     this.state = defaultState
@@ -117,10 +117,14 @@ class SinglePostModule extends Component {
     return (
       <ContainerMediaQuery
         node={this.state.node} >
-        {( containerClassName ) => {
+        {(containerClassName) => {
           return (
             <div
-              ref={(node) => { this.state.node = node }}
+              ref={(node) => {
+                if (!this.state.node) {
+                  this.setState({ node })
+                }
+              }}
               style={{
                 backgroundImage: this.getBackgroundImage()
               }}

@@ -28,7 +28,7 @@ class MultiPostButtonModule extends Component {
           }
         }
       ],
-      node: {}
+      node: undefined
     }
     this.defaultState = defaultState
     this.state = defaultState
@@ -84,10 +84,14 @@ class MultiPostButtonModule extends Component {
     return (
       <ContainerMediaQuery
         node={this.state.node} >
-        {( containerClassName ) => {
+        {(containerClassName) => {
           return (
             <div
-              ref={(node) => { this.state.node = node }}
+              ref={(node) => {
+                if (!this.state.node) {
+                  this.setState({ node })
+                }
+              }}
               style={{
                 backgroundImage: this.getBackgroundImage()
               }}

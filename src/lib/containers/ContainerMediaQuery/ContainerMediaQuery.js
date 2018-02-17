@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 import debounce from 'debounce'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../globals'
@@ -22,7 +22,7 @@ class ContainerMediaQuery extends Component {
     window.removeEventListener('resize', this.updateContainerDimensions)
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (nextProps.node !== this.props.node) {
       this.updateContainerDimensions()
     }
@@ -30,13 +30,10 @@ class ContainerMediaQuery extends Component {
 
   updateContainerDimensions () {
     if (this.props.node && this.props.node.offsetWidth) {
-
-      if (this.props.node.offsetWidth < MOBILEMAXWIDTH ) {
+      if (this.props.node.offsetWidth < MOBILEMAXWIDTH) {
         this.setState({ containerClassName: 'container-size-mobile' })
-
       } else if (this.props.node.offsetWidth < TABLETMAXWIDTH) {
         this.setState({ containerClassName: 'container-size-mobile container-size-tablet' })
-
       } else {
         this.setState({ containerClassName: 'container-size-mobile container-size-tablet container-size-desktop' })
       }
@@ -44,9 +41,7 @@ class ContainerMediaQuery extends Component {
   }
 
   render () {
-    // pass children function an object so we can pick and choose properties we want to use
-    const self = this
-    return this.props.children( this.state.containerClassName )
+    return this.props.children(this.state.containerClassName)
   }
 }
 

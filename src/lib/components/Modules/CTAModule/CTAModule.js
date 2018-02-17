@@ -6,7 +6,7 @@ import ContainerMediaQuery from '../../../containers/ContainerMediaQuery/Contain
 import style from './CTAModule.scss'
 
 class CTAModule extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = { node: undefined }
@@ -68,11 +68,11 @@ class CTAModule extends Component {
     return (
       <ContainerMediaQuery
         node={this.state.node} >
-        {( containerClassName ) => {
+        {(containerClassName) => {
           return (
             <div
               ref={(node) => {
-                if (! this.state.node) {
+                if (!this.state.node) {
                   this.setState({ node })
                 }
               }}
