@@ -2,9 +2,15 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import BCorpLink from '../../BCorpLink/BCorpLink'
+import ContainerMediaQuery from '../../../containers/ContainerMediaQuery/ContainerMediaQuery'
 import style from './CTAModule.scss'
 
 class CTAModule extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = { node: undefined }
+  }
   renderTitle () {
     const { title } = this.props
 
@@ -60,14 +66,27 @@ class CTAModule extends Component {
 
   render () {
     return (
-      <div className={style.CTAModule} >
+      <ContainerMediaQuery
+        node={this.state.node} >
+        {( containerClassName ) => {
+          return (
+            <div
+              ref={(node) => {
+                if (! this.state.node) {
+                  this.setState({ node })
+                }
+              }}
+              className={`${containerClassName} ${style.CTAModule}`} >
 
-        {this.renderTitle()}
-        {this.renderMedia()}
-        {this.renderText()}
-        {this.renderButton()}
+              {this.renderTitle()}
+              {this.renderMedia()}
+              {this.renderText()}
+              {this.renderButton()}
 
-      </div>
+            </div>
+          )
+        }}
+      </ContainerMediaQuery>
     )
   }
 }

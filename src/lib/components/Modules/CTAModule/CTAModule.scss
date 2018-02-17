@@ -11,36 +11,41 @@
   :last-child {
     padding-bottom: 0;
   }
-}
 
-.title {
-  padding-bottom: 20px;
-  text-align: center;
-  color: $black;
-
-  @include respond-to(tablet) {
-    padding-bottom: 28px;
-    font-size: 20px;
+  .title {
+    padding-bottom: 20px;
+    text-align: center;
+    color: $black;
   }
 
-  @include respond-to(desktop) {
-    padding-bottom: 38px;
-    font-size: 24px;
+  .text {
+    padding-bottom: 37px;
+    line-height: 1.5;
+    text-align: center;
   }
-}
 
-.text {
-  padding-bottom: 37px;
-  line-height: 1.5;
-  text-align: center;
-}
+  .button {
+    text-transform:  uppercase;
+  }
 
-.button {
-  text-transform:  uppercase;
 
-  @include respond-to(tablet) {
-    padding-right: 30px;
-    padding-left: 30px;
-    width: auto;
+  &:global(.container-size-tablet) {
+    .title {
+      padding-bottom: 28px;
+      font-size: 20px;
+    }
+
+    .button {
+      padding-right: 30px;
+      padding-left: 30px;
+      width: auto;
+    }
+  }
+
+  &:global(.container-size-desktop) {
+    .title {
+      padding-bottom: 38px;
+      font-size: 24px;
+    }
   }
 }

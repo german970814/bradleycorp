@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import CPTApiClient from '../../../../../../api/cpt_client'
 import { getExcerpt } from '../../../../../../lib/bcorpPost'
 import ImageFrame from '../../../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
-import moduleStyle from '../Modules.scss'
+import ContainerMediaQuery from '../../../../../../lib/containers/ContainerMediaQuery/ContainerMediaQuery'
+import moduleStyle from '../../../../../../lib/components/Modules/Modules.scss'
 import style from './SinglePostModule.scss'
 
 /**
@@ -26,7 +27,8 @@ class SinglePostModule extends Component {
       },
       media: {
         'featured_image': ['', 0, 0, false]
-      }
+      },
+      node: {}
     }
     this.defaultState = defaultState
     this.state = defaultState
@@ -93,11 +95,11 @@ class SinglePostModule extends Component {
     return (
       <div className={`row ${style.buttonsWrapper}`} >
 
-        <div className={`col1 col2-tablet ${style.button}`} >
+        <div className={`${style.button}`} >
           <button className={`button-orange ${style.letsTalk}`}>{"LET'S TALK"}</button>
         </div>
 
-        <div className={`col1 col2-tablet ${style.button}`} >
+        <div className={`${style.button}`} >
           <button className={`button-border-slate-grey ${style.learnMore}`}>{'LEARN MORE'}</button>
         </div>
 
@@ -113,27 +115,35 @@ class SinglePostModule extends Component {
 
   render () {
     return (
-      <div
-        style={{
-          backgroundImage: this.getBackgroundImage()
+      <ContainerMediaQuery
+        node={this.state.node} >
+        {( containerClassName ) => {
+          return (
+            <div
+              ref={(node) => { this.state.node = node }}
+              style={{
+                backgroundImage: this.getBackgroundImage()
+              }}
+              className={`row ${containerClassName} ${style.singlePostModule} ${moduleStyle.module}`}>
+
+              <div className={`${style.stretchToHeight} ${style.imageCol}`} >
+                {this.renderImage()}
+              </div>
+
+              <div className={`${style.stretchToHeight} ${style.contentCol}`} >
+
+                <div className={style.contentWrapper} >
+                  {this.renderTitle()}
+                  {this.renderContent()}
+                  {this.renderButtons()}
+                </div>
+
+              </div>
+
+            </div>
+          )
         }}
-        className={`row ${style.singlePostModule} ${moduleStyle.module}`}>
-
-        <div className={`col1 inline-col2-middle-tablet ${style.stretchToHeight} ${style.imageCol}`} >
-          {this.renderImage()}
-        </div>
-
-        <div className={`col1 inline-col2-middle-tablet ${style.stretchToHeight} ${style.contentCol}`} >
-
-          <div className={style.contentWrapper} >
-            {this.renderTitle()}
-            {this.renderContent()}
-            {this.renderButtons()}
-          </div>
-
-        </div>
-
-      </div>
+      </ContainerMediaQuery >
     )
   }
 

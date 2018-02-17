@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import CPTApiClient from '../../../../../../api/cpt_client'
-// import { nWords } from '../../../../../../lib/bcorpString'
-// import FixedAspectRatioBox from '../../../../../../lib/components/FixedAspectRatioBox/FixedAspectRatioBox'
+import ContainerMediaQuery from '../../../../../../lib/containers/ContainerMediaQuery/ContainerMediaQuery'
 import PostColumn from './PostColumn/PostColumn'
-import moduleStyle from '../Modules.scss'
+import moduleStyle from '../../../../../../lib/components/Modules/Modules.scss'
 import style from './MultiPostButtonModule.scss'
 
 class MultiPostButtonModule extends Component {
@@ -28,7 +27,8 @@ class MultiPostButtonModule extends Component {
             'featured_image': ['', 0, 0, false]
           }
         }
-      ]
+      ],
+      node: {}
     }
     this.defaultState = defaultState
     this.state = defaultState
@@ -52,7 +52,7 @@ class MultiPostButtonModule extends Component {
     }
 
     return (
-      <h5 className={`col1 ${style.title}`} >
+      <h5 className={`${style.title}`} >
         {this.props.title}
       </h5>
     )
@@ -69,8 +69,7 @@ class MultiPostButtonModule extends Component {
       return (
         <PostColumn
           key={index}
-          post={post}
-          colClassName={`col1 col3-tablet column`} />
+          post={post} />
       )
     })
   }
@@ -83,19 +82,27 @@ class MultiPostButtonModule extends Component {
 
   render () {
     return (
-      <div
-        style={{
-          backgroundImage: this.getBackgroundImage()
+      <ContainerMediaQuery
+        node={this.state.node} >
+        {( containerClassName ) => {
+          return (
+            <div
+              ref={(node) => { this.state.node = node }}
+              style={{
+                backgroundImage: this.getBackgroundImage()
+              }}
+              className={`row ${containerClassName} ${moduleStyle.module} ${style.multiPostButtonModule}`} >
+
+              {this.renderTitle()}
+
+              <div className={`row ${style.columnsRow}`} >
+                {this.renderCols()}
+              </div>
+
+            </div>
+          )
         }}
-        className={`row ${moduleStyle.module} ${style.multiPostButtonModule}`} >
-
-        {this.renderTitle()}
-
-        <div className={`row ${style.columnsRow}`} >
-          {this.renderCols()}
-        </div>
-
-      </div>
+      </ContainerMediaQuery >
     )
   }
 

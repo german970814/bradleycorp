@@ -65,7 +65,7 @@ class PostColumn extends Component {
 
   render () {
     return (
-      <div className={`${this.props.colClassName} ${style.postColumnWrapper}`} >
+      <div className={`${style.postColumnWrapper}`} >
 
         {this.renderImage()}
         {this.renderTitle()}
@@ -79,8 +79,7 @@ class PostColumn extends Component {
 }
 
 PostColumn.propTypes = {
-  post: PropTypes.object.isRequired,
-  colClassName: PropTypes.string.isRequired
+  post: PropTypes.object.isRequired
 }
 
 export default PostColumn

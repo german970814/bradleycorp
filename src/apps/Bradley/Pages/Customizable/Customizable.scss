@@ -7,29 +7,65 @@
   }
 
   .bcorp-column {
+
     &[data-col-width="12"] {
       @include col(1);
     }
+
     &[data-col-width="9"] {
       @include col(12 / 9);
+
+      @include respond-to-max(tablet) {
+        @include col(1);
+      }
     }
+
     &[data-col-width="8"] {
       @include col(12 / 8);
+
+      @include respond-to-max(tablet) {
+        @include col(1);
+      }
     }
+
     &[data-col-width="7"] {
       @include col(12 / 7);
+
+      @include respond-to-max(tablet) {
+        @include col(1);
+      }
     }
+
     &[data-col-width="6"] {
       @include col(2);
+
+      @include respond-to-max(tablet) {
+        @include col(1);
+      }
     }
+
     &[data-col-width="5"] {
       @include col(12 / 5);
+
+      @include respond-to-max(tablet) {
+        @include col(1);
+      }
     }
+
     &[data-col-width="4"] {
       @include col(3);
+
+      @include respond-to-max(tablet) {
+        @include col(1);
+      }
     }
+
     &[data-col-width="3"] {
       @include col(4);
+
+      @include respond-to-max(tablet) {
+        @include col(1);
+      }
     }
   }
 

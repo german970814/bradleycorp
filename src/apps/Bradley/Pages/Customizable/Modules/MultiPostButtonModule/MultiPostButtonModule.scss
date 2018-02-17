@@ -1,50 +1,69 @@
 @import "../../../../../../scss/partials/variables";
 @import "../../../../../../scss/partials/mixins";
 @import "../../../../../../scss/partials/helpers";
+@import "../../../../../../scss/partials/grid";
 
 $tabletGutter: 5.2vw;
 $desktopGutter: 4.296875vw;
 
 .multiPostButtonModule {
+
+  /*
+    MOBILE SIZED CONTAINER ONLY
+   */
+
+  &:global {
+    &:not(.container-size-tablet) {
+      background-image: none !important;
+      background-color: $light-gray !important;
+    }
+  }
+
+  /*
+   MOBILE SIZED CONTAINER AND UP
+   */
+
   @extend %coverBackground;
   width: auto;
 
-  // background is light gray on mobile
-  @include respond-to-max(tablet) {
-    background-image: none !important;
-    background-color: $light-gray !important;
+  h5.title {
+    @include col(1);
+    margin-bottom: 27px;
+    text-align: center;
+    color: #2f3d70;
   }
 
-  @include respond-to(desktop) {
+  /*
+   TABLET SIZED CONTAINER AND UP
+   */
+
+  &:global(.container-size-tablet) {
+
+    h5.title {
+      color: #2e3c6e;
+    }
+
+    .columnsRow {
+      float: left;
+      position: relative;
+      margin: auto (-$tabletGutter);
+    }
+  }
+
+  /*
+   DESKTOP SIZED CONTAINER
+   */
+
+  &:global(.container-size-desktop) {
     padding: 60px $desktopGutter;
-  }
-}
 
+    h5.title {
+      font-size: 22px;
+      color: $navy;
+    }
 
-
-h5.title {
-  margin-bottom: 27px;
-  text-align: center;
-  color: #2f3d70;
-
-  @include respond-to(tablet) {
-    color: #2e3c6e;
-  }
-
-  @include respond-to(desktop) {
-    font-size: 22px;
-    color: $navy;
-  }
-}
-
-.columnsRow {
-  @include respond-to(tablet) {
-    float: left;
-    position: relative;
-    margin: auto (-$tabletGutter);
-  }
-
-  @include respond-to(desktop) {
-    margin: auto (-$desktopGutter);
+    .columnsRow {
+      margin: auto (-$desktopGutter);
+    }
   }
 }

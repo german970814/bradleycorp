@@ -1,10 +1,17 @@
 @import "../../../../../../../scss/partials/helpers";
 @import "../../../../../../../scss/partials/variables";
 @import "../../../../../../../scss/partials/mixins";
+@import "../../../../../../../scss/partials/grid";
 
 @import "../MultiPostButtonModule";
 
 .postColumnWrapper {
+
+  /*
+   MOBILE SIZED CONTAINER AND UP
+   */
+
+  @include col(1);
   margin-top: 30px;
 
   &:first-child {
@@ -21,7 +28,38 @@
     }
   }
 
-  @include respond-to(tablet) {
+  .imageWrapper {
+    margin-bottom: 24px;
+  }
+
+  .image {
+    @extend %coverBackground;
+  }
+
+  .title {
+    margin-bottom: 21px;
+    text-transform: uppercase;
+    color: $black;
+  }
+
+  .content {
+    margin-bottom: 27px;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .button {
+    margin-bottom: 30px;
+  }
+}
+
+/*
+ TABLET SIZED CONTAINER AND UP
+ */
+
+:global(.container-size-tablet) {
+  .postColumnWrapper {
+    @include col(3);
     margin-top: 0px;
     margin-bottom: 0px;
     padding: 0 $tabletGutter;
@@ -45,68 +83,50 @@
         width: 0;
       }
     }
-  }
 
-  @include respond-to(desktop) {
+    .title {
+      margin-bottom: 20px;
+    }
+
+    .content {
+      margin-bottom: 36px;
+    }
+
+    .button {
+      margin-bottom: 0;
+    }
+  }
+}
+
+/*
+ DESKTOP SIZED CONTAINER
+ */
+
+:global(.container-size-desktop) {
+  .postColumnWrapper {
     padding: 0 $desktopGutter;
 
     &::before {
       transform: translateX(-$desktopGutter);
     }
-  }
-}
 
-.imageWrapper {
-  margin-bottom: 24px;
+    .imageWrapper {
+      margin: 0 auto 27px auto;
+      max-width: 400px;
+    }
 
-  @include respond-to(desktop) {
-    margin: 0 auto 27px auto;
-    max-width: 400px;
-  }
-}
+    .title {
+      margin-bottom: 23px;
+    }
 
-.image {
-  @extend %coverBackground;
-}
+    .content {
+      margin-bottom: 37px;
+    }
 
-.title {
-  margin-bottom: 21px;
-  text-transform: uppercase;
-  color: $black;
-
-  @include respond-to(tablet) {
-    margin-bottom: 20px;
-  }
-
-  @include respond-to(desktop) {
-    margin-bottom: 23px;
-  }
-}
-
-.content {
-  margin-bottom: 27px;
-  line-height: 1.5;
-  text-align: center;
-
-  @include respond-to(tablet) {
-    margin-bottom: 36px;
-  }
-
-  @include respond-to(desktop) {
-    margin-bottom: 37px;
-  }
-}
-
-.button {
-  margin-bottom: 30px;
-
-  @include respond-to(tablet) {
-    margin-bottom: 0;
-  }
-
-  @include respond-to(desktop) {
-    display: block;
-    margin: 0 auto;
-    width: 154px;
+    .button {
+      display: block;
+      margin: 0 auto;
+      width: 154px;
+    }
   }
 }
