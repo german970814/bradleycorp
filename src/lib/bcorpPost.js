@@ -10,13 +10,11 @@ export function getExcerpt (excerpt, postContent, numberWords) {
   const defaultExcerptLength = 22
 
   if (excerpt && excerpt !== '') {
-
     if (numberWords && numberWords !== 0) {
       return nWords(excerpt, numberWords)
     } else {
       return excerpt
     }
-
   } else
 
   if (postContent && postContent !== '') {

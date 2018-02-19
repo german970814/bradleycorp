@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import CPTApiClient from '../../../../../../api/cpt_client'
+import { arraysAreEqual } from '../../../../../../lib/bcorpArray'
 import ContainerMediaQuery from '../../../../../../lib/containers/ContainerMediaQuery/ContainerMediaQuery'
 import PostColumn from './PostColumn/PostColumn'
 import moduleStyle from '../../../../../../lib/components/Modules/Modules.scss'
@@ -39,7 +40,7 @@ class MultiPostButtonModule extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.postIDs !== this.props.postIDs) {
+    if (!arraysAreEqual(nextProps.postIDs, this.props.postIDs)) {
       // clear posts state from last props
       this.setState(this.defaultState)
       this.updatePosts(nextProps.postIDs)
