@@ -7,11 +7,19 @@ export function isNew (date) {
 }
 
 export function getExcerpt (excerpt, postContent, numberWords) {
+  const defaultExcerptLength = 22
+
   if (excerpt && excerpt !== '') {
-    return excerpt
-  }
+
+    if (numberWords && numberWords !== 0) {
+      return nWords(excerpt, numberWords)
+    } else {
+      return excerpt
+    }
+
+  } else
 
   if (postContent && postContent !== '') {
-    return nWords(postContent, numberWords)
+    return nWords(postContent, numberWords || defaultExcerptLength)
   }
 }

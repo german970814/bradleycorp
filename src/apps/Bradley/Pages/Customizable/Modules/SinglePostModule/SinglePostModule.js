@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import CPTApiClient from '../../../../../../api/cpt_client'
 import { getExcerpt } from '../../../../../../lib/bcorpPost'
-import VerticalAlignHelper from '../../../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import ImageFrame from '../../../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import ContainerMediaQuery from '../../../../../../lib/containers/ContainerMediaQuery/ContainerMediaQuery'
 import moduleStyle from '../../../../../../lib/components/Modules/Modules.scss'
@@ -79,7 +78,7 @@ class SinglePostModule extends Component {
 
   renderContent () {
     const { post } = this.state
-    const excerpt = getExcerpt(post['post_excerpt'], post['post_content'], 22)
+    const excerpt = getExcerpt(post['post_excerpt'], post['post_content'])
 
     if (!excerpt) {
       return
@@ -130,8 +129,6 @@ class SinglePostModule extends Component {
                 backgroundImage: this.getBackgroundImage()
               }}
               className={`row ${containerClassName} ${style.singlePostModule} ${moduleStyle.module}`}>
-
-              <VerticalAlignHelper />
 
               <div className={`${style.stretchToHeight} ${style.imageCol}`} >
                 {this.renderImage()}
