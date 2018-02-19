@@ -78,7 +78,7 @@ class MultiPostButtonModule extends Component {
   getBackgroundImage () {
     return this.props.background
       ? `url(${this.props.background})`
-      : `url(${require('../../../../../../images/marble-background/shutterstock-109902944.png')})`
+      : `url(${require('../../../../../../images/marble-background-2/shutterstock-522883816.png')})`
   }
 
   render () {
