@@ -23,7 +23,7 @@ const ModuleFactory = ({ data }) => {
       return (
         <MultiPostButtonModule
           title={data['title']}
-          postIDs={[126, 126, 126]}
+          postIDs={[413, 415, 411]}
           accentColor={data['accent_color']}
           background={data['background']}
           skin={data['skin']} />

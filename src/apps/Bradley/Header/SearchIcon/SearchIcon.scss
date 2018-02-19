@@ -36,7 +36,10 @@
   @extend %BodyPaddingWithMediaQueries;
   box-sizing: border-box;
   width: 100%;
-  max-width: unset;
+
+  @include respond-to(desktop) {
+    max-width: none;
+  }
 }
 
 .lightboxSearchForm {
@@ -79,7 +82,7 @@
     letter-spacing: -1.1px;
   }
 
-  @include respond-to(tablet) {
+  @include respond-to(desktop) {
     padding-bottom: 13px;
     font-size: 34px;
     letter-spacing: -1.4px;

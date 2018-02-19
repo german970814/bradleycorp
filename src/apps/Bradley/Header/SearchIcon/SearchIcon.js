@@ -36,7 +36,6 @@ class SearchIcon extends Component {
               <input
                 type={'text'}
                 name={'search'}
-                placeholder={'Start Typing...'}
                 className={style.lightboxSearchFormInput}
                 onClick={this.handleClick.bind(this)} />
 
