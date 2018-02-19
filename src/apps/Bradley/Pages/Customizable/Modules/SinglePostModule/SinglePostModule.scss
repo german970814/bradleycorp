@@ -134,6 +134,17 @@
 
     .contentCol {
       width: 54.6% !important;
+
+      .title {
+        margin-bottom: 35px;
+        font-size: 42px;
+        line-height: 0.94;
+        letter-spacing: 4.2px;
+      }
+
+      .content {
+        margin-bottom: 37px;
+      }
     }
   }
 }
