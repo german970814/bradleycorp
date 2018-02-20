@@ -135,7 +135,7 @@ class MultiPostButtonModule extends Component {
    */
   async getPost (postID) {
     try {
-      const postAPIClient = new CPTApiClient(this.props.postType)
+      const postAPIClient = new CPTApiClient(this.props.postType.replace(/_/g, '-'))
       const post = await postAPIClient.getById(postID)
       const postData = post.data
 
