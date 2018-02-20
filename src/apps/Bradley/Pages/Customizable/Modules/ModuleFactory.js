@@ -8,13 +8,13 @@ const ModuleFactory = ({ data }) => {
   if (!data.name) {
     return null
   }
-
+console.log(data)
   switch (data.name) {
     case 'module_cta':
       return (
         <CTAModule
           title={data['title']}
-          text={data['text']}
+          text={data['content']}
           link={data['link']}
           linkText={data['link_text']} />
       )
