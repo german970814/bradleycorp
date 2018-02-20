@@ -15,24 +15,24 @@ class MultiPostButtonModule extends Component {
      * Default state, post object response is merged shallowly with this
      * so we can be sure of what state we definitely have
      */
-    const defaultState = {
+    this.defaultPostState = {
+      post: {
+        ID: 1,
+        'post_title': '',
+        'post_content': '',
+        'post_excerpt': ''
+      },
+      media: {
+        'featured_image': ['', 0, 0, false]
+      }
+    }
+
+    this.state = {
       posts: [
-        {
-          post: {
-            ID: 1,
-            'post_title': '',
-            'post_content': '',
-            'post_excerpt': ''
-          },
-          media: {
-            'featured_image': ['', 0, 0, false]
-          }
-        }
+        this.defaultPostState
       ],
       node: undefined
     }
-    this.defaultState = defaultState
-    this.state = defaultState
   }
 
   componentDidMount () {
@@ -70,7 +70,8 @@ class MultiPostButtonModule extends Component {
       return (
         <PostColumn
           key={index}
-          post={post} />
+          post={post}
+          numColumns={posts.length} />
       )
     })
   }
@@ -140,7 +141,7 @@ class MultiPostButtonModule extends Component {
       const post = await postAPIClient.getById(postID)
       const postData = post.data
 
-      const posts = [ ...this.state.posts, Object.assign({}, this.defaultState, postData) ]
+      const posts = [ ...this.state.posts, Object.assign({}, this.defaultPostState, postData) ]
 
       return this.setState({ posts })
     } catch (err) {

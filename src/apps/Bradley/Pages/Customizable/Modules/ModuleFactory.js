@@ -8,7 +8,7 @@ const ModuleFactory = ({ data }) => {
   if (!data.name) {
     return null
   }
-  console.log(data)
+
   switch (data.name) {
     case 'module_cta':
       return (

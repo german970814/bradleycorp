@@ -59,10 +59,25 @@
 
 :global(.container-size-tablet) {
   .postColumnWrapper {
-    @include col(3);
     margin-top: 0px;
     margin-bottom: 0px;
     padding: 0 $tabletGutter;
+
+    &.post-column-1 {
+      @include col(1);
+    }
+
+    &.post-column-2 {
+      @include col(2);
+    }
+
+    &.post-column-3 {
+      @include col(3);
+    }
+
+    &.post-column-4 {
+      @include col(4);
+    }
 
     :global .divider :local {
       display: none;
