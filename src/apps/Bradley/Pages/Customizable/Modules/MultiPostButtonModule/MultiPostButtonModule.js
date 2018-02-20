@@ -1,52 +1,18 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import CPTApiClient from '../../../../../../api/cpt_client'
-import { arraysAreEqual } from '../../../../../../lib/bcorpArray'
+import PostGettingModule from '../PostGettingModule'
 import ContainerMediaQuery from '../../../../../../lib/containers/ContainerMediaQuery/ContainerMediaQuery'
 import PostColumn from './PostColumn/PostColumn'
 import moduleStyle from '../../../../../../lib/components/Modules/Modules.scss'
 import style from './MultiPostButtonModule.scss'
 
-class MultiPostButtonModule extends Component {
-  constructor (props) {
-    super(props)
-
-    /**
-     * Default state, post object response is merged shallowly with this
-     * so we can be sure of what state we definitely have
-     */
-    this.defaultPostState = {
-      post: {
-        ID: 1,
-        'post_title': '',
-        'post_content': '',
-        'post_excerpt': ''
-      },
-      media: {
-        'featured_image': ['', 0, 0, false]
-      }
-    }
-
-    this.state = {
-      posts: [
-        this.defaultPostState
-      ],
-      node: undefined
-    }
-  }
-
-  componentDidMount () {
-    this.updatePosts(this.props.postIDs)
-  }
-
-  componentWillReceiveProps (nextProps) {
-    if (!arraysAreEqual(nextProps.postIDs, this.props.postIDs)) {
-      // clear posts state from last props
-      this.setState(this.defaultState)
-      this.updatePosts(nextProps.postIDs)
-    }
-  }
-
+/**
+ * Handles the presentational logic for the Multi Post Button Module
+ * Post data is handled by the PostGettingModule class that we extend
+ *
+ * @extends PostGettingModule
+ */
+class MultiPostButtonModule extends PostGettingModule {
   renderTitle () {
     if (!this.props.title) {
       return
@@ -111,56 +77,16 @@ class MultiPostButtonModule extends Component {
       </ContainerMediaQuery >
     )
   }
-
-  /**
-   * Updates the array of posts from the postIDs given in props
-   * @param  {[object]} props component props
-   * @return {[void]}         sends a network request for each post ID
-   */
-  updatePosts (postIDs) {
-    this.setState({ posts: [] })
-
-    // makes network request one at a time
-    if (postIDs) {
-      postIDs.forEach(postID => {
-        this.getPost(postID)
-      })
-    }
-  }
-
-  /**
-   * Gets the post objects and merges them with state
-   * @param  {[number]}  postID ID of the post to request
-   */
-  async getPost (postID) {
-    try {
-      const { postType } = this.props
-      const postAPIClient = new CPTApiClient(postType.replace(/_/g, '-'))
-      const post = await postAPIClient.getById(postID)
-      const postData = post.data
-
-      const posts = [ ...this.state.posts, Object.assign({}, this.defaultPostState, postData) ]
-
-      return this.setState({ posts })
-    } catch (err) {
-      console.log(err)
-    }
-  }
 }
 
 MultiPostButtonModule.propTypes = {
+
+  ...PostGettingModule.propTypes,
+
   /*
    * Title to display above the posts
    */
   title: PropTypes.string,
-  /*
-   * ID of the post to display
-   */
-  postIDs: PropTypes.array.isRequired,
-  /*
-   * Post type of the posts to be displayed - must be the same for them all
-   */
-  postType: PropTypes.string.isRequired,
   accentColor: PropTypes.string,
   /**
    * The image src as a sting

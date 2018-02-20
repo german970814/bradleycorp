@@ -24,8 +24,6 @@ class CPTApiClient {
     const url = `${api.baseURL}${this.cptName}`
     const params = { id_array: JSON.stringify(idArray) }
 
-    console.log(params)
-
     return axios.get(url, { params })
   }
 

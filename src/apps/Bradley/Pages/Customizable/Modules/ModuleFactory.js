@@ -30,7 +30,7 @@ const ModuleFactory = ({ data }) => {
           background={data['background']}
           skin={data['skin']} />
       )
-      
+
     case 'module_multi_post_arrow':
       return (
         <MultiPostArrowModule
@@ -45,7 +45,8 @@ const ModuleFactory = ({ data }) => {
     case 'module_single_post':
       return (
         <SinglePostModule
-          postID={parseInt(data['post'])}
+          postIDs={[parseInt(data['post'])]} // needs to be an array to extend PostGettingModule
+          postType={data['post_type']}
           accentColor={data['accent_color']}
           background={data['background']}
           skin={data['skin']} />
