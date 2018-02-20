@@ -135,7 +135,8 @@ class MultiPostButtonModule extends Component {
    */
   async getPost (postID) {
     try {
-      const postAPIClient = new CPTApiClient(this.props.postType.replace(/_/g, '-'))
+      const { postType } = this.props
+      const postAPIClient = new CPTApiClient(postType.replace(/_/g, '-'))
       const post = await postAPIClient.getById(postID)
       const postData = post.data
 
@@ -157,6 +158,10 @@ MultiPostButtonModule.propTypes = {
    * ID of the post to display
    */
   postIDs: PropTypes.array.isRequired,
+  /*
+   * Post type of the posts to be displayed - must be the same for them all
+   */
+  postType: PropTypes.string.isRequired,
   accentColor: PropTypes.string,
   /**
    * The image src as a sting
