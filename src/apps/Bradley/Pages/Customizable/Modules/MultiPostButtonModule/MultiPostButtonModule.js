@@ -36,7 +36,7 @@ class MultiPostButtonModule extends Component {
   }
 
   componentDidMount () {
-    this.updatePosts(this.props)
+    this.updatePosts(this.props.postIDs)
   }
 
   componentWillReceiveProps (nextProps) {
@@ -117,9 +117,7 @@ class MultiPostButtonModule extends Component {
    * @param  {[object]} props component props
    * @return {[void]}         sends a network request for each post ID
    */
-  updatePosts (props) {
-    const { postIDs } = props
-
+  updatePosts (postIDs) {
     this.setState({ posts: [] })
 
     // makes network request one at a time

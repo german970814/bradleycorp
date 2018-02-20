@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import SinglePostModule from './SinglePostModule/SinglePostModule'
 import MultiPostButtonModule from './MultiPostButtonModule/MultiPostButtonModule'
+import MultiPostArrowModule from './MultiPostArrowModule/MultiPostArrowModule'
 import CTAModule from '../../../../../lib/components/Modules/CTAModule/CTAModule'
 
 const ModuleFactory = ({ data }) => {
@@ -22,6 +23,17 @@ const ModuleFactory = ({ data }) => {
     case 'module_multi_post_button':
       return (
         <MultiPostButtonModule
+          title={data['title']}
+          postType={data['post_type']}
+          postIDs={data['posts'].split(',')}
+          accentColor={data['accent_color']}
+          background={data['background']}
+          skin={data['skin']} />
+      )
+      
+    case 'module_multi_post_arrow':
+      return (
+        <MultiPostArrowModule
           title={data['title']}
           postType={data['post_type']}
           postIDs={data['posts'].split(',')}
