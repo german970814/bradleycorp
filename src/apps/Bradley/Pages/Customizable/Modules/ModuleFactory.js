@@ -23,7 +23,8 @@ console.log(data)
       return (
         <MultiPostButtonModule
           title={data['title']}
-          postIDs={[413, 415, 411]}
+          postType={data['post_type']}
+          postIDs={data['posts'].split(',')}
           accentColor={data['accent_color']}
           background={data['background']}
           skin={data['skin']} />
