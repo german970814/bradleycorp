@@ -7,7 +7,7 @@
 $distanceBetweenItems: 20px;
 $distanceBetweenItemsTabletDesktop: 45px;
 
-h4.title {
+%title {
   margin: {
     top: 40px;
     bottom: 40px;
@@ -16,6 +16,10 @@ h4.title {
   line-height: 1.26;
   text-transform: uppercase;
   color: $black;
+}
+
+h4.title {
+  @extend %title;
 
   @include respond-to(tablet) {
     margin: {
@@ -160,5 +164,35 @@ $arrowWidthTablet: 11px;
 
   img {
     width: 100%;
+  }
+}
+
+// respond to container separate styles
+
+.respondToContainerContainer {
+  width: 100%;
+
+  h4.respondToContainerTitle {
+    @extend %title;
+  }
+
+  &:global(.container-size-tablet) {
+    h4.respondToContainerTitle {
+      margin: {
+        top: 60px;
+        bottom: 50px;
+      }
+      line-height: normal;
+    }
+  }
+
+  &:global(.container-size-desktop) {
+    h4.respondToContainerTitle {
+      margin: {
+        top: 60px;
+        bottom: 40px;
+      }
+      line-height: 1.11;
+    }
   }
 }

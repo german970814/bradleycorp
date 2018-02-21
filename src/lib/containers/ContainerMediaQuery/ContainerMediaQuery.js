@@ -7,7 +7,7 @@ class ContainerMediaQuery extends Component {
   constructor (props) {
     super(props)
 
-    this.state = { containerClassName: '' }
+    this.state = { containerClassName: '', size: '' }
 
     this.initUpdateContainerDimensions = this.updateContainerDimensions.bind(this)
     this.updateContainerDimensions = debounce(this.updateContainerDimensions.bind(this), 200)
@@ -31,17 +31,17 @@ class ContainerMediaQuery extends Component {
   updateContainerDimensions () {
     if (this.props.node && this.props.node.offsetWidth) {
       if (this.props.node.offsetWidth < MOBILEMAXWIDTH) {
-        this.setState({ containerClassName: 'container-size-mobile' })
+        this.setState({ containerClassName: 'container-size-mobile', size: 'mobile' })
       } else if (this.props.node.offsetWidth < TABLETMAXWIDTH) {
-        this.setState({ containerClassName: 'container-size-mobile container-size-tablet' })
+        this.setState({ containerClassName: 'container-size-mobile container-size-tablet', size: 'tablet' })
       } else {
-        this.setState({ containerClassName: 'container-size-mobile container-size-tablet container-size-desktop' })
+        this.setState({ containerClassName: 'container-size-mobile container-size-tablet container-size-desktop', size: 'desktop' })
       }
     }
   }
 
   render () {
-    return this.props.children(this.state.containerClassName)
+    return this.props.children(this.state.containerClassName, this.state.size)
   }
 }
 
