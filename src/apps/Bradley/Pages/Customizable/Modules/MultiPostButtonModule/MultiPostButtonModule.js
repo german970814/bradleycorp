@@ -13,6 +13,15 @@ import style from './MultiPostButtonModule.scss'
  * @extends PostGettingModule
  */
 class MultiPostButtonModule extends PostGettingModule {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      ...this.state,
+      node: undefined
+    }
+  }
+
   renderTitle () {
     if (!this.props.title) {
       return

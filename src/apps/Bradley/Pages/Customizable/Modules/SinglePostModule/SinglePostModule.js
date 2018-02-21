@@ -20,6 +20,15 @@ import style from './SinglePostModule.scss'
  * @extends PostGettingModule
  */
 class SinglePostModule extends PostGettingModule {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      ...this.state,
+      node: undefined
+    }
+  }
+
   renderImage () {
     const post = this.state.posts[0]
     if (!post.media['featured_image'] ||

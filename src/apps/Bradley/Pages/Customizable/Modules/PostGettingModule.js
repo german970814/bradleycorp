@@ -3,6 +3,16 @@ import PropTypes from 'prop-types'
 import CPTApiClient from '../../../../../api/cpt_client'
 import { arraysAreEqual } from '../../../../../lib/bcorpArray'
 
+/**
+ * Any module which is required to make a network request for post data
+ * can just extend this class and only worry about presentation
+ *
+ * As long as a child class has postIDs and postType props
+ * the request for those posts will be made when postIDs update
+ * and any found posts will be saved to state
+ *
+ * @extends Component
+ */
 class PostGettingModule extends Component {
   constructor (props) {
     super(props)
@@ -26,8 +36,7 @@ class PostGettingModule extends Component {
     this.defaultState = {
       posts: [
         this.defaultPostState
-      ],
-      node: undefined
+      ]
     }
 
     this.state = this.defaultState
