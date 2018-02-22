@@ -12,7 +12,7 @@
     padding-bottom: 0;
   }
 
-  .title {
+  h5.title {
     padding-bottom: 20px;
     text-align: center;
     color: $black;
@@ -28,11 +28,13 @@
     text-transform:  uppercase;
   }
 
+  /*
+   TABLET CONTAINER SIZE
+   */
 
   &:global(.container-size-tablet) {
-    .title {
+    h5.title {
       padding-bottom: 28px;
-      font-size: 20px;
     }
 
     .button {
@@ -42,9 +44,34 @@
     }
   }
 
+  /*
+   DESKTOP CONTAINER SIZE
+   */
+
   &:global(.container-size-desktop) {
-    .title {
+    h5.title {
       padding-bottom: 38px;
+    }
+  }
+
+  /*
+   TABLET SCREEN SIZE
+   */
+
+  @include respond-to(tablet) {
+
+    h5.title {
+      font-size: 20px;
+    }
+  }
+
+  /*
+   DESKTOP CONTAINER SIZE
+  */
+
+  @include respond-to(tablet) {
+
+    h5.title {
       font-size: 24px;
     }
   }

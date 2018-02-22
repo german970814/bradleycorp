@@ -7,9 +7,6 @@
   height: 100%;
 }
 
-/* TODO: remove background on mobile
-//*/
-
 .singlePostModule {
 
   /*
@@ -23,7 +20,7 @@
   }
 
   /*
-   MOBILE SIZED CONTAINER AND UP
+   MOBILE SIZED CONTAINER + SCREEN AND UP
    */
 
   @extend %coverBackground;
@@ -96,7 +93,6 @@
       @include inline-col(2, middle);
 
       .title {
-        font-size: 36px;
         line-height: 1;
         letter-spacing: 3.6px;
       }
@@ -137,13 +133,40 @@
 
       .title {
         margin-bottom: 35px;
-        font-size: 42px;
         line-height: 0.94;
         letter-spacing: 4.2px;
       }
 
       .content {
         margin-bottom: 37px;
+      }
+    }
+  }
+
+  /*
+    TABLET SIZE SCREEN
+   */
+
+  @include respond-to(tablet) {
+
+    .contentCol {
+
+      .title {
+        font-size: 36px;
+      }
+    }
+  }
+
+  /*
+   DESKTOP SIZE SCREEN
+  */
+
+  @include respond-to(tablet) {
+
+    .contentCol {
+
+      .title {
+        font-size: 42px;
       }
     }
   }

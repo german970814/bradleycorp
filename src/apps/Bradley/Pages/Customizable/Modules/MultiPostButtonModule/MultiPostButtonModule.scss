@@ -58,12 +58,22 @@ $desktopGutter: 4.296875vw;
     padding: 60px $desktopGutter;
 
     h5.title {
-      font-size: 22px;
       color: $navy;
     }
 
     .columnsRow {
       margin: auto (-$desktopGutter);
+    }
+  }
+
+  /*
+   DESKTOP SIZED SCREEN
+   */
+
+  @include respond-to(desktop) {
+
+    h5.title {
+      font-size: 22px;
     }
   }
 }

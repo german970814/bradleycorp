@@ -42,23 +42,13 @@ $distanceBetweenItems: 20px;
     }
   }
 
-  /*
-   TABLET SIZED CONTAINER AND UP
-   */
-
-  &:global(.container-size-tablet) {
-
+  @include respond-to(tablet) {
     h5.title {
       font-size: 20px;
     }
   }
 
-  /*
-   DESKTOP SIZED CONTAINER
-   */
-
-  &:global(.container-size-desktop) {
-
+  @include respond-to(desktop) {
     h5.title {
       font-size: 24px;
     }
