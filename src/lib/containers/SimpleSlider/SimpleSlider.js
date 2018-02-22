@@ -121,10 +121,12 @@ class SimpleSlider extends Component {
     } else {
       /**
        * Slider with media query based on container size
+       *
+       * respond with priority to a node passed as props rather than itself
        */
       return (
         <ContainerMediaQuery
-          node={this.state.node} >
+          node={this.props.containerNode || this.state.node} >
           {(containerClassName, size) => {
             let slider = null
 
@@ -143,7 +145,7 @@ class SimpleSlider extends Component {
             return (
               <div
                 ref={(node) => {
-                  if (!this.state.node) {
+                  if (!this.props.containerNode && !this.state.node) {
                     this.setState({ node })
                   }
                 }}
@@ -199,6 +201,13 @@ SimpleSlider.propTypes = {
    * Media query is on container size rather than window
    */
   respondToContainer: PropTypes.bool,
+  /**
+   * We can give the slider another DOM a different node to respond to if respondToContainer is true
+   * eg we might pick a higher level parent that still isnt the whole window
+   *
+   * If left empty the slider will respond to the size of its' container
+   */
+  containerNode: PropTypes.object,
   /**
    * Custom class name for the scroller's wrapper node on mobile
    */

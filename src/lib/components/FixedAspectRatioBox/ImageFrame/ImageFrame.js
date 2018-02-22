@@ -92,7 +92,7 @@ class ImageFrame extends Component {
     } else {
       return (
         <ContainerMediaQuery
-          node={this.state.node} >
+          node={this.props.containerNode || this.state.node} >
           {(containerClassName, size) => {
             let frame = null
 
@@ -111,7 +111,7 @@ class ImageFrame extends Component {
             return (
               <div
                 ref={(node) => {
-                  if (!this.state.node) {
+                  if (!this.props.containerNode && !this.state.node) {
                     this.setState({ node })
                   }
                 }}
@@ -133,7 +133,17 @@ ImageFrame.propTypes = {
   aspectRatio: PropTypes.number.isRequired,
   aspectRatioTablet: PropTypes.number,
   aspectRatioDesktop: PropTypes.number,
+  /**
+   * Media query is on container size rather than window
+   */
   respondToContainer: PropTypes.bool,
+  /**
+   * We can give the slider another DOM a different node to respond to if respondToContainer is true
+   * eg we might pick a higher level parent that still isnt the whole window
+   *
+   * If left empty the slider will respond to the size of its' container
+   */
+  containerNode: PropTypes.object,
   sizing: PropTypes.oneOf(['cover', 'contain'])
 }
 
