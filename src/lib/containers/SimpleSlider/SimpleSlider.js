@@ -59,7 +59,8 @@ class SimpleSlider extends Component {
         buttonDown={this.renderButtonDownMobile()}
         positionButtonsBelow={this.props.nextPrevButtonsForMobile}
         reverseScroll={this.props.reverseScroll}
-        wrapperClassName={`${style.sliderWrapper} ${this.props.wrapperClassName}`} >
+        wrapperClassName={`${style.sliderWrapper} ${this.props.wrapperClassName}`}
+        alwaysUpdate={this.props.alwaysUpdate} >
         {this.props.children}
       </ScrollableList>
     )
@@ -73,7 +74,8 @@ class SimpleSlider extends Component {
         buttonUp={<ButtonLeft />}
         buttonDown={<ButtonRight />}
         reverseScroll={this.props.reverseScroll}
-        wrapperClassName={`${style.sliderTabletDesktop} ${this.props.desktopWrapperClassName}`} >
+        wrapperClassName={`${style.sliderTabletDesktop} ${this.props.desktopWrapperClassName}`}
+        alwaysUpdate={this.props.alwaysUpdate} >
         {this.props.children}
       </ScrollableList>
     )
@@ -87,7 +89,8 @@ class SimpleSlider extends Component {
         buttonUp={<ButtonLeft />}
         buttonDown={<ButtonRight />}
         reverseScroll={this.props.reverseScroll}
-        wrapperClassName={`${style.sliderTabletDesktop} ${this.props.desktopWrapperClassName}`} >
+        wrapperClassName={`${style.sliderTabletDesktop} ${this.props.desktopWrapperClassName}`}
+        alwaysUpdate={this.props.alwaysUpdate} >
         {this.props.children}
       </ScrollableList>
     )
@@ -201,6 +204,10 @@ SimpleSlider.propTypes = {
    * Media query is on container size rather than window
    */
   respondToContainer: PropTypes.bool,
+  /*
+    Update the children whenever the component receives new props, regardless of if they changed
+   */
+  alwaysUpdate: PropTypes.bool,
   /**
    * We can give the slider another DOM a different node to respond to if respondToContainer is true
    * eg we might pick a higher level parent that still isnt the whole window

@@ -55,9 +55,9 @@ class PostColumn extends Component {
   }
 
   renderArrow () {
-    const { size } = this.props
+    const { arrow } = this.props
 
-    if (size === 'tablet' || size === 'desktop') {
+    if (arrow) {
       return (
         <div className={style.arrowWrapper} >
           <img
@@ -89,7 +89,7 @@ class PostColumn extends Component {
 
 PostColumn.propTypes = {
   post: PropTypes.object.isRequired,
-  size: PropTypes.string,
+  arrow: PropTypes.bool,
   containerNode: PropTypes.object
 }
 

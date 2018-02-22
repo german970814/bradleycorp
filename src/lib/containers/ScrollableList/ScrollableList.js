@@ -30,7 +30,8 @@ class ScrollableList extends Component {
   componentWillReceiveProps (nextProps) {
     // check if we need to update the scroller's children
     if (this.childrenDidUpdate(nextProps.children, this.props.children) ||
-    this.numberToDisplayDidUpdate(nextProps.numberToDisplay, this.props.numberToDisplay)) {
+    this.numberToDisplayDidUpdate(nextProps.numberToDisplay, this.props.numberToDisplay) ||
+    this.props.alwaysUpdate) {
       const children = this.getChildrenWithScrollableListApiAsProps(nextProps)
       this.setState({
         children,
@@ -365,6 +366,10 @@ ScrollableList.propTypes = {
     Display the scroller vertically
    */
   vertical: PropTypes.bool,
+  /*
+    Update the children whenever the component receives new props, regardless of if they changed
+   */
+  alwaysUpdate: PropTypes.bool,
   /*
     Callback for when the position of the scroller changes
     Will be passed an argument of the next children state (array)

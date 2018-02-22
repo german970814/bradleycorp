@@ -36,13 +36,15 @@ class MultiPostArrowModule extends PostGettingModule {
   }
 
   renderPosts (size) {
+    const arrow = (size === 'tablet' || size === 'desktop')
+
     return this.state.posts.map((post, index) => {
       return (
         <PostColumn
           key={index}
           post={post}
-          size={size}
-          containerNode={this.state.node} />
+          containerNode={this.state.node}
+          arrow={arrow} />
       )
     })
   }
@@ -61,7 +63,8 @@ class MultiPostArrowModule extends PostGettingModule {
         desktopWrapperClassName={style.slider}
         containerNode={this.state.node}
         respondToContainer
-        nextPrevButtonsForMobile >
+        nextPrevButtonsForMobile
+        alwaysUpdate >
         {this.renderPosts(size)}
       </SimpleSlider>
     )
