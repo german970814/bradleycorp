@@ -1,0 +1,22 @@
+@import "../MultiPostArrowModule";
+
+.postColumn {
+  padding: 0 $distanceBetweenItems / 2;
+
+  .imageWrapper {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  h4.title {
+    margin-bottom: 18px;
+    color: #fff;
+    text-transform: uppercase;
+  }
+
+  .content {
+    margin-bottom: 30px;
+    color: #fff;
+    line-height: 1.5;
+  }
+}

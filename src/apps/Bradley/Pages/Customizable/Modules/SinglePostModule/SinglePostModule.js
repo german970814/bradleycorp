@@ -44,7 +44,8 @@ class SinglePostModule extends PostGettingModule {
           src={src}
           aspectRatio={180 / 270}
           aspectRatioTablet={300 / 311}
-          aspectRatioDesktop={386 / 420} />
+          aspectRatioDesktop={386 / 420}
+          respondToContainer />
       </div>
     )
   }

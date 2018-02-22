@@ -1,0 +1,66 @@
+@import "../../../../../../scss/partials/variables";
+@import "../../../../../../scss/partials/mixins";
+@import "../../../../../../scss/partials/helpers";
+@import "../../../../../../scss/partials/grid";
+
+$distanceBetweenItems: 20px;
+
+.multiPostArrowModule {
+
+  /*
+   MOBILE SIZED CONTAINER AND UP
+   */
+
+  @extend %coverBackground;
+  width: auto;
+
+  h5.title {
+    @include col(1);
+    margin-bottom: 27px;
+    text-align: center;
+    color: white;
+  }
+
+  .slider {
+    padding: 0;
+
+    :global(.track-wrapper) {
+      margin: {
+        right: -$distanceBetweenItems / 2;
+        bottom: 0;
+        left: -$distanceBetweenItems / 2;
+      }
+      width: calc(100% + #{$distanceBetweenItems});
+    }
+
+    :global(.buttons-below) {
+      margin-bottom: 0;
+
+      h6 {
+        color: #fff;
+      }
+    }
+  }
+
+  /*
+   TABLET SIZED CONTAINER AND UP
+   */
+
+  &:global(.container-size-tablet) {
+
+    h5.title {
+      font-size: 20px;
+    }
+  }
+
+  /*
+   DESKTOP SIZED CONTAINER
+   */
+
+  &:global(.container-size-desktop) {
+
+    h5.title {
+      font-size: 24px;
+    }
+  }
+}
