@@ -3,7 +3,10 @@
 @import "../../../../../../scss/partials/helpers";
 @import "../../../../../../scss/partials/grid";
 
+$arrowWidth: 11px;
+
 $distanceBetweenItems: 20px;
+$distanceBetweenItemsTablet:44px;
 
 .multiPostArrowModule {
 
@@ -42,11 +45,101 @@ $distanceBetweenItems: 20px;
     }
   }
 
+  .postColumn {
+    padding: 0 $distanceBetweenItems / 2;
+
+    .imageWrapper {
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
+    h4.title {
+      margin-bottom: 18px;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    .content {
+      margin-bottom: 30px;
+      color: #fff;
+      line-height: 1.5;
+      text-align: center;
+    }
+  }
+
+  /*
+   TABLET SIZED CONTAINER AND UP
+   */
+
+  &:global(.container-size-tablet) {
+
+    h5.title {
+      margin-bottom: 35px;
+    }
+
+    $sliderMargins: 48px;
+
+    .slider {
+      padding: 0 $arrowWidth;
+
+      :global(.track-wrapper) {
+        margin: {
+          right: $sliderMargins - ($distanceBetweenItemsTablet / 2);
+          left: $sliderMargins - ($distanceBetweenItemsTablet / 2);
+        }
+        width: calc(100% - #{$sliderMargins * 2} + #{$distanceBetweenItemsTablet});
+      }
+
+      :global(.button-up) {
+        left: 0;
+      }
+
+      :global(.button-down) {
+        right: 0;
+      }
+    }
+
+    .postColumn {
+      padding: 0 $distanceBetweenItemsTablet / 2;
+
+      h4.title {
+        margin-bottom: 15px;
+      }
+
+      .content {
+        margin-bottom: 19px;
+      }
+
+      .arrowWrapper {
+        margin-bottom: 0;
+        height: 20px;
+        text-align: center;
+
+        .arrow {
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  /*
+   DESKTOP SIZED CONTAINER AND UP
+  */
+
+
+  /*
+   TABLET SIZED SCREEN AND UP
+  */
+
   @include respond-to(tablet) {
     h5.title {
       font-size: 20px;
     }
   }
+
+  /*
+   DESKTOP SIZED SCREEN
+  */
 
   @include respond-to(desktop) {
     h5.title {

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { getExcerpt } from '../../../../../../../lib/bcorpPost'
 import ImageFrame from '../../../../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
-import style from './PostColumn.scss'
+import style from '../MultiPostArrowModule.scss'
 
 class PostColumn extends Component {
   renderImage () {
@@ -21,6 +21,7 @@ class PostColumn extends Component {
           aspectRatio={121 / 125}
           aspectRatioTablet={114 / 161}
           aspectRatioDesktop={156 / 205}
+          containerNode={this.props.containerNode}
           respondToContainer />
       </div>
     )
@@ -54,7 +55,19 @@ class PostColumn extends Component {
   }
 
   renderArrow () {
-    return null
+    const { size } = this.props
+
+    if (size === 'tablet' || size === 'desktop') {
+      return (
+        <div className={style.arrowWrapper} >
+          <img
+            className={style.arrow}
+            src={require('../../../../../../../images/arrow/arrow@2x.png')} />
+        </div>
+      )
+    } else {
+      return null
+    }
   }
 
   render () {
@@ -75,7 +88,9 @@ class PostColumn extends Component {
 }
 
 PostColumn.propTypes = {
-  post: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired,
+  size: PropTypes.string,
+  containerNode: PropTypes.object
 }
 
 export default PostColumn

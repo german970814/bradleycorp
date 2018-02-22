@@ -14,6 +14,15 @@ import style from './MultiPostArrowModule.scss'
  * @extends PostGettingModule
  */
 class MultiPostArrowModule extends PostGettingModule {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      ...this.state,
+      node: undefined
+    }
+  }
+
   renderTitle () {
     if (!this.props.title) {
       return
@@ -26,27 +35,34 @@ class MultiPostArrowModule extends PostGettingModule {
     )
   }
 
-  renderPosts () {
+  renderPosts (size) {
     return this.state.posts.map((post, index) => {
       return (
         <PostColumn
           key={index}
-          post={post} />
+          post={post}
+          size={size}
+          containerNode={this.state.node} />
       )
     })
   }
 
-  renderSlider () {
+  /**
+   * containerNode prop makes sure slider layout responds to whole module size,
+   * not just the inner module
+   */
+  renderSlider (size) {
     return (
       <SimpleSlider
         numberMobile={2}
         numberTablet={3}
         numberDesktop={5}
         wrapperClassName={style.slider}
-        desktopWrapperClassName={style.sliderDesktop}
-        nextPrevButtonsForMobile
-        respondToContainer >
-        {this.renderPosts()}
+        desktopWrapperClassName={style.slider}
+        containerNode={this.state.node}
+        respondToContainer
+        nextPrevButtonsForMobile >
+        {this.renderPosts(size)}
       </SimpleSlider>
     )
   }
@@ -63,7 +79,7 @@ class MultiPostArrowModule extends PostGettingModule {
     return (
       <ContainerMediaQuery
         node={this.state.node} >
-        {(containerClassName) => {
+        {(containerClassName, size) => {
           return (
             <div
               ref={(node) => {
@@ -80,7 +96,7 @@ class MultiPostArrowModule extends PostGettingModule {
 
               {this.renderTitle()}
 
-              {this.renderSlider()}
+              {this.renderSlider(size)}
 
             </div>
           )
