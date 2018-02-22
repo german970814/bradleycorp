@@ -43,6 +43,10 @@ class ScrollableListTrack extends Component {
   componentWillUnmount () {
     window.removeEventListener('resize', this.updateTrackNode)
   }
+  
+  componentWillReceiveProps () {
+    this.updateTrackNode()
+  }
 
   updateTrackNode () {
     if (this.node) {
@@ -128,7 +132,11 @@ class ScrollableListTrack extends Component {
 
     return (
       <div
-        ref={(node) => { this.node = node }}
+        ref={(node) => {
+          if (!this.node) {
+            this.node = node
+          }
+        }}
         className={`${style.trackWrapper} track-wrapper`}>
 
         <BCorpTouch>
