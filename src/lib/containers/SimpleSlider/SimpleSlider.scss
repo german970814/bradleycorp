@@ -176,7 +176,7 @@ $arrowWidthTablet: 11px;
     @extend %title;
   }
 
-  &:global(.container-size-tablet) {
+  > :global(.container-size-tablet) {
     h4.respondToContainerTitle {
       margin: {
         top: 60px;
@@ -186,7 +186,7 @@ $arrowWidthTablet: 11px;
     }
   }
 
-  &:global(.container-size-desktop) {
+  > :global(.container-size-desktop) {
     h4.respondToContainerTitle {
       margin: {
         top: 60px;

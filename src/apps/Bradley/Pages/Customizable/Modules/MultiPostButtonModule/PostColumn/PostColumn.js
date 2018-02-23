@@ -22,6 +22,7 @@ class PostColumn extends Component {
           aspectRatio={121 / 270}
           aspectRatioTablet={89 / 177}
           aspectRatioDesktop={140 / 316}
+          containerNode={this.props.containerNode}
           respondToContainer />
       </div>
     )
@@ -82,6 +83,7 @@ class PostColumn extends Component {
 
 PostColumn.propTypes = {
   post: PropTypes.object.isRequired,
+  containerNode: PropTypes.object,
   numColumns: PropTypes.number.isRequired
 }
 

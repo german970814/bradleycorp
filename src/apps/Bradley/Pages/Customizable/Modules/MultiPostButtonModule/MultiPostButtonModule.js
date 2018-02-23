@@ -13,15 +13,6 @@ import style from './MultiPostButtonModule.scss'
  * @extends PostGettingModule
  */
 class MultiPostButtonModule extends PostGettingModule {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      ...this.state,
-      node: undefined
-    }
-  }
-
   renderTitle () {
     if (!this.props.title) {
       return
@@ -46,6 +37,7 @@ class MultiPostButtonModule extends PostGettingModule {
         <PostColumn
           key={index}
           post={post}
+          containerNode={this.node}
           numColumns={posts.length} />
       )
     })
@@ -59,31 +51,36 @@ class MultiPostButtonModule extends PostGettingModule {
 
   render () {
     return (
-      <ContainerMediaQuery
-        node={this.state.node} >
-        {(containerClassName) => {
-          return (
-            <div
-              ref={(node) => {
-                if (!this.state.node) {
-                  this.setState({ node })
-                }
-              }}
-              style={{
-                backgroundImage: this.getBackgroundImage()
-              }}
-              className={`row ${containerClassName} ${moduleStyle.module} ${style.multiPostButtonModule}`} >
-
-              {this.renderTitle()}
-
-              <div className={`row ${style.columnsRow}`} >
-                {this.renderCols()}
-              </div>
-
-            </div>
-          )
+      <div
+        ref={(node) => {
+          if (!this.node) {
+            this.node = node
+          }
         }}
-      </ContainerMediaQuery >
+        className={`${moduleStyle.module} ${style.multiPostButtonModule}`} >
+
+        <ContainerMediaQuery
+          node={this.node} >
+          {(containerClassName) => {
+            return (
+              <div
+                style={{
+                  backgroundImage: this.getBackgroundImage()
+                }}
+                className={`row ${containerClassName}`} >
+
+                {this.renderTitle()}
+
+                <div className={`row ${style.columnsRow}`} >
+                  {this.renderCols()}
+                </div>
+
+              </div>
+            )
+          }}
+        </ContainerMediaQuery >
+
+      </div>
     )
   }
 }

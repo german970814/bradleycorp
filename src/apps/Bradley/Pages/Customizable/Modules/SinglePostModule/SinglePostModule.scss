@@ -13,7 +13,7 @@
     MOBILE SIZED CONTAINER ONLY
    */
 
-  &:global {
+  > :global {
     &:not(.container-size-tablet) {
       background: none !important;
     }
@@ -77,7 +77,7 @@
     TABLET SIZE CONTAINER AND UP
    */
 
-  &:global(.container-size-tablet) {
+  > :global(.container-size-tablet) {
 
     .imageCol {
       @include inline-col(2, middle);
@@ -118,7 +118,7 @@
     DESKTOP SIZE CONTAINER
    */
 
-  &:global(.container-size-desktop) {
+  > :global(.container-size-desktop) {
 
     .imageCol {
       width: 45.4% !important;

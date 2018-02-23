@@ -14,15 +14,6 @@ import style from './MultiPostArrowModule.scss'
  * @extends PostGettingModule
  */
 class MultiPostArrowModule extends PostGettingModule {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      ...this.state,
-      node: undefined
-    }
-  }
-
   renderTitle () {
     if (!this.props.title) {
       return
@@ -43,7 +34,7 @@ class MultiPostArrowModule extends PostGettingModule {
         <PostColumn
           key={index}
           post={post}
-          containerNode={this.state.node}
+          containerNode={this.node}
           arrow={arrow} />
       )
     })
@@ -61,7 +52,7 @@ class MultiPostArrowModule extends PostGettingModule {
         numberDesktop={4}
         wrapperClassName={style.slider}
         desktopWrapperClassName={style.slider}
-        containerNode={this.state.node}
+        containerNode={this.node}
         respondToContainer
         nextPrevButtonsForMobile
         alwaysUpdate >
@@ -80,31 +71,38 @@ class MultiPostArrowModule extends PostGettingModule {
 
   render () {
     return (
-      <ContainerMediaQuery
-        node={this.state.node} >
-        {(containerClassName, size) => {
-          return (
-            <div
-              ref={(node) => {
-                if (!this.state.node) {
-                  this.setState({ node })
-                }
-              }}
-              style={{
-                background: this.getBackground(),
-                backgroundRepeat: 'no-repeat',
-                backgroundSize: 'cover'
-              }}
-              className={`row ${containerClassName} ${moduleStyle.module} ${style.multiPostArrowModule}`} >
-
-              {this.renderTitle()}
-
-              {this.renderSlider(size)}
-
-            </div>
-          )
+      <div
+        ref={(node) => {
+          if (!this.node) {
+            this.node = node
+          }
         }}
-      </ContainerMediaQuery >
+        style={{
+          background: this.getBackground(),
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover'
+        }}
+        className={`${moduleStyle.module} ${style.multiPostArrowModule}`} >
+
+        <ContainerMediaQuery
+          node={this.node} >
+          {(containerClassName, size) => {
+            return (
+              <div
+                className={`row ${containerClassName}`} >
+
+                {this.renderTitle()}
+
+                {this.renderSlider(size)}
+
+                <div id={'test-element'} />
+
+              </div>
+            )
+          }}
+        </ContainerMediaQuery >
+
+      </div>
     )
   }
 }

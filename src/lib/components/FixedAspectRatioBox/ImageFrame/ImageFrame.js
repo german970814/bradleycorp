@@ -7,14 +7,6 @@ import FixedAspectRatioBox from '../FixedAspectRatioBox'
 import style from './ImageFrame.scss'
 
 class ImageFrame extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      node: undefined
-    }
-  }
-
   getAspectRatioTablet () {
     if (!this.props.aspectRatioTablet) {
       return this.props.aspectRatio
@@ -91,38 +83,43 @@ class ImageFrame extends Component {
       )
     } else {
       return (
-        <ContainerMediaQuery
-          node={this.props.containerNode || this.state.node} >
-          {(containerClassName, size) => {
-            let frame = null
-
-            if (size === 'mobile') {
-              frame = this.renderFrameMobile()
-            } else
-
-            if (size === 'tablet') {
-              frame = this.renderFrameTablet()
-            } else
-
-            if (size === 'desktop') {
-              frame = this.renderFrameDesktop()
+        <div
+          ref={(node) => {
+            if (!this.props.containerNode && !this.node) {
+              this.node = node
             }
-
-            return (
-              <div
-                ref={(node) => {
-                  if (!this.props.containerNode && !this.state.node) {
-                    this.setState({ node })
-                  }
-                }}
-                className={`${containerClassName} ${style.imageFrame}`} >
-
-                {frame}
-
-              </div>
-            )
           }}
-        </ContainerMediaQuery>
+          className={style.imageFrame} >
+
+          <ContainerMediaQuery
+            node={this.props.containerNode || this.node} >
+            {(containerClassName, size) => {
+              let frame = null
+
+              if (size === 'mobile') {
+                frame = this.renderFrameMobile()
+              } else
+
+              if (size === 'tablet') {
+                frame = this.renderFrameTablet()
+              } else
+
+              if (size === 'desktop') {
+                frame = this.renderFrameDesktop()
+              }
+
+              return (
+                <div
+                  className={containerClassName} >
+
+                  {frame}
+
+                </div>
+              )
+            }}
+          </ContainerMediaQuery>
+
+        </div>
       )
     }
   }

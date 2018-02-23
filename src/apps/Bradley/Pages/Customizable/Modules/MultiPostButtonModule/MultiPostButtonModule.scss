@@ -12,7 +12,7 @@ $desktopGutter: 4.296875vw;
     MOBILE SIZED CONTAINER ONLY
    */
 
-  &:global {
+  > :global {
     &:not(.container-size-tablet) {
       background-image: none !important;
       background-color: $light-gray !important;
@@ -37,7 +37,7 @@ $desktopGutter: 4.296875vw;
    TABLET SIZED CONTAINER AND UP
    */
 
-  &:global(.container-size-tablet) {
+  > :global(.container-size-tablet) {
 
     h5.title {
       color: #2e3c6e;
@@ -54,7 +54,7 @@ $desktopGutter: 4.296875vw;
    DESKTOP SIZED CONTAINER
    */
 
-  &:global(.container-size-desktop) {
+  > :global(.container-size-desktop) {
     padding: 60px $desktopGutter;
 
     h5.title {

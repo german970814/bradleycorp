@@ -70,7 +70,7 @@ $arrowWidth: 11px;
    TABLET SIZED CONTAINER AND UP
    */
 
-  &:global(.container-size-tablet) {
+  > :global(.container-size-tablet) {
 
     h5.title {
       margin-bottom: 35px;
@@ -126,7 +126,7 @@ $arrowWidth: 11px;
    DESKTOP SIZED CONTAINER AND UP
   */
 
-  &:global(.container-size-desktop) {
+  > :global(.container-size-desktop) {
 
     padding: {
       right: 5.859375%;

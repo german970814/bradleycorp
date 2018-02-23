@@ -20,4 +20,20 @@
   &:global(.container-size-desktop) {
     padding: 60px 8.359375%;
   }
+
+  > :global(.container-size-mobile) {
+    padding: 0 $MobileBodyPadding;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  > :global(.container-size-tablet) {
+    padding: 0 $TabletBodyPadding;
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  > :global(.container-size-desktop) {
+    padding: 60px 8.359375%;
+  }
 }

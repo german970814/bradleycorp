@@ -6,11 +6,6 @@ import ContainerMediaQuery from '../../../containers/ContainerMediaQuery/Contain
 import style from './CTAModule.scss'
 
 class CTAModule extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = { node: undefined }
-  }
   renderTitle () {
     const { title } = this.props
 
@@ -68,27 +63,32 @@ class CTAModule extends Component {
 
   render () {
     return (
-      <ContainerMediaQuery
-        node={this.state.node} >
-        {(containerClassName) => {
-          return (
-            <div
-              ref={(node) => {
-                if (!this.state.node) {
-                  this.setState({ node })
-                }
-              }}
-              className={`${containerClassName} ${style.CTAModule}`} >
-
-              {this.renderTitle()}
-              {this.renderMedia()}
-              {this.renderText()}
-              {this.renderButton()}
-
-            </div>
-          )
+      <div
+        ref={(node) => {
+          if (!this.node) {
+            this.node = node
+          }
         }}
-      </ContainerMediaQuery>
+        className={style.CTAModule} >
+
+        <ContainerMediaQuery
+          node={this.node} >
+          {(containerClassName) => {
+            return (
+              <div
+                className={containerClassName} >
+
+                {this.renderTitle()}
+                {this.renderMedia()}
+                {this.renderText()}
+                {this.renderButton()}
+
+              </div>
+            )
+          }}
+        </ContainerMediaQuery>
+
+      </div>
     )
   }
 }

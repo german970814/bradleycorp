@@ -14,14 +14,6 @@ import style from './SimpleSlider.scss'
  * Wraps the ScrollableList component with media queries and default button elements
  */
 class SimpleSlider extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      node: undefined
-    }
-  }
-
   renderTitle () {
     if (this.props.title !== undefined &&
     this.props.title !== '') {
@@ -128,40 +120,45 @@ class SimpleSlider extends Component {
        * respond with priority to a node passed as props rather than itself
        */
       return (
-        <ContainerMediaQuery
-          node={this.props.containerNode || this.state.node} >
-          {(containerClassName, size) => {
-            let slider = null
-
-            if (size === 'mobile') {
-              slider = this.renderSliderMobile()
-            } else
-
-            if (size === 'tablet') {
-              slider = this.renderSliderTablet()
-            } else
-
-            if (size === 'desktop') {
-              slider = this.renderSliderDesktop()
+        <div
+          ref={(node) => {
+            if (!this.props.containerNode && !this.node) {
+              this.node = node
             }
-
-            return (
-              <div
-                ref={(node) => {
-                  if (!this.props.containerNode && !this.state.node) {
-                    this.setState({ node })
-                  }
-                }}
-                className={`${containerClassName} ${style.respondToContainerContainer}`} >
-
-                {this.renderTitle()}
-
-                {slider}
-
-              </div>
-            )
           }}
-        </ContainerMediaQuery>
+          className={style.respondToContainerContainer} >
+
+          <ContainerMediaQuery
+            node={this.props.containerNode || this.node} >
+            {(containerClassName, size) => {
+              let slider = null
+
+              if (size === 'mobile') {
+                slider = this.renderSliderMobile()
+              } else
+
+              if (size === 'tablet') {
+                slider = this.renderSliderTablet()
+              } else
+
+              if (size === 'desktop') {
+                slider = this.renderSliderDesktop()
+              }
+
+              return (
+                <div
+                  className={containerClassName} >
+
+                  {this.renderTitle()}
+
+                  {slider}
+
+                </div>
+              )
+            }}
+          </ContainerMediaQuery>
+
+        </div>
       )
     }
   }

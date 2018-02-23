@@ -43,7 +43,12 @@ class ScrollableListTrack extends Component {
   componentWillUnmount () {
     window.removeEventListener('resize', this.updateTrackNode)
   }
-  
+
+  /**
+   * This is the best we can do at the moment to respond to changes in the DOM not related to screen resize
+   *
+   * @see file docs for ContainerMediaQuery
+   */
   componentWillReceiveProps () {
     this.updateTrackNode()
   }
@@ -169,7 +174,11 @@ class ScrollableListTrack extends Component {
   renderVertical () {
     return (
       <div
-        ref={(node) => { this.node = node }}
+        ref={(node) => {
+          if (!this.node) {
+            this.node = node
+          }
+        }}
         className={`${style.trackWrapperVertical} track-wrapper-vertical`}>
 
         <BCorpTouch>

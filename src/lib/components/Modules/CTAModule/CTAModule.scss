@@ -32,7 +32,7 @@
    TABLET CONTAINER SIZE
    */
 
-  &:global(.container-size-tablet) {
+  > :global(.container-size-tablet) {
     h5.title {
       padding-bottom: 28px;
     }
@@ -48,7 +48,7 @@
    DESKTOP CONTAINER SIZE
    */
 
-  &:global(.container-size-desktop) {
+  > :global(.container-size-desktop) {
     h5.title {
       padding-bottom: 38px;
     }
