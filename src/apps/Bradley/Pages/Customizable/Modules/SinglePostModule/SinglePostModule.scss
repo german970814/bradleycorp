@@ -81,6 +81,7 @@
 
     .imageCol {
       @include inline-col(2, middle);
+      float: none;
 
       .imagePadding {
         margin-bottom: 0;
@@ -91,6 +92,7 @@
 
     .contentCol {
       @include inline-col(2, middle);
+      float: none;
 
       .title {
         line-height: 1;
