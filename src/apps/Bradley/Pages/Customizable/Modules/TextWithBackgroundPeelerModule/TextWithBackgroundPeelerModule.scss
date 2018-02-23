@@ -1,43 +1,73 @@
 @import "../../../../../../scss/partials/variables";
+@import "../../../../../../scss/partials/helpers";
 
 $backgroundColor: $charcoal-grey;
 
 .textWithBackgroundPeelerModule {
   position: relative;
-  padding-right: 100px - $MobileBodyPadding;
+  overflow: hidden;
+  @extend %coverBackground;
   background-color: $backgroundColor;
 
-  h4.title {
-    position: relative; // to float it in front of the texture image
-    z-index: 1;
-    margin-bottom: 25px;
-    color: #fff;
-    text-align: left;
-    text-transform: uppercase;
+  > :global(.container-size-mobile) {
+    padding-right: 100px;
+
+    h4.title {
+      position: relative; // to float it in front of the texture image
+      z-index: 1;
+      margin-bottom: 25px;
+      color: #fff;
+      text-align: left;
+      text-transform: uppercase;
+    }
+
+    .text {
+      position: relative; // to float it in front of the texture image
+      z-index: 1;
+      color: #fff;
+      line-height: 1.5;
+    }
+
+    // 120 px top distance
+    // SASS has no sqrt function, calculation we want is $textureWidth = sqrt( 2 * (topDistance**2))
+    // then round it to nearest even number so we dont have to deal with decimal pixels
+    $textureSize: 170px;
+
+    .texture {
+      position: absolute;
+      top: - $textureSize / 2;
+      right: - $textureSize / 2;
+      width: $textureSize;
+      height: $textureSize;
+      transform: rotate(45deg);
+    }
   }
 
-  .text {
-    position: relative; // to float it in front of the texture image
-    z-index: 1;
-    color: #fff;
-    line-height: 1.5;
+  > :global(.container-size-tablet) {
+    padding-right: 280px;
+
+    // 300px top distance
+    $textureSize: 426px;
+
+    .texture {
+      top: - $textureSize / 2;
+      right: - $textureSize / 2;
+      width: $textureSize;
+      height: $textureSize;
+    }
   }
 
-  $textureWidth: 120px;
-  $textureHeight: 120px;
+  > :global(.container-size-desktop) {
+    padding-right: 480px;
 
-  .texture, .texture::after {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: $textureWidth;
-    height: $textureHeight;
-  }
+    // 500 px top distance
+    $textureSize: 708px;
 
-  .texture::after {
-    content: '';
-    width: $textureWidth + 1;
-    height: $textureHeight + 1;
-    background: linear-gradient(45deg, $backgroundColor 50%, transparent 50%);
+    .texture {
+      top: - $textureSize / 2;
+      right: - $textureSize / 2;
+      width: $textureSize;
+      height: $textureSize;
+    }
   }
 }

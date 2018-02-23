@@ -39,13 +39,14 @@ class TextWithBackgroundPeelerModule extends Component {
     }
 
     const image = `url(${this.props.backgroundPeeler})`
+    const hasCustomBackground = this.props.background ? style.hasCustomBackground : undefined
 
     return (
       <div
         style = {{
           backgroundImage: image
         }}
-        className={style.texture} />
+        className={`${style.texture} ${hasCustomBackground}`} />
     )
   }
 
@@ -66,7 +67,7 @@ class TextWithBackgroundPeelerModule extends Component {
           }
         }}
         style={{
-          background: this.getBackground()
+          backgroundImage: this.getBackground()
         }}
         className={`${style.textWithBackgroundPeelerModule} ${moduleStyle.module}`} >
 
