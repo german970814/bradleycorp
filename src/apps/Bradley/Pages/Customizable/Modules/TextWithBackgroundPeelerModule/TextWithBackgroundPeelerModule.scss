@@ -1,0 +1,43 @@
+@import "../../../../../../scss/partials/variables";
+
+$backgroundColor: $charcoal-grey;
+
+.textWithBackgroundPeelerModule {
+  position: relative;
+  padding-right: 100px - $MobileBodyPadding;
+  background-color: $backgroundColor;
+
+  h4.title {
+    position: relative; // to float it in front of the texture image
+    z-index: 1;
+    margin-bottom: 25px;
+    color: #fff;
+    text-align: left;
+    text-transform: uppercase;
+  }
+
+  .text {
+    position: relative; // to float it in front of the texture image
+    z-index: 1;
+    color: #fff;
+    line-height: 1.5;
+  }
+
+  $textureWidth: 120px;
+  $textureHeight: 120px;
+
+  .texture, .texture::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: $textureWidth;
+    height: $textureHeight;
+  }
+
+  .texture::after {
+    content: '';
+    width: $textureWidth + 1;
+    height: $textureHeight + 1;
+    background: linear-gradient(45deg, $backgroundColor 50%, transparent 50%);
+  }
+}

@@ -4,6 +4,7 @@ import SinglePostModule from './SinglePostModule/SinglePostModule'
 import MultiPostButtonModule from './MultiPostButtonModule/MultiPostButtonModule'
 import MultiPostArrowModule from './MultiPostArrowModule/MultiPostArrowModule'
 import CTAModule from '../../../../../lib/components/Modules/CTAModule/CTAModule'
+import TextWithBackgroundPeelerModule from './TextWithBackgroundPeelerModule/TextWithBackgroundPeelerModule'
 
 const ModuleFactory = ({ data }) => {
   if (!data.name) {
@@ -49,6 +50,16 @@ const ModuleFactory = ({ data }) => {
           postType={data['post_type']}
           accentColor={data['accent_color']}
           background={data['background']}
+          skin={data['skin']} />
+      )
+
+    case 'module_text_background_peeler':
+      return (
+        <TextWithBackgroundPeelerModule
+          title={data['title']}
+          text={data['text']}
+          background={data['background']}
+          backgroundPeeler={data['background_peeler']}
           skin={data['skin']} />
       )
 
