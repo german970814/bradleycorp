@@ -46,7 +46,7 @@ const ModuleFactory = ({ data }) => {
     case 'module_single_post':
       return (
         <SinglePostModule
-          postIDs={[parseInt(data['post'])]} // needs to be an array to extend PostGettingModule
+          postIDs={[parseInt(data['posts'])]} // needs to be an array with name postIDs to extend PostGettingModule
           postType={data['post_type']}
           accentColor={data['accent_color']}
           background={data['background']}
