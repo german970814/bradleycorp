@@ -4,6 +4,7 @@ import SinglePostModule from './SinglePostModule/SinglePostModule'
 import MultiPostButtonModule from './MultiPostButtonModule/MultiPostButtonModule'
 import MultiPostArrowModule from './MultiPostArrowModule/MultiPostArrowModule'
 import CTAModule from '../../../../../lib/components/Modules/CTAModule/CTAModule'
+import SliderModule from './SliderModule/SliderModule'
 import TextWithBackgroundPeelerModule from './TextWithBackgroundPeelerModule/TextWithBackgroundPeelerModule'
 
 const ModuleFactory = ({ data }) => {
@@ -50,6 +51,16 @@ const ModuleFactory = ({ data }) => {
           postType={data['post_type']}
           accentColor={data['accent_color']}
           background={data['background']}
+          skin={data['skin']} />
+      )
+
+    case 'module_slider':
+      return (
+        <SliderModule
+          title={data['title']}
+          postType={data['post_type']}
+          postIDs={data['posts'].split(',')}
+          accentColor={data['accent_color']}
           skin={data['skin']} />
       )
 

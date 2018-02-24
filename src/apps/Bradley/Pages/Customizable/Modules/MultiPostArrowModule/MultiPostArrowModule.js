@@ -95,8 +95,6 @@ class MultiPostArrowModule extends PostGettingModule {
 
                 {this.renderSlider(size)}
 
-                <div id={'test-element'} />
-
               </div>
             )
           }}

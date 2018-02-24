@@ -1,0 +1,134 @@
+@import "../../../../../../scss/partials/variables";
+@import "../../../../../../scss/partials/mixins";
+
+.sliderModule {
+
+  /*
+   MOBILE SIZED CONTAINER + SCREEN AND UP
+   */
+
+  > :global(.container-size-mobile) {
+
+    h5.title {
+      margin-bottom: 30px;
+      color: $brown;
+      text-align: center;
+    }
+
+    .sliderWrapper {
+
+      :global(.button-up), :global(.button-down) {
+        display: none;
+      }
+
+      :global(.position-circles) {
+        margin-top: -20px;
+        text-align: right;
+
+        li div:global(.active) {
+          background-color: #ae9988;
+        }
+      }
+    }
+
+    .sliderItem {
+
+      .imageWrapper {
+        margin-bottom: 30px;
+        padding: 0 10px;
+      }
+
+      h4.title {
+        margin-bottom: 25px;
+        font-size: 27px;
+        letter-spacing: 2.7px;
+        color: $black;
+        text-transform: uppercase;
+      }
+
+      .content {
+        margin-bottom: 30px;
+        line-height: 1.5;
+      }
+
+      .arrowWrapper {
+        height: 20px;
+        text-align: center;
+
+        .arrow {
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  /*
+   TABLET SIZED CONTAINER AND UP
+   */
+
+  > :global(.container-size-tablet) {
+
+    h5.title {
+      margin-bottom: 25px;
+      text-align: left;
+    }
+  }
+
+  /*
+   DESKTOP SIZED CONTAINER + SCREEN AND UP
+   */
+
+  > :global(.container-size-destop) {
+
+    h5.title {
+      margin-bottom: 35px;
+    }
+
+    .sliderItem {
+
+      h4.title {
+        margin-bottom: 35px;
+      }
+    }
+  }
+
+  /*
+   TABLET SIZED SCREEN AND UP
+   */
+
+  @include respond-to(tablet) {
+
+    h5.title {
+      font-size: 20px;
+    }
+
+    .sliderItem {
+
+      h4.title {
+        font-size: 36px;
+        letter-spacing: 3.6px;
+        text-align: left;
+      }
+    }
+  }
+
+  /*
+   DESKTOP SIZED SCREEN AND UP
+   */
+
+  @include respond-to(desktop) {
+
+    h5.title {
+      font-size: 24px;
+    }
+
+    .sliderItem {
+
+      h4.title {
+        font-size: 42px;
+        letter-spacing: 4.2px;
+        text-align: left;
+      }
+    }
+  }
+}
