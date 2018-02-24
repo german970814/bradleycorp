@@ -23,52 +23,55 @@
    MOBILE SIZED CONTAINER + SCREEN AND UP
    */
 
-  @extend %coverBackground;
-  width: auto;
+  > :global(.container-size-tablet) {
 
-  .imageCol {
-    @include col(1);
+    @extend %coverBackground;
+    box-sizing: border-box;
 
-    .imagePadding {
-      margin-bottom: 40px;
-    }
-  }
-
-  .contentCol {
-    @include col(1);
-
-    .contentWrapper {
-      display: inline-block;
-      vertical-align: middle;
-      width: 100%;
-    }
-
-    .title {
-      margin-bottom: 30px;
-      font-family: TradeGothic;
-      font-size: 27px;
-      font-weight: bold;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: 0.83;
-      letter-spacing: 2.7px;
-      text-align: left;
-      text-transform: uppercase;
-      color: $black;
-    }
-
-    .content {
-      margin-bottom: 27px;
-      line-height: 1.5;
-    }
-
-    .button {
+    .imageCol {
       @include col(1);
-      margin-bottom: 10px;
-      text-align: center;
 
-      &:last-child {
-        margin-bottom: 0;
+      .imagePadding {
+        margin-bottom: 40px;
+      }
+    }
+
+    .contentCol {
+      @include col(1);
+
+      .contentWrapper {
+        display: inline-block;
+        vertical-align: middle;
+        width: 100%;
+      }
+
+      .title {
+        margin-bottom: 30px;
+        font-family: TradeGothic;
+        font-size: 27px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 0.83;
+        letter-spacing: 2.7px;
+        text-align: left;
+        text-transform: uppercase;
+        color: $black;
+      }
+
+      .content {
+        margin-bottom: 27px;
+        line-height: 1.5;
+      }
+
+      .button {
+        @include col(1);
+        margin-bottom: 10px;
+        text-align: center;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
       }
     }
   }
