@@ -23,7 +23,7 @@
    MOBILE SIZED CONTAINER + SCREEN AND UP
    */
 
-  > :global(.container-size-tablet) {
+  > :global(.container-size-mobile) {
 
     @extend %coverBackground;
     box-sizing: border-box;
