@@ -1,11 +1,25 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import { createCPTUrl } from '../../../../../../../lib/bcorpUrl'
 import { getExcerpt } from '../../../../../../../lib/bcorpPost'
 import Divider from '../../../../../../../lib/components/Divider/Divider'
 import ImageFrame from '../../../../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import style from './PostColumn.scss'
 
 class PostColumn extends Component {
+  constructor(props) {
+    super(props)
+
+    this.postLink = '#'
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.post) {
+      this.postLink = createCPTUrl(nextProps.post.post)
+    }
+  }
+
   renderImage () {
     const { post } = this.props
 
@@ -57,7 +71,13 @@ class PostColumn extends Component {
 
   renderButton () {
     return (
-      <button className={`button-brown ${style.button}`} >{'LEARN MORE'}</button>
+      <Link
+        to={`${this.postLink}`}
+        replace >
+
+        <button className={`button-brown ${style.button}`} >{'LEARN MORE'}</button>
+
+      </Link>
     )
   }
 

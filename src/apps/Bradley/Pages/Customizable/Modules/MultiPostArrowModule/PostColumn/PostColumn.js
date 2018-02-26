@@ -1,10 +1,24 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import { createCPTUrl } from '../../../../../../../lib/bcorpUrl'
 import { getExcerpt } from '../../../../../../../lib/bcorpPost'
 import ImageFrame from '../../../../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import style from '../MultiPostArrowModule.scss'
 
 class PostColumn extends Component {
+  constructor(props) {
+    super(props)
+
+    this.postLink = '#'
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.post) {
+      this.postLink = createCPTUrl(nextProps.post.post)
+    }
+  }
+
   renderImage () {
     const { post } = this.props
 
@@ -59,11 +73,17 @@ class PostColumn extends Component {
 
     if (arrow) {
       return (
-        <div className={style.arrowWrapper} >
-          <img
-            className={style.arrow}
-            src={require('../../../../../../../images/arrow/arrow@2x.png')} />
-        </div>
+        <Link
+          to={`${this.postLink}`}
+          replace >
+
+          <div className={style.arrowWrapper} >
+            <img
+              className={style.arrow}
+              src={require('../../../../../../../images/arrow/arrow@2x.png')} />
+          </div>
+
+        </Link>
       )
     } else {
       return null
