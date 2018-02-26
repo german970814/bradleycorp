@@ -7,7 +7,11 @@ class PostGridItem extends Component {
     const { post } = this.props
 
     if (!post.media['featured_image'] || post.media['featured_image'].length === 0) {
-      return
+      return (
+        <div className={style.image} >
+          <div className={style.imageGradient} />
+        </div>
+      )
     }
 
     const imgSrc = post.media['featured_image'][0]
@@ -48,8 +52,9 @@ class PostGridItem extends Component {
   }
 
   render () {
+    const sizeClassName = style[`size-${this.props.size}`]
     return (
-      <div className={style.postGridItem} >
+      <div className={`${style.postGridItem} ${sizeClassName}`} >
 
         {this.renderImage()}
 
@@ -62,7 +67,8 @@ class PostGridItem extends Component {
 }
 
 PostGridItem.propTypes = {
-  post: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired,
+  size: PropTypes.string
 }
 
 export default PostGridItem

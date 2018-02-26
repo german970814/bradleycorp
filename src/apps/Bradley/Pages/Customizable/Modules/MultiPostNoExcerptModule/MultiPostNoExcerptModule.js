@@ -12,14 +12,15 @@ import style from './MultiPostNoExcerptModule.scss'
  * @extends PostGettingModule
  */
 class MultiPostNoExcerptModule extends PostGettingModule {
-  renderGrid () {
-    return this.state.posts.map((post, index) => {
+  renderGrid (size) {
+    return this.state.posts.map((post, index, posts) => {
       return (
         <div
           key={index}
-          className={style.col1} >
+          className={this.getColumnClass(size, posts.length, index)} >
           <PostGridItem
-            post={post} />
+            post={post}
+            size={size} />
         </div>
       )
     })
@@ -37,12 +38,12 @@ class MultiPostNoExcerptModule extends PostGettingModule {
 
         <ContainerMediaQuery
           node={this.node} >
-          {(containerClassName) => {
+          {(containerClassName, size) => {
             return (
               <div
                 className={`row ${containerClassName}`} >
 
-                {this.renderGrid()}
+                {this.renderGrid(size)}
 
               </div>
             )
@@ -51,6 +52,34 @@ class MultiPostNoExcerptModule extends PostGettingModule {
 
       </div>
     )
+  }
+
+  getColumnClass (size, total, index) {
+    if (size === 'mobile') {
+      return 'col1'
+    }
+
+    if (total === 1) {
+      return 'col1'
+    } else if (total === 2) {
+      return 'col2'
+    } else if (total === 3) {
+      return 'col3'
+    } else if (total === 4) {
+      if (size === 'tablet') {
+        return 'col2'
+      } else if (size === 'desktop') {
+        return 'col4'
+      }
+    } else if (total === 5) {
+      if (index === 0 || index === 1 || index === 2) {
+        return 'col3'
+      } else if (index === 3 || index === 4) {
+        return 'col2'
+      }
+    } else if (total === 6) {
+      return 'col3'
+    }
   }
 }
 

@@ -34,6 +34,7 @@
     position: absolute;
     bottom: $MobileBodyPadding;
     left: $MobileBodyPadding;
+    width: 50%;
     color: white;
   }
 
@@ -46,6 +47,14 @@
     .arrow {
       height: 100%;
     }
+  }
+
+  &.size-tablet {
+    height: 200px;
+  }
+
+  &.size-desktop {
+    height: 250px;
   }
 
 }
