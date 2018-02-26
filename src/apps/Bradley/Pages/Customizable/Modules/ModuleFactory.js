@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import SinglePostModule from './SinglePostModule/SinglePostModule'
 import MultiPostButtonModule from './MultiPostButtonModule/MultiPostButtonModule'
+import MultiPostNoExcerptModule from './MultiPostNoExcerptModule/MultiPostNoExcerptModule'
 import MultiPostArrowModule from './MultiPostArrowModule/MultiPostArrowModule'
 import CTAModule from '../../../../../lib/components/Modules/CTAModule/CTAModule'
 import SliderModule from './SliderModule/SliderModule'
@@ -20,6 +21,13 @@ const ModuleFactory = ({ data }) => {
           text={data['content']}
           link={data['link']}
           linkText={data['link_text']} />
+      )
+
+    case 'module_multi_post_no_excerpt':
+      return (
+        <MultiPostNoExcerptModule
+          postType={data['post_type']}
+          postIDs={data['posts'].split(',')} />
       )
 
     case 'module_multi_post_button':
