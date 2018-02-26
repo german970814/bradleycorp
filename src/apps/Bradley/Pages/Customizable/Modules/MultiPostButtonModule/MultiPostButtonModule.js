@@ -25,7 +25,7 @@ class MultiPostButtonModule extends PostGettingModule {
     )
   }
 
-  renderCols () {
+  renderCols (size) {
     const { posts } = this.state
 
     if (!posts) {
@@ -38,7 +38,8 @@ class MultiPostButtonModule extends PostGettingModule {
           key={index}
           post={post}
           containerNode={this.node}
-          numColumns={posts.length} />
+          numColumns={posts.length}
+          size={size} />
       )
     })
   }
@@ -61,7 +62,7 @@ class MultiPostButtonModule extends PostGettingModule {
 
         <ContainerMediaQuery
           node={this.node} >
-          {(containerClassName) => {
+          {(containerClassName, size) => {
             return (
               <div
                 style={{
@@ -72,7 +73,7 @@ class MultiPostButtonModule extends PostGettingModule {
                 {this.renderTitle()}
 
                 <div className={`row ${style.columnsRow}`} >
-                  {this.renderCols()}
+                  {this.renderCols(size)}
                 </div>
 
               </div>

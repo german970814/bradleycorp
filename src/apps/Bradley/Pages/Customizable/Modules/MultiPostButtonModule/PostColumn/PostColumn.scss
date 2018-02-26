@@ -51,14 +51,12 @@
   .button {
     margin-bottom: 30px;
   }
-}
 
-/*
- TABLET SIZED CONTAINER AND UP
- */
+  /*
+   TABLET SIZED CONTAINER AND UP
+   */
 
-:global(.container-size-tablet) {
-  .postColumnWrapper {
+  &.size-tablet {
     margin-top: 0px;
     margin-bottom: 0px;
     padding: 0 $tabletGutter;
@@ -111,14 +109,12 @@
       margin-bottom: 0;
     }
   }
-}
 
-/*
- DESKTOP SIZED CONTAINER
- */
+  /*
+   DESKTOP SIZED CONTAINER
+   */
 
-:global(.container-size-desktop) {
-  .postColumnWrapper {
+  &.size-desktop {
     padding: 0 $desktopGutter;
 
     &::before {
