@@ -8,13 +8,13 @@ import ImageFrame from '../../../../../../../lib/components/FixedAspectRatioBox/
 import style from './PostColumn.scss'
 
 class PostColumn extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.postLink = '#'
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (nextProps.post) {
       this.postLink = createCPTUrl(nextProps.post.post)
     }
@@ -86,11 +86,10 @@ class PostColumn extends Component {
   }
 
   render () {
-    console.log(this.props.size)
     const columnSizeClass = style[`post-column-${this.props.numColumns}`]
     const sizeClassName = style[`size-${this.props.size}`]
     return (
-      <div className={`${columnSizeClass} ${style.postColumnWrapper} ${style.sizeClassName}`} >
+      <div className={`${columnSizeClass} ${style.postColumnWrapper} ${sizeClassName}`} >
 
         {this.renderImage()}
         {this.renderTitle()}

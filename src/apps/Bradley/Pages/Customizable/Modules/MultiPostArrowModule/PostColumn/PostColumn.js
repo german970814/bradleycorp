@@ -7,13 +7,13 @@ import ImageFrame from '../../../../../../../lib/components/FixedAspectRatioBox/
 import style from '../MultiPostArrowModule.scss'
 
 class PostColumn extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.postLink = '#'
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (nextProps.post) {
       this.postLink = createCPTUrl(nextProps.post.post)
     }

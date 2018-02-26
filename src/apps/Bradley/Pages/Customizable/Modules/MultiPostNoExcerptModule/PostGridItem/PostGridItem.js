@@ -5,13 +5,13 @@ import { createCPTUrl } from '../../../../../../../lib/bcorpUrl'
 import style from './PostGridItem.scss'
 
 class PostGridItem extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.postLink = '#'
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (nextProps.post) {
       this.postLink = createCPTUrl(nextProps.post.post)
     }
