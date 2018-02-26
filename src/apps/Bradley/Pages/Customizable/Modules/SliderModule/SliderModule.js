@@ -37,7 +37,7 @@ class SliderModule extends PostGettingModule {
         numberToDisplay={1}
         touchMoveSensitivity={1.5}
         wrapperClassName={style.sliderWrapper}
-        animation={'fade'}
+        animation={['fade', 'slide']}
         transitionSpeed={1500}
         alwaysUpdate
         showPosition >
@@ -52,7 +52,7 @@ class SliderModule extends PostGettingModule {
         numberToDisplay={1}
         touchMoveSensitivity={1}
         wrapperClassName={style.sliderWrapper}
-        animation={'fade'}
+        animation={['fade']}
         transitionSpeed={1500}
         alwaysUpdate
         showPosition >
@@ -67,7 +67,7 @@ class SliderModule extends PostGettingModule {
         numberToDisplay={1}
         touchMoveSensitivity={1}
         wrapperClassName={style.sliderWrapper}
-        animation={'fade'}
+        animation={['fade']}
         transitionSpeed={1500}
         alwaysUpdate
         showPosition >

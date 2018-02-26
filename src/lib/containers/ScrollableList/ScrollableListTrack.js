@@ -123,7 +123,7 @@ class ScrollableListTrack extends Component {
 
   getOpacity (dx) {
     // only want to change translation while sliding if we've chosen slide animation
-    if (this.props.animation !== 'fade') {
+    if (!this.props.animation.includes('fade')) {
       return 1
     }
 
@@ -133,7 +133,7 @@ class ScrollableListTrack extends Component {
 
   getOpacityVertical (dy) {
     // only want to change translation while sliding if we've chosen slide animation
-    if (this.props.animation !== 'fade') {
+    if (!this.props.animation.includes('fade')) {
       return 1
     }
 
@@ -144,7 +144,7 @@ class ScrollableListTrack extends Component {
 
   getTransform (dx) {
     // only want to change translation while sliding if we've chosen slide animation
-    if (this.props.animation !== 'slide') {
+    if (!this.props.animation.includes('slide')) {
       return `translate3d(${this.getTrackPosition()}px , 0px, 0px)`
     }
 
@@ -153,7 +153,7 @@ class ScrollableListTrack extends Component {
 
   getTransformVertical (dy) {
     // only want to change translation while sliding if we've chosen slide animation
-    if (this.props.animation !== 'slide') {
+    if (!this.props.animation.includes('slide')) {
       return `translate3d(0px, ${this.getTrackPositionVertical()}px, 0px)`
     }
 
@@ -161,19 +161,16 @@ class ScrollableListTrack extends Component {
   }
 
   getTransition (dx, dy) {
-    if (this.props.animation === 'none') {
+    if (this.props.animation.includes('none')) {
       return 'transform 0s, opacity 0s'
     }
 
     // only add transition if we're not swiping so there isn't a delay
     if (dx === 0 && dy === 0) {
-      if (this.props.animation === 'slide') {
-        return `transform ${this.state.transition}ms`
-      } else
+      const slideTransition = this.props.animation.includes('slide') ? this.state.transition : 0
+      const fadeTransition = this.props.animation.includes('fade') ? this.state.transition : 0
 
-      if (this.props.animation === 'fade') {
-        return `opacity ${this.state.transition}ms`
-      }
+      return `transform ${slideTransition}ms, opacity ${fadeTransition}ms`
     }
 
     return 'transform 0s, opacity 0s'
@@ -277,7 +274,7 @@ ScrollableListTrack.propTypes = {
   touchMoveSensitivity: PropTypes.number,
   vertical: PropTypes.bool,
   reverseSwipeScroll: PropTypes.bool,
-  animation: PropTypes.string
+  animation: PropTypes.array
 }
 
 export default ScrollableListTrack
