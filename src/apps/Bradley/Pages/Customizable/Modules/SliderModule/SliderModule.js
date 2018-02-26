@@ -35,8 +35,10 @@ class SliderModule extends PostGettingModule {
     return (
       <ScrollableList
         numberToDisplay={1}
-        touchMoveSensitivity={1}
+        touchMoveSensitivity={1.5}
         wrapperClassName={style.sliderWrapper}
+        animation={'fade'}
+        transitionSpeed={1500}
         alwaysUpdate
         showPosition >
         {this.renderSliderItems()}
@@ -50,6 +52,8 @@ class SliderModule extends PostGettingModule {
         numberToDisplay={1}
         touchMoveSensitivity={1}
         wrapperClassName={style.sliderWrapper}
+        animation={'fade'}
+        transitionSpeed={1500}
         alwaysUpdate
         showPosition >
         {this.renderSliderItems()}
@@ -63,6 +67,8 @@ class SliderModule extends PostGettingModule {
         numberToDisplay={1}
         touchMoveSensitivity={1}
         wrapperClassName={style.sliderWrapper}
+        animation={'fade'}
+        transitionSpeed={1500}
         alwaysUpdate
         showPosition >
         {this.renderSliderItems()}

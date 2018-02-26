@@ -247,7 +247,8 @@ class ScrollableList extends Component {
           currentIndex={this.getFirstDisplayedChildIndex(this.state.children)}
           vertical={this.props.vertical}
           touchMoveSensitivity={this.props.touchMoveSensitivity}
-          reverseSwipeScroll={this.props.reverseSwipeScroll} >
+          reverseSwipeScroll={this.props.reverseSwipeScroll}
+          animation={this.props.animation} >
           {(elementDimension) => this.renderChildren(elementDimension)}
         </ScrollableListTrack>
 
@@ -323,11 +324,11 @@ ScrollableList.propTypes = {
   /*
     JSX element to be displayed as the 'up' button
    */
-  buttonUp: PropTypes.element.isRequired,
+  buttonUp: PropTypes.element,
   /*
     JSX element to be displayed as the 'down' button
    */
-  buttonDown: PropTypes.element.isRequired,
+  buttonDown: PropTypes.element,
   /*
     The number of elements to display at a time in the scroller
    */
@@ -371,6 +372,10 @@ ScrollableList.propTypes = {
    */
   alwaysUpdate: PropTypes.bool,
   /*
+    Choose animation for the slider
+   */
+  animation: PropTypes.oneOf(['none', 'slide', 'fade']),
+  /*
     Callback for when the position of the scroller changes
     Will be passed an argument of the next children state (array)
    */
@@ -384,7 +389,8 @@ ScrollableList.propTypes = {
 ScrollableList.defaultProps = {
   numberToDisplay: 1,
   touchMoveSensitivity: 1,
-  transitionSpeed: 600
+  transitionSpeed: 600,
+  animation: 'slide'
 }
 
 export default ScrollableList
