@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import AllPurposeModule from '../../../../../lib/components/Modules/AllPurposeModule/AllPurposeModule'
 import SinglePostModule from './SinglePostModule/SinglePostModule'
 import SinglePostFeaturedModule from './SinglePostFeaturedModule/SinglePostFeaturedModule'
 import MultiPostButtonModule from './MultiPostButtonModule/MultiPostButtonModule'
@@ -15,6 +16,12 @@ const ModuleFactory = ({ data }) => {
   }
 
   switch (data.name) {
+    case 'module_all_purpose':
+      return (
+        <AllPurposeModule
+          content={data['content']} />
+      )
+
     case 'module_cta':
       return (
         <CTAModule

@@ -3,29 +3,32 @@
 @import "../../../../scss/partials/variables";
 
 .CTAModule {
-  @extend %BodyPaddingWithMediaQueries;
-  padding-top: 60px;
-  padding-bottom: 60px;
-  text-align: center;
 
-  :last-child {
-    padding-bottom: 0;
-  }
+  > :global(.container-size-mobile) {
 
-  h5.title {
-    padding-bottom: 20px;
+    padding-top: 60px;
+    padding-bottom: 60px;
     text-align: center;
-    color: $black;
-  }
 
-  .text {
-    padding-bottom: 37px;
-    line-height: 1.5;
-    text-align: center;
-  }
+    :last-child {
+      padding-bottom: 0;
+    }
 
-  .button {
-    text-transform:  uppercase;
+    h5.title {
+      padding-bottom: 20px;
+      text-align: center;
+      color: $black;
+    }
+
+    .text {
+      padding-bottom: 37px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .button {
+      text-transform:  uppercase;
+    }
   }
 
   /*

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import BCorpLink from '../../BCorpLink/BCorpLink'
 import ContainerMediaQuery from '../../../containers/ContainerMediaQuery/ContainerMediaQuery'
+import moduleStyle from '../Modules.scss'
 import style from './CTAModule.scss'
 
 class CTAModule extends Component {
@@ -77,7 +78,7 @@ class CTAModule extends Component {
             this.setState({ node })
           }
         }}
-        className={style.CTAModule} >
+        className={`${style.CTAModule} ${moduleStyle.module}`} >
 
         <ContainerMediaQuery
           node={this.state.node} >
