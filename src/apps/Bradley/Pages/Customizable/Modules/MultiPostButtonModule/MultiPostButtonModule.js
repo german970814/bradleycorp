@@ -62,7 +62,7 @@ class MultiPostButtonModule extends PostGettingModule {
 
         <ContainerMediaQuery
           node={this.node} >
-          {(containerClassName, size) => {
+          {(containerClassName) => {
             return (
               <div
                 style={{

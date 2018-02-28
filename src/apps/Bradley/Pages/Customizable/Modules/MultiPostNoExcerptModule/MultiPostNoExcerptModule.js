@@ -12,15 +12,23 @@ import style from './MultiPostNoExcerptModule.scss'
  * @extends PostGettingModule
  */
 class MultiPostNoExcerptModule extends PostGettingModule {
-  renderGrid (size) {
+  constructor (props) {
+    super(props)
+
+    // we don't want to set state and re render when size is set, since it gets set within the render method
+    // any previous functions to run within render then have access to its' latest value
+    this.size = undefined
+  }
+
+  renderGrid () {
     return this.state.posts.map((post, index, posts) => {
       return (
         <div
           key={index}
-          className={this.getColumnClass(size, posts.length, index)} >
+          className={this.getColumnClass(posts.length, index)} >
           <PostGridItem
             post={post}
-            size={size} />
+            size={this.size} />
         </div>
       )
     })
@@ -39,11 +47,14 @@ class MultiPostNoExcerptModule extends PostGettingModule {
         <ContainerMediaQuery
           node={this.node} >
           {(containerClassName, size) => {
+            // size is set here, before any other render functions because they depend on its value
+            this.size = size
+
             return (
               <div
                 className={`row ${containerClassName}`} >
 
-                {this.renderGrid(size)}
+                {this.renderGrid()}
 
               </div>
             )
@@ -54,8 +65,8 @@ class MultiPostNoExcerptModule extends PostGettingModule {
     )
   }
 
-  getColumnClass (size, total, index) {
-    if (size === 'mobile') {
+  getColumnClass (total, index) {
+    if (this.size === 'mobile') {
       return 'col1'
     }
 
@@ -66,9 +77,9 @@ class MultiPostNoExcerptModule extends PostGettingModule {
     } else if (total === 3) {
       return 'col3'
     } else if (total === 4) {
-      if (size === 'tablet') {
+      if (this.size === 'tablet') {
         return 'col2'
-      } else if (size === 'desktop') {
+      } else if (this.size === 'desktop') {
         return 'col4'
       }
     } else if (total === 5) {

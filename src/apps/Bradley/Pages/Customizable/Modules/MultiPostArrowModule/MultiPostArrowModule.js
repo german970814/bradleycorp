@@ -14,6 +14,14 @@ import style from './MultiPostArrowModule.scss'
  * @extends PostGettingModule
  */
 class MultiPostArrowModule extends PostGettingModule {
+  constructor (props) {
+    super(props)
+
+    // we don't want to set state and re render when size is set, since it gets set within the render method
+    // any previous functions to run within render then have access to its' latest value
+    this.size = undefined
+  }
+
   renderTitle () {
     if (!this.props.title) {
       return
@@ -26,8 +34,8 @@ class MultiPostArrowModule extends PostGettingModule {
     )
   }
 
-  renderPosts (size) {
-    const arrow = (size === 'tablet' || size === 'desktop')
+  renderPosts () {
+    const arrow = (this.size === 'tablet' || this.size === 'desktop')
 
     return this.state.posts.map((post, index) => {
       return (
@@ -44,7 +52,7 @@ class MultiPostArrowModule extends PostGettingModule {
    * containerNode prop makes sure slider layout responds to whole module size,
    * not just the inner module
    */
-  renderSlider (size) {
+  renderSlider () {
     return (
       <SimpleSlider
         numberMobile={2}
@@ -56,7 +64,7 @@ class MultiPostArrowModule extends PostGettingModule {
         respondToContainer
         nextPrevButtonsForMobile
         alwaysUpdate >
-        {this.renderPosts(size)}
+        {this.renderPosts()}
       </SimpleSlider>
     )
   }
@@ -87,13 +95,16 @@ class MultiPostArrowModule extends PostGettingModule {
         <ContainerMediaQuery
           node={this.node} >
           {(containerClassName, size) => {
+            // size is set here, before any other render functions because they depend on its value
+            this.size = size
+
             return (
               <div
                 className={`row ${containerClassName}`} >
 
                 {this.renderTitle()}
 
-                {this.renderSlider(size)}
+                {this.renderSlider()}
 
               </div>
             )
