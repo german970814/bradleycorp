@@ -71,13 +71,17 @@ class PostColumn extends Component {
 
   renderButton () {
     return (
-      <Link
-        to={`${this.postLink}`}
-        replace >
+      <div className={style.buttonWrapper} >
 
-        <button className={`button-brown ${style.button}`} >{'LEARN MORE'}</button>
+        <Link
+          to={`${this.postLink}`}
+          replace >
 
-      </Link>
+          <button className={`button-brown ${style.button}`} >{'LEARN MORE'}</button>
+
+        </Link>
+
+      </div>
     )
   }
 
@@ -87,9 +91,8 @@ class PostColumn extends Component {
 
   render () {
     const columnSizeClass = style[`post-column-${this.props.numColumns}`]
-    const sizeClassName = style[`size-${this.props.size}`]
     return (
-      <div className={`${columnSizeClass} ${style.postColumnWrapper} ${sizeClassName}`} >
+      <div className={`${columnSizeClass} ${style.postColumnWrapper} ${this.props.containerClassName}`} >
 
         {this.renderImage()}
         {this.renderTitle()}
@@ -106,7 +109,7 @@ PostColumn.propTypes = {
   post: PropTypes.object.isRequired,
   containerNode: PropTypes.object,
   numColumns: PropTypes.number.isRequired,
-  size: PropTypes.string
+  containerClassName: PropTypes.string
 }
 
 export default PostColumn

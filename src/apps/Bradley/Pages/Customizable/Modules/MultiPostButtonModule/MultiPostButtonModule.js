@@ -25,7 +25,7 @@ class MultiPostButtonModule extends PostGettingModule {
     )
   }
 
-  renderCols (size) {
+  renderCols (containerClassName) {
     const { posts } = this.state
 
     if (!posts) {
@@ -39,7 +39,7 @@ class MultiPostButtonModule extends PostGettingModule {
           post={post}
           containerNode={this.node}
           numColumns={posts.length}
-          size={size} />
+          containerClassName={containerClassName} />
       )
     })
   }
@@ -73,7 +73,7 @@ class MultiPostButtonModule extends PostGettingModule {
                 {this.renderTitle()}
 
                 <div className={`row ${style.columnsRow}`} >
-                  {this.renderCols(size)}
+                  {this.renderCols(containerClassName)}
                 </div>
 
               </div>

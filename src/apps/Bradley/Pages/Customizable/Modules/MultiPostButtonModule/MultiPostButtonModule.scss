@@ -67,13 +67,26 @@ $desktopGutter: 4.296875vw;
   }
 
   /*
+   TABLET SIZED SCREEN AND UP
+  */
+
+  @include respond-to(tablet) {
+    :global(.container-size-mobile), :global(.container-size-tablet), :global(.container-size-desktop ) {
+      h5.title {
+        font-size: 20px;
+      }
+    }
+  }
+
+  /*
    DESKTOP SIZED SCREEN
-   */
+  */
 
   @include respond-to(desktop) {
-
-    h5.title {
-      font-size: 22px;
+    :global(.container-size-mobile), :global(.container-size-tablet), :global(.container-size-desktop ) {
+      h5.title {
+        font-size: 24px;
+      }
     }
   }
 }

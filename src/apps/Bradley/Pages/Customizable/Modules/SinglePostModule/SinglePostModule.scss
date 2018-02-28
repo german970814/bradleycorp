@@ -153,11 +153,12 @@
    */
 
   @include respond-to(tablet) {
+    :global(.container-size-mobile), :global(.container-size-tablet), :global(.container-size-desktop ) {
 
-    .contentCol {
-
-      .title {
-        font-size: 36px;
+      .contentCol {
+        .title {
+          font-size: 36px;
+        }
       }
     }
   }
@@ -167,11 +168,12 @@
   */
 
   @include respond-to(desktop) {
+    :global(.container-size-mobile), :global(.container-size-tablet), :global(.container-size-desktop ) {
 
-    .contentCol {
-
-      .title {
-        font-size: 42px;
+      .contentCol {
+        .title {
+          font-size: 42px;
+        }
       }
     }
   }

@@ -48,15 +48,20 @@
     text-align: center;
   }
 
-  .button {
-    margin-bottom: 30px;
+  .buttonWrapper {
+    width: 100%;
+    text-align: center;
+
+    .button {
+      margin-bottom: 30px;
+    }
   }
 
   /*
    TABLET SIZED CONTAINER AND UP
    */
 
-  &.size-tablet {
+  &:global(.container-size-tablet) {
     margin-top: 0px;
     margin-bottom: 0px;
     padding: 0 $tabletGutter;
@@ -105,8 +110,13 @@
       margin-bottom: 36px;
     }
 
-    .button {
-      margin-bottom: 0;
+    .buttonWrapper {
+      .button {
+        margin-bottom: 0;
+        padding-right: 30px;
+        padding-left: 30px;
+        width: auto;
+      }
     }
   }
 
@@ -114,7 +124,7 @@
    DESKTOP SIZED CONTAINER
    */
 
-  &.size-desktop {
+  &:global(.container-size-desktop) {
     padding: 0 $desktopGutter;
 
     &::before {

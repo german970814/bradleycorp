@@ -13,7 +13,7 @@ class CTAModule extends Component {
       node: undefined
     }
   }
-  
+
   renderTitle () {
     const { title } = this.props
 

@@ -159,8 +159,10 @@ $arrowWidth: 11px;
   */
 
   @include respond-to(tablet) {
-    h5.title {
-      font-size: 20px;
+    :global(.container-size-mobile), :global(.container-size-tablet), :global(.container-size-desktop ) {
+      h5.title {
+        font-size: 20px;
+      }
     }
   }
 
@@ -169,8 +171,10 @@ $arrowWidth: 11px;
   */
 
   @include respond-to(desktop) {
-    h5.title {
-      font-size: 24px;
+    :global(.container-size-mobile), :global(.container-size-tablet), :global(.container-size-desktop ) {
+      h5.title {
+        font-size: 24px;
+      }
     }
   }
 }
