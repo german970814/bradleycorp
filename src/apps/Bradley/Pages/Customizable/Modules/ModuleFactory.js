@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import SinglePostModule from './SinglePostModule/SinglePostModule'
+import SinglePostFeaturedModule from './SinglePostFeaturedModule/SinglePostFeaturedModule'
 import MultiPostButtonModule from './MultiPostButtonModule/MultiPostButtonModule'
 import MultiPostNoExcerptModule from './MultiPostNoExcerptModule/MultiPostNoExcerptModule'
 import MultiPostArrowModule from './MultiPostArrowModule/MultiPostArrowModule'
@@ -60,6 +61,15 @@ const ModuleFactory = ({ data }) => {
           accentColor={data['accent_color']}
           background={data['background']}
           skin={data['skin']} />
+      )
+
+    case 'module_single_post_featured':
+      return (
+        <SinglePostFeaturedModule
+          postIDs={[parseInt(data['posts'])]} // needs to be an array with name postIDs to extend PostGettingModule
+          postType={data['post_type']}
+          headline={data['headline']}
+          background={data['background']} />
       )
 
     case 'module_slider':

@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import PostGettingModule from '../PostGettingModule'
-// import CPTApiClient from '../../../../../../api/cpt_client'
 import { getExcerpt } from '../../../../../../lib/bcorpPost'
 import ImageFrame from '../../../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import ContainerMediaQuery from '../../../../../../lib/containers/ContainerMediaQuery/ContainerMediaQuery'
