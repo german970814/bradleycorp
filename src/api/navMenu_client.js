@@ -3,23 +3,23 @@ import api from './index'
 
 const NavMenuApiClient = {
 
-  getNavMenuByLocation (location) {
+  getNavMenuByLocation (location, nested) {
     const url = `${api.baseURL}nav-menu`
-    const params = { location }
+    const params = { location, nested }
 
     return axios.get(url, { params })
   },
 
-  getNavMenuByName (name) {
+  getNavMenuByName (name, nested) {
     const url = `${api.baseURL}nav-menu`
-    const params = { name }
+    const params = { name, nested }
 
     return axios.get(url, { params })
   },
 
-  getNavMenuBySlug (slug) {
+  getNavMenuBySlug (slug, nested) {
     const url = `${api.baseURL}nav-menu`
-    const params = { slug }
+    const params = { slug, nested }
 
     return axios.get(url, { params })
   }

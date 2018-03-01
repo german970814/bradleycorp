@@ -6,6 +6,7 @@ import SinglePostFeaturedModule from './SinglePostFeaturedModule/SinglePostFeatu
 import MultiPostButtonModule from './MultiPostButtonModule/MultiPostButtonModule'
 import MultiPostNoExcerptModule from './MultiPostNoExcerptModule/MultiPostNoExcerptModule'
 import MultiPostArrowModule from './MultiPostArrowModule/MultiPostArrowModule'
+import MenuModule from './MenuModule/MenuModule'
 import CTAModule from '../../../../../lib/components/Modules/CTAModule/CTAModule'
 import SliderModule from './SliderModule/SliderModule'
 import TextWithBackgroundPeelerModule from './TextWithBackgroundPeelerModule/TextWithBackgroundPeelerModule'
@@ -29,6 +30,13 @@ const ModuleFactory = ({ data }) => {
           text={data['content']}
           link={data['link']}
           linkText={data['link_text']} />
+      )
+
+    case 'module_menu':
+      return (
+        <MenuModule
+          title={data['title']}
+          menuSlug={data['menu_slug']} />
       )
 
     case 'module_multi_post_no_excerpt':

@@ -1,0 +1,60 @@
+@import "../../../../../../scss/partials/grid";
+@import "../../../../../../scss/partials/variables";
+@import "../../../../../../scss/partials/mixins";
+
+.menuModule {
+
+  > :global(.container-size-mobile) {
+
+    h5.title {
+      margin-bottom: 35px;
+      color: $black;
+      font-size: 16px;
+      line-height: normal;
+      text-align: center;
+    }
+
+    .menuBlockWrapper {
+      @include inline-col(1, top);
+      margin-bottom: 26px;
+    }
+  }
+
+  > :global(.container-size-tablet) {
+
+    h5.title {
+      margin-bottom: 55px;
+    }
+
+    .menuBlockWrapper {
+      @include inline-col(2, top);
+      padding-right: 100px;
+    }
+  }
+
+  > :global(.container-size-desktop) {
+
+    .menuBlockWrapper {
+      @include inline-col(4, top);
+      padding-right: 50px;
+    }
+  }
+
+  @include respond-to(tablet) {
+    :global(.container-size-mobile), :global(.container-size-tablet), :global(.container-size-desktop ) {
+
+      h5.title {
+        font-size: 20px;
+      }
+    }
+  }
+
+  @include respond-to(desktop) {
+    :global(.container-size-mobile), :global(.container-size-tablet), :global(.container-size-desktop ) {
+
+      h5.title {
+        font-size: 24px;
+      }
+    }
+  }
+}
