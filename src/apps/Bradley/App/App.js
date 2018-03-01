@@ -57,7 +57,7 @@ class App extends Component {
   */
   async setInitialState () {
     try {
-      const primaryMenuRequest = NavMenuApiClient.getNavMenu('primary')
+      const primaryMenuRequest = NavMenuApiClient.getNavMenuByLocation('primary')
       const primaryMenuResponse = await primaryMenuRequest
       this.setState({ primaryMenu: primaryMenuResponse.data })
     } catch (err) {
@@ -67,7 +67,7 @@ class App extends Component {
     const footer = this.defaults.footer
 
     try {
-      const footerMenuRequest = NavMenuApiClient.getNavMenu('footer_col_1')
+      const footerMenuRequest = NavMenuApiClient.getNavMenuByLocation('footer_col_1')
       const footerResponse = await footerMenuRequest
       footer.menu1 = footerResponse.data || []
     } catch (err) {
@@ -75,7 +75,7 @@ class App extends Component {
     }
 
     try {
-      const footerMenuRequest2 = NavMenuApiClient.getNavMenu('footer_col_2')
+      const footerMenuRequest2 = NavMenuApiClient.getNavMenuByLocation('footer_col_2')
       const footerResponse2 = await footerMenuRequest2
       footer.menu2 = footerResponse2.data || []
     } catch (err) {
@@ -83,7 +83,7 @@ class App extends Component {
     }
 
     try {
-      const footerMenuRequest3 = NavMenuApiClient.getNavMenu('footer_col_3')
+      const footerMenuRequest3 = NavMenuApiClient.getNavMenuByLocation('footer_col_3')
       const footerResponse3 = await footerMenuRequest3
       footer.menu3 = footerResponse3.data || []
     } catch (err) {
