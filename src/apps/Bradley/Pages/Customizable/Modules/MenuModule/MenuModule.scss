@@ -1,10 +1,14 @@
 @import "../../../../../../scss/partials/grid";
 @import "../../../../../../scss/partials/variables";
 @import "../../../../../../scss/partials/mixins";
+@import "../../../../../../lib/components/Modules/Modules";
 
 .menuModule {
 
+  $margin-bottom: 26px;
+
   > :global(.container-size-mobile) {
+    padding-bottom: $modulePaddingTopBottomMobile - $margin-bottom;
 
     h5.title {
       margin-bottom: 35px;
@@ -16,11 +20,12 @@
 
     .menuBlockWrapper {
       @include inline-col(1, top);
-      margin-bottom: 26px;
+      margin-bottom: $margin-bottom;
     }
   }
 
   > :global(.container-size-tablet) {
+    padding-bottom: $modulePaddingTopBottomTablet - $margin-bottom;
 
     h5.title {
       margin-bottom: 55px;
@@ -33,6 +38,7 @@
   }
 
   > :global(.container-size-desktop) {
+    padding-bottom: $modulePaddingTopBottomDesktop - $margin-bottom;
 
     .menuBlockWrapper {
       @include inline-col(4, top);

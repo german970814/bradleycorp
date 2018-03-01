@@ -2,22 +2,26 @@
 @import "../../../scss/partials/mixins";
 @import "../../../scss/partials/variables";
 
+$modulePaddingTopBottomMobile: 40px;
+$modulePaddingTopBottomTablet: 60px;
+$modulePaddingTopBottomDesktop: 60px;
+
 .module {
   display: block;
 
   > :global(.container-size-mobile) {
     padding: 0 $MobileBodyPadding;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    padding-top: $modulePaddingTopBottomMobile;
+    padding-bottom: $modulePaddingTopBottomMobile;
   }
 
   > :global(.container-size-tablet) {
     padding: 0 $TabletBodyPadding;
-    padding-top: 60px;
-    padding-bottom: 60px;
+    padding-top: $modulePaddingTopBottomTablet;
+    padding-bottom: $modulePaddingTopBottomTablet;
   }
 
   > :global(.container-size-desktop) {
-    padding: 60px 8.359375%;
+    padding: $modulePaddingTopBottomDesktop 8.359375%;
   }
 }
