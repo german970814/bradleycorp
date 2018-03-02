@@ -1,13 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import PostGettingModule from '../PostGettingModule'
-import ContainerMediaQuery from '../../../../../../lib/containers/ContainerMediaQuery/ContainerMediaQuery'
 import ScrollableList from '../../../../../../lib/containers/ScrollableList/ScrollableList'
 import SliderItem from './SliderItem/SliderItem'
-import moduleStyle from '../../../../../../lib/components/Modules/Modules.scss'
 import style from './SliderModule.scss'
 
 class SliderModule extends PostGettingModule {
+  constructor (props) {
+    super(props, style, 'sliderModule')
+  }
+
   renderHeading () {
     if (!this.props.title || this.size !== 'mobile') {
       return
@@ -27,7 +29,7 @@ class SliderModule extends PostGettingModule {
           key={index}
           post={post}
           heading={this.props.title}
-          containerNode={this.node}
+          containerNode={this.state.node}
           size={this.size} />
       )
     })
@@ -72,36 +74,21 @@ class SliderModule extends PostGettingModule {
     )
   }
 
-  render () {
+  renderModule () {
     return (
       <div
-        ref={(node) => {
-          if (!this.node) {
-            this.node = node
-          }
-        }}
-        className={`${moduleStyle.module} ${style.sliderModule}`} >
+        className={this.containerClassName} >
 
-        <ContainerMediaQuery
-          node={this.node} >
-          {(containerClassName, size) => {
-            this.size = size
+        {this.renderHeading()}
 
-            return (
-              <div
-                className={containerClassName} >
-
-                {this.renderHeading()}
-
-                {this.renderSlider()}
-
-              </div>
-            )
-          }}
-        </ContainerMediaQuery >
+        {this.renderSlider()}
 
       </div>
     )
+  }
+
+  render () {
+    return super.render()
   }
 }
 

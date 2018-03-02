@@ -1,50 +1,36 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import ContainerMediaQuery from '../../../containers/ContainerMediaQuery/ContainerMediaQuery'
-import moduleStyle from '../Modules.scss'
+import BCorpModule from '../BCorpModule'
 import style from './AllPurposeModule.scss'
 
-class AllPurposeModule extends Component {
+class AllPurposeModule extends BCorpModule {
   constructor (props) {
-    super(props)
-
-    this.state = {
-      node: undefined
-    }
+    super(props, style, 'allPurposeModule')
   }
 
-  render () {
-    if (!this.props.content) {
-      return null
-    }
-
+  renderModule () {
     return (
       <div
-        ref={(node) => {
-          if (!this.state.node) {
-            this.setState({ node })
-          }
-        }}
-        className={`${style.allPurposeModule} ${moduleStyle.module}`} >
+        className={this.containerClassName} >
 
-        <ContainerMediaQuery
-          node={this.state.node} >
-          {(containerClassName) => {
-            return (
-              <div
-                className={containerClassName} >
-
-                <div
-                  className={style.content}
-                  dangerouslySetInnerHTML={{ __html: decodeURIComponent(this.props.content) }} />
-
-              </div>
-            )
-          }}
-        </ContainerMediaQuery>
+        <div
+          className={style.content}
+          dangerouslySetInnerHTML={{ __html: decodeURIComponent(this.props.content) }} />
 
       </div>
     )
+  }
+
+  render () {
+    return super.render()
+  }
+
+  passesValidation () {
+    if (!this.props.content) {
+      return false
+    }
+
+    return true
   }
 }
 

@@ -23,14 +23,17 @@ $desktopGutter: 4.296875vw;
    MOBILE SIZED CONTAINER AND UP
    */
 
-  @extend %coverBackground;
-  width: auto;
+  > :global(.container-size-tablet) {
+    @extend %coverBackground;
+    box-sizing: border-box;
+    width: auto;
 
-  h5.title {
-    @include col(1);
-    margin-bottom: 27px;
-    text-align: center;
-    color: #2f3d70;
+    h5.title {
+      @include col(1);
+      margin-bottom: 27px;
+      text-align: center;
+      color: #2f3d70;
+    }
   }
 
   /*
@@ -47,6 +50,7 @@ $desktopGutter: 4.296875vw;
       float: left;
       position: relative;
       margin: auto (-$tabletGutter);
+      width: calc(100% + #{2 * $tabletGutter});
     }
   }
 
@@ -63,6 +67,7 @@ $desktopGutter: 4.296875vw;
 
     .columnsRow {
       margin: auto (-$desktopGutter);
+      width: calc(100% + #{2 * $desktopGutter});
     }
   }
 

@@ -1,18 +1,13 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
+import BCorpModule from '../BCorpModule'
 import { Link } from 'react-router-dom'
 import BCorpLink from '../../BCorpLink/BCorpLink'
-import ContainerMediaQuery from '../../../containers/ContainerMediaQuery/ContainerMediaQuery'
-import moduleStyle from '../Modules.scss'
 import style from './CTAModule.scss'
 
-class CTAModule extends Component {
+class CTAModule extends BCorpModule {
   constructor (props) {
-    super(props)
-
-    this.state = {
-      node: undefined
-    }
+    super(props, style, 'CTAModule')
   }
 
   renderTitle () {
@@ -70,35 +65,22 @@ class CTAModule extends Component {
     )
   }
 
-  render () {
+  renderModule () {
     return (
       <div
-        ref={(node) => {
-          if (!this.state.node) {
-            this.setState({ node })
-          }
-        }}
-        className={`${style.CTAModule} ${moduleStyle.module}`} >
+        className={this.containerClassName} >
 
-        <ContainerMediaQuery
-          node={this.state.node} >
-          {(containerClassName) => {
-            return (
-              <div
-                className={containerClassName} >
-
-                {this.renderTitle()}
-                {this.renderMedia()}
-                {this.renderText()}
-                {this.renderButton()}
-
-              </div>
-            )
-          }}
-        </ContainerMediaQuery>
+        {this.renderTitle()}
+        {this.renderMedia()}
+        {this.renderText()}
+        {this.renderButton()}
 
       </div>
     )
+  }
+
+  render () {
+    return super.render()
   }
 }
 

@@ -2,9 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import PostGettingModule from '../PostGettingModule'
 import SimpleSlider from '../../../../../../lib/containers/SimpleSlider/SimpleSlider'
-import ContainerMediaQuery from '../../../../../../lib/containers/ContainerMediaQuery/ContainerMediaQuery'
 import PostColumn from './PostColumn/PostColumn'
-import moduleStyle from '../../../../../../lib/components/Modules/Modules.scss'
 import style from './MultiPostArrowModule.scss'
 
 /**
@@ -15,11 +13,7 @@ import style from './MultiPostArrowModule.scss'
  */
 class MultiPostArrowModule extends PostGettingModule {
   constructor (props) {
-    super(props)
-
-    // we don't want to set state and re render when size is set, since it gets set within the render method
-    // any previous functions to run within render then have access to its' latest value
-    this.size = undefined
+    super(props, style, 'multiPostArrowModule')
   }
 
   renderTitle () {
@@ -42,7 +36,7 @@ class MultiPostArrowModule extends PostGettingModule {
         <PostColumn
           key={index}
           post={post}
-          containerNode={this.node}
+          containerNode={this.state.node}
           arrow={arrow} />
       )
     })
@@ -60,7 +54,7 @@ class MultiPostArrowModule extends PostGettingModule {
         numberDesktop={4}
         wrapperClassName={style.slider}
         desktopWrapperClassName={style.slider}
-        containerNode={this.node}
+        containerNode={this.state.node}
         respondToContainer
         nextPrevButtonsForMobile
         alwaysUpdate >
@@ -77,42 +71,26 @@ class MultiPostArrowModule extends PostGettingModule {
     return `linear-gradient(rgba(47, 61, 112, 0.7),rgba(47, 61, 112, 0.7)), ${image}`
   }
 
-  render () {
+  renderModule () {
     return (
       <div
-        ref={(node) => {
-          if (!this.node) {
-            this.node = node
-          }
-        }}
         style={{
           background: this.getBackground(),
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover'
         }}
-        className={`${moduleStyle.module} ${style.multiPostArrowModule}`} >
+        className={`row ${this.containerClassName}`} >
 
-        <ContainerMediaQuery
-          node={this.node} >
-          {(containerClassName, size) => {
-            // size is set here, before any other render functions because they depend on its value
-            this.size = size
+        {this.renderTitle()}
 
-            return (
-              <div
-                className={`row ${containerClassName}`} >
-
-                {this.renderTitle()}
-
-                {this.renderSlider()}
-
-              </div>
-            )
-          }}
-        </ContainerMediaQuery >
+        {this.renderSlider()}
 
       </div>
     )
+  }
+
+  render () {
+    return super.render()
   }
 }
 

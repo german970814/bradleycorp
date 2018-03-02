@@ -1,20 +1,22 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
+import BCorpModule from '../../../../../../lib/components/Modules/BCorpModule'
 import NavMenuApiClient from '../../../../../../api/navMenu_client'
-import ContainerMediaQuery from '../../../../../../lib/containers/ContainerMediaQuery/ContainerMediaQuery'
 import MenuBlock from './MenuBlock/MenuBlock'
-import moduleStyle from '../../../../../../lib/components/Modules/Modules.scss'
 import style from './MenuModule.scss'
 
-class MenuModule extends Component {
+class MenuModule extends BCorpModule {
   constructor (props) {
-    super(props)
+    super(props, style, 'menuModule')
 
     this.defaultState = {
       menuBlocks: []
     }
 
-    this.state = this.defaultState
+    this.state = {
+      ...this.state,
+      ...this.defaultState
+    }
   }
 
   componentDidMount () {
@@ -58,33 +60,20 @@ class MenuModule extends Component {
     })
   }
 
-  render () {
+  renderModule () {
     return (
-      <div
-        ref={(node) => {
-          if (!this.node) {
-            this.node = node
-          }
-        }}
-        className={`${style.menuModule} ${moduleStyle.module}`} >
+      <div className={`row ${this.containerClassName}`} >
 
-        <ContainerMediaQuery
-          node={this.node} >
-          {(containerClassName) => {
-            return (
-              <div className={`row ${containerClassName}`} >
+        {this.renderTitle()}
 
-                {this.renderTitle()}
-
-                {this.renderMenuBlocks()}
-
-              </div>
-            )
-          }}
-        </ContainerMediaQuery >
+        {this.renderMenuBlocks()}
 
       </div>
     )
+  }
+
+  render () {
+    return super.render()
   }
 
   async getMenu (menuSlug) {
@@ -99,13 +88,6 @@ class MenuModule extends Component {
   }
 }
 
-/**
- *
- * Make sure to extend these propTypes in child classes using:
- * ...MenuModule.propTypes
- * at the top of the child propTypes object
- *
- */
 MenuModule.propTypes = {
   title: PropTypes.string,
   menuSlug: PropTypes.string

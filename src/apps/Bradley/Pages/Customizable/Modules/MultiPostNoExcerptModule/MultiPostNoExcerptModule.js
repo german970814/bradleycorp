@@ -1,8 +1,6 @@
 import React from 'react'
 import PostGettingModule from '../PostGettingModule'
-import ContainerMediaQuery from '../../../../../../lib/containers/ContainerMediaQuery/ContainerMediaQuery'
 import PostGridItem from './PostGridItem/PostGridItem'
-import moduleStyle from '../../../../../../lib/components/Modules/Modules.scss'
 import style from './MultiPostNoExcerptModule.scss'
 
 /**
@@ -13,11 +11,7 @@ import style from './MultiPostNoExcerptModule.scss'
  */
 class MultiPostNoExcerptModule extends PostGettingModule {
   constructor (props) {
-    super(props)
-
-    // we don't want to set state and re render when size is set, since it gets set within the render method
-    // any previous functions to run within render then have access to its' latest value
-    this.size = undefined
+    super(props, style, 'multiPostNoExcerptModule')
   }
 
   renderGrid () {
@@ -28,38 +22,18 @@ class MultiPostNoExcerptModule extends PostGettingModule {
           className={this.getColumnClass(posts.length, index)} >
           <PostGridItem
             post={post}
-            size={this.size} />
+            size={this.state.size} />
         </div>
       )
     })
   }
 
-  render () {
+  renderModule () {
     return (
       <div
-        ref={(node) => {
-          if (!this.node) {
-            this.node = node
-          }
-        }}
-        className={`${moduleStyle.module} ${style.multiPostNoExcerptModule}`} >
+        className={`row ${this.containerClassName}`} >
 
-        <ContainerMediaQuery
-          node={this.node} >
-          {(containerClassName, size) => {
-            // size is set here, before any other render functions because they depend on its value
-            this.size = size
-
-            return (
-              <div
-                className={`row ${containerClassName}`} >
-
-                {this.renderGrid()}
-
-              </div>
-            )
-          }}
-        </ContainerMediaQuery >
+        {this.renderGrid()}
 
       </div>
     )

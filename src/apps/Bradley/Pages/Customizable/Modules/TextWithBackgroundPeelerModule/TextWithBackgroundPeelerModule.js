@@ -1,16 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import ContainerMediaQuery from '../../../../../../lib/containers/ContainerMediaQuery/ContainerMediaQuery'
-import moduleStyle from '../../../../../../lib/components/Modules/Modules.scss'
+import BCorpModule from '../../../../../../lib/components/Modules/BCorpModule'
 import style from './TextWithBackgroundPeelerModule.scss'
 
-class TextWithBackgroundPeelerModule extends Component {
+class TextWithBackgroundPeelerModule extends BCorpModule {
   constructor (props) {
-    super(props)
-
-    this.state = {
-      node: undefined
-    }
+    super(props, style, 'textWithBackgroundPeelerModule')
   }
 
   renderTitle () {
@@ -58,39 +53,26 @@ class TextWithBackgroundPeelerModule extends Component {
     }
   }
 
-  render () {
+  renderModule () {
     return (
       <div
-        ref={(node) => {
-          if (!this.state.node) {
-            this.setState({ node })
-          }
-        }}
         style={{
           backgroundImage: this.getBackground()
         }}
-        className={`${style.textWithBackgroundPeelerModule} ${moduleStyle.module}`} >
+        className={this.containerClassName}>
 
-        <ContainerMediaQuery
-          node={this.state.node} >
-          {(containerClassName) => {
-            return (
-              <div
-                className={containerClassName}>
+        {this.renderTitle()}
 
-                {this.renderTitle()}
+        {this.renderText()}
 
-                {this.renderText()}
-
-                {this.renderTexture()}
-
-              </div>
-            )
-          }}
-        </ContainerMediaQuery >
+        {this.renderTexture()}
 
       </div>
     )
+  }
+
+  render () {
+    return super.render()
   }
 }
 

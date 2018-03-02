@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import PostGettingModule from '../PostGettingModule'
 import { getExcerpt } from '../../../../../../lib/bcorpPost'
 import ImageFrame from '../../../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
-import ContainerMediaQuery from '../../../../../../lib/containers/ContainerMediaQuery/ContainerMediaQuery'
-import moduleStyle from '../../../../../../lib/components/Modules/Modules.scss'
 import style from './SinglePostModule.scss'
 
 /**
@@ -19,6 +17,10 @@ import style from './SinglePostModule.scss'
  * @extends PostGettingModule
  */
 class SinglePostModule extends PostGettingModule {
+  constructor (props) {
+    super(props, style, 'singlePostModule')
+  }
+
   renderImage () {
     const post = this.state.posts[0]
     if (!post.media['featured_image'] ||
@@ -35,7 +37,7 @@ class SinglePostModule extends PostGettingModule {
           aspectRatio={180 / 270}
           aspectRatioTablet={300 / 311}
           aspectRatioDesktop={386 / 420}
-          containerNode={this.node}
+          containerNode={this.state.node}
           respondToContainer />
       </div>
     )
@@ -91,47 +93,34 @@ class SinglePostModule extends PostGettingModule {
       : `url(${require('../../../../../../images/marble-background/shutterstock-109902944.png')})`
   }
 
-  render () {
+  renderModule () {
     return (
       <div
-        ref={(node) => {
-          if (!this.node) {
-            this.node = node
-          }
+        style={{
+          backgroundImage: this.getBackgroundImage()
         }}
-        className={`${style.singlePostModule} ${moduleStyle.module}`} >
+        className={`row ${this.containerClassName}`}>
 
-        <ContainerMediaQuery
-          node={this.node} >
-          {(containerClassName) => {
-            return (
-              <div
-                style={{
-                  backgroundImage: this.getBackgroundImage()
-                }}
-                className={`row ${containerClassName}`}>
+        <div className={`${style.stretchToHeight} ${style.imageCol}`} >
+          {this.renderImage()}
+        </div>
 
-                <div className={`${style.stretchToHeight} ${style.imageCol}`} >
-                  {this.renderImage()}
-                </div>
+        <div className={`${style.stretchToHeight} ${style.contentCol}`} >
 
-                <div className={`${style.stretchToHeight} ${style.contentCol}`} >
+          <div className={style.contentWrapper} >
+            {this.renderTitle()}
+            {this.renderContent()}
+            {this.renderButtons()}
+          </div>
 
-                  <div className={style.contentWrapper} >
-                    {this.renderTitle()}
-                    {this.renderContent()}
-                    {this.renderButtons()}
-                  </div>
-
-                </div>
-
-              </div>
-            )
-          }}
-        </ContainerMediaQuery >
+        </div>
 
       </div>
     )
+  }
+
+  render () {
+    return super.render()
   }
 }
 

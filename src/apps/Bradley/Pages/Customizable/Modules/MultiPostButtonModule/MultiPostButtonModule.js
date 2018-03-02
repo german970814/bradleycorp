@@ -1,9 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import PostGettingModule from '../PostGettingModule'
-import ContainerMediaQuery from '../../../../../../lib/containers/ContainerMediaQuery/ContainerMediaQuery'
 import PostColumn from './PostColumn/PostColumn'
-import moduleStyle from '../../../../../../lib/components/Modules/Modules.scss'
 import style from './MultiPostButtonModule.scss'
 
 /**
@@ -13,6 +11,10 @@ import style from './MultiPostButtonModule.scss'
  * @extends PostGettingModule
  */
 class MultiPostButtonModule extends PostGettingModule {
+  constructor (props) {
+    super(props, style, 'multiPostButtonModule')
+  }
+
   renderTitle () {
     if (!this.props.title) {
       return
@@ -25,7 +27,7 @@ class MultiPostButtonModule extends PostGettingModule {
     )
   }
 
-  renderCols (containerClassName) {
+  renderCols () {
     const { posts } = this.state
 
     if (!posts) {
@@ -37,9 +39,9 @@ class MultiPostButtonModule extends PostGettingModule {
         <PostColumn
           key={index}
           post={post}
-          containerNode={this.node}
+          containerNode={this.state.node}
           numColumns={posts.length}
-          containerClassName={containerClassName} />
+          containerClassName={this.containerClassName} />
       )
     })
   }
@@ -50,50 +52,33 @@ class MultiPostButtonModule extends PostGettingModule {
       : `url(${require('../../../../../../images/marble-background-2/shutterstock-522883816.png')})`
   }
 
-  render () {
-    if (!this.passesValidation()) {
-      return null
-    }
-    
+  renderModule () {
     return (
       <div
-        ref={(node) => {
-          if (!this.node) {
-            this.node = node
-          }
+        style={{
+          backgroundImage: this.getBackgroundImage()
         }}
-        className={`${moduleStyle.module} ${style.multiPostButtonModule}`} >
+        className={`row ${this.containerClassName}`} >
 
-        <ContainerMediaQuery
-          node={this.node} >
-          {(containerClassName) => {
-            return (
-              <div
-                style={{
-                  backgroundImage: this.getBackgroundImage()
-                }}
-                className={`row ${containerClassName}`} >
+        {this.renderTitle()}
 
-                {this.renderTitle()}
-
-                <div className={`row ${style.columnsRow}`} >
-                  {this.renderCols(containerClassName)}
-                </div>
-
-              </div>
-            )
-          }}
-        </ContainerMediaQuery >
+        <div className={`row ${style.columnsRow}`} >
+          {this.renderCols()}
+        </div>
 
       </div>
     )
   }
-  
+
+  render () {
+    return super.render()
+  }
+
   passesValidation () {
     if (!this.state.posts || this.state.posts.length < 2 || this.state.posts.length > 4) {
       return false
     }
-    
+
     return true
   }
 }

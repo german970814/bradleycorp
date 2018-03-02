@@ -2,8 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import PostGettingModule from '../PostGettingModule'
 import { getExcerpt } from '../../../../../../lib/bcorpPost'
-import ContainerMediaQuery from '../../../../../../lib/containers/ContainerMediaQuery/ContainerMediaQuery'
-import moduleStyle from '../../../../../../lib/components/Modules/Modules.scss'
 import style from './SinglePostFeaturedModule.scss'
 
 /**
@@ -18,6 +16,10 @@ import style from './SinglePostFeaturedModule.scss'
  * @extends PostGettingModule
  */
 class SinglePostFeaturedModule extends PostGettingModule {
+  constructor (props) {
+    super(props, style, 'singlePostFeaturedModule')
+  }
+
   renderHeadline () {
     if (!this.props.headline) {
       return
@@ -79,47 +81,34 @@ class SinglePostFeaturedModule extends PostGettingModule {
     }
   }
 
-  render () {
+  renderModule () {
     return (
-      <div
-        ref={(node) => {
-          if (!this.node) {
-            this.node = node
-          }
-        }}
-        className={`${style.singlePostFeaturedModule} ${moduleStyle.module}`} >
+      <React.Fragment>
 
-        <ContainerMediaQuery
-          node={this.node} >
-          {(containerClassName) => {
-            return (
-              <React.Fragment>
-              
-                {this.renderImage()}
-                
-                <div className={`row ${containerClassName}`}>
+        {this.renderImage()}
 
-                  {this.renderHeadline()}
+        <div className={`row ${this.containerClassName}`}>
 
-                  <div className={style.contentWrapper} >
+          {this.renderHeadline()}
 
-                    {this.renderTitle()}
+          <div className={style.contentWrapper} >
 
-                    {this.renderContent()}
+            {this.renderTitle()}
 
-                  </div>
+            {this.renderContent()}
 
-                  {this.renderArrow()}
+          </div>
 
-                </div>
-                
-              </React.Fragment>
-            )
-          }}
-        </ContainerMediaQuery >
+          {this.renderArrow()}
 
-      </div>
+        </div>
+
+      </React.Fragment>
     )
+  }
+
+  render () {
+    return super.render()
   }
 }
 

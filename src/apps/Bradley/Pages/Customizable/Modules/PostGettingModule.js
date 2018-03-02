@@ -1,5 +1,5 @@
-import { Component } from 'react'
 import PropTypes from 'prop-types'
+import BCorpModule from '../../../../../lib/components/Modules/BCorpModule'
 import CPTApiClient from '../../../../../api/cpt_client'
 import { arraysAreEqual } from '../../../../../lib/bcorpArray'
 
@@ -13,9 +13,9 @@ import { arraysAreEqual } from '../../../../../lib/bcorpArray'
  *
  * @extends Component
  */
-class PostGettingModule extends Component {
-  constructor (props) {
-    super(props)
+class PostGettingModule extends BCorpModule {
+  constructor (props, localStyle, moduleName) {
+    super(props, localStyle, moduleName)
 
     /**
      * Default state, post object response is merged shallowly with this
@@ -39,7 +39,10 @@ class PostGettingModule extends Component {
       ]
     }
 
-    this.state = this.defaultState
+    this.state = {
+      ...this.state,
+      ...this.defaultState
+    }
   }
 
   componentDidMount () {
@@ -58,8 +61,12 @@ class PostGettingModule extends Component {
    *
    * @return {[type]} null
    */
-  render () {
+  renderModule () {
     return null
+  }
+
+  render () {
+    return super.render()
   }
 
   /**
