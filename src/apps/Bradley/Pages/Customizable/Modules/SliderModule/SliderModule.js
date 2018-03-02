@@ -36,13 +36,13 @@ class SliderModule extends PostGettingModule {
   renderSlider () {
     let args = {
       wrapperClassName: style.sliderWrapper,
-      animation: ['fade','slide'],
+      animation: ['fade', 'slide'],
       transitionSpeed: 1500,
       vertical: false,
       positionCirclesVertical: false,
       reverseScroll: false
     }
-    
+
     if (this.size === 'tablet' || this.size === 'desktop') {
       args = {
         ...args,
@@ -54,10 +54,10 @@ class SliderModule extends PostGettingModule {
         reverseScroll: true
       }
     }
-    
+
     console.log(this.size)
     console.log(args)
-    
+
     return (
       <ScrollableList
         numberToDisplay={1}
@@ -88,9 +88,8 @@ class SliderModule extends PostGettingModule {
         <ContainerMediaQuery
           node={this.node} >
           {(containerClassName, size) => {
-            
-            this.size = size 
-            
+            this.size = size
+
             return (
               <div
                 className={containerClassName} >

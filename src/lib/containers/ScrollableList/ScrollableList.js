@@ -185,7 +185,7 @@ class ScrollableList extends Component {
     if (!this.props.showPosition || this.props.numberToDisplay !== 1) {
       return
     }
-    
+
     const positionCirclesVertical = this.props.positionCirclesVertical ? `${style.vertical} position-circles-vertical` : ''
 
     return (
@@ -349,7 +349,7 @@ ScrollableList.propTypes = {
    */
   showPosition: PropTypes.bool,
   /*
-    Display position circles vertically 
+    Display position circles vertically
   */
   positionCirclesVertical: PropTypes.bool,
   /*

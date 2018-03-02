@@ -8,8 +8,8 @@ import style from '../SliderModule.scss'
 class SliderItem extends Component {
   renderImage () {
     const { post } = this.props
-    
-    const imgSrc = post.media['featured_image'] && post.media['featured_image'].length !== 0 
+
+    const imgSrc = post.media['featured_image'] && post.media['featured_image'].length !== 0
       ? post.media['featured_image'][0]
       : ''
 
@@ -26,13 +26,13 @@ class SliderItem extends Component {
       </div>
     )
   }
-  
+
   renderHeading () {
-    if (!this.props.heading || 
+    if (!this.props.heading ||
       (this.props.size !== 'tablet' && this.props.size !== 'desktop')) {
-      return 
+      return
     }
-    
+
     return (
       <h5 className={style.heading} >
         {this.props.heading}
@@ -54,7 +54,7 @@ class SliderItem extends Component {
 
   renderContent () {
     const { post } = this.props
-    const excerpt = getExcerpt(post.post['post_excerpt'], undefined, 19)
+    const excerpt = getExcerpt(post.post['post_excerpt'], null, 19)
 
     if (!excerpt) {
       return
@@ -80,13 +80,13 @@ class SliderItem extends Component {
   render () {
     return (
       <div className={`row ${style.sliderItem}`} >
-        
+
         <VerticalAlignHelper />
 
         {this.renderImage()}
-        
+
         <div className={style.contentWrapper} >
-          
+
           {this.renderHeading()}
 
           {this.renderTitle()}
@@ -94,7 +94,7 @@ class SliderItem extends Component {
           {this.renderContent()}
 
           {this.renderArrow()}
-          
+
         </div>
 
       </div>
@@ -106,6 +106,7 @@ SliderItem.propTypes = {
   post: PropTypes.object.isRequired,
   containerNode: PropTypes.object,
   size: PropTypes.string,
+  heading: PropTypes.string
 }
 
 export default SliderItem

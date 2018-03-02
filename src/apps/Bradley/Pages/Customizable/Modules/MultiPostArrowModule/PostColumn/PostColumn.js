@@ -55,7 +55,7 @@ class PostColumn extends Component {
 
   renderContent () {
     const { post } = this.props
-    const excerpt = getExcerpt(post.post['post_excerpt'], post.post['post_content'], 12)
+    const excerpt = getExcerpt(post.post['post_excerpt'], null, 12)
 
     if (!excerpt) {
       return
