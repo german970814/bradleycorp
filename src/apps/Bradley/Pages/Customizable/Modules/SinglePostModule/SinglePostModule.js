@@ -90,7 +90,7 @@ class SinglePostModule extends PostGettingModule {
   getBackgroundImage () {
     return this.props.background
       ? `url(${this.props.background})`
-      : `url(${require('../../../../../../images/marble-background/shutterstock-109902944.png')})`
+      : undefined
   }
 
   renderModule () {

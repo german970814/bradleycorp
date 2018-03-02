@@ -60,7 +60,7 @@ class SinglePostFeaturedModule extends PostGettingModule {
 
   renderImage () {
     const { media } = this.state.posts[0]
-    let src = ''
+    let src
 
     if (this.props.background) {
       src = `url(${this.props.background})`

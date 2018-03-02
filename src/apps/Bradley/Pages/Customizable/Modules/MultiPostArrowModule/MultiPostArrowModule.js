@@ -65,10 +65,10 @@ class MultiPostArrowModule extends PostGettingModule {
 
   getBackground () {
     const image = this.props.background
-      ? `url(${this.props.background})`
-      : `url(${require('../../../../../../images/verge-background-image/verge-background-image.jpg')})`
+      ? `linear-gradient(rgba(47, 61, 112, 0.7),rgba(47, 61, 112, 0.7)), url(${this.props.background})`
+      : undefined
 
-    return `linear-gradient(rgba(47, 61, 112, 0.7),rgba(47, 61, 112, 0.7)), ${image}`
+    return image
   }
 
   renderModule () {

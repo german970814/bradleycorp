@@ -45,19 +45,17 @@ class TextWithBackgroundPeelerModule extends BCorpModule {
     )
   }
 
-  getBackground () {
-    if (this.props.background) {
-      return `url(${this.props.background})`
-    } else {
-      return undefined
-    }
+  getBackgroundImage () {
+    return this.props.background
+      ? `url(${this.props.background})`
+      : undefined
   }
 
   renderModule () {
     return (
       <div
         style={{
-          backgroundImage: this.getBackground()
+          backgroundImage: this.getBackgroundImage()
         }}
         className={this.containerClassName}>
 

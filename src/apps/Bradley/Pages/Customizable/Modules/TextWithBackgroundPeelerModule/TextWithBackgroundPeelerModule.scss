@@ -11,7 +11,7 @@ $backgroundColor: $charcoal-grey;
     @extend %coverBackground;
     box-sizing: border-box;
     padding-right: 100px;
-    background-color: $backgroundColor;
+    //background-color: $backgroundColor;
 
     h4.title {
       position: relative; // to float it in front of the texture image
