@@ -82,6 +82,16 @@ class CTAModule extends BCorpModule {
   render () {
     return super.render()
   }
+
+  passesValidation () {
+    const { title, text, link, linkText, mediaSrc } = this.props
+
+    if (!title && !text && !link && !linkText && !mediaSrc) {
+      return false
+    }
+
+    return true
+  }
 }
 
 CTAModule.propTypes = {

@@ -110,6 +110,14 @@ class SinglePostFeaturedModule extends PostGettingModule {
   render () {
     return super.render()
   }
+
+  passesValidation () {
+    if (!this.state.posts || this.state.posts.length === 0) {
+      return false
+    }
+
+    return true
+  }
 }
 
 SinglePostFeaturedModule.propTypes = {

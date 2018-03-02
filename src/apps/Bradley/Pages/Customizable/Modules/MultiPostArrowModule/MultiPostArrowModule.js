@@ -92,6 +92,14 @@ class MultiPostArrowModule extends PostGettingModule {
   render () {
     return super.render()
   }
+
+  passesValidation () {
+    if (!this.state.posts || this.state.posts.length < 1 || this.state.posts.length > 100) {
+      return false
+    }
+
+    return true
+  }
 }
 
 MultiPostArrowModule.propTypes = {

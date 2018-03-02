@@ -42,10 +42,6 @@ class MenuModule extends BCorpModule {
   }
 
   renderMenuBlocks () {
-    if (!this.state.menuBlocks || this.state.menuBlocks.length === 0) {
-      return
-    }
-
     return this.state.menuBlocks.map((menuBlock, index) => {
       return (
         <div
@@ -74,6 +70,14 @@ class MenuModule extends BCorpModule {
 
   render () {
     return super.render()
+  }
+
+  passesValidation () {
+    if (!this.state.menuBlocks || this.state.menuBlocks.length === 0) {
+      return false
+    }
+
+    return true
   }
 
   async getMenu (menuSlug) {

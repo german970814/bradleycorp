@@ -74,6 +74,16 @@ class TextWithBackgroundPeelerModule extends BCorpModule {
   render () {
     return super.render()
   }
+
+  passesValidation () {
+    const { title, text, background, backgroundPeeler } = this.props
+
+    if (!title && !text && !background && !backgroundPeeler) {
+      return false
+    }
+
+    return true
+  }
 }
 
 TextWithBackgroundPeelerModule.propTypes = {

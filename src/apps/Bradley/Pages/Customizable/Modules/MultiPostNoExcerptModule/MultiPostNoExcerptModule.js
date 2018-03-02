@@ -39,6 +39,14 @@ class MultiPostNoExcerptModule extends PostGettingModule {
     )
   }
 
+  passesValidation () {
+    if (!this.state.posts || this.state.posts.length < 1 || this.state.posts.length > 6) {
+      return false
+    }
+
+    return true
+  }
+
   getColumnClass (total, index) {
     if (this.size === 'mobile') {
       return 'col1'
