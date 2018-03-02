@@ -1,17 +1,18 @@
-%positionCircle {
-  margin: 0 4px;
+$circleWidth: 7px;
+$sideMargin: 4px;
+
+.positionCircle {
+  margin: 0 $sideMargin;
   border-radius: 50%;
-  width: 7px;
-  height: 7px;
+  width: $circleWidth;
+  height: $circleWidth;
   cursor: pointer;
 }
 
 .active {
-  @extend %positionCircle;
   background-color: #232d5c;
 }
 
 .notActive {
-  @extend %positionCircle;
   background-color: #c6d4cf;
 }

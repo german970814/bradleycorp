@@ -8,7 +8,7 @@ const PositionCircle = props => {
     : `${style.notActive} not-active`
   return (
     <div
-      className={activeClass}
+      className={`${style.positionCircle} ${activeClass}`}
       onClick={(e) => props.onClick(e)}>
     </div>
   )

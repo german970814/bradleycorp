@@ -8,13 +8,13 @@ import moduleStyle from '../../../../../../lib/components/Modules/Modules.scss'
 import style from './SliderModule.scss'
 
 class SliderModule extends PostGettingModule {
-  renderTitle () {
-    if (!this.props.title) {
+  renderHeading () {
+    if (!this.props.title || this.size !== 'mobile') {
       return
     }
 
     return (
-      <h5 className={`${style.title}`} >
+      <h5 className={style.heading} >
         {this.props.title}
       </h5>
     )
@@ -26,68 +26,53 @@ class SliderModule extends PostGettingModule {
         <SliderItem
           key={index}
           post={post}
-          containerNode={this.node} />
+          heading={this.props.title}
+          containerNode={this.node}
+          size={this.size} />
       )
     })
   }
 
-  renderSliderMobile () {
+  renderSlider () {
+    let args = {
+      wrapperClassName: style.sliderWrapper,
+      animation: ['fade','slide'],
+      transitionSpeed: 1500,
+      vertical: false,
+      positionCirclesVertical: false,
+      reverseScroll: false
+    }
+    
+    if (this.size === 'tablet' || this.size === 'desktop') {
+      args = {
+        ...args,
+        wrapperClassName: style.sliderWrapperTabletDesktop,
+        animation: ['fade'],
+        transitionSpeed: 1500,
+        vertical: true,
+        positionCirclesVertical: true,
+        reverseScroll: true
+      }
+    }
+    
+    console.log(this.size)
+    console.log(args)
+    
     return (
       <ScrollableList
         numberToDisplay={1}
         touchMoveSensitivity={1.5}
-        wrapperClassName={style.sliderWrapper}
-        animation={['fade', 'slide']}
-        transitionSpeed={1500}
+        wrapperClassName={args.wrapperClassName}
+        animation={args.animation}
+        transitionSpeed={args.transitionSpeed}
+        vertical={args.vertical}
+        reverseScroll={args.reverseScroll}
+        positionCirclesVertical={args.positionCirclesVertical}
         alwaysUpdate
         showPosition >
         {this.renderSliderItems()}
       </ScrollableList>
     )
-  }
-
-  renderSliderTablet () {
-    return (
-      <ScrollableList
-        numberToDisplay={1}
-        touchMoveSensitivity={1}
-        wrapperClassName={style.sliderWrapper}
-        animation={['fade']}
-        transitionSpeed={1500}
-        alwaysUpdate
-        showPosition >
-        {this.renderSliderItems()}
-      </ScrollableList>
-    )
-  }
-
-  renderSliderDesktop () {
-    return (
-      <ScrollableList
-        numberToDisplay={1}
-        touchMoveSensitivity={1}
-        wrapperClassName={style.sliderWrapper}
-        animation={['fade']}
-        transitionSpeed={1500}
-        alwaysUpdate
-        showPosition >
-        {this.renderSliderItems()}
-      </ScrollableList>
-    )
-  }
-
-  renderSlider (size) {
-    if (size === 'mobile') {
-      return this.renderSliderMobile()
-    } else
-
-    if (size === 'tablet') {
-      return this.renderSliderTablet()
-    } else
-
-    if (size === 'desktop') {
-      return this.renderSliderDesktop()
-    }
   }
 
   render () {
@@ -103,13 +88,16 @@ class SliderModule extends PostGettingModule {
         <ContainerMediaQuery
           node={this.node} >
           {(containerClassName, size) => {
+            
+            this.size = size 
+            
             return (
               <div
-                className={`row ${containerClassName}`} >
+                className={containerClassName} >
 
-                {this.renderTitle()}
+                {this.renderHeading()}
 
-                {this.renderSlider(size)}
+                {this.renderSlider()}
 
               </div>
             )

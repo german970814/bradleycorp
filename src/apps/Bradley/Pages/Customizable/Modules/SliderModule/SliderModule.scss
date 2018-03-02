@@ -1,5 +1,7 @@
 @import "../../../../../../scss/partials/variables";
 @import "../../../../../../scss/partials/mixins";
+@import "../../../../../../scss/partials/grid";
+@import "../../../../../../scss/partials/helpers";
 
 .sliderModule {
 
@@ -9,13 +11,13 @@
 
   > :global(.container-size-mobile) {
 
-    h5.title {
+    h5.heading {
       margin-bottom: 30px;
       color: $brown;
       text-align: center;
     }
 
-    .sliderWrapper {
+    .sliderWrapper, .sliderWrapperTabletDesktop {
 
       :global(.button-up), :global(.button-down) {
         display: none;
@@ -34,29 +36,35 @@
     .sliderItem {
 
       .imageWrapper {
+        @include col(1);
+
         margin-bottom: 30px;
         padding: 0 10px;
       }
 
-      h4.title {
-        margin-bottom: 25px;
-        font-size: 27px;
-        letter-spacing: 2.7px;
-        color: $black;
-        text-transform: uppercase;
-      }
+      .contentWrapper {
+        @include col(1);
 
-      .content {
-        margin-bottom: 30px;
-        line-height: 1.5;
-      }
+        h4.title {
+          margin-bottom: 25px;
+          font-size: 27px;
+          letter-spacing: 2.7px;
+          color: $black;
+          text-transform: uppercase;
+        }
 
-      .arrowWrapper {
-        height: 20px;
-        text-align: center;
+        .content {
+          margin-bottom: 27px;
+          line-height: 1.5;
+        }
 
-        .arrow {
-          height: 100%;
+        .arrowWrapper {
+          height: 20px;
+          text-align: center;
+
+          .arrow {
+            height: 100%;
+          }
         }
       }
     }
@@ -68,9 +76,41 @@
 
   > :global(.container-size-tablet) {
 
-    h5.title {
+    h5.heading {
       margin-bottom: 25px;
       text-align: left;
+    }
+
+    .sliderWrapperTabletDesktop {
+      position: relative;
+      height: 400px;
+    }
+
+    .sliderItem {
+      height: 100%;
+
+      .imageWrapper {
+        @include inline-col(2, middle);
+        float: none;
+        margin: 0;
+        padding: 0;
+        padding-right: 38px;
+      }
+
+      .contentWrapper {
+        @include inline-col(2, middle);
+        float: none;
+        padding-right: 34px;
+
+        .arrowWrapper {
+          text-align: left;
+        }
+      }
+    }
+
+    :global(.position-circles-vertical) {
+      right: -10px;
+      @extend %verticalAlignMiddleAbsolutelyPositionedElement;
     }
   }
 
@@ -78,17 +118,32 @@
    DESKTOP SIZED CONTAINER + SCREEN AND UP
    */
 
-  > :global(.container-size-destop) {
+  > :global(.container-size-desktop) {
 
-    h5.title {
-      margin-bottom: 35px;
+    h5.heading {
+      margin-bottom: 36px;
+    }
+
+    .sliderWrapperTabletDesktop {
+      height: 450px;
     }
 
     .sliderItem {
 
-      h4.title {
-        margin-bottom: 35px;
+      .contentWrapper {
+
+        h4.title {
+          margin-bottom: 35px;
+        }
+
+        .content {
+          margin-bottom: 42px;
+        }
       }
+    }
+
+    :global(.position-circles-vertical) {
+      right: -20px;
     }
   }
 
@@ -97,17 +152,22 @@
    */
 
   @include respond-to(tablet) {
+    :global(.container-size-mobile), :global(.container-size-tablet), :global(.container-size-desktop ) {
 
-    h5.title {
-      font-size: 20px;
-    }
+      h5.heading {
+        font-size: 20px;
+      }
 
-    .sliderItem {
+      .sliderItem {
 
-      h4.title {
-        font-size: 36px;
-        letter-spacing: 3.6px;
-        text-align: left;
+        .contentWrapper {
+
+          h4.title {
+            font-size: 36px;
+            letter-spacing: 3.6px;
+            text-align: left;
+          }
+        }
       }
     }
   }
@@ -117,17 +177,22 @@
    */
 
   @include respond-to(desktop) {
+    :global(.container-size-mobile), :global(.container-size-tablet), :global(.container-size-desktop ) {
 
-    h5.title {
-      font-size: 24px;
-    }
+      h5.heading {
+        font-size: 24px;
+      }
 
-    .sliderItem {
+      .sliderItem {
 
-      h4.title {
-        font-size: 42px;
-        letter-spacing: 4.2px;
-        text-align: left;
+        .contentWrapper {
+
+          h4.title {
+            font-size: 42px;
+            letter-spacing: 4.2px;
+            text-align: left;
+          }
+        }
       }
     }
   }

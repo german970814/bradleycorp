@@ -27,6 +27,12 @@
   left: 0;
 }
 
+%verticalAlignMiddleAbsolutelyPositionedElement {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 %aspectRatioWrapper169 {
   position: relative;
   overflow: hidden;

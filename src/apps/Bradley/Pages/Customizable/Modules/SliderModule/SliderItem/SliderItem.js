@@ -1,18 +1,17 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { getExcerpt } from '../../../../../../../lib/bcorpPost'
+import VerticalAlignHelper from '../../../../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import ImageFrame from '../../../../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import style from '../SliderModule.scss'
 
 class SliderItem extends Component {
   renderImage () {
     const { post } = this.props
-
-    if (!post.media['featured_image'] || post.media['featured_image'].length === 0) {
-      return
-    }
-
-    const imgSrc = post.media['featured_image'][0]
+    
+    const imgSrc = post.media['featured_image'] && post.media['featured_image'].length !== 0 
+      ? post.media['featured_image'][0]
+      : ''
 
     return (
       <div className={style.imageWrapper} >
@@ -25,6 +24,19 @@ class SliderItem extends Component {
           containerNode={this.props.containerNode}
           respondToContainer />
       </div>
+    )
+  }
+  
+  renderHeading () {
+    if (!this.props.heading || 
+      (this.props.size !== 'tablet' && this.props.size !== 'desktop')) {
+      return 
+    }
+    
+    return (
+      <h5 className={style.heading} >
+        {this.props.heading}
+      </h5>
     )
   }
 
@@ -67,15 +79,23 @@ class SliderItem extends Component {
 
   render () {
     return (
-      <div className={style.sliderItem} >
+      <div className={`row ${style.sliderItem}`} >
+        
+        <VerticalAlignHelper />
 
         {this.renderImage()}
+        
+        <div className={style.contentWrapper} >
+          
+          {this.renderHeading()}
 
-        {this.renderTitle()}
+          {this.renderTitle()}
 
-        {this.renderContent()}
+          {this.renderContent()}
 
-        {this.renderArrow()}
+          {this.renderArrow()}
+          
+        </div>
 
       </div>
     )
@@ -84,7 +104,8 @@ class SliderItem extends Component {
 
 SliderItem.propTypes = {
   post: PropTypes.object.isRequired,
-  containerNode: PropTypes.object
+  containerNode: PropTypes.object,
+  size: PropTypes.string,
 }
 
 export default SliderItem

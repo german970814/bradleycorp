@@ -33,6 +33,8 @@
   float: left;
 }
 
+@import "./PositionCircle/PositionCircle";
+
 .positionCircles {
   margin-top: 35px;
   margin-bottom: 0;
@@ -46,6 +48,10 @@
 
   @include respond-to(tablet) {
     margin-top: 31px;
+  }
+
+  &.vertical {
+    width: $circleWidth + $sideMargin;
   }
 }
 

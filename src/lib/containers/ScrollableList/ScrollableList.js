@@ -185,10 +185,12 @@ class ScrollableList extends Component {
     if (!this.props.showPosition || this.props.numberToDisplay !== 1) {
       return
     }
+    
+    const positionCirclesVertical = this.props.positionCirclesVertical ? `${style.vertical} position-circles-vertical` : ''
 
     return (
       <ul
-        className={`${style.positionCircles} position-circles`}>
+        className={`${style.positionCircles} position-circles ${positionCirclesVertical}`}>
         {this.state.children.map((child, index) => {
           return (
             <li
@@ -346,6 +348,10 @@ ScrollableList.propTypes = {
     (automatically disabled if slider shows more than one element at a time)
    */
   showPosition: PropTypes.bool,
+  /*
+    Display position circles vertically 
+  */
+  positionCirclesVertical: PropTypes.bool,
   /*
     Reverse direction of scroll
    */
