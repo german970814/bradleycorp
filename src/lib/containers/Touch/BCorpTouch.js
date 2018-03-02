@@ -10,9 +10,16 @@ class BCorpTouch extends Component {
     super(props)
 
     this.state = { x: 0, y: 0, dx: 0, dy: 0 }
+    this.body = document.getElementById('body')
   }
 
   touchStart (event) {
+    // event.preventDefault() 
+    // 
+    // would like to use this, but would have to add the event as event listener to the node and set { passive: false }
+    // this is an anti pattern in react, so for now the best solution is to add overflow: hidden to body
+    this.body.classList.add('prevent-scroll')
+    
     const touchObj = event.changedTouches[0]
     this.setState({
       x: touchObj.clientX,
@@ -23,6 +30,8 @@ class BCorpTouch extends Component {
   }
 
   touchMove (event) {
+    // event.preventDefault() see above
+    
     const touchObj = event.changedTouches[0]
     this.setState(prevState => {
       return {
@@ -35,6 +44,9 @@ class BCorpTouch extends Component {
   }
 
   touchEndCapture (event) {
+    // event.preventDefault() see above
+    this.body.classList.remove('prevent-scroll')
+    
     // if we swiped then we dont want to call child click or touchEnd events
     // so we stop propagation in the event capture phase
     //

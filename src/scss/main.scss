@@ -6,6 +6,10 @@
 body {
   overflow-x: hidden;
   margin: 0;
+
+  &:global(.prevent-scroll) {
+    overflow: hidden;
+  }
 }
 
 a {
