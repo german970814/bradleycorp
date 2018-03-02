@@ -55,9 +55,6 @@ class SliderModule extends PostGettingModule {
       }
     }
 
-    console.log(this.size)
-    console.log(args)
-
     return (
       <ScrollableList
         numberToDisplay={1}

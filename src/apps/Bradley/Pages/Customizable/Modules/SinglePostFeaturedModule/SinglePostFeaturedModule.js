@@ -89,27 +89,31 @@ class SinglePostFeaturedModule extends PostGettingModule {
         }}
         className={`${style.singlePostFeaturedModule} ${moduleStyle.module}`} >
 
-        {this.renderImage()}
-
         <ContainerMediaQuery
           node={this.node} >
           {(containerClassName) => {
             return (
-              <div className={`row ${containerClassName}`}>
+              <React.Fragment>
+              
+                {this.renderImage()}
+                
+                <div className={`row ${containerClassName}`}>
 
-                {this.renderHeadline()}
+                  {this.renderHeadline()}
 
-                <div className={style.contentWrapper} >
+                  <div className={style.contentWrapper} >
 
-                  {this.renderTitle()}
+                    {this.renderTitle()}
 
-                  {this.renderContent()}
+                    {this.renderContent()}
+
+                  </div>
+
+                  {this.renderArrow()}
 
                 </div>
-
-                {this.renderArrow()}
-
-              </div>
+                
+              </React.Fragment>
             )
           }}
         </ContainerMediaQuery >

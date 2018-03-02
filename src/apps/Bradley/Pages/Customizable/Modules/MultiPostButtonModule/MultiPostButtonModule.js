@@ -51,6 +51,10 @@ class MultiPostButtonModule extends PostGettingModule {
   }
 
   render () {
+    if (!this.passesValidation()) {
+      return null
+    }
+    
     return (
       <div
         ref={(node) => {
@@ -83,6 +87,14 @@ class MultiPostButtonModule extends PostGettingModule {
 
       </div>
     )
+  }
+  
+  passesValidation () {
+    if (!this.state.posts || this.state.posts.length < 2 || this.state.posts.length > 4) {
+      return false
+    }
+    
+    return true
   }
 }
 
