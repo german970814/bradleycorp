@@ -20,6 +20,13 @@ class CPTApiClient {
     return axios.get(url, { params })
   }
 
+  getByIdArray (idArray) {
+    const url = `${api.baseURL}${this.cptName}`
+    const params = { id_array: JSON.stringify(idArray) }
+
+    return axios.get(url, { params })
+  }
+
   getByTax (taxName, termSlug) {
     const url = `${api.baseURL}${this.cptName}`
     const params = { tax_name: taxName, term_slug: termSlug }

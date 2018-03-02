@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import CPTApiClient from '../../../../../../api/cpt_client'
+import PostGettingModule from '../PostGettingModule'
+// import CPTApiClient from '../../../../../../api/cpt_client'
 import { getExcerpt } from '../../../../../../lib/bcorpPost'
 import ImageFrame from '../../../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import ContainerMediaQuery from '../../../../../../lib/containers/ContainerMediaQuery/ContainerMediaQuery'
@@ -8,50 +9,34 @@ import moduleStyle from '../../../../../../lib/components/Modules/Modules.scss'
 import style from './SinglePostModule.scss'
 
 /**
- * Single Post Module Component
+ * Single Post Module presentational component.
+ * Post data is managed by the PostGettingModule
+ *
+ * Make sure we pass it a single post id, but in an array... eg [123]
+ * This keeps it compatible with PostGettingModule
+ *
+ * If multiple IDs are passed, it will always just display the first
+ *
+ * @extends PostGettingModule
  */
-class SinglePostModule extends Component {
+class SinglePostModule extends PostGettingModule {
   constructor (props) {
     super(props)
 
-    /**
-     * Default state, post object response is merged shallowly with this
-     * so we can be sure of what state we definitely have
-     */
-    const defaultState = {
-      post: {
-        ID: 1,
-        'post_title': '',
-        'post_content': '',
-        'post_excerpt': ''
-      },
-      media: {
-        'featured_image': ['', 0, 0, false]
-      },
+    this.state = {
+      ...this.state,
       node: undefined
-    }
-    this.defaultState = defaultState
-    this.state = defaultState
-  }
-
-  componentDidMount () {
-    const { postID } = this.props
-    this.getPost(postID)
-  }
-
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.postID !== this.props.postID) {
-      this.getPost(nextProps.postID)
     }
   }
 
   renderImage () {
-    if (!this.state.media['featured_image'] ||
-    this.state.media['featured_image'].length === 0) {
+    const post = this.state.posts[0]
+    if (!post.media['featured_image'] ||
+    post.media['featured_image'].length === 0) {
       return
     }
 
-    const src = this.state.media['featured_image'][0]
+    const src = post.media['featured_image'][0]
 
     return (
       <div className={style.imagePadding } >
@@ -65,20 +50,21 @@ class SinglePostModule extends Component {
   }
 
   renderTitle () {
-    if (!this.state.post['post_title']) {
+    const post = this.state.posts[0]
+    if (!post.post['post_title']) {
       return
     }
 
     return (
       <div className={style.title} >
-        {this.state.post['post_title']}
+        {post.post['post_title']}
       </div>
     )
   }
 
   renderContent () {
-    const { post } = this.state
-    const excerpt = getExcerpt(post['post_excerpt'], post['post_content'])
+    const post = this.state.posts[0]
+    const excerpt = getExcerpt(post.post['post_excerpt'], post.post['post_content'])
 
     if (!excerpt) {
       return
@@ -150,30 +136,12 @@ class SinglePostModule extends Component {
       </ContainerMediaQuery >
     )
   }
-
-  /**
-   * Gets the post object and merges it with state
-   * @param  {[number]}  postID ID of the post to request
-   */
-  async getPost (postID) {
-    try {
-      const postAPIClient = new CPTApiClient('post')
-      const post = await postAPIClient.getById(postID)
-      const postData = post.data
-
-      // set state leaving defaults where there exists no data in the request
-      return this.setState(Object.assign({}, this.defaultState, postData))
-    } catch (err) {
-      console.log(err)
-    }
-  }
 }
 
 SinglePostModule.propTypes = {
-  /*
-   * ID of the post to display
-   */
-  postID: PropTypes.number.isRequired,
+
+  ...PostGettingModule.propTypes,
+
   accentColor: PropTypes.string,
   /**
    * The image src as a sting

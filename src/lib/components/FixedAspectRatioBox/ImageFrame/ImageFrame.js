@@ -2,10 +2,19 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Media from 'react-media'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../globals'
+import ContainerMediaQuery from '../../../containers/ContainerMediaQuery/ContainerMediaQuery'
 import FixedAspectRatioBox from '../FixedAspectRatioBox'
 import style from './ImageFrame.scss'
 
 class ImageFrame extends Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      node: undefined
+    }
+  }
+
   getAspectRatioTablet () {
     if (!this.props.aspectRatioTablet) {
       return this.props.aspectRatio
@@ -22,53 +31,100 @@ class ImageFrame extends Component {
     return this.props.aspectRatioDesktop
   }
 
-  render () {
+  renderFrameMobile () {
     return (
-      <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
-        {match =>
-          match ? (
-            // mobile
-            <FixedAspectRatioBox
-              aspectRatio={this.props.aspectRatio} >
-              <div
-                style={{
-                  backgroundImage: `url(${this.props.src})`,
-                  backgroundSize: this.props.sizing
-                }}
-                className={style.image} />
-            </FixedAspectRatioBox>
-          ) : (
-            <Media query={{ maxWidth: TABLETMAXWIDTH }}>
-              {match =>
-                match ? (
-                // tablet
-                  <FixedAspectRatioBox
-                    aspectRatio={this.getAspectRatioTablet()} >
-                    <div
-                      style={{
-                        backgroundImage: `url(${this.props.src})`,
-                        backgroundSize: this.props.sizing
-                      }}
-                      className={style.image} />
-                  </FixedAspectRatioBox>
-                ) : (
-                // desktop
-                  <FixedAspectRatioBox
-                    aspectRatio={this.getAspectRatioDesktop()} >
-                    <div
-                      style={{
-                        backgroundImage: `url(${this.props.src})`,
-                        backgroundSize: this.props.sizing
-                      }}
-                      className={style.image} />
-                  </FixedAspectRatioBox>
-                )
-              }
-            </Media>
-          )
-        }
-      </Media>
+      <FixedAspectRatioBox
+        aspectRatio={this.props.aspectRatio} >
+        <div
+          style={{
+            backgroundImage: `url(${this.props.src})`,
+            backgroundSize: this.props.sizing
+          }}
+          className={style.image} />
+      </FixedAspectRatioBox>
     )
+  }
+
+  renderFrameTablet () {
+    return (
+      <FixedAspectRatioBox
+        aspectRatio={this.getAspectRatioTablet()} >
+        <div
+          style={{
+            backgroundImage: `url(${this.props.src})`,
+            backgroundSize: this.props.sizing
+          }}
+          className={style.image} />
+      </FixedAspectRatioBox>
+    )
+  }
+
+  renderFrameDesktop () {
+    return (
+      <FixedAspectRatioBox
+        aspectRatio={this.getAspectRatioDesktop()} >
+        <div
+          style={{
+            backgroundImage: `url(${this.props.src})`,
+            backgroundSize: this.props.sizing
+          }}
+          className={style.image} />
+      </FixedAspectRatioBox>
+    )
+  }
+
+  render () {
+    if (!this.props.respondToContainer) {
+      return (
+        <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
+          {match =>
+            match ? this.renderFrameMobile()
+              : (
+                <Media query={{ maxWidth: TABLETMAXWIDTH }}>
+                  {match =>
+                    match ? this.renderFrameTablet() : this.renderFrameDesktop()
+                  }
+                </Media>
+              )
+          }
+        </Media>
+      )
+    } else {
+      return (
+        <ContainerMediaQuery
+          node={this.state.node} >
+          {(containerClassName, size) => {
+            let frame = null
+
+            if (size === 'mobile') {
+              frame = this.renderFrameMobile()
+            } else
+
+            if (size === 'tablet') {
+              frame = this.renderFrameTablet()
+            } else
+
+            if (size === 'desktop') {
+              frame = this.renderFrameDesktop()
+            }
+
+            return (
+              <div
+                ref={(node) => {
+                  if (!this.state.node) {
+                    this.setState({ node })
+                  }
+                }}
+                className={`${containerClassName} ${style.imageFrame}`} >
+
+                {frame}
+
+              </div>
+            )
+          }}
+        </ContainerMediaQuery>
+      )
+    }
   }
 }
 
@@ -77,6 +133,7 @@ ImageFrame.propTypes = {
   aspectRatio: PropTypes.number.isRequired,
   aspectRatioTablet: PropTypes.number,
   aspectRatioDesktop: PropTypes.number,
+  respondToContainer: PropTypes.bool,
   sizing: PropTypes.oneOf(['cover', 'contain'])
 }
 

@@ -34,7 +34,7 @@ class CTAModule extends Component {
 
     return <div
       className={style.text}
-      dangerouslySetInnerHTML={{__html: decodeURIComponent( text )}}/>
+      dangerouslySetInnerHTML={{__html: decodeURIComponent(text)}}/>
   }
 
   renderButton () {
