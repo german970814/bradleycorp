@@ -91,12 +91,10 @@ MultiPostButtonModule.propTypes = {
    * Title to display above the posts
    */
   title: PropTypes.string,
-  accentColor: PropTypes.string,
   /**
    * The image src as a sting
    */
-  background: PropTypes.string,
-  skin: PropTypes.string
+  background: PropTypes.string
 }
 
 export default MultiPostButtonModule

@@ -135,13 +135,10 @@ class SinglePostModule extends PostGettingModule {
 SinglePostModule.propTypes = {
 
   ...PostGettingModule.propTypes,
-
-  accentColor: PropTypes.string,
   /**
    * The image src as a sting
    */
-  background: PropTypes.string,
-  skin: PropTypes.string
+  background: PropTypes.string
 }
 
 export default SinglePostModule

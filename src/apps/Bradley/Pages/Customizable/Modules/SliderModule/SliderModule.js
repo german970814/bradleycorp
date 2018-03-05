@@ -106,12 +106,7 @@ SliderModule.propTypes = {
   /*
    * Title to display above the posts
    */
-  title: PropTypes.string,
-  accentColor: PropTypes.string,
-  /**
-   * The image src as a sting
-   */
-  skin: PropTypes.string
+  title: PropTypes.string
 }
 
 export default SliderModule

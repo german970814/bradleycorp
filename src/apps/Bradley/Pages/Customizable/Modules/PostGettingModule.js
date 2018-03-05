@@ -50,6 +50,8 @@ class PostGettingModule extends BCorpModule {
   }
 
   componentWillReceiveProps (nextProps) {
+    super.componentWillReceiveProps(nextProps)
+
     if (!arraysAreEqual(nextProps.postIDs, this.props.postIDs)) {
       this.getPosts(nextProps.postIDs)
     }
@@ -99,6 +101,8 @@ class PostGettingModule extends BCorpModule {
  *
  */
 PostGettingModule.propTypes = {
+  ...BCorpModule.propTypes,
+
   /*
    * ID of the post to display
    */

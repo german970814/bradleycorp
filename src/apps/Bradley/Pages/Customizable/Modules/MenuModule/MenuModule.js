@@ -24,6 +24,8 @@ class MenuModule extends BCorpModule {
   }
 
   componentWillReceiveProps (nextProps) {
+    super.componentWillReceiveProps(nextProps)
+
     if (nextProps.menuSlug !== this.props.menuSlug) {
       this.getMenu(nextProps.menuSlug)
     }
@@ -93,6 +95,8 @@ class MenuModule extends BCorpModule {
 }
 
 MenuModule.propTypes = {
+  ...BCorpModule.propTypes,
+
   title: PropTypes.string,
   menuSlug: PropTypes.string
 }

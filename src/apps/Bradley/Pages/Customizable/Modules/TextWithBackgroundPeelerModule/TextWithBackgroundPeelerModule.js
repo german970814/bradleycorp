@@ -85,11 +85,11 @@ class TextWithBackgroundPeelerModule extends BCorpModule {
 }
 
 TextWithBackgroundPeelerModule.propTypes = {
+  ...BCorpModule.propTypes,
+
   title: PropTypes.string,
   text: PropTypes.string,
-  background: PropTypes.string,
-  backgroundPeeler: PropTypes.string,
-  skin: PropTypes.string
+  backgroundPeeler: PropTypes.string
 }
 
 export default TextWithBackgroundPeelerModule

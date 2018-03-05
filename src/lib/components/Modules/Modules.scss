@@ -24,4 +24,20 @@ $modulePaddingTopBottomDesktop: 60px;
   > :global(.container-size-desktop) {
     padding: $modulePaddingTopBottomDesktop 8.359375%;
   }
+
+  :global(.module-accent-color-green) {
+    background-color: $green;
+  }
+
+  :global(.module-accent-color-blue) {
+    background-color: $blue;
+  }
+
+  :global(.module-accent-color-orange) {
+    background-color: $orange;
+  }
+
+  :global(.module-accent-color-brown) {
+    background-color: $brown;
+  }
 }

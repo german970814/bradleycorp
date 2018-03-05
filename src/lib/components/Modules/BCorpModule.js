@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import ContainerMediaQuery from '../../containers/ContainerMediaQuery/ContainerMediaQuery'
 import moduleStyle from './Modules.scss'
 
@@ -39,12 +40,43 @@ class BCorpModule extends Component {
      * @type {String}
      */
     this.containerClassName = ''
+
     /**
      * the current size of the module's container
      * '', 'mobile', 'tablet' or 'desktop'
      * @type {String}
      */
     this.size = ''
+
+    /**
+     * Add this class to any elements you want to be affected by different accent colours
+     *
+     * This gets set when component props update
+     *
+     * @type {String}
+     */
+    this.accentColorClass = ''
+
+    /**
+     * Add this class to any elements you want to be affected by different skin types
+     *
+     * This gets set when component props update
+     *
+     * @type {String}
+     */
+    this.skinClass = ''
+  }
+
+  /**
+   *
+   * Make sure to run this in children if they also implement a componentWillReceiveProps method
+   *
+   */
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.accentColor !== this.props.accentColor || nextProps.skin !== this.props.skin) {
+      this.accentColorClass = nextProps.accentColor ? `module-accent-color-${nextProps.accentColor}` : ''
+      this.skinClass = nextProps.skin ? `module-skin-${nextProps.skin}` : ''
+    }
   }
 
   /**
@@ -91,7 +123,7 @@ class BCorpModule extends Component {
             this.setState({ node })
           }
         }}
-        className={`${moduleStyle.module} ${this.localStyle[this.moduleName]}`} >
+        className={`${moduleStyle.module} ${this.localStyle[this.moduleName]}=`} >
 
         <ContainerMediaQuery
           node={this.state.node} >
@@ -120,6 +152,29 @@ class BCorpModule extends Component {
   passesValidation () {
     return true
   }
+}
+
+BCorpModule.propTypes = {
+  /**
+   * Determines main colour theme of module elements
+   *
+   * one of 'orange', 'green', 'blue', 'brown' or 'none'
+   *
+   * note: default will be brown for all modules
+   *
+   * @type {[stirng]}
+   */
+  accentColor: PropTypes.string,
+  /**
+   * Colour of the background, determines wether text should be white or black
+   * eg light => white background so black text
+   *
+   * one of 'light', 'dark' or 'none'.
+   * default to light
+   *
+   * @type {[type]}
+   */
+  skin: PropTypes.string
 }
 
 export default BCorpModule
