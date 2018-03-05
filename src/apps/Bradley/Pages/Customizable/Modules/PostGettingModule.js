@@ -61,9 +61,7 @@ class PostGettingModule extends BCorpModule {
    *
    * @return {[type]} null
    */
-  renderModule () {
-    return null
-  }
+  renderModule () { return null }
 
   render () {
     return super.render()

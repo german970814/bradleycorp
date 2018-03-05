@@ -39,6 +39,10 @@ class MultiPostNoExcerptModule extends PostGettingModule {
     )
   }
 
+  render () {
+    return super.render()
+  }
+
   passesValidation () {
     if (!this.state.posts || this.state.posts.length < 1 || this.state.posts.length > 6) {
       return false
