@@ -28,7 +28,7 @@ const ModuleFactory = ({ data }) => {
         <CTAModule
           title={data['title']}
           text={data['content']}
-          link={data['link']}
+          link={data['link_url']}
           linkText={data['link_text']} />
       )
 
@@ -73,6 +73,8 @@ const ModuleFactory = ({ data }) => {
         <SinglePostModule
           postIDs={[parseInt(data['posts'])]} // needs to be an array with name postIDs to extend PostGettingModule
           postType={data['post_type']}
+          link={data['link_url']}
+          linkText={data['link_text']}
           accentColor={data['accent_color']}
           background={data['background']}
           skin={data['skin']} />

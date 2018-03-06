@@ -1,8 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import PostGettingModule from '../PostGettingModule'
+import { Link } from 'react-router-dom'
 import { getExcerpt } from '../../../../../../lib/bcorpPost'
+import { createCPTUrl } from '../../../../../../lib/bcorpUrl'
+import PostGettingModule from '../PostGettingModule'
 import ImageFrame from '../../../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
+import BCorpLink from '../../../../../../lib/components/BCorpLink/BCorpLink'
 import style from './SinglePostModule.scss'
 
 /**
@@ -75,18 +78,45 @@ class SinglePostModule extends PostGettingModule {
   }
 
   renderButtons () {
+    const { post } = this.state.posts[0]
     const skinClass = this.size === 'tablet' || this.size === 'desktop' ? this.skinClass : ''
+
+    const button = (linkText) => {
+      return <button className={`button-orange ${style.button1} ${this.accentColorClass}`}>{linkText}</button>
+    }
+
+    const button1 = this.props.linkText && this.props.link
+      ? (
+        <BCorpLink
+          url={this.props.link}
+          renderInternal={
+            url => {
+              return (
+                <Link className={`${style.button}`} to={url} replace >
+                  {button(this.props.linkText)}
+                </Link>
+              )
+            }
+          }
+          renderExternal={
+            url => {
+              return (
+                <a className={`${style.button}`} href={url} >
+                  {button(this.props.linkText)}
+                </a>
+              )
+            }
+          } />
+      ) : null
 
     return (
       <div className={`row ${style.buttonsWrapper}`} >
 
-        <div className={`${style.button}`} >
-          <button className={`button-orange ${style.button1} ${this.accentColorClass}`}>{"LET'S TALK"}</button>
-        </div>
+        {button1}
 
-        <div className={`${style.button}`} >
+        <Link className={`${style.button}`} to={createCPTUrl(post)} replace >
           <button className={`button-border-slate-grey ${style.button2} ${skinClass}`}>{'LEARN MORE'}</button>
-        </div>
+        </Link>
 
       </div>
     )
@@ -143,7 +173,9 @@ SinglePostModule.propTypes = {
   /**
    * The image src as a sting
    */
-  background: PropTypes.string
+  background: PropTypes.string,
+  link: PropTypes.string,
+  linkText: PropTypes.string
 }
 
 export default SinglePostModule
