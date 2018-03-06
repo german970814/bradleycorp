@@ -9,6 +9,10 @@ $modulePaddingTopBottomDesktop: 60px;
 .module {
   display: block;
 
+  /*
+    Global module styling
+   */
+
   > :global(.container-size-mobile) {
     padding: 0 $MobileBodyPadding;
     padding-top: $modulePaddingTopBottomMobile;
@@ -25,12 +29,16 @@ $modulePaddingTopBottomDesktop: 60px;
     padding: $modulePaddingTopBottomDesktop 8.359375%;
   }
 
+  /*
+    Global accent colour classes
+   */
+
   :global(.module-accent-color-green) {
     background-color: $green;
   }
 
   :global(.module-accent-color-blue) {
-    background-color: $blue;
+    background-color: $navy;
   }
 
   :global(.module-accent-color-orange) {
@@ -39,5 +47,21 @@ $modulePaddingTopBottomDesktop: 60px;
 
   :global(.module-accent-color-brown) {
     background-color: $brown;
+  }
+
+  /*
+    Global skin classes
+   */
+
+  :global(.module-skin-light) {
+    color: $slate-grey;
+
+    &h4, &h5, &h6 {
+      color: $black;
+    }
+  }
+
+  :global(.module-skin-dark) {
+    color: white;
   }
 }

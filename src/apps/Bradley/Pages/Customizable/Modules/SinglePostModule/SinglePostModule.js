@@ -76,7 +76,7 @@ class SinglePostModule extends PostGettingModule {
       <div className={`row ${style.buttonsWrapper}`} >
 
         <div className={`${style.button}`} >
-          <button className={`button-orange ${style.letsTalk}`}>{"LET'S TALK"}</button>
+          <button className={`button-orange ${style.letsTalk} ${this.accentColorClass}`}>{"LET'S TALK"}</button>
         </div>
 
         <div className={`${style.button}`} >

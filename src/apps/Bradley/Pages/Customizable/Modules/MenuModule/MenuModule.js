@@ -20,6 +20,8 @@ class MenuModule extends BCorpModule {
   }
 
   componentDidMount () {
+    super.componentDidMount()
+
     this.getMenu(this.props.menuSlug)
   }
 

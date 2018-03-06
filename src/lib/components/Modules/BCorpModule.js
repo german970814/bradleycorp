@@ -68,15 +68,19 @@ class BCorpModule extends Component {
   }
 
   /**
-   *
+   * Make sure to run this in children if they also implement a componentDidMount method
+   */
+  componentDidMount () {
+    this.setAccentColourClass(this.props)
+    this.setSkinClass(this.props)
+  }
+
+  /**
    * Make sure to run this in children if they also implement a componentWillReceiveProps method
-   *
    */
   componentWillReceiveProps (nextProps) {
-    if (nextProps.accentColor !== this.props.accentColor || nextProps.skin !== this.props.skin) {
-      this.accentColorClass = nextProps.accentColor ? `module-accent-color-${nextProps.accentColor}` : ''
-      this.skinClass = nextProps.skin ? `module-skin-${nextProps.skin}` : ''
-    }
+    this.setAccentColourClass(nextProps)
+    this.setSkinClass(nextProps)
   }
 
   /**
@@ -123,7 +127,7 @@ class BCorpModule extends Component {
             this.setState({ node })
           }
         }}
-        className={`${moduleStyle.module} ${this.localStyle[this.moduleName]}=`} >
+        className={`${moduleStyle.module} ${this.localStyle[this.moduleName]}`} >
 
         <ContainerMediaQuery
           node={this.state.node} >
@@ -151,6 +155,14 @@ class BCorpModule extends Component {
    */
   passesValidation () {
     return true
+  }
+
+  setAccentColourClass (props) {
+    this.accentColorClass = props.accentColor ? `module-accent-color-${props.accentColor}` : ''
+  }
+
+  setSkinClass (props) {
+    this.skinClass = props.skin ? `module-skin-${props.skin}` : ''
   }
 }
 

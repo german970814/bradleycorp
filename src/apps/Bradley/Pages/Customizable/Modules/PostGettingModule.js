@@ -46,6 +46,8 @@ class PostGettingModule extends BCorpModule {
   }
 
   componentDidMount () {
+    super.componentDidMount()
+
     this.getPosts(this.props.postIDs)
   }
 
