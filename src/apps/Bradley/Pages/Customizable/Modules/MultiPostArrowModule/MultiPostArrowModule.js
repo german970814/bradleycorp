@@ -22,7 +22,7 @@ class MultiPostArrowModule extends PostGettingModule {
     }
 
     return (
-      <h5 className={`${style.title}`} >
+      <h5 className={`${style.title} ${this.accentColorClass} module-accent-color-change-text ${this.skinClass}`} >
         {this.props.title}
       </h5>
     )
@@ -37,6 +37,7 @@ class MultiPostArrowModule extends PostGettingModule {
           key={index}
           post={post}
           containerNode={this.state.node}
+          skinClass={this.skinClass}
           arrow={arrow} />
       )
     })

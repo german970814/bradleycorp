@@ -13,11 +13,11 @@
 
     h5.heading {
       margin-bottom: 30px;
-      color: $brown;
       text-align: center;
     }
 
     .sliderWrapper, .sliderWrapperTabletDesktop {
+      background-color: initial;
 
       :global(.button-up), :global(.button-down) {
         display: none;
@@ -26,10 +26,22 @@
       :global(.position-circles) {
         margin-top: -20px;
         text-align: right;
+      }
 
-        li div:global(.active) {
-          background-color: #ae9988;
-        }
+      &:global(.module-accent-color-blue) :global(.position-circles) li div:global(.active) {
+        background-color: $navy;
+      }
+
+      &:global(.module-accent-color-brown) :global(.position-circles) li div:global(.active) {
+        background-color: $brown;
+      }
+
+      &:global(.module-accent-color-orange) :global(.position-circles) li div:global(.active) {
+        background-color: $orange;
+      }
+
+      &:global(.module-accent-color-green) :global(.position-circles) li div:global(.active) {
+        background-color: $green;
       }
     }
 
@@ -49,7 +61,6 @@
           margin-bottom: 25px;
           font-size: 27px;
           letter-spacing: 2.7px;
-          color: $black;
           text-transform: uppercase;
         }
 

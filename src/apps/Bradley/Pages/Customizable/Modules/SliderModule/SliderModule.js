@@ -16,7 +16,7 @@ class SliderModule extends PostGettingModule {
     }
 
     return (
-      <h5 className={style.heading} >
+      <h5 className={`${style.heading} ${this.accentColorClass} module-accent-color-change-text ${this.skinClass}`} >
         {this.props.title}
       </h5>
     )
@@ -30,14 +30,16 @@ class SliderModule extends PostGettingModule {
           post={post}
           heading={this.props.title}
           containerNode={this.state.node}
-          size={this.size} />
+          size={this.size}
+          accentColorClass={this.accentColorClass}
+          skinClass={this.skinClass} />
       )
     })
   }
 
   renderSlider () {
     let args = {
-      wrapperClassName: style.sliderWrapper,
+      wrapperClassName: `${style.sliderWrapper} ${this.accentColorClass}`,
       animation: ['fade', 'slide'],
       transitionSpeed: 1500,
       vertical: false,
@@ -48,7 +50,7 @@ class SliderModule extends PostGettingModule {
     if (this.size === 'tablet' || this.size === 'desktop') {
       args = {
         ...args,
-        wrapperClassName: style.sliderWrapperTabletDesktop,
+        wrapperClassName: `${style.sliderWrapperTabletDesktop} ${this.accentColorClass}`,
         animation: ['fade'],
         transitionSpeed: 1500,
         vertical: true,

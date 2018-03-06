@@ -21,7 +21,6 @@ $arrowWidth: 11px;
       @include col(1);
       margin-bottom: 27px;
       text-align: center;
-      color: white;
     }
 
     $distanceBetweenItems: 20px;
@@ -40,10 +39,6 @@ $arrowWidth: 11px;
 
       :global(.buttons-below) {
         margin-bottom: 0;
-
-        h6 {
-          color: #fff;
-        }
       }
     }
 
@@ -57,13 +52,11 @@ $arrowWidth: 11px;
 
       h4.title {
         margin-bottom: 18px;
-        color: #fff;
         text-transform: uppercase;
       }
 
       .content {
         margin-bottom: 30px;
-        color: #fff;
         line-height: 1.5;
         text-align: center;
       }

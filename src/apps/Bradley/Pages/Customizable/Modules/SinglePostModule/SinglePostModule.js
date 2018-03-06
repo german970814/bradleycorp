@@ -44,43 +44,48 @@ class SinglePostModule extends PostGettingModule {
   }
 
   renderTitle () {
+    const skinClass = this.size === 'tablet' || this.size === 'desktop' ? this.skinClass : ''
     const post = this.state.posts[0]
+
     if (!post.post['post_title']) {
       return
     }
 
     return (
-      <div className={style.title} >
+      <h5 className={`${style.title} ${skinClass}`} >
         {post.post['post_title']}
-      </div>
+      </h5>
     )
   }
 
   renderContent () {
     const post = this.state.posts[0]
     const excerpt = getExcerpt(post.post['post_excerpt'], null)
+    const skinClass = this.size === 'tablet' || this.size === 'desktop' ? this.skinClass : ''
 
     if (!excerpt) {
       return
     }
 
     return (
-      <div className={style.content} >
+      <div className={`${style.content} ${skinClass}`} >
         {excerpt}
       </div>
     )
   }
 
   renderButtons () {
+    const skinClass = this.size === 'tablet' || this.size === 'desktop' ? this.skinClass : ''
+
     return (
       <div className={`row ${style.buttonsWrapper}`} >
 
         <div className={`${style.button}`} >
-          <button className={`button-orange ${style.letsTalk} ${this.accentColorClass}`}>{"LET'S TALK"}</button>
+          <button className={`button-orange ${style.button1} ${this.accentColorClass}`}>{"LET'S TALK"}</button>
         </div>
 
         <div className={`${style.button}`} >
-          <button className={`button-border-slate-grey ${style.learnMore}`}>{'LEARN MORE'}</button>
+          <button className={`button-border-slate-grey ${style.button2} ${skinClass}`}>{'LEARN MORE'}</button>
         </div>
 
       </div>

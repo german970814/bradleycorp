@@ -15,7 +15,7 @@ class TextWithBackgroundPeelerModule extends BCorpModule {
       return
     }
 
-    return <h4 className={style.title} >{title}</h4>
+    return <h4 className={`${style.title} ${this.skinClass}`} >{title}</h4>
   }
 
   renderText () {
@@ -25,7 +25,7 @@ class TextWithBackgroundPeelerModule extends BCorpModule {
       return
     }
 
-    return <div className={style.text} >{text}</div>
+    return <div className={`${style.text} ${this.skinClass}`} >{text}</div>
   }
 
   renderTexture () {

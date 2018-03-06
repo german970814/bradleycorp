@@ -50,7 +50,7 @@ class PostColumn extends Component {
     }
 
     return (
-      <h4 className={style.title} >{post.post['post_title']}</h4>
+      <h4 className={`${style.title} ${this.props.skinClass}`} >{post.post['post_title']}</h4>
     )
   }
 
@@ -63,7 +63,7 @@ class PostColumn extends Component {
     }
 
     return (
-      <div className={style.content} >
+      <div className={`${style.content} ${this.props.skinClass}`} >
         {excerpt}
       </div>
     )
@@ -77,7 +77,7 @@ class PostColumn extends Component {
           to={`${this.postLink}`}
           replace >
 
-          <button className={`button-brown ${style.button}`} >{'LEARN MORE'}</button>
+          <button className={`button-brown ${style.button} ${this.props.accentColorClass}`} >{'LEARN MORE'}</button>
 
         </Link>
 
@@ -109,7 +109,9 @@ PostColumn.propTypes = {
   post: PropTypes.object.isRequired,
   containerNode: PropTypes.object,
   numColumns: PropTypes.number.isRequired,
-  containerClassName: PropTypes.string
+  containerClassName: PropTypes.string,
+  accentColorClass: PropTypes.string,
+  skinClass: PropTypes.string
 }
 
 export default PostColumn

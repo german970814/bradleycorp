@@ -34,7 +34,7 @@ class SliderItem extends Component {
     }
 
     return (
-      <h5 className={style.heading} >
+      <h5 className={`${style.heading} ${this.props.accentColorClass} module-accent-color-change-text ${this.props.skinClass}`} >
         {this.props.heading}
       </h5>
     )
@@ -48,7 +48,7 @@ class SliderItem extends Component {
     }
 
     return (
-      <h4 className={style.title} >{post.post['post_title']}</h4>
+      <h4 className={`${style.title} ${this.props.skinClass}`} >{post.post['post_title']}</h4>
     )
   }
 
@@ -61,7 +61,7 @@ class SliderItem extends Component {
     }
 
     return (
-      <div className={style.content} >
+      <div className={`${style.content} ${this.props.skinClass}`} >
         {excerpt}
       </div>
     )
@@ -106,7 +106,9 @@ SliderItem.propTypes = {
   post: PropTypes.object.isRequired,
   containerNode: PropTypes.object,
   size: PropTypes.string,
-  heading: PropTypes.string
+  heading: PropTypes.string,
+  accentColorClass: PropTypes.string,
+  skinClass: PropTypes.string
 }
 
 export default SliderItem

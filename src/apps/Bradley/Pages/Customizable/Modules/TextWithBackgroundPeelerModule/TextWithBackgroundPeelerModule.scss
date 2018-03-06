@@ -17,7 +17,6 @@ $backgroundColor: $charcoal-grey;
       position: relative; // to float it in front of the texture image
       z-index: 1;
       margin-bottom: 25px;
-      color: #fff;
       text-align: left;
       text-transform: uppercase;
     }
@@ -25,7 +24,6 @@ $backgroundColor: $charcoal-grey;
     .text {
       position: relative; // to float it in front of the texture image
       z-index: 1;
-      color: #fff;
       line-height: 1.5;
     }
 

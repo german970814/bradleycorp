@@ -49,7 +49,7 @@ class PostColumn extends Component {
     }
 
     return (
-      <h4 className={style.title} >{post.post['post_title']}</h4>
+      <h4 className={`${style.title} ${this.props.skinClass}`} >{post.post['post_title']}</h4>
     )
   }
 
@@ -62,7 +62,7 @@ class PostColumn extends Component {
     }
 
     return (
-      <div className={style.content} >
+      <div className={`${style.content} ${this.props.skinClass}`} >
         {excerpt}
       </div>
     )
@@ -80,7 +80,7 @@ class PostColumn extends Component {
           <div className={style.arrowWrapper} >
             <img
               className={style.arrow}
-              src={require('../../../../../../../images/arrow/arrow@2x.png')} />
+              src={require('../../../../../../../images/arrow/arrow-brown@2x.png')} />
           </div>
 
         </Link>
@@ -110,7 +110,8 @@ class PostColumn extends Component {
 PostColumn.propTypes = {
   post: PropTypes.object.isRequired,
   arrow: PropTypes.bool,
-  containerNode: PropTypes.object
+  containerNode: PropTypes.object,
+  skinClass: PropTypes.string
 }
 
 export default PostColumn

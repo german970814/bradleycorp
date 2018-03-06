@@ -35,18 +35,38 @@ $modulePaddingTopBottomDesktop: 60px;
 
   :global(.module-accent-color-green) {
     background-color: $green;
+
+    &:global(.module-accent-color-change-text) {
+      background-color: transparent;
+      color: $green;
+    }
   }
 
   :global(.module-accent-color-blue) {
     background-color: $navy;
+
+    &:global(.module-accent-color-change-text) {
+      background-color: transparent;
+      color: $navy;
+    }
   }
 
   :global(.module-accent-color-orange) {
     background-color: $orange;
+
+    &:global(.module-accent-color-change-text) {
+      background-color: transparent;
+      color: $orange;
+    }
   }
 
   :global(.module-accent-color-brown) {
     background-color: $brown;
+
+    &:global(.module-accent-color-change-text) {
+      background-color: transparent;
+      color: $brown;
+    }
   }
 
   /*
@@ -55,13 +75,13 @@ $modulePaddingTopBottomDesktop: 60px;
 
   :global(.module-skin-light) {
     color: $slate-grey;
+  }
 
-    &h4, &h5, &h6 {
-      color: $black;
-    }
+  h4:global(.module-skin-light), h5:global(.module-skin-light), h6:global(.module-skin-light) {
+    color: $black;
   }
 
   :global(.module-skin-dark) {
-    color: white;
+    color: #fff !important;
   }
 }

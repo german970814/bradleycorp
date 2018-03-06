@@ -45,7 +45,7 @@
         width: 100%;
       }
 
-      .title {
+      h5.title {
         margin-bottom: 30px;
         font-family: TradeGothic;
         font-size: 27px;
@@ -56,7 +56,6 @@
         letter-spacing: 2.7px;
         text-align: left;
         text-transform: uppercase;
-        color: $black;
       }
 
       .content {
@@ -68,6 +67,12 @@
         @include col(1);
         margin-bottom: 10px;
         text-align: center;
+
+        .button2 {
+          &:global(.module-skin-dark) {
+            border-color: #fff;
+          }
+        }
 
         &:last-child {
           margin-bottom: 0;

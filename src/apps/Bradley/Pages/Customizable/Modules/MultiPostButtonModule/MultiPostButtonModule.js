@@ -21,7 +21,7 @@ class MultiPostButtonModule extends PostGettingModule {
     }
 
     return (
-      <h5 className={`${style.title}`} >
+      <h5 className={`${style.title} ${this.accentColorClass} module-accent-color-change-text ${this.skinClass}`} >
         {this.props.title}
       </h5>
     )
@@ -41,7 +41,9 @@ class MultiPostButtonModule extends PostGettingModule {
           post={post}
           containerNode={this.state.node}
           numColumns={posts.length}
-          containerClassName={this.containerClassName} />
+          containerClassName={this.containerClassName}
+          accentColorClass={this.accentColorClass}
+          skinClass={this.skinClass} />
       )
     })
   }

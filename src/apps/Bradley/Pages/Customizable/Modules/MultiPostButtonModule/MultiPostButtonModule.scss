@@ -12,18 +12,22 @@ $desktopGutter: 4.296875vw;
     MOBILE SIZED CONTAINER ONLY
    */
 
+  /*
+  TODO:// not sure if we want to lose background on mobile or not - need to confirm
+
   > :global {
     &:not(.container-size-tablet) {
       background-image: none !important;
       background-color: $light-gray !important;
     }
   }
+  */
 
   /*
    MOBILE SIZED CONTAINER AND UP
    */
 
-  > :global(.container-size-tablet) {
+  > :global(.container-size-mobile) {
     @extend %coverBackground;
     box-sizing: border-box;
     width: auto;
@@ -32,7 +36,10 @@ $desktopGutter: 4.296875vw;
       @include col(1);
       margin-bottom: 27px;
       text-align: center;
-      color: #2f3d70;
+
+      &:global(.module-skin-light) {
+        //color: $navy;
+      }
     }
   }
 
@@ -41,10 +48,6 @@ $desktopGutter: 4.296875vw;
    */
 
   > :global(.container-size-tablet) {
-
-    h5.title {
-      color: #2e3c6e;
-    }
 
     .columnsRow {
       float: left;
@@ -60,10 +63,6 @@ $desktopGutter: 4.296875vw;
 
   > :global(.container-size-desktop) {
     padding: 60px $desktopGutter;
-
-    h5.title {
-      color: $navy;
-    }
 
     .columnsRow {
       margin: auto (-$desktopGutter);
