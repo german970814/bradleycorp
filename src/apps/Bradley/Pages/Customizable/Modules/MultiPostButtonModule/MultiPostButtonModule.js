@@ -60,7 +60,7 @@ class MultiPostButtonModule extends PostGettingModule {
         style={{
           backgroundImage: this.getBackgroundImage()
         }}
-        className={`row ${this.containerClassName}`} >
+        className={`row ${this.containerClassName} ${this.skinClass} module-skin-background-black`} >
 
         {this.renderTitle()}
 

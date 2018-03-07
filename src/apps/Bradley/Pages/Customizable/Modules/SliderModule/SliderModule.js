@@ -79,7 +79,7 @@ class SliderModule extends PostGettingModule {
   renderModule () {
     return (
       <div
-        className={this.containerClassName} >
+        className={`${this.containerClassName} ${this.skinClass} module-skin-background-black`} >
 
         {this.renderHeading()}
 

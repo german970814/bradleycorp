@@ -83,5 +83,9 @@ $modulePaddingTopBottomDesktop: 60px;
 
   :global(.module-skin-dark) {
     color: #fff !important;
+
+    &:global(.module-skin-background-black) {
+      background-color: $black;
+    }
   }
 }

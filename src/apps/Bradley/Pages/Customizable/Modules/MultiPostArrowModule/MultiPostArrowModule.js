@@ -80,7 +80,7 @@ class MultiPostArrowModule extends PostGettingModule {
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover'
         }}
-        className={`row ${this.containerClassName}`} >
+        className={`row ${this.containerClassName} ${this.skinClass} module-skin-background-black`} >
 
         {this.renderTitle()}
 
