@@ -28,10 +28,7 @@
   }
 
   .col3 {
-    @include col(3) {
-      margin-top: 20px;
-      margin-bottom: 20px;
-    };
+    @include col(3);
   }
 
   .col4 {
