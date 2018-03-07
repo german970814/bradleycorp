@@ -21,7 +21,7 @@ class MultiPostButtonModule extends PostGettingModule {
     }
 
     return (
-      <h5 className={`${style.title} ${this.accentColorClass} module-accent-color-change-text ${this.skinClass}`} >
+      <h5 className={`${style.title} ${this.skinClass}`} >
         {this.props.title}
       </h5>
     )
@@ -77,7 +77,7 @@ class MultiPostButtonModule extends PostGettingModule {
   }
 
   passesValidation () {
-    if (!this.state.posts || this.state.posts.length < 2 || this.state.posts.length > 4) {
+    if (!this.state.posts || this.state.posts.length < 2 || this.state.posts.length > 3) {
       return false
     }
 

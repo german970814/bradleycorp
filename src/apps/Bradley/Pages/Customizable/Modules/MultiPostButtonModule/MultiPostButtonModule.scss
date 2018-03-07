@@ -12,16 +12,10 @@ $desktopGutter: 4.296875vw;
     MOBILE SIZED CONTAINER ONLY
    */
 
-  /*
-  TODO:// not sure if we want to lose background on mobile or not - need to confirm
-
-  > :global {
-    &:not(.container-size-tablet) {
-      background-image: none !important;
-      background-color: $light-gray !important;
-    }
+  :local :global > :not(.container-size-tablet) :local {
+    background-image: none !important;
+    background-color: $light-gray;
   }
-  */
 
   /*
    MOBILE SIZED CONTAINER AND UP
@@ -38,7 +32,7 @@ $desktopGutter: 4.296875vw;
       text-align: center;
 
       &:global(.module-skin-light) {
-        //color: $navy;
+        color: $navy;
       }
     }
   }
