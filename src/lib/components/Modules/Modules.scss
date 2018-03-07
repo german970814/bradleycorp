@@ -73,19 +73,31 @@ $modulePaddingTopBottomDesktop: 60px;
     Global skin classes
    */
 
+  // light
+
   :global(.module-skin-light) {
     color: $slate-grey;
+
+    &:global(.module-skin-light-background-light-gray) {
+      background-color: $light-gray;
+    }
   }
 
   h4:global(.module-skin-light), h5:global(.module-skin-light), h6:global(.module-skin-light) {
     color: $black;
   }
 
+  //dark
+
   :global(.module-skin-dark) {
     color: #fff !important;
 
-    &:global(.module-skin-background-black) {
+    &:global(.module-skin-dark-background-black) {
       background-color: $black;
+    }
+
+    &:global(.module-skin-dark-background-navy) {
+      background-color: $navy;
     }
   }
 }

@@ -57,7 +57,7 @@ class TextWithBackgroundPeelerModule extends BCorpModule {
         style={{
           backgroundImage: this.getBackgroundImage()
         }}
-        className={`${this.containerClassName} ${this.skinClass} module-skin-background-black`}>
+        className={`${this.containerClassName} ${this.skinClass} module-skin-dark-background-black`}>
 
         {this.renderTitle()}
 

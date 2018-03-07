@@ -76,10 +76,18 @@ class SliderModule extends PostGettingModule {
     )
   }
 
+  getBackgroundColorClass () {
+    if (this.props.postType === 'product') {
+      return 'module-skin-dark-background-black'
+    } else {
+      return 'module-skin-dark-background-navy module-skin-light-background-light-gray'
+    }
+  }
+
   renderModule () {
     return (
       <div
-        className={`${this.containerClassName} ${this.skinClass} module-skin-background-black`} >
+        className={`${this.containerClassName} ${this.skinClass} ${this.getBackgroundColorClass()}`} >
 
         {this.renderHeading()}
 
