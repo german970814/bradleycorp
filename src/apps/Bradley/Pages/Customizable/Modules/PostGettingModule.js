@@ -14,7 +14,7 @@ import { arraysAreEqual } from '../../../../../lib/bcorpArray'
  * @extends Component
  */
 class PostGettingModule extends BCorpModule {
-  constructor (props, localStyle, moduleName) {
+  constructor (props, localStyle, moduleName, maxPosts) {
     super(props, localStyle, moduleName)
 
     /**
@@ -43,19 +43,21 @@ class PostGettingModule extends BCorpModule {
       ...this.state,
       ...this.defaultState
     }
+
+    this.maxPosts = maxPosts
   }
 
   componentDidMount () {
     super.componentDidMount()
 
-    this.getPosts(this.props.postIDs)
+    this.getPosts(this.props.postIDs, this.maxPosts)
   }
 
   componentWillReceiveProps (nextProps) {
     super.componentWillReceiveProps(nextProps)
 
     if (!arraysAreEqual(nextProps.postIDs, this.props.postIDs)) {
-      this.getPosts(nextProps.postIDs)
+      this.getPosts(nextProps.postIDs, this.maxPosts)
     }
   }
 
@@ -77,11 +79,11 @@ class PostGettingModule extends BCorpModule {
    *
    * @param  {[number]}  postID ID of the post to request
    */
-  async getPosts (postIdArray) {
+  async getPosts (postIdArray, postsPerPage) {
     try {
       const { postType } = this.props
       const postAPIClient = new CPTApiClient(postType.replace(/_/g, '-'))
-      const postsResponse = await postAPIClient.getByIdArray(postIdArray)
+      const postsResponse = await postAPIClient.getByIdArray(postIdArray, postsPerPage)
       const postsData = postsResponse.data
 
       const posts = postsData.map(postData => {

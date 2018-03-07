@@ -13,7 +13,7 @@ import style from './MultiPostArrowModule.scss'
  */
 class MultiPostArrowModule extends PostGettingModule {
   constructor (props) {
-    super(props, style, 'multiPostArrowModule')
+    super(props, style, 'multiPostArrowModule', 100)
   }
 
   renderTitle () {
@@ -95,7 +95,7 @@ class MultiPostArrowModule extends PostGettingModule {
   }
 
   passesValidation () {
-    if (!this.state.posts || this.state.posts.length < 1 || this.state.posts.length > 100) {
+    if (!this.state.posts || this.state.posts.length < 1 || this.state.posts.length > this.maxPosts) {
       return false
     }
 

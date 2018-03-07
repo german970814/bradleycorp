@@ -11,7 +11,7 @@ import style from './MultiPostNoExcerptModule.scss'
  */
 class MultiPostNoExcerptModule extends PostGettingModule {
   constructor (props) {
-    super(props, style, 'multiPostNoExcerptModule')
+    super(props, style, 'multiPostNoExcerptModule', 6)
   }
 
   renderGrid () {
@@ -44,7 +44,7 @@ class MultiPostNoExcerptModule extends PostGettingModule {
   }
 
   passesValidation () {
-    if (!this.state.posts || this.state.posts.length < 1 || this.state.posts.length > 6) {
+    if (!this.state.posts || this.state.posts.length < 1 || this.state.posts.length > this.maxPosts) {
       return false
     }
 

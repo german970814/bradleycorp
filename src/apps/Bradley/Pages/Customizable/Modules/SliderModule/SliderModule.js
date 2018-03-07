@@ -7,7 +7,7 @@ import style from './SliderModule.scss'
 
 class SliderModule extends PostGettingModule {
   constructor (props) {
-    super(props, style, 'sliderModule')
+    super(props, style, 'sliderModule', 4)
   }
 
   renderHeading () {
@@ -102,7 +102,7 @@ class SliderModule extends PostGettingModule {
   }
 
   passesValidation () {
-    if (!this.state.posts || this.state.posts.length < 1 || this.state.posts.length > 4) {
+    if (!this.state.posts || this.state.posts.length < 1 || this.state.posts.length > this.maxPosts) {
       return false
     }
 

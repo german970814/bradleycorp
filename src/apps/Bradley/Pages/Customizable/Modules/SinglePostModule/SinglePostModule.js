@@ -21,7 +21,7 @@ import style from './SinglePostModule.scss'
  */
 class SinglePostModule extends PostGettingModule {
   constructor (props) {
-    super(props, style, 'singlePostModule')
+    super(props, style, 'singlePostModule', 1)
   }
 
   renderImage () {

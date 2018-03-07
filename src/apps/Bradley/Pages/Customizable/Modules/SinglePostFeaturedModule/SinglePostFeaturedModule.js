@@ -17,7 +17,7 @@ import style from './SinglePostFeaturedModule.scss'
  */
 class SinglePostFeaturedModule extends PostGettingModule {
   constructor (props) {
-    super(props, style, 'singlePostFeaturedModule')
+    super(props, style, 'singlePostFeaturedModule', 1)
   }
 
   renderHeadline () {

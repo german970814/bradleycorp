@@ -12,7 +12,7 @@ import style from './MultiPostButtonModule.scss'
  */
 class MultiPostButtonModule extends PostGettingModule {
   constructor (props) {
-    super(props, style, 'multiPostButtonModule')
+    super(props, style, 'multiPostButtonModule', 3)
   }
 
   renderTitle () {
@@ -77,7 +77,7 @@ class MultiPostButtonModule extends PostGettingModule {
   }
 
   passesValidation () {
-    if (!this.state.posts || this.state.posts.length < 2 || this.state.posts.length > 3) {
+    if (!this.state.posts || this.state.posts.length < 2 || this.state.posts.length > this.maxPosts) {
       return false
     }
 
