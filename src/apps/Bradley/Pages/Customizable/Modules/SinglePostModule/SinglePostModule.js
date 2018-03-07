@@ -79,7 +79,6 @@ class SinglePostModule extends PostGettingModule {
 
   renderButtons () {
     const { post } = this.state.posts[0]
-    const skinClass = this.size === 'tablet' || this.size === 'desktop' ? this.skinClass : ''
 
     const button = (linkText) => {
       return <button className={`button-orange ${style.button1} ${this.accentColorClass}`}>{linkText}</button>
@@ -115,7 +114,7 @@ class SinglePostModule extends PostGettingModule {
         {button1}
 
         <Link className={`${style.button}`} to={createCPTUrl(post)} replace >
-          <button className={`button-border-slate-grey ${style.button2} ${skinClass}`}>{'LEARN MORE'}</button>
+          <button className={`button-border-slate-grey ${style.button2} ${this.skinClass}`}>{'LEARN MORE'}</button>
         </Link>
 
       </div>
