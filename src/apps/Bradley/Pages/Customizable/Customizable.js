@@ -12,8 +12,11 @@ class Customizable extends Component {
     super(props)
 
     this.defaultState = {
-      content: '',
-      rows: [],
+      'module_data': {
+        content: '',
+        rows: []
+      },
+      'page_template_data': {},
       htmlIsSet: false
     }
 
@@ -42,7 +45,7 @@ class Customizable extends Component {
 
   renderPortals () {
     if (this.state.htmlIsSet) {
-      return this.state.rows.map(row => {
+      return this.state['module_data'].rows.map(row => {
         const rowNode = document.querySelector(`[data-row-id="${row.atts['row_id']}"]`)
         const columnNodes = Array.from(rowNode.querySelectorAll(`.bcorp-column`))
 
@@ -65,14 +68,14 @@ class Customizable extends Component {
   render () {
     return (
       <div className={style.customizable}>
-        <CustomizableContentMarkup content={this.state.content} />
+        <CustomizableContentMarkup content={this.state['module_data'].content} />
         {this.renderPortals()}
       </div>
     )
   }
 
   componentDidUpdate (prevProps, prevState) {
-    if (prevState.content !== this.state.content) {
+    if (prevState['module_data'].content !== this.state['module_data'].content) {
       this.setState({ htmlIsSet: true })
     }
   }
