@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import CustomPageApiClient from '../../../../api/customPage_client'
 import { validChain } from '../../../../lib/bcorpObject'
-import ModuleFactory from './Modules/ModuleFactory'
-import CustomizableContentMarkup from './CustomizableContentMarkup'
-import style from './Customizable.scss'
+import Template from './Templates/Template'
 
 class Customizable extends Component {
   constructor (props) {
@@ -16,8 +13,7 @@ class Customizable extends Component {
         content: '',
         rows: []
       },
-      'page_template_data': {},
-      htmlIsSet: false
+      'page_template_data': {}
     }
 
     this.state = this.defaultState
@@ -43,41 +39,8 @@ class Customizable extends Component {
     }
   }
 
-  renderPortals () {
-    if (this.state.htmlIsSet) {
-      return this.state['module_data'].rows.map(row => {
-        const rowNode = document.querySelector(`[data-row-id="${row.atts['row_id']}"]`)
-        const columnNodes = Array.from(rowNode.querySelectorAll(`.bcorp-column`))
-
-        return columnNodes.map((columnNode, index) => {
-          const colData = row.columns[index]
-          const moduleNodes = Array.from(columnNode.getElementsByClassName(`bcorp-module`))
-
-          return moduleNodes.map((moduleNode, index) => {
-            const moduleData = colData.modules[index]
-
-            return ReactDOM.createPortal((
-              <ModuleFactory data={moduleData} />
-            ), moduleNode)
-          })
-        })
-      })
-    }
-  }
-
   render () {
-    return (
-      <div className={style.customizable}>
-        <CustomizableContentMarkup content={this.state['module_data'].content} />
-        {this.renderPortals()}
-      </div>
-    )
-  }
-
-  componentDidUpdate (prevProps, prevState) {
-    if (prevState['module_data'].content !== this.state['module_data'].content) {
-      this.setState({ htmlIsSet: true })
-    }
+    return <Template pageData={this.state} />
   }
 
   async getPage (slug) {

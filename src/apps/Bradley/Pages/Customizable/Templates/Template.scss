@@ -1,6 +1,6 @@
-@import "../../../../scss/partials/grid";
+@import "../../../../../scss/partials/grid";
 
-.customizable :global {
+.template :global {
 
   .bcorp-row {
     @include row();
