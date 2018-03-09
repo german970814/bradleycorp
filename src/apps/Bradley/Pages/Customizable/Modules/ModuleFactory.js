@@ -11,6 +11,12 @@ import CTAModule from '../../../../../lib/components/Modules/CTAModule/CTAModule
 import SliderModule from './SliderModule/SliderModule'
 import TextWithBackgroundPeelerModule from './TextWithBackgroundPeelerModule/TextWithBackgroundPeelerModule'
 
+/**
+ * Given data about a module, we return the correct component with the necessary props
+ *
+ * @param {[object]} props
+ * @return {[component]}
+ */
 const ModuleFactory = ({ data }) => {
   if (!data.name) {
     return null
