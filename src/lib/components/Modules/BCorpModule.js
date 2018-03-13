@@ -174,7 +174,7 @@ BCorpModule.propTypes = {
    *
    * note: default will be brown for all modules
    *
-   * @type {[stirng]}
+   * @type {[string]}
    */
   accentColor: PropTypes.string,
   /**
@@ -184,9 +184,16 @@ BCorpModule.propTypes = {
    * one of 'light', 'dark' or 'none'.
    * default to light
    *
-   * @type {[type]}
+   * @type {[string]}
    */
-  skin: PropTypes.string
+  skin: PropTypes.string,
+  /**
+   * Each module needs access to information about its' containing row
+   * From this we're able to make sure they all have the same height
+   *
+   * @type {[object]}
+   */
+  rowNode: PropTypes.object.isRequired
 }
 
 export default BCorpModule

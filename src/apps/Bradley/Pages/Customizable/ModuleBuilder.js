@@ -52,25 +52,25 @@ class ModuleBuilder extends Component {
       const rowNode = document.querySelector(`[data-row-id="${row.atts['row_id']}"]`)
       const columnNodes = Array.from(rowNode.querySelectorAll(`.bcorp-column`))
 
-      return this.renderColumns(columnNodes, row)
+      return this.renderColumns(columnNodes, row, rowNode)
     })
   }
 
-  renderColumns (columnNodes, row) {
+  renderColumns (columnNodes, row, rowNode) {
     return columnNodes.map((columnNode, index) => {
       const colData = row.columns[index]
       const moduleNodes = Array.from(columnNode.getElementsByClassName(`bcorp-module`))
 
-      return this.renderModules(moduleNodes, colData)
+      return this.renderModules(moduleNodes, colData, rowNode)
     })
   }
 
-  renderModules (moduleNodes, colData) {
+  renderModules (moduleNodes, colData, rowNode) {
     return moduleNodes.map((moduleNode, index) => {
       const moduleData = colData.modules[index]
 
       return ReactDOM.createPortal((
-        <ModuleFactory data={moduleData} />
+        <ModuleFactory data={moduleData} rowNode={rowNode} />
       ), moduleNode)
     })
   }
