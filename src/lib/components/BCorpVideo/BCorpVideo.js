@@ -4,6 +4,10 @@ import YouTube from 'react-youtube'
 import Vimeo from 'react-vimeo'
 import { stringIsNumeric } from '../../bcorpString'
 
+/**
+ * Takes a Video URL or ID from YouTube or Vimeo, and player parameters for both,
+ * and returns the relevant player.
+ */
 const BCorpVideo = props => {
   const videoParams = getVideoParamsFromURL(props.url)
 

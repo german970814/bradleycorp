@@ -4,6 +4,15 @@ import debounce from 'debounce'
 import BCorpVideo from '../BCorpVideo'
 import style from './VideoBackground.scss'
 
+/**
+ * Adds a video background to a relatively positioned contaner node
+ *
+ * Note: although Vimeo is technically supported, YouTube is recommended.
+ * Vimeo currently has no way to mute the video, and the autoplay argument also seems to have a bug.
+ *
+ * Make sure video has a 0.5625 aspect ratio (standard for YouTube)
+ *
+ */
 class VideoBackground extends Component {
   constructor (props) {
     super(props)
@@ -29,6 +38,14 @@ class VideoBackground extends Component {
     }
   }
 
+  /**
+   * Height and width are set such that,
+   * while keeping its' aspect ratio
+   * (important since youtube videos always keep aspect ratio of video regardless size of iframe),
+   * the video always covers its' container.
+   *
+   * @return {[void]}
+   */
   updateBackgroundDimensions () {
     const { offsetWidth, offsetHeight } = this.props.node
 
@@ -47,13 +64,16 @@ class VideoBackground extends Component {
     this.setState({ width, height, top, left })
   }
 
+  /**
+   * Autoplay currently doesnt work for youtube, so we need to do it here.
+   * We can also mute the player.
+   *
+   * @param  {[object]} event
+   * @return {[void]}
+   */
   onPlayerReady (event) {
     event.target.mute()
     event.target.playVideo()
-  }
-
-  vimeoOnReady (object) {
-    console.log(object)
   }
 
   render () {
@@ -94,8 +114,7 @@ class VideoBackground extends Component {
               title: false,
               width: this.state.width,
               height: this.state.height
-            },
-            onReady: this.vimeoOnReady
+            }
           }} />
       </div>
     )
@@ -108,6 +127,9 @@ VideoBackground.propTypes = {
    * Note: this container should have relative positioning
    */
   node: PropTypes.object.isRequired,
+  /**
+   * A Video URL or just the ID
+   */
   url: PropTypes.string.isRequired
 }
 
