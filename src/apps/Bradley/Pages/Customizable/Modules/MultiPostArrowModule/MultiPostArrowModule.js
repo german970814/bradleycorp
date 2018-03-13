@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import PostGettingModule from '../PostGettingModule'
 import SimpleSlider from '../../../../../../lib/containers/SimpleSlider/SimpleSlider'
+import BCorpBackground from '../../../../../../lib/components/BCorpBackground/BCorpBackground'
 import PostColumn from './PostColumn/PostColumn'
 import style from './MultiPostArrowModule.scss'
 
@@ -64,23 +65,14 @@ class MultiPostArrowModule extends PostGettingModule {
     )
   }
 
-  getBackground () {
-    const image = this.props.background
-      ? `linear-gradient(rgba(47, 61, 112, 0.7),rgba(47, 61, 112, 0.7)), url(${this.props.background})`
-      : undefined
-
-    return image
-  }
-
   renderModule () {
     return (
-      <div
-        style={{
-          background: this.getBackground(),
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover'
-        }}
-        className={`row ${this.containerClassName} ${this.skinClass} module-skin-dark-background-black`} >
+      <div className={`row ${this.containerClassName} ${this.skinClass}`} >
+
+        <BCorpBackground
+          imageSrc={this.props.background}
+          overlay={this.props.backgroundOverlay}
+          skin={this.props.skin} />
 
         {this.renderTitle()}
 
@@ -114,7 +106,8 @@ MultiPostArrowModule.propTypes = {
   /**
    * The image src as a sting
    */
-  background: PropTypes.string
+  background: PropTypes.string,
+  backgroundOverlay: PropTypes.string
 }
 
 export default MultiPostArrowModule

@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import PostGettingModule from '../PostGettingModule'
 import { getExcerpt } from '../../../../../../lib/bcorpPost'
+import BCorpBackground from '../../../../../../lib/components/BCorpBackground/BCorpBackground'
 import style from './SinglePostFeaturedModule.scss'
 
 /**
@@ -63,20 +64,19 @@ class SinglePostFeaturedModule extends PostGettingModule {
     let src
 
     if (this.props.background) {
-      src = `url(${this.props.background})`
+      src = this.props.background
     } else
 
     if (media['featured_image'] && media['featured_image'].length > 0) {
-      src = `url(${media['featured_image'][0]})`
+      src = media['featured_image'][0]
     }
 
     if (src !== '') {
       return (
-        <div
-          style={{
-            backgroundImage: src
-          }}
-          className={style.image} />
+        <BCorpBackground
+          imageSrc={src}
+          overlay={this.props.backgroundOverlay}
+          skin={this.props.skin} />
       )
     }
   }
@@ -128,7 +128,8 @@ SinglePostFeaturedModule.propTypes = {
   /**
    * The image src as a sting
    */
-  background: PropTypes.string
+  background: PropTypes.string,
+  backgroundOverlay: PropTypes.string
 }
 
 export default SinglePostFeaturedModule

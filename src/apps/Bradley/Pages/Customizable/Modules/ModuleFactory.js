@@ -60,6 +60,7 @@ const ModuleFactory = ({ data }) => {
           postIDs={data['posts'].split(',')}
           accentColor={data['accent_color']}
           background={data['background']}
+          backgroundOverlay={data['background_overlay']}
           skin={data['skin']} />
       )
 
@@ -71,6 +72,7 @@ const ModuleFactory = ({ data }) => {
           postIDs={data['posts'].split(',')}
           accentColor={data['accent_color']}
           background={data['background']}
+          backgroundOverlay={data['background_overlay']}
           skin={data['skin']} />
       )
 
@@ -83,6 +85,7 @@ const ModuleFactory = ({ data }) => {
           linkText={data['link_text']}
           accentColor={data['accent_color']}
           background={data['background']}
+          backgroundOverlay={data['background_overlay']}
           skin={data['skin']} />
       )
 
@@ -92,7 +95,8 @@ const ModuleFactory = ({ data }) => {
           postIDs={[parseInt(data['posts'])]} // needs to be an array with name postIDs to extend PostGettingModule
           postType={data['post_type']}
           headline={data['headline']}
-          background={data['background']} />
+          background={data['background']}
+          backgroundOverlay={data['background_overlay']} />
       )
 
     case 'module_slider':

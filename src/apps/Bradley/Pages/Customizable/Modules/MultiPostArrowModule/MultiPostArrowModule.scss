@@ -2,10 +2,12 @@
 @import "../../../../../../scss/partials/mixins";
 @import "../../../../../../scss/partials/helpers";
 @import "../../../../../../scss/partials/grid";
+@import "../../../../../../lib/components/BCorpBackground/BCorpBackground";
 
 $arrowWidth: 11px;
 
 .multiPostArrowModule {
+  @extend %bcorpBackgroundParent;
 
   /*
    MOBILE SIZED CONTAINER AND UP
@@ -13,7 +15,7 @@ $arrowWidth: 11px;
 
   > :global(.container-size-mobile) {
 
-    @extend %coverBackground;
+    position: relative;
     box-sizing: border-box;
 
 

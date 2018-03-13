@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import PostGettingModule from '../PostGettingModule'
 import PostColumn from './PostColumn/PostColumn'
+import BCorpBackground from '../../../../../../lib/components/BCorpBackground/BCorpBackground'
 import style from './MultiPostButtonModule.scss'
 
 /**
@@ -56,11 +57,12 @@ class MultiPostButtonModule extends PostGettingModule {
 
   renderModule () {
     return (
-      <div
-        style={{
-          backgroundImage: this.getBackgroundImage()
-        }}
-        className={`row ${this.containerClassName} ${this.skinClass} module-skin-dark-background-black`} >
+      <div className={`row ${this.containerClassName} ${this.skinClass}`} >
+
+        <BCorpBackground
+          imageSrc={this.props.background}
+          overlay={this.props.backgroundOverlay}
+          skin={this.props.skin} />
 
         {this.renderTitle()}
 
@@ -96,7 +98,8 @@ MultiPostButtonModule.propTypes = {
   /**
    * The image src as a sting
    */
-  background: PropTypes.string
+  background: PropTypes.string,
+  backgroundOverlay: PropTypes.string
 }
 
 export default MultiPostButtonModule

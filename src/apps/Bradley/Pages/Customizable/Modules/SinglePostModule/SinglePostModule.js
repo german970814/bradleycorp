@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { getExcerpt } from '../../../../../../lib/bcorpPost'
 import { createCPTUrl } from '../../../../../../lib/bcorpUrl'
+import BCorpBackground from '../../../../../../lib/components/BCorpBackground/BCorpBackground'
 import PostGettingModule from '../PostGettingModule'
 import ImageFrame from '../../../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import BCorpLink from '../../../../../../lib/components/BCorpLink/BCorpLink'
@@ -121,19 +122,14 @@ class SinglePostModule extends PostGettingModule {
     )
   }
 
-  getBackgroundImage () {
-    return this.props.background
-      ? `url(${this.props.background})`
-      : undefined
-  }
-
   renderModule () {
     return (
-      <div
-        style={{
-          backgroundImage: this.getBackgroundImage()
-        }}
-        className={`row ${this.containerClassName} ${this.skinClass} module-skin-dark-background-black`}>
+      <div className={`row ${this.containerClassName} ${this.skinClass}`}>
+
+        <BCorpBackground
+          imageSrc={this.props.background}
+          overlay={this.props.backgroundOverlay}
+          skin={this.props.skin} />
 
         <div className={`${style.stretchToHeight} ${style.imageCol}`} >
           {this.renderImage()}
@@ -173,6 +169,7 @@ SinglePostModule.propTypes = {
    * The image src as a sting
    */
   background: PropTypes.string,
+  backgroundOverlay: PropTypes.string,
   link: PropTypes.string,
   linkText: PropTypes.string
 }

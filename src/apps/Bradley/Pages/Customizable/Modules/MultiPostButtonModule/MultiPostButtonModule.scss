@@ -2,11 +2,13 @@
 @import "../../../../../../scss/partials/mixins";
 @import "../../../../../../scss/partials/helpers";
 @import "../../../../../../scss/partials/grid";
+@import "../../../../../../lib/components/BCorpBackground/BCorpBackground";
 
 $tabletGutter: 5.2vw;
 $desktopGutter: 4.296875vw;
 
 .multiPostButtonModule {
+  @extend %bcorpBackgroundParent;
 
   /*
     MOBILE SIZED CONTAINER ONLY
@@ -22,7 +24,7 @@ $desktopGutter: 4.296875vw;
    */
 
   > :global(.container-size-mobile) {
-    @extend %coverBackground;
+    position: relative;
     box-sizing: border-box;
     width: auto;
 

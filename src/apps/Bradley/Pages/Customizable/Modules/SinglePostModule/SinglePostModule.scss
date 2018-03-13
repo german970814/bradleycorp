@@ -2,12 +2,14 @@
 @import "../../../../../../scss/partials/variables";
 @import "../../../../../../scss/partials/mixins";
 @import "../../../../../../scss/partials/grid";
+@import "../../../../../../lib/components/BCorpBackground/BCorpBackground";
 
 .stretchToHeight {
   height: 100%;
 }
 
 .singlePostModule {
+  @extend %bcorpBackgroundParent;
 
   /*
     MOBILE SIZED CONTAINER ONLY
@@ -25,7 +27,6 @@
 
   > :global(.container-size-mobile) {
 
-    @extend %coverBackground;
     box-sizing: border-box;
 
     .imageCol {

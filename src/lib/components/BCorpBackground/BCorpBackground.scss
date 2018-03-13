@@ -9,9 +9,10 @@
   @extend %fillRelativeParent;
   @extend %coverBackground;
   z-index: -1;
-  opacity: 0.2;
 }
 
-.video {
-  opacity: 0.2;
+// make sure parent div extends this
+%bcorpBackgroundParent {
+  position: relative;
+  z-index: 0;
 }

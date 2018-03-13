@@ -3,6 +3,16 @@ import PropTypes from 'prop-types'
 import { lookupColor } from '../../bcorpStyles'
 import style from './BCorpBackground.scss'
 
+/**
+ * Adds a background to a parent div
+ *
+ * If src and overlay are passed, we return an image with a coloured overlay
+ * If just src is passed, or overlay is an empty string, we get the image with opacity 1
+ * If just the overlay is passed with no image, we get a solid coloured background
+ * If neither are passed, we get the background colour from the skin
+ *
+ * NOTE: the parent div should extend the %bcorpBackgroundParent SCSS class.
+ */
 const BCorpBackground = props => {
   return (
     <div>
@@ -14,20 +24,20 @@ const BCorpBackground = props => {
         className={style.overlay} />
 
       <div
-        style={{
-          backgroundImage: getBackgroundImage(props)
-        }}
-        className={style.image} />
+        style={getBackgroundStyle(props)}
+        className={`${style.image} bcorp-background-image`} />
 
     </div>
   )
 }
 
-function getBackgroundImage (props) {
-  if (!props.imageSrc) {
-    return undefined
-  }
-  return `url(${props.imageSrc})`
+function getBackgroundStyle (props) {
+  const backgroundStyle = {}
+
+  backgroundStyle.backgroundImage = props.imageSrc ? `url(${props.imageSrc})` : undefined
+  backgroundStyle.opacity = props.overlay ? 0.2 : 1
+
+  return backgroundStyle
 }
 
 function getOverlay (props) {
@@ -38,13 +48,12 @@ function getOverlay (props) {
 }
 
 BCorpBackground.propTypes = {
-  src: PropTypes.string,
+  imageSrc: PropTypes.string,
   overlay: PropTypes.string,
-  skin: PropTypes.oneOf(['light', 'dark'])
+  skin: PropTypes.oneOf(['light', 'dark']).isRequired
 }
 
 BCorpBackground.defaultProps = {
-  overlay: '',
   skin: 'light'
 }
 

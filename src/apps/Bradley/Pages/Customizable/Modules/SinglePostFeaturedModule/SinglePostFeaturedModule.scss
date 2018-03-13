@@ -2,19 +2,16 @@
 @import "../../../../../../scss/partials/mixins";
 @import "../../../../../../scss/partials/helpers";
 @import "../../../../../../scss/partials/grid";
+@import "../../../../../../lib/components/BCorpBackground/BCorpBackground";
 
 .singlePostFeaturedModule {
-  position: relative;
-  overflow: hidden;
+  @extend %bcorpBackgroundParent;
 
-  .image {
-    @extend %coverBackground;
-    @extend %fillRelativeParent;
+  :global(.bcorp-background-image) {
     transition: transform 500ms;
-    z-index: -1;
   }
 
-  &:hover .image {
+  &:hover :global(.bcorp-background-image) {
     transform: scale(1.08);
   }
 
