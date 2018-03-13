@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { validChain } from '../../../../../../lib/bcorpObject'
+import VideoBackground from '../../../../../../lib/components/BCorpVideo/VideoBackground/VideoBackground'
 import style from './FullWidthTemplate.scss'
 
 class FullWidthTemplate extends Component {
@@ -46,8 +47,22 @@ class FullWidthTemplate extends Component {
     )
   }
 
+  renderBackgroundVideo () {
+    if (!this.props.data.metaboxes['page_hero']['video_url'] || !this.heroNode) {
+      return
+    }
+
+    return (
+      <VideoBackground
+        node={this.heroNode}
+        url={this.props.data.metaboxes['page_hero']['video_url']} />
+    )
+  }
+
   getHeroBackgroundImage () {
-    if (!this.props.data['featured_image'] || this.props.data['featured_image'].length === 0) {
+    // only use this if no video url is given
+    if (!this.props.data['featured_image'] || this.props.data['featured_image'].length === 0 ||
+        this.props.data.metaboxes['page_hero']['video_url'] !== '') {
       return undefined
     }
 
@@ -63,13 +78,19 @@ class FullWidthTemplate extends Component {
 
     return (
       <div
-        style={{
-          backgroundImage: this.getHeroBackgroundImage()
-        }}
-        className={`row ${style.hero}`}>
-        {this.renderTagline(shouldRender.tagline)}
-        {this.renderTitle(shouldRender.title)}
-        {this.renderCopy(shouldRender.copy)}
+        ref={node => { this.heroNode = node }}
+        className={style.heroWrapper} >
+        {this.renderBackgroundVideo()}
+        <div
+          style={{
+            backgroundImage: this.getHeroBackgroundImage()
+          }}
+          className={`row ${style.hero}`}>
+          {this.renderTagline(shouldRender.tagline)}
+          {this.renderTitle(shouldRender.title)}
+          {this.renderCopy(shouldRender.copy)}
+        </div>
+
       </div>
     )
   }

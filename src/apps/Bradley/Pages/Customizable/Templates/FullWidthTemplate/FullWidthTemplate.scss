@@ -1,82 +1,87 @@
 @import "../../../../../../scss/partials/mixins";
 @import "../../../../../../scss/partials/helpers";
 
-.hero {
-  @extend %coverBackground;
-  padding: 60px 30px;
-  width: 100%;
-  box-sizing: border-box;
+.heroWrapper {
+  position: relative;
+  overflow: hidden;
 
-  h5.tagline {
-    margin-bottom: 25px;
-    color: #fff;
-    line-height: 1.31;
-    letter-spacing: 3.2px;
-    text-align: center;
-    text-transform: uppercase;
+  .hero {
+    @extend %coverBackground;
+    padding: 60px 30px;
+    width: 100%;
+    box-sizing: border-box;
+    
+    h5.tagline {
+      margin-bottom: 25px;
+      color: #fff;
+      line-height: 1.31;
+      letter-spacing: 3.2px;
+      text-align: center;
+      text-transform: uppercase;
 
-    @include respond-to(tablet) {
-      font-size: 20px;
-      line-height: 1.35;
-      letter-spacing: 4px;
+      @include respond-to(tablet) {
+        font-size: 20px;
+        line-height: 1.35;
+        letter-spacing: 4px;
+      }
+
+      @include respond-to(desktop) {
+        margin-bottom: 30px;
+        font-size: 24px;
+        line-height: 1.33;
+        letter-spacing: 4.8px;
+      }
     }
 
-    @include respond-to(desktop) {
+    h4.title {
       margin-bottom: 30px;
-      font-size: 24px;
-      line-height: 1.33;
-      letter-spacing: 4.8px;
-    }
-  }
+      color: #fff;
+      font-size: 46px;
+      line-height: 1;
+      letter-spacing: 1.8px;
+      text-align: center;
+      text-transform: uppercase;
 
-  h4.title {
-    margin-bottom: 30px;
-    color: #fff;
-    font-size: 46px;
-    line-height: 1;
-    letter-spacing: 1.8px;
-    text-align: center;
-    text-transform: uppercase;
+      @include respond-to(tablet) {
+        font-size: 72px;
+        letter-spacing: 7.2px;
+      }
 
-    @include respond-to(tablet) {
-      font-size: 72px;
-      letter-spacing: 7.2px;
-    }
-
-    @include respond-to(desktop) {
-      margin-bottom: 35px;
-      font-size: 90px;
-      letter-spacing: 9px;
-    }
-  }
-
-  h6.copy {
-    color: #fff;
-    font-size: 12px;
-    line-height: 1.5;
-    letter-spacing: normal;
-    text-align: center;
-
-    @include respond-to(tablet) {
-      font-size: 13px;
-      line-height: 1.38;
+      @include respond-to(desktop) {
+        margin-bottom: 35px;
+        font-size: 90px;
+        letter-spacing: 9px;
+      }
     }
 
-    @include respond-to(desktop) {
-      font-size: 16px;
+    h6.copy {
+      color: #fff;
+      font-size: 12px;
       line-height: 1.5;
+      letter-spacing: normal;
+      text-align: center;
+
+      @include respond-to(tablet) {
+        font-size: 13px;
+        line-height: 1.38;
+      }
+
+      @include respond-to(desktop) {
+        font-size: 16px;
+        line-height: 1.5;
+      }
     }
-  }
 
-  :last-child {
-    margin-bottom: 0;
-  }
+    :last-child {
+      margin-bottom: 0;
+    }
 
-  @include respond-to(tablet) {
-    padding: 60px 130px;
-  }
+    @include respond-to(tablet) {
+      padding: 60px 130px;
+    }
 
-  @include respond-to(desktop) {
-    padding: 85px 200px;
+    @include respond-to(desktop) {
+      padding: 85px 200px;
+    }
   }
 }
