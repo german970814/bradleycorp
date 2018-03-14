@@ -1,14 +1,13 @@
 @import "../../../../../../scss/partials/variables";
 @import "../../../../../../scss/partials/helpers";
+@import "../../../../../../lib/components/BCorpBackground/BCorpBackground";
 
 $backgroundColor: $charcoal-grey;
 
 .textWithBackgroundPeelerModule {
-  position: relative;
-  overflow: hidden;
+  @extend %bcorpBackgroundParent;
 
   > :global(.container-size-mobile) {
-    @extend %coverBackground;
     box-sizing: border-box;
     padding-right: 100px;
     //background-color: $backgroundColor;

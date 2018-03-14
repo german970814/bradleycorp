@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import BCorpModule from '../../../../../../lib/components/Modules/BCorpModule'
+import BCorpBackground from '../../../../../../lib/components/BCorpBackground/BCorpBackground'
 import style from './TextWithBackgroundPeelerModule.scss'
 
 class TextWithBackgroundPeelerModule extends BCorpModule {
@@ -45,19 +46,13 @@ class TextWithBackgroundPeelerModule extends BCorpModule {
     )
   }
 
-  getBackgroundImage () {
-    return this.props.background
-      ? `url(${this.props.background})`
-      : undefined
-  }
-
   renderModule () {
     return (
-      <div
-        style={{
-          backgroundImage: this.getBackgroundImage()
-        }}
-        className={`${this.containerClassName} ${this.skinClass} module-skin-dark-background-black`}>
+      <div className={`${this.containerClassName} ${this.skinClass}`}>
+
+        <BCorpBackground
+          overlay={this.props.backgroundColor}
+          skin={this.props.skin} />
 
         {this.renderTitle()}
 
@@ -89,6 +84,7 @@ TextWithBackgroundPeelerModule.propTypes = {
 
   title: PropTypes.string,
   text: PropTypes.string,
+  backgroundColor: PropTypes.string,
   backgroundPeeler: PropTypes.string
 }
 
