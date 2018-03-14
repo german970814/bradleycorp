@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import debounce from 'debounce'
 import ContainerMediaQuery from '../../containers/ContainerMediaQuery/ContainerMediaQuery'
 import moduleStyle from './Modules.scss'
 
@@ -21,7 +22,8 @@ class BCorpModule extends Component {
     super(props)
 
     this.state = {
-      node: undefined
+      node: undefined,
+      minHeight: 0
     }
 
     this.moduleName = moduleName
@@ -65,6 +67,12 @@ class BCorpModule extends Component {
      * @type {String}
      */
     this.skinClass = ''
+
+    /**
+     * Bind our height updating methods to the class so we can add them to the resize listener
+     */
+    this.initUpdateModuleHeight = this.updateModuleHeight.bind(this)
+    this.updateModuleHeight = debounce(this.updateModuleHeight.bind(this), 200)
   }
 
   /**
@@ -73,6 +81,15 @@ class BCorpModule extends Component {
   componentDidMount () {
     this.setAccentColourClass(this.props)
     this.setSkinClass(this.props)
+
+    window.addEventListener('resize', this.updateModuleHeight)
+  }
+
+  /**
+   * Make sure to run this in children if they also implement a componentWillUnmount method
+   */
+  componentWillUnmount () {
+    window.removeEventListener('resize', this.updateModuleHeight)
   }
 
   /**
@@ -81,6 +98,36 @@ class BCorpModule extends Component {
   componentWillReceiveProps (nextProps) {
     this.setAccentColourClass(nextProps)
     this.setSkinClass(nextProps)
+  }
+
+  /**
+   * Make sure to run this in children if they also implement a componentDidUpdate method
+   */
+  componentDidUpdate (prevProps, prevState) {
+    this.updateModuleHeight()
+  }
+
+  updateModuleHeight () {
+    if (!this.state.node) {
+      return
+    }
+
+    const rowHeight = this.props.rowNode.offsetHeight
+    const moduleHeight = this.state.node.offsetHeight
+
+    // we won't need to update the height if the module is full width
+    // we just need to make sure the maxHeight returns to (or already is) 0
+    if (this.state.node.offsetWidth === window.innerWidth) {
+      return this.setState({ minHeight: 0 })
+    } else {
+      if (this.state.minHeight === 0 && moduleHeight === rowHeight) {
+        // module is already the tallest in the row, so we can just leave it
+
+      } else if (moduleHeight < rowHeight) {
+        // if module isnt the tallest, set it to be the row height
+        return this.setState({ minHeight: rowHeight })
+      }
+    }
   }
 
   /**
@@ -116,6 +163,9 @@ class BCorpModule extends Component {
               this.setState({ node })
             }
           }}
+          style={{
+            minHeight: this.state.minHeight
+          }}
           className={`${moduleStyle.module} ${this.localStyle[this.moduleName]}`} />
       )
     }
@@ -126,6 +176,9 @@ class BCorpModule extends Component {
           if (!this.state.node) {
             this.setState({ node })
           }
+        }}
+        style={{
+          minHeight: this.state.minHeight
         }}
         className={`${moduleStyle.module} ${this.localStyle[this.moduleName]}`} >
 
