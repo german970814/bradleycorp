@@ -82,10 +82,10 @@ class SinglePostModule extends PostGettingModule {
     const { post } = this.state.posts[0]
 
     const button = (linkText) => {
-      return <button className={`button-orange ${style.button1} ${this.accentColorClass}`}>{linkText}</button>
+      return <button className={`button-border-slate-grey ${style.button2} ${this.skinClass}`}>{linkText}</button>
     }
 
-    const button1 = this.props.linkText && this.props.link
+    const button2 = this.props.linkText && this.props.link
       ? (
         <BCorpLink
           url={this.props.link}
@@ -112,11 +112,11 @@ class SinglePostModule extends PostGettingModule {
     return (
       <div className={`row ${style.buttonsWrapper}`} >
 
-        {button1}
-
         <Link className={`${style.button}`} to={createCPTUrl(post)} replace >
-          <button className={`button-border-slate-grey ${style.button2} ${this.skinClass}`}>{'LEARN MORE'}</button>
+          <button className={`button-orange ${style.button1} ${this.accentColorClass}`}>{'READ MORE'}</button>
         </Link>
+
+        {button2}
 
       </div>
     )
