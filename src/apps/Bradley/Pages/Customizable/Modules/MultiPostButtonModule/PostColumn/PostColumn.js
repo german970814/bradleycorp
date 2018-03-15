@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { createCPTUrl } from '../../../../../../../lib/bcorpUrl'
 import { getExcerpt } from '../../../../../../../lib/bcorpPost'
+import { lookupColor } from '../../../../../../../lib/bcorpStyles'
 import Divider from '../../../../../../../lib/components/Divider/Divider'
 import ImageFrame from '../../../../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import style from './PostColumn.scss'
@@ -86,7 +87,10 @@ class PostColumn extends Component {
   }
 
   renderDivider () {
-    return <Divider fullWidth />
+    const color = this.props.skin === 'dark' ? lookupColor('charcoal-grey') : undefined
+    console.log(this.props.skin)
+    console.log(color)
+    return <Divider color={color} fullWidth />
   }
 
   render () {
@@ -111,7 +115,8 @@ PostColumn.propTypes = {
   numColumns: PropTypes.number.isRequired,
   containerClassName: PropTypes.string,
   accentColorClass: PropTypes.string,
-  skinClass: PropTypes.string
+  skinClass: PropTypes.string,
+  skin: PropTypes.string
 }
 
 export default PostColumn

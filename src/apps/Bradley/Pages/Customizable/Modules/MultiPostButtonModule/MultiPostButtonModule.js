@@ -44,7 +44,8 @@ class MultiPostButtonModule extends PostGettingModule {
           numColumns={posts.length}
           containerClassName={this.containerClassName}
           accentColorClass={this.accentColorClass}
-          skinClass={this.skinClass} />
+          skinClass={this.skinClass}
+          skin={this.props.skin} />
       )
     })
   }

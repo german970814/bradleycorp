@@ -13,7 +13,7 @@ const Divider = props => {
       className={`divider ${style.divider} ${props.customClass}`} >
       <div
         style={{
-          color: props.color
+          backgroundColor: props.color
         }}
         className={style.color} />
     </div>
