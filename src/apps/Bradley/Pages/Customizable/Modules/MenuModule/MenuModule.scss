@@ -5,17 +5,13 @@
 
 .menuModule {
 
-  $margin-bottom: 26px;
+  $margin-bottom: 25px;
 
   > :global(.container-size-mobile) {
     padding-bottom: $modulePaddingTopBottomMobile - $margin-bottom;
 
-    h5.title {
+    h3.title {
       margin-bottom: 35px;
-      color: $black;
-      font-size: 16px;
-      line-height: normal;
-      text-align: center;
     }
 
     .menuBlockWrapper {
@@ -27,9 +23,8 @@
   > :global(.container-size-tablet) {
     padding-bottom: $modulePaddingTopBottomTablet - $margin-bottom;
 
-    h5.title {
+    h3.title {
       margin-bottom: 55px;
-      font-size: 20px;
     }
 
     .menuBlockWrapper {
@@ -40,10 +35,6 @@
 
   > :global(.container-size-desktop) {
     padding-bottom: $modulePaddingTopBottomDesktop - $margin-bottom;
-
-    h5.title {
-      font-size: 24px;
-    }
 
     .menuBlockWrapper {
       @include inline-col(4, top);

@@ -39,9 +39,9 @@ class MenuModule extends BCorpModule {
     }
 
     return (
-      <h5 className={style.title} >
+      <h3 className={style.title} >
         {this.props.title}
-      </h5>
+      </h3>
     )
   }
 

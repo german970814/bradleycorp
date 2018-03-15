@@ -167,6 +167,12 @@
   color: $slate-grey;
 }
 
+%link-navy {
+  @extend %body;
+  line-height: normal;
+  color: $navy;
+}
+
 %small-body-desktop {
   @extend %body;
   font-size: 12px;

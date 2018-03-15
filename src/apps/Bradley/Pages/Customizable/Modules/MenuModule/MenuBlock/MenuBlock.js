@@ -14,7 +14,8 @@ class MenuBlock extends Component {
     return this.props.blockData.children.map((childLink, index) => {
       return (
         <ArrowThumbnail
-          key={index} >
+          key={index}
+          customClass={style.arrowWrapper} >
 
           <BCorpLink
             url={childLink.url}
@@ -22,7 +23,7 @@ class MenuBlock extends Component {
               url => {
                 return (
                   <Link to={url} replace >
-                    <div className={style.childLink}>{childLink.title}</div>
+                    <div className={`${style.childLink} link-navy`}>{childLink.title}</div>
                   </Link>
                 )
               }
@@ -31,7 +32,7 @@ class MenuBlock extends Component {
               url => {
                 return (
                   <a href={url} >
-                    <div className={style.childLink}>{childLink.title}</div>
+                    <div className={`${style.childLink} link-navy`}>{childLink.title}</div>
                   </a>
                 )
               }

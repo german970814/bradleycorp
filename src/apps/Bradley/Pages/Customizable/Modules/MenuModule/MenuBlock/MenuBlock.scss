@@ -1,15 +1,17 @@
 @import "../../../../../../../scss/partials/variables";
 
-.blockTitle {
+h6.blockTitle {
   margin-bottom: 5px;
-  letter-spacing: 0.5px;
-  line-height: normal;
-  color: $gray;
-  text-transform: uppercase;
+}
+
+.arrowWrapper {
+  margin-bottom: 13px;
+
+  &:last-child {
+    margin-bottom: 0px;
+  }
 }
 
 .childLink {
   margin-bottom: 9px;
-  color: $navy;
-  line-height: normal;
 }

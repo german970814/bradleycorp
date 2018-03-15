@@ -67,6 +67,10 @@ body {
   @extend %body;
 }
 
+:global .link-navy :local {
+  @extend %link-navy;
+}
+
 :global .small-body :local {
   @extend %small-body-desktop;
 }
