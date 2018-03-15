@@ -49,12 +49,6 @@ class MultiPostButtonModule extends PostGettingModule {
     })
   }
 
-  getBackgroundImage () {
-    return this.props.background
-      ? `url(${this.props.background})`
-      : undefined
-  }
-
   renderModule () {
     return (
       <div className={`row ${this.containerClassName} ${this.skinClass}`} >
