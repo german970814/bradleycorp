@@ -69,6 +69,60 @@
   letter-spacing: -1.4px;
 }
 
+%h2-mobile {
+  font-family: $TradeGothic-CondTwenty;
+  font-size: 27px;
+  font-weight: bold;
+  line-height: 1;
+  letter-spacing: 2.7px;
+  text-align: left;
+  color: $black;
+}
+
+%h2-tablet {
+  font-family: $TradeGothic-CondTwenty;
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 1;
+  letter-spacing: 3.6px;
+  text-align: left;
+  color: $black;
+}
+
+%h2-desktop {
+  font-family: $TradeGothic-CondTwenty;
+  font-size: 42px;
+  font-weight: bold;
+  line-height: 1;
+  letter-spacing: 4.2px;
+  text-align: left;
+  color: $black;
+}
+
+%h3-mobile {
+  font-family: $CentraleSansPro;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  color: #2f3d70;
+}
+
+%h3-tablet {
+  font-family: $CentraleSansPro;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: #2e3c6e;
+}
+
+%h3-desktop {
+  font-family: $CentraleSansPro;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  color: $navy;
+}
+
 %h4-tablet-mobile {
   margin-top: 0;
   margin-bottom: 0;
