@@ -48,7 +48,6 @@ class SinglePostModule extends PostGettingModule {
   }
 
   renderTitle () {
-    const skinClass = this.size === 'tablet' || this.size === 'desktop' ? this.skinClass : ''
     const post = this.state.posts[0]
 
     if (!post.post['post_title']) {
@@ -56,7 +55,7 @@ class SinglePostModule extends PostGettingModule {
     }
 
     return (
-      <h5 className={`${style.title} ${skinClass}`} >
+      <h5 className={`${style.title} ${this.skinClass}`} >
         {post.post['post_title']}
       </h5>
     )
@@ -65,14 +64,13 @@ class SinglePostModule extends PostGettingModule {
   renderContent () {
     const post = this.state.posts[0]
     const excerpt = getExcerpt(post.post['post_excerpt'], null)
-    const skinClass = this.size === 'tablet' || this.size === 'desktop' ? this.skinClass : ''
 
     if (!excerpt) {
       return
     }
 
     return (
-      <div className={`${style.content} ${skinClass}`} >
+      <div className={`${style.content} ${this.skinClass}`} >
         {excerpt}
       </div>
     )
