@@ -14,9 +14,15 @@ $desktopGutter: 4.296875vw;
     MOBILE SIZED CONTAINER ONLY
    */
 
-  // bit nasty looking, just makes sure background is always light grey on mobile with light skin
+  // bit nasty looking,
+  // just makes sure background is always light grey on mobile with light skin
+  // and alays black with dark skin
   :local :global > :not(.container-size-tablet):global(.module-skin-light) :local {
       background-color: $light-gray;
+  }
+
+  :local :global > :not(.container-size-tablet):global(.module-skin-dark) :local {
+      background-color: $black;
   }
 
   /*

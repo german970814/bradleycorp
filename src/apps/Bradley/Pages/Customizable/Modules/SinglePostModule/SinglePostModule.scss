@@ -17,7 +17,13 @@
 
   > :global {
     &:not(.container-size-tablet) {
-      background-image: none !important;
+      &.module-skin-dark {
+        background-color: $black;
+      }
+
+      &.module-skin-light {
+        background-color: #fff;
+      }
     }
   }
 
