@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { validChain } from '../../../../../lib/bcorpObject'
 import FullWidthTemplate from './FullWidthTemplate/FullWidthTemplate'
+import DefaultTemplate from './DefaultTemplate/DefaultTemplate'
 
 /**
  * Given page template data, we pass it through to the correct template component
@@ -41,9 +42,12 @@ function getTemplateComponent (template, templateProps) {
     case 'full-width-page':
       return <FullWidthTemplate {...templateProps} />
 
+    case 'default':
+      return <DefaultTemplate {...templateProps} />
+
     default:
       console.warn(`Couldn't find component for template ${template}`)
-      return null
+      return <DefaultTemplate {...templateProps} />
   }
 }
 

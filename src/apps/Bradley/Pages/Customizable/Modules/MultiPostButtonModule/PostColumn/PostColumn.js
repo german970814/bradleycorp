@@ -88,8 +88,6 @@ class PostColumn extends Component {
 
   renderDivider () {
     const color = this.props.skin === 'dark' ? lookupColor('charcoal-grey') : undefined
-    console.log(this.props.skin)
-    console.log(color)
     return <Divider color={color} fullWidth />
   }
 
