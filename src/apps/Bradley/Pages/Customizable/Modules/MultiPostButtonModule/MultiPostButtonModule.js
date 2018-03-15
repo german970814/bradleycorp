@@ -22,9 +22,9 @@ class MultiPostButtonModule extends PostGettingModule {
     }
 
     return (
-      <h5 className={`${style.title} ${this.skinClass}`} >
+      <h3 className={`${style.title} ${this.skinClass}`} >
         {this.props.title}
-      </h5>
+      </h3>
     )
   }
 

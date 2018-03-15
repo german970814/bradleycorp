@@ -16,6 +16,7 @@
 
     h5.title {
       padding-bottom: 20px;
+      font-size: 16px;
       text-align: center;
       color: $black;
     }
@@ -38,6 +39,7 @@
   > :global(.container-size-tablet) {
     h5.title {
       padding-bottom: 28px;
+      font-size: 20px;
     }
 
     .button {
@@ -54,27 +56,6 @@
   > :global(.container-size-desktop) {
     h5.title {
       padding-bottom: 38px;
-    }
-  }
-
-  /*
-   TABLET SCREEN SIZE
-   */
-
-  @include respond-to(tablet) {
-
-    h5.title {
-      font-size: 20px;
-    }
-  }
-
-  /*
-   DESKTOP CONTAINER SIZE
-  */
-
-  @include respond-to(tablet) {
-
-    h5.title {
       font-size: 24px;
     }
   }

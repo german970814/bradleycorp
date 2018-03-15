@@ -42,6 +42,7 @@
 
       h4.title {
         margin-bottom: 18px;
+        font-size: 16px;
         color: #fff;
         text-align: left;
         text-transform: uppercase;
@@ -77,6 +78,7 @@
       margin-bottom: 70px;
       padding-right: 25%;
       min-height: 0px;
+      font-size: 72px;
       line-height: 1;
       letter-spacing: 7.2px;
     }
@@ -106,6 +108,8 @@
       padding: 100px 0;
       padding-right: 50%;
       width: 100%;
+      font-size: 90px;
+      letter-spacing: 9px;
     }
 
     .contentWrapper {
@@ -118,6 +122,7 @@
 
       h4.title {
         width: 100%;
+        font-size: 18px;
       }
 
       .content {
@@ -127,14 +132,6 @@
       .arrowWrapper {
         right: $padding;
         bottom: $padding;
-      }
-    }
-  }
-
-  @include respond-to(tablet) {
-    :global(.container-size-mobile), :global(.container-size-tablet), :global(.container-size-desktop ) {
-      h4.headline {
-        font-size: 72px;
       }
     }
   }

@@ -16,6 +16,7 @@ $backgroundColor: $charcoal-grey;
       position: relative; // to float it in front of the texture image
       z-index: 1;
       margin-bottom: 25px;
+      font-size: 18px;
       text-align: left;
       text-transform: uppercase;
     }
@@ -43,6 +44,10 @@ $backgroundColor: $charcoal-grey;
 
   > :global(.container-size-tablet) {
     padding-right: 280px;
+
+    h4.title {
+      font-size: 16px;
+    }
 
     // 300px top distance
     $textureSize: 426px;

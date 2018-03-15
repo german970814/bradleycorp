@@ -24,13 +24,13 @@ $desktopGutter: 4.296875vw;
    */
 
   > :global(.container-size-mobile) {
-    position: relative;
     box-sizing: border-box;
     width: auto;
 
-    h5.title {
+    h3.title {
       @include col(1);
       margin-bottom: 27px;
+      font-size: 16px;
       text-align: center;
 
       &:global(.module-skin-light) {
@@ -44,6 +44,10 @@ $desktopGutter: 4.296875vw;
    */
 
   > :global(.container-size-tablet) {
+
+    h3.title {
+      font-size: 20px;
+    }
 
     .columnsRow {
       float: left;
@@ -60,33 +64,13 @@ $desktopGutter: 4.296875vw;
   > :global(.container-size-desktop) {
     padding: 60px $desktopGutter;
 
+    h3.title {
+      font-size: 24px;
+    }
+
     .columnsRow {
       margin: auto (-$desktopGutter);
       width: calc(100% + #{2 * $desktopGutter});
-    }
-  }
-
-  /*
-   TABLET SIZED SCREEN AND UP
-  */
-
-  @include respond-to(tablet) {
-    :global(.container-size-mobile), :global(.container-size-tablet), :global(.container-size-desktop ) {
-      h5.title {
-        font-size: 20px;
-      }
-    }
-  }
-
-  /*
-   DESKTOP SIZED SCREEN
-  */
-
-  @include respond-to(desktop) {
-    :global(.container-size-mobile), :global(.container-size-tablet), :global(.container-size-desktop ) {
-      h5.title {
-        font-size: 24px;
-      }
     }
   }
 }

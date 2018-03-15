@@ -36,8 +36,9 @@
     @extend %coverBackground;
   }
 
-  .title {
+  h4.title {
     margin-bottom: 21px;
+    font-size: 16px;
     text-transform: uppercase;
   }
 
@@ -101,8 +102,9 @@
       }
     }
 
-    .title {
+    h4.title {
       margin-bottom: 20px;
+      font-size: 16px;
     }
 
     .content {
@@ -135,8 +137,9 @@
       max-width: 400px;
     }
 
-    .title {
+    h4.title {
       margin-bottom: 23px;
+      font-size: 18px;
     }
 
     .content {
