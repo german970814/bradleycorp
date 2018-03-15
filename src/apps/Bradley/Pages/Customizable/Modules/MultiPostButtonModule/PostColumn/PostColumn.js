@@ -94,7 +94,7 @@ class PostColumn extends Component {
   render () {
     const columnSizeClass = style[`post-column-${this.props.numColumns}`]
     return (
-      <div className={`${columnSizeClass} ${style.postColumnWrapper} ${this.props.containerClassName}`} >
+      <div className={`${columnSizeClass} ${style.postColumnWrapper} ${this.props.containerClassName} ${this.props.skinClass}`} >
 
         {this.renderImage()}
         {this.renderTitle()}

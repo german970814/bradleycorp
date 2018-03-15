@@ -93,6 +93,10 @@
       background-color: $silver;
     }
 
+    &:global(.module-skin-dark)::before {
+      background-color: $charcoal-grey;
+    }
+
     &:first-child {
       &::before {
         width: 0;
