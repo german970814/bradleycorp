@@ -17,7 +17,7 @@ class CTAModule extends BCorpModule {
       return
     }
 
-    return <h5 className={style.title}>{title}</h5>
+    return <h3 className={style.title}>{title}</h3>
   }
 
   renderMedia () {

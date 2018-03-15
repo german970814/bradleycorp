@@ -36,12 +36,6 @@ $desktopGutter: 4.296875vw;
     h3.title {
       @include col(1);
       margin-bottom: 27px;
-      font-size: 16px;
-      text-align: center;
-
-      &:global(.module-skin-light) {
-        color: $navy;
-      }
     }
   }
 
@@ -50,10 +44,6 @@ $desktopGutter: 4.296875vw;
    */
 
   > :global(.container-size-tablet) {
-
-    h3.title {
-      font-size: 20px;
-    }
 
     .columnsRow {
       float: left;
@@ -69,10 +59,6 @@ $desktopGutter: 4.296875vw;
 
   > :global(.container-size-desktop) {
     padding: 60px $desktopGutter;
-
-    h3.title {
-      font-size: 24px;
-    }
 
     .columnsRow {
       margin: auto (-$desktopGutter);
