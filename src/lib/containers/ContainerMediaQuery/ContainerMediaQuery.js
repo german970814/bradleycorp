@@ -14,10 +14,11 @@ class ContainerMediaQuery extends Component {
   constructor (props) {
     super(props)
 
-    this.state = { containerClassName: '', size: '' }
+    this.defaultState = { width: 0 }
+    this.state = Object.assign({}, this.defaultState, this.props.node.offsetWidth)
 
-    this.initUpdateContainerDimensions = this.updateContainerDimensions.bind(this)
-    this.updateContainerDimensions = debounce(this.updateContainerDimensions.bind(this), 200)
+    this.initUpdateWidth = this.updateWidth.bind(this)
+    this.updateWidth = debounce(this.updateWidth.bind(this), 200)
   }
 
   /**
@@ -30,40 +31,42 @@ class ContainerMediaQuery extends Component {
    * @see https://developers.google.com/web/updates/2016/10/resizeobserver
    */
   componentDidMount () {
-    this.initUpdateContainerDimensions()
-    window.addEventListener('resize', this.updateContainerDimensions)
+    window.addEventListener('resize', this.updateWidth)
   }
 
   componentWillUnmount () {
-    window.removeEventListener('resize', this.updateContainerDimensions)
+    window.removeEventListener('resize', this.updateWidth)
   }
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.node !== this.props.node) {
-      this.updateContainerDimensions()
+      this.updateWidth()
     }
   }
 
-  updateContainerDimensions () {
-    if (this.props.node && this.props.node.offsetWidth) {
-      if (this.props.node.offsetWidth < MOBILEMAXWIDTH) {
-        this.setState({ containerClassName: 'container-size-mobile', size: 'mobile' })
-      } else if (this.props.node.offsetWidth < TABLETMAXWIDTH) {
-        this.setState({ containerClassName: 'container-size-mobile container-size-tablet', size: 'tablet' })
-      } else {
-        this.setState({ containerClassName: 'container-size-mobile container-size-tablet container-size-desktop', size: 'desktop' })
-      }
+  updateWidth () {
+    this.setState({ width: this.props.node.offsetWidth })
+  }
+
+  getContainerSize () {
+    if (this.props.node.offsetWidth < MOBILEMAXWIDTH) {
+      return { containerClassName: 'container-size-mobile', size: 'mobile' }
+    } else if (this.props.node.offsetWidth < TABLETMAXWIDTH) {
+      return { containerClassName: 'container-size-mobile container-size-tablet', size: 'tablet' }
+    } else {
+      return { containerClassName: 'container-size-mobile container-size-tablet container-size-desktop', size: 'desktop' }
     }
   }
 
   render () {
-    return this.props.children(this.state.containerClassName, this.state.size)
+    const { containerClassName, size } = this.getContainerSize()
+    return this.props.children(containerClassName, size)
   }
 }
 
 ContainerMediaQuery.propTypes = {
   children: PropTypes.func.isRequired,
-  node: PropTypes.object
+  node: PropTypes.object.isRequired
 }
 
 export default ContainerMediaQuery

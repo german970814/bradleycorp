@@ -16,6 +16,17 @@ import moduleStyle from './Modules.scss'
  * A child module MUST implement a renderModule function.
  * The passesValidation function is optional
  *
+ * We have a few render cycles to run since each module needs information from the DOM:
+ *
+ * Cycle 1: Register the module's HTML in the DOM - we get the DOM node and set it as state
+ *          Make any network requests in componentDidMount
+ *
+ * Cycle 2: Now with knowledge of the DOM, we get the container size and render the module markup
+ *          At this point module is rendered with data
+ *          We request another cycle in componentDidUpdate to get the correct row height
+ *
+ * Cycle 3+: Cycles again updating row height until the component is no longer updating
+ *
  */
 class BCorpModule extends Component {
   constructor (props, localStyle, moduleName) {
@@ -77,10 +88,17 @@ class BCorpModule extends Component {
 
   /**
    * Make sure to run this in children if they also implement a componentDidMount method
+   *
+   * We listen for an event which is specific to each module's row
+   * If one module updates in the row, we want them to all recheck their heights
    */
   componentDidMount () {
     this.setAccentColourClass(this.props)
     this.setSkinClass(this.props)
+
+    this.rowUpdateEventName = `row-${this.props.rowNode.getAttribute('data-row-id')}`
+    this.rowUpdateEvent = new Event(this.rowUpdateEventName)
+    window.addEventListener(this.rowUpdateEventName, this.updateModuleHeight)
 
     window.addEventListener('resize', this.updateModuleHeight)
   }
@@ -102,11 +120,20 @@ class BCorpModule extends Component {
 
   /**
    * Make sure to run this in children if they also implement a componentDidUpdate method
+   *
+   * If the module has updated, we need to let the other modules in the row know so they can recheck their heights
+   * We dispatch an event that will only be listened for by other modules in the row
+   *
    */
-  componentDidUpdate (prevProps, prevState) {
+  componentDidUpdate () {
     this.updateModuleHeight()
+    window.dispatchEvent(this.rowUpdateEvent)
   }
 
+  /**
+   * The most important thing about this function is that it only updates the state if it needs to
+   * If not, it'll lead to an infinite loop.
+   */
   updateModuleHeight () {
     if (!this.state.node) {
       return
@@ -118,15 +145,11 @@ class BCorpModule extends Component {
     // we won't need to update the height if the module is full width
     // we just need to make sure the maxHeight returns to (or already is) 0
     if (this.state.node.offsetWidth === window.innerWidth) {
-      return this.setState({ minHeight: 0 })
-    } else {
-      if (this.state.minHeight === 0 && moduleHeight === rowHeight) {
-        // module is already the tallest in the row, so we can just leave it
-
-      } else if (moduleHeight < rowHeight) {
-        // if module isnt the tallest, set it to be the row height
-        return this.setState({ minHeight: rowHeight })
+      if (this.state.minHeight !== 0) {
+        return this.setState({ minHeight: 0 })
       }
+    } else if (moduleHeight < rowHeight) {
+      return this.setState({ minHeight: rowHeight })
     }
   }
 
@@ -155,7 +178,8 @@ class BCorpModule extends Component {
    *
    */
   render () {
-    if (!this.passesValidation()) {
+    // this will be called for the first render
+    if (!this.passesValidation() || !this.state.node) {
       return (
         <div
           ref={(node) => {
