@@ -31,6 +31,17 @@ class ModuleBuilder extends Component {
   }
 
   /**
+   * TODO: I can't see a better way of knowing when to update the page than checking the whole content string,
+   *       but it can sometimes be massive.
+   *       Definitelt some optimisation to be done here
+   */
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.pageData['module_data'].content !== this.props.pageData['module_data'].content) {
+      this.setState({ htmlIsSet: false })
+    }
+  }
+
+  /**
    * If the span nodes exist but htmlIsSet is still false, then it means that we're ready to render the portals.
    * We set htmlIsSet to true which triggers a new render cycle, this time rendering the actual module components.
    */
@@ -89,7 +100,6 @@ class ModuleBuilder extends Component {
     if (!this.props.pageData) {
       return null
     }
-
     return (
       <TemplateFactory
         data={this.props.pageData['page_template_data']}
@@ -116,7 +126,18 @@ class ModuleBuilder extends Component {
 }
 
 ModuleBuilder.propTypes = {
-  pageData: PropTypes.object
+  /**
+   * All the data for the page; modules, widgets and template meta
+   *
+   * @type {[Object]}
+   */
+  pageData: PropTypes.object,
+  /**
+   * The page slug, so we know when to re run the whole build sequence
+   *
+   * @type {[string]}
+   */
+  pageSlug: PropTypes.string
 }
 
 export default ModuleBuilder

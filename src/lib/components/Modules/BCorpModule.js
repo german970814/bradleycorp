@@ -96,10 +96,11 @@ class BCorpModule extends Component {
     this.setAccentColourClass(this.props)
     this.setSkinClass(this.props)
 
-    this.rowUpdateEventName = `row-${this.props.rowNode.getAttribute('data-row-id')}`
+    // eg event name update-row-1
+    this.rowUpdateEventName = `update-row-${this.props.rowNode.getAttribute('data-row-id')}`
     this.rowUpdateEvent = new Event(this.rowUpdateEventName)
-    window.addEventListener(this.rowUpdateEventName, this.updateModuleHeight)
 
+    window.addEventListener(this.rowUpdateEventName, this.updateModuleHeight)
     window.addEventListener('resize', this.updateModuleHeight)
   }
 
@@ -108,6 +109,7 @@ class BCorpModule extends Component {
    */
   componentWillUnmount () {
     window.removeEventListener('resize', this.updateModuleHeight)
+    window.removeEventListener(this.rowUpdateEventName, this.updateModuleHeight)
   }
 
   /**

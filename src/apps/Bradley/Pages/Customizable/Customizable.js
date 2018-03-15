@@ -34,9 +34,6 @@ class Customizable extends Component {
     this.state = this.defaultState
   }
 
-  /**
-   * Make the intial network request before first render
-   */
   componentDidMount () {
     if (!validChain(this.props, 'match', 'params', 'slug')) {
       return
@@ -48,7 +45,9 @@ class Customizable extends Component {
 
   /**
    * If we go between urls that both render a customizable page, we need to make sure we're making a new network request
+   *
    * @param  {[object]} nextProps
+   * @return {[void]}
    */
   componentWillReceiveProps (nextProps) {
     if (!validChain(this.props, 'match', 'params', 'slug') ||
@@ -61,10 +60,16 @@ class Customizable extends Component {
     }
   }
 
+  /**
+   * Note we pass the react router slug through
+   * This lets us know when to rerun the ModuleBuilder and set htmlIsSet back to False
+   *
+   * @return {[void]}
+   */
   render () {
     return (
       <div className={style.customizable} >
-        <ModuleBuilder pageData={this.state} />
+        <ModuleBuilder pageData={this.state} pageSlug={this.props.match.params.slug} />
       </div>
     )
   }
