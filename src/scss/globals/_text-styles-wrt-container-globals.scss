@@ -1,0 +1,50 @@
+// this is imported at the end of text-styles-global
+// to give these priority
+
+:global(.container-size-mobile) {
+  h1 {
+    @extend %h1-mobile;
+  }
+  h2 {
+    @extend %h2-mobile;
+  }
+  h3 {
+    @extend %h3-mobile;
+  }
+  h4 {
+    @extend %h4-tablet-mobile;
+  }
+  h5 {
+    @extend %h5-desktop;
+  }
+  h6 {
+    @extend %h6-desktop;
+  }
+}
+
+:global(.container-size-tablet) {
+  h1 {
+    @extend %h1-tablet;
+  }
+  h2 {
+    @extend %h2-tablet;
+  }
+  h3 {
+    @extend %h3-tablet;
+  }
+}
+
+:global(.container-size-desktop) {
+  h1 {
+    @extend %h1-desktop;
+  }
+  h2 {
+    @extend %h2-desktop;
+  }
+  h3 {
+    @extend %h3-desktop;
+  }
+  h4 {
+    @extend %h4-desktop;
+  }
+}
