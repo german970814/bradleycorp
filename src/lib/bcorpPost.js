@@ -7,17 +7,16 @@ export function isNew (date) {
 }
 
 export function getExcerpt (excerpt, postContent, numberWords) {
-  const defaultExcerptLength = 22
+  const defaultExcerptLength = 100
+  const defaultExcerptFromContentLength = 55
 
   if (excerpt && excerpt !== '') {
-    if (numberWords && numberWords !== 0) {
-      return nWords(excerpt, numberWords)
-    } else {
-      return excerpt
-    }
+    return nWords(excerpt, numberWords || defaultExcerptLength)
   } else
 
   if (postContent && postContent !== '') {
-    return nWords(postContent, numberWords || defaultExcerptLength)
+    return nWords(postContent, numberWords || defaultExcerptFromContentLength)
+  } else {
+    return ''
   }
 }

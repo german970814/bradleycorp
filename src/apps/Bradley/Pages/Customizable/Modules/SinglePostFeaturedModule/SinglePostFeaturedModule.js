@@ -46,7 +46,7 @@ class SinglePostFeaturedModule extends PostGettingModule {
       return
     }
 
-    return <div className={style.content} >{getExcerpt(post['post_excerpt'], null, 12)}</div>
+    return <div className={style.content} >{getExcerpt(post['post_excerpt'], post['post_content'])}</div>
   }
 
   renderArrow () {

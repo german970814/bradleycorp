@@ -63,7 +63,7 @@ class SinglePostModule extends PostGettingModule {
 
   renderContent () {
     const post = this.state.posts[0]
-    const excerpt = getExcerpt(post.post['post_excerpt'], null)
+    const excerpt = getExcerpt(post.post['post_excerpt'], post.post['post_content'])
 
     if (!excerpt) {
       return
