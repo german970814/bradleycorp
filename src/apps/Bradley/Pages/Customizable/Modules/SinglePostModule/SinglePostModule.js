@@ -55,9 +55,9 @@ class SinglePostModule extends PostGettingModule {
     }
 
     return (
-      <h5 className={`${style.title} ${this.skinClass}`} >
+      <h2 className={`${style.title} ${this.skinClass}`} >
         {post.post['post_title']}
-      </h5>
+      </h2>
     )
   }
 

@@ -77,15 +77,10 @@ $modulePaddingTopBottomDesktop: 60px;
   // light
 
   :global(.module-skin-light) {
-    color: $slate-grey;
 
     &:global(.module-skin-light-background-light-gray) {
       background-color: $light-gray;
     }
-  }
-
-  h4:global(.module-skin-light), h5:global(.module-skin-light), h6:global(.module-skin-light) {
-    color: $black;
   }
 
   //dark
