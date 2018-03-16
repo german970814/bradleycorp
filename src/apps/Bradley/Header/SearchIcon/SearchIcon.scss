@@ -1,6 +1,7 @@
 @import "../../../../scss/partials/variables";
 @import "../../../../scss/partials/mixins";
 @import "../../../../scss/partials/layout";
+@import "../../../../scss/partials/text-styles";
 
 .magnifyingGlassWrapper {
   display: inline-block;
@@ -53,6 +54,7 @@
 }
 
 .lightboxSearchFormInput {
+  @extend %h1-mobile;
   display: block;
   box-sizing: border-box;
   margin-bottom: 21px;
@@ -61,13 +63,6 @@
   padding-bottom: 16px;
   width: 100%;
   background-color: transparent;
-  font-family: $CentraleSansPro;
-  font-size: 23px;
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: -0.9px;
   outline: none;
   text-align: center;
   color: #ffffff;
@@ -79,12 +74,14 @@
   @include respond-to(tablet) {
     padding-bottom: 14px;
     font-size: 28px;
+    line-height: 1.21;
     letter-spacing: -1.1px;
   }
 
   @include respond-to(desktop) {
     padding-bottom: 13px;
     font-size: 34px;
+    line-height: 1.06;
     letter-spacing: -1.4px;
   }
 }
