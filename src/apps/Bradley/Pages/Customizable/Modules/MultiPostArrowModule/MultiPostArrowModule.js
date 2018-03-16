@@ -23,9 +23,9 @@ class MultiPostArrowModule extends PostGettingModule {
     }
 
     return (
-      <h5 className={`${style.title} ${this.accentColorClass} module-accent-color-change-text ${this.skinClass}`} >
+      <h3 className={`${style.title} ${this.accentColorClass} module-accent-color-change-text ${this.skinClass}`} >
         {this.props.title}
-      </h5>
+      </h3>
     )
   }
 
