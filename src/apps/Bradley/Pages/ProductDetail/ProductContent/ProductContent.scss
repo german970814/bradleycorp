@@ -10,21 +10,20 @@
 
 %aboveTitle {
   display: inline;
-  line-height: 1;
 }
 
-.new {
+h6.new {
   @extend %aboveTitle;
   margin-right: 14px;
   color: $red;
 }
 
-.sku {
+h6.sku {
   @extend %aboveTitle;
   color: $gray;
 }
 
-.title {
+h1.title {
   margin-top: 17px;
   margin-bottom: 17px;
   width: 100%;

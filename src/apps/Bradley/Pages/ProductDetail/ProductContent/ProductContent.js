@@ -22,17 +22,6 @@ const ProductContentImagesDesktopLoadable = Loadable({
   Contains the page up until the tabs
  */
 class ProductContent extends Component {
-  constructor (props) {
-    super(props)
-
-    this.renderNew = this.renderNew.bind(this)
-    this.renderSKU = this.renderSKU.bind(this)
-    this.renderAwards = this.renderAwards.bind(this)
-    this.renderCTA = this.renderCTA.bind(this)
-    this.renderDesktop = this.renderDesktop.bind(this)
-    this.renderTablet = this.renderTablet.bind(this)
-  }
-
   renderNew () {
     if (isNew(this.props.newUntil)) {
       return (
