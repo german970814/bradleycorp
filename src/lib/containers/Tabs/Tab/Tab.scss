@@ -1,18 +1,22 @@
 @import "../../../../scss/partials/variables";
 @import "../../../../scss/partials/mixins";
 
-.active {
+.tab {
+  h5.tabText {
+    display: inline;
+  }
+
+  &.active {
+    background-color: $navy;
+
+    h5.tabText {
+      color: #ffffff;
+    }
+  }
 
   @include respond-to(tablet) {
-    background-color: #2f3d70;
-
-    span {
-      font-family: $CentraleSansPro;
+    h5.tabText {
       font-size: 13px;
-      font-weight: bold;
-      line-height: normal;
-      text-align: center;
-      color: #ffffff;
     }
   }
 }

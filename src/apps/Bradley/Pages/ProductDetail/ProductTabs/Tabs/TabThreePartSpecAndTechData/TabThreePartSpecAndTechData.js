@@ -27,7 +27,7 @@ class TabThreePartSpecAndTechData extends Component {
             title={threePartSpec.post['post_title'] || ''}
             link={threePartSpec.meta['technical_info_pdf']}
             linkClass={tabStyle.tabTextOrangeLink}
-            titleClass={tabStyle.tabTextOrange}
+            titleClass={`link-orange ${tabStyle.tabTextOrange}`}
             iconClass={tabStyle.wordPDFIcon} />
         </li>
       )
@@ -61,7 +61,7 @@ class TabThreePartSpecAndTechData extends Component {
             title={technicalData.post['post_title'] || ''}
             link={technicalData.meta['technical_info_pdf']}
             linkClass={tabStyle.tabTextOrangeLink}
-            titleClass={tabStyle.tabTextOrange}
+            titleClass={`link-orange ${tabStyle.tabTextOrange}`}
             iconClass={tabStyle.wordPDFIcon} />
         </li>
       )

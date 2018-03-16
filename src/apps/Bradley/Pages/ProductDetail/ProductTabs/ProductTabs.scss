@@ -20,20 +20,13 @@ $tabHeight: 65px;
   padding-bottom: 25px;
   background-color: $light-gray;
   text-align: left;
-  @include row()
 }
 
 .productDetailTabs {
   @extend %BodyPaddingWithMediaQueries;
   border-bottom: 1px solid $silver;
   height: $tabHeight;
-  font-family: $CentraleSansPro;
-  font-size: 16px;
-  font-weight: bold;
-  line-height: $tabHeight;
   list-style: none;
-  text-align: left;
-  color: #2e3c6e;
   cursor: pointer;
 
   &:first-child {
@@ -41,11 +34,12 @@ $tabHeight: 65px;
     border-top: 1px solid $silver;
   }
 
-  span {
+  h5:global(.tab-text) {
     display: inline-block;
     vertical-align: middle;
     width: calc(100% - 19px);
-    line-height: normal;
+    color: $navy;
+    line-height: $tabHeight;
   }
 
   img {
@@ -89,7 +83,6 @@ $tabContentPaddingRight: 11.5vw;
 
 .activeTabContentDesktop {
   @extend %BodyPaddingWithMediaQueries;
-  @include row()
   padding-top: 80px;
   padding-bottom: 45px;
   text-align: left;
@@ -111,28 +104,16 @@ $tabContentPaddingRight: 11.5vw;
   width: 120px;
   max-width: 240px;
   height: $tabHeightDesktop;
-  font-family: $CentraleSansPro;
-  font-size: 13px;
-  font-weight: bold;
   line-height: $tabHeightDesktop;
   list-style: none;
-  text-align: center;
   white-space: normal;
-  color: #2e3c6e;
   cursor: pointer;
 
-  span {
+  h5:global(.tab-text) {
     display: inline-block;
     vertical-align: middle;
     width: 118px;
     line-height: normal;
+    text-align: center;
   }
-
-  img {
-    float: right;
-    width: 19px;
-    height: 11px;
-    margin: ($tabHeight - 11px)/2 0;
-  }
-
 }

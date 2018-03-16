@@ -101,19 +101,17 @@
   font-size: 16px;
   font-weight: bold;
   text-align: center;
-  color: #2f3d70;
+  color: $navy;
 }
 
 %h3-tablet {
   @extend %h3-mobile;
   font-size: 20px;
-  color: #2e3c6e;
 }
 
 %h3-desktop {
   @extend %h3-tablet;
   font-size: 24px;
-  color: $navy;
 }
 
 %h4-tablet-mobile {
@@ -178,6 +176,17 @@
   @extend %body;
   line-height: normal;
   color: $navy;
+}
+
+%link-orange {
+  font-family: $CentraleSansPro;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  text-align: left;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: $orange;
 }
 
 %small-link-gray {

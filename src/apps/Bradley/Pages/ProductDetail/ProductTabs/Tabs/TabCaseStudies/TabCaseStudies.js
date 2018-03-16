@@ -22,7 +22,7 @@ class TabCaseStudies extends Component {
             <PDFWithFeaturedImage
               title={caseStudy.post['post_title']}
               imageSrc={caseStudy.media['featured_image'][0]}
-              titleClassName={tabStyle.tabTextOrange} />
+              titleClassName={`link-orange ${tabStyle.tabTextOrange}`} />
           </a>
 
         </li>

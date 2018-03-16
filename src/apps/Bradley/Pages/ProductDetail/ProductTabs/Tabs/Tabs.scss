@@ -104,10 +104,10 @@ $fullWidthColBreakpoint: 600px;
   padding: 0;
 }
 
-.tabColTitle {
+h5.tabColTitle {
   margin-top: 0;
   margin-bottom: $titleMarginBottom;
-  color: #2f3d70;
+  color: $navy;
 }
 
 .tabTextOrangeLink {
@@ -122,16 +122,9 @@ $fullWidthColBreakpoint: 600px;
 }
 
 .tabTextOrange {
-  @extend %h6-desktop;
   display: inline-block;
   vertical-align: middle;
-  font-style: normal;
-  font-stretch: normal;
   line-height: inherit;
-  text-align: left;
-  text-decoration: none;
-  text-transform: uppercase;
-  color: $orange;
 }
 
 .wordPDFIcon {

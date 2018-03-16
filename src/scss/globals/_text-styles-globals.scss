@@ -75,6 +75,10 @@ body {
   @extend %link-navy;
 }
 
+:global .link-orange :local {
+  @extend %link-orange;
+}
+
 :global .small-link-gray :local {
   @extend %small-link-gray;
 }

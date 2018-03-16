@@ -48,7 +48,7 @@ class TabDesign extends Component {
             arrowCustomClass={tabStyle.greyArrow}>
             <Link
               to={link.url}
-              className={tabStyle.tabTextOrange}
+              className={`link-orange ${tabStyle.tabTextOrange}`}
               replace >
               {link.text}
             </Link>
@@ -123,7 +123,7 @@ class TabDesign extends Component {
             <PDFWithFeaturedImage
               title={literature.post['post_title']}
               imageSrc={imageSrc}
-              titleClassName={tabStyle.tabTextOrange} />
+              titleClassName={`link-orange ${tabStyle.tabTextOrange}`} />
           </a>
 
         </li>
@@ -181,10 +181,10 @@ class TabDesign extends Component {
           <img
             src={src}
             className={style.colorImage} />
-          <div
+          <h6
             className={style.colorTitle} >
             {color.post['post_title']}
-          </div>
+          </h6>
 
         </li>
       )
