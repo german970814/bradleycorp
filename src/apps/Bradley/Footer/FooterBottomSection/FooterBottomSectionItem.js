@@ -20,7 +20,7 @@ const FooterBottomSectionItem = props => {
         <Link
           to={props.link}
           replace >
-          {props.title}
+          <div className={`small-link-gray ${style.menuItemLinkGray}`} >{props.title}</div>
         </Link>
       </div>
     </div>

@@ -48,40 +48,38 @@ $menuItemFontSize: 10px;
   padding-bottom: $menuItemsGap / 2;
   height: $logoHeight;
 
+  .logo {
+    width: $logoHeight;
+    height: $logoHeight;
+  }
+
   @include respond-to(tablet) {
     padding-top: $footerSectionTopPaddingTablet;
     height: $logoHeightTablet;
+
+    .logo {
+      width: $logoHeightTablet;
+      height: $logoHeightTablet;
+    }
   }
 
   @include respond-to(desktop) {
     padding-top: $footerSectionTopPaddingDesktop;
     height: $logoHeightDesktop;
-  }
-}
 
-.logo {
-  width: $logoHeight;
-  height: $logoHeight;
-
-  @include respond-to(tablet) {
-    width: $logoHeightTablet;
-    height: $logoHeightTablet;
-  }
-  @include respond-to(tablet) {
-    width: $logoHeightDesktop;
-    height: $logoHeightDesktop;
+    .logo {
+      width: $logoHeightDesktop;
+      height: $logoHeightDesktop;
+    }
   }
 }
 
 .menuItem {
   padding: ($menuItemsGap / 2) 0 (($menuItemsGap / 2) - 2) 0;
-  color: white;
-  font-family: $CentraleSansPro;
-  font-size: $menuItemFontSize;
-  font-weight: bold;
-  line-height: normal;
-  letter-spacing: 0.2px;
-  text-transform: uppercase;
+
+  .menuItemLink {
+    color: white;
+  }
 
   @include respond-to(tablet) {
     padding: ($menuItemsGapTablet / 2) 0 (($menuItemsGapTablet / 2) - 2) 0;
@@ -91,14 +89,6 @@ $menuItemFontSize: 10px;
   @include respond-to(desktop) {
     padding-right: 50px;
   }
-
-  a {
-    color: white;
-  }
-}
-
-.menuItemBottomSection, .menuItemBottomSection a {
-  color: $gray;
 }
 
 .socialMediaIconsWrapper .footerSection {
@@ -151,6 +141,10 @@ $menuItemFontSize: 10px;
 
   .menuItem {
     padding-right: $TabletBodyPadding;
+
+    .menuItemLinkGray {
+      text-align: right;
+    }
 
     @include respond-to(desktop) {
       padding-right: $DesktopBodyPadding;
