@@ -11,9 +11,8 @@
 
   > :global(.container-size-mobile) {
 
-    h5.heading {
+    h3.heading {
       margin-bottom: 30px;
-      text-align: center;
     }
 
     .sliderWrapper, .sliderWrapperTabletDesktop {
@@ -57,11 +56,8 @@
       .contentWrapper {
         @include col(1);
 
-        h4.title {
+        h2.title {
           margin-bottom: 25px;
-          font-size: 27px;
-          letter-spacing: 2.7px;
-          text-transform: uppercase;
         }
 
         .content {
@@ -87,8 +83,7 @@
 
   > :global(.container-size-tablet) {
 
-    h5.heading {
-      margin-bottom: 25px;
+    h3.heading {
       text-align: left;
     }
 
@@ -113,6 +108,10 @@
         float: none;
         padding-right: 34px;
 
+        h2.title {
+          text-align: left;
+        }
+
         .arrowWrapper {
           text-align: left;
         }
@@ -131,8 +130,8 @@
 
   > :global(.container-size-desktop) {
 
-    h5.heading {
-      margin-bottom: 36px;
+    h3.heading {
+      margin-bottom: 40px;
     }
 
     .sliderWrapperTabletDesktop {
@@ -143,68 +142,18 @@
 
       .contentWrapper {
 
-        h4.title {
+        h2.title {
           margin-bottom: 35px;
         }
 
         .content {
-          margin-bottom: 42px;
+          margin-bottom: 45px;
         }
       }
     }
 
     :global(.position-circles-vertical) {
       right: -20px;
-    }
-  }
-
-  /*
-   TABLET SIZED SCREEN AND UP
-   */
-
-  @include respond-to(tablet) {
-    :global(.container-size-mobile), :global(.container-size-tablet), :global(.container-size-desktop ) {
-
-      h5.heading {
-        font-size: 20px;
-      }
-
-      .sliderItem {
-
-        .contentWrapper {
-
-          h4.title {
-            font-size: 36px;
-            letter-spacing: 3.6px;
-            text-align: left;
-          }
-        }
-      }
-    }
-  }
-
-  /*
-   DESKTOP SIZED SCREEN AND UP
-   */
-
-  @include respond-to(desktop) {
-    :global(.container-size-mobile), :global(.container-size-tablet), :global(.container-size-desktop ) {
-
-      h5.heading {
-        font-size: 24px;
-      }
-
-      .sliderItem {
-
-        .contentWrapper {
-
-          h4.title {
-            font-size: 42px;
-            letter-spacing: 4.2px;
-            text-align: left;
-          }
-        }
-      }
     }
   }
 }

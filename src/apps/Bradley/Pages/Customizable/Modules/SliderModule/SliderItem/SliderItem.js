@@ -34,9 +34,9 @@ class SliderItem extends Component {
     }
 
     return (
-      <h5 className={`${style.heading} ${this.props.accentColorClass} module-accent-color-change-text ${this.props.skinClass}`} >
+      <h3 className={`${style.heading} ${this.props.accentColorClass} module-accent-color-change-text ${this.props.skinClass}`} >
         {this.props.heading}
-      </h5>
+      </h3>
     )
   }
 
@@ -48,7 +48,7 @@ class SliderItem extends Component {
     }
 
     return (
-      <h4 className={`${style.title} ${this.props.skinClass}`} >{post.post['post_title']}</h4>
+      <h2 className={`${style.title} ${this.props.skinClass}`} >{post.post['post_title']}</h2>
     )
   }
 

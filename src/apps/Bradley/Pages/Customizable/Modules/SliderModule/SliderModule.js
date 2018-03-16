@@ -16,9 +16,9 @@ class SliderModule extends PostGettingModule {
     }
 
     return (
-      <h5 className={`${style.heading} ${this.accentColorClass} module-accent-color-change-text ${this.skinClass}`} >
+      <h3 className={`${style.heading} ${this.accentColorClass} module-accent-color-change-text ${this.skinClass}`} >
         {this.props.title}
-      </h5>
+      </h3>
     )
   }
 
