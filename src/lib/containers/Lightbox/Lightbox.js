@@ -12,8 +12,6 @@ class Lightbox extends Component {
     this.state = {
       isOpen: false
     }
-
-    this.renderLightbox = this.renderLightbox.bind(this)
   }
 
   toggleOpen () {

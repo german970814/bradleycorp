@@ -13,9 +13,6 @@ $distanceBetweenItemsTabletDesktop: 45px;
     bottom: 40px;
   }
   width: 100%;
-  line-height: 1.26;
-  text-transform: uppercase;
-  color: $black;
 }
 
 h4.title {
@@ -73,15 +70,6 @@ h4.title {
   float: none;
 }
 
-%buttonsBelowText {
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: center;
-  color: $steel-grey;
-}
-
 .prevButton {
 
   img {
@@ -93,7 +81,6 @@ h4.title {
   }
 
   :global(.small-body-desktop) {
-    @extend %buttonsBelowText;
     display: inline-block;
     vertical-align: middle;
     margin-left: 19px;
@@ -112,7 +99,6 @@ h4.title {
   }
 
   :global(.small-body-desktop) {
-    @extend %buttonsBelowText;
     display: inline-block;
     vertical-align: middle;
     margin-right: 19px;

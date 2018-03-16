@@ -7,7 +7,6 @@ class Tab extends Component {
     super(props)
 
     this.handleClick = this.handleClick.bind(this)
-    this.renderUpDownArrow = this.renderUpDownArrow.bind(this)
   }
 
   handleClick (e) {

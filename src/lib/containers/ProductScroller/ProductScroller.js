@@ -4,12 +4,6 @@ import SimpleSlider from '../SimpleSlider/SimpleSlider'
 import ProductScrollerProduct from './ProductScrollerProduct/ProductScrollerProduct'
 
 class ProductScroller extends Component {
-  constructor (props) {
-    super(props)
-
-    this.renderProducts = this.renderProducts.bind(this)
-  }
-
   renderProducts () {
     return this.props.productsArray.map((product, index) => {
       return (
