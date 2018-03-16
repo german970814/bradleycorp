@@ -13,9 +13,9 @@ class FullWidthTemplate extends Component {
     const { data } = this.props
 
     return (
-      <h4 className={`col1 ${style.title}`} >
+      <div className={`col1 hero-headline ${style.title}`} >
         {data.metaboxes['page_hero'].title}
-      </h4>
+      </div>
     )
   }
 
@@ -27,9 +27,9 @@ class FullWidthTemplate extends Component {
     const { data } = this.props
 
     return (
-      <h5 className={`col1 ${style.tagline}`} >
+      <h3 className={`col1 ${style.tagline}`} >
         {data.metaboxes['page_hero'].tagline}
-      </h5>
+      </h3>
     )
   }
 
@@ -41,9 +41,9 @@ class FullWidthTemplate extends Component {
     const { data } = this.props
 
     return (
-      <h6 className={`col1 ${style.copy}`} >
+      <div className={`col1 hero-copy ${style.copy}`} >
         {data.metaboxes['page_hero'].copy}
-      </h6>
+      </div>
     )
   }
 

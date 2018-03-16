@@ -44,29 +44,6 @@
 
 /* Text styles */
 
-%hero-headline-mobile {
-  font-family: $TradeGothic-CondTwenty;
-  font-size: 46px;
-  font-weight: bold;
-  line-height: 1;
-  letter-spacing: 1.8px;
-  text-align: center;
-  text-transform: uppercase;
-  color: #ffffff;
-}
-
-%hero-headline-tablet {
-  @extend %hero-headline-mobile;
-  font-size: 72px;
-  letter-spacing: 7.2px;
-}
-
-%hero-headline-desktop {
-  @extend %hero-headline-tablet;
-  font-size: 90px;
-  letter-spacing: 9px;
-}
-
 %h1-mobile {
   margin-top: 0;
   margin-bottom: 0;
@@ -201,6 +178,50 @@
   font-size: 12px;
   text-align: center;
   color: $steel-grey;
+}
+
+%hero-headline-mobile {
+  font-family: $TradeGothic-CondTwenty;
+  font-size: 46px;
+  font-weight: bold;
+  line-height: 1;
+  letter-spacing: 1.8px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+%hero-headline-tablet {
+  @extend %hero-headline-mobile;
+  font-size: 72px;
+  letter-spacing: 7.2px;
+}
+
+%hero-headline-desktop {
+  @extend %hero-headline-tablet;
+  font-size: 90px;
+  letter-spacing: 9px;
+}
+
+%hero-copy-mobile {
+  font-family: $CentraleSansPro;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.5;
+  text-align: center;
+  color: #ffffff;
+}
+
+%hero-copy-tablet {
+  @extend %hero-copy-mobile;
+  font-size: 13px;
+  line-height: 1.38;
+}
+
+%hero-copy-desktop {
+  @extend %hero-copy-tablet;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 %legal {
