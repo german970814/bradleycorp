@@ -26,7 +26,7 @@ class SinglePostFeaturedModule extends PostGettingModule {
       return
     }
 
-    return <h4 className={style.headline} >{this.props.headline}</h4>
+    return <div className={`hero-headline ${style.headline}`} >{this.props.headline}</div>
   }
 
   renderTitle () {

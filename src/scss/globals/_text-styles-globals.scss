@@ -2,6 +2,20 @@
 @import "../partials/mixins";
 // NOTE: styles wrt container size imported at the end
 
+:global(.hero-headline) {
+  @extend %hero-headline-mobile;
+
+  @include respond-to(tablet) {
+    font-size: 72px;
+    letter-spacing: 7.2px;
+  }
+
+  @include respond-to(desktop) {
+    font-size: 90px;
+    letter-spacing: 9px;
+  }
+}
+
 h1 {
   @extend %h1-mobile;
 

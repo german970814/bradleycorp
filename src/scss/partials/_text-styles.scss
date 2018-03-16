@@ -44,6 +44,29 @@
 
 /* Text styles */
 
+%hero-headline-mobile {
+  font-family: $TradeGothic-CondTwenty;
+  font-size: 46px;
+  font-weight: bold;
+  line-height: 1;
+  letter-spacing: 1.8px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+%hero-headline-tablet {
+  @extend %hero-headline-mobile;
+  font-size: 72px;
+  letter-spacing: 7.2px;
+}
+
+%hero-headline-desktop {
+  @extend %hero-headline-tablet;
+  font-size: 90px;
+  letter-spacing: 9px;
+}
+
 %h1-mobile {
   margin-top: 0;
   margin-bottom: 0;

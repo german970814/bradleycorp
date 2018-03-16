@@ -22,17 +22,13 @@
     padding-top: 60px;
     padding-bottom: $paddingBottom;
 
-    h4.headline {
+    .headline {
       margin-bottom: 100px;
       padding-right: 20%;
       box-sizing: border-box;
       width: 100%;
       min-height: 100px;
-      font-size: 27px;
-      color: #fff;
-      letter-spacing: 1.1px;
       text-align: left;
-      text-transform: uppercase;
     }
 
     .contentWrapper {
@@ -42,10 +38,8 @@
 
       h4.title {
         margin-bottom: 18px;
-        font-size: 16px;
-        color: #fff;
         text-align: left;
-        text-transform: uppercase;
+        color: #fff;
       }
 
       .content {
@@ -74,13 +68,10 @@
     padding: $padding;
     padding-top: 80px;
 
-    h4.headline {
+    .headline {
       margin-bottom: 70px;
       padding-right: 25%;
       min-height: 0px;
-      font-size: 72px;
-      line-height: 1;
-      letter-spacing: 7.2px;
     }
 
     .contentWrapper {
@@ -103,13 +94,11 @@
 
     padding: $padding;
 
-    h4.headline {
+    .headline {
       margin-bottom: 0;
       padding: 100px 0;
       padding-right: 50%;
       width: 100%;
-      font-size: 90px;
-      letter-spacing: 9px;
     }
 
     .contentWrapper {
@@ -122,7 +111,6 @@
 
       h4.title {
         width: 100%;
-        font-size: 18px;
       }
 
       .content {

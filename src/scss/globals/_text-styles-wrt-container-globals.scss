@@ -2,6 +2,9 @@
 // to give these priority
 
 :global(.container-size-mobile) {
+  :global .hero-headline :local {
+    @extend %hero-headline-mobile;
+  }
   h1 {
     @extend %h1-mobile;
   }
@@ -14,15 +17,12 @@
   h4 {
     @extend %h4-tablet-mobile;
   }
-  h5 {
-    @extend %h5-desktop;
-  }
-  h6 {
-    @extend %h6-desktop;
-  }
 }
 
 :global(.container-size-tablet) {
+  :global .hero-headline :local {
+    @extend %hero-headline-tablet;
+  }
   h1 {
     @extend %h1-tablet;
   }
@@ -35,6 +35,9 @@
 }
 
 :global(.container-size-desktop) {
+  :global .hero-headline :local {
+    @extend %hero-headline-desktop;
+  }
   h1 {
     @extend %h1-desktop;
   }
