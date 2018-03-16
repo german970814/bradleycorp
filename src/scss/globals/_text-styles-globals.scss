@@ -67,12 +67,16 @@ body {
   @extend %body;
 }
 
+:global .small-body :local {
+  @extend %small-body-desktop;
+}
+
 :global .link-navy :local {
   @extend %link-navy;
 }
 
-:global .small-body :local {
-  @extend %small-body-desktop;
+:global .small-link-gray :local {
+  @extend %small-link-gray;
 }
 
 :global(.hero-headline) {

@@ -167,17 +167,26 @@
   color: $slate-grey;
 }
 
+%small-body-desktop {
+  @extend %body;
+  font-size: 12px;
+  text-align: center;
+  color: $steel-grey;
+}
+
 %link-navy {
   @extend %body;
   line-height: normal;
   color: $navy;
 }
 
-%small-body-desktop {
-  @extend %body;
-  font-size: 12px;
-  text-align: center;
-  color: $steel-grey;
+%small-link-gray {
+  font-family: $CentraleSansPro;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0.2px;
+  text-align: left;
+  color: $gray;
 }
 
 %hero-headline-mobile {

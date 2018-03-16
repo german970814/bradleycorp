@@ -21,7 +21,7 @@ const HeaderDesktop = props => {
             <img
               src={require('../../../../images/avatar/avatar@2x.png')}
               className={style.avatar} />
-            <div className={style.userText}>{'LOGIN'}</div>
+            <div className={`small-link-gray ${style.userText}`}>{'LOGIN'}</div>
           </div>
           */}
 
@@ -31,7 +31,7 @@ const HeaderDesktop = props => {
             <img
               src={require('../../../../images/flag/flag@2x.png')}
               className={style.flag} />
-            <div className={style.countryText}>{'USA'}</div>
+            <div className={`small-link-gray ${style.countryText}`}>{'USA'}</div>
           </div>
 
         </div>
