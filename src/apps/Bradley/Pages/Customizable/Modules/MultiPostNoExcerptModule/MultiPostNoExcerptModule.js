@@ -30,8 +30,7 @@ class MultiPostNoExcerptModule extends PostGettingModule {
 
   renderModule () {
     return (
-      <div
-        className={`row ${this.containerClassName}`} >
+      <div className={`row ${this.containerClassName}`} >
 
         {this.renderGrid()}
 
