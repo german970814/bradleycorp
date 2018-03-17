@@ -16,7 +16,7 @@
     }
 
     .sliderWrapper, .sliderWrapperTabletDesktop {
-      background-color: initial;
+      background-color: transparent;
 
       :global(.button-up), :global(.button-down) {
         display: none;
