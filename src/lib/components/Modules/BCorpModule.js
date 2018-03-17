@@ -98,7 +98,7 @@ class BCorpModule extends Component {
 
     // eg event name update-row-1
     this.rowUpdateEventName = `update-row-${this.props.rowNode.getAttribute('data-row-id')}`
-    this.rowUpdateEvent = new Event(this.rowUpdateEventName)
+    this.rowUpdateEvent = new CustomEvent(this.rowUpdateEventName)
 
     window.addEventListener(this.rowUpdateEventName, this.updateModuleHeight)
     window.addEventListener('resize', this.updateModuleHeight)
