@@ -35,7 +35,10 @@
 
 @import "./PositionCircle/PositionCircle";
 
-.positionCircles {
+ul.positionCircles {
+  position: relative;
+  z-index: 10;
+  // ^ makes sure we can always click them
   margin-top: 35px;
   margin-bottom: 0;
   padding: 0;

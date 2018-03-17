@@ -86,6 +86,13 @@ class ScrollableList extends Component {
       incrementBy = this.state.children.length - this.state.children[newIndex].position
     }
 
+    // reverseScroll breaks clicking on position circles
+    // since an increment of 1 from the start will seem to go off the end (becomes increment of -1)
+    // we need to make sure we undo this before we pass it to moveList
+    if (this.props.reverseScroll) {
+      incrementBy = -incrementBy
+    }
+
     return this.moveList(e, incrementBy)
   }
 
