@@ -76,6 +76,7 @@
 h6.title {
   @extend %widthController;
   display: inline-block;
+  line-height: normal;
   text-align: center;
   color: $black;
 }
