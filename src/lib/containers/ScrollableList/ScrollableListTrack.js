@@ -76,8 +76,10 @@ class ScrollableListTrack extends Component {
     // we calculate an integer number to move by
     // using percentage of element width swiped multiplied by sensitivity
     // higher sensitivity means a smaller swipe moves the scroller further
-    const numberToMove = (delta / this.getElementWidth()) * touchMoveSensitivity
+    const numberToMove = -(delta / this.getElementWidth()) * touchMoveSensitivity
     const intNumberToMove = Math.round(numberToMove)
+
+    console.log(numberToMove)
 
     return this.props.moveList(e, intNumberToMove)
   }

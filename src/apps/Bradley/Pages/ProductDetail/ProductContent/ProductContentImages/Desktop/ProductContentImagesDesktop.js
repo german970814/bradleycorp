@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { rotate } from '../../../../../../../lib/bcorpArray'
+import { validChain } from '../../../../../../../lib/bcorpObject'
 import VerticalAlignHelper from '../../../../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import VerticalListItem from './VerticalListItem/VerticalListItem'
 import ScrollableList from '../../../../../../../lib/containers/ScrollableList/ScrollableList'
@@ -16,29 +16,22 @@ class ProductContentImagesDesktop extends Component {
     super(props)
 
     this.state = {
-      selectedImageSrc: '',
-      imagesSrcList: [],
-      videosSrcList: []
+      selectedImageSrc: ''
     }
-
-    this.renderSelectedImage = this.renderSelectedImage.bind(this)
-    this.setInitState = this.setInitState.bind(this)
-    this.renderVerticalList = this.renderVerticalList.bind(this)
-    this.renderImagesListLightbox = this.renderImagesListLightbox.bind(this)
   }
 
   componentDidMount () {
-    this.setInitState(this.props)
+    this.init(this.props)
   }
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.images !== this.props.images ||
     nextProps.featuredImageSrc !== this.props.featuredImageSrc) {
-      this.setInitState(nextProps)
+      this.init(nextProps)
     }
   }
 
-  setInitState (props) {
+  init (props) {
     const videosSrcList = (props.videos && props.videos.length)
       ? props.videos.split(',')
       : []
@@ -46,27 +39,19 @@ class ProductContentImagesDesktop extends Component {
       ? props.images.split(',')
       : []
 
-    if (props.featuredImageSrc) {
-      const imagesSrcList = this.withFeaturedImage(props, imageSrcs)
-      return this.setState({
-        selectedImageSrc: props.featuredImageSrc,
-        imagesSrcList,
-        videosSrcList
-      })
-    }
+    this.videosSrcList = videosSrcList
 
-    return this.setState({
-      selectedImageSrc: imageSrcs[0],
-      imagesSrcList: imageSrcs,
-      videosSrcList
-    })
+    if (props.featuredImageSrc) {
+      this.imagesSrcList = this.withFeaturedImage(props, imageSrcs)
+      return this.setState({ selectedImageSrc: props.featuredImageSrc })
+    } else {
+      this.imagesSrcList = imageSrcs
+      return this.setState({ selectedImageSrc: imageSrcs[0] })
+    }
   }
 
   updateSelectedImage (src) {
-    return this.setState({
-      ...this.state,
-      selectedImageSrc: src
-    })
+    return this.setState({ selectedImageSrc: src })
   }
 
   handleImageListItemClick (e, src) {
@@ -77,20 +62,24 @@ class ProductContentImagesDesktop extends Component {
     return this.updateSelectedImage(src)
   }
 
-  handleSelectedImageScrollerPositionChange (children) {
-    const displayedChild = children.filter(child => {
-      return child.display
-    })
+  handleSelectedImageScrollerPositionChange (children, index) {
+    if (!validChain(children[index], 'props', 'src')) {
+      return
+    }
 
-    const displayedChildSrc = displayedChild[0].component.props.src
+    const displayedChildSrc = children[index].props.src
 
-    if (displayedChildSrc && this.state.imagesSrcList.includes(displayedChildSrc)) {
+    if (this.imagesSrcList.includes(displayedChildSrc)) {
       return this.updateSelectedImage(displayedChildSrc)
     }
   }
 
   renderVerticalList () {
-    const imgs = this.state.imagesSrcList.map((imageSrc, index) => {
+    if (!this.imagesSrcList || !this.videosSrcList) {
+      return []
+    }
+
+    const imgs = this.imagesSrcList.map((imageSrc, index) => {
       return (
         <VerticalListItem
           key={index}
@@ -98,7 +87,7 @@ class ProductContentImagesDesktop extends Component {
           src={imageSrc} />
       )
     })
-    const videos = this.state.videosSrcList.map((videoSrc, index) => {
+    const videos = this.videosSrcList.map((videoSrc, index) => {
       return (
         <VerticalListItem
           key={`video_${index}`}
@@ -111,19 +100,21 @@ class ProductContentImagesDesktop extends Component {
   }
 
   renderImagesListLightbox () {
-    const combinedSrc = [...this.state.imagesSrcList, ...this.state.videosSrcList]
-    const selectedIndex = combinedSrc.indexOf(this.state.selectedImageSrc)
-    const orderedSrcs = rotate(combinedSrc, selectedIndex)
+    if (!this.imagesSrcList || !this.videosSrcList) {
+      return []
+    }
+
+    const orderedSrcs = [...this.imagesSrcList, ...this.videosSrcList]
 
     return orderedSrcs.map((src, index) => {
-      if (this.state.imagesSrcList.indexOf(src) !== -1) {
+      if (this.imagesSrcList.indexOf(src) !== -1) {
         return (
           <ListItemLightbox
             key={index}
             src={src} />
         )
       }
-      if (this.state.videosSrcList.indexOf(src) !== -1) {
+      if (this.videosSrcList.indexOf(src) !== -1) {
         return (
           <ListItemLightbox
             key={index}
@@ -150,7 +141,8 @@ class ProductContentImagesDesktop extends Component {
 
         <SelectedImageLightboxContent
           onPositionChange={this.handleSelectedImageScrollerPositionChange.bind(this)}
-          items={items} >
+          items={items}
+          firstItemSrc={this.state.selectedImageSrc} >
         </SelectedImageLightboxContent>
 
       </Lightbox>
@@ -158,6 +150,10 @@ class ProductContentImagesDesktop extends Component {
   }
 
   render () {
+    if (!this.props.images && !this.props.videos) {
+      return null
+    }
+
     return (
       <React.Fragment>
 
@@ -184,8 +180,9 @@ class ProductContentImagesDesktop extends Component {
   }
 
   withFeaturedImage (props, imgSrcs) {
-    if (imgSrcs.includes(props.featuredImageSrc)) {
-      return imgSrcs
+    const ix = imgSrcs.indexOf(props.featuredImageSrc)
+    if (ix > -1) {
+      imgSrcs.splice(ix, 1)
     }
     return [ props.featuredImageSrc, ...imgSrcs ]
   }

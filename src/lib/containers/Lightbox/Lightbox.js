@@ -15,9 +15,10 @@ class Lightbox extends Component {
   }
 
   toggleOpen () {
-    this.setState({
-      isOpen: !this.state.isOpen
-    })
+    if (!this.state.isOpen) {
+      return this.openLightbox()
+    }
+    this.closeLightbox()
   }
 
   openLightbox () {
