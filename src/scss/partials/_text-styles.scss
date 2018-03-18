@@ -52,7 +52,6 @@
   font-weight: 300;
   line-height: 1.22;
   letter-spacing: -0.9px;
-  text-align: left;
 }
 
 %h1-tablet {
@@ -77,7 +76,6 @@
   font-weight: bold;
   line-height: 1;
   letter-spacing: 2.7px;
-  text-align: left;
   text-transform: uppercase;
   color: $black;
 }
@@ -100,7 +98,6 @@
   font-family: $CentraleSansPro;
   font-size: 16px;
   font-weight: bold;
-  text-align: center;
   color: $navy;
 }
 
@@ -121,7 +118,6 @@
   font-size: 16px;
   font-weight: bold;
   letter-spacing: 1.6px;
-  text-align: center;
   text-transform: uppercase;
 }
 
@@ -138,7 +134,6 @@
   font-family: $CentraleSansPro;
   font-size: 16px;
   font-weight: bold;
-  text-align: left;
 }
 
 %h6-desktop {
@@ -149,7 +144,6 @@
   font-weight: bold;
   line-height: 2.77;
   letter-spacing: 0.5px;
-  text-align: left;
   text-transform: uppercase;
 }
 
@@ -167,10 +161,9 @@
   color: $slate-grey;
 }
 
-%small-body-desktop {
+.small-body {
   @extend %body;
   font-size: 12px;
-  text-align: center;
   color: $steel-grey;
 }
 
@@ -185,7 +178,6 @@
   font-size: 13px;
   font-weight: bold;
   letter-spacing: 0.5px;
-  text-align: left;
   text-decoration: none;
   text-transform: uppercase;
   color: $orange;
@@ -196,7 +188,6 @@
   font-size: 10px;
   font-weight: bold;
   letter-spacing: 0.2px;
-  text-align: left;
   text-transform: uppercase;
   color: $gray;
 }
@@ -207,7 +198,6 @@
   font-weight: bold;
   line-height: 1;
   letter-spacing: 1.8px;
-  text-align: center;
   text-transform: uppercase;
   color: #ffffff;
 }
@@ -229,7 +219,6 @@
   font-size: 12px;
   font-weight: bold;
   line-height: 1.5;
-  text-align: center;
   color: #ffffff;
 }
 
@@ -251,5 +240,4 @@
   font-family: $CentraleSansPro;
   font-size: 8px;
   font-weight: bold;
-  text-align: right;
 }

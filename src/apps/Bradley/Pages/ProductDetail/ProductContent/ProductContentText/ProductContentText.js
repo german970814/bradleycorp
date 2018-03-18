@@ -34,7 +34,7 @@ class ProductContentText extends Component {
                 className={style.content}
                 dangerouslySetInnerHTML={{__html: this.renderText(isOpen)}} />
 
-              <div className={`small-body-desktop ${style.moreDetail}`}>
+              <div className={`small-body ${style.moreDetail}`}>
                 <div
                   onClick={() => openClose()} >
                   {this.renderMoreDetailsButtonText(isOpen)}

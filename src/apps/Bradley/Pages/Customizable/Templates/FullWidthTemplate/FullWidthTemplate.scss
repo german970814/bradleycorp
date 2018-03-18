@@ -13,6 +13,7 @@
 
     h3.tagline {
       margin-bottom: 25px;
+      text-align: center;
       color: #fff;
 
       @include respond-to(desktop) {
@@ -20,8 +21,13 @@
       }
     }
 
-    .title {
+    :global(.hero-headline).title {
       margin-bottom: 30px;
+      text-align: center;
+    }
+
+    :global(.hero-copy).copy {
+      text-align: center;
     }
 
     :last-child {

@@ -1,7 +1,7 @@
 @import "../../../../../../scss/partials/variables";
 @import "../../../../../../scss/partials/mixins";
 
-.moreDetail {
+:global(.small-body).moreDetail {
   margin-bottom: 35px;
   width: 100%;
   color: $black;

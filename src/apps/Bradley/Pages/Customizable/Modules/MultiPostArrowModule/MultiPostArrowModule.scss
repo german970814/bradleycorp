@@ -20,6 +20,7 @@ $arrowWidth: 11px;
     h3.title {
       @include col(1);
       margin-bottom: 30px;
+      text-align: center;
     }
 
     $distanceBetweenItems: 20px;
@@ -40,15 +41,16 @@ $arrowWidth: 11px;
         margin-bottom: 0;
 
         :global(.button-up) , :global(.button-down) {
-          global(.small-body-desktop) {
+          global(.small-body) {
             line-height: normal;
+            text-align: center;
           }
         }
       }
     }
     &:global(.module-skin-dark) {
-      .slider :global(.buttons-below), :global(button-up), :global(.small-body-desktop),
-      .slider :global(.buttons-below), :global(button-down), :global(.small-body-desktop),
+      .slider :global(.buttons-below), :global(button-up), :global(.small-body),
+      .slider :global(.buttons-below), :global(button-down), :global(.small-body),
       {
         color: #fff;
       }
@@ -64,6 +66,7 @@ $arrowWidth: 11px;
 
       h4.title {
         margin-bottom: 18px;
+        text-align: center;
       }
 
       .content {
