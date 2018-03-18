@@ -79,8 +79,6 @@ class ScrollableListTrack extends Component {
     const numberToMove = -(delta / this.getElementWidth()) * touchMoveSensitivity
     const intNumberToMove = Math.round(numberToMove)
 
-    console.log(numberToMove)
-
     return this.props.moveList(e, intNumberToMove)
   }
 
@@ -207,7 +205,6 @@ class ScrollableListTrack extends Component {
                 style={{
                   margin: alignText,
                   width: this.getTrackWidth(),
-                  opacity: this.getOpacity(dx),
                   transform: this.getTransform(dx),
                   transition: this.getTransition(dx, dy)
                 }}
@@ -218,7 +215,7 @@ class ScrollableListTrack extends Component {
                   this.touchEnd(e, dx)
                   touchEndCapture(e)
                 }} >
-                {this.props.children(this.getElementWidth())}
+                {this.props.children(this.getElementWidth(), this.getOpacity(dx))}
               </div>
             )
           }}

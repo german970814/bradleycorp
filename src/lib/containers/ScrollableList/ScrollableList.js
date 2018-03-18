@@ -153,10 +153,7 @@ class ScrollableList extends Component {
               key={index} >
               <PositionCircle
                 onClick={(e) => { this.moveListToIndex(e, index) }}
-                selected={
-                  index >= this.state.currentFirstIndex &&
-                  index <= this.state.currentFirstIndex + this.props.numberToDisplay - 1
-                } />
+                selected={this.childIsDisplayed(index)} />
             </li>
           )
         })}
@@ -174,13 +171,20 @@ class ScrollableList extends Component {
    * @param  {[number]} dimensions height or width, depending on if it's a vertical scroller
    * @return {[array]}            array of JSX elements with their width (or height) set
    */
-  renderChildren (dimensions) {
-    const inlineStyle = this.props.vertical ? { height: dimensions } : { width: dimensions }
+  renderChildren (dimensions, opacity) {
     const className = this.props.vertical
       ? `${style.trackItemVertical} track-item-vertical`
       : `${style.trackItem} track-item`
 
     return this.props.children.map((child, index) => {
+      const inlineStyle = this.props.vertical ? { height: dimensions } : { width: dimensions }
+
+      if (!isNaN(opacity)) {
+        inlineStyle.opacity = this.childIsDisplayed(index)
+          ? opacity
+          : 1 - opacity
+      }
+
       return (
         <div
           key={index}
@@ -210,7 +214,7 @@ class ScrollableList extends Component {
           touchMoveSensitivity={this.props.touchMoveSensitivity}
           reverseSwipeScroll={this.props.reverseSwipeScroll}
           animation={this.props.animation} >
-          {(elementDimension) => this.renderChildren(elementDimension)}
+          {(elementDimension, opacity) => this.renderChildren(elementDimension, opacity)}
         </ScrollableListTrack>
 
         {this.renderButtonDown()}
@@ -228,6 +232,10 @@ class ScrollableList extends Component {
   /**
    * HELPER FUNCTIONS
    */
+
+  childIsDisplayed (index) {
+    return index >= this.state.currentFirstIndex && index <= this.state.currentFirstIndex + this.props.numberToDisplay - 1
+  }
 
   childrenDidUpdate (newChildren, children) {
     if (newChildren.length !== children.length) {
