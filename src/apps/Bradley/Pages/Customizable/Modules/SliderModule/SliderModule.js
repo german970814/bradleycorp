@@ -55,7 +55,7 @@ class SliderModule extends PostGettingModule {
         transitionSpeed: 1500,
         vertical: true,
         positionCirclesVertical: true,
-        reverseScroll: true
+        reverseSwipeScroll: true
       }
     }
 
@@ -67,8 +67,9 @@ class SliderModule extends PostGettingModule {
         animation={args.animation}
         transitionSpeed={args.transitionSpeed}
         vertical={args.vertical}
-        reverseScroll={args.reverseScroll}
+        reverseSwipeScroll={args.reverseSwipeScroll}
         positionCirclesVertical={args.positionCirclesVertical}
+        slideShow
         alwaysUpdate
         showPosition >
         {this.renderSliderItems()}

@@ -19,6 +19,14 @@ class ScrollableList extends Component {
        */
       currentFirstIndex: 0
     }
+
+    this.slideShowDirectionForward = true
+  }
+
+  componentDidMount () {
+    if (this.props.slideShow) {
+      this.resetSlideTimer()
+    }
   }
 
   componentWillReceiveProps (nextProps) {
@@ -27,6 +35,28 @@ class ScrollableList extends Component {
     this.numberToDisplayDidUpdate(nextProps.numberToDisplay, this.props.numberToDisplay) ||
     this.props.alwaysUpdate) {
       this.setState({ currentFirstIndex: 0 })
+    }
+  }
+
+  resetSlideTimer () {
+    if (this.slideTimer) {
+      clearTimeout(this.slideTimer)
+    }
+    this.slideTimer = setTimeout(this.slide.bind(this), this.props.slideShowSpeed)
+  }
+
+  slide () {
+    // reverse direction if we hit an end
+    if (this.childIsDisplayed(this.props.children.length - 1)) {
+      this.slideShowDirectionForward = false
+    } else if (this.childIsDisplayed(0)) {
+      this.slideShowDirectionForward = true
+    }
+
+    if (this.slideShowDirectionForward) {
+      this.moveList(null, 1)
+    } else {
+      this.moveList(null, -1)
     }
   }
 
@@ -63,7 +93,7 @@ class ScrollableList extends Component {
    * @return {[void]}             Sets new component state with objects in new position
    */
   moveList (e, increment) {
-    if (this.props.stopEventBubblingFromButtons) { // stops it from calling any onClick events on the container eg close lightbox
+    if (e && this.props.stopEventBubblingFromButtons) { // stops it from calling any onClick events on the container eg close lightbox
       e.stopPropagation()
     }
 
@@ -87,7 +117,11 @@ class ScrollableList extends Component {
       this.props.onPositionChange(this.props.children, newIndex)
     }
 
-    return this.setState({ currentFirstIndex: newIndex })
+    this.setState({ currentFirstIndex: newIndex })
+
+    if (this.props.slideShow) {
+      this.resetSlideTimer()
+    }
   }
 
   renderButtonsBelow () {
@@ -326,6 +360,14 @@ ScrollableList.propTypes = {
     PropTypes.oneOf(['none', 'slide', 'fade'])
   ),
   /*
+    Have the slider play automatically on a timer
+   */
+  slideShow: PropTypes.bool,
+  /*
+    Time between each transition in ms
+   */
+  slideShowSpeed: PropTypes.number,
+  /*
     Callback for when the position of the scroller changes
     Will be passed an argument of the next children state (array)
    */
@@ -340,7 +382,8 @@ ScrollableList.defaultProps = {
   numberToDisplay: 1,
   touchMoveSensitivity: 1,
   transitionSpeed: 600,
-  animation: ['slide']
+  animation: ['slide'],
+  slideShowSpeed: 5000
 }
 
 export default ScrollableList
