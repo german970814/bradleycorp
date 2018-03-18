@@ -213,10 +213,14 @@ class ScrollableList extends Component {
     return this.props.children.map((child, index) => {
       const inlineStyle = this.props.vertical ? { height: dimensions } : { width: dimensions }
 
-      if (!isNaN(opacity)) {
-        inlineStyle.opacity = this.childIsDisplayed(index)
-          ? opacity
-          : 1 - opacity
+      if (this.props.animation.includes('fade')) {
+        inlineStyle.transition = `opacity ${this.props.transitionSpeed}ms`
+
+        if (!isNaN(opacity)) {
+          inlineStyle.opacity = this.childIsDisplayed(index)
+            ? opacity
+            : 1 - opacity
+        }
       }
 
       return (

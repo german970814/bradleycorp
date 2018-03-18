@@ -49,7 +49,7 @@ class ScrollableListTrack extends Component {
    *
    * @see file docs for ContainerMediaQuery
    */
-  componentWillReceiveProps () {
+  componentWillReceiveProps (nextProps) {
     this.updateTrackNode()
   }
 
@@ -241,7 +241,6 @@ class ScrollableListTrack extends Component {
               <div
                 style={{
                   height: this.getTrackHeightVertical(),
-                  opacity: this.getOpacityVertical(dy),
                   transform: this.getTransformVertical(dy),
                   transition: this.getTransition(dx, dy)
                 }}
@@ -252,7 +251,7 @@ class ScrollableListTrack extends Component {
                   this.touchEnd(e, dy)
                   touchEndCapture(e)
                 }} >
-                {this.props.children(this.getElementHeightVertical())}
+                {this.props.children(this.getElementHeightVertical(), this.getOpacity(dy))}
               </div>
             )
           }}
