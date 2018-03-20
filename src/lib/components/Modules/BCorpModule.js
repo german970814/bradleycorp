@@ -41,7 +41,7 @@ class BCorpModule extends Component {
     this.localStyle = localStyle
 
     /**
-     * Class name to give to the module allowing us to write scss responsding to the container
+     * Class name to give to the module allowing us to write scss responding to the container
      *
      * mobile size: 'container-size-mobile'
      * tabelt size: 'container-size-mobile container-size-tablet'
