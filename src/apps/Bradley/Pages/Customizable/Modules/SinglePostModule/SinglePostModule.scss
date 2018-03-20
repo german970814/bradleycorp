@@ -2,76 +2,77 @@
 @import "../../../../../../scss/partials/variables";
 @import "../../../../../../scss/partials/mixins";
 @import "../../../../../../scss/partials/grid";
+@import "../../../../../../lib/components/BCorpBackground/BCorpBackground";
 
 .stretchToHeight {
   height: 100%;
 }
 
-/* TODO: remove background on mobile
-//*/
-
 .singlePostModule {
+  @extend %bcorpBackgroundParent;
 
   /*
     MOBILE SIZED CONTAINER ONLY
    */
 
-  &:global {
+  > :global {
     &:not(.container-size-tablet) {
-      background: none !important;
+      &.module-skin-dark {
+        background-color: $black;
+      }
+
+      &.module-skin-light {
+        background-color: #fff;
+      }
     }
   }
 
   /*
-   MOBILE SIZED CONTAINER AND UP
+   MOBILE SIZED CONTAINER + SCREEN AND UP
    */
 
-  @extend %coverBackground;
-  width: auto;
+  > :global(.container-size-mobile) {
+    box-sizing: border-box;
 
-  .imageCol {
-    @include col(1);
-
-    .imagePadding {
-      margin-bottom: 40px;
-    }
-  }
-
-  .contentCol {
-    @include col(1);
-
-    .contentWrapper {
-      display: inline-block;
-      vertical-align: middle;
-      width: 100%;
-    }
-
-    .title {
-      margin-bottom: 30px;
-      font-family: TradeGothic;
-      font-size: 27px;
-      font-weight: bold;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: 0.83;
-      letter-spacing: 2.7px;
-      text-align: left;
-      text-transform: uppercase;
-      color: $black;
-    }
-
-    .content {
-      margin-bottom: 27px;
-      line-height: 1.5;
-    }
-
-    .button {
+    .imageCol {
       @include col(1);
-      margin-bottom: 10px;
-      text-align: center;
 
-      &:last-child {
-        margin-bottom: 0;
+      .imagePadding {
+        margin-bottom: 40px;
+      }
+    }
+
+    .contentCol {
+      @include col(1);
+
+      .contentWrapper {
+        display: inline-block;
+        vertical-align: middle;
+        width: 100%;
+      }
+
+      h2.title {
+        margin-bottom: 30px;
+      }
+
+      .content {
+        margin-bottom: 27px;
+      }
+
+      .button {
+        @include col(1);
+        margin-bottom: 10px;
+        text-align: center;
+
+        .button2 {
+          &:global(.module-skin-dark) {
+            border-color: #fff;
+          }
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
       }
     }
   }
@@ -80,10 +81,11 @@
     TABLET SIZE CONTAINER AND UP
    */
 
-  &:global(.container-size-tablet) {
+  > :global(.container-size-tablet) {
 
     .imageCol {
       @include inline-col(2, middle);
+      float: none;
 
       .imagePadding {
         margin-bottom: 0;
@@ -94,12 +96,7 @@
 
     .contentCol {
       @include inline-col(2, middle);
-
-      .title {
-        font-size: 36px;
-        line-height: 1;
-        letter-spacing: 3.6px;
-      }
+      float: none;
 
       $buttonWidth: 150px;
       $buttonGutter: 10px;
@@ -122,7 +119,7 @@
     DESKTOP SIZE CONTAINER
    */
 
-  &:global(.container-size-desktop) {
+  > :global(.container-size-desktop) {
 
     .imageCol {
       width: 45.4% !important;
@@ -135,11 +132,8 @@
     .contentCol {
       width: 54.6% !important;
 
-      .title {
+      h2.title {
         margin-bottom: 35px;
-        font-size: 42px;
-        line-height: 0.94;
-        letter-spacing: 4.2px;
       }
 
       .content {

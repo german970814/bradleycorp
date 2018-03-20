@@ -1,12 +1,11 @@
 @import "../../../../../../scss/partials/variables";
 @import "../../../../../../scss/partials/mixins";
 
-.moreDetail {
+:global(.small-body).moreDetail {
   margin-bottom: 35px;
   width: 100%;
-  font-weight: bold;
-  line-height: 1.5;
   color: $black;
+  font-weight: bold;
   cursor: pointer;
 
   @include respond-to(desktop) {
@@ -17,7 +16,6 @@
 .content {
   overflow: hidden;
   width: 100%;
-  line-height: 1;
   margin-bottom: 15px;
 
   ul {

@@ -44,7 +44,7 @@ class Footer extends Component {
               <Link
                 to={removeHostFromUrl(menuItem['url']) || '#'}
                 replace >
-                {menuItem['title']}
+                <div className={`small-link-gray ${style.menuItemLink}`} >{menuItem['title']}</div>
               </Link>
             </div>
           </div>
@@ -71,7 +71,7 @@ class Footer extends Component {
               <Link
                 to={removeHostFromUrl(menuItem['url']) || '#'}
                 replace >
-                {menuItem['title']}
+                <div className={`small-link-gray ${style.menuItemLink}`} >{menuItem['title']}</div>
               </Link>
             </div>
           </div>

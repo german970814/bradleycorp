@@ -19,6 +19,20 @@
   background-position:center;
 }
 
+%fillRelativeParent {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+%verticalAlignMiddleAbsolutelyPositionedElement {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 %aspectRatioWrapper169 {
   position: relative;
   overflow: hidden;

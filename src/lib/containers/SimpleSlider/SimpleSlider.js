@@ -14,14 +14,6 @@ import style from './SimpleSlider.scss'
  * Wraps the ScrollableList component with media queries and default button elements
  */
 class SimpleSlider extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      node: undefined
-    }
-  }
-
   renderTitle () {
     if (this.props.title !== undefined &&
     this.props.title !== '') {
@@ -59,7 +51,8 @@ class SimpleSlider extends Component {
         buttonDown={this.renderButtonDownMobile()}
         positionButtonsBelow={this.props.nextPrevButtonsForMobile}
         reverseScroll={this.props.reverseScroll}
-        wrapperClassName={`${style.sliderWrapper} ${this.props.wrapperClassName}`} >
+        wrapperClassName={`${style.sliderWrapper} ${this.props.wrapperClassName}`}
+        alwaysUpdate={this.props.alwaysUpdate} >
         {this.props.children}
       </ScrollableList>
     )
@@ -73,7 +66,8 @@ class SimpleSlider extends Component {
         buttonUp={<ButtonLeft />}
         buttonDown={<ButtonRight />}
         reverseScroll={this.props.reverseScroll}
-        wrapperClassName={`${style.sliderTabletDesktop} ${this.props.desktopWrapperClassName}`} >
+        wrapperClassName={`${style.sliderTabletDesktop} ${this.props.desktopWrapperClassName}`}
+        alwaysUpdate={this.props.alwaysUpdate} >
         {this.props.children}
       </ScrollableList>
     )
@@ -87,7 +81,8 @@ class SimpleSlider extends Component {
         buttonUp={<ButtonLeft />}
         buttonDown={<ButtonRight />}
         reverseScroll={this.props.reverseScroll}
-        wrapperClassName={`${style.sliderTabletDesktop} ${this.props.desktopWrapperClassName}`} >
+        wrapperClassName={`${style.sliderTabletDesktop} ${this.props.desktopWrapperClassName}`}
+        alwaysUpdate={this.props.alwaysUpdate} >
         {this.props.children}
       </ScrollableList>
     )
@@ -121,42 +116,49 @@ class SimpleSlider extends Component {
     } else {
       /**
        * Slider with media query based on container size
+       *
+       * respond with priority to a node passed as props rather than itself
        */
       return (
-        <ContainerMediaQuery
-          node={this.state.node} >
-          {(containerClassName, size) => {
-            let slider = null
-
-            if (size === 'mobile') {
-              slider = this.renderSliderMobile()
-            } else
-
-            if (size === 'tablet') {
-              slider = this.renderSliderTablet()
-            } else
-
-            if (size === 'desktop') {
-              slider = this.renderSliderDesktop()
+        <div
+          ref={(node) => {
+            if (!this.props.containerNode && !this.node) {
+              this.node = node
             }
-
-            return (
-              <div
-                ref={(node) => {
-                  if (!this.state.node) {
-                    this.setState({ node })
-                  }
-                }}
-                className={`${containerClassName} ${style.respondToContainerContainer}`} >
-
-                {this.renderTitle()}
-
-                {slider}
-
-              </div>
-            )
           }}
-        </ContainerMediaQuery>
+          className={style.respondToContainerContainer} >
+
+          <ContainerMediaQuery
+            node={this.props.containerNode || this.node} >
+            {(containerClassName, size) => {
+              let slider = null
+
+              if (size === 'mobile') {
+                slider = this.renderSliderMobile()
+              } else
+
+              if (size === 'tablet') {
+                slider = this.renderSliderTablet()
+              } else
+
+              if (size === 'desktop') {
+                slider = this.renderSliderDesktop()
+              }
+
+              return (
+                <div
+                  className={containerClassName} >
+
+                  {this.renderTitle()}
+
+                  {slider}
+
+                </div>
+              )
+            }}
+          </ContainerMediaQuery>
+
+        </div>
       )
     }
   }
@@ -199,6 +201,17 @@ SimpleSlider.propTypes = {
    * Media query is on container size rather than window
    */
   respondToContainer: PropTypes.bool,
+  /*
+    Update the children whenever the component receives new props, regardless of if they changed
+   */
+  alwaysUpdate: PropTypes.bool,
+  /**
+   * We can give the slider another DOM a different node to respond to if respondToContainer is true
+   * eg we might pick a higher level parent that still isnt the whole window
+   *
+   * If left empty the slider will respond to the size of its' container
+   */
+  containerNode: PropTypes.object,
   /**
    * Custom class name for the scroller's wrapper node on mobile
    */

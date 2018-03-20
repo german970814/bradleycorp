@@ -1,0 +1,46 @@
+@import "../../../../../../scss/partials/grid";
+@import "../../../../../../scss/partials/variables";
+@import "../../../../../../scss/partials/mixins";
+@import "../../../../../../lib/components/Modules/Modules";
+
+.menuModule {
+
+  $margin-bottom: 25px;
+
+  > :global(.container-size-mobile) {
+    padding-bottom: $modulePaddingTopBottomMobile - $margin-bottom;
+
+    h3.title {
+      margin-bottom: 35px;
+      text-align: center;
+      color: $black;
+    }
+
+    .menuBlockWrapper {
+      @include inline-col(1, top);
+      margin-bottom: $margin-bottom;
+    }
+  }
+
+  > :global(.container-size-tablet) {
+    padding-bottom: $modulePaddingTopBottomTablet - $margin-bottom;
+
+    h3.title {
+      margin-bottom: 55px;
+    }
+
+    .menuBlockWrapper {
+      @include inline-col(2, top);
+      padding-right: 100px;
+    }
+  }
+
+  > :global(.container-size-desktop) {
+    padding-bottom: $modulePaddingTopBottomDesktop - $margin-bottom;
+
+    .menuBlockWrapper {
+      @include inline-col(4, top);
+      padding-right: 50px;
+    }
+  }
+}

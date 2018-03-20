@@ -1,11 +1,26 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import { createCPTUrl } from '../../../../../../../lib/bcorpUrl'
 import { getExcerpt } from '../../../../../../../lib/bcorpPost'
+import { lookupColor } from '../../../../../../../lib/bcorpStyles'
 import Divider from '../../../../../../../lib/components/Divider/Divider'
 import ImageFrame from '../../../../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import style from './PostColumn.scss'
 
 class PostColumn extends Component {
+  constructor (props) {
+    super(props)
+
+    this.postLink = '#'
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.post) {
+      this.postLink = createCPTUrl(nextProps.post.post)
+    }
+  }
+
   renderImage () {
     const { post } = this.props
 
@@ -21,7 +36,9 @@ class PostColumn extends Component {
           src={imgSrc}
           aspectRatio={121 / 270}
           aspectRatioTablet={89 / 177}
-          aspectRatioDesktop={140 / 316} />
+          aspectRatioDesktop={140 / 316}
+          containerNode={this.props.containerNode}
+          respondToContainer />
       </div>
     )
   }
@@ -34,20 +51,20 @@ class PostColumn extends Component {
     }
 
     return (
-      <h4 className={style.title} >{post.post['post_title']}</h4>
+      <h4 className={`${style.title} ${this.props.skinClass}`} >{post.post['post_title']}</h4>
     )
   }
 
   renderContent () {
     const { post } = this.props
-    const excerpt = getExcerpt(post.post['post_excerpt'], post.post['post_content'], 22)
+    const excerpt = getExcerpt(post.post['post_excerpt'], post.post['post_content'])
 
     if (!excerpt) {
       return
     }
 
     return (
-      <div className={style.content} >
+      <div className={`${style.content} ${this.props.skinClass}`} >
         {excerpt}
       </div>
     )
@@ -55,18 +72,29 @@ class PostColumn extends Component {
 
   renderButton () {
     return (
-      <button className={`button-brown ${style.button}`} >{'LEARN MORE'}</button>
+      <div className={style.buttonWrapper} >
+
+        <Link
+          to={`${this.postLink}`}
+          replace >
+
+          <button className={`button-brown ${style.button} ${this.props.accentColorClass}`} >{'LEARN MORE'}</button>
+
+        </Link>
+
+      </div>
     )
   }
 
   renderDivider () {
-    return <Divider fullWidth />
+    const color = this.props.skin === 'dark' ? lookupColor('charcoal-grey') : undefined
+    return <Divider color={color} fullWidth />
   }
 
   render () {
     const columnSizeClass = style[`post-column-${this.props.numColumns}`]
     return (
-      <div className={`${columnSizeClass} ${style.postColumnWrapper}`} >
+      <div className={`${columnSizeClass} ${style.postColumnWrapper} ${this.props.containerClassName} ${this.props.skinClass}`} >
 
         {this.renderImage()}
         {this.renderTitle()}
@@ -81,7 +109,12 @@ class PostColumn extends Component {
 
 PostColumn.propTypes = {
   post: PropTypes.object.isRequired,
-  numColumns: PropTypes.number.isRequired
+  containerNode: PropTypes.object,
+  numColumns: PropTypes.number.isRequired,
+  containerClassName: PropTypes.string,
+  accentColorClass: PropTypes.string,
+  skinClass: PropTypes.string,
+  skin: PropTypes.string
 }
 
 export default PostColumn

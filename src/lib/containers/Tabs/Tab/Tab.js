@@ -7,7 +7,6 @@ class Tab extends Component {
     super(props)
 
     this.handleClick = this.handleClick.bind(this)
-    this.renderUpDownArrow = this.renderUpDownArrow.bind(this)
   }
 
   handleClick (e) {
@@ -28,7 +27,6 @@ class Tab extends Component {
 
   render () {
     const active = this.props.isActive ? style.active : ''
-    const tabClass = this.props.isDesktop ? [style.tab, style.tabDesktop].join(' ') : style.tab
     const inlineStyle = {
       width: this.props.tabWidth
     }
@@ -36,9 +34,9 @@ class Tab extends Component {
     return (
       <li
         style={inlineStyle}
-        className={[tabClass, `${this.props.tabClassName} ${active}`].join(' ')}
+        className={`${style.tab} ${this.props.tabClassName} ${active}`}
         onClick={(e) => { this.handleClick(e) }} >
-        <span>{this.props.text}</span>
+        <h5 className={`tab-text ${style.tabText}`}>{this.props.text}</h5>
         {this.renderUpDownArrow()}
       </li>
     )

@@ -33,7 +33,12 @@
   float: left;
 }
 
-.positionCircles {
+@import "./PositionCircle/PositionCircle";
+
+ul.positionCircles {
+  position: relative;
+  z-index: 10;
+  // ^ makes sure we can always click them
   margin-top: 35px;
   margin-bottom: 0;
   padding: 0;
@@ -46,6 +51,10 @@
 
   @include respond-to(tablet) {
     margin-top: 31px;
+  }
+
+  &.vertical {
+    width: $circleWidth + $sideMargin;
   }
 }
 

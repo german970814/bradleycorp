@@ -1,16 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
+import BCorpModule from '../BCorpModule'
 import { Link } from 'react-router-dom'
 import BCorpLink from '../../BCorpLink/BCorpLink'
-import ContainerMediaQuery from '../../../containers/ContainerMediaQuery/ContainerMediaQuery'
 import style from './CTAModule.scss'
 
-class CTAModule extends Component {
+class CTAModule extends BCorpModule {
   constructor (props) {
-    super(props)
-
-    this.state = { node: undefined }
+    super(props, style, 'CTAModule')
   }
+
   renderTitle () {
     const { title } = this.props
 
@@ -18,7 +17,7 @@ class CTAModule extends Component {
       return
     }
 
-    return <h5 className={style.title}>{title}</h5>
+    return <h3 className={style.title}>{title}</h3>
   }
 
   renderMedia () {
@@ -66,30 +65,32 @@ class CTAModule extends Component {
     )
   }
 
-  render () {
+  renderModule () {
     return (
-      <ContainerMediaQuery
-        node={this.state.node} >
-        {(containerClassName) => {
-          return (
-            <div
-              ref={(node) => {
-                if (!this.state.node) {
-                  this.setState({ node })
-                }
-              }}
-              className={`${containerClassName} ${style.CTAModule}`} >
+      <div
+        className={this.containerClassName} >
 
-              {this.renderTitle()}
-              {this.renderMedia()}
-              {this.renderText()}
-              {this.renderButton()}
+        {this.renderTitle()}
+        {this.renderMedia()}
+        {this.renderText()}
+        {this.renderButton()}
 
-            </div>
-          )
-        }}
-      </ContainerMediaQuery>
+      </div>
     )
+  }
+
+  render () {
+    return super.render()
+  }
+
+  passesValidation () {
+    const { title, text, link, linkText, mediaSrc } = this.props
+
+    if (!title && !text && !link && !linkText && !mediaSrc) {
+      return false
+    }
+
+    return true
   }
 }
 

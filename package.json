@@ -18,6 +18,7 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "core-js": "^2.5.3",
+    "custom-event-polyfill": "^0.3.0",
     "debounce": "^1.1.0",
     "npm-run-all": "^4.1.2",
     "path": "^0.12.7",
@@ -29,6 +30,7 @@
     "react-loadable": "^5.3.1",
     "react-media": "^1.6.1",
     "react-router-dom": "^4.2.2",
+    "react-vimeo": "^2.0.0",
     "react-youtube": "^7.5.0",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.4"

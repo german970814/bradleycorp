@@ -5,9 +5,9 @@ const ButtonNext = props => {
   return (
     <div
       className={style.nextButton}>
-      <h6>
+      <div className={'small-body'}>
         {'Next'}
-      </h6>
+      </div>
       <img src={require('../../../images/icon-arrow/icon-arrow-r@2x.png')} />
     </div>
 

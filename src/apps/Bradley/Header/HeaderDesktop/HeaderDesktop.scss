@@ -5,7 +5,7 @@
 
 $avatarHeight: 12px;
 $flagHeight: 9px;
-$topBarTextFontSize: 13px;
+$topBarTextFontSize: 10px;
 
 .topBar {
   @extend %BodyPaddingWithMediaQueries;
@@ -16,16 +16,6 @@ $topBarTextFontSize: 13px;
 
 .topBarColor {
   background-color: $topBarColor;
-}
-
-%topBarText {
-  font-family: $CentraleSansPro;
-  font-size: $topBarTextFontSize;
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-  letter-spacing: 0.3px;
-  color: $steel-grey;
 }
 
 .user, .country {
@@ -49,9 +39,7 @@ $topBarTextFontSize: 13px;
 }
 
 .userText {
-  @extend %topBarText;
-  height: $avatarHeight;
-  line-height: $topBarTextFontSize;
+  height: $topBarTextFontSize;
 }
 
 .flag {
@@ -61,9 +49,7 @@ $topBarTextFontSize: 13px;
 }
 
 .countryText {
-  @extend %topBarText;
-  height: $avatarHeight;
-  line-height: $topBarTextFontSize;
+  height: $topBarTextFontSize;
 }
 
 // Bottom bar
@@ -118,17 +104,8 @@ $spaceBetweenMenuItems: 34px;
   &:first-child {
     margin-left: 0;
   }
+}
 
-  a {
-    font-family: $CentraleSansPro;
-    font-size: 13px;
-    font-weight: bold;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: $slate-grey;
-    text-decoration: none;
-    text-transform: uppercase;
-  }
+h6.menuItemLink {
+  text-decoration: none;
 }

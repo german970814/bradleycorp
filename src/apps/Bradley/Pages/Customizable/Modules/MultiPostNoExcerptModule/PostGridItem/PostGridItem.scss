@@ -1,0 +1,57 @@
+@import "../../../../../../../scss/partials/helpers";
+@import "../../../../../../../scss/partials/variables";
+
+.postGridItem {
+  position: relative;
+  overflow: hidden;
+  height: 180px;
+
+  .image {
+    position: relative;
+    @extend %coverBackground;
+    width: 100%;
+    height: 100%;
+    transition: transform 500ms ease;
+
+    .imageGradient {
+      @extend %fillRelativeParent;
+      background: linear-gradient(to top, $black, transparent);
+      background-blend-mode: normal, multiply;
+    }
+  }
+
+  &:hover {
+    .image {
+      transform: scale(1.08);
+    }
+  }
+
+  h5.title {
+    position: absolute;
+    bottom: $MobileBodyPadding;
+    left: $MobileBodyPadding;
+    width: 50%;
+    color: #fff;
+  }
+
+  .arrowWrapper {
+    position: absolute;
+    right: $MobileBodyPadding;
+    bottom: $MobileBodyPadding;
+    height: 20px;
+
+    .arrow {
+      width: auto;
+      height: 100%;
+    }
+  }
+
+  &.size-tablet {
+    height: 200px;
+  }
+
+  &.size-desktop {
+    height: 250px;
+  }
+
+}

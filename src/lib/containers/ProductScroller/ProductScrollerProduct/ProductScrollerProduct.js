@@ -6,23 +6,12 @@ import { isNew } from '../../../bcorpPost'
 import style from './ProductScrollerProduct.scss'
 
 class ProductScrollerProduct extends Component {
-  constructor (props) {
-    super(props)
-
-    this.renderImage = this.renderImage.bind(this)
-    this.renderNew = this.renderNew.bind(this)
-    this.renderSKU = this.renderSKU.bind(this)
-    this.renderTitle = this.renderTitle.bind(this)
-    this.renderCompliance = this.renderCompliance.bind(this)
-  }
-
   renderNew () {
     if (isNew(this.props.product.meta['product_new_until'])) {
       return (
-        <span
-          className={style.new}>
+        <h6 className={style.new}>
           {'NEW'}
-        </span>
+        </h6>
       )
     }
   }
@@ -40,8 +29,7 @@ class ProductScrollerProduct extends Component {
 
   renderSKU () {
     return (
-      <span
-        className={style.sku}>
+      <span className={`small-body ${style.sku}`}>
         {this.props.product.meta['product_sku']}
       </span>
 

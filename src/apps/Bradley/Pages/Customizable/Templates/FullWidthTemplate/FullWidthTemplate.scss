@@ -1,0 +1,45 @@
+@import "../../../../../../scss/partials/mixins";
+@import "../../../../../../scss/partials/helpers";
+
+.heroWrapper {
+  position: relative;
+  overflow: hidden;
+
+  .hero {
+    @extend %coverBackground;
+    padding: 60px 30px;
+    width: 100%;
+    box-sizing: border-box;
+
+    h3.tagline {
+      margin-bottom: 25px;
+      text-align: center;
+      color: #fff;
+
+      @include respond-to(desktop) {
+        margin-bottom: 30px;
+      }
+    }
+
+    :global(.hero-headline).title {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    :global(.hero-copy).copy {
+      text-align: center;
+    }
+
+    :last-child {
+      margin-bottom: 0;
+    }
+
+    @include respond-to(tablet) {
+      padding: 60px 130px;
+    }
+
+    @include respond-to(desktop) {
+      padding: 85px 200px;
+    }
+  }
+}

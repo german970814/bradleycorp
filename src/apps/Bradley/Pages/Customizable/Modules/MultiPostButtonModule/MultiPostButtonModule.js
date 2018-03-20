@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import PostGettingModule from '../PostGettingModule'
-import ContainerMediaQuery from '../../../../../../lib/containers/ContainerMediaQuery/ContainerMediaQuery'
 import PostColumn from './PostColumn/PostColumn'
-import moduleStyle from '../../../../../../lib/components/Modules/Modules.scss'
+import BCorpBackground from '../../../../../../lib/components/BCorpBackground/BCorpBackground'
 import style from './MultiPostButtonModule.scss'
 
 /**
@@ -14,12 +13,7 @@ import style from './MultiPostButtonModule.scss'
  */
 class MultiPostButtonModule extends PostGettingModule {
   constructor (props) {
-    super(props)
-
-    this.state = {
-      ...this.state,
-      node: undefined
-    }
+    super(props, style, 'multiPostButtonModule', 3)
   }
 
   renderTitle () {
@@ -28,9 +22,9 @@ class MultiPostButtonModule extends PostGettingModule {
     }
 
     return (
-      <h5 className={`${style.title}`} >
+      <h3 className={`${style.title} ${this.skinClass}`} >
         {this.props.title}
-      </h5>
+      </h3>
     )
   }
 
@@ -46,45 +40,45 @@ class MultiPostButtonModule extends PostGettingModule {
         <PostColumn
           key={index}
           post={post}
-          numColumns={posts.length} />
+          containerNode={this.state.node}
+          numColumns={posts.length}
+          containerClassName={this.containerClassName}
+          accentColorClass={this.accentColorClass}
+          skinClass={this.skinClass}
+          skin={this.props.skin} />
       )
     })
   }
 
-  getBackgroundImage () {
-    return this.props.background
-      ? `url(${this.props.background})`
-      : `url(${require('../../../../../../images/marble-background-2/shutterstock-522883816.png')})`
+  renderModule () {
+    return (
+      <div className={`row ${this.containerClassName} ${this.skinClass}`} >
+
+        <BCorpBackground
+          imageSrc={this.props.background}
+          overlay={this.props.backgroundOverlay}
+          skin={this.props.skin} />
+
+        {this.renderTitle()}
+
+        <div className={`row ${style.columnsRow}`} >
+          {this.renderCols()}
+        </div>
+
+      </div>
+    )
   }
 
   render () {
-    return (
-      <ContainerMediaQuery
-        node={this.state.node} >
-        {(containerClassName) => {
-          return (
-            <div
-              ref={(node) => {
-                if (!this.state.node) {
-                  this.setState({ node })
-                }
-              }}
-              style={{
-                backgroundImage: this.getBackgroundImage()
-              }}
-              className={`row ${containerClassName} ${moduleStyle.module} ${style.multiPostButtonModule}`} >
+    return super.render()
+  }
 
-              {this.renderTitle()}
+  passesValidation () {
+    if (!this.state.posts || this.state.posts.length < 2 || this.state.posts.length > this.maxPosts) {
+      return false
+    }
 
-              <div className={`row ${style.columnsRow}`} >
-                {this.renderCols()}
-              </div>
-
-            </div>
-          )
-        }}
-      </ContainerMediaQuery >
-    )
+    return true
   }
 }
 
@@ -96,12 +90,11 @@ MultiPostButtonModule.propTypes = {
    * Title to display above the posts
    */
   title: PropTypes.string,
-  accentColor: PropTypes.string,
   /**
    * The image src as a sting
    */
   background: PropTypes.string,
-  skin: PropTypes.string
+  backgroundOverlay: PropTypes.string
 }
 
 export default MultiPostButtonModule

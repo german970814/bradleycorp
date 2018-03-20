@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import PostGettingModule from '../PostGettingModule'
-// import CPTApiClient from '../../../../../../api/cpt_client'
+import { Link } from 'react-router-dom'
 import { getExcerpt } from '../../../../../../lib/bcorpPost'
+import { createCPTUrl } from '../../../../../../lib/bcorpUrl'
+import BCorpBackground from '../../../../../../lib/components/BCorpBackground/BCorpBackground'
+import PostGettingModule from '../PostGettingModule'
 import ImageFrame from '../../../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
-import ContainerMediaQuery from '../../../../../../lib/containers/ContainerMediaQuery/ContainerMediaQuery'
-import moduleStyle from '../../../../../../lib/components/Modules/Modules.scss'
+import BCorpLink from '../../../../../../lib/components/BCorpLink/BCorpLink'
 import style from './SinglePostModule.scss'
 
 /**
@@ -21,12 +22,7 @@ import style from './SinglePostModule.scss'
  */
 class SinglePostModule extends PostGettingModule {
   constructor (props) {
-    super(props)
-
-    this.state = {
-      ...this.state,
-      node: undefined
-    }
+    super(props, style, 'singlePostModule', 1)
   }
 
   renderImage () {
@@ -44,21 +40,24 @@ class SinglePostModule extends PostGettingModule {
           src={src}
           aspectRatio={180 / 270}
           aspectRatioTablet={300 / 311}
-          aspectRatioDesktop={386 / 420} />
+          aspectRatioDesktop={386 / 420}
+          containerNode={this.state.node}
+          respondToContainer />
       </div>
     )
   }
 
   renderTitle () {
     const post = this.state.posts[0]
+
     if (!post.post['post_title']) {
       return
     }
 
     return (
-      <div className={style.title} >
+      <h2 className={`${style.title} ${this.skinClass}`} >
         {post.post['post_title']}
-      </div>
+      </h2>
     )
   }
 
@@ -71,83 +70,106 @@ class SinglePostModule extends PostGettingModule {
     }
 
     return (
-      <div className={style.content} >
+      <div className={`${style.content} ${this.skinClass}`} >
         {excerpt}
       </div>
     )
   }
 
   renderButtons () {
+    const { post } = this.state.posts[0]
+
+    const button = (linkText) => {
+      return <button className={`button-border-slate-grey ${style.button2} ${this.skinClass}`}>{linkText}</button>
+    }
+
+    const button2 = this.props.linkText && this.props.link
+      ? (
+        <BCorpLink
+          url={this.props.link}
+          renderInternal={
+            url => {
+              return (
+                <Link className={`${style.button}`} to={url} replace >
+                  {button(this.props.linkText)}
+                </Link>
+              )
+            }
+          }
+          renderExternal={
+            url => {
+              return (
+                <a className={`${style.button}`} href={url} >
+                  {button(this.props.linkText)}
+                </a>
+              )
+            }
+          } />
+      ) : null
+
     return (
       <div className={`row ${style.buttonsWrapper}`} >
 
-        <div className={`${style.button}`} >
-          <button className={`button-orange ${style.letsTalk}`}>{"LET'S TALK"}</button>
+        <Link className={`${style.button}`} to={createCPTUrl(post)} replace >
+          <button className={`button-orange ${style.button1} ${this.accentColorClass}`}>{'READ MORE'}</button>
+        </Link>
+
+        {button2}
+
+      </div>
+    )
+  }
+
+  renderModule () {
+    return (
+      <div className={`row ${this.containerClassName} ${this.skinClass}`}>
+
+        <BCorpBackground
+          imageSrc={this.props.background}
+          overlay={this.props.backgroundOverlay}
+          skin={this.props.skin} />
+
+        <div className={`${style.stretchToHeight} ${style.imageCol}`} >
+          {this.renderImage()}
         </div>
 
-        <div className={`${style.button}`} >
-          <button className={`button-border-slate-grey ${style.learnMore}`}>{'LEARN MORE'}</button>
+        <div className={`${style.stretchToHeight} ${style.contentCol}`} >
+
+          <div className={style.contentWrapper} >
+            {this.renderTitle()}
+            {this.renderContent()}
+            {this.renderButtons()}
+          </div>
+
         </div>
 
       </div>
     )
   }
 
-  getBackgroundImage () {
-    return this.props.background
-      ? `url(${this.props.background})`
-      : `url(${require('../../../../../../images/marble-background/shutterstock-109902944.png')})`
+  render () {
+    return super.render()
   }
 
-  render () {
-    return (
-      <ContainerMediaQuery
-        node={this.state.node} >
-        {(containerClassName) => {
-          return (
-            <div
-              ref={(node) => {
-                if (!this.state.node) {
-                  this.setState({ node })
-                }
-              }}
-              style={{
-                backgroundImage: this.getBackgroundImage()
-              }}
-              className={`row ${containerClassName} ${style.singlePostModule} ${moduleStyle.module}`}>
+  passesValidation () {
+    if (!this.state.posts || this.state.posts.length === 0) {
+      return false
+    }
 
-              <div className={`${style.stretchToHeight} ${style.imageCol}`} >
-                {this.renderImage()}
-              </div>
-
-              <div className={`${style.stretchToHeight} ${style.contentCol}`} >
-
-                <div className={style.contentWrapper} >
-                  {this.renderTitle()}
-                  {this.renderContent()}
-                  {this.renderButtons()}
-                </div>
-
-              </div>
-
-            </div>
-          )
-        }}
-      </ContainerMediaQuery >
-    )
+    return true
   }
 }
 
 SinglePostModule.propTypes = {
 
   ...PostGettingModule.propTypes,
-
-  accentColor: PropTypes.string,
   /**
    * The image src as a sting
    */
   background: PropTypes.string,
-  skin: PropTypes.string
+  backgroundOverlay: PropTypes.string,
+  link: PropTypes.string,
+  linkText: PropTypes.string
 }
 
 export default SinglePostModule

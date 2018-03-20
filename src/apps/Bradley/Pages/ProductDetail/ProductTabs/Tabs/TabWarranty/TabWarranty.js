@@ -18,6 +18,7 @@ class TabWarranty extends Component {
           className={style.warranty} >
 
           <div
+            className={`small-body`}
             dangerouslySetInnerHTML={{__html: warranty.post['post_content']}} />
         </div>
       )

@@ -35,15 +35,7 @@
   display: inline-block;
   vertical-align: top;
   float: left;
-  font-family: $CentraleSansPro;
-  font-size: 13px;
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: left;
-  color: #e51616;
+  color: $red;
 }
 
 .complianceIconWrapper {
@@ -75,29 +67,17 @@
   height: 161px;
 }
 
-.sku {
+:global(.small-body).sku {
   @extend %widthController;
   display: inline-block;
-  margin-bottom: 20px;
-  font-family: Helvetica;
-  font-size: 12px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
+  margin-bottom: 12px;
   text-align: center;
-  color: $steel-grey;
 }
 
 h6.title {
   @extend %widthController;
   display: inline-block;
-  font-style: normal;
-  font-stretch: normal;
   line-height: normal;
-  letter-spacing: normal;
   text-align: center;
   color: $black;
-  text-transform: none;
 }

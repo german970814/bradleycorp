@@ -27,7 +27,7 @@ class TabMaintenance extends Component {
           <FileDownloadLink
             title={guide.post['post_title'] || ''}
             link={guide.meta['technical_info_pdf']}
-            titleClass={tabStyle.tabTextOrange}
+            titleClass={`link-orange ${tabStyle.tabTextOrange}`}
             linkClass={tabStyle.tabTextOrangeLink}
             iconClass={tabStyle.wordPDFIcon} />
         </li>

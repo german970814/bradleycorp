@@ -18,7 +18,7 @@ class MenuItems extends Component {
           <Link
             to={removeHostFromUrl(menuItem['url'])}
             replace >
-            {menuItem['title']}
+            <h6 className={style.menuItemLink}>{menuItem['title']}</h6>
           </Link>
         </div>
       )

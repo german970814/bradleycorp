@@ -13,8 +13,7 @@ $distanceBetweenItemsTabletDesktop: 45px;
     bottom: 40px;
   }
   width: 100%;
-  line-height: 1.26;
-  text-transform: uppercase;
+  text-align: center;
   color: $black;
 }
 
@@ -73,15 +72,6 @@ h4.title {
   float: none;
 }
 
-%buttonsBelowText {
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: center;
-  color: $steel-grey;
-}
-
 .prevButton {
 
   img {
@@ -92,12 +82,12 @@ h4.title {
     height: 19px;
   }
 
-  h6 {
-    @extend %buttonsBelowText;
+  :global(.small-body) {
     display: inline-block;
     vertical-align: middle;
     margin-left: 19px;
     margin-right: 4px;
+    text-align: center;
   }
 }
 
@@ -111,12 +101,12 @@ h4.title {
     height: 19px;
   }
 
-  h6 {
-    @extend %buttonsBelowText;
+  :global(.small-body) {
     display: inline-block;
     vertical-align: middle;
     margin-right: 19px;
     margin-left: 4px;
+    text-align: center;
   }
 }
 
@@ -164,6 +154,7 @@ $arrowWidthTablet: 11px;
 
   img {
     width: 100%;
+    height: auto;
   }
 }
 
@@ -176,7 +167,7 @@ $arrowWidthTablet: 11px;
     @extend %title;
   }
 
-  &:global(.container-size-tablet) {
+  > :global(.container-size-tablet) {
     h4.respondToContainerTitle {
       margin: {
         top: 60px;
@@ -186,7 +177,7 @@ $arrowWidthTablet: 11px;
     }
   }
 
-  &:global(.container-size-desktop) {
+  > :global(.container-size-desktop) {
     h4.respondToContainerTitle {
       margin: {
         top: 60px;

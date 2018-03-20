@@ -4,11 +4,11 @@ import style from './PositionCircle.scss'
 
 const PositionCircle = props => {
   const activeClass = props.selected
-    ? style.active
-    : style.notActive
+    ? `${style.active} active`
+    : `${style.notActive} not-active`
   return (
     <div
-      className={activeClass}
+      className={`${style.positionCircle} ${activeClass}`}
       onClick={(e) => props.onClick(e)}>
     </div>
   )

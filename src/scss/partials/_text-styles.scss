@@ -52,7 +52,6 @@
   font-weight: 300;
   line-height: 1.22;
   letter-spacing: -0.9px;
-  text-align: left;
 }
 
 %h1-tablet {
@@ -69,6 +68,49 @@
   letter-spacing: -1.4px;
 }
 
+%h2-mobile {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: $TradeGothic-CondTwenty;
+  font-size: 27px;
+  font-weight: bold;
+  line-height: 1;
+  letter-spacing: 2.7px;
+  text-transform: uppercase;
+  color: $black;
+}
+
+%h2-tablet {
+  @extend %h2-mobile;
+  font-size: 36px;
+  letter-spacing: 3.6px;
+}
+
+%h2-desktop {
+  @extend %h2-tablet;
+  font-size: 42px;
+  letter-spacing: 4.2px;
+}
+
+%h3-mobile {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: $CentraleSansPro;
+  font-size: 16px;
+  font-weight: bold;
+  color: $navy;
+}
+
+%h3-tablet {
+  @extend %h3-mobile;
+  font-size: 20px;
+}
+
+%h3-desktop {
+  @extend %h3-tablet;
+  font-size: 24px;
+}
+
 %h4-tablet-mobile {
   margin-top: 0;
   margin-bottom: 0;
@@ -76,7 +118,7 @@
   font-size: 16px;
   font-weight: bold;
   letter-spacing: 1.6px;
-  text-align: center;
+  text-transform: uppercase;
 }
 
 %h4-desktop {
@@ -92,7 +134,6 @@
   font-family: $CentraleSansPro;
   font-size: 16px;
   font-weight: bold;
-  text-align: left;
 }
 
 %h6-desktop {
@@ -103,10 +144,12 @@
   font-weight: bold;
   line-height: 2.77;
   letter-spacing: 0.5px;
-  text-align: left;
+  text-transform: uppercase;
 }
 
 %body {
+  margin-top: 0;
+  margin-bottom: 0;
   font-family: Helvetica;
   font-size: 14px;
   font-weight: normal;
@@ -118,15 +161,83 @@
   color: $slate-grey;
 }
 
-%small-body-desktop {
+.small-body {
   @extend %body;
   font-size: 12px;
-  text-align: center;
+  color: $steel-grey;
+}
+
+%link-navy {
+  @extend %body;
+  line-height: normal;
+  color: $navy;
+}
+
+%link-orange {
+  font-family: $CentraleSansPro;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: $orange;
+}
+
+%small-link-gray {
+  font-family: $CentraleSansPro;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  color: $gray;
+}
+
+%hero-headline-mobile {
+  font-family: $TradeGothic-CondTwenty;
+  font-size: 46px;
+  font-weight: bold;
+  line-height: 1;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+%hero-headline-tablet {
+  @extend %hero-headline-mobile;
+  font-size: 72px;
+  letter-spacing: 7.2px;
+}
+
+%hero-headline-desktop {
+  @extend %hero-headline-tablet;
+  font-size: 90px;
+  letter-spacing: 9px;
+}
+
+%hero-copy-mobile {
+  font-family: $CentraleSansPro;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.5;
+  color: #ffffff;
+}
+
+%hero-copy-tablet {
+  @extend %hero-copy-mobile;
+  font-size: 13px;
+  line-height: 1.38;
+}
+
+%hero-copy-desktop {
+  @extend %hero-copy-tablet;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 %legal {
+  margin-top: 0;
+  margin-bottom: 0;
   font-family: $CentraleSansPro;
   font-size: 8px;
   font-weight: bold;
-  text-align: right;
 }

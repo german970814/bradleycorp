@@ -1,5 +1,5 @@
-import { Component } from 'react'
 import PropTypes from 'prop-types'
+import BCorpModule from '../../../../../lib/components/Modules/BCorpModule'
 import CPTApiClient from '../../../../../api/cpt_client'
 import { arraysAreEqual } from '../../../../../lib/bcorpArray'
 
@@ -13,9 +13,9 @@ import { arraysAreEqual } from '../../../../../lib/bcorpArray'
  *
  * @extends Component
  */
-class PostGettingModule extends Component {
-  constructor (props) {
-    super(props)
+class PostGettingModule extends BCorpModule {
+  constructor (props, localStyle, moduleName, maxPosts) {
+    super(props, localStyle, moduleName)
 
     /**
      * Default state, post object response is merged shallowly with this
@@ -39,16 +39,25 @@ class PostGettingModule extends Component {
       ]
     }
 
-    this.state = this.defaultState
+    this.state = {
+      ...this.state,
+      ...this.defaultState
+    }
+
+    this.maxPosts = maxPosts
   }
 
   componentDidMount () {
-    this.getPosts(this.props.postIDs)
+    super.componentDidMount()
+
+    this.getPosts(this.props.postIDs, this.maxPosts)
   }
 
   componentWillReceiveProps (nextProps) {
+    super.componentWillReceiveProps(nextProps)
+
     if (!arraysAreEqual(nextProps.postIDs, this.props.postIDs)) {
-      this.getPosts(nextProps.postIDs)
+      this.getPosts(nextProps.postIDs, this.maxPosts)
     }
   }
 
@@ -58,8 +67,10 @@ class PostGettingModule extends Component {
    *
    * @return {[type]} null
    */
+  renderModule () { return null }
+
   render () {
-    return null
+    return super.render()
   }
 
   /**
@@ -68,11 +79,11 @@ class PostGettingModule extends Component {
    *
    * @param  {[number]}  postID ID of the post to request
    */
-  async getPosts (postIdArray) {
+  async getPosts (postIdArray, postsPerPage) {
     try {
       const { postType } = this.props
       const postAPIClient = new CPTApiClient(postType.replace(/_/g, '-'))
-      const postsResponse = await postAPIClient.getByIdArray(postIdArray)
+      const postsResponse = await postAPIClient.getByIdArray(postIdArray, postsPerPage)
       const postsData = postsResponse.data
 
       const posts = postsData.map(postData => {
@@ -94,6 +105,8 @@ class PostGettingModule extends Component {
  *
  */
 PostGettingModule.propTypes = {
+  ...BCorpModule.propTypes,
+
   /*
    * ID of the post to display
    */

@@ -13,6 +13,7 @@ $slate-grey: #58595b;
 $steel-grey: #808285;
 $charcoal-grey: #414042;
 $thumbnail-border: #cecece;
+$brown: #a7917e;
 
 /* Global Sizes */
 
@@ -40,6 +41,19 @@ $TabletMaxWidthPX: $TabletMaxWidth + px;
 :export {
   MobileMaxWidth: $MobileMaxWidth;
   TabletMaxWidth: $TabletMaxWidth;
+  Green: $green;
+  Navy: $navy;
+  Black: $black;
+  Red: $red;
+  Orange: $orange;
+  LightGray: $light-gray;
+  Gray: $gray;
+  DarkGray: $dark-gray;
+  Silver: $silver;
+  SlateGrey: $slate-grey;
+  SteelGrey: $steel-grey;
+  CharcoalGrey: $charcoal-grey;
+  Brown: $brown;
 }
 
 /* Padding */

@@ -12,14 +12,13 @@ class Lightbox extends Component {
     this.state = {
       isOpen: false
     }
-
-    this.renderLightbox = this.renderLightbox.bind(this)
   }
 
   toggleOpen () {
-    this.setState({
-      isOpen: !this.state.isOpen
-    })
+    if (!this.state.isOpen) {
+      return this.openLightbox()
+    }
+    this.closeLightbox()
   }
 
   openLightbox () {

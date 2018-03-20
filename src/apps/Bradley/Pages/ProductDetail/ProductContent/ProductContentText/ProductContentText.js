@@ -28,17 +28,19 @@ class ProductContentText extends Component {
         {(isOpen, updateNode, openClose) => {
           return (
             <div>
+
               <div
                 ref={(node) => updateNode(node)}
                 className={style.content}
                 dangerouslySetInnerHTML={{__html: this.renderText(isOpen)}} />
-              <div
-                className={style.moreDetail}>
+
+              <div className={`small-body ${style.moreDetail}`}>
                 <div
                   onClick={() => openClose()} >
                   {this.renderMoreDetailsButtonText(isOpen)}
                 </div>
               </div>
+
             </div>
           )
         }}
