@@ -82,8 +82,8 @@ class BCorpModule extends Component {
     /**
      * Bind our height updating methods to the class so we can add them to the resize listener
      */
-    this.initUpdateModuleHeight = this.updateModuleHeight.bind(this)
-    this.updateModuleHeight = debounce(this.updateModuleHeight.bind(this), 200)
+    this.initUpdateModuleHeight = this._updateModuleHeight.bind(this)
+    this.updateModuleHeight = debounce(this._updateModuleHeight.bind(this), 200)
   }
 
   /**
@@ -136,7 +136,7 @@ class BCorpModule extends Component {
    * The most important thing about this function is that it only updates the state if it needs to
    * If not, it'll lead to an infinite loop.
    */
-  updateModuleHeight () {
+  _updateModuleHeight () {
     if (!this.state.node) {
       return
     }
@@ -209,6 +209,7 @@ class BCorpModule extends Component {
         className={`${moduleStyle.module} ${this.localStyle[this.moduleName]}`} >
 
         <ContainerMediaQuery
+          minHeight={this.state.minHeight}
           node={this.state.node} >
           {(containerClassName, size) => {
             this.containerClassName = containerClassName
