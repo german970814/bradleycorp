@@ -10,11 +10,13 @@ $modulePaddingTopBottomDesktop: 60px;
   display: block;
   overflow: hidden;
 
+
   /*
     Global module styling
    */
 
   > :global(.container-size-mobile) {
+    box-sizing: border-box;
     padding: 0 $MobileBodyPadding;
     padding-top: $modulePaddingTopBottomMobile;
     padding-bottom: $modulePaddingTopBottomMobile;
