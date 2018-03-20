@@ -88,7 +88,8 @@ class SliderModule extends PostGettingModule {
   renderModule () {
     return (
       <div
-        className={`${this.containerClassName} ${this.skinClass} ${this.getBackgroundColorClass()}`} >
+        className={`${this.containerClassName} ${this.skinClass} ${this.getBackgroundColorClass()}`}
+        style={{minHeight: this.state.minHeight}} >
 
         {this.renderHeading()}
 
