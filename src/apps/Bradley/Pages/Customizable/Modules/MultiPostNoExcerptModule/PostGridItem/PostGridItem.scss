@@ -15,6 +15,7 @@
 
     .imageGradient {
       @extend %fillRelativeParent;
+      top: 50%;
       background: linear-gradient(to top, $black, transparent);
       background-blend-mode: normal, multiply;
     }
