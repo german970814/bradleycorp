@@ -1,7 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import PostGettingModule from '../PostGettingModule'
 import { getExcerpt } from '../../../../../../lib/bcorpPost'
+import { createCPTUrl } from '../../../../../../lib/bcorpUrl'
+import SVGIcon from '../../../../../../lib/components/SVGIcon/SVGIcon'
 import BCorpBackground from '../../../../../../lib/components/BCorpBackground/BCorpBackground'
 import style from './SinglePostFeaturedModule.scss'
 
@@ -19,6 +22,14 @@ import style from './SinglePostFeaturedModule.scss'
 class SinglePostFeaturedModule extends PostGettingModule {
   constructor (props) {
     super(props, style, 'singlePostFeaturedModule', 1)
+
+    this.postLink = '#'
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    if (this.state.posts[0]['post_title'] !== prevState.posts[0]['post_title']) {
+      this.postLink = createCPTUrl(this.state.posts[0])
+    }
   }
 
   renderHeadline () {
@@ -26,7 +37,15 @@ class SinglePostFeaturedModule extends PostGettingModule {
       return
     }
 
-    return <div className={`hero-headline ${style.headline}`} >{this.props.headline}</div>
+    return (
+      <Link
+        to={this.postLink}
+        replace >
+
+        <div className={`hero-headline ${style.headline}`} >{this.props.headline}</div>
+
+      </Link>
+    )
   }
 
   renderTitle () {
@@ -36,7 +55,15 @@ class SinglePostFeaturedModule extends PostGettingModule {
       return
     }
 
-    return <h4 className={style.title} >{post['post_title']}</h4>
+    return (
+      <Link
+        to={this.postLink}
+        replace >
+
+        <h4 className={style.title} >{post['post_title']}</h4>
+
+      </Link>
+    )
   }
 
   renderContent () {
@@ -51,11 +78,19 @@ class SinglePostFeaturedModule extends PostGettingModule {
 
   renderArrow () {
     return (
-      <div className={style.arrowWrapper} >
-        <img
-          className={style.arrow}
-          src={require('../../../../../../images/arrow/arrow@2x.png')} />
-      </div>
+      <Link
+        to={this.postLink}
+        replace >
+
+        <div className={style.arrowWrapper} >
+          <SVGIcon
+            className={style.arrow}
+            icon={'arrow'}
+            color={'white'}
+            redrawOnHover />
+        </div>
+
+      </Link>
     )
   }
 
@@ -83,7 +118,7 @@ class SinglePostFeaturedModule extends PostGettingModule {
 
   renderModule () {
     return (
-      <React.Fragment>
+      <React.Fragment >
 
         {this.renderImage()}
 

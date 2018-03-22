@@ -51,7 +51,13 @@ class PostColumn extends Component {
     }
 
     return (
-      <h4 className={`${style.title} ${this.props.skinClass}`} >{post.post['post_title']}</h4>
+      <Link
+        to={`${this.postLink}`}
+        replace >
+
+        <h4 className={`${style.title} ${this.props.skinClass}`} >{post.post['post_title']}</h4>
+
+      </Link>
     )
   }
 

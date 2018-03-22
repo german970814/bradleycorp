@@ -1,11 +1,26 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import { createCPTUrl } from '../../../../../../../lib/bcorpUrl'
 import { getExcerpt } from '../../../../../../../lib/bcorpPost'
+import SVGIcon from '../../../../../../../lib/components/SVGIcon/SVGIcon'
 import VerticalAlignHelper from '../../../../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import ImageFrame from '../../../../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import style from '../SliderModule.scss'
 
 class SliderItem extends Component {
+  constructor (props) {
+    super(props)
+
+    this.postLink = '#'
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.post) {
+      this.postLink = createCPTUrl(nextProps.post.post)
+    }
+  }
+
   renderImage () {
     const { post } = this.props
 
@@ -48,7 +63,13 @@ class SliderItem extends Component {
     }
 
     return (
-      <h2 className={`${style.title} ${this.props.skinClass}`} >{post.post['post_title']}</h2>
+      <Link
+        to={`${this.postLink}`}
+        replace >
+
+        <h2 className={`${style.title} ${this.props.skinClass}`} >{post.post['post_title']}</h2>
+
+      </Link>
     )
   }
 
@@ -69,11 +90,19 @@ class SliderItem extends Component {
 
   renderArrow () {
     return (
-      <div className={style.arrowWrapper} >
-        <img
-          className={style.arrow}
-          src={require('../../../../../../../images/arrow/arrow-brown@2x.png')} />
-      </div>
+      <Link
+        to={`${this.postLink}`}
+        replace >
+
+        <div className={style.arrowWrapper} >
+          <SVGIcon
+            className={style.arrow}
+            icon={'arrow'}
+            color={this.props.skin === 'dark' ? 'white' : this.props.accentColor}
+            redrawOnHover />
+        </div>
+
+      </Link>
     )
   }
 
@@ -107,6 +136,8 @@ SliderItem.propTypes = {
   containerNode: PropTypes.object,
   size: PropTypes.string,
   heading: PropTypes.string,
+  skin: PropTypes.string,
+  accentColor: PropTypes.string,
   accentColorClass: PropTypes.string,
   skinClass: PropTypes.string
 }

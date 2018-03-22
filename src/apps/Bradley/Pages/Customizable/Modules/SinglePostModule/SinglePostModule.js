@@ -48,16 +48,22 @@ class SinglePostModule extends PostGettingModule {
   }
 
   renderTitle () {
-    const post = this.state.posts[0]
+    const { post } = this.state.posts[0]
 
-    if (!post.post['post_title']) {
+    if (!post['post_title']) {
       return
     }
 
     return (
-      <h2 className={`${style.title} ${this.skinClass}`} >
-        {post.post['post_title']}
-      </h2>
+      <Link
+        to={createCPTUrl(post)}
+        replace >
+
+        <h2 className={`${style.title} ${this.skinClass}`} >
+          {post['post_title']}
+        </h2>
+
+      </Link>
     )
   }
 

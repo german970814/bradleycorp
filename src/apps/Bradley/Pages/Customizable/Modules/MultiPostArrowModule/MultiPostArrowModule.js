@@ -38,6 +38,8 @@ class MultiPostArrowModule extends PostGettingModule {
           key={index}
           post={post}
           containerNode={this.state.node}
+          skin={this.props.skin}
+          accentColor={this.props.accentColor}
           skinClass={this.skinClass}
           arrow={arrow} />
       )

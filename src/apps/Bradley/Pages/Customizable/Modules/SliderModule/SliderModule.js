@@ -31,6 +31,8 @@ class SliderModule extends PostGettingModule {
           heading={this.props.title}
           containerNode={this.state.node}
           size={this.size}
+          skin={this.props.skin}
+          accentColor={this.props.accentColor}
           accentColorClass={this.accentColorClass}
           skinClass={this.skinClass} />
       )

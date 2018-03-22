@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { createCPTUrl } from '../../../../../../../lib/bcorpUrl'
 import { getExcerpt } from '../../../../../../../lib/bcorpPost'
+import SVGIcon from '../../../../../../../lib/components/SVGIcon/SVGIcon'
 import ImageFrame from '../../../../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import style from '../MultiPostArrowModule.scss'
 
@@ -49,7 +50,13 @@ class PostColumn extends Component {
     }
 
     return (
-      <h4 className={`${style.title} ${this.props.skinClass}`} >{post.post['post_title']}</h4>
+      <Link
+        to={`${this.postLink}`}
+        replace >
+
+        <h4 className={`${style.title} ${this.props.skinClass}`} >{post.post['post_title']}</h4>
+
+      </Link>
     )
   }
 
@@ -78,9 +85,11 @@ class PostColumn extends Component {
           replace >
 
           <div className={style.arrowWrapper} >
-            <img
+            <SVGIcon
               className={style.arrow}
-              src={require('../../../../../../../images/arrow/arrow-brown@2x.png')} />
+              icon={'arrow'}
+              color={this.props.skin === 'dark' ? 'white' : this.props.accentColor}
+              redrawOnHover />
           </div>
 
         </Link>
@@ -111,6 +120,8 @@ PostColumn.propTypes = {
   post: PropTypes.object.isRequired,
   arrow: PropTypes.bool,
   containerNode: PropTypes.object,
+  skin: PropTypes.string,
+  accentColor: PropTypes.string,
   skinClass: PropTypes.string
 }
 

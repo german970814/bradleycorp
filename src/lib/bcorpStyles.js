@@ -12,6 +12,7 @@ export function lookupColor (color) {
       return variables.Green
 
     case 'navy':
+    case 'blue':
       return variables.Navy
 
     case 'red':

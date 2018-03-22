@@ -35,14 +35,16 @@
   }
 
   .arrowWrapper {
+    display: block;
     position: absolute;
     right: $MobileBodyPadding;
     bottom: $MobileBodyPadding;
     height: 20px;
+    width: 41px;
 
     .arrow {
-      width: auto;
-      height: 100%;
+      max-width: 100%;
+      height: auto;
     }
   }
 
