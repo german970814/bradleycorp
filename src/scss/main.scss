@@ -3,9 +3,14 @@
 @import "./globals/buttons-globals";
 @import "./globals/hamburgers/hamburgers";
 
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   overflow-x: hidden;
   margin: 0;
+  -webkit-text-size-adjust: 100%;
 
   &:global(.prevent-scroll) {
     overflow: hidden;
