@@ -22,7 +22,7 @@ class MultiPostNoExcerptModule extends PostGettingModule {
           className={this.getColumnClass(posts.length, index)} >
           <PostGridItem
             post={post}
-            size={this.state.size} />
+            containerClassName={this.containerClassName} />
         </div>
       )
     })

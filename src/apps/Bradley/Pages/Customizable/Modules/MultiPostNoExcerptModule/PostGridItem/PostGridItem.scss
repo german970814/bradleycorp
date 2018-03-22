@@ -48,12 +48,11 @@
     }
   }
 
-  &.size-tablet {
+  &:global(.container-size-tablet) {
     height: 200px;
   }
 
-  &.size-desktop {
+  &:global(.container-size-desktop) {
     height: 250px;
   }
-
 }

@@ -81,9 +81,8 @@ class PostGridItem extends Component {
   }
 
   render () {
-    const sizeClassName = style[`size-${this.props.size}`]
     return (
-      <div className={`${style.postGridItem} ${sizeClassName}`} >
+      <div className={`${style.postGridItem} ${this.props.containerClassName}`} >
 
         {this.renderImage()}
 
@@ -97,7 +96,7 @@ class PostGridItem extends Component {
 
 PostGridItem.propTypes = {
   post: PropTypes.object.isRequired,
-  size: PropTypes.string
+  containerClassName: PropTypes.string
 }
 
 export default PostGridItem
