@@ -5,6 +5,8 @@ import ReactHtmlParser from 'react-html-parser'
 import ModuleFactory from './Modules/ModuleFactory'
 import TemplateFactory from './Templates/TemplateFactory'
 
+import FileDownloadLink from '../../../../lib/components/FileDownloadLink/FileDownloadLink'
+
 /**
  * This component is responsible for building the grid of modules to match the backend UI
  *
@@ -108,7 +110,21 @@ class ModuleBuilder extends Component {
             return (
               <React.Fragment>
 
-                {ReactHtmlParser(this.props.pageData['module_data'].content)}
+                {ReactHtmlParser(this.props.pageData['module_data'].content, {
+                  transform: function(node, i) {
+                    console.log( node )
+                    if ( node
+                      && 'a' === node.name
+                      && node.attribs
+                      && null !== node.attribs.href.match(/\.(pdf|doc|docx|docm|docb)$/) ) {
+                      return <FileDownloadLink
+                      key={i}
+                      title={node.children[0].data}
+                      titleClass={`link-orange`}
+                      link={node.attribs.href} />
+                    }
+                  }
+                })}
 
                 {this.renderModulePortals()}
 
