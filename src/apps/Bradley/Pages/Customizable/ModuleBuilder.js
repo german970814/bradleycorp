@@ -116,17 +116,17 @@ class ModuleBuilder extends Component {
               <React.Fragment>
 
                 {ReactHtmlParser(this.props.pageData['module_data'].content, {
-                  transform: function(node, i) {
+                  transform: function (node, i) {
                     // console.log( node )
-                    if ( node
-                      && 'a' === node.name
-                      && node.attribs
-                      && null !== node.attribs.href.match(/\.(pdf|doc|docx|docm|docb)$/) ) {
+                    if (node &&
+                      node.name === 'a' &&
+                      node.attribs &&
+                      node.attribs.href.match(/\.(pdf|doc|docx|docm|docb)$/) !== null) {
                       return <FileDownloadLink
-                      key={i}
-                      title={node.children[0].data}
-                      titleClass={`link-orange`}
-                      link={node.attribs.href} />
+                        key={i}
+                        title={node.children[0].data}
+                        titleClass={`link-orange`}
+                        link={node.attribs.href} />
                     }
                   }
                 })}
