@@ -4,6 +4,7 @@
 @import "../../../../../../scss/partials/helpers";
 
 .sliderModule {
+  position: relative;
 
   /*
    MOBILE SIZED CONTAINER + SCREEN AND UP
@@ -90,7 +91,6 @@
     }
 
     .sliderWrapperTabletDesktop {
-      position: relative;
       height: 400px;
     }
 
@@ -121,7 +121,7 @@
     }
 
     :global(.position-circles-vertical) {
-      right: -10px;
+      right: 30px;
       @extend %verticalAlignMiddleAbsolutelyPositionedElement;
     }
   }
@@ -155,7 +155,7 @@
     }
 
     :global(.position-circles-vertical) {
-      right: -20px;
+      right: 40px;
     }
   }
 }
