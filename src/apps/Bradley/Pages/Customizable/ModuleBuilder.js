@@ -64,6 +64,11 @@ class ModuleBuilder extends Component {
     return this.props.pageData['module_data'].rows.map(row => {
       const rowNode = document.querySelector(`[data-row-id="${row.atts['row_id']}"]`)
       const columnNodes = Array.from(rowNode.querySelectorAll(`.bcorp-column`))
+      // make sure there is no space on the p element holding
+      // this row. This allows us to mix formatted text with our
+      // rows without disrupting the layout
+      rowNode.parentNode.style.marginBottom = 0
+      rowNode.parentNode.style.marginTop = 0
 
       return this.renderColumns(columnNodes, row, rowNode)
     })
@@ -112,7 +117,7 @@ class ModuleBuilder extends Component {
 
                 {ReactHtmlParser(this.props.pageData['module_data'].content, {
                   transform: function(node, i) {
-                    console.log( node )
+                    // console.log( node )
                     if ( node
                       && 'a' === node.name
                       && node.attribs
