@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import debounce from 'debounce'
+import { lookupColor } from '../../../../lib/bcorpStyles'
 import BCorpVideo from '../BCorpVideo'
 import style from './VideoBackground.scss'
 
@@ -17,7 +18,7 @@ class VideoBackground extends Component {
   constructor (props) {
     super(props)
 
-    this.state = { width: 0, height: 0, top: 0, left: 0 }
+    this.state = { width: 0, height: 0, top: 0, left: 0, playerReady: false }
 
     this.initUpdateBackgroundDimensions = this.updateBackgroundDimensions.bind(this)
     this.updateBackgroundDimensions = debounce(this.updateBackgroundDimensions.bind(this), 200)
@@ -76,6 +77,29 @@ class VideoBackground extends Component {
     event.target.playVideo()
   }
 
+  onPlay (event) {
+    this.setState({ playerReady: true })
+  }
+
+  /**
+   * Renders the image that appears by default until the video starts playing
+   */
+  renderPlaceholderImage () {
+    if (!this.props.placeholder) {
+      return
+    }
+
+    return (
+      <div
+        style={{
+          backgroundImage: this.props.placeholder ? `url(${this.props.placeholder})` : undefined,
+          backgroundColor: this.props.placeholder ? undefined : lookupColor('black'),
+          opacity: this.state.playerReady ? 0 : 1
+        }}
+        className={style.placeholderImage} />
+    )
+  }
+
   render () {
     return (
       <div
@@ -86,6 +110,9 @@ class VideoBackground extends Component {
           left: this.state.left
         }}
         className={style.videoBackground} >
+
+        {this.renderPlaceholderImage()}
+
         <BCorpVideo
           url={this.props.url}
           youtubeProps={{
@@ -101,6 +128,7 @@ class VideoBackground extends Component {
               }
             },
             onReady: this.onPlayerReady,
+            onPlay: this.onPlay.bind(this),
             onPause: this.onPlayerReady,
             onEnd: this.onPlayerReady
           }}
@@ -116,6 +144,7 @@ class VideoBackground extends Component {
               height: this.state.height
             }
           }} />
+
       </div>
     )
   }
@@ -130,7 +159,11 @@ VideoBackground.propTypes = {
   /**
    * A Video URL or just the ID
    */
-  url: PropTypes.string.isRequired
+  url: PropTypes.string.isRequired,
+  /**
+   * Placeholder Image Src, leave empty for no placeholder
+   */
+  placeholder: PropTypes.string
 }
 
 export default VideoBackground

@@ -55,18 +55,25 @@ class FullWidthTemplate extends Component {
     return (
       <VideoBackground
         node={this.heroNode}
-        url={this.props.data.metaboxes['page_hero']['video_url']} />
+        url={this.props.data.metaboxes['page_hero']['video_url']}
+        placeholder={this.getHeroBackgroundImageSrc()} />
     )
   }
 
-  getHeroBackgroundImage () {
-    // only use this if no video url is given
-    if (!this.props.data['featured_image'] || this.props.data['featured_image'].length === 0 ||
-        this.props.data.metaboxes['page_hero']['video_url'] !== '') {
+  getHeroBackgroundImageSrc () {
+    if (!this.props.data['featured_image'] || this.props.data['featured_image'].length === 0) {
       return undefined
     }
 
-    return `url(${this.props.data['featured_image'][0]})`
+    return this.props.data['featured_image'][0]
+  }
+
+  getHeroBackgroundImage () {
+    if (this.props.data.metaboxes['page_hero']['video_url'] !== '') {
+      return undefined
+    }
+
+    return `url(${this.getHeroBackgroundImageSrc()})`
   }
 
   renderHero () {
