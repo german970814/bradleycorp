@@ -29,3 +29,25 @@ a {
 img {
 	border: 0;
 }
+
+// ensure all wordpress inserted images are responsive
+img[class*="wp-image-"] {
+  max-width: 100%;
+  height: auto;
+
+  :global &.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  :global &.alignleft {
+    float:left;
+    margin:0 1em 1em 0;
+  }
+
+  :global &.alignright {
+    float:right;
+    margin:0 0 1em 1em;
+  }
+}
