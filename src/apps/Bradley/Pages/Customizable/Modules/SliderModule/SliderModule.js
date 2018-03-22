@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import PostGettingModule from '../PostGettingModule'
+import { lookupColor } from '../../../../../../lib/bcorpStyles'
 import ScrollableList from '../../../../../../lib/containers/ScrollableList/ScrollableList'
 import SliderItem from './SliderItem/SliderItem'
 import style from './SliderModule.scss'
@@ -8,6 +9,35 @@ import style from './SliderModule.scss'
 class SliderModule extends PostGettingModule {
   constructor (props) {
     super(props, style, 'sliderModule', 4)
+  }
+
+  /**
+   * Skin is a bit different for slider module,
+   * since it needs to always have a white background if post type is product
+   *
+   * We can override the parent setSkinClass function
+   * to allow us to still use this.skinClass as we would in any other module
+   *
+   * @param {[object]} props
+   */
+  setSkinClass (props) {
+    if (props.postType === 'product') {
+      this.skinClass = `module-skin-light`
+    } else {
+      super.setSkinClass(props)
+    }
+  }
+
+  /**
+   * use this to get slider skin instead of this.props.skin
+   *
+   * @return {[string]} the skin
+   */
+  getSliderSkin () {
+    if (this.props.postType === 'product') {
+      return 'light'
+    }
+    return this.props.skin
   }
 
   renderHeading () {
@@ -31,7 +61,7 @@ class SliderModule extends PostGettingModule {
           heading={this.props.title}
           containerNode={this.state.node}
           size={this.size}
-          skin={this.props.skin}
+          skin={this.getSliderSkin()}
           accentColor={this.props.accentColor}
           accentColorClass={this.accentColorClass}
           skinClass={this.skinClass} />
@@ -79,19 +109,14 @@ class SliderModule extends PostGettingModule {
     )
   }
 
-  getBackgroundColorClass () {
-    if (this.props.postType === 'product') {
-      return 'module-skin-dark-background-black'
-    } else {
-      return 'module-skin-dark-background-navy module-skin-light-background-light-gray'
-    }
-  }
-
   renderModule () {
     return (
       <div
-        className={`${this.containerClassName} ${this.skinClass} ${this.getBackgroundColorClass()}`}
-        style={{minHeight: this.state.minHeight}} >
+        className={`${this.containerClassName} ${this.skinClass} module-skin-dark-background-navy module-skin-light-background-light-gray`}
+        style={{
+          minHeight: this.state.minHeight,
+          backgroundColor: this.props.postType === 'product' ? lookupColor('white') : undefined
+        }} >
 
         {this.renderHeading()}
 
