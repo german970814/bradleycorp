@@ -93,7 +93,7 @@ class VideoBackground extends Component {
       <div
         style={{
           backgroundImage: this.props.placeholder ? `url(${this.props.placeholder})` : undefined,
-          backgroundColor: this.props.placeholder ? undefined : lookupColor('black'),
+          backgroundColor: lookupColor('black'),
           opacity: this.state.playerReady ? 0 : 1
         }}
         className={style.placeholderImage} />
