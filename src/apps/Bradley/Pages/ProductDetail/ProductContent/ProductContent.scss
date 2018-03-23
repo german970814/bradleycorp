@@ -1,0 +1,130 @@
+@import "../../../../../scss/partials/text-styles";
+@import "../../../../../scss/partials/variables";
+@import "../../../../../scss/partials/mixins";
+@import "../../../../../scss/partials/layout";
+
+.productContent {
+  @extend %BodyPaddingWithMediaQueries;
+  padding-top: 40px;
+}
+
+%aboveTitle {
+  display: inline;
+}
+
+h6.new {
+  @extend %aboveTitle;
+  margin-right: 14px;
+  color: $red;
+}
+
+h6.sku {
+  @extend %aboveTitle;
+  color: $gray;
+}
+
+h1.title {
+  margin-top: 17px;
+  margin-bottom: 17px;
+  width: 100%;
+  height: auto;
+  color: $navy;
+
+  @include respond-to(tablet) {
+    margin-bottom: 27px;
+  }
+}
+
+.award {
+  display: inline-block;
+  margin-right: 17px;
+  margin-bottom: 24px;
+  margin-left: 0;
+  height: 50px;
+
+  img {
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @include respond-to(desktop){
+    margin-right: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+.imageSelector {
+  width: 100%;
+}
+
+$productDetailBtnTabletGap: 16px;
+
+.ctaButtons {
+  margin-top: 16px;
+}
+
+.buttonWrapper {
+  margin-bottom: 10px;
+
+  @include respond-to(tablet) {
+    &:first-child {
+      padding-right: $productDetailBtnTabletGap / 2;
+    }
+
+    &:last-child {
+      padding-left: $productDetailBtnTabletGap / 2;
+    }
+  }
+}
+
+// Desktop
+
+.productContentDesktop {
+  @extend %BodyPaddingWithMediaQueries;
+  margin: 0 auto;
+  padding-top: 40px;
+  width: 70%;
+}
+
+.detailsDesktop {
+  display: inline-block;
+  width: 45%;
+}
+
+.titleDesktop {
+  position: relative;
+  margin-top: 17px;
+  margin-bottom: 40px;
+  color: $navy;
+
+  &::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    border-bottom: 1px solid $silver;
+    width: 92%;
+    height: 1px;
+  }
+
+}
+
+.imageSelectorDesktop {
+  display: inline-block;
+  vertical-align: top;
+  width: 55%;
+  height: 428px;
+}
+
+.buttonWrapperDesktop {
+  float: left;
+  margin-top: 10px;
+  margin-right: 20px;
+  width: 212px;
+}
+
+.surveyWrapper {
+  width: 241px;
+}

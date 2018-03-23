@@ -1,21 +1,58 @@
-@import "./partials/grid-globals";
+@import "./globals/grid-globals";
+@import "./globals/text-styles-globals";
+@import "./globals/buttons-globals";
+@import "./globals/hamburgers/hamburgers";
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
 
 body {
   overflow-x: hidden;
   margin: 0;
-  font-family: Helvetica;
-  font-size: 14px;
-  line-height: 1.5;
-  text-align: left;
+  -webkit-text-size-adjust: 100%;
+
+  &:global(.prevent-scroll) {
+    overflow: hidden;
+  }
 }
 
 a {
-  color: unset;
+  color: inherit;
   cursor: pointer;
   text-decoration: none;
+}
+
+:global .noSelectBackground {
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+
 }
 
 /* IE fix */
 img {
 	border: 0;
+}
+
+// ensure all wordpress inserted images are responsive
+img[class*="wp-image-"] {
+  max-width: 100%;
+  height: auto;
+
+  :global &.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  :global &.alignleft {
+    float:left;
+    margin:0 1em 1em 0;
+  }
+
+  :global &.alignright {
+    float:right;
+    margin:0 0 1em 1em;
+  }
 }

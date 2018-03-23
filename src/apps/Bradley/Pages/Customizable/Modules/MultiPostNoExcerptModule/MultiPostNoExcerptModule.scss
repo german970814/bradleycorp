@@ -1,0 +1,15 @@
+.multiPostNoExcerptModule {
+  display: block;
+
+  > :global(.container-size-mobile) {
+    padding: 0;
+  }
+
+  > :global(.container-size-tablet) {
+    padding: 0;
+  }
+
+  > :global(.container-size-desktop) {
+    padding: 0;
+  }
+}

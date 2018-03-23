@@ -1,0 +1,119 @@
+@import "../partials/text-styles";
+@import "../partials/mixins";
+// NOTE: styles wrt container size imported at the end
+
+h1 {
+  @extend %h1-mobile;
+
+  @include respond-to(tablet) {
+    font-size: 28px;
+    line-height: 1.21;
+    letter-spacing: -1.1px;
+  }
+
+  @include respond-to(desktop) {
+    font-size: 34px;
+    line-height: 1.06;
+    letter-spacing: -1.4px;
+  }
+}
+
+h2 {
+  @extend %h2-mobile;
+
+  @include respond-to(tablet) {
+    font-size: 36px;
+    letter-spacing: 3.6px;
+  }
+
+  @include respond-to(desktop) {
+    font-size: 42px;
+    letter-spacing: 4.2px;
+  }
+}
+
+h3 {
+  @extend %h3-mobile;
+
+  @include respond-to(tablet) {
+    font-size: 20px;
+  }
+
+  @include respond-to(desktop) {
+    font-size: 24px;
+    color: $navy;
+  }
+}
+
+h4 {
+  @extend %h4-tablet-mobile;
+
+  @include respond-to(desktop) {
+    font-size: 18px;
+    line-height: 1.11;
+    letter-spacing: 1.8px;
+  }
+}
+
+h5 {
+  @extend %h5-desktop;
+}
+
+h6 {
+  @extend %h6-desktop;
+}
+
+body {
+  @extend %body;
+}
+
+:global .small-body :local {
+  @extend .small-body;
+}
+
+:global .link-navy :local {
+  @extend %link-navy;
+}
+
+:global .link-orange :local {
+  @extend %link-orange;
+}
+
+:global .small-link-gray :local {
+  @extend %small-link-gray;
+}
+
+:global(.hero-headline) {
+  @extend %hero-headline-mobile;
+
+  @include respond-to(tablet) {
+    font-size: 72px;
+    letter-spacing: 7.2px;
+  }
+
+  @include respond-to(desktop) {
+    font-size: 90px;
+    letter-spacing: 9px;
+  }
+}
+
+:global(.hero-copy) {
+  @extend %hero-copy-mobile;
+
+  @include respond-to(tablet) {
+    font-size: 13px;
+    line-height: 1.38;
+  }
+
+  @include respond-to(desktop) {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+:global .legal :local {
+  @extend %legal;
+}
+
+// import at the end to give styles wrt container priority
+@import "./text-styles-wrt-container-globals";

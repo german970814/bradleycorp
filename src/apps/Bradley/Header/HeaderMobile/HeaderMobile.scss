@@ -1,0 +1,30 @@
+@import "../../../../scss/partials/layout";
+
+.header {
+  @extend %BodyPaddingWithMediaQueries;
+  height: 64px;
+}
+
+.burgerMenuWrapper {
+  display: inline-block;
+  vertical-align: middle;
+  width: 30%;
+}
+
+.logoWrapper {
+  display: inline-block;
+  vertical-align: bottom;
+  width: 40%;
+  padding-bottom: 8px;
+}
+
+.logo {
+  margin: 0 auto;
+  width: 46px;
+  height: 46px;
+}
+
+.logoImage {
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,47 @@
+@import "../partials/variables";
+
+// buttons
+
+:global button :local {
+  border: none;
+  width: 100%;
+  height: $buttonHeight;
+  background-color: $green;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: $CentraleSansPro;
+  font-size: 13px;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  line-height: 42px;
+  outline: none;
+  text-transform: uppercase;
+}
+
+:global .button-orange :local {
+  background-color: $orange;
+}
+
+:global .button-brown :local {
+  background-color: $brown;
+}
+
+:global .button-border-slate-grey :local {
+  border: solid 1px $slate-grey;
+  background-color: transparent;
+  color: $slate-grey;
+}
+
+:global .button-border-dark-gray :local {
+  border: solid 1px $dark-gray;
+  background-color: transparent;
+  color: $dark-gray;
+}
+
+:global .button-border-red :local {
+  border: solid 1px #e51616;
+  background-color: transparent;
+  color: #e51616;
+}

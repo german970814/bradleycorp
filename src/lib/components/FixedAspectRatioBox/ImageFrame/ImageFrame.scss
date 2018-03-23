@@ -1,0 +1,9 @@
+@import "../../../../scss/partials/helpers";
+
+.imageFrame {
+  width: 100%;
+}
+
+.image {
+  @extend %coverBackground;
+}

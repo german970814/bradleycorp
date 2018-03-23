@@ -1,0 +1,83 @@
+@import "../../../../scss/partials/variables";
+@import "../../../../scss/partials/helpers";
+@import "../../../../scss/partials/mixins";
+
+@import "../../SimpleSlider/SimpleSlider";
+
+%widthController {
+  width: 100%;
+  max-width: 150px;
+  margin: 0 auto;
+
+  @include respond-to(tablet) {
+    max-width: 170px;
+  }
+}
+
+.productScrollerProduct {
+  padding: 0 ($distanceBetweenItems / 2);
+
+  @include respond-to(tablet) {
+    padding: 0 ($distanceBetweenItemsTabletDesktop / 2);
+  }
+}
+
+.elementWrapper {
+  width: 100%;
+}
+
+.topIcons {
+  @extend %widthController;
+  height: 30px;
+}
+
+.new {
+  display: inline-block;
+  vertical-align: top;
+  float: left;
+  color: $red;
+}
+
+.complianceIconWrapper {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 5px;
+  width: 23px;
+  height: 22px;
+  overflow: hidden;
+}
+
+.complianceIcon {
+  max-width: 100%;
+  height: 100%;
+}
+
+.compliance {
+  display: inline-block;
+  vertical-align: top;
+  float: right;
+  text-align: right;
+}
+
+.image {
+  @extend %fitBackground;
+  @extend %widthController;
+  display: inline-block;
+  margin-bottom: 3px;
+  height: 161px;
+}
+
+:global(.small-body).sku {
+  @extend %widthController;
+  display: inline-block;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+h6.title {
+  @extend %widthController;
+  display: inline-block;
+  line-height: normal;
+  text-align: center;
+  color: $black;
+}

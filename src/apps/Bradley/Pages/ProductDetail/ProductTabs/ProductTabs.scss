@@ -1,0 +1,120 @@
+@import "../../../../../scss/partials/text-styles";
+@import "../../../../../scss/partials/variables";
+@import "../../../../../scss/partials/mixins";
+@import "../../../../../scss/partials/layout";
+@import "../../../../../scss/partials/grid";
+
+$tabHeight: 65px;
+
+.productDetailTabsUl {
+  margin-bottom: 0;
+  padding-left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.activeTabContent {
+  @extend %BodyPaddingWithMediaQueries;
+  border-bottom: solid 1px $silver;
+  padding-top: 30px;
+  padding-bottom: 25px;
+  background-color: $light-gray;
+  text-align: left;
+}
+
+.productDetailTabs {
+  @extend %BodyPaddingWithMediaQueries;
+  border-bottom: 1px solid $silver;
+  height: $tabHeight;
+  list-style: none;
+  cursor: pointer;
+
+  &:first-child {
+    margin-top: 62px;
+    border-top: 1px solid $silver;
+  }
+
+  h5:global(.tab-text) {
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 19px);
+    color: $navy;
+    line-height: $tabHeight;
+  }
+
+  img {
+    float: right;
+    width: 19px;
+    height: 11px;
+    margin: ($tabHeight - 11px)/2 0;
+  }
+
+}
+
+
+
+// Tablet-Desktop
+
+$tabHeightDesktop: 60px;
+$tabContentPaddingLeft: 11.5vw;
+$tabContentPaddingRight: 11.5vw;
+
+.tabsWrapperDesktop {
+  margin-top: 70px;
+}
+
+.tabsWrapperDesktop :global .tabs-active-content-background-color {
+  background-color: $light-gray;
+  border-top: solid 1px $silver;
+  border-bottom: solid 1px $silver;
+}
+
+.productDetailTabsUlDesktop {
+  @extend %BodyPaddingWithMediaQueries;
+  margin-bottom: 0;
+  overflow-x: scroll;
+  text-align: center;
+  white-space: nowrap;
+
+  @include respond-to(desktop) {
+    overflow-x: hidden;
+  }
+}
+
+.activeTabContentDesktop {
+  @extend %BodyPaddingWithMediaQueries;
+  padding-top: 80px;
+  padding-bottom: 45px;
+  text-align: left;
+  box-sizing: border-box;
+
+  @include respond-to(desktop) {
+    // padding-left: $tabContentPaddingLeft;
+    // padding-right: $tabContentPaddingRight;
+    width: 100%;
+  }
+}
+
+.productDetailTabsDesktop {
+  margin-right: 1px;
+  display: inline-block;
+  border: solid 1px $silver;
+  border-bottom: none;
+  min-width: 118px;
+  width: 120px;
+  max-width: 240px;
+  height: $tabHeightDesktop;
+  line-height: $tabHeightDesktop;
+  list-style: none;
+  white-space: normal;
+  cursor: pointer;
+
+  h5:global(.tab-text) {
+    display: inline-block;
+    vertical-align: middle;
+    width: 118px;
+    color: $black;
+    line-height: normal;
+    text-align: center;
+  }
+}

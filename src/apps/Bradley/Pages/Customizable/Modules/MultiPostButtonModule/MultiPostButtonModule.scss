@@ -1,0 +1,69 @@
+@import "../../../../../../scss/partials/variables";
+@import "../../../../../../scss/partials/mixins";
+@import "../../../../../../scss/partials/helpers";
+@import "../../../../../../scss/partials/grid";
+@import "../../../../../../lib/components/BCorpBackground/BCorpBackground";
+
+$tabletGutter: 5.2vw;
+$desktopGutter: 4.296875vw;
+
+.multiPostButtonModule {
+  @extend %bcorpBackgroundParent;
+
+  /*
+    MOBILE SIZED CONTAINER ONLY
+   */
+
+  // bit nasty looking,
+  // just makes sure background is always light grey on mobile with light skin
+  // and alays black with dark skin
+  :local :global > :not(.container-size-tablet):global(.module-skin-light) :local {
+      background-color: $light-gray;
+  }
+
+  :local :global > :not(.container-size-tablet):global(.module-skin-dark) :local {
+      background-color: $black;
+  }
+
+  /*
+   MOBILE SIZED CONTAINER AND UP
+   */
+
+  > :global(.container-size-mobile) {
+    box-sizing: border-box;
+    width: auto;
+
+    h3.title {
+      @include col(1);
+      margin-bottom: 27px;
+      text-align: center;
+    }
+  }
+
+  /*
+   TABLET SIZED CONTAINER AND UP
+   */
+
+  > :global(.container-size-tablet) {
+
+    .columnsRow {
+      float: left;
+      position: relative;
+      margin: auto (-$tabletGutter);
+      width: calc(100% + #{2 * $tabletGutter});
+    }
+  }
+
+  /*
+   DESKTOP SIZED CONTAINER
+   */
+
+  > :global(.container-size-desktop) {
+    padding: 60px $desktopGutter;
+
+    .columnsRow {
+      margin: auto (-$desktopGutter);
+      width: calc(100% + #{2 * $desktopGutter});
+    }
+  }
+}

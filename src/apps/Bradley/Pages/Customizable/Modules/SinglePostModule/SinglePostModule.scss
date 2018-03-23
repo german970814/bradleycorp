@@ -1,0 +1,144 @@
+@import "../../../../../../scss/partials/helpers";
+@import "../../../../../../scss/partials/variables";
+@import "../../../../../../scss/partials/mixins";
+@import "../../../../../../scss/partials/grid";
+@import "../../../../../../lib/components/BCorpBackground/BCorpBackground";
+
+.stretchToHeight {
+  height: 100%;
+}
+
+.singlePostModule {
+  @extend %bcorpBackgroundParent;
+
+  /*
+    MOBILE SIZED CONTAINER ONLY
+   */
+
+  > :global {
+    &:not(.container-size-tablet) {
+      &.module-skin-dark {
+        background-color: $black;
+      }
+
+      &.module-skin-light {
+        background-color: #fff;
+      }
+    }
+  }
+
+  /*
+   MOBILE SIZED CONTAINER + SCREEN AND UP
+   */
+
+  > :global(.container-size-mobile) {
+    box-sizing: border-box;
+
+    .imageCol {
+      @include col(1);
+
+      .imagePadding {
+        margin-bottom: 40px;
+      }
+    }
+
+    .contentCol {
+      @include col(1);
+
+      .contentWrapper {
+        display: inline-block;
+        vertical-align: middle;
+        width: 100%;
+      }
+
+      h2.title {
+        margin-bottom: 30px;
+      }
+
+      .content {
+        margin-bottom: 27px;
+      }
+
+      .button {
+        @include col(1);
+        margin-bottom: 10px;
+        text-align: center;
+
+        .button2 {
+          &:global(.module-skin-dark) {
+            border-color: #fff;
+          }
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  /*
+    TABLET SIZE CONTAINER AND UP
+   */
+
+  > :global(.container-size-tablet) {
+
+    .imageCol {
+      @include inline-col(2, middle);
+      float: none;
+
+      .imagePadding {
+        margin-bottom: 0;
+        padding-right: 40px;
+        height: 100%;
+      }
+    }
+
+    .contentCol {
+      @include inline-col(2, middle);
+      float: none;
+
+      $buttonWidth: 150px;
+      $buttonGutter: 10px;
+
+      .buttonsWrapper {
+        max-width: 2 * $buttonWidth + 2 * $buttonGutter;
+      }
+
+      .button {
+        @include col(2);
+        float: left;
+        margin-bottom: 0;
+        padding-right: $buttonGutter;
+        width: $buttonWidth;
+      }
+    }
+  }
+
+  /*
+    DESKTOP SIZE CONTAINER
+   */
+
+  > :global(.container-size-desktop) {
+
+    .imageCol {
+      width: 45.4% !important;
+
+      .imagePadding {
+        padding-right: 64px;
+      }
+    }
+
+    .contentCol {
+      width: 54.6% !important;
+
+      h2.title {
+        margin-bottom: 35px;
+      }
+
+      .content {
+        margin-bottom: 37px;
+      }
+    }
+  }
+}

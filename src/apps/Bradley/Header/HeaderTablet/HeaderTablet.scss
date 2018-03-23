@@ -1,0 +1,95 @@
+@import "../../../../scss/partials/layout";
+@import "../../../../scss/partials/variables";
+
+@import "../Header";
+
+$avatarHeight: 12px;
+$flagHeight: 10px;
+
+.topBar {
+  @extend %BodyPaddingWithMediaQueries;
+  height: 27px;
+  background-color: $topBarColor;
+  text-align: right;
+}
+
+%topBarText {
+  float: left;
+  font-family: $CentraleSansPro;
+  font-size: 10px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: 0.2px;
+  color: $steel-grey;
+}
+
+.user, .country {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.user {
+  margin-right: 32px;
+}
+
+.avatar {
+  float: left;
+  margin-right: 9px;
+  width: 10px;
+  height: $avatarHeight;
+}
+
+.userText {
+  @extend %topBarText;
+  line-height: $avatarHeight;
+}
+
+.flag {
+  float: left;
+  margin-right: 10px;
+  width: 16px;
+  height: $flagHeight;
+}
+
+.countryText {
+  @extend %topBarText;
+  line-height: $flagHeight;
+}
+
+// Bottom bar
+
+.bottomBar {
+  @extend %BodyPaddingWithMediaQueries;
+  position: relative;
+  height: 64px;
+}
+
+.burgerMenuWrapper {
+  display: inline-block;
+  vertical-align: middle;
+  width: 30%;
+}
+
+.logoWrapper {
+  position: relative;
+  display: inline-block;
+  vertical-align: bottom;
+  width: 40%;
+  padding-bottom: 8px;
+}
+
+.logo {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.logoImage {
+  margin: 0 auto;
+  margin-bottom: 17px;
+  width: 56px;
+  height: 56px;
+}

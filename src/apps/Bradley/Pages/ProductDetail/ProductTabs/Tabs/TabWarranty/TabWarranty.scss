@@ -1,0 +1,50 @@
+@import "../../../../../../../scss/partials/variables";
+@import "../../../../../../../scss/partials/mixins";
+@import "../Tabs";
+
+$marginTop: 20px;
+
+.warranty {
+  margin-top: $marginTop;
+
+  p, li, div {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+
+  li {
+    list-style: circle;
+  }
+
+  ul {
+    padding: 0;
+  }
+
+  ul > li {
+    list-style: none;
+  }
+
+  ol {
+    margin-top: 15px;
+    padding-left: 5%;
+
+    @include respond-to-custom(400px) {
+      padding-left: 40px;
+    }
+  }
+
+  ol > li {
+
+    padding-left: 5%;
+
+    list-style: decimal;
+
+    @include respond-to-custom(400px) {
+      padding-left: 30px;
+    }
+  }
+}
+
+.title {
+  margin-bottom: $titleMarginBottom - $marginTop;
+}

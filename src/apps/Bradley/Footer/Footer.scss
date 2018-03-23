@@ -1,0 +1,169 @@
+@import "../../../scss/partials/layout";
+@import "../../../scss/partials/variables";
+@import "../../../scss/partials/mixins";
+
+.footerColor {
+  background: black;
+  color: white;
+}
+
+.footerWrapper {
+  @extend %BodyPaddingWithMediaQueries;
+  max-width: 100%;
+  @include respond-to(tablet) {
+    position: relative;
+  }
+}
+
+$logoHeight: 60px;
+$logoHeightTablet: 55px;
+$logoHeightDesktop: 70px;
+
+$footerSectionTopBottomPadding: 30px;
+$footerSectionTopPaddingTablet: 50px;
+$footerSectionBottomPaddingTablet: 40px;
+$footerSectionTopPaddingDesktop: 60px;
+
+$menuItemsGap: 18px;
+$menuItemsGapTablet: 20px;
+$menuItemFontSize: 10px;
+
+.footerSection {
+  padding: ($footerSectionTopBottomPadding - $menuItemsGap) 0px;
+
+  @include respond-to(tablet) {
+    padding-top: $footerSectionTopPaddingTablet - ($menuItemsGapTablet / 2);
+    padding-bottom: $footerSectionBottomPaddingTablet - ($menuItemsGapTablet / 2);
+    min-height: 200px;
+  }
+
+  @include respond-to(desktop) {
+    padding-top: $footerSectionTopPaddingDesktop - ($menuItemsGapTablet / 2);
+  }
+}
+
+.logoWrapper {
+  display: block;
+  padding-top: $footerSectionTopBottomPadding;
+  padding-bottom: $menuItemsGap / 2;
+  height: $logoHeight;
+
+  .logo {
+    width: $logoHeight;
+    height: $logoHeight;
+  }
+
+  @include respond-to(tablet) {
+    padding-top: $footerSectionTopPaddingTablet;
+    height: $logoHeightTablet;
+
+    .logo {
+      width: $logoHeightTablet;
+      height: $logoHeightTablet;
+    }
+  }
+
+  @include respond-to(desktop) {
+    padding-top: $footerSectionTopPaddingDesktop;
+    height: $logoHeightDesktop;
+
+    .logo {
+      width: $logoHeightDesktop;
+      height: $logoHeightDesktop;
+    }
+  }
+}
+
+.menuItem {
+  padding: ($menuItemsGap / 2) 0 (($menuItemsGap / 2) - 2) 0;
+
+  .menuItemLink {
+    color: white;
+  }
+
+  @include respond-to(tablet) {
+    padding: ($menuItemsGapTablet / 2) 0 (($menuItemsGapTablet / 2) - 2) 0;
+    padding-right: 30px;
+  }
+
+  @include respond-to(desktop) {
+    padding-right: 50px;
+  }
+}
+
+.socialMediaIconsWrapper .footerSection {
+  text-align: right;
+
+  @include respond-to(desktop) {
+    margin-left: -45px;
+  }
+}
+
+.footerSection .socialMediaIcon {
+  padding: ($menuItemsGap / 2) 0;
+  padding-right: 15px;
+  height: 18px;
+
+  &:last-child {
+    padding-right: 0 !important;
+  }
+
+  @include respond-to(tablet) {
+    display: inline-block;
+    float: none;
+    padding-right: 0;
+    padding-left: 15px;
+  }
+}
+
+// hide tablet social media icons
+.socialMediaIconsWrapperTablet {
+  @include respond-to(desktop) {
+    display: none !important;
+  }
+}
+
+// show desktop social media icons
+.socialMediaIconsWrapperDesktop {
+  @extend .socialMediaIconsWrapper;
+
+  @include respond-to-max(desktop) {
+    display: none !important;
+  }
+}
+
+.blogLinksDesktop {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding-bottom: $footerSectionBottomPaddingTablet - ($menuItemsGapTablet / 2);
+  text-align: right;
+
+  .menuItem {
+    padding-right: $TabletBodyPadding;
+
+    .menuItemLinkGray {
+      text-align: right;
+    }
+
+    @include respond-to(desktop) {
+      padding-right: $DesktopBodyPadding;
+    }
+  }
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: $charcoal-grey;
+
+  @include respond-to(tablet) {
+    display: none;
+  }
+}
+
+.padlock {
+  float: left;
+  height: 10px;
+  margin-right: 4px;
+}

@@ -1,0 +1,64 @@
+@import "../../../../scss/partials/grid";
+
+.customizable :global {
+
+  .bcorp-row {
+    @include row();
+  }
+
+  .bcorp-column {
+    @include col(1);
+
+    &[data-col-width="12"] {
+    }
+
+    &[data-col-width="9"] {
+      @include respond-to(tablet) {
+        @include col(12 / 9);
+      }
+    }
+
+    &[data-col-width="8"] {
+      @include respond-to(tablet) {
+        @include col(12 / 8);
+      }
+    }
+
+    &[data-col-width="7"] {
+      @include respond-to(tablet) {
+        @include col(12 / 7);
+      }
+    }
+
+    &[data-col-width="6"] {
+      @include respond-to(tablet) {
+        @include col(2);
+      }
+    }
+
+    &[data-col-width="5"] {
+      @include respond-to(tablet) {
+        @include col(12 / 5);
+      }
+    }
+
+    &[data-col-width="4"] {
+      @include respond-to(tablet) {
+        @include col(3);
+      }
+    }
+
+    &[data-col-width="3"] {
+      @include col(1);
+
+      @include respond-to(tablet) {
+        @include col(2);
+      }
+
+      @include respond-to(desktop) {
+        @include col(4);
+      }
+    }
+  }
+
+}

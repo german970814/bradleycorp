@@ -6,7 +6,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const Visualizer = require('webpack-visualizer-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
-const srcDir = path.join(__dirname, 'src')
+const srcDir = path.join(__dirname, 'src/apps/Bradley')
 
 const config = {
   context: srcDir,
@@ -16,6 +16,7 @@ const config = {
     vendor: [
       // vendors added here will be included in vendor chunk
       // so they only get requested once and can easily be cached
+      'core-js',
       'react',
       'react-dom',
       'react-router-dom',
@@ -63,7 +64,7 @@ const config = {
         })
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|gif|svg)$/,
         use: {
           loader: 'url-loader',
           options: {

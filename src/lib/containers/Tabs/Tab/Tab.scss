@@ -1,0 +1,22 @@
+@import "../../../../scss/partials/variables";
+@import "../../../../scss/partials/mixins";
+
+.tab {
+  h5.tabText {
+    display: inline;
+  }
+
+  &.active {
+    background-color: $navy;
+
+    h5.tabText {
+      color: #ffffff;
+    }
+  }
+
+  @include respond-to(tablet) {
+    h5.tabText {
+      font-size: 13px;
+    }
+  }
+}

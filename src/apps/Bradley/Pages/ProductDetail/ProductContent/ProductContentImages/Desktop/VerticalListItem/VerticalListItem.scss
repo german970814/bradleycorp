@@ -1,0 +1,18 @@
+@import "../../../../../../../../scss/partials/helpers";
+
+$marginBetween: 17px;
+
+.listItem {
+  @extend %fitBackground;
+  margin-top: $marginBetween / 2;
+  margin-bottom: $marginBetween / 2;
+  height: calc(100% - #{$marginBetween});
+  cursor: pointer;
+}
+
+$videoIconWidth: 51px;
+
+.listItemVideo {
+  @extend .listItem;
+  margin: 0 calc((100% - #{$videoIconWidth})/2);
+}

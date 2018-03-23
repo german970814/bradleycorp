@@ -1,0 +1,18 @@
+$circleWidth: 7px;
+$sideMargin: 4px;
+
+.positionCircle {
+  margin: 0 $sideMargin;
+  border-radius: 50%;
+  width: $circleWidth;
+  height: $circleWidth;
+  cursor: pointer;
+}
+
+.active {
+  background-color: #232d5c;
+}
+
+.notActive {
+  background-color: #c6d4cf;
+}

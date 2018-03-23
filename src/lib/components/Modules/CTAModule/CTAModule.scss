@@ -1,0 +1,59 @@
+@import "../../../../scss/partials/layout";
+@import "../../../../scss/partials/mixins";
+@import "../../../../scss/partials/variables";
+
+.CTAModule {
+
+  > :global(.container-size-mobile) {
+
+    padding-top: 60px;
+    padding-bottom: 60px;
+    text-align: center;
+
+    :last-child {
+      padding-bottom: 0;
+    }
+
+    h3.title {
+      padding-bottom: 20px;
+      text-align: center;
+      color: $black;
+    }
+
+    .text {
+      padding-bottom: 37px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .button {
+      text-transform:  uppercase;
+    }
+  }
+
+  /*
+   TABLET CONTAINER SIZE
+   */
+
+  > :global(.container-size-tablet) {
+    h3.title {
+      padding-bottom: 28px;
+    }
+
+    .button {
+      padding-right: 30px;
+      padding-left: 30px;
+      width: auto;
+    }
+  }
+
+  /*
+   DESKTOP CONTAINER SIZE
+   */
+
+  > :global(.container-size-desktop) {
+    h3.title {
+      padding-bottom: 38px;
+    }
+  }
+}
