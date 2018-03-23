@@ -64,7 +64,8 @@ class SVGIcon extends Component {
       <svg
         className={this.props.className}
         xmlns={icons[this.props.icon].ns}
-        viewBox={icons[this.props.icon].viewBox} >
+        viewBox={icons[this.props.icon].viewBox}
+        onMouseEnter={this.props.redrawOnHover ? this.onMouseEnter.bind(this) : undefined} >
 
         <path
           d={icons[this.props.icon].d}
@@ -72,8 +73,7 @@ class SVGIcon extends Component {
             ...icons[this.props.icon].pathStyle,
             ...this.getRedrawStyles(),
             ...customStyles
-          }}
-          onMouseEnter={this.props.redrawOnHover ? this.onMouseEnter.bind(this) : undefined} />
+          }} />
 
       </svg>
     )
