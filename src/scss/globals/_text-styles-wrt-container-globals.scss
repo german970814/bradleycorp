@@ -14,6 +14,12 @@
   h4 {
     @extend %h4-tablet-mobile;
   }
+  :global(.hero-headline) {
+    @extend %hero-headline-mobile;
+  }
+  :global(.hero-copy) {
+    @extend %hero-copy-mobile;
+  }
 }
 
 :global(.container-size-tablet) {
@@ -25,6 +31,12 @@
   }
   h3 {
     @extend %h3-tablet;
+  }
+  :global(.hero-headline) {
+    @extend %hero-headline-tablet;
+  }
+  :global(.hero-copy) {
+    @extend %hero-copy-tablet;
   }
 }
 
@@ -40,5 +52,11 @@
   }
   h4 {
     @extend %h4-desktop;
+  }
+  :global(.hero-headline) {
+    @extend %hero-headline-desktop;
+  }
+  :global(.hero-copy) {
+    @extend %hero-copy-desktop;
   }
 }
