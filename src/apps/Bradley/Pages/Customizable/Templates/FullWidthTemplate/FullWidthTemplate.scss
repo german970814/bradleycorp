@@ -7,8 +7,14 @@ $fadeInSpeed: 500ms;
   position: relative;
   overflow: hidden;
 
-  .hero {
+  .videoOverlay {
+    @extend %fillRelativeParent;
     @extend %coverBackground;
+    opacity: 0.67;
+    z-index: -1;
+  }
+
+  .hero {
     padding: 60px 30px;
     width: 100%;
     box-sizing: border-box;

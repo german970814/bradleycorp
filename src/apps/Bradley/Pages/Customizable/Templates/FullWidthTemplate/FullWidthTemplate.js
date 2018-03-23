@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { validChain } from '../../../../../../lib/bcorpObject'
 import VideoBackground from '../../../../../../lib/components/BCorpVideo/VideoBackground/VideoBackground'
+import BCorpBackground from '../../../../../../lib/components/BCorpBackground/BCorpBackground'
 import style from './FullWidthTemplate.scss'
 
 class FullWidthTemplate extends Component {
@@ -111,16 +112,39 @@ class FullWidthTemplate extends Component {
     )
   }
 
-  renderBackgroundVideo () {
+  renderHeroBackground () {
     if (!this.props.data.metaboxes['page_hero']['video_url'] || !this.heroNode) {
-      return
+      return this.renderHeroBackgroundImage()
     }
 
+    return this.renderHeroBackgroundVideo()
+  }
+
+  renderHeroBackgroundImage () {
     return (
-      <VideoBackground
-        node={this.heroNode}
-        url={this.props.data.metaboxes['page_hero']['video_url']}
-        placeholder={this.getHeroBackgroundImageSrc()} />
+      <BCorpBackground
+        imageSrc={this.getHeroBackgroundImageSrc()}
+        overlay={this.props.data.metaboxes['page_hero']['overlay']}
+        imageOpacity={0.33} />
+    )
+  }
+
+  renderHeroBackgroundVideo () {
+    return (
+      <React.Fragment>
+
+        <VideoBackground
+          node={this.heroNode}
+          url={this.props.data.metaboxes['page_hero']['video_url']}
+          placeholder={this.getHeroBackgroundImageSrc()} />
+
+        <div
+          style={{
+            backgroundColor: this.props.data.metaboxes['page_hero']['overlay']
+          }}
+          className={style.videoOverlay} />
+
+      </React.Fragment>
     )
   }
 
@@ -130,14 +154,6 @@ class FullWidthTemplate extends Component {
     }
 
     return this.props.data['featured_image'][0]
-  }
-
-  getHeroBackgroundImage () {
-    if (this.props.data.metaboxes['page_hero']['video_url'] !== '') {
-      return undefined
-    }
-
-    return `url(${this.getHeroBackgroundImageSrc()})`
   }
 
   renderHero () {
@@ -151,12 +167,10 @@ class FullWidthTemplate extends Component {
       <div
         ref={node => { this.heroNode = node }}
         className={style.heroWrapper} >
-        {this.renderBackgroundVideo()}
-        <div
-          style={{
-            backgroundImage: this.getHeroBackgroundImage()
-          }}
-          className={`row ${style.hero}`}>
+
+        {this.renderHeroBackground()}
+
+        <div className={`row ${style.hero}`}>
           {this.renderTagline(shouldRender.tagline)}
           {this.renderTitle(shouldRender.title)}
           {this.renderCopy(shouldRender.copy)}

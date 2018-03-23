@@ -35,7 +35,7 @@ function getBackgroundStyle (props) {
   const backgroundStyle = {}
 
   backgroundStyle.backgroundImage = props.imageSrc ? `url(${props.imageSrc})` : undefined
-  backgroundStyle.opacity = props.overlay ? 0.2 : 1
+  backgroundStyle.opacity = props.overlay ? props.imageOpacity : 1
 
   return backgroundStyle
 }
@@ -50,11 +50,13 @@ function getOverlay (props) {
 BCorpBackground.propTypes = {
   imageSrc: PropTypes.string,
   overlay: PropTypes.string,
-  skin: PropTypes.oneOf(['light', 'dark']).isRequired
+  skin: PropTypes.oneOf(['light', 'dark']).isRequired,
+  imageOpacity: PropTypes.number
 }
 
 BCorpBackground.defaultProps = {
-  skin: 'light'
+  skin: 'light',
+  imageOpacity: 0.2
 }
 
 export default BCorpBackground
