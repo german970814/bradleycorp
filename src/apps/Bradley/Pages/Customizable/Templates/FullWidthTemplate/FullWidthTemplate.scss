@@ -1,6 +1,8 @@
 @import "../../../../../../scss/partials/mixins";
 @import "../../../../../../scss/partials/helpers";
 
+$fadeInSpeed: 500ms;
+
 .heroWrapper {
   position: relative;
   overflow: hidden;
@@ -15,6 +17,7 @@
       margin-bottom: 25px;
       text-align: center;
       color: #fff;
+      transition: opacity $fadeInSpeed;
 
       @include respond-to(desktop) {
         margin-bottom: 30px;
@@ -24,10 +27,12 @@
     :global(.hero-headline).title {
       margin-bottom: 30px;
       text-align: center;
+      transition: opacity $fadeInSpeed;
     }
 
     :global(.hero-copy).copy {
       text-align: center;
+      transition: opacity $fadeInSpeed;
     }
 
     :last-child {

@@ -110,6 +110,7 @@ class ModuleBuilder extends Component {
     return (
       <TemplateFactory
         data={this.props.pageData['page_template_data']}
+        pageSlug={this.props.pageSlug}
         renderModules={
           () => {
             return (

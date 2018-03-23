@@ -5,6 +5,58 @@ import VideoBackground from '../../../../../../lib/components/BCorpVideo/VideoBa
 import style from './FullWidthTemplate.scss'
 
 class FullWidthTemplate extends Component {
+  constructor (props) {
+    super(props)
+
+    this.defaultState = {
+      showTagline: false,
+      showTitle: false,
+      showCopy: false
+    }
+    this.state = this.defaultState
+  }
+
+  componentDidMount () {
+    this.fadeTextIn()
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.pageSlug !== this.props.pageSlug) {
+      this.resetText()
+    }
+  }
+
+  componentDidUpdate (prevProps) {
+    if (prevProps.pageSlug !== this.props.pageSlug) {
+      this.fadeTextIn()
+    }
+  }
+
+  resetText () {
+    clearTimeout(this.taglineTimer)
+    clearTimeout(this.titleTimer)
+    clearTimeout(this.copyTimer)
+    this.setState(this.defaultState)
+  }
+
+  fadeTextIn () {
+    this.taglineTimer = setTimeout(this.showTagline.bind(this), 500)
+    this.titleTimer = setTimeout(this.showTitle.bind(this), 1500)
+    this.copyTimer = setTimeout(this.showCopy.bind(this), 2500)
+  }
+
+  showTagline () {
+    this.setState({ showTagline: true })
+  }
+
+  showTitle () {
+    this.setState({ showTitle: true })
+  }
+
+  showCopy () {
+    this.setState({ showCopy: true })
+  }
+
   renderTitle (shouldRender) {
     if (!shouldRender) {
       return
@@ -13,7 +65,11 @@ class FullWidthTemplate extends Component {
     const { data } = this.props
 
     return (
-      <div className={`col1 hero-headline ${style.title}`} >
+      <div
+        style={{
+          opacity: this.state.showTitle ? 1 : 0
+        }}
+        className={`col1 hero-headline ${style.title}`} >
         {data.metaboxes['page_hero'].title}
       </div>
     )
@@ -27,7 +83,11 @@ class FullWidthTemplate extends Component {
     const { data } = this.props
 
     return (
-      <h3 className={`col1 ${style.tagline}`} >
+      <h3
+        style={{
+          opacity: this.state.showTagline ? 1 : 0
+        }}
+        className={`col1 ${style.tagline}`} >
         {data.metaboxes['page_hero'].tagline}
       </h3>
     )
@@ -41,7 +101,11 @@ class FullWidthTemplate extends Component {
     const { data } = this.props
 
     return (
-      <div className={`col1 hero-copy ${style.copy}`} >
+      <div
+        style={{
+          opacity: this.state.showCopy ? 1 : 0
+        }}
+        className={`col1 hero-copy ${style.copy}`} >
         {data.metaboxes['page_hero'].copy}
       </div>
     )
@@ -140,7 +204,8 @@ class FullWidthTemplate extends Component {
 FullWidthTemplate.propTypes = {
   data: PropTypes.object,
   renderModules: PropTypes.func.isRequired,
-  renderWidgets: PropTypes.func.isRequired
+  renderWidgets: PropTypes.func.isRequired,
+  pageSlug: PropTypes.string
 }
 
 export default FullWidthTemplate
