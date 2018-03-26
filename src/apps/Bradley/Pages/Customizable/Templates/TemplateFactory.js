@@ -21,7 +21,7 @@ const TemplateFactory = props => {
   const templateProps = {
     data: props.data,
     renderModules: props.renderModules,
-    renderWidgets: props.renderWidgets,
+    renderRightSidebarWidgets: props.renderRightSidebarWidgets,
     pageSlug: props.pageSlug
   }
 
@@ -68,7 +68,7 @@ TemplateFactory.propTypes = {
   /**
    * A render function for the widgets, this is just passed on to the template
    */
-  renderWidgets: PropTypes.func.isRequired,
+  renderRightSidebarWidgets: PropTypes.func.isRequired,
   /**
    * Used in the templates to know when to re run any init functions
    */

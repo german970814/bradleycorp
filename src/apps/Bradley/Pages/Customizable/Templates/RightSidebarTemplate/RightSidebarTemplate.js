@@ -18,12 +18,12 @@ class RightSidebarTemplate extends Component {
 
         {this.renderTitle()}
 
-        <div className={`col3x2 ${style.content}`} >
+        <div className={`col1 col3x2-desktop ${style.content}`} >
           {this.props.renderModules()}
         </div>
 
-        <div className={`col3 ${style.sidebar}`} >
-          {this.props.renderWidgets()}
+        <div className={`col1 col2-tablet col3-desktop ${style.sidebar}`} >
+          {this.props.renderRightSidebarWidgets()}
         </div>
 
       </div>
@@ -34,7 +34,7 @@ class RightSidebarTemplate extends Component {
 RightSidebarTemplate.propTypes = {
   data: PropTypes.object,
   renderModules: PropTypes.func.isRequired,
-  renderWidgets: PropTypes.func.isRequired
+  renderRightSidebarWidgets: PropTypes.func.isRequired
 }
 
 export default RightSidebarTemplate

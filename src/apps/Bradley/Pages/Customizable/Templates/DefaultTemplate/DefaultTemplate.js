@@ -23,8 +23,7 @@ class DefaultTemplate extends Component {
 
 DefaultTemplate.propTypes = {
   data: PropTypes.object,
-  renderModules: PropTypes.func.isRequired,
-  renderWidgets: PropTypes.func.isRequired
+  renderModules: PropTypes.func.isRequired
 }
 
 export default DefaultTemplate

@@ -43,10 +43,6 @@
     @include col(6);
   }
 
-  .col3x2 {
-    @include col(1.5);
-  }
-
   // globals with media queries
 
   .col1-tablet {
@@ -86,6 +82,18 @@
       @include inline-col(3, top) {
         float: none;
       }
+    }
+  }
+
+  .col3-desktop {
+    @include respond-to(desktop) {
+      @include col(3);
+    }
+  }
+
+  .col3x2-desktop {
+    @include respond-to(desktop) {
+      @include col(1.5);
     }
   }
 }

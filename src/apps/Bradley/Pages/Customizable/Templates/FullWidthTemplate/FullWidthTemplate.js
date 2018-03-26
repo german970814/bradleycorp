@@ -218,7 +218,6 @@ class FullWidthTemplate extends Component {
 FullWidthTemplate.propTypes = {
   data: PropTypes.object,
   renderModules: PropTypes.func.isRequired,
-  renderWidgets: PropTypes.func.isRequired,
   pageSlug: PropTypes.string
 }
 
