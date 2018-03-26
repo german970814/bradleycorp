@@ -1,0 +1,35 @@
+@import "../../../../../scss/partials/mixins";
+@import "../../../../../scss/partials/variables";
+
+$titleMarginBottomMobile: 20px;
+$titleMarginTopMobile: 40px;
+
+.pageTitle {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: $silver;
+
+  margin-top: $titleMarginTopMobile;
+  margin-bottom: $titleMarginBottomMobile;
+  @include respond-to( tablet ) {
+    margin-bottom: ($titleMarginBottomMobile + 10)
+  }
+
+  @include respond-to( desktop ) {
+    margin-top: ($titleMarginTopMobile + 28);
+    margin-bottom: ($titleMarginBottomMobile + 20)
+  }
+
+  h1 {
+    color: $navy;
+    margin-bottom: $titleMarginBottomMobile;
+
+    @include respond-to( tablet ) {
+      margin-bottom: ($titleMarginBottomMobile + 10)
+    }
+
+    @include respond-to( desktop ) {
+      margin-bottom: ($titleMarginBottomMobile + 20)
+    }
+  }
+}

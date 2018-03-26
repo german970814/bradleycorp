@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import style from './DefaultTemplate.scss'
+import templatesStyle from '../Templates.scss'
 
 class DefaultTemplate extends Component {
   renderTitle () {
     return (
-      <div className={style.pageTitle}>
+      <div className={templatesStyle.pageTitle}>
         <h1
           dangerouslySetInnerHTML={{
             __html: this.props.data.page_title
