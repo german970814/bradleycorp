@@ -1,23 +1,19 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import style from './DefaultTemplate.scss'
-import templatesStyle from '../Templates.scss'
+import defaultStyle from '../Templates.scss'
 
 class DefaultTemplate extends Component {
   renderTitle () {
     return (
-      <div className={templatesStyle.pageTitle}>
-        <h1
-          dangerouslySetInnerHTML={{
-            __html: this.props.data.page_title
-          }} />
+      <div className={defaultStyle.pageTitle}>
+        <h1>{this.props.data.page_title}</h1>
       </div>
     )
   }
 
   render () {
     return (
-      <div className={style.defaultTemplate}>
+      <div className={defaultStyle.defaultTemplate}>
         {this.renderTitle()}
         {this.props.renderModules()}
       </div>

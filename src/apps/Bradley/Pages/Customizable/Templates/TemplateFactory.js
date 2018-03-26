@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { validChain } from '../../../../../lib/bcorpObject'
 import FullWidthTemplate from './FullWidthTemplate/FullWidthTemplate'
+import RightSidebarTemplate from './RightSidebarTemplate/RightSidebarTemplate'
 import DefaultTemplate from './DefaultTemplate/DefaultTemplate'
 
 /**
@@ -42,6 +43,9 @@ function getTemplateComponent (template, templateProps) {
   switch (template) {
     case 'full-width-page':
       return <FullWidthTemplate {...templateProps} />
+
+    case 'right-sidebar':
+      return <RightSidebarTemplate {...templateProps} />
 
     case 'default':
       return <DefaultTemplate {...templateProps} />

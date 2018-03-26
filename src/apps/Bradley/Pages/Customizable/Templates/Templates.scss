@@ -1,8 +1,17 @@
 @import "../../../../../scss/partials/mixins";
+@import "../../../../../scss/partials/layout";
 @import "../../../../../scss/partials/variables";
 
 $titleMarginBottomMobile: 20px;
 $titleMarginTopMobile: 40px;
+
+.defaultTemplate {
+  @extend %BodyPaddingWithMediaQueries;
+
+  @include respond-to(desktop) {
+    max-width: 1170px;
+  }
+}
 
 .pageTitle {
   border-bottom-style: solid;
@@ -16,7 +25,7 @@ $titleMarginTopMobile: 40px;
   }
 
   @include respond-to( desktop ) {
-    margin-top: ($titleMarginTopMobile + 28);
+    margin-top: ($titleMarginTopMobile + 10);
     margin-bottom: ($titleMarginBottomMobile + 20)
   }
 
