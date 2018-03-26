@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import ReactHtmlParser from 'react-html-parser'
 import ModuleFactory from './Modules/ModuleFactory'
-import TemplateFactory from './Templates/TemplateFactory'
-
 import FileDownloadLink from '../../../../lib/components/FileDownloadLink/FileDownloadLink'
 
 /**
@@ -108,41 +106,27 @@ class ModuleBuilder extends Component {
       return null
     }
     return (
-      <TemplateFactory
-        data={this.props.pageData['page_template_data']}
-        pageSlug={this.props.pageSlug}
-        renderModules={
-          () => {
-            return (
-              <React.Fragment>
+      <React.Fragment>
 
-                {ReactHtmlParser(this.props.pageData['module_data'].content, {
-                  transform: function (node, i) {
-                    // console.log( node )
-                    if (node &&
-                      node.name === 'a' &&
-                      node.attribs &&
-                      node.attribs.href.match(/\.(pdf|doc|docx|docm|docb)$/) !== null) {
-                      return <FileDownloadLink
-                        key={i}
-                        title={node.children[0].data}
-                        titleClass={`link-orange`}
-                        link={node.attribs.href} />
-                    }
-                  }
-                })}
-
-                {this.renderModulePortals()}
-
-              </React.Fragment>
-            )
+        {ReactHtmlParser(this.props.pageData['module_data'].content, {
+          transform: function (node, i) {
+            // console.log( node )
+            if (node &&
+              node.name === 'a' &&
+              node.attribs &&
+              node.attribs.href.match(/\.(pdf|doc|docx|docm|docb)$/) !== null) {
+              return <FileDownloadLink
+                key={i}
+                title={node.children[0].data}
+                titleClass={`link-orange`}
+                link={node.attribs.href} />
+            }
           }
-        }
-        renderWidgets={
-          () => {
-            return null
-          }
-        } />
+        })}
+
+        {this.renderModulePortals()}
+
+      </React.Fragment>
     )
   }
 }

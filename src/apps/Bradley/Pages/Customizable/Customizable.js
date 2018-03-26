@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import CustomPageApiClient from '../../../../api/customPage_client'
 import { validChain } from '../../../../lib/bcorpObject'
+import TemplateFactory from './Templates/TemplateFactory'
 import ModuleBuilder from './ModuleBuilder'
 import style from './Customizable.scss'
 
@@ -69,7 +70,21 @@ class Customizable extends Component {
   render () {
     return (
       <div className={style.customizable} >
-        <ModuleBuilder pageData={this.state} pageSlug={this.props.match.params.slug} />
+        <TemplateFactory
+          data={this.state['page_template_data']}
+          pageSlug={this.props.match.params.slug}
+          renderModules={
+            () => {
+              return (
+                <ModuleBuilder pageData={this.state} pageSlug={this.props.match.params.slug} />
+              )
+            }
+          }
+          renderWidgets={
+            () => {
+              return null
+            }
+          } />
       </div>
     )
   }

@@ -41,9 +41,9 @@ class FullWidthTemplate extends Component {
   }
 
   fadeTextIn () {
-    this.taglineTimer = setTimeout(this.showTagline.bind(this), 500)
-    this.titleTimer = setTimeout(this.showTitle.bind(this), 1500)
-    this.copyTimer = setTimeout(this.showCopy.bind(this), 2500)
+    this.taglineTimer = setTimeout(this.showTagline.bind(this), 1000)
+    this.titleTimer = setTimeout(this.showTitle.bind(this), 2000)
+    this.copyTimer = setTimeout(this.showCopy.bind(this), 3000)
   }
 
   showTagline () {
