@@ -6,8 +6,12 @@
   "scripts": {
     "build": "webpack -p",
     "dev-server": "webpack-dev-server --inline",
+    "dev-server-washfountain": "webpack-dev-server --inline --port 8081",
+    "dev-server-bimrevit": "webpack-dev-server --inline --port 8082",
     "lint": "eslint --ignore-pattern build/**/* --fix src/",
-    "start:dev": "npm-run-all lint dev-server"
+    "start:dev": "npm-run-all lint dev-server",
+    "start:dev:washfountain": "npm-run-all lint dev-server-washfountain",
+    "start:dev:bimrevit": "npm-run-all lint dev-server-bimrevit"
   },
   "author": "2x4",
   "license": "ISC",
