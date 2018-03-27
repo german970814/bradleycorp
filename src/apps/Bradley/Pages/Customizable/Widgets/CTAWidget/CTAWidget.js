@@ -49,7 +49,8 @@ class CTAWidget extends BCorpWidget {
 }
 
 CTAWidget.propTypes = {
-  title: PropTypes.string,
+  ...BCorpWidget.propTypes,
+
   text: PropTypes.string,
   link: PropTypes.string,
   linkText: PropTypes.string,

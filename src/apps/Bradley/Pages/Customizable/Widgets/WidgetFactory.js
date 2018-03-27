@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import CTAWidget from './CTAWidget/CTAWidget'
+import RecentPostsWidget from './RecentPostsWidget/RecentPostsWidget'
 
 /**
  * Given data about a widget, we return the correct component with the necessary props
@@ -25,6 +26,14 @@ const WidgetFactory = ({ type, data }) => {
           text={data['display_text']}
           link={data['link_url']}
           linkText={data['link_text']} />
+      )
+
+    case 'bcorp_recent_posts_widget':
+      return (
+        <RecentPostsWidget
+          {...sharedProps}
+          numberposts={data['number']}
+          blog={data['blog']} />
       )
 
     default:
