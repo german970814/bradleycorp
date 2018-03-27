@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
+import { site } from '../../../api'
 import NavMenuApiClient from '../../../api/navMenu_client'
 import Header from '../Header/Header'
 import Main from '../Main/Main'
+import MainBIMRevit from '../../BIMRevit/Main/Main'
+import MainTheWashfountain from '../../TheWashfountain/Main/Main'
 import Footer from '../Footer/Footer'
 import AppInitException from '../../../exceptions/AppInitException'
 import style from './App.scss'
@@ -27,6 +30,22 @@ class App extends Component {
     this.setInitialState()
   }
 
+  getMain () {
+    switch (site) {
+      case 'bcorp':
+        return <Main />
+
+      case 'thewashfountain':
+        return <MainTheWashfountain />
+
+      case 'bimrevit':
+        return <MainBIMRevit />
+
+      default:
+        return <Main />
+    }
+  }
+
   render () {
     return (
       <div
@@ -35,7 +54,7 @@ class App extends Component {
         <Header
           menuItems={this.state.primaryMenu} />
 
-        <Main />
+        {this.getMain()}
 
         <Footer
           menu1={this.state.footer.menu1}

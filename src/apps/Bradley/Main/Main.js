@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Loadable from 'react-loadable'
 import Loading from '../../../lib/components/Loading/Loading'
@@ -14,16 +14,14 @@ const CustomizableLoadable = Loadable({
   loading: Loading
 })
 
-class Main extends Component {
-  render () {
-    return (
-      <Switch>
-        <Route exact path='/' component={Home}/>
-        <Route exact path='/product/:slug' component={ProductDetailLoadable}/>
-        <Route exact path='/:slug' component={CustomizableLoadable}/>
-      </Switch>
-    )
-  }
+const Main = props => {
+  return (
+    <Switch>
+      <Route exact path='/' component={Home}/>
+      <Route exact path='/product/:slug' component={ProductDetailLoadable}/>
+      <Route exact path='/:slug' component={CustomizableLoadable}/>
+    </Switch>
+  )
 }
 
 export default Main
