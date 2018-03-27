@@ -1,0 +1,22 @@
+@import "../../../../../scss/partials/mixins";
+
+.widget {
+  margin-bottom: 40px;
+
+  @include respond-to(desktop) {
+    margin-bottom: 60px;
+  }
+
+  h4.title {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .contentBox {
+    border: solid 1px $silver;
+    padding: 15px;
+    padding-bottom: 20px;
+    box-shadow: 0px 8px 30px 0 rgba(209, 211, 212, 0.59);
+    background-color: #fff;
+  }
+}

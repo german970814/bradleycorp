@@ -1,20 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
-import BCorpLink from '../../../../../../lib/components/BCorpLink/BCorpLink'
+import ArrowButton from '../../../../../../lib/components/ArrowButton/ArrowButton'
+import BCorpWidget from '../BCorpWidget'
 import style from './CTAWidget.scss'
 
-class CTAWidget extends Component {
-  renderTitle () {
-    const { title } = this.props
-
-    if (!title) {
-      return
-    }
-
-    return <h3 className={style.title}>{title}</h3>
-  }
-
+class CTAWidget extends BCorpWidget {
   renderMedia () {
     return null
   }
@@ -26,9 +16,7 @@ class CTAWidget extends Component {
       return
     }
 
-    return <div
-      className={style.text}
-      dangerouslySetInnerHTML={{__html: decodeURIComponent(text)}}/>
+    return <div className={style.text}>{text}</div>
   }
 
   renderButton () {
@@ -38,40 +26,25 @@ class CTAWidget extends Component {
       return
     }
 
-    const button = <button className={style.button} >{linkText}</button>
-
     return (
-      <BCorpLink
-        url={link}
-        renderInternal={url => {
-          return (
-            <Link to={url} replace >
-              {button}
-            </Link>
-          )
-        }}
-        renderExternal={url => {
-          return (
-            <a href={url} >
-              {button}
-            </a>
-          )
-        }} />
+      <div className={style.button} >
+        <ArrowButton text={linkText} link={link} />
+      </div>
+    )
+  }
+
+  renderContentBox () {
+    return (
+      <React.Fragment>
+        {this.renderMedia()}
+        {this.renderText()}
+        {this.renderButton()}
+      </React.Fragment>
     )
   }
 
   render () {
-    return (
-      <div
-        className={this.containerClassName} >
-
-        {this.renderTitle()}
-        {this.renderMedia()}
-        {this.renderText()}
-        {this.renderButton()}
-
-      </div>
-    )
+    return super.render()
   }
 }
 

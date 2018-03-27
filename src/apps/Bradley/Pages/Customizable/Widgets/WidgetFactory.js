@@ -13,14 +13,15 @@ const WidgetFactory = ({ type, data }) => {
     return null
   }
 
-  const sharedProps = {}
+  const sharedProps = {
+    title: data['title']
+  }
 
   switch (type) {
     case 'bcorp_cta_widget':
       return (
         <CTAWidget
           {...sharedProps}
-          title={data['title']}
           text={data['display_text']}
           link={data['link_url']}
           linkText={data['link_text']} />
