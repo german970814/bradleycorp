@@ -162,10 +162,18 @@
   color: $slate-grey;
 }
 
-.small-body {
+%small-body {
   @extend %body;
   font-size: 12px;
   color: $steel-grey;
+}
+
+%post-meta-data {
+  @extend %body;
+  font-size: 12px;
+  font-style: oblique;
+  line-height: normal;
+  color: $slate-grey;
 }
 
 %link-navy {

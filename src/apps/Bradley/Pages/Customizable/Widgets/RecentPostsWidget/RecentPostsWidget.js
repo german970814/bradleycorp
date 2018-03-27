@@ -2,7 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import BIMRevitClient from '../../../../../../api/bimRevit_client'
 import TheWashfountainClient from '../../../../../../api/theWashfountain_client'
+import { urlBIMRevit, urlTheWashfountain } from '../../../../../../api'
+import { createCPTUrl } from '../../../../../../lib/bcorpUrl'
 import BCorpWidget from '../BCorpWidget'
+import style from './RecentPostsWidget.scss'
 
 class RecentPostsWidget extends BCorpWidget {
   constructor (props) {
@@ -40,12 +43,31 @@ class RecentPostsWidget extends BCorpWidget {
     }
   }
 
+  getLink (post) {
+    if (this.props.blog === 'washfountain') {
+      return `${urlTheWashfountain}${createCPTUrl(post)}`
+    } else if (this.props.blog === 'bim-revit') {
+      return `${urlBIMRevit}${createCPTUrl(post)}`
+    } else {
+      return '#'
+    }
+  }
+
   renderContentBox () {
     return this.state.posts.map((post, index) => {
       return (
-        <div key={index}>
-          {post.post['post_title']}
-        </div>
+        <a
+          key={index}
+          href={this.getLink(post.post)}
+          className={style.recentPost} >
+
+          <div className={`link-navy ${style.title}`} >{post.post['post_title']}</div>
+
+          <div className={`post-meta-data ${style.postMeta}`} >
+            {`by ${post.post['post_author']} posted at ${post.post['post_date']}`}
+          </div>
+
+        </a>
       )
     })
   }
@@ -88,7 +110,7 @@ RecentPostsWidget.propTypes = {
   ...BCorpWidget.propTypes,
 
   numberposts: PropTypes.number.isRequired,
-  blog: PropTypes.oneOf(['thewashfountain', 'bim-revit']).isRequired
+  blog: PropTypes.oneOf(['washfountain', 'bim-revit']).isRequired
 }
 
 export default RecentPostsWidget

@@ -16,6 +16,14 @@ api.hostBIMRevit = dev
   ? `http://bimrevit.bradley.test`
   : `http://bimrevit.bradleydev.twoxfour.com`
 
+api.urlTheWashfountain = dev
+  ? `http://localhost:8081`
+  : `http://thewashfountain.site.bradleydev.com/`
+
+api.urlBIMRevit = dev
+  ? `http://localhost:8082`
+  : `http://bimrevit.site.bradleydev.com/`
+
 /**
  * set the api host depending on the location.href we're currently on
  *
@@ -25,10 +33,10 @@ api.hostBIMRevit = dev
  * Since the blogs and the main site share so much functionality,
  * all we actually need is a different API client host and a different router
  */
-if (location.href.includes('8081') || location.href.includes('thewashfountain.')) {
+if (location.href.includes(api.urlTheWashfountain)) {
   api.site = 'thewashfountain'
   api.host = api.hostTheWashfountain
-} else if (location.href.includes('8082') || location.href.includes('bimrevit.')) {
+} else if (location.href.includes(api.urlBIMRevit)) {
   api.site = 'bimrevit'
   api.host = api.hostBIMRevit
 } else {

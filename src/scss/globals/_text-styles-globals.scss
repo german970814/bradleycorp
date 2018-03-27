@@ -68,7 +68,11 @@ body {
 }
 
 :global .small-body :local {
-  @extend .small-body;
+  @extend %small-body;
+}
+
+:global .post-meta-data :local {
+  @extend %post-meta-data;
 }
 
 :global .link-navy :local {

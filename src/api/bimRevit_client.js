@@ -10,7 +10,7 @@ import api from './index'
 const BIMRevitClient = {
 
   getRecentPosts (numberposts) {
-    const url = `${api.baseURLTheWashfountain}posts`
+    const url = `${api.baseURLBIMRevit}posts`
     const params = { numberposts }
 
     return axios.get(url, { params })
