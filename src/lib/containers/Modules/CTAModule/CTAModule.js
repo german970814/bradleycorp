@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import BCorpModule from '../BCorpModule'
 import { Link } from 'react-router-dom'
-import BCorpLink from '../../BCorpLink/BCorpLink'
+import BCorpLink from '../../../components/BCorpLink/BCorpLink'
 import style from './CTAModule.scss'
 
 class CTAModule extends BCorpModule {

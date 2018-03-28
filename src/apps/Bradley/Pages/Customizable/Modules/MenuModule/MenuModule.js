@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import BCorpModule from '../../../../../../lib/components/Modules/BCorpModule'
+import BCorpModule from '../../../../../../lib/containers/Modules/BCorpModule'
 import NavMenuApiClient from '../../../../../../api/navMenu_client'
 import MenuBlock from './MenuBlock/MenuBlock'
 import style from './MenuModule.scss'

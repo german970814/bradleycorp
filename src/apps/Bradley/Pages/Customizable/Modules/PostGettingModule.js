@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import BCorpModule from '../../../../../lib/components/Modules/BCorpModule'
+import BCorpModule from '../../../../../lib/containers/Modules/BCorpModule'
 import CPTApiClient from '../../../../../api/cpt_client'
 import { arraysAreEqual } from '../../../../../lib/bcorpArray'
 

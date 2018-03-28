@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import debounce from 'debounce'
-import ContainerMediaQuery from '../../containers/ContainerMediaQuery/ContainerMediaQuery'
+import ContainerMediaQuery from '../ContainerMediaQuery/ContainerMediaQuery'
 import moduleStyle from './Modules.scss'
 
 /**
