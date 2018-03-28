@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import WidgetFactory from './WidgetFactory'
 
+/**
+ * This is the main entry point for rendering widgets,
+ * if you need widgets, you'll need to use this component and pass it the widgets data
+ */
 class WidgetBuilder extends Component {
   renderWidgets () {
     const { widgetData } = this.props

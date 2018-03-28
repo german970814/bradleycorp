@@ -33,7 +33,9 @@ class Customizable extends Component {
       'widget_data': {
         'right_sidebar': []
       },
-      'page_template_data': {}
+      'page_template_data': {
+        template: ''
+      }
     }
 
     this.state = this.defaultState
@@ -75,6 +77,7 @@ class Customizable extends Component {
     return (
       <div className={style.customizable} >
         <TemplateFactory
+          templateSlug={this.state['page_template_data'].template}
           data={this.state['page_template_data']}
           pageSlug={this.props.match.params.slug}
           renderModules={

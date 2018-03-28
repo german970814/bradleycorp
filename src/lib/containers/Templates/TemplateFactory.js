@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { validChain } from '../../bcorpObject'
 import FullWidthTemplate from './FullWidthTemplate/FullWidthTemplate'
 import RightSidebarTemplate from './RightSidebarTemplate/RightSidebarTemplate'
 import DefaultTemplate from './DefaultTemplate/DefaultTemplate'
@@ -14,7 +13,7 @@ import DefaultTemplate from './DefaultTemplate/DefaultTemplate'
  * @return {[component]}
  */
 const TemplateFactory = props => {
-  if (!validChain(props, 'data', 'template')) {
+  if (!props.templateSlug || props.templateSlug === '') {
     return null
   }
 
@@ -25,7 +24,7 @@ const TemplateFactory = props => {
     pageSlug: props.pageSlug
   }
 
-  return getTemplateComponent(props.data.template, templateProps)
+  return getTemplateComponent(props.templateSlug, templateProps)
 }
 
 /**
@@ -57,8 +56,12 @@ function getTemplateComponent (template, templateProps) {
 }
 
 TemplateFactory.propTypes = {
+  /*
+    The slug of the template to render, eg full-width-page
+   */
+  templateSlug: PropTypes.string.isRequired,
   /**
-   * The page data (featured image, metaboxes etc)
+   * The page template data, this will simply be passed through to the resulting template
    */
   data: PropTypes.object,
   /**
