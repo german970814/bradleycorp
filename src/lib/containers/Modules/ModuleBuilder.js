@@ -2,11 +2,14 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import ReactHtmlParser from 'react-html-parser'
-import ModuleFactory from '../../Modules/ModuleFactory'
-import FileDownloadLink from '../../../components/FileDownloadLink/FileDownloadLink'
+import ModuleFactory from './ModuleFactory'
+import FileDownloadLink from '../../components/FileDownloadLink/FileDownloadLink'
 
 /**
  * This component is responsible for building the grid of modules to match the backend UI
+ *
+ * This is the main entry point for rendering modules,
+ * if you need modules, you'll need to use this component and pass it the modules data
  *
  * To do this we:
  *
@@ -36,7 +39,7 @@ class ModuleBuilder extends Component {
    *       Definitelt some optimisation to be done here
    */
   componentWillReceiveProps (nextProps) {
-    if (nextProps.pageData['module_data'].content !== this.props.pageData['module_data'].content) {
+    if (nextProps.moduleData.content !== this.props.moduleData.content) {
       this.setState({ htmlIsSet: false })
     }
   }
@@ -59,7 +62,7 @@ class ModuleBuilder extends Component {
    * This is the same logic for renderColumns and renderModules
    */
   renderRows () {
-    return this.props.pageData['module_data'].rows.map(row => {
+    return this.props.moduleData.rows.map(row => {
       const rowNode = document.querySelector(`[data-row-id="${row.atts['row_id']}"]`)
       const columnNodes = Array.from(rowNode.querySelectorAll(`.bcorp-column`))
       // make sure there is no space on the p element holding
@@ -102,13 +105,13 @@ class ModuleBuilder extends Component {
   }
 
   render () {
-    if (!this.props.pageData) {
+    if (!this.props.moduleData) {
       return null
     }
     return (
       <React.Fragment>
 
-        {ReactHtmlParser(this.props.pageData['module_data'].content, {
+        {ReactHtmlParser(this.props.moduleData.content, {
           transform: function (node, i) {
             // console.log( node )
             if (node &&
@@ -133,11 +136,19 @@ class ModuleBuilder extends Component {
 
 ModuleBuilder.propTypes = {
   /**
-   * All the data for the page; modules, widgets and template meta
+   * Data required to render modules should have the shape:
+   *
+   * {
+   *   @var content string: The html output by the module shortcodes ,
+   *   @var rows array: The data for individual modules sorted by rows and columns
+   * }
    *
    * @type {[Object]}
    */
-  pageData: PropTypes.object,
+  moduleData: PropTypes.shape({
+    content: PropTypes.string,
+    rows: PropTypes.array
+  }),
   /**
    * The page slug, so we know when to re run the whole build sequence
    *

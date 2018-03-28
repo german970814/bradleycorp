@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import CustomPageApiClient from '../../../../api/customPage_client'
 import { validChain } from '../../../bcorpObject'
 import TemplateFactory from './Templates/TemplateFactory'
-import ModuleBuilder from './ModuleBuilder'
+import ModuleBuilder from '../../Modules/ModuleBuilder'
 import WidgetBuilder from '../../Widgets/WidgetBuilder'
 import style from './Customizable.scss'
 
@@ -79,7 +79,7 @@ class Customizable extends Component {
           pageSlug={this.props.match.params.slug}
           renderModules={
             () => {
-              return <ModuleBuilder pageData={this.state} pageSlug={this.props.match.params.slug} />
+              return <ModuleBuilder moduleData={this.state['module_data']} pageSlug={this.props.match.params.slug} />
             }
           }
           renderRightSidebarWidgets={

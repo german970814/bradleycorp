@@ -22,11 +22,22 @@ class WidgetBuilder extends Component {
 
 WidgetBuilder.propTypes = {
   /**
-   * Array of data for all widgets in the given widget area
+   * Array of data for all widgets in the given widget area,
+   * each array element should have shape:
+   *
+   * {
+   *   @var type string: The widget slug as registered in WP, eg bcorp_cta_widget,
+   *   @var data array: The data for the widget's fields
+   * }
    *
    * @type {[Object]}
    */
-  widgetData: PropTypes.array,
+  widgetData: PropTypes.arrayOf(
+    PropTypes.shape({
+      type: PropTypes.string,
+      data: PropTypes.object
+    })
+  ),
   /**
    * The page slug, so we know when to re run the whole build sequence
    *
