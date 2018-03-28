@@ -4,6 +4,11 @@ import ArrowButton from '../../../../../../lib/components/ArrowButton/ArrowButto
 import BCorpWidget from '../BCorpWidget'
 import style from './CTAWidget.scss'
 
+/**
+ * The CTA Widget
+ *
+ * @extends BCorpWidget
+ */
 class CTAWidget extends BCorpWidget {
   renderMedia () {
     return null

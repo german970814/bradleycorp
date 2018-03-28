@@ -4,6 +4,11 @@ import ArrowButton from '../../../../../../lib/components/ArrowButton/ArrowButto
 import BCorpWidget from '../BCorpWidget'
 import style from './NewsletterWidget.scss'
 
+/**
+ * The Newsletter Widget
+ *
+ * @extends BCorpWidget
+ */
 class NewsletterWidget extends BCorpWidget {
   constructor (props) {
     super(props)

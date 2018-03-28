@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import CTAWidget from './CTAWidget/CTAWidget'
 import RecentPostsWidget from './RecentPostsWidget/RecentPostsWidget'
 import NewsletterWidget from './NewsletterWidget/NewsletterWidget'
+import BlogUpdatesWidget from './NewsletterWidget/BlogUpdatesWidget/BlogUpdatesWidget'
 
 /**
  * Given data about a widget, we return the correct component with the necessary props
@@ -43,6 +44,15 @@ const WidgetFactory = ({ type, data }) => {
           {...sharedProps}
           description={data['description']}
           linkText={data['link_text']} />
+      )
+
+    case 'bcorp_blog_updates_widget':
+      return (
+        <BlogUpdatesWidget
+          {...sharedProps}
+          description={data['display_text']}
+          linkText={data['link_text']}
+          blog={data['blog']} />
       )
 
     default:

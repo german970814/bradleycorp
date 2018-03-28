@@ -43,6 +43,13 @@ class RecentPostsWidget extends BCorpWidget {
     }
   }
 
+  /**
+   * Regardless of what site the widget is used on,
+   * we need to link each posts to either the washfountain or bimrevit respectively
+   *
+   * @param  {[object]} post WP_Post object
+   * @return {[string]}      The post href
+   */
   getLink (post) {
     if (this.props.blog === 'washfountain') {
       return `${urlTheWashfountain}${createCPTUrl(post)}`
