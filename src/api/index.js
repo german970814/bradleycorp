@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const api = {}
 
-const dev = false
+const dev = true
 
 api.host = dev
   ? `http://bradley.test`

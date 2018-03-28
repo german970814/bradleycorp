@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Loadable from 'react-loadable'
-import Loading from '../../../lib/components/Loading/Loading'
+import Loading from '../../../../lib/components/Loading/Loading'
 
 const Home = Loadable({
   loader: () => import('../Pages/Home/Home'),
