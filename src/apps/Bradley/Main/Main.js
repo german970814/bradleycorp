@@ -10,7 +10,7 @@ const ProductDetailLoadable = Loadable({
 })
 
 const CustomizableLoadable = Loadable({
-  loader: () => import('../Pages/Customizable/Customizable'),
+  loader: () => import('../../../lib/containers/Pages/Customizable/Customizable'),
   loading: Loading
 })
 

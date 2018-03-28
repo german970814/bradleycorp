@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import CustomPageApiClient from '../../../../api/customPage_client'
-import { validChain } from '../../../../lib/bcorpObject'
+import { validChain } from '../../../bcorpObject'
 import TemplateFactory from './Templates/TemplateFactory'
 import ModuleBuilder from './ModuleBuilder'
-import WidgetBuilder from '../../../../lib/containers/Widgets/WidgetBuilder'
+import WidgetBuilder from '../../Widgets/WidgetBuilder'
 import style from './Customizable.scss'
 
 /**

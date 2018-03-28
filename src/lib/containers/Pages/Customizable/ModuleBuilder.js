@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import ReactHtmlParser from 'react-html-parser'
 import ModuleFactory from './Modules/ModuleFactory'
-import FileDownloadLink from '../../../../lib/components/FileDownloadLink/FileDownloadLink'
+import FileDownloadLink from '../../../components/FileDownloadLink/FileDownloadLink'
 
 /**
  * This component is responsible for building the grid of modules to match the backend UI

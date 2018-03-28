@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { validChain } from '../../../../../lib/bcorpObject'
+import { validChain } from '../../../../bcorpObject'
 import FullWidthTemplate from './FullWidthTemplate/FullWidthTemplate'
 import RightSidebarTemplate from './RightSidebarTemplate/RightSidebarTemplate'
 import DefaultTemplate from './DefaultTemplate/DefaultTemplate'

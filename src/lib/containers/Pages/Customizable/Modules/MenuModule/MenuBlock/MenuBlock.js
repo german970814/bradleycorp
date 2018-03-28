@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import BCorpLink from '../../../../../../../lib/components/BCorpLink/BCorpLink'
-import ArrowThumbnail from '../../../../../../../lib/components/ArrowThumbnail/ArrowThumbnail'
+import BCorpLink from '../../../../../../components/BCorpLink/BCorpLink'
+import ArrowThumbnail from '../../../../../../components/ArrowThumbnail/ArrowThumbnail'
 import style from './MenuBlock.scss'
 
 class MenuBlock extends Component {
