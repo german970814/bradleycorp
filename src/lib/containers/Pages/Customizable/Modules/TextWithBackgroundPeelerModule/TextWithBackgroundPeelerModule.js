@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import BCorpModule from '../../../../../../lib/containers/Modules/BCorpModule'
-import BCorpBackground from '../../../../../../lib/components/BCorpBackground/BCorpBackground'
+import BCorpModule from '../../../../../containers/Modules/BCorpModule'
+import BCorpBackground from '../../../../../components/BCorpBackground/BCorpBackground'
 import style from './TextWithBackgroundPeelerModule.scss'
 
 class TextWithBackgroundPeelerModule extends BCorpModule {

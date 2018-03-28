@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { createCPTUrl } from '../../../../../../../lib/bcorpUrl'
-import SVGIcon from '../../../../../../../lib/components/SVGIcon/SVGIcon'
+import { createCPTUrl } from '../../../../../../bcorpUrl'
+import SVGIcon from '../../../../../../components/SVGIcon/SVGIcon'
 import style from './PostGridItem.scss'
 
 class PostGridItem extends Component {

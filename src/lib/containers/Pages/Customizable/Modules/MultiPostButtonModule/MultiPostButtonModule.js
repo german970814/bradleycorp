@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import PostGettingModule from '../PostGettingModule'
 import PostColumn from './PostColumn/PostColumn'
-import BCorpBackground from '../../../../../../lib/components/BCorpBackground/BCorpBackground'
+import BCorpBackground from '../../../../../components/BCorpBackground/BCorpBackground'
 import style from './MultiPostButtonModule.scss'
 
 /**

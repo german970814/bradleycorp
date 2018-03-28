@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { createCPTUrl } from '../../../../../../../lib/bcorpUrl'
-import { getExcerpt } from '../../../../../../../lib/bcorpPost'
-import SVGIcon from '../../../../../../../lib/components/SVGIcon/SVGIcon'
-import VerticalAlignHelper from '../../../../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
-import ImageFrame from '../../../../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
+import { createCPTUrl } from '../../../../../../bcorpUrl'
+import { getExcerpt } from '../../../../../../bcorpPost'
+import SVGIcon from '../../../../../../components/SVGIcon/SVGIcon'
+import VerticalAlignHelper from '../../../../../../components/VerticalAlignHelper/VerticalAlignHelper'
+import ImageFrame from '../../../../../../components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import style from '../SliderModule.scss'
 
 class SliderItem extends Component {

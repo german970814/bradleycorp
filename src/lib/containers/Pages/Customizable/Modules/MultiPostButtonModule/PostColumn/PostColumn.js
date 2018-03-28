@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { createCPTUrl } from '../../../../../../../lib/bcorpUrl'
-import { getExcerpt } from '../../../../../../../lib/bcorpPost'
-import { lookupColor } from '../../../../../../../lib/bcorpStyles'
-import Divider from '../../../../../../../lib/components/Divider/Divider'
-import ImageFrame from '../../../../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
+import { createCPTUrl } from '../../../../../../bcorpUrl'
+import { getExcerpt } from '../../../../../../bcorpPost'
+import { lookupColor } from '../../../../../../bcorpStyles'
+import Divider from '../../../../../../components/Divider/Divider'
+import ImageFrame from '../../../../../../components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import style from './PostColumn.scss'
 
 class PostColumn extends Component {

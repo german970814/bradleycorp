@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import PostGettingModule from '../PostGettingModule'
-import { lookupColor } from '../../../../../../lib/bcorpStyles'
-import ScrollableList from '../../../../../../lib/containers/ScrollableList/ScrollableList'
+import { lookupColor } from '../../../../../bcorpStyles'
+import ScrollableList from '../../../../../containers/ScrollableList/ScrollableList'
 import SliderItem from './SliderItem/SliderItem'
 import style from './SliderModule.scss'
 

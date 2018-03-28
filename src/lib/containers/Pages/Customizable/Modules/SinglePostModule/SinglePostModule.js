@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { getExcerpt } from '../../../../../../lib/bcorpPost'
-import { createCPTUrl } from '../../../../../../lib/bcorpUrl'
-import BCorpBackground from '../../../../../../lib/components/BCorpBackground/BCorpBackground'
+import { getExcerpt } from '../../../../../bcorpPost'
+import { createCPTUrl } from '../../../../../bcorpUrl'
+import BCorpBackground from '../../../../../components/BCorpBackground/BCorpBackground'
 import PostGettingModule from '../PostGettingModule'
-import ImageFrame from '../../../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
-import BCorpLink from '../../../../../../lib/components/BCorpLink/BCorpLink'
+import ImageFrame from '../../../../../components/FixedAspectRatioBox/ImageFrame/ImageFrame'
+import BCorpLink from '../../../../../components/BCorpLink/BCorpLink'
 import style from './SinglePostModule.scss'
 
 /**

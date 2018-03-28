@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import PostGettingModule from '../PostGettingModule'
-import SimpleSlider from '../../../../../../lib/containers/SimpleSlider/SimpleSlider'
-import BCorpBackground from '../../../../../../lib/components/BCorpBackground/BCorpBackground'
+import SimpleSlider from '../../../../../containers/SimpleSlider/SimpleSlider'
+import BCorpBackground from '../../../../../components/BCorpBackground/BCorpBackground'
 import PostColumn from './PostColumn/PostColumn'
 import style from './MultiPostArrowModule.scss'
 
