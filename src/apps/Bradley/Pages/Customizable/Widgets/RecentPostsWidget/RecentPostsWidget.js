@@ -19,7 +19,7 @@ class RecentPostsWidget extends BCorpWidget {
       post: {
         ID: 1,
         'post_title': '',
-        'post_author': '',
+        'author_display_name': '',
         'post_date': ''
       }
     }
@@ -64,7 +64,7 @@ class RecentPostsWidget extends BCorpWidget {
           <div className={`link-navy ${style.title}`} >{post.post['post_title']}</div>
 
           <div className={`post-meta-data ${style.postMeta}`} >
-            {`by ${post.post['post_author']} posted at ${post.post['post_date']}`}
+            {`by ${post.post['author_display_name']} posted at ${post.post['post_date']}`}
           </div>
 
         </a>
