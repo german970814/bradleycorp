@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const api = {}
 
-const dev = true
+const dev = false
 
 api.host = dev
   ? `http://bradley.test`
@@ -18,11 +18,11 @@ api.hostBIMRevit = dev
 
 api.urlTheWashfountain = dev
   ? `http://localhost:8081`
-  : `http://thewashfountain.site.bradleydev.com/`
+  : `http://thewashfountain.site.bradleydev.twoxfour.com`
 
 api.urlBIMRevit = dev
   ? `http://localhost:8082`
-  : `http://bimrevit.site.bradleydev.com/`
+  : `http://bimrevit.site.bradleydev.twoxfour.com`
 
 /**
  * set the api host depending on the location.href we're currently on
