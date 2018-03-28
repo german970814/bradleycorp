@@ -22,7 +22,7 @@ class CTAWidget extends BCorpWidget {
   renderButton () {
     const { link, linkText } = this.props
 
-    if (!link || !linkText) {
+    if (!link) {
       return
     }
 

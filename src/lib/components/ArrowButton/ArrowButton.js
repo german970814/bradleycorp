@@ -21,8 +21,8 @@ const ArrowButton = ({ text, link }) => {
     </div>
   )
 
-  return (
-    <BCorpLink
+  return link
+    ? <BCorpLink
       url={link}
       renderInternal={url => {
         return (
@@ -38,7 +38,7 @@ const ArrowButton = ({ text, link }) => {
           </a>
         )
       }} />
-  )
+    : button
 }
 
 ArrowButton.propTypes = {

@@ -1,0 +1,24 @@
+@import "../../../../../../scss/partials/variables";
+@import "../../../../../../scss/partials/mixins";
+
+.description {
+  margin-bottom: 20px;
+  padding: 0 5px;
+  text-align: center;
+}
+
+.input {
+  display: block;
+  box-sizing: border-box;
+  margin-bottom: 20px !important;
+  border: solid 1px $silver;
+  padding: 0 10px;
+  width: 100%;
+  height: 30px;
+  background-color: $light-gray;
+  line-height: 30px;
+
+  @include respond-to(tablet) {
+    margin-bottom: 25px !important;
+  }
+}

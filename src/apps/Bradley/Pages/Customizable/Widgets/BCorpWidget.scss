@@ -1,7 +1,11 @@
 @import "../../../../../scss/partials/mixins";
 
 .widget {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
+
+  @include respond-to(tablet) {
+    margin-bottom: 45px;
+  }
 
   @include respond-to(desktop) {
     margin-bottom: 60px;
@@ -18,5 +22,9 @@
     padding-bottom: 20px;
     box-shadow: 0px 8px 30px 0 rgba(209, 211, 212, 0.59);
     background-color: #fff;
+  }
+
+  &:last-child {
+    margin-bottom: 60px;
   }
 }
