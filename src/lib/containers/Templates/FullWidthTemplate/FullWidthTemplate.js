@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { validChain } from '../../../../../bcorpObject'
-import VideoBackground from '../../../../../components/BCorpVideo/VideoBackground/VideoBackground'
-import BCorpBackground from '../../../../../components/BCorpBackground/BCorpBackground'
+import { validChain } from '../../../bcorpObject'
+import VideoBackground from '../../../components/BCorpVideo/VideoBackground/VideoBackground'
+import BCorpBackground from '../../../components/BCorpBackground/BCorpBackground'
 import style from './FullWidthTemplate.scss'
 
 class FullWidthTemplate extends Component {
