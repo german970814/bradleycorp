@@ -4,7 +4,7 @@ import CustomPageApiClient from '../../../../api/customPage_client'
 import { validChain } from '../../../../lib/bcorpObject'
 import TemplateFactory from './Templates/TemplateFactory'
 import ModuleBuilder from './ModuleBuilder'
-import WidgetBuilder from './WidgetBuilder'
+import WidgetBuilder from '../../../../lib/containers/Widgets/WidgetBuilder'
 import style from './Customizable.scss'
 
 /**
@@ -30,7 +30,9 @@ class Customizable extends Component {
         content: '',
         rows: []
       },
-      'widget_data': {},
+      'widget_data': {
+        'right_sidebar': []
+      },
       'page_template_data': {}
     }
 
@@ -82,7 +84,7 @@ class Customizable extends Component {
           }
           renderRightSidebarWidgets={
             () => {
-              return <WidgetBuilder widgetArea={'right_sidebar'} widgetData={this.state['widget_data']} pageSlug={this.props.match.params.slug} />
+              return <WidgetBuilder widgetData={this.state['widget_data']['right_sidebar']} pageSlug={this.props.match.params.slug} />
             }
           } />
       </div>

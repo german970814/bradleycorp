@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import ArrowButton from '../../../../../../lib/components/ArrowButton/ArrowButton'
+import ArrowButton from '../../../../lib/components/ArrowButton/ArrowButton'
 import BCorpWidget from '../BCorpWidget'
 import style from './NewsletterWidget.scss'
 

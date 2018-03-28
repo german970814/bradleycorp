@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import BIMRevitClient from '../../../../../../api/bimRevit_client'
-import TheWashfountainClient from '../../../../../../api/theWashfountain_client'
-import { urlBIMRevit, urlTheWashfountain } from '../../../../../../api'
-import { createCPTUrl } from '../../../../../../lib/bcorpUrl'
+import BIMRevitClient from '../../../../api/bimRevit_client'
+import TheWashfountainClient from '../../../../api/theWashfountain_client'
+import { urlBIMRevit, urlTheWashfountain } from '../../../../api'
+import { createCPTUrl } from '../../../../lib/bcorpUrl'
 import BCorpWidget from '../BCorpWidget'
 import style from './RecentPostsWidget.scss'
 

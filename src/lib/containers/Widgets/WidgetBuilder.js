@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import WidgetFactory from './Widgets/WidgetFactory'
+import WidgetFactory from './WidgetFactory'
 
 class WidgetBuilder extends Component {
   renderWidgets () {
-    const widgets = this.props.widgetData[this.props.widgetArea]
+    const { widgetData } = this.props
 
-    return widgets.map((widgetData, index) => {
+    return widgetData.map((widgetData, index) => {
       return <WidgetFactory key={index} type={widgetData.type} data={widgetData.data} />
     })
   }
 
   render () {
-    if (!this.props.widgetData || !this.props.widgetData[this.props.widgetArea]) {
+    if (!this.props.widgetData) {
       return null
     }
 
@@ -22,17 +22,11 @@ class WidgetBuilder extends Component {
 
 WidgetBuilder.propTypes = {
   /**
-   * The widget area to build widgets for
-   *
-   * @type {[string]}
-   */
-  widgetArea: PropTypes.string.isRequired,
-  /**
-   * Data for all widgets in all widget areas
+   * Array of data for all widgets in the given widget area
    *
    * @type {[Object]}
    */
-  widgetData: PropTypes.object,
+  widgetData: PropTypes.array,
   /**
    * The page slug, so we know when to re run the whole build sequence
    *
