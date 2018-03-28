@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import ReactHtmlParser from 'react-html-parser'
-import ModuleFactory from './Modules/ModuleFactory'
+import ModuleFactory from '../../Modules/ModuleFactory'
 import FileDownloadLink from '../../../components/FileDownloadLink/FileDownloadLink'
 
 /**

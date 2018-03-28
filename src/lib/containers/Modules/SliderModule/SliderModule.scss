@@ -1,0 +1,161 @@
+@import "../../../../scss/partials/variables";
+@import "../../../../scss/partials/mixins";
+@import "../../../../scss/partials/grid";
+@import "../../../../scss/partials/helpers";
+
+.sliderModule {
+  position: relative;
+
+  /*
+   MOBILE SIZED CONTAINER + SCREEN AND UP
+   */
+
+  > :global(.container-size-mobile) {
+
+    h3.heading {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .sliderWrapper, .sliderWrapperTabletDesktop {
+      background-color: transparent;
+
+      :global(.button-up), :global(.button-down) {
+        display: none;
+      }
+
+      :global(.position-circles) {
+        margin-top: -20px;
+        text-align: right;
+      }
+
+      &:global(.module-accent-color-blue) :global(.position-circles) li div:global(.active) {
+        background-color: $navy;
+      }
+
+      &:global(.module-accent-color-brown) :global(.position-circles) li div:global(.active) {
+        background-color: $brown;
+      }
+
+      &:global(.module-accent-color-orange) :global(.position-circles) li div:global(.active) {
+        background-color: $orange;
+      }
+
+      &:global(.module-accent-color-green) :global(.position-circles) li div:global(.active) {
+        background-color: $green;
+      }
+    }
+
+    .sliderItem {
+
+      .imageWrapper {
+        @include col(1);
+
+        margin-bottom: 30px;
+        padding: 0 10px;
+      }
+
+      .contentWrapper {
+        @include col(1);
+
+        h2.title {
+          margin-bottom: 25px;
+        }
+
+        .content {
+          margin-bottom: 27px;
+          line-height: 1.5;
+        }
+
+        .arrowWrapper {
+          height: 20px;
+          text-align: center;
+
+          .arrow {
+            width: auto;
+            height: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  /*
+   TABLET SIZED CONTAINER AND UP
+   */
+
+  > :global(.container-size-tablet) {
+
+    h3.heading {
+      text-align: left;
+    }
+
+    .sliderWrapperTabletDesktop {
+      height: 400px;
+    }
+
+    .sliderItem {
+      height: 100%;
+
+      .imageWrapper {
+        @include inline-col(2, middle);
+        float: none;
+        margin: 0;
+        padding: 0;
+        padding-right: 38px;
+      }
+
+      .contentWrapper {
+        @include inline-col(2, middle);
+        float: none;
+        padding-right: 34px;
+
+        h2.title {
+          text-align: left;
+        }
+
+        .arrowWrapper {
+          text-align: left;
+        }
+      }
+    }
+
+    :global(.position-circles-vertical) {
+      right: 30px;
+      @extend %verticalAlignMiddleAbsolutelyPositionedElement;
+    }
+  }
+
+  /*
+   DESKTOP SIZED CONTAINER + SCREEN AND UP
+   */
+
+  > :global(.container-size-desktop) {
+
+    h3.heading {
+      margin-bottom: 40px;
+    }
+
+    .sliderWrapperTabletDesktop {
+      height: 450px;
+    }
+
+    .sliderItem {
+
+      .contentWrapper {
+
+        h2.title {
+          margin-bottom: 35px;
+        }
+
+        .content {
+          margin-bottom: 45px;
+        }
+      }
+    }
+
+    :global(.position-circles-vertical) {
+      right: 40px;
+    }
+  }
+}

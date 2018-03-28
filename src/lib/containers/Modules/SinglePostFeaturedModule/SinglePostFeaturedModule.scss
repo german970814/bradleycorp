@@ -1,0 +1,125 @@
+@import "../../../../scss/partials/variables";
+@import "../../../../scss/partials/mixins";
+@import "../../../../scss/partials/helpers";
+@import "../../../../scss/partials/grid";
+@import "../../../components/BCorpBackground/BCorpBackground";
+
+.singlePostFeaturedModule {
+  @extend %bcorpBackgroundParent;
+
+  :global(.bcorp-background-image) {
+    transition: transform 500ms;
+  }
+
+  &:hover :global(.bcorp-background-image) {
+    transform: scale(1.08);
+  }
+
+  :global(.container-size-mobile) {
+
+    $paddingBottom: 30px;
+
+    padding-top: 60px;
+    padding-bottom: $paddingBottom;
+
+    .headline {
+      margin-bottom: 100px;
+      padding-right: 20%;
+      box-sizing: border-box;
+      width: 100%;
+      min-height: 100px;
+    }
+
+    .contentWrapper {
+      padding-right: 80px;
+      box-sizing: border-box;
+      width: 100%;
+
+      h4.title {
+        margin-bottom: 18px;
+        color: #fff;
+      }
+
+      .content {
+        color: #fff;
+        line-height: 1.5;
+        text-align: left;
+      }
+    }
+
+    .arrowWrapper {
+      position: absolute;
+      right: $MobileBodyPadding;
+      bottom: $paddingBottom + 10px;
+      height: 20px;
+
+      .arrow {
+        width: auto;
+        height: 100%;
+      }
+    }
+  }
+
+  :global(.container-size-tablet) {
+
+    $padding: 30px;
+
+    padding: $padding;
+    padding-top: 80px;
+
+    .headline {
+      margin-bottom: 70px;
+      padding-right: 25%;
+      min-height: 0px;
+    }
+
+    .contentWrapper {
+      margin-bottom: 25px;
+
+      .content {
+        width: 36%;
+      }
+    }
+
+    .arrowWrapper {
+      right: $padding;
+      bottom: $padding;
+    }
+  }
+
+  :global(.container-size-desktop) {
+
+    $padding: 40px;
+
+    padding: $padding;
+
+    .headline {
+      margin-bottom: 0;
+      padding: 100px 0;
+      padding-right: 50%;
+      width: 100%;
+    }
+
+    .contentWrapper {
+      position: absolute;
+      right: 145px;
+      bottom: 80px;
+      margin: 0;
+      padding: 0;
+      width: 250px;
+
+      h4.title {
+        width: 100%;
+      }
+
+      .content {
+        width: 100%;
+      }
+
+      .arrowWrapper {
+        right: $padding;
+        bottom: $padding;
+      }
+    }
+  }
+}

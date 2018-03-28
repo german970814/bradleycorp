@@ -1,0 +1,17 @@
+@import "../../../../../scss/partials/variables";
+
+h6.blockTitle {
+  margin-bottom: 5px;
+}
+
+.arrowWrapper {
+  margin-bottom: 13px;
+
+  &:last-child {
+    margin-bottom: 0px;
+  }
+}
+
+.childLink {
+  margin-bottom: 9px;
+}
