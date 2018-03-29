@@ -20,7 +20,8 @@ class App extends Component {
         menu2: [],
         menu3: [],
         social_media_icons: []
-      }
+      },
+      blur: false
     }
 
     this.state = this.defaults
@@ -28,6 +29,10 @@ class App extends Component {
 
   componentDidMount () {
     this.setInitialState()
+  }
+
+  toggleBlur () {
+    this.setState({ blur: !this.state.blur })
   }
 
   getMain () {
@@ -47,12 +52,15 @@ class App extends Component {
   }
 
   render () {
+    const blurClass = !this.state.blur ? style.blurOut : style.blurIn // the order here is reversed to make sure we start of un blurred
     return (
       <div
-        className={style.app}>
+        className={`${style.app} ${blurClass}`}
+      >
 
         <Header
-          menuItems={this.state.primaryMenu} />
+          menuItems={this.state.primaryMenu}
+          blurApp={this.toggleBlur.bind(this)} />
 
         {this.getMain()}
 

@@ -6,25 +6,28 @@ import HeaderMobile from './HeaderMobile/HeaderMobile'
 import HeaderTablet from './HeaderTablet/HeaderTablet'
 import HeaderDesktop from './HeaderDesktop/HeaderDesktop'
 
-const Header = ({ menuItems }) => {
+const Header = ({ menuItems, blurApp }) => {
   return (
     <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
       {match =>
         match ? (
           // mobile
           <HeaderMobile
-            menuItems={menuItems} />
+            menuItems={menuItems}
+            blurApp={blurApp} />
         ) : (
           <Media query={{ maxWidth: TABLETMAXWIDTH }}>
             {match =>
               match ? (
                 // tablet
                 <HeaderTablet
-                  menuItems={menuItems} />
+                  menuItems={menuItems}
+                  blurApp={blurApp} />
               ) : (
                 // desktop
                 <HeaderDesktop
-                  menuItems={menuItems} />
+                  menuItems={menuItems}
+                  blurApp={blurApp} />
               )
             }
           </Media>
@@ -35,7 +38,8 @@ const Header = ({ menuItems }) => {
 }
 
 Header.propTypes = {
-  menuItems: PropTypes.array
+  menuItems: PropTypes.array,
+  blurApp: PropTypes.func
 }
 
 export default Header

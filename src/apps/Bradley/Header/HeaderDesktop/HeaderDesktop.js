@@ -57,7 +57,8 @@ const HeaderDesktop = props => {
           <VerticalAlignHelper />
         </div>
 
-        <SearchIcon />
+        <SearchIcon
+          blurApp={props.blurApp} />
 
       </div>
 
@@ -66,7 +67,8 @@ const HeaderDesktop = props => {
 }
 
 HeaderDesktop.propTypes = {
-  menuItems: PropTypes.array.isRequired
+  menuItems: PropTypes.array.isRequired,
+  blurApp: PropTypes.func
 }
 
 export default HeaderDesktop

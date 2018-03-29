@@ -22,12 +22,20 @@ class Lightbox extends Component {
   }
 
   openLightbox () {
+    if (this.props.onLightboxOpen) {
+      this.props.onLightboxOpen()
+    }
+
     this.setState({
       isOpen: true
     })
   }
 
   closeLightbox () {
+    if (this.props.onLightboxClose) {
+      this.props.onLightboxClose()
+    }
+
     this.setState({
       isOpen: false
     })
@@ -96,7 +104,9 @@ Lightbox.propTypes = {
   children: PropTypes.node.isRequired,
   backgroundClass: PropTypes.string,
   closeButton: PropTypes.func,
-  closeButtonOnClick: PropTypes.func
+  closeButtonOnClick: PropTypes.func,
+  onLightboxOpen: PropTypes.func,
+  onLightboxClose: PropTypes.func
 }
 
 export default Lightbox

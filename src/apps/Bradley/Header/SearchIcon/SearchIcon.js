@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Lightbox from '../../../../lib/containers/Lightbox/Lightbox'
 import VerticalAlignHelper from '../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import style from './SearchIcon.scss'
@@ -15,7 +16,9 @@ class SearchIcon extends Component {
         className={style.magnifyingGlassWrapper} >
 
         <Lightbox
-          backgroundClass={style.lightboxBackground} >
+          backgroundClass={style.lightboxBackground}
+          onLightboxOpen={this.props.blurApp}
+          onLightboxClose={this.props.blurApp} >
 
           {/* outside lightbox in header bar */}
           <div
@@ -52,6 +55,10 @@ class SearchIcon extends Component {
       </div>
     )
   }
+}
+
+SearchIcon.propTypes = {
+  blurApp: PropTypes.func
 }
 
 export default SearchIcon

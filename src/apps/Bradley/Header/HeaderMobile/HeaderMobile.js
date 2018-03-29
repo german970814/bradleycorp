@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import BurgerMenu from '../../../../lib/components/BurgerMenu/BurgerMenu'
 import VerticalAlignHelper from '../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import SearchIcon from '../SearchIcon/SearchIcon'
@@ -25,10 +26,16 @@ const HeaderMobile = props => {
         </div>
       </div>
 
-      <SearchIcon />
+      <SearchIcon
+        blurApp={props.blurApp} />
 
     </header>
   )
+}
+
+HeaderMobile.propTypes = {
+  menuItems: PropTypes.array,
+  blurApp: PropTypes.func
 }
 
 export default HeaderMobile
