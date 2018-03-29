@@ -1,17 +1,14 @@
 @import "../../../../../scss/partials/variables";
 
 h6.blockTitle {
-  margin-bottom: 5px;
+  // should be 10 but we have 3px extra space from the dont style
+  margin-bottom: 7px;
 }
 
 .arrowWrapper {
-  margin-bottom: 13px;
+  margin-bottom: 10px;
 
   &:last-child {
     margin-bottom: 0px;
   }
-}
-
-.childLink {
-  margin-bottom: 9px;
 }
