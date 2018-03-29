@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { validChain } from '../../../bcorpObject'
+import { lookupColor } from '../../../bcorpStyles'
 import VideoBackground from '../../../components/BCorpVideo/VideoBackground/VideoBackground'
 import BCorpBackground from '../../../components/BCorpBackground/BCorpBackground'
 import style from './FullWidthTemplate.scss'
@@ -140,7 +141,7 @@ class FullWidthTemplate extends Component {
 
         <div
           style={{
-            backgroundColor: this.props.data.metaboxes['page_hero']['overlay']
+            backgroundColor: lookupColor(this.props.data.metaboxes['page_hero']['overlay'])
           }}
           className={style.videoOverlay} />
 
