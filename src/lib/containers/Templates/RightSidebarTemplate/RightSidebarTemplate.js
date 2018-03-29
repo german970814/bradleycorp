@@ -5,6 +5,10 @@ import defaultStyle from '../Templates.scss'
 
 class RightSidebarTemplate extends Component {
   renderTitle () {
+    if (!this.props.data.page_title) {
+      return
+    }
+
     return (
       <div className={`col1 ${defaultStyle.pageTitle}`}>
         <h1>{this.props.data.page_title}</h1>
@@ -32,6 +36,9 @@ class RightSidebarTemplate extends Component {
 }
 
 RightSidebarTemplate.propTypes = {
+  /**
+   * Only requires 'page_title' to feature on the data object
+   */
   data: PropTypes.object,
   renderModules: PropTypes.func.isRequired,
   renderRightSidebarWidgets: PropTypes.func.isRequired

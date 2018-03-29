@@ -3,15 +3,15 @@ import { Switch, Route } from 'react-router-dom'
 import Loadable from 'react-loadable'
 import Loading from '../../../../lib/components/Loading/Loading'
 
-const Home = Loadable({
-  loader: () => import('../Pages/Home/Home'),
+const BlogLandingPageLoadable = Loadable({
+  loader: () => import('../../../../lib/containers/Pages/BlogLandingPage/BlogLandingPage'),
   loading: Loading
 })
 
 const Main = props => {
   return (
     <Switch>
-      <Route exact path='/' component={Home}/>
+      <Route exact path='/' component={BlogLandingPageLoadable}/>
     </Switch>
   )
 }

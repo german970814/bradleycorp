@@ -35,12 +35,15 @@ api.urlBIMRevit = dev
  */
 if (location.href.includes(api.urlTheWashfountain)) {
   api.site = 'thewashfountain'
+  api.sitePrettyName = 'The Washfountain'
   api.host = api.hostTheWashfountain
 } else if (location.href.includes(api.urlBIMRevit)) {
   api.site = 'bimrevit'
+  api.sitePrettyName = 'BIM-Revit'
   api.host = api.hostBIMRevit
 } else {
   api.site = 'bcorp'
+  api.sitePrettyName = 'Bradley Corp'
 }
 
 api.namespace = `bcorp/v1/`
