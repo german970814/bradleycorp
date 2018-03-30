@@ -30,6 +30,45 @@ class ProductDetail extends Component {
     }
   }
 
+  renderPurchasedWith () {
+    if (this.state.productDetail['purchased_with'].length !== 0) {
+      return (
+        <section>
+          <ProductScroller
+            title={'Frequently Purchased With'}
+            productsArray={this.state.productDetail['purchased_with']}
+            numberMobile={2}
+            numberTablet={3}
+            numberDesktop={5} />
+        </section>
+      )
+    }
+  }
+
+  renderDivider () {
+    if (this.state.productDetail['purchased_with'].length !== 0 && this.state.productDetail['similar'].length !== 0) {
+      return (
+        <Divider
+          customClass={style.divider} />
+      )
+    }
+  }
+
+  renderSimilarProducts () {
+    if (this.state.productDetail['similar'].length !== 0) {
+      return (
+        <section>
+          <ProductScroller
+            title={'Similar Products'}
+            productsArray={this.state.productDetail['similar']}
+            numberMobile={2}
+            numberTablet={3}
+            numberDesktop={5} />
+        </section>
+      )
+    }
+  }
+
   render () {
     console.log(this.state.productDetail)
     return (
@@ -62,30 +101,10 @@ class ProductDetail extends Component {
             tabsData={this.state.productDetail.tabs} />
         </section>
 
-        {(this.state.productDetail['purchased_with'].length)
-          ? <section>
-            <ProductScroller
-              title={'Frequently Purchased With'}
-              productsArray={this.state.productDetail['purchased_with']}
-              numberMobile={2}
-              numberTablet={3}
-              numberDesktop={5} />
-          </section>
-          : ''}
+        {this.renderPurchasedWith()}
+        {this.renderDivider()}
+        {this.renderSimilarProducts()}
 
-        {(this.state.productDetail['similar'].length)
-          ? <div><Divider
-            customClass={style.divider} />
-
-          <section>
-            <ProductScroller
-              title={'Similar Products'}
-              productsArray={this.state.productDetail['similar']}
-              numberMobile={2}
-              numberTablet={3}
-              numberDesktop={5} />
-          </section></div>
-          : ''}
       </div>
 
     )
