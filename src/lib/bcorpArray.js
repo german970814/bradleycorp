@@ -22,3 +22,23 @@ export function arraysAreEqual (array1, array2) {
   }
   return true
 }
+
+export function clean (array, deleteValue) {
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === deleteValue) {
+      array.splice(i, 1)
+      i--
+    }
+  }
+  return array
+};
+
+export function cleanWithRegex (array, regex) {
+  for (let i = 0; i < array.length; i++) {
+    if (regex.match(array[i])) {
+      array.splice(i, 1)
+      i--
+    }
+  }
+  return array
+};

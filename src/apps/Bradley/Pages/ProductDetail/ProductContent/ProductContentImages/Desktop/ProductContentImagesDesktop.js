@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { validChain } from '../../../../../../../lib/bcorpObject'
+import { clean, cleanWithRegex } from '../../../../../../../lib/bcorpArray'
 import VerticalAlignHelper from '../../../../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import VerticalListItem from './VerticalListItem/VerticalListItem'
 import ScrollableList from '../../../../../../../lib/containers/ScrollableList/ScrollableList'
@@ -32,21 +33,29 @@ class ProductContentImagesDesktop extends Component {
   }
 
   init (props) {
-    const videosSrcList = (props.videos && props.videos.length)
+    let videosSrcList = (props.videos && props.videos.length)
       ? props.videos.split(',')
       : []
-    const imageSrcs = (props.images && props.images.length)
+    let imageSrcs = (props.images && props.images.length)
       ? props.images.split(',')
       : []
 
+    videosSrcList = clean(videosSrcList, '')
+    videosSrcList = clean(videosSrcList, undefined)
+    videosSrcList = cleanWithRegex(videosSrcList, '/[ ]*/')
     this.videosSrcList = videosSrcList
+
+    imageSrcs = clean(imageSrcs, '')
+    imageSrcs = clean(imageSrcs, undefined)
 
     if (props.featuredImageSrc) {
       this.imagesSrcList = this.withFeaturedImage(props, imageSrcs)
       return this.setState({ selectedImageSrc: props.featuredImageSrc })
     } else {
       this.imagesSrcList = imageSrcs
-      return this.setState({ selectedImageSrc: imageSrcs[0] })
+      return imageSrcs.length !== 0
+        ? this.setState({ selectedImageSrc: imageSrcs[0] })
+        : null
     }
   }
 
@@ -150,10 +159,6 @@ class ProductContentImagesDesktop extends Component {
   }
 
   render () {
-    if (!this.props.images && !this.props.videos) {
-      return null
-    }
-
     return (
       <React.Fragment>
 

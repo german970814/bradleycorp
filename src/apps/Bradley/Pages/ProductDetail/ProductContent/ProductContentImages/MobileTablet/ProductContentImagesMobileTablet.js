@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import YouTube from 'react-youtube'
 import { youtubeParser } from '../../../../../../../lib/bcorpUrl'
+import { clean } from '../../../../../../../lib/bcorpArray'
 import FixedAspectRatioBox from '../../../../../../../lib/components/FixedAspectRatioBox/FixedAspectRatioBox'
 import LIGHTBOXSIZES from '../../../../../../../lib/containers/Lightbox/lightboxVars'
 import ScrollableListOpensInLightbox from '../../../../../../../lib/containers/ScrollableList/ScrollableListOpensInLightbox/ScrollableListOpensInLightbox'
@@ -18,69 +19,83 @@ class ProductContentImages extends Component {
     return [ this.props.featuredImageSrc, ...imgSrcs ]
   }
 
+  getImageSrcs () {
+    let imgSrcs = this.getImagesSrcListWithFeaturedImage()
+    imgSrcs = clean(imgSrcs, '')
+    imgSrcs = clean(imgSrcs, undefined)
+
+    if (!imgSrcs || imgSrcs.length === 0) {
+      return []
+    }
+
+    return imgSrcs.map((imageSrc, index) => {
+      const imageStyle = {
+        backgroundImage: `url(${imageSrc})`
+      }
+      return (
+        <React.Fragment
+          key={index} >
+
+          {/* display in scroller */}
+          <div
+            src={imageSrc}
+            style={imageStyle}
+            className={`${style.fitBackground} ${style.scrollerImage}`} />
+
+          {/* display in lightbox scroller */}
+          <div
+            src={imageSrc}
+            style={imageStyle}
+            className={`${style.fitBackground} ${style.scrollerImage}`} />
+
+        </React.Fragment>
+      )
+    })
+  }
+
+  getVideoSrcs () {
+    let videoSrcs = this.props.videos.split(',')
+    videoSrcs = clean(videoSrcs, '')
+    videoSrcs = clean(videoSrcs, undefined)
+
+    if (!videoSrcs || videoSrcs.length === 0) {
+      return []
+    }
+
+    return videoSrcs.map((videoSrc, index) => {
+      const videoId = youtubeParser(videoSrc) || ''
+      const videoStyle = {
+        backgroundImage: `url(${require('../../../../../../../images/icon-video/icon-video@3x.png')})`
+      }
+      return (
+        <React.Fragment
+          key={`video_${index}`}>
+
+          {/* display in scroller */}
+          <div
+            style={videoStyle}
+            className={[style.videoListItem, style.fitBackground].join(' ')} />
+
+          {/* display in lightbox scroller */}
+          <div className={style.videoLightboxPadding} >
+            <FixedAspectRatioBox
+              maxHeight={LIGHTBOXSIZES.heightMinusCloseButton}>
+              <YouTube
+                videoId={videoId}
+                opts={{
+                  width: '100%',
+                  height: '100%'
+                }} />
+            </FixedAspectRatioBox>
+          </div>
+
+        </React.Fragment>
+      )
+    })
+  }
+
   renderList () {
-    const imgSrcs = this.getImagesSrcListWithFeaturedImage()
-
-    const images = (imgSrcs && imgSrcs[0] && imgSrcs[0].length !== 0)
-      ? imgSrcs.map((imageSrc, index) => {
-        const imageStyle = {
-          backgroundImage: `url(${imageSrc})`
-        }
-        return (
-          <React.Fragment
-            key={index} >
-
-            {/* display in scroller */}
-            <div
-              src={imageSrc}
-              style={imageStyle}
-              className={`${style.fitBackground} ${style.scrollerImage}`} />
-
-            {/* display in lightbox scroller */}
-            <div
-              src={imageSrc}
-              style={imageStyle}
-              className={`${style.fitBackground} ${style.scrollerImage}`} />
-
-          </React.Fragment>
-        )
-      })
-      : []
-
-    const videos = (this.props.videos && this.props.videos.length)
-      ? this.props.videos.split(',').map((videoSrc, index) => {
-        const videoId = youtubeParser(videoSrc) || ''
-        const videoStyle = {
-          backgroundImage: `url(${require('../../../../../../../images/icon-video/icon-video@3x.png')})`
-        }
-        return (
-          <React.Fragment
-            key={`video_${index}`}>
-
-            {/* display in scroller */}
-            <div
-              style={videoStyle}
-              className={[style.videoListItem, style.fitBackground].join(' ')} />
-
-            {/* display in lightbox scroller */}
-            <div className={style.videoLightboxPadding} >
-              <FixedAspectRatioBox
-                maxHeight={LIGHTBOXSIZES.heightMinusCloseButton}>
-                <YouTube
-                  videoId={videoId}
-                  opts={{
-                    width: '100%',
-                    height: '100%'
-                  }} />
-              </FixedAspectRatioBox>
-            </div>
-
-          </React.Fragment>
-        )
-      })
-      : []
-
-    return [...images, ...videos]
+    return [...this.getImageSrcs(), ...this.getVideoSrcs()]
   }
 
   render () {
