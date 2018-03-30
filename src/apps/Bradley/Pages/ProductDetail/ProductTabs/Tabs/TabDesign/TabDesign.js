@@ -8,15 +8,6 @@ import tabStyle from '../Tabs.scss'
 import style from './TabDesign.scss'
 
 class TabDesign extends Component {
-  constructor (props) {
-    super(props)
-
-    this.renderLinks = this.renderLinks.bind(this)
-    this.renderVideos = this.renderVideos.bind(this)
-    this.renderLiterature = this.renderLiterature.bind(this)
-    this.renderColors = this.renderColors.bind(this)
-  }
-
   getColumnWidth () {
     let count = 0
     const propsArray = [this.props.links, this.props.videos, this.props.literature]
@@ -60,28 +51,19 @@ class TabDesign extends Component {
 
   renderLinks () {
     if (this.props.links.length) {
-      // links array always seems to contain an empty object, so remove this
-      const links = this.props.links
-      const indexOfEmpty = links.findIndex(link => link.text === '')
-      if (indexOfEmpty !== -1) {
-        links.splice(indexOfEmpty, 1)
-      }
-
-      if (links.length) {
-        return (
-          <div
-            className={this.getColumnWidth()} >
-            <h5
-              className={tabStyle.tabColTitle} >
-              {'Links'}
-            </h5>
-            <ul
-              className={tabStyle.tabColUl} >
-              {this.renderLinksList(links)}
-            </ul>
-          </div>
-        )
-      }
+      return (
+        <div
+          className={this.getColumnWidth()} >
+          <h5
+            className={tabStyle.tabColTitle} >
+            {'Links'}
+          </h5>
+          <ul
+            className={tabStyle.tabColUl} >
+            {this.renderLinksList(this.props.links)}
+          </ul>
+        </div>
+      )
     }
   }
 

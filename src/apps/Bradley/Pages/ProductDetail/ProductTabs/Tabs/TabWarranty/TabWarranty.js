@@ -4,12 +4,6 @@ import tabStyle from '../Tabs.scss'
 import style from './TabWarranty.scss'
 
 class TabWarranty extends Component {
-  constructor (props) {
-    super(props)
-
-    this.renderWarranty = this.renderWarranty.bind(this)
-  }
-
   renderWarranty () {
     return this.props.warranty.map((warranty, index) => {
       return (

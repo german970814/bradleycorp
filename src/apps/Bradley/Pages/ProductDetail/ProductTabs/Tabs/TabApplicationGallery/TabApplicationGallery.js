@@ -4,12 +4,6 @@ import tabStyle from '../Tabs.scss'
 import style from './TabApplicationGallery.scss'
 
 class TabApplicationGallery extends Component {
-  constructor (props) {
-    super(props)
-
-    this.renderApplicationGallery = this.renderApplicationGallery.bind(this)
-  }
-
   renderApplicationGallery () {
     return this.props.applicationGalleries.map((applicationGallery, index) => {
       return (

@@ -5,13 +5,6 @@ import FileDownloadLink from '../../../../../../../lib/components/FileDownloadLi
 import style from './TabThreePartSpecAndTechData.scss'
 
 class TabThreePartSpecAndTechData extends Component {
-  constructor (props) {
-    super(props)
-
-    this.renderThreePartSpec = this.renderThreePartSpec.bind(this)
-    this.renderTechnicalData = this.renderTechnicalData.bind(this)
-  }
-
   getColumnWidth () {
     return this.props.threePartSpec.length && this.props.technicalData.length
       ? tabStyle.halfWidthColDesktopTab

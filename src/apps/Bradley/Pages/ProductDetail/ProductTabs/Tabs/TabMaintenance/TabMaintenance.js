@@ -6,13 +6,6 @@ import tabStyle from '../Tabs.scss'
 import style from './TabMaintenance.scss'
 
 class TabMaintenance extends Component {
-  constructor (props) {
-    super(props)
-
-    this.renderGuides = this.renderGuides.bind(this)
-    this.renderVideos = this.renderVideos.bind(this)
-  }
-
   getColumnWidth () {
     return this.props.guides.length && this.props.videos.length
       ? tabStyle.halfWidthColDesktopTab

@@ -4,12 +4,6 @@ import tabStyle from '../Tabs.scss'
 import style from './TabBimRevit.scss'
 
 class TabBimRevit extends Component {
-  constructor (props) {
-    super(props)
-
-    this.renderBimRevit = this.renderBimRevit.bind(this)
-  }
-
   renderBimRevit () {
     return this.props.bimRevit.map((bimRevit, index) => {
       return (

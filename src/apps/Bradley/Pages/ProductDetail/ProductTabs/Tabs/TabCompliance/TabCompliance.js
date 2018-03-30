@@ -5,15 +5,6 @@ import tabStyle from '../Tabs.scss'
 import style from './TabCompliance.scss'
 
 class TabCompliance extends Component {
-  constructor (props) {
-    super(props)
-
-    this.renderCompliance = this.renderCompliance.bind(this)
-    this.renderComplianceLinks = this.renderComplianceLinks.bind(this)
-    this.renderComplianceIcons = this.renderComplianceIcons.bind(this)
-    this.renderComplianceIconsHtml = this.renderComplianceIconsHtml.bind(this)
-  }
-
   renderCompliance () {
     if (this.props.compliance.compliance.length) {
       return (

@@ -31,8 +31,16 @@ function getTheTabs (tabsData) {
   }
 
   // Design
+  // links array always seems to contain an empty object,
+  // so remove this before checking if we should render design tab
+  const links = tabsData.design.links
+  const indexOfEmpty = links.findIndex(link => link.text === '')
+  if (indexOfEmpty !== -1) {
+    links.splice(indexOfEmpty, 1)
+  }
+
   if (tabsData.design.videos.length > 0 ||
-      tabsData.design.links.length > 1 ||
+      links.length > 0 ||
       tabsData.design.literature.length > 0 ||
       tabsData.design.colors.length > 0) {
     tabs = [ ...tabs,

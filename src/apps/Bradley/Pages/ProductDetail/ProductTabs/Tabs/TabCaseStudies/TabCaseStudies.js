@@ -5,12 +5,6 @@ import tabStyle from '../Tabs.scss'
 import style from './TabCaseStudies.scss'
 
 class TabCaseStudies extends Component {
-  constructor (props) {
-    super(props)
-
-    this.renderCaseStudies = this.renderCaseStudies.bind(this)
-  }
-
   renderCaseStudies () {
     return this.props.caseStudies.map((caseStudy, index) => {
       return (
