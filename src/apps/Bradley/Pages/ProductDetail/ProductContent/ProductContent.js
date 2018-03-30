@@ -71,7 +71,7 @@ class ProductContent extends Component {
       : `col1 col2-tablet ${style.buttonWrapper}`
 
     let buttons = []
-    if (this.props.cta['submittal_btn']) {
+    if (this.props.cta['submittal_btn'] && this.props.cta['submittal_btn'] === '1') {
       const styleClass = desktop
         ? style.submittalBtnDesktop
         : style.productDetailBtn
@@ -87,7 +87,7 @@ class ProductContent extends Component {
         </div>
       ]
     }
-    if (this.props.cta['survey_btn']) {
+    if (this.props.cta['survey_btn'] && this.props.cta['survey_btn'] === '1') {
       const styleClassSurvey = desktop
         ? style.surveyBtnDesktop
         : style.productDetailBtn
