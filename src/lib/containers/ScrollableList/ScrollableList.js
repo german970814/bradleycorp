@@ -97,6 +97,10 @@ class ScrollableList extends Component {
       e.stopPropagation()
     }
 
+    if (this.props.children.length <= this.props.numberToDisplay) {
+      return
+    }
+
     if (this.props.reverseScroll) {
       increment = -increment
     }
