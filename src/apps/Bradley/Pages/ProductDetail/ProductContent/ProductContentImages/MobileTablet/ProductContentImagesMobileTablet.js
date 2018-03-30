@@ -20,7 +20,8 @@ class ProductContentImages extends Component {
 
   renderList () {
     const imgSrcs = this.getImagesSrcListWithFeaturedImage()
-    const images = (imgSrcs && imgSrcs[0].length)
+
+    const images = (imgSrcs && imgSrcs[0] && imgSrcs[0].length !== 0)
       ? imgSrcs.map((imageSrc, index) => {
         const imageStyle = {
           backgroundImage: `url(${imageSrc})`
