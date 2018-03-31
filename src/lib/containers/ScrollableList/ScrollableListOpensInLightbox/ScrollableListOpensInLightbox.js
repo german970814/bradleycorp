@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import VerticalAlignHelper from '../../../components/VerticalAlignHelper/VerticalAlignHelper'
 import ScrollableList from '../ScrollableList'
 import Lightbox from '../../Lightbox/Lightbox'
@@ -25,7 +26,9 @@ class ScrollableListOpensInLightbox extends ScrollableList {
   //
   render () {
     return (
-      <Lightbox>
+      <Lightbox
+        onLightboxOpen={this.props.onLightboxOpen}
+        onLightboxClose={this.props.onLightboxClose} >
 
         {super.render()}
 
@@ -37,6 +40,13 @@ class ScrollableListOpensInLightbox extends ScrollableList {
       </Lightbox>
     )
   }
+}
+
+ScrollableListOpensInLightbox.propTypes = {
+  ...ScrollableList.propTypes,
+
+  onLightboxOpen: PropTypes.func,
+  onLightboxClose: PropTypes.func
 }
 
 export default ScrollableListOpensInLightbox

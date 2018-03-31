@@ -7,10 +7,6 @@ import BCorpVideo from '../../../../../../lib/components/BCorpVideo/BCorpVideo'
 import FixedAspectRatioBox from '../../../../../../lib/components/FixedAspectRatioBox/FixedAspectRatioBox'
 import tabStyle from './Tabs.scss'
 
-function onYoutubeLightboxReady (event) {
-  event.target.playVideo()
-}
-
 export default function renderVideoThumbnail (videos) {
   const arrayOfSrcs = videos.map(video => {
     return video.meta['video_gallery_video']
@@ -27,10 +23,6 @@ export default function renderVideoThumbnail (videos) {
       }
     }
   }
-
-  const youtubePropsLightbox = {...youtubeProps}
-  youtubePropsLightbox.opts.playerVars.autoplay = 1
-  youtubePropsLightbox.onReady = onYoutubeLightboxReady
 
   const vimeoProps = {
     playerOptions: {
@@ -58,8 +50,9 @@ export default function renderVideoThumbnail (videos) {
           maxHeight={LIGHTBOXSIZES.heightMinusCloseButton} >
           <BCorpVideo
             url={url}
-            youtubeProps={youtubePropsLightbox}
-            vimeoProps={vimeoPropsLightbox} />
+            youtubeProps={youtubeProps}
+            vimeoProps={vimeoPropsLightbox}
+            autoplay />
         </FixedAspectRatioBox>
 
       </LightboxYoutube>
@@ -104,13 +97,8 @@ export default function renderVideoThumbnail (videos) {
   const videoIdsPlayAfter = videoIds.join(',')
 
   youtubeProps.opts.playerVars.playlist = videoIdsPlayAfter
-  youtubePropsLightbox.opts.playerVars.playlist = videoIdsPlayAfter
-
   youtubeProps.opts.playerVars.showinfo = 1
-  youtubePropsLightbox.opts.playerVars.showinfo = 1
-
   youtubeProps.opts.playerVars.controls = 1
-  youtubePropsLightbox.opts.playerVars.controls = 1
 
   return (
     <LightboxYoutube>
@@ -125,8 +113,9 @@ export default function renderVideoThumbnail (videos) {
         maxHeight={LIGHTBOXSIZES.heightMinusCloseButton} >
         <BCorpVideo
           url={videoIdPlayFirst}
-          youtubeProps={youtubePropsLightbox}
-          noVimeo />
+          youtubeProps={youtubeProps}
+          noVimeo
+          autoplay />
       </FixedAspectRatioBox>
 
     </LightboxYoutube>

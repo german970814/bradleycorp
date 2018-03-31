@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import YouTube from 'react-youtube'
-import { youtubeParser } from '../../../../../../../lib/bcorpUrl'
 import { clean } from '../../../../../../../lib/bcorpArray'
+import BCorpVideo from '../../../../../../../lib/components/BCorpVideo/BCorpVideo'
 import FixedAspectRatioBox from '../../../../../../../lib/components/FixedAspectRatioBox/FixedAspectRatioBox'
 import LIGHTBOXSIZES from '../../../../../../../lib/containers/Lightbox/lightboxVars'
 import ScrollableListOpensInLightbox from '../../../../../../../lib/containers/ScrollableList/ScrollableListOpensInLightbox/ScrollableListOpensInLightbox'
@@ -62,8 +61,28 @@ class ProductContentImages extends Component {
       return []
     }
 
+    const youtubeProps = {
+      opts: {
+        width: '100%',
+        height: '100%',
+        playerVars: {
+          showinfo: 0,
+          modestbranding: 1,
+          controls: 1
+        }
+      }
+    }
+
+    const vimeoProps = {
+      playerOptions: {
+        byline: false,
+        loop: true,
+        portrait: false,
+        title: false
+      }
+    }
+
     return videoSrcs.map((videoSrc, index) => {
-      const videoId = youtubeParser(videoSrc) || ''
       const videoStyle = {
         backgroundImage: `url(${require('../../../../../../../images/icon-video/icon-video@3x.png')})`
       }
@@ -80,12 +99,10 @@ class ProductContentImages extends Component {
           <div className={style.videoLightboxPadding} >
             <FixedAspectRatioBox
               maxHeight={LIGHTBOXSIZES.heightMinusCloseButton}>
-              <YouTube
-                videoId={videoId}
-                opts={{
-                  width: '100%',
-                  height: '100%'
-                }} />
+              <BCorpVideo
+                url={videoSrc}
+                youtubeProps={youtubeProps}
+                vimeoProps={vimeoProps} />
             </FixedAspectRatioBox>
           </div>
 

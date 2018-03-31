@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import YouTube from 'react-youtube'
-import { youtubeParser } from '../../../../../../../../lib/bcorpUrl'
+import BCorpVideo from '../../../../../../../../lib/components/BCorpVideo/BCorpVideo'
 import LIGHTBOXSIZES from '../../../../../../../../lib/containers/Lightbox/lightboxVars'
 import FixedAspectRatioBox from '../../../../../../../../lib/components/FixedAspectRatioBox/FixedAspectRatioBox'
 import Lightbox from '../../../../../../../../lib/containers/Lightbox/Lightbox'
@@ -23,7 +22,27 @@ class VerticalListItem extends Component {
   }
 
   renderVideo () {
-    const videoId = youtubeParser(this.props.src) || ''
+    const youtubeProps = {
+      opts: {
+        width: '100%',
+        height: '100%',
+        playerVars: {
+          showinfo: 0,
+          modestbranding: 1,
+          controls: 1
+        }
+      }
+    }
+
+    const vimeoProps = {
+      playerOptions: {
+        byline: false,
+        loop: true,
+        portrait: false,
+        title: false
+      }
+    }
+
     const videoStyle = {
       backgroundImage: `url(${require('../../../../../../../../images/icon-video/icon-video@2x.png')})`
     }
@@ -36,12 +55,11 @@ class VerticalListItem extends Component {
 
         <FixedAspectRatioBox
           maxHeight={LIGHTBOXSIZES.heightMinusCloseButton} >
-          <YouTube
-            videoId={videoId}
-            opts={{
-              width: '100%',
-              height: '100%'
-            }} />
+          <BCorpVideo
+            url={this.props.src}
+            youtubeProps={youtubeProps}
+            vimeoProps={vimeoProps}
+            autoplay />
         </FixedAspectRatioBox>
 
       </Lightbox>

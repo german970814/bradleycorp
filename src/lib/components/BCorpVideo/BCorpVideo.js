@@ -4,6 +4,10 @@ import YouTube from 'react-youtube'
 import Vimeo from 'react-vimeo'
 import { stringIsNumeric } from '../../bcorpString'
 
+function onReady (event) {
+  event.target.playVideo()
+}
+
 /**
  * Takes a Video URL or ID from YouTube or Vimeo, and player parameters for both,
  * and returns the relevant player.
@@ -27,6 +31,7 @@ const BCorpVideo = props => {
         videoId={videoParams.videoID}
         className={props.className}
         onPlay={props.onPlay}
+        onReady={props.autoplay ? onReady : undefined}
         {...props.youtubeProps} />
     )
   }
@@ -34,6 +39,8 @@ const BCorpVideo = props => {
   /**
    * react-vimeo callbacks and options
    * all the core ones are the same as react-youtube
+   *
+   * NOTE we set autplay always true here, it doesnt actually play, it just gets rid of a horrible buggy preview screen
    *
    * sort callbacks and options as per the react-youtube api and they'll automatically be unwrapped for vimeo
    *
@@ -45,6 +52,7 @@ const BCorpVideo = props => {
         videoId={videoParams.videoID}
         className={props.className}
         onPlay={props.onPlay}
+        autoplay={true}
         {...props.vimeoProps} />
     )
   }
@@ -127,6 +135,11 @@ BCorpVideo.propTypes = {
   className: PropTypes.string,
   youtubeProps: PropTypes.object,
   vimeoProps: PropTypes.object,
+  /**
+   * Autoplay seems buggy for youtube, so we add it ourselves
+   * doesn't always work for vimeo
+   */
+  autoplay: PropTypes.bool,
   noVimeo: PropTypes.bool,
   /**
    * Bit of hacky prop here just allowing lightbox youtube to add onPlay functionality,
