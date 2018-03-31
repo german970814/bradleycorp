@@ -26,6 +26,7 @@ const BCorpVideo = props => {
       <YouTube
         videoId={videoParams.videoID}
         className={props.className}
+        onPlay={props.onPlay}
         {...props.youtubeProps} />
     )
   }
@@ -38,24 +39,16 @@ const BCorpVideo = props => {
    *
    * @see https://github.com/freeCodeCamp/react-vimeo/blob/master/docs/README.md
    */
-  if (videoParams.videoType === 'vimeo') {
+  if (videoParams.videoType === 'vimeo' && !props.noVimeo) {
     return (
       <Vimeo
         videoId={videoParams.videoID}
         className={props.className}
+        onPlay={props.onPlay}
         {...props.vimeoProps} />
     )
   }
 }
-
-BCorpVideo.propTypes = {
-  url: PropTypes.string.isRequired,
-  className: PropTypes.string,
-  youtubeProps: PropTypes.object,
-  vimeoProps: PropTypes.object
-}
-
-export default BCorpVideo
 
 function getVideoParamsFromURL (url) {
   let videoParams = {
@@ -128,3 +121,19 @@ function vimeoParser (url) {
   const match = url.match(regExp)
   return (match && stringIsNumeric(match[1])) ? match[1] : false
 }
+
+BCorpVideo.propTypes = {
+  url: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  youtubeProps: PropTypes.object,
+  vimeoProps: PropTypes.object,
+  noVimeo: PropTypes.bool,
+  /**
+   * Bit of hacky prop here just allowing lightbox youtube to add onPlay functionality,
+   * we can normally just pass this within youtubeProps or vimeoProps
+   * needs to be redesigned really TODO
+   */
+  onPlay: PropTypes.func
+}
+
+export default BCorpVideo

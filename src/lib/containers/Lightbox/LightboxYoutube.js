@@ -3,12 +3,6 @@ import Lightbox from './Lightbox'
 import style from './Lightbox.scss'
 
 class LightboxYoutube extends Lightbox { // extends Lightbox and adds openLightbox to the onPlay event
-  constructor (props) {
-    super(props)
-
-    this.renderChildrenWithYoutubeApi = this.renderChildrenWithYoutubeApi.bind(this)
-  }
-
   getChildrenWithLightboxContentRemoved () {
     const children = React.Children.toArray(this.props.children)
     children.pop()
@@ -24,7 +18,10 @@ class LightboxYoutube extends Lightbox { // extends Lightbox and adds openLightb
   }
 
   onPlay (e) {
-    e.target.pauseVideo()
+    if (e.target.pauseVideo) {
+      e.target.pauseVideo()
+    }
+
     this.openLightbox()
   }
 
@@ -32,7 +29,10 @@ class LightboxYoutube extends Lightbox { // extends Lightbox and adds openLightb
     return (
       <div
         className={style.childWrapper}
-        onClick={(e) => this.toggleOpen(e)}>
+        onClickCapture={(e) => {
+          this.toggleOpen(e)
+          e.stopPropagation()
+        }} >
         {this.renderChildrenWithYoutubeApi()}
         {this.renderLightbox()}
       </div>
