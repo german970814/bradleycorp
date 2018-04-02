@@ -1,5 +1,5 @@
-@import "../../../../scss/partials/mixins";
-@import "../../../../scss/partials/helpers";
+@import '../../../../scss/partials/mixins';
+@import '../../../../scss/partials/helpers';
 
 $fadeInSpeed: 500ms;
 
@@ -19,10 +19,8 @@ $fadeInSpeed: 500ms;
     width: 100%;
     box-sizing: border-box;
 
-    h3.tagline {
+    :global(.hero-intro).tagline {
       margin-bottom: 25px;
-      text-align: center;
-      color: #fff;
       transition: opacity $fadeInSpeed;
 
       @include respond-to(desktop) {

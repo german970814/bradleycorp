@@ -1,5 +1,5 @@
-@import "../partials/text-styles";
-@import "../partials/mixins";
+@import '../partials/text-styles';
+@import '../partials/mixins';
 // NOTE: styles wrt container size imported at the end
 
 h1 {
@@ -101,6 +101,22 @@ body {
   }
 }
 
+:global(.hero-intro) {
+  @extend %hero-intro-mobile;
+
+  @include respond-to(tablet) {
+    font-size: 20px;
+    line-height: 1.36;
+    letter-spacing: 3.9px;
+  }
+
+  @include respond-to(desktop) {
+    font-size: 24px;
+    line-height: 1.33;
+    letter-spacing: 4.8px;
+  }
+}
+
 :global(.hero-copy) {
   @extend %hero-copy-mobile;
 
@@ -120,4 +136,4 @@ body {
 }
 
 // import at the end to give styles wrt container priority
-@import "./text-styles-wrt-container-globals";
+@import './text-styles-wrt-container-globals';

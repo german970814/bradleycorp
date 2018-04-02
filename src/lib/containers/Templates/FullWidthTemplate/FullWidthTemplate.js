@@ -71,7 +71,7 @@ class FullWidthTemplate extends Component {
         style={{
           opacity: this.state.showTitle ? 1 : 0
         }}
-        className={`col1 hero-headline ${style.title}`} >
+        className={`col1 hero-headline ${style.title}`}>
         {data.metaboxes['page_hero'].title}
       </div>
     )
@@ -85,13 +85,13 @@ class FullWidthTemplate extends Component {
     const { data } = this.props
 
     return (
-      <h3
+      <div
         style={{
           opacity: this.state.showTagline ? 1 : 0
         }}
-        className={`col1 ${style.tagline}`} >
+        className={`col1 hero-intro ${style.tagline}`}>
         {data.metaboxes['page_hero'].tagline}
-      </h3>
+      </div>
     )
   }
 
@@ -107,14 +107,17 @@ class FullWidthTemplate extends Component {
         style={{
           opacity: this.state.showCopy ? 1 : 0
         }}
-        className={`col1 hero-copy ${style.copy}`} >
+        className={`col1 hero-copy ${style.copy}`}>
         {data.metaboxes['page_hero'].copy}
       </div>
     )
   }
 
   renderHeroBackground () {
-    if (!this.props.data.metaboxes['page_hero']['video_url'] || !this.heroNode) {
+    if (
+      !this.props.data.metaboxes['page_hero']['video_url'] ||
+      !this.heroNode
+    ) {
       return this.renderHeroBackgroundImage()
     }
 
@@ -126,31 +129,37 @@ class FullWidthTemplate extends Component {
       <BCorpBackground
         imageSrc={this.getHeroBackgroundImageSrc()}
         overlay={this.props.data.metaboxes['page_hero']['overlay']}
-        imageOpacity={0.33} />
+        imageOpacity={0.33}
+      />
     )
   }
 
   renderHeroBackgroundVideo () {
     return (
       <React.Fragment>
-
         <VideoBackground
           node={this.heroNode}
           url={this.props.data.metaboxes['page_hero']['video_url']}
-          placeholder={this.getHeroBackgroundImageSrc()} />
+          placeholder={this.getHeroBackgroundImageSrc()}
+        />
 
         <div
           style={{
-            backgroundColor: lookupColor(this.props.data.metaboxes['page_hero']['overlay'])
+            backgroundColor: lookupColor(
+              this.props.data.metaboxes['page_hero']['overlay']
+            )
           }}
-          className={style.videoOverlay} />
-
+          className={style.videoOverlay}
+        />
       </React.Fragment>
     )
   }
 
   getHeroBackgroundImageSrc () {
-    if (!this.props.data['featured_image'] || this.props.data['featured_image'].length === 0) {
+    if (
+      !this.props.data['featured_image'] ||
+      this.props.data['featured_image'].length === 0
+    ) {
       return undefined
     }
 
@@ -166,9 +175,10 @@ class FullWidthTemplate extends Component {
 
     return (
       <div
-        ref={node => { this.heroNode = node }}
-        className={style.heroWrapper} >
-
+        ref={node => {
+          this.heroNode = node
+        }}
+        className={style.heroWrapper}>
         {this.renderHeroBackground()}
 
         <div className={`row ${style.hero}`}>
@@ -176,7 +186,6 @@ class FullWidthTemplate extends Component {
           {this.renderTitle(shouldRender.title)}
           {this.renderCopy(shouldRender.copy)}
         </div>
-
       </div>
     )
   }
@@ -198,13 +207,22 @@ class FullWidthTemplate extends Component {
       copy: false
     }
 
-    if (validChain(data, 'metaboxes', 'page_hero', 'title') && data.metaboxes['page_hero'].title) {
+    if (
+      validChain(data, 'metaboxes', 'page_hero', 'title') &&
+      data.metaboxes['page_hero'].title
+    ) {
       shouldRender.title = true
     }
-    if (validChain(data, 'metaboxes', 'page_hero', 'tagline') && data.metaboxes['page_hero'].tagline) {
+    if (
+      validChain(data, 'metaboxes', 'page_hero', 'tagline') &&
+      data.metaboxes['page_hero'].tagline
+    ) {
       shouldRender.tagline = true
     }
-    if (validChain(data, 'metaboxes', 'page_hero', 'copy') && data.metaboxes['page_hero'].copy) {
+    if (
+      validChain(data, 'metaboxes', 'page_hero', 'copy') &&
+      data.metaboxes['page_hero'].copy
+    ) {
       shouldRender.copy = true
     }
 
