@@ -15,7 +15,7 @@ class ProductContentImages extends Component {
     if (imgSrcs.includes(this.props.featuredImageSrc)) {
       return imgSrcs
     }
-    return [ this.props.featuredImageSrc, ...imgSrcs ]
+    return [this.props.featuredImageSrc, ...imgSrcs]
   }
 
   getImageSrcs () {
@@ -32,21 +32,20 @@ class ProductContentImages extends Component {
         backgroundImage: `url(${imageSrc})`
       }
       return (
-        <React.Fragment
-          key={index} >
-
+        <React.Fragment key={index}>
           {/* display in scroller */}
           <div
             src={imageSrc}
             style={imageStyle}
-            className={`${style.fitBackground} ${style.scrollerImage}`} />
+            className={`${style.fitBackground} ${style.scrollerImage}`}
+          />
 
           {/* display in lightbox scroller */}
           <div
             src={imageSrc}
             style={imageStyle}
-            className={`${style.fitBackground} ${style.scrollerImage}`} />
-
+            className={`${style.fitBackground} ${style.scrollerImage}`}
+          />
         </React.Fragment>
       )
     })
@@ -87,25 +86,24 @@ class ProductContentImages extends Component {
         backgroundImage: `url(${require('../../../../../../../images/icon-video/icon-video@3x.png')})`
       }
       return (
-        <React.Fragment
-          key={`video_${index}`}>
-
+        <React.Fragment key={`video_${index}`}>
           {/* display in scroller */}
           <div
             style={videoStyle}
-            className={[style.videoListItem, style.fitBackground].join(' ')} />
+            className={[style.videoListItem, style.fitBackground].join(' ')}
+          />
 
           {/* display in lightbox scroller */}
-          <div className={style.videoLightboxPadding} >
+          <div className={style.videoLightboxPadding}>
             <FixedAspectRatioBox
               maxHeight={LIGHTBOXSIZES.heightMinusCloseButton}>
               <BCorpVideo
                 url={videoSrc}
                 youtubeProps={youtubeProps}
-                vimeoProps={vimeoProps} />
+                vimeoProps={vimeoProps}
+              />
             </FixedAspectRatioBox>
           </div>
-
         </React.Fragment>
       )
     })
@@ -125,7 +123,7 @@ class ProductContentImages extends Component {
         buttonUp={<ButtonLeft />}
         buttonDown={<ButtonRight />}
         stopEventBubblingFromButtons
-        showPosition >
+        showPosition>
         {this.renderList()}
       </ScrollableListOpensInLightbox>
     )

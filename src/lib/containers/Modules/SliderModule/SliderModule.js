@@ -46,7 +46,10 @@ class SliderModule extends PostGettingModule {
     }
 
     return (
-      <h3 className={`${style.heading} ${this.accentColorClass} module-accent-color-change-text ${this.skinClass}`} >
+      <h3
+        className={`${style.heading} ${
+          this.accentColorClass
+        } module-accent-color-change-text ${this.skinClass}`}>
         {this.props.title}
       </h3>
     )
@@ -64,7 +67,8 @@ class SliderModule extends PostGettingModule {
           skin={this.getSliderSkin()}
           accentColor={this.props.accentColor}
           accentColorClass={this.accentColorClass}
-          skinClass={this.skinClass} />
+          skinClass={this.skinClass}
+        />
       )
     })
   }
@@ -82,7 +86,9 @@ class SliderModule extends PostGettingModule {
     if (this.size === 'tablet' || this.size === 'desktop') {
       args = {
         ...args,
-        wrapperClassName: `${style.sliderWrapperTabletDesktop} ${this.accentColorClass}`,
+        wrapperClassName: `${style.sliderWrapperTabletDesktop} ${
+          this.accentColorClass
+        }`,
         animation: ['fade'],
         transitionSpeed: 1500,
         vertical: true,
@@ -94,7 +100,7 @@ class SliderModule extends PostGettingModule {
     return (
       <ScrollableList
         numberToDisplay={1}
-        touchMoveSensitivity={1.5}
+        touchMoveSensitivity={2}
         wrapperClassName={args.wrapperClassName}
         animation={args.animation}
         transitionSpeed={args.transitionSpeed}
@@ -103,7 +109,7 @@ class SliderModule extends PostGettingModule {
         positionCirclesVertical={args.positionCirclesVertical}
         slideShow
         alwaysUpdate
-        showPosition >
+        showPosition>
         {this.renderSliderItems()}
       </ScrollableList>
     )
@@ -112,16 +118,17 @@ class SliderModule extends PostGettingModule {
   renderModule () {
     return (
       <div
-        className={`${this.containerClassName} ${this.skinClass} module-skin-dark-background-navy module-skin-light-background-light-gray`}
+        className={`${this.containerClassName} ${
+          this.skinClass
+        } module-skin-dark-background-navy module-skin-light-background-light-gray`}
         style={{
           minHeight: this.state.minHeight,
-          backgroundColor: this.props.postType === 'product' ? lookupColor('white') : undefined
-        }} >
-
+          backgroundColor:
+            this.props.postType === 'product' ? lookupColor('white') : undefined
+        }}>
         {this.renderHeading()}
 
         {this.renderSlider()}
-
       </div>
     )
   }
@@ -131,7 +138,11 @@ class SliderModule extends PostGettingModule {
   }
 
   passesValidation () {
-    if (!this.state.posts || this.state.posts.length < 1 || this.state.posts.length > this.maxPosts) {
+    if (
+      !this.state.posts ||
+      this.state.posts.length < 1 ||
+      this.state.posts.length > this.maxPosts
+    ) {
       return false
     }
 

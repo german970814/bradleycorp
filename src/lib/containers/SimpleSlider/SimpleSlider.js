@@ -15,15 +15,13 @@ import style from './SimpleSlider.scss'
  */
 class SimpleSlider extends Component {
   renderTitle () {
-    if (this.props.title !== undefined &&
-    this.props.title !== '') {
+    if (this.props.title !== undefined && this.props.title !== '') {
       const titleClass = this.props.respondToContainer
         ? style.respondToContainerTitle
         : style.title
 
       return (
-        <h4
-          className={`simple-slider-title ${titleClass} ${style.buttonUp}`} >
+        <h4 className={`simple-slider-title ${titleClass} ${style.buttonUp}`}>
           {this.props.title}
         </h4>
       )
@@ -31,28 +29,30 @@ class SimpleSlider extends Component {
   }
 
   renderButtonUpMobile () {
-    return this.props.nextPrevButtonsForMobile
-      ? <ButtonPrev />
-      : <ButtonLeft />
+    return this.props.nextPrevButtonsForMobile ? <ButtonPrev /> : <ButtonLeft />
   }
 
   renderButtonDownMobile () {
-    return this.props.nextPrevButtonsForMobile
-      ? <ButtonNext />
-      : <ButtonRight />
+    return this.props.nextPrevButtonsForMobile ? (
+      <ButtonNext />
+    ) : (
+      <ButtonRight />
+    )
   }
 
   renderSliderMobile () {
     return (
       <ScrollableList
         numberToDisplay={this.props.numberMobile}
-        touchMoveSensitivity={1}
+        touchMoveSensitivity={1.5}
         buttonUp={this.renderButtonUpMobile()}
         buttonDown={this.renderButtonDownMobile()}
         positionButtonsBelow={this.props.nextPrevButtonsForMobile}
         reverseScroll={this.props.reverseScroll}
-        wrapperClassName={`${style.sliderWrapper} ${this.props.wrapperClassName}`}
-        alwaysUpdate={this.props.alwaysUpdate} >
+        wrapperClassName={`${style.sliderWrapper} ${
+          this.props.wrapperClassName
+        }`}
+        alwaysUpdate={this.props.alwaysUpdate}>
         {this.props.children}
       </ScrollableList>
     )
@@ -62,12 +62,14 @@ class SimpleSlider extends Component {
     return (
       <ScrollableList
         numberToDisplay={this.props.numberTablet}
-        touchMoveSensitivity={1.5}
+        touchMoveSensitivity={2}
         buttonUp={<ButtonLeft />}
         buttonDown={<ButtonRight />}
         reverseScroll={this.props.reverseScroll}
-        wrapperClassName={`${style.sliderTabletDesktop} ${this.props.desktopWrapperClassName}`}
-        alwaysUpdate={this.props.alwaysUpdate} >
+        wrapperClassName={`${style.sliderTabletDesktop} ${
+          this.props.desktopWrapperClassName
+        }`}
+        alwaysUpdate={this.props.alwaysUpdate}>
         {this.props.children}
       </ScrollableList>
     )
@@ -77,12 +79,14 @@ class SimpleSlider extends Component {
     return (
       <ScrollableList
         numberToDisplay={this.props.numberDesktop}
-        touchMoveSensitivity={2}
+        touchMoveSensitivity={2.5}
         buttonUp={<ButtonLeft />}
         buttonDown={<ButtonRight />}
         reverseScroll={this.props.reverseScroll}
-        wrapperClassName={`${style.sliderTabletDesktop} ${this.props.desktopWrapperClassName}`}
-        alwaysUpdate={this.props.alwaysUpdate} >
+        wrapperClassName={`${style.sliderTabletDesktop} ${
+          this.props.desktopWrapperClassName
+        }`}
+        alwaysUpdate={this.props.alwaysUpdate}>
         {this.props.children}
       </ScrollableList>
     )
@@ -95,22 +99,23 @@ class SimpleSlider extends Component {
        */
       return (
         <React.Fragment>
-
           {this.renderTitle()}
 
           <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
             {match =>
-              match ? this.renderSliderMobile()
-                : (
-                  <Media query={{ maxWidth: TABLETMAXWIDTH }}>
-                    {match =>
-                      match ? this.renderSliderTablet() : this.renderSliderDesktop()
-                    }
-                  </Media>
-                )
+              match ? (
+                this.renderSliderMobile()
+              ) : (
+                <Media query={{ maxWidth: TABLETMAXWIDTH }}>
+                  {match =>
+                    match
+                      ? this.renderSliderTablet()
+                      : this.renderSliderDesktop()
+                  }
+                </Media>
+              )
             }
           </Media>
-
         </React.Fragment>
       )
     } else {
@@ -121,43 +126,33 @@ class SimpleSlider extends Component {
        */
       return (
         <div
-          ref={(node) => {
+          ref={node => {
             if (!this.props.containerNode && !this.node) {
               this.node = node
             }
           }}
-          className={style.respondToContainerContainer} >
-
-          <ContainerMediaQuery
-            node={this.props.containerNode || this.node} >
+          className={style.respondToContainerContainer}>
+          <ContainerMediaQuery node={this.props.containerNode || this.node}>
             {(containerClassName, size) => {
               let slider = null
 
               if (size === 'mobile') {
                 slider = this.renderSliderMobile()
-              } else
-
-              if (size === 'tablet') {
+              } else if (size === 'tablet') {
                 slider = this.renderSliderTablet()
-              } else
-
-              if (size === 'desktop') {
+              } else if (size === 'desktop') {
                 slider = this.renderSliderDesktop()
               }
 
               return (
-                <div
-                  className={containerClassName} >
-
+                <div className={containerClassName}>
                   {this.renderTitle()}
 
                   {slider}
-
                 </div>
               )
             }}
           </ContainerMediaQuery>
-
         </div>
       )
     }

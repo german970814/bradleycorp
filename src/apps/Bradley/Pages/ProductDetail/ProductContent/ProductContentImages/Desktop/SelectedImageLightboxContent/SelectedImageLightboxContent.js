@@ -25,11 +25,12 @@ class SelectedImageLightboxContent extends Component {
     return (
       <ScrollableList
         numberToDisplay={1}
+        touchMoveSensitivity={2}
         onPositionChange={this.props.onPositionChange}
         buttonDown={<ButtonRight />}
         buttonUp={<ButtonLeft />}
         wrapperClassName={style.wrapper}
-        stopEventBubblingFromButtons >
+        stopEventBubblingFromButtons>
         {this.items}
       </ScrollableList>
     )
