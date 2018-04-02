@@ -24,12 +24,13 @@ class SliderItem extends Component {
   renderImage () {
     const { post } = this.props
 
-    const imgSrc = post.media['featured_image'] && post.media['featured_image'].length !== 0
-      ? post.media['featured_image'][0]
-      : ''
+    const imgSrc =
+      post.media['featured_image'] && post.media['featured_image'].length !== 0
+        ? post.media['featured_image'][0]
+        : ''
 
     return (
-      <div className={style.imageWrapper} >
+      <div className={style.imageWrapper}>
         <ImageFrame
           src={imgSrc}
           aspectRatio={169 / 250}
@@ -37,19 +38,25 @@ class SliderItem extends Component {
           aspectRatioDesktop={302 / 449}
           sizing={'contain'}
           containerNode={this.props.containerNode}
-          respondToContainer />
+          respondToContainer
+        />
       </div>
     )
   }
 
   renderHeading () {
-    if (!this.props.heading ||
-      (this.props.size !== 'tablet' && this.props.size !== 'desktop')) {
+    if (
+      !this.props.heading ||
+      (this.props.size !== 'tablet' && this.props.size !== 'desktop')
+    ) {
       return
     }
 
     return (
-      <h3 className={`${style.heading} ${this.props.accentColorClass} module-accent-color-change-text ${this.props.skinClass}`} >
+      <h3
+        className={`${style.heading} ${
+          this.props.accentColorClass
+        } module-accent-color-change-text ${this.props.skinClass}`}>
         {this.props.heading}
       </h3>
     )
@@ -63,59 +70,59 @@ class SliderItem extends Component {
     }
 
     return (
-      <Link
-        to={`${this.postLink}`}
-        replace >
-
-        <h2 className={`${style.title} ${this.props.skinClass}`} >{post.post['post_title']}</h2>
-
+      <Link to={`${this.postLink}`} replace>
+        <h2 className={`${style.title} ${this.props.skinClass}`}>
+          {post.post['post_title']}
+        </h2>
       </Link>
     )
   }
 
   renderContent () {
     const { post } = this.props
-    const excerpt = getExcerpt(post.post['post_excerpt'], post.post['post_content'])
+    const excerpt = getExcerpt(
+      post.post['post_excerpt'],
+      post.post['post_content'],
+      'short'
+    )
 
     if (!excerpt) {
       return
     }
 
     return (
-      <div className={`${style.content} ${this.props.skinClass}`} >
-        {excerpt}
-      </div>
+      <div
+        className={`${style.content} ${this.props.skinClass}`}
+        dangerouslySetInnerHTML={{ __html: excerpt }}
+      />
     )
   }
 
   renderArrow () {
     return (
-      <Link
-        to={`${this.postLink}`}
-        replace >
-
-        <div className={style.arrowWrapper} >
+      <Link to={`${this.postLink}`} replace>
+        <div className={style.arrowWrapper}>
           <SVGIcon
             className={style.arrow}
             icon={'arrow'}
-            color={this.props.skin === 'dark' ? 'white' : this.props.accentColor}
-            redrawOnHover />
+            color={
+              this.props.skin === 'dark' ? 'white' : this.props.accentColor
+            }
+            redrawOnHover
+          />
         </div>
-
       </Link>
     )
   }
 
   render () {
     return (
-      <div className={`row ${style.sliderItem}`} >
-
+      <div className={`row ${style.sliderItem}`}>
         <VerticalAlignHelper />
 
         {this.renderImage()}
 
-        <div className={style.contentWrapper} >
-
+        <div className={style.contentWrapper}>
           {this.renderHeading()}
 
           {this.renderTitle()}
@@ -123,9 +130,7 @@ class SliderItem extends Component {
           {this.renderContent()}
 
           {this.renderArrow()}
-
         </div>
-
       </div>
     )
   }

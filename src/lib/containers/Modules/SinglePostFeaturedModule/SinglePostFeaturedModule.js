@@ -71,7 +71,7 @@ class SinglePostFeaturedModule extends PostGettingModule {
 
     return (
       <div className={style.content}>
-        {getExcerpt(post['post_excerpt'], post['post_content'])}
+        {getExcerpt(post['post_excerpt'], post['post_content'], 'short')}
       </div>
     )
   }

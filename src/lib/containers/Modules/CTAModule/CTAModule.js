@@ -31,9 +31,12 @@ class CTAModule extends BCorpModule {
       return
     }
 
-    return <div
-      className={style.text}
-      dangerouslySetInnerHTML={{__html: decodeURIComponent(text)}}/>
+    return (
+      <div
+        className={style.text}
+        dangerouslySetInnerHTML={{ __html: decodeURIComponent(text) }}
+      />
+    )
   }
 
   renderButton () {
@@ -43,38 +46,32 @@ class CTAModule extends BCorpModule {
       return
     }
 
-    const button = <button className={style.button} >{linkText}</button>
+    const button = <button className={style.button}>{linkText}</button>
 
     return (
       <BCorpLink
         url={link}
         renderInternal={url => {
           return (
-            <Link to={url} replace >
+            <Link to={url} replace>
               {button}
             </Link>
           )
         }}
         renderExternal={url => {
-          return (
-            <a href={url} >
-              {button}
-            </a>
-          )
-        }} />
+          return <a href={url}>{button}</a>
+        }}
+      />
     )
   }
 
   renderModule () {
     return (
-      <div
-        className={this.containerClassName} >
-
+      <div className={this.containerClassName}>
         {this.renderTitle()}
         {this.renderMedia()}
         {this.renderText()}
         {this.renderButton()}
-
       </div>
     )
   }

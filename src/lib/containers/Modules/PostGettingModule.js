@@ -24,19 +24,17 @@ class PostGettingModule extends BCorpModule {
     this.defaultPostState = {
       post: {
         ID: 1,
-        'post_title': '',
-        'post_content': '',
-        'post_excerpt': ''
+        post_title: '',
+        post_content: '',
+        post_excerpt: ''
       },
       media: {
-        'featured_image': ['', 0, 0, false]
+        featured_image: ['', 0, 0, false]
       }
     }
 
     this.defaultState = {
-      posts: [
-        this.defaultPostState
-      ]
+      posts: [this.defaultPostState]
     }
 
     this.state = {
@@ -67,7 +65,9 @@ class PostGettingModule extends BCorpModule {
    *
    * @return {[type]} null
    */
-  renderModule () { return null }
+  renderModule () {
+    return null
+  }
 
   render () {
     return super.render()
@@ -83,7 +83,10 @@ class PostGettingModule extends BCorpModule {
     try {
       const { postType } = this.props
       const postAPIClient = new CPTApiClient(postType.replace(/_/g, '-'))
-      const postsResponse = await postAPIClient.getByIdArray(postIdArray, postsPerPage)
+      const postsResponse = await postAPIClient.getByIdArray(
+        postIdArray,
+        postsPerPage
+      )
       const postsData = postsResponse.data
 
       const posts = postsData.map(postData => {

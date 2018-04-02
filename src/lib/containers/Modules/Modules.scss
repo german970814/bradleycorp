@@ -1,6 +1,6 @@
-@import "../../../scss/partials/layout";
-@import "../../../scss/partials/mixins";
-@import "../../../scss/partials/variables";
+@import '../../../scss/partials/layout';
+@import '../../../scss/partials/mixins';
+@import '../../../scss/partials/variables';
 
 $modulePaddingTopBottomMobile: 40px;
 $modulePaddingTopBottomTablet: 60px;
@@ -9,7 +9,6 @@ $modulePaddingTopBottomDesktop: 60px;
 .module {
   display: block;
   overflow: hidden;
-
 
   /*
     Global module styling
@@ -79,7 +78,6 @@ $modulePaddingTopBottomDesktop: 60px;
   // light
 
   :global(.module-skin-light) {
-
     &:global(.module-skin-light-background-light-gray) {
       background-color: $light-gray;
     }
@@ -89,6 +87,18 @@ $modulePaddingTopBottomDesktop: 60px;
 
   :global(.module-skin-dark) {
     color: #fff !important;
+
+    // for when content inserted is html
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    div,
+    a {
+      color: #fff !important;
+    }
 
     &:global(.module-skin-dark-background-black) {
       background-color: $black;

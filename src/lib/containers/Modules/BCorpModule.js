@@ -97,7 +97,9 @@ class BCorpModule extends Component {
     this.setSkinClass(this.props)
 
     // eg event name update-row-1
-    this.rowUpdateEventName = `update-row-${this.props.rowNode.getAttribute('data-row-id')}`
+    this.rowUpdateEventName = `update-row-${this.props.rowNode.getAttribute(
+      'data-row-id'
+    )}`
     this.rowUpdateEvent = new CustomEvent(this.rowUpdateEventName)
 
     window.addEventListener(this.rowUpdateEventName, this.updateModuleHeight)
@@ -164,7 +166,9 @@ class BCorpModule extends Component {
    *
    * @return {[null]} null
    */
-  renderModule () { return null }
+  renderModule () {
+    return null
+  }
 
   /**
    *
@@ -184,7 +188,7 @@ class BCorpModule extends Component {
     if (!this.passesValidation() || !this.state.node) {
       return (
         <div
-          ref={(node) => {
+          ref={node => {
             if (!this.state.node) {
               this.setState({ node })
             }
@@ -192,13 +196,16 @@ class BCorpModule extends Component {
           style={{
             minHeight: this.state.minHeight
           }}
-          className={`${moduleStyle.module} ${this.localStyle[this.moduleName]}`} />
+          className={`${moduleStyle.module} ${
+            this.localStyle[this.moduleName]
+          }`}
+        />
       )
     }
 
     return (
       <div
-        ref={(node) => {
+        ref={node => {
           if (!this.state.node) {
             this.setState({ node })
           }
@@ -206,19 +213,17 @@ class BCorpModule extends Component {
         style={{
           minHeight: this.state.minHeight
         }}
-        className={`${moduleStyle.module} ${this.localStyle[this.moduleName]}`} >
-
+        className={`${moduleStyle.module} ${this.localStyle[this.moduleName]}`}>
         <ContainerMediaQuery
           minHeight={this.state.minHeight}
-          node={this.state.node} >
+          node={this.state.node}>
           {(containerClassName, size) => {
             this.containerClassName = containerClassName
             this.size = size
 
             return this.renderModule()
           }}
-        </ContainerMediaQuery >
-
+        </ContainerMediaQuery>
       </div>
     )
   }
@@ -238,7 +243,9 @@ class BCorpModule extends Component {
   }
 
   setAccentColourClass (props) {
-    this.accentColorClass = props.accentColor ? `module-accent-color-${props.accentColor}` : ''
+    this.accentColorClass = props.accentColor
+      ? `module-accent-color-${props.accentColor}`
+      : ''
   }
 
   setSkinClass (props) {

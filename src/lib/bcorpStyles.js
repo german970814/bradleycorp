@@ -1,6 +1,9 @@
-import variables from '../scss/partials/_variables.scss'
+// @flow
 
-export const styleguideColors = {
+import variables from '../scss/partials/_variables.scss'
+import type { BCorpColor } from './types/styleguide_types'
+
+export const styleguideColors: { [key: BCorpColor]: string } = {
   black: variables.Black,
   white: '#fff',
   green: variables.Green,
@@ -18,7 +21,7 @@ export const styleguideColors = {
   brown: variables.Brown
 }
 
-export function lookupColor (color) {
+export function lookupColor (color?: BCorpColor) {
   if (!color) {
     return undefined
   }

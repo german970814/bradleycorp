@@ -16,7 +16,7 @@ class TextWithBackgroundPeelerModule extends BCorpModule {
       return
     }
 
-    return <h4 className={`${style.title} ${this.skinClass}`} >{title}</h4>
+    return <h4 className={`${style.title} ${this.skinClass || ''}`}>{title}</h4>
   }
 
   renderText () {
@@ -26,7 +26,12 @@ class TextWithBackgroundPeelerModule extends BCorpModule {
       return
     }
 
-    return <div className={`${style.text} ${this.skinClass}`} >{text}</div>
+    return (
+      <div
+        className={`${style.text} ${this.skinClass || ''}`}
+        dangerouslySetInnerHTML={{ __html: text }}
+      />
+    )
   }
 
   renderTexture () {
@@ -35,31 +40,33 @@ class TextWithBackgroundPeelerModule extends BCorpModule {
     }
 
     const image = `url(${this.props.backgroundPeeler})`
-    const hasCustomBackground = this.props.background ? style.hasCustomBackground : undefined
+    const hasCustomBackground = this.props.background
+      ? style.hasCustomBackground
+      : undefined
 
     return (
       <div
-        style = {{
+        style={{
           backgroundImage: image
         }}
-        className={`${style.texture} ${hasCustomBackground}`} />
+        className={`${style.texture} ${hasCustomBackground}`}
+      />
     )
   }
 
   renderModule () {
     return (
-      <div className={`${this.containerClassName} ${this.skinClass}`}>
-
+      <div className={`${this.containerClassName} ${this.skinClass || ''}`}>
         <BCorpBackground
           overlay={this.props.backgroundColor}
-          skin={this.props.skin} />
+          skin={this.props.skin}
+        />
 
         {this.renderTitle()}
 
         {this.renderText()}
 
         {this.renderTexture()}
-
       </div>
     )
   }
