@@ -13,18 +13,22 @@
   }}>
   (See PROPS & METHODS for link to available player configurations)
 </div>
-<BCorpVideo
-  url={'https://www.youtube.com/embed/Pcf_k81ACfc'}
-  youtubeProps={{
-    opts: {
-      playerVars: {
-        showinfo: 0,
-        modestbranding: 1,
-        controls: 1
+<FixedAspectRatioBox>
+  <BCorpVideo
+    url={'https://www.youtube.com/embed/Pcf_k81ACfc'}
+    youtubeProps={{
+      opts: {
+        width: '100%',
+        height: '100%',
+        playerVars: {
+          showinfo: 0,
+          modestbranding: 1,
+          controls: 1
+        }
       }
-    }
-  }}
-/>
+    }}
+  />
+</FixedAspectRatioBox>
 <h1
 style={{
     paddingTop: '25px',

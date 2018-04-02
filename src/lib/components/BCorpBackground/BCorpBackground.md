@@ -1,7 +1,6 @@
 ```jsx
 <div
   style={{
-    height: '300px',
     width: '100%',
     position: 'relative',
     zIndex: 0
@@ -40,6 +39,7 @@
     style={{
       color: 'white',
       paddingTop: '20px',
+      paddingBottom: '50px',
       paddingLeft: '10%',
       paddingRight: '10%',
       textAlign: 'center'
