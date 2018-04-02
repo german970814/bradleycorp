@@ -2,7 +2,9 @@ const functional = [
   '**/BCorpLink/**',
   '**/VerticalAlignHelper/**',
   '**/ContainerMediaQuery/**',
-  '**/Touch/**'
+  '**/AutoGrowShrinkAnimation/**',
+  '**/Touch/**',
+  '**/ScrollableListTrack.js'
 ]
 
 module.exports = {
@@ -14,6 +16,14 @@ module.exports = {
     '**/*.d.ts',
     '**/PDFDownloadLink/*.js',
     '**/WordDownloadLink/*.js',
+    '**/LightboxCloseButton.js',
+    '**/lightboxVars.js',
+    '**/ProductScrollerProduct/**',
+    '**/PositionCircle/**',
+    '**/ButtonLeft.js',
+    '**/ButtonRight.js',
+    '**/ButtonPrev.js',
+    '**/ButtonNext.js',
     '**/Modules/**',
     '**/Pages/**',
     '**/Templates/**',

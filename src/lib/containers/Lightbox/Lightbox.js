@@ -5,6 +5,9 @@ import VerticalAlignHelper from '../../components/VerticalAlignHelper/VerticalAl
 import LightboxCloseButton from './LightboxCloseButton'
 import style from './Lightbox.scss'
 
+/**
+ * This component will receive two elements. On clicking the first one, the second one will open in a lightbox.
+ */
 class Lightbox extends Component {
   constructor (props) {
     super(props)
@@ -67,32 +70,26 @@ class Lightbox extends Component {
 
   renderLightbox () {
     if (this.state.isOpen) {
-      return ReactDOM.createPortal((
+      return ReactDOM.createPortal(
         <div
           className={[style.background, this.props.backgroundClass].join(' ')}
-          onClick={this.closeLightbox.bind(this)} >
-
+          onClick={this.closeLightbox.bind(this)}>
           <VerticalAlignHelper />
 
-          <div
-            className={style.lightbox} >
-
+          <div className={style.lightbox}>
             {this.getLightboxContent()}
 
-            <LightboxCloseButton
-              onClick={this.closeLightbox.bind(this)} />
-
+            <LightboxCloseButton onClick={this.closeLightbox.bind(this)} />
           </div>
-
-        </div>
-      ), document.getElementById('lightbox'))
+        </div>,
+        document.getElementById('lightbox')
+      )
     }
   }
 
   render () {
     return (
-      <div
-        className={style.childWrapper} >
+      <div className={style.childWrapper}>
         {this.renderChildrenWithLightboxAPI()}
         {this.renderLightbox()}
       </div>
@@ -101,11 +98,29 @@ class Lightbox extends Component {
 }
 
 Lightbox.propTypes = {
+  /**
+   * Should be two children, the first is rendered as normal and the second is rendered inside a lightbox on clicking the first.
+   */
   children: PropTypes.node.isRequired,
+  /**
+   * Custom css class for the lightbox background
+   */
   backgroundClass: PropTypes.string,
+  /**
+   * The lightbox close button element
+   */
   closeButton: PropTypes.func,
+  /**
+   * Can pass a listener to the close button on click event
+   */
   closeButtonOnClick: PropTypes.func,
+  /**
+   * Can pass a listener to lightbox open event
+   */
   onLightboxOpen: PropTypes.func,
+  /**
+   * Can pass a listener to lightbox close event
+   */
   onLightboxClose: PropTypes.func
 }
 

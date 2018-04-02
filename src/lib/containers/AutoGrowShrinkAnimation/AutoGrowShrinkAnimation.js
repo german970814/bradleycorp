@@ -1,6 +1,9 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 
+/**
+ * Stage manager for animating elements with changeable heights
+ */
 class AutoGrowShrinkAnimation extends Component {
   constructor (props) {
     super(props)
@@ -25,7 +28,8 @@ class AutoGrowShrinkAnimation extends Component {
 
       requestAnimationFrame(() => {
         this.node.style.height = newHeight
-        this.node.style.transition = `height ${this.props.speed || 600}ms ${this.props.easing || 'linear'}`
+        this.node.style.transition = `height ${this.props.speed || 600}ms ${this
+          .props.easing || 'linear'}`
       })
     })
   }
@@ -41,13 +45,29 @@ class AutoGrowShrinkAnimation extends Component {
   }
 
   render () {
-    return this.props.children(this.state.isOpen, this.updateNode.bind(this), this.openClose.bind(this))
+    return this.props.children(
+      this.state.isOpen,
+      this.updateNode.bind(this),
+      this.openClose.bind(this)
+    )
   }
 }
 
 AutoGrowShrinkAnimation.propTypes = {
+  /**
+   * A function which returns some jsx. The returned jsx is what will be rendered.
+   * This function will receive isOpen bool state,
+   * an openClose function,
+   * and an updateNode function which must be called and passed a ref
+   */
   children: PropTypes.func.isRequired,
+  /**
+   * The easing function to use for the animation
+   */
   easing: PropTypes.string,
+  /**
+   * The speed of the animation in ms
+   */
   speed: PropTypes.number
 }
 
