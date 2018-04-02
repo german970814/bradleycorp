@@ -19,6 +19,9 @@ const icons = {
   }
 }
 
+/**
+ * Wraps registered SVG files with an API to interact with it more easily
+ */
 class SVGIcon extends Component {
   constructor (props) {
     super(props)
@@ -31,10 +34,16 @@ class SVGIcon extends Component {
   }
 
   onMouseEnter (e) {
-    this.setState({ strokeDashoffset: `${-icons[this.props.icon].redrawDashArraySize}px`, transition: 'none' })
+    this.setState({
+      strokeDashoffset: `${-icons[this.props.icon].redrawDashArraySize}px`,
+      transition: 'none'
+    })
 
     setTimeout(() => {
-      this.setState({ strokeDashoffset: '0px', transition: 'stroke-dashoffset 500ms' })
+      this.setState({
+        strokeDashoffset: '0px',
+        transition: 'stroke-dashoffset 500ms'
+      })
     }, 30)
   }
 
@@ -45,14 +54,18 @@ class SVGIcon extends Component {
 
     return {
       strokeDashoffset: this.state.strokeDashoffset,
-      strokeDasharray: this.props.redrawOnHover ? `${icons[this.props.icon].redrawDashArraySize}px` : undefined,
+      strokeDasharray: this.props.redrawOnHover
+        ? `${icons[this.props.icon].redrawDashArraySize}px`
+        : undefined,
       transition: this.state.transition
     }
   }
 
   render () {
     if (!icons[this.props.icon]) {
-      console.warn(`icon ${this.props.icon} is not registered in the SVGIcon component`)
+      console.warn(
+        `icon ${this.props.icon} is not registered in the SVGIcon component`
+      )
       return null
     }
 
@@ -65,25 +78,36 @@ class SVGIcon extends Component {
         className={this.props.className}
         xmlns={icons[this.props.icon].ns}
         viewBox={icons[this.props.icon].viewBox}
-        onMouseEnter={this.props.redrawOnHover ? this.onMouseEnter.bind(this) : undefined} >
-
+        onMouseEnter={
+          this.props.redrawOnHover ? this.onMouseEnter.bind(this) : undefined
+        }>
         <path
           d={icons[this.props.icon].d}
           style={{
             ...icons[this.props.icon].pathStyle,
             ...this.getRedrawStyles(),
             ...customStyles
-          }} />
-
+          }}
+        />
       </svg>
     )
   }
 }
 
 SVGIcon.propTypes = {
-  icon: PropTypes.string.isRequired,
+  /**
+   * The slug for the SVG icon to render.
+   * Must be registered within the class
+   */
+  icon: PropTypes.oneOf(['arrow']).isRequired,
   className: PropTypes.string,
+  /**
+   * Redraws the icon each time it's hovered over
+   */
   redrawOnHover: PropTypes.bool,
+  /**
+   * A colour from the styleguide
+   */
   color: PropTypes.string
 }
 

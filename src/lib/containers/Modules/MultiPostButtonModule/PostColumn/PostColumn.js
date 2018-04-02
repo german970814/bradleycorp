@@ -31,14 +31,15 @@ class PostColumn extends Component {
     const imgSrc = post.media['featured_image'][0]
 
     return (
-      <div className={style.imageWrapper} >
+      <div className={style.imageWrapper}>
         <ImageFrame
           src={imgSrc}
           aspectRatio={121 / 270}
           aspectRatioTablet={89 / 177}
           aspectRatioDesktop={140 / 316}
           containerNode={this.props.containerNode}
-          respondToContainer />
+          respondToContainer
+        />
       </div>
     )
   }
@@ -51,12 +52,8 @@ class PostColumn extends Component {
     }
 
     return (
-      <Link
-        to={`${this.postLink}`}
-        replace >
-
-        <h4 className={`${style.title} ${this.props.skinClass}`} >{post.post['post_title']}</h4>
-
+      <Link to={`${this.postLink}`} replace>
+        <h4 className={`${style.title} ${this.props.skinClass}`}>{post.post['post_title']}</h4>
       </Link>
     )
   }
@@ -69,25 +66,17 @@ class PostColumn extends Component {
       return
     }
 
-    return (
-      <div className={`${style.content} ${this.props.skinClass}`} >
-        {excerpt}
-      </div>
-    )
+    return <div className={`${style.content} ${this.props.skinClass}`}>{excerpt}</div>
   }
 
   renderButton () {
     return (
-      <div className={style.buttonWrapper} >
-
-        <Link
-          to={`${this.postLink}`}
-          replace >
-
-          <button className={`button-brown ${style.button} ${this.props.accentColorClass}`} >{'LEARN MORE'}</button>
-
+      <div className={style.buttonWrapper}>
+        <Link to={`${this.postLink}`} replace>
+          <button className={`button-brown ${style.button} ${this.props.accentColorClass}`}>
+            {'LEARN MORE'}
+          </button>
         </Link>
-
       </div>
     )
   }
@@ -100,14 +89,15 @@ class PostColumn extends Component {
   render () {
     const columnSizeClass = style[`post-column-${this.props.numColumns}`]
     return (
-      <div className={`${columnSizeClass} ${style.postColumnWrapper} ${this.props.containerClassName} ${this.props.skinClass}`} >
-
+      <div
+        className={`${columnSizeClass} ${style.postColumnWrapper} ${
+          this.props.containerClassName
+        } ${this.props.skinClass}`}>
         {this.renderImage()}
         {this.renderTitle()}
         {this.renderContent()}
         {this.renderButton()}
         {this.renderDivider()}
-
       </div>
     )
   }

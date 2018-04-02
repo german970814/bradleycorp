@@ -10,7 +10,11 @@ import style from './TabDesign.scss'
 class TabDesign extends Component {
   getColumnWidth () {
     let count = 0
-    const propsArray = [this.props.links, this.props.videos, this.props.literature]
+    const propsArray = [
+      this.props.links,
+      this.props.videos,
+      this.props.literature
+    ]
     propsArray.forEach(prop => {
       if (prop.length) {
         count++
@@ -33,14 +37,12 @@ class TabDesign extends Component {
         return
       }
       return (
-        <li
-          key={index} >
-          <ArrowThumbnail
-            arrowCustomClass={tabStyle.greyArrow}>
+        <li key={index}>
+          <ArrowThumbnail>
             <Link
               to={link.url}
               className={`link-orange ${tabStyle.tabTextOrange}`}
-              replace >
+              replace>
               {link.text}
             </Link>
           </ArrowThumbnail>
@@ -52,14 +54,9 @@ class TabDesign extends Component {
   renderLinks () {
     if (this.props.links.length) {
       return (
-        <div
-          className={this.getColumnWidth()} >
-          <h5
-            className={tabStyle.tabColTitle} >
-            {'Links'}
-          </h5>
-          <ul
-            className={tabStyle.tabColUl} >
+        <div className={this.getColumnWidth()}>
+          <h5 className={tabStyle.tabColTitle}>{'Links'}</h5>
+          <ul className={tabStyle.tabColUl}>
             {this.renderLinksList(this.props.links)}
           </ul>
         </div>
@@ -70,18 +67,11 @@ class TabDesign extends Component {
   renderVideos () {
     if (this.props.videos.length) {
       return (
-        <div
-          className={this.getColumnWidth()} >
-          <div
-            className={tabStyle.videoColMaxWidth} >
-            <h5
-              className={tabStyle.tabColTitle} >
-              {'Videos'}
-            </h5>
-            <div
-              className={tabStyle.videoApectRatioWrapper} >
-              <div
-                className={tabStyle.videoAspectRatioInside}>
+        <div className={this.getColumnWidth()}>
+          <div className={tabStyle.videoColMaxWidth}>
+            <h5 className={tabStyle.tabColTitle}>{'Videos'}</h5>
+            <div className={tabStyle.videoApectRatioWrapper}>
+              <div className={tabStyle.videoAspectRatioInside}>
                 {renderVideoThumbnail(this.props.videos)}
               </div>
             </div>
@@ -93,21 +83,19 @@ class TabDesign extends Component {
 
   renderLiteratureList () {
     return this.props.literature.map((literature, index) => {
-      const imageSrc = literature.media['featured_image'] && literature.media['featured_image'].length
-        ? literature.media['featured_image'][0]
-        : undefined
+      const imageSrc =
+        literature.media['featured_image'] &&
+        literature.media['featured_image'].length
+          ? literature.media['featured_image'][0]
+          : undefined
       return (
-        <li
-          key={index}
-          className={style.literature} >
-
-          <a href={literature.meta['literature_pdf']}>
-            <PDFWithFeaturedImage
-              title={literature.post['post_title']}
-              imageSrc={imageSrc}
-              titleClassName={`link-orange ${tabStyle.tabTextOrange}`} />
-          </a>
-
+        <li key={index} className={style.literature}>
+          <PDFWithFeaturedImage
+            title={literature.post['post_title']}
+            url={literature.meta['literature_pdf']}
+            imageSrc={imageSrc}
+            titleClassName={`link-orange ${tabStyle.tabTextOrange}`}
+          />
         </li>
       )
     })
@@ -116,16 +104,11 @@ class TabDesign extends Component {
   renderLiterature () {
     if (this.props.literature.length) {
       return (
-        <div
-          className={this.getColumnWidth()} >
-          <h5
-            className={`${tabStyle.tabColTitle} ${style.literatureTitle}`} >
+        <div className={this.getColumnWidth()}>
+          <h5 className={`${tabStyle.tabColTitle} ${style.literatureTitle}`}>
             {'Literature'}
           </h5>
-          <ul
-            className={tabStyle.tabColUl} >
-            {this.renderLiteratureList()}
-          </ul>
+          <ul className={tabStyle.tabColUl}>{this.renderLiteratureList()}</ul>
         </div>
       )
     }
@@ -139,11 +122,14 @@ class TabDesign extends Component {
         const termName = materialType.name
 
         if (Object.keys(colorsByMaterialType).includes(termName)) {
-          colorsByMaterialType[termName] = [ ...colorsByMaterialType[termName], color ]
+          colorsByMaterialType[termName] = [
+            ...colorsByMaterialType[termName],
+            color
+          ]
           return
         }
 
-        colorsByMaterialType[termName] = [ color ]
+        colorsByMaterialType[termName] = [color]
       })
     })
 
@@ -152,22 +138,14 @@ class TabDesign extends Component {
 
   renderColorsList (colors) {
     return colors.map((color, index) => {
-      const src = color.media['featured_image'] && color.media['featured_image'].length
-        ? color.media['featured_image'][0]
-        : ''
+      const src =
+        color.media['featured_image'] && color.media['featured_image'].length
+          ? color.media['featured_image'][0]
+          : ''
       return (
-        <li
-          key={index}
-          className={style.color} >
-
-          <img
-            src={src}
-            className={style.colorImage} />
-          <h6
-            className={style.colorTitle} >
-            {color.post['post_title']}
-          </h6>
-
+        <li key={index} className={style.color}>
+          <img src={src} className={style.colorImage} />
+          <h6 className={style.colorTitle}>{color.post['post_title']}</h6>
         </li>
       )
     })
@@ -178,15 +156,12 @@ class TabDesign extends Component {
       const colorsByMaterialType = this.getColorsByMaterialType()
       return Object.keys(colorsByMaterialType).map((materialType, index) => {
         return (
-          <div
-            key={index}
-            className={tabStyle.fullWidthColDesktopTab} >
+          <div key={index} className={tabStyle.fullWidthColDesktopTab}>
             <h5
-              className={`${tabStyle.tabColTitle} ${style.colorMaterialType}`} >
+              className={`${tabStyle.tabColTitle} ${style.colorMaterialType}`}>
               {materialType}
             </h5>
-            <ul
-              className={tabStyle.tabColUl} >
+            <ul className={tabStyle.tabColUl}>
               {this.renderColorsList(colorsByMaterialType[materialType])}
             </ul>
           </div>
@@ -197,9 +172,7 @@ class TabDesign extends Component {
 
   render () {
     return (
-      <div
-        className={style.tabDesign} >
-
+      <div className={style.tabDesign}>
         {this.renderLinks()}
 
         {this.renderVideos()}
@@ -207,7 +180,6 @@ class TabDesign extends Component {
         {this.renderLiterature()}
 
         {this.renderColors()}
-
       </div>
     )
   }

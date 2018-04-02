@@ -1,48 +1,32 @@
 import variables from '../scss/partials/_variables.scss'
 
+export const styleguideColors = {
+  black: variables.Black,
+  white: '#fff',
+  green: variables.Green,
+  navy: variables.Navy,
+  blue: variables.Navy,
+  red: variables.Red,
+  orange: variables.Orange,
+  'light-gray': variables.LightGray,
+  gray: variables.Gray,
+  'dark-gray': variables.DarkGray,
+  silver: variables.Silver,
+  'slate-grey': variables.SlateGrey,
+  'steel-grey': variables.SteelGrey,
+  'charcoal-grey': variables.CharcoalGrey,
+  brown: variables.Brown
+}
+
 export function lookupColor (color) {
-  switch (color) {
-    case 'black':
-      return variables.Black
-
-    case 'white':
-      return '#fff'
-
-    case 'green':
-      return variables.Green
-
-    case 'navy':
-    case 'blue':
-      return variables.Navy
-
-    case 'red':
-      return variables.Red
-
-    case 'orange':
-      return variables.Orange
-
-    case 'light-gray':
-      return variables.LightGray
-
-    case 'gray':
-      return variables.Gray
-
-    case 'dark-gray':
-      return variables.DarkGray
-
-    case 'silver':
-      return variables.Silver
-
-    case 'slate-grey':
-      return variables.SlateGrey
-
-    case 'steel-grey':
-      return variables.SteelGrey
-
-    case 'charcoal-grey':
-      return variables.CharcoalGrey
-
-    case 'brown':
-      return variables.Brown
+  if (!color) {
+    return undefined
+  }
+  if (styleguideColors && styleguideColors.hasOwnProperty(color)) {
+    return styleguideColors[color]
+  } else {
+    console.log(`Couldnt find color ${color} in styleguideColors`)
+    console.log(styleguideColors)
+    return undefined
   }
 }

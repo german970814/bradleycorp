@@ -6,6 +6,10 @@ import ContainerMediaQuery from '../../../containers/ContainerMediaQuery/Contain
 import FixedAspectRatioBox from '../FixedAspectRatioBox'
 import style from './ImageFrame.scss'
 
+/**
+ * Wrapper for FixedAspectRatioBox which takes
+ * an image src and allows you to specify a different aspect ratio for each screen size
+ */
 class ImageFrame extends Component {
   getAspectRatioTablet () {
     if (!this.props.aspectRatioTablet) {
@@ -25,42 +29,42 @@ class ImageFrame extends Component {
 
   renderFrameMobile () {
     return (
-      <FixedAspectRatioBox
-        aspectRatio={this.props.aspectRatio} >
+      <FixedAspectRatioBox aspectRatio={this.props.aspectRatio}>
         <div
           style={{
             backgroundImage: `url(${this.props.src})`,
             backgroundSize: this.props.sizing
           }}
-          className={style.image} />
+          className={style.image}
+        />
       </FixedAspectRatioBox>
     )
   }
 
   renderFrameTablet () {
     return (
-      <FixedAspectRatioBox
-        aspectRatio={this.getAspectRatioTablet()} >
+      <FixedAspectRatioBox aspectRatio={this.getAspectRatioTablet()}>
         <div
           style={{
             backgroundImage: `url(${this.props.src})`,
             backgroundSize: this.props.sizing
           }}
-          className={style.image} />
+          className={style.image}
+        />
       </FixedAspectRatioBox>
     )
   }
 
   renderFrameDesktop () {
     return (
-      <FixedAspectRatioBox
-        aspectRatio={this.getAspectRatioDesktop()} >
+      <FixedAspectRatioBox aspectRatio={this.getAspectRatioDesktop()}>
         <div
           style={{
             backgroundImage: `url(${this.props.src})`,
             backgroundSize: this.props.sizing
           }}
-          className={style.image} />
+          className={style.image}
+        />
       </FixedAspectRatioBox>
     )
   }
@@ -70,55 +74,42 @@ class ImageFrame extends Component {
       return (
         <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
           {match =>
-            match ? this.renderFrameMobile()
-              : (
-                <Media query={{ maxWidth: TABLETMAXWIDTH }}>
-                  {match =>
-                    match ? this.renderFrameTablet() : this.renderFrameDesktop()
-                  }
-                </Media>
-              )
+            match ? (
+              this.renderFrameMobile()
+            ) : (
+              <Media query={{ maxWidth: TABLETMAXWIDTH }}>
+                {match =>
+                  match ? this.renderFrameTablet() : this.renderFrameDesktop()
+                }
+              </Media>
+            )
           }
         </Media>
       )
     } else {
       return (
         <div
-          ref={(node) => {
+          ref={node => {
             if (!this.props.containerNode && !this.node) {
               this.node = node
             }
           }}
-          className={style.imageFrame} >
-
-          <ContainerMediaQuery
-            node={this.props.containerNode || this.node} >
+          className={style.imageFrame}>
+          <ContainerMediaQuery node={this.props.containerNode || this.node}>
             {(containerClassName, size) => {
               let frame = null
 
               if (size === 'mobile') {
                 frame = this.renderFrameMobile()
-              } else
-
-              if (size === 'tablet') {
+              } else if (size === 'tablet') {
                 frame = this.renderFrameTablet()
-              } else
-
-              if (size === 'desktop') {
+              } else if (size === 'desktop') {
                 frame = this.renderFrameDesktop()
               }
 
-              return (
-                <div
-                  className={containerClassName} >
-
-                  {frame}
-
-                </div>
-              )
+              return <div className={containerClassName}>{frame}</div>
             }}
           </ContainerMediaQuery>
-
         </div>
       )
     }
@@ -126,12 +117,24 @@ class ImageFrame extends Component {
 }
 
 ImageFrame.propTypes = {
+  /**
+   * Src of an image to contain in the frame
+   */
   src: PropTypes.string.isRequired,
+  /**
+   * Aspect ratio for mobile screen size
+   */
   aspectRatio: PropTypes.number.isRequired,
+  /**
+   * Aspect ratio for tablet screen size (defaults to mobile)
+   */
   aspectRatioTablet: PropTypes.number,
+  /**
+   * Aspect ratio for desktop screen size (defaults to mobile)
+   */
   aspectRatioDesktop: PropTypes.number,
   /**
-   * Media query is on container size rather than window
+   * Media query will be on container size rather than window
    */
   respondToContainer: PropTypes.bool,
   /**
@@ -141,6 +144,9 @@ ImageFrame.propTypes = {
    * If left empty the slider will respond to the size of its' container
    */
   containerNode: PropTypes.object,
+  /**
+   * How should the image fit inside the frame
+   */
   sizing: PropTypes.oneOf(['cover', 'contain'])
 }
 

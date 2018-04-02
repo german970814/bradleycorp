@@ -27,7 +27,9 @@ class SinglePostFeaturedModule extends PostGettingModule {
   }
 
   componentDidUpdate (prevProps, prevState) {
-    if (this.state.posts[0]['post_title'] !== prevState.posts[0]['post_title']) {
+    if (
+      this.state.posts[0]['post_title'] !== prevState.posts[0]['post_title']
+    ) {
       this.postLink = createCPTUrl(this.state.posts[0])
     }
   }
@@ -38,12 +40,10 @@ class SinglePostFeaturedModule extends PostGettingModule {
     }
 
     return (
-      <Link
-        to={this.postLink}
-        replace >
-
-        <div className={`hero-headline ${style.headline}`} >{this.props.headline}</div>
-
+      <Link to={this.postLink} replace>
+        <div className={`hero-headline ${style.headline}`}>
+          {this.props.headline}
+        </div>
       </Link>
     )
   }
@@ -56,12 +56,8 @@ class SinglePostFeaturedModule extends PostGettingModule {
     }
 
     return (
-      <Link
-        to={this.postLink}
-        replace >
-
-        <h4 className={style.title} >{post['post_title']}</h4>
-
+      <Link to={this.postLink} replace>
+        <h4 className={style.title}>{post['post_title']}</h4>
       </Link>
     )
   }
@@ -73,23 +69,24 @@ class SinglePostFeaturedModule extends PostGettingModule {
       return
     }
 
-    return <div className={style.content} >{getExcerpt(post['post_excerpt'], post['post_content'])}</div>
+    return (
+      <div className={style.content}>
+        {getExcerpt(post['post_excerpt'], post['post_content'])}
+      </div>
+    )
   }
 
   renderArrow () {
     return (
-      <Link
-        to={this.postLink}
-        replace >
-
-        <div className={style.arrowWrapper} >
+      <Link to={this.postLink} replace>
+        <div className={style.arrowWrapper}>
           <SVGIcon
             className={style.arrow}
             icon={'arrow'}
             color={'white'}
-            redrawOnHover />
+            redrawOnHover
+          />
         </div>
-
       </Link>
     )
   }
@@ -100,9 +97,7 @@ class SinglePostFeaturedModule extends PostGettingModule {
 
     if (this.props.background) {
       src = this.props.background
-    } else
-
-    if (media['featured_image'] && media['featured_image'].length > 0) {
+    } else if (media['featured_image'] && media['featured_image'].length > 0) {
       src = media['featured_image'][0]
     }
 
@@ -111,33 +106,28 @@ class SinglePostFeaturedModule extends PostGettingModule {
         <BCorpBackground
           imageSrc={src}
           overlay={this.props.backgroundOverlay}
-          skin={this.props.skin} />
+          skin={this.props.skin}
+        />
       )
     }
   }
 
   renderModule () {
     return (
-      <React.Fragment >
-
+      <React.Fragment>
         {this.renderImage()}
 
         <div className={`row ${this.containerClassName}`}>
-
           {this.renderHeadline()}
 
-          <div className={style.contentWrapper} >
-
+          <div className={style.contentWrapper}>
             {this.renderTitle()}
 
             {this.renderContent()}
-
           </div>
 
           {this.renderArrow()}
-
         </div>
-
       </React.Fragment>
     )
   }
@@ -156,7 +146,6 @@ class SinglePostFeaturedModule extends PostGettingModule {
 }
 
 SinglePostFeaturedModule.propTypes = {
-
   ...PostGettingModule.propTypes,
 
   headline: PropTypes.string,

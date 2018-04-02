@@ -39,18 +39,19 @@ class ProductDetail extends Component {
             productsArray={this.state.productDetail['purchased_with']}
             numberMobile={2}
             numberTablet={3}
-            numberDesktop={5} />
+            numberDesktop={5}
+          />
         </section>
       )
     }
   }
 
   renderDivider () {
-    if (this.state.productDetail['purchased_with'].length !== 0 && this.state.productDetail['similar'].length !== 0) {
-      return (
-        <Divider
-          customClass={style.divider} />
-      )
+    if (
+      this.state.productDetail['purchased_with'].length !== 0 &&
+      this.state.productDetail['similar'].length !== 0
+    ) {
+      return <Divider className={style.divider} />
     }
   }
 
@@ -63,7 +64,8 @@ class ProductDetail extends Component {
             productsArray={this.state.productDetail['similar']}
             numberMobile={2}
             numberTablet={3}
-            numberDesktop={5} />
+            numberDesktop={5}
+          />
         </section>
       )
     }
@@ -72,41 +74,49 @@ class ProductDetail extends Component {
   render () {
     console.log(this.state.productDetail)
     return (
-      <div
-        className={style.productDetailPage}>
-        <section
-          className={style.content}>
+      <div className={style.productDetailPage}>
+        <section className={style.content}>
           <ProductContent
             title={this.state.productDetail.product.post['post_title']}
             content={this.state.productDetail.product.post['post_content']}
-            featuredImageSrc={this.state.productDetail.product.media['featured_image'][0]}
-            images={(this.state.productDetail.product.meta['product_media'])
-              ? this.state.productDetail.product.meta['product_media'].images[0]
-              : ''}
-            videos={(this.state.productDetail.product.meta['product_media'])
-              ? this.state.productDetail.product.meta['product_media'].videos
-              : ''}
-            newUntil={this.state.productDetail.product.meta['product_new_until']}
+            featuredImageSrc={
+              this.state.productDetail.product.media['featured_image'][0]
+            }
+            images={
+              this.state.productDetail.product.meta['product_media']
+                ? this.state.productDetail.product.meta['product_media']
+                  .images[0]
+                : ''
+            }
+            videos={
+              this.state.productDetail.product.meta['product_media']
+                ? this.state.productDetail.product.meta['product_media'].videos
+                : ''
+            }
+            newUntil={
+              this.state.productDetail.product.meta['product_new_until']
+            }
             sku={this.state.productDetail.product.meta['product_sku']}
-            awards={(this.state.productDetail.product.meta['product_awards'])
-              ? this.state.productDetail.product.meta['product_awards']
-              : []}
-            cta={this.state.productDetail.product.meta['product_cta']} />
+            awards={
+              this.state.productDetail.product.meta['product_awards']
+                ? this.state.productDetail.product.meta['product_awards']
+                : []
+            }
+            cta={this.state.productDetail.product.meta['product_cta']}
+          />
         </section>
 
-        <section
-          className={style.tabs}>
+        <section className={style.tabs}>
           <ProductTabs
             productID={this.state.productDetail.product.post.ID}
-            tabsData={this.state.productDetail.tabs} />
+            tabsData={this.state.productDetail.tabs}
+          />
         </section>
 
         {this.renderPurchasedWith()}
         {this.renderDivider()}
         {this.renderSimilarProducts()}
-
       </div>
-
     )
   }
 
@@ -117,7 +127,9 @@ class ProductDetail extends Component {
       const productDetailData = productDetail.data
 
       // set state leaving defaults where there exists no data in the request
-      return this.setState({ productDetail: Object.assign({}, productObjectShape, productDetailData) })
+      return this.setState({
+        productDetail: Object.assign({}, productObjectShape, productDetailData)
+      })
     } catch (err) {
       console.log(new ProductDetailException(err))
     }

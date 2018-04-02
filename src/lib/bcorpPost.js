@@ -6,16 +6,13 @@ export function isNew (date) {
   return newUntil - now > 0
 }
 
-export function getExcerpt (excerpt, postContent, numberWords) {
-  const defaultExcerptLength = 100
-  const defaultExcerptFromContentLength = 55
+export function getExcerpt (excerpt, postContent, long) {
+  const excerptLength = long ? 50 : 25
 
   if (excerpt && excerpt !== '') {
-    return nWords(excerpt, numberWords || defaultExcerptLength)
-  } else
-
-  if (postContent && postContent !== '') {
-    return nWords(postContent, numberWords || defaultExcerptFromContentLength)
+    return nWords(excerpt, excerptLength)
+  } else if (postContent && postContent !== '') {
+    return nWords(postContent, excerptLength)
   } else {
     return ''
   }

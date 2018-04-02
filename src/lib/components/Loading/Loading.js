@@ -1,7 +1,9 @@
 import React from 'react'
 
+/**
+ * Will be created in a future sprint with designs
+ */
 const Loading = props => {
-  // TODO: we'll change this when we have the designs available
   return <div>Loading...</div>
 }
 

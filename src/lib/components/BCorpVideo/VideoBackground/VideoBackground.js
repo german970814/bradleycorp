@@ -6,7 +6,10 @@ import BCorpVideo from '../BCorpVideo'
 import style from './VideoBackground.scss'
 
 /**
- * Adds a video background to a relatively positioned contaner node
+ * Adds a video background to a relatively positioned contaner node.
+ * There is the option to add a placeholder image that will fade out when the video is ready to play.
+ *
+ * Video backgrounds will autoplay and be muted.
  *
  * Note: although Vimeo is technically supported, YouTube is recommended.
  * Vimeo currently has no way to mute the video, and the autoplay argument also seems to have a bug.
@@ -20,8 +23,13 @@ class VideoBackground extends Component {
 
     this.state = { width: 0, height: 0, top: 0, left: 0, playerReady: false }
 
-    this.initUpdateBackgroundDimensions = this.updateBackgroundDimensions.bind(this)
-    this.updateBackgroundDimensions = debounce(this.updateBackgroundDimensions.bind(this), 200)
+    this.initUpdateBackgroundDimensions = this.updateBackgroundDimensions.bind(
+      this
+    )
+    this.updateBackgroundDimensions = debounce(
+      this.updateBackgroundDimensions.bind(this),
+      200
+    )
   }
 
   componentDidMount () {
@@ -48,6 +56,10 @@ class VideoBackground extends Component {
    * @return {[void]}
    */
   updateBackgroundDimensions () {
+    if (!this.props.node) {
+      return
+    }
+
     const { offsetWidth, offsetHeight } = this.props.node
 
     let height = offsetWidth * 0.5625
@@ -62,7 +74,7 @@ class VideoBackground extends Component {
       left = (offsetWidth - width) / 2
     }
 
-    this.setState({ width, height, top, left })
+    return this.setState({ width, height, top, left })
   }
 
   /**
@@ -85,18 +97,17 @@ class VideoBackground extends Component {
    * Renders the image that appears by default until the video starts playing
    */
   renderPlaceholderImage () {
-    if (!this.props.placeholder) {
-      return
-    }
-
     return (
       <div
         style={{
-          backgroundImage: this.props.placeholder ? `url(${this.props.placeholder})` : undefined,
+          backgroundImage: this.props.placeholder
+            ? `url(${this.props.placeholder})`
+            : undefined,
           backgroundColor: lookupColor('black'),
           opacity: this.state.playerReady ? 0 : 1
         }}
-        className={style.placeholderImage} />
+        className={style.placeholderImage}
+      />
     )
   }
 
@@ -109,8 +120,7 @@ class VideoBackground extends Component {
           top: this.state.top,
           left: this.state.left
         }}
-        className={style.videoBackground} >
-
+        className={style.videoBackground}>
         {this.renderPlaceholderImage()}
 
         <BCorpVideo
@@ -143,8 +153,8 @@ class VideoBackground extends Component {
               width: this.state.width,
               height: this.state.height
             }
-          }} />
-
+          }}
+        />
       </div>
     )
   }
@@ -152,16 +162,17 @@ class VideoBackground extends Component {
 
 VideoBackground.propTypes = {
   /**
-   * node ref for the container that we want to give a video background to
+   * node ref for the container that we want to give a video background to.
    * Note: this container should have relative positioning
    */
   node: PropTypes.object.isRequired,
   /**
-   * A Video URL or just the ID
+   * A Video URL or just the ID (YouTube)
    */
   url: PropTypes.string.isRequired,
   /**
-   * Placeholder Image Src, leave empty for no placeholder
+   * Placeholder Image Src, this will show while the video is loading and fade out when the video is ready.
+   * Leave empty for no placeholder
    */
   placeholder: PropTypes.string
 }

@@ -2,37 +2,42 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import style from './PDFWithFeaturedImage.scss'
 
+/**
+ * For displaying links to PDFs with a preview image
+ */
 const PDFWithFeaturedImage = props => {
-  const imageContainer = props.imageSrc
-    ? (
-      <div
-        className={style.imageContainer} >
-
-        <img
-          className={style.image}
-          src={props.imageSrc} />
-      </div>
-    )
-    : null
+  const imageContainer = props.imageSrc ? (
+    <div className={style.imageContainer}>
+      <img className={style.image} src={props.imageSrc} />
+    </div>
+  ) : null
 
   return (
-    <div
-      className={style.pdfWithFeaturedImage}>
+    <a href={props.url} target="_blank">
+      <div className={style.pdfWithFeaturedImage}>
+        {imageContainer}
 
-      {imageContainer}
-
-      <div
-        className={`${style.title} ${props.titleClassName}`} >
-        {props.title}
+        <div className={`${style.title} ${props.titleClassName}`}>
+          {props.title}
+        </div>
       </div>
-
-    </div>
+    </a>
   )
 }
 
 PDFWithFeaturedImage.propTypes = {
-  title: PropTypes.string,
-  imageSrc: PropTypes.string,
+  /**
+   * Title of the PDF
+   */
+  title: PropTypes.string.isRequired,
+  /**
+   * Link to the PDF
+   */
+  url: PropTypes.string.isRequired,
+  /**
+   * A preview image for the PDF
+   */
+  imageSrc: PropTypes.string.isRequired,
   titleClassName: PropTypes.string
 }
 

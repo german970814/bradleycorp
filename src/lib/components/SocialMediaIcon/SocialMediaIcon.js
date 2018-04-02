@@ -2,6 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import style from './SocialMediaIcon.scss'
 
+/**
+ * Renders one of the included social media icons
+ */
 const SocialMediaIcon = ({ className, iconName }) => {
   const iconSrc = getIconSrc(iconName)
 
@@ -10,17 +13,21 @@ const SocialMediaIcon = ({ className, iconName }) => {
   }
 
   return (
-    <div
-      className={`social-media-icon ${style.socialMediaIcon} ${className}`} >
-      <img
-        src={iconSrc} />
+    <div className={`social-media-icon ${style.socialMediaIcon} ${className}`}>
+      <img src={iconSrc} />
     </div>
   )
 }
 
 SocialMediaIcon.propTypes = {
-  // select icon name from the list below
-  iconName: PropTypes.string.isRequired,
+  iconName: PropTypes.oneOf([
+    'facebook',
+    'google',
+    'instagram',
+    'pinerest',
+    'twitter',
+    'youtube'
+  ]).isRequired,
   className: PropTypes.string
 }
 

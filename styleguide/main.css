@@ -1,0 +1,1370 @@
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+.-arrowButton__vuZM5- {
+  text-align: center; }
+  .-arrowButton__vuZM5- h6.-text__3jr1s- {
+    display: inline-block;
+    margin-right: 20px; }
+  .-arrowButton__vuZM5- .-arrowWrapper__22ZGk- {
+    display: inline-block;
+    vertical-align: middle;
+    height: 21px;
+    width: 40px; }
+/*
+  Need to split this up from _grid,
+  otherwise everytime we include _grid somewhere
+  all the globals get built again
+ */
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+/**
+ * used to wrap floating columns. Apply this to the container of your floating columns to ensure that elements around the grid in your html do not get distorted.
+ *
+ * @param  {mixed} $offset: 0px can be px or %. used to offset the row on bot left and right to account for the columns margin.
+ * @return {string}             the css required to prperly clear floats around floating columns and offset their margins
+ */
+.row {
+  display: block; }
+  .row:after {
+    content: '';
+    display: block;
+    clear: both; }
+
+.col1 {
+  display: block;
+  float: left;
+  min-height: 1px;
+  width: 100%;
+  box-sizing: border-box; }
+
+.col2 {
+  display: block;
+  float: left;
+  min-height: 1px;
+  width: 50%;
+  box-sizing: border-box; }
+
+.col3 {
+  display: block;
+  float: left;
+  min-height: 1px;
+  width: 33.33333%;
+  box-sizing: border-box; }
+
+.col4 {
+  display: block;
+  float: left;
+  min-height: 1px;
+  width: 25%;
+  box-sizing: border-box; }
+
+.col5 {
+  display: block;
+  float: left;
+  min-height: 1px;
+  width: 20%;
+  box-sizing: border-box; }
+
+.col6 {
+  display: block;
+  float: left;
+  min-height: 1px;
+  width: 16.66667%;
+  box-sizing: border-box; }
+
+@media only screen and (min-width: 768px) {
+  .col1-tablet {
+    display: block;
+    float: left;
+    min-height: 1px;
+    width: 100%;
+    box-sizing: border-box; } }
+
+@media only screen and (min-width: 768px) {
+  .col2-tablet {
+    display: block;
+    float: left;
+    min-height: 1px;
+    width: 50%;
+    box-sizing: border-box; } }
+
+@media only screen and (min-width: 768px) {
+  .col3-tablet {
+    display: block;
+    float: left;
+    min-height: 1px;
+    width: 33.33333%;
+    box-sizing: border-box; } }
+
+@media only screen and (min-width: 768px) {
+  .col6-tablet {
+    display: block;
+    float: left;
+    min-height: 1px;
+    width: 16.66667%;
+    box-sizing: border-box; } }
+
+@media only screen and (min-width: 768px) {
+  .inline-col2-middle-tablet {
+    display: inline-block;
+    width: 49.9%;
+    vertical-align: middle;
+    float: none;
+    box-sizing: border-box; } }
+
+@media only screen and (min-width: 768px) {
+  .inline-col3-top-tablet {
+    display: inline-block;
+    width: 33.23333%;
+    vertical-align: top;
+    float: none;
+    box-sizing: border-box; } }
+
+@media only screen and (min-width: 1024px) {
+  .col3-desktop {
+    display: block;
+    float: left;
+    min-height: 1px;
+    width: 33.33333%;
+    box-sizing: border-box; } }
+
+@media only screen and (min-width: 1024px) {
+  .col3x2-desktop {
+    display: block;
+    float: left;
+    min-height: 1px;
+    width: 66.66667%;
+    box-sizing: border-box; } }
+
+@font-face {
+  font-family: 'CentraleSansPro';
+  /*'CentraleSansProBold';*/
+  src: url("http://site.bradleydev.twoxfour.com/assets/webfonts/357BF9_0_0.eot");
+  src: url("http://site.bradleydev.twoxfour.com/assets/webfonts/357BF9_0_0.eot?#iefix") format("embedded-opentype"), url("http://site.bradleydev.twoxfour.com/assets/webfonts/357BF9_0_0.woff2") format("woff2"), url("http://site.bradleydev.twoxfour.com/assets/webfonts/357BF9_0_0.woff") format("woff"), url("http://site.bradleydev.twoxfour.com/assets/webfonts/357BF9_0_0.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'CentraleSansPro';
+  /*'CentraleSansProLight';*/
+  src: url("http://site.bradleydev.twoxfour.com/assets/webfonts/357BF9_1_0.eot");
+  src: url("http://site.bradleydev.twoxfour.com/assets/webfonts/357BF9_1_0.eot?#iefix") format("embedded-opentype"), url("http://site.bradleydev.twoxfour.com/assets/webfonts/357BF9_1_0.woff2") format("woff2"), url("http://site.bradleydev.twoxfour.com/assets/webfonts/357BF9_1_0.woff") format("woff"), url("http://site.bradleydev.twoxfour.com/assets/webfonts/357BF9_1_0.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'CentraleSansPro';
+  /*'CentraleSansProLight-It';*/
+  src: url("http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_2_0.eot");
+  src: url("http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_2_0.eot?#iefix") format("embedded-opentype"), url("http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_2_0.woff2") format("woff2"), url("http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_2_0.woff") format("woff"), url("http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_2_0.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic; }
+
+@font-face {
+  font-family: 'TradeGothic';
+  /*'TradeGothicLT-BoldCondTwenty';*/
+  src: url("http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_0_0.eot");
+  src: url("http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_0_0.eot?#iefix") format("embedded-opentype"), url("http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_0_0.woff2") format("woff2"), url("http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_0_0.woff") format("woff"), url("http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_0_0.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'CentraleSansPro';
+  /*'CentraleSansProBold-It';*/
+  src: url("http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_1_0.eot");
+  src: url("http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_1_0.eot?#iefix") format("embedded-opentype"), url("http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_1_0.woff2") format("woff2"), url("http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_1_0.woff") format("woff"), url("http://site.bradleydev.twoxfour.com/assets/webfonts/357E43_1_0.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic; }
+
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+/* Text styles */
+.container-size-desktop h1, .container-size-tablet h1, h1, .container-size-mobile h1 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: "CentraleSansPro";
+  font-size: 23px;
+  font-weight: 300;
+  line-height: 1.22;
+  letter-spacing: -0.9px; }
+
+.container-size-desktop h1, .container-size-tablet h1 {
+  font-size: 28px;
+  line-height: 1.21;
+  letter-spacing: -1.1px; }
+
+.container-size-desktop h1 {
+  font-size: 34px;
+  line-height: 1.06;
+  letter-spacing: -1.4px; }
+
+.container-size-desktop h2, .container-size-tablet h2, h2, .container-size-mobile h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: "TradeGothic";
+  font-size: 27px;
+  font-weight: bold;
+  line-height: 1;
+  letter-spacing: 2.7px;
+  text-transform: uppercase;
+  color: #000000; }
+
+.container-size-desktop h2, .container-size-tablet h2 {
+  font-size: 36px;
+  letter-spacing: 3.6px; }
+
+.container-size-desktop h2 {
+  font-size: 42px;
+  letter-spacing: 4.2px; }
+
+.container-size-desktop h3, .container-size-tablet h3, h3, .container-size-mobile h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: "CentraleSansPro";
+  font-size: 16px;
+  font-weight: bold;
+  color: #2f3d6f; }
+
+.container-size-desktop h3, .container-size-tablet h3 {
+  font-size: 20px; }
+
+.container-size-desktop h3 {
+  font-size: 24px; }
+
+.container-size-desktop h4, h4, .container-size-mobile h4 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: "TradeGothic";
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: #000000; }
+
+.container-size-desktop h4 {
+  font-size: 18px;
+  line-height: 1.11;
+  letter-spacing: 1.8px; }
+
+h5 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: "CentraleSansPro";
+  font-size: 16px;
+  font-weight: bold; }
+
+h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: "CentraleSansPro";
+  font-size: 13px;
+  font-weight: bold;
+  line-height: normal;
+  letter-spacing: 0.5px;
+  text-transform: uppercase; }
+
+.small-body, .post-meta-data, .link-navy, body {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: Helvetica;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+  text-align: left;
+  color: #58595b; }
+
+.small-body {
+  font-size: 12px;
+  color: #808285; }
+
+.post-meta-data {
+  font-size: 12px;
+  font-style: oblique;
+  line-height: normal;
+  color: #58595b; }
+
+.link-navy {
+  line-height: normal;
+  color: #2f3d6f; }
+
+.link-orange {
+  font-family: "CentraleSansPro";
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #e9872b; }
+
+.small-link-gray {
+  font-family: "CentraleSansPro";
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  color: #a7a9ac; }
+
+.container-size-desktop .hero-headline, .container-size-tablet .hero-headline, .hero-headline, .container-size-mobile .hero-headline {
+  font-family: "TradeGothic";
+  font-size: 46px;
+  font-weight: bold;
+  line-height: 1;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: #ffffff; }
+
+.container-size-desktop .hero-headline, .container-size-tablet .hero-headline {
+  font-size: 72px;
+  letter-spacing: 7.2px; }
+
+.container-size-desktop .hero-headline {
+  font-size: 90px;
+  letter-spacing: 9px; }
+
+.container-size-desktop .hero-copy, .container-size-tablet .hero-copy, .hero-copy, .container-size-mobile .hero-copy {
+  font-family: "CentraleSansPro";
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.5;
+  color: #ffffff; }
+
+.container-size-desktop .hero-copy, .container-size-tablet .hero-copy {
+  font-size: 13px;
+  line-height: 1.38; }
+
+.container-size-desktop .hero-copy {
+  font-size: 16px;
+  line-height: 1.5; }
+
+.legal {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: "CentraleSansPro";
+  font-size: 8px;
+  font-weight: bold; }
+
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+@media only screen and (min-width: 768px) {
+  h1 {
+    font-size: 28px;
+    line-height: 1.21;
+    letter-spacing: -1.1px; } }
+
+@media only screen and (min-width: 1024px) {
+  h1 {
+    font-size: 34px;
+    line-height: 1.06;
+    letter-spacing: -1.4px; } }
+
+@media only screen and (min-width: 768px) {
+  h2 {
+    font-size: 36px;
+    letter-spacing: 3.6px; } }
+
+@media only screen and (min-width: 1024px) {
+  h2 {
+    font-size: 42px;
+    letter-spacing: 4.2px; } }
+
+@media only screen and (min-width: 768px) {
+  h3 {
+    font-size: 20px; } }
+
+@media only screen and (min-width: 1024px) {
+  h3 {
+    font-size: 24px;
+    color: #2f3d6f; } }
+
+@media only screen and (min-width: 1024px) {
+  h4 {
+    font-size: 18px;
+    line-height: 1.11;
+    letter-spacing: 1.8px; } }
+
+@media only screen and (min-width: 768px) {
+  .hero-headline {
+    font-size: 72px;
+    letter-spacing: 7.2px; } }
+
+@media only screen and (min-width: 1024px) {
+  .hero-headline {
+    font-size: 90px;
+    letter-spacing: 9px; } }
+
+@media only screen and (min-width: 768px) {
+  .hero-copy {
+    font-size: 13px;
+    line-height: 1.38; } }
+
+@media only screen and (min-width: 1024px) {
+  .hero-copy {
+    font-size: 16px;
+    line-height: 1.5; } }
+
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+button {
+  border: none;
+  width: 100%;
+  height: 42px;
+  background-color: #91c53b;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: "CentraleSansPro";
+  font-size: 13px;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  line-height: 42px;
+  outline: none;
+  text-transform: uppercase; }
+
+.button-orange {
+  background-color: #e9872b; }
+
+.button-brown {
+  background-color: #a7917e; }
+
+.button-border-slate-grey {
+  border: solid 1px #58595b;
+  background-color: transparent;
+  color: #58595b; }
+
+.button-border-dark-gray {
+  border: solid 1px #6d6d6d;
+  background-color: transparent;
+  color: #6d6d6d; }
+
+.button-border-red {
+  border: solid 1px #e51616;
+  background-color: transparent;
+  color: #e51616; }
+
+/*!
+ * Hamburgers
+ * @description Tasty CSS-animated hamburgers
+ * @author Jonathan Suh @jonsuh
+ * @site https://jonsuh.com/hamburgers
+ * @link https://github.com/jonsuh/hamburgers
+ */
+.hamburger {
+  padding: 0px 0px;
+  display: inline-block;
+  cursor: pointer;
+  transition-property: opacity, filter;
+  transition-duration: 0.15s;
+  transition-timing-function: linear;
+  font: inherit;
+  color: inherit;
+  text-transform: none;
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  overflow: visible; }
+  .hamburger:hover {
+    opacity: 0.7; }
+
+.hamburger-box {
+  width: 28px;
+  height: 14px;
+  display: inline-block;
+  position: relative; }
+
+.hamburger-inner {
+  display: block;
+  top: 50%;
+  margin-top: -1px; }
+  .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+    width: 28px;
+    height: 2px;
+    background-color: #000;
+    border-radius: 4px;
+    position: absolute;
+    transition-property: transform;
+    transition-duration: 0.15s;
+    transition-timing-function: ease; }
+  .hamburger-inner::before, .hamburger-inner::after {
+    content: "";
+    display: block; }
+  .hamburger-inner::before {
+    top: -6px; }
+  .hamburger-inner::after {
+    bottom: -6px; }
+
+/*
+   * Squeeze
+   */
+.hamburger--squeeze .hamburger-inner {
+  transition-duration: 0.075s;
+  transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19); }
+  .hamburger--squeeze .hamburger-inner::before {
+    transition: top 0.075s 0.12s ease, opacity 0.075s ease; }
+  .hamburger--squeeze .hamburger-inner::after {
+    transition: bottom 0.075s 0.12s ease, transform 0.075s cubic-bezier(0.55, 0.055, 0.675, 0.19); }
+
+.hamburger--squeeze.is-active .hamburger-inner {
+  transform: rotate(45deg);
+  transition-delay: 0.12s;
+  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); }
+  .hamburger--squeeze.is-active .hamburger-inner::before {
+    top: 0;
+    opacity: 0;
+    transition: top 0.075s ease, opacity 0.075s 0.12s ease; }
+  .hamburger--squeeze.is-active .hamburger-inner::after {
+    bottom: 0;
+    transform: rotate(-90deg);
+    transition: bottom 0.075s ease, transform 0.075s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1); }
+
+html {
+  -webkit-text-size-adjust: 100%; }
+
+body {
+  overflow-x: hidden;
+  margin: 0;
+  -webkit-text-size-adjust: 100%; }
+  body.prevent-scroll {
+    overflow: hidden; }
+
+a {
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none; }
+
+.noSelectBackground {
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+/* IE fix */
+img {
+  border: 0; }
+
+img[class*="wp-image-"] {
+  max-width: 100%;
+  height: auto; }
+  img[class*="wp-image-"].aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto; }
+  img[class*="wp-image-"].alignleft {
+    float: left;
+    margin: 0 1em 1em 0; }
+  img[class*="wp-image-"].alignright {
+    float: right;
+    margin: 0 0 1em 1em; }
+.-wrapper__3ysXv- {
+  position: relative;
+  padding-left: 19px; }
+
+.-arrowWrapper__2HAPP- {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%; }
+
+.-arrow__1dqZ2- {
+  display: inline-block;
+  vertical-align: middle;
+  width: 6px;
+  height: 9px; }
+
+.-wrapChildren__32DbN- {
+  display: inline-block;
+  vertical-align: middle; }
+.-image__1mhNw- {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; }
+
+.-overlay__2Hdiw-, .-image__1mhNw- {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; }
+
+.-overlay__2Hdiw- {
+  z-index: -2; }
+
+.-image__1mhNw- {
+  z-index: -1; }
+.-placeholderImage__1Z2I2- {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; }
+
+.-placeholderImage__1Z2I2- {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; }
+
+.-videoBackground__2MTTX- {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1; }
+  .-videoBackground__2MTTX- iframe, .-videoBackground__2MTTX- .vimeo {
+    width: 100%;
+    height: 100%; }
+
+.-placeholderImage__1Z2I2- {
+  z-index: 0;
+  -webkit-transition: opacity 500ms;
+  transition: opacity 500ms; }
+.-burgerMenuWrapper__3EAny- {
+  display: inline-block;
+  width: 28px; }
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+.-divider__QttNm- {
+  display: block;
+  padding: 0 25px; }
+  @media only screen and (min-width: 768px) {
+    .-divider__QttNm- {
+      padding: 0 40px; } }
+  @media only screen and (min-width: 1024px) {
+    .-divider__QttNm- {
+      max-width: 1066px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 55px; } }
+
+.-color__TST1j- {
+  width: 100%;
+  height: 1px;
+  background-color: #d1d3d4; }
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+.-container__AWVub- {
+  margin-bottom: 12px; }
+  .-container__AWVub- a {
+    text-decoration: none; }
+
+.-wrapper__82h8H- {
+  position: relative;
+  padding-left: 26px; }
+
+.-iconWrapper__pxqak- {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%; }
+
+.-icon__rDUyO- {
+  display: inline-block;
+  vertical-align: middle;
+  width: 13px;
+  height: 17px; }
+
+.-wrapChildren__1oYg6- {
+  display: inline-block;
+  vertical-align: middle; }
+
+.-noLink__3_GTm- {
+  color: #58595b; }
+.-vAlignHelper__1aNeo- {
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%; }
+.-aspectRatioBox__1qRl8- {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 0; }
+
+.-aspectRatioBoxContent__3tGBr- {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+
+.-aspectRatioBoxHeightController__1cvUb- {
+  margin: 0 auto;
+  width: 100%;
+  height: 100%; }
+.-image__1-q4E- {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; }
+
+.-imageFrame__3VeeV- {
+  width: 100%; }
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+.-pdfWithFeaturedImage__1FqwU- {
+  width: 100%;
+  height: 100%; }
+
+.-imageContainer__1Gh5B- {
+  display: inline-block;
+  margin-bottom: 13px;
+  width: 100%;
+  height: 124px;
+  text-align: left; }
+
+.-image__2QSnF- {
+  display: inline-block;
+  border: 1px solid #cecece;
+  max-width: 100%;
+  height: auto; }
+
+.-title__1MZPX- {
+  display: inline-block;
+  width: 100%; }
+.-socialMediaIcon__3YfFm- {
+  display: block;
+  float: left; }
+  .-socialMediaIcon__3YfFm- img {
+    width: auto;
+    height: 100%; }
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+.-childWrapper__3Cb1Y- {
+  z-index: 100;
+  height: 100%; }
+
+.-background__1r51U- {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  padding: 0 7.5%;
+  width: 85%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  text-align: left; }
+  @media only screen and (min-width: 768px) {
+    .-background__1r51U- {
+      padding: 0 19%;
+      width: 62%;
+      text-align: center; } }
+
+.-lightbox__2mY9t- {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  max-height: calc(85% - 32px*2 - 40px);
+  text-align: center; }
+
+.-closeButtonWrapper__LnWer- {
+  position: absolute;
+  bottom: -72px;
+  width: 100%; }
+
+.-closeButton__1DH_j- {
+  margin: 0 auto;
+  width: 32px;
+  height: 32px;
+  cursor: pointer; }
+.-positionCircle__NdCaq- {
+  margin: 0 4px;
+  border-radius: 50%;
+  width: 7px;
+  height: 7px;
+  cursor: pointer; }
+
+.-active__-75Vc- {
+  background-color: #232d5c; }
+
+.-notActive__1mRD_- {
+  background-color: #c6d4cf; }
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+#lightbox .-scrollableListOpensInLightbox__2ulzO- {
+  width: 100%;
+  height: 100%; }
+
+#lightbox .-scrollableListOpensInLightbox__2ulzO- .track-item > :first-child,
+#lightbox .-scrollableListOpensInLightbox__2ulzO- .track-item-vertical > :first-child {
+  display: none; }
+
+.-trackWrapper__2noiQ-, .-trackWrapperVertical__tuHv7- {
+  overflow: hidden;
+  width: 100%;
+  height: 100%; }
+
+.-track__KGcOj- {
+  height: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.-trackItem__1PCuX- {
+  display: inline-block;
+  float: left;
+  height: 100%; }
+
+.-trackItemVertical__3K2La- {
+  display: inline-block;
+  float: left;
+  width: 100%; }
+
+.-buttonUp__1MbR1-, .-buttonDown__EWLMt- {
+  display: inline-block;
+  cursor: pointer; }
+
+.-buttonUp__1MbR1- {
+  float: left; }
+
+.-positionCircle___PmXY- {
+  margin: 0 4px;
+  border-radius: 50%;
+  width: 7px;
+  height: 7px;
+  cursor: pointer; }
+
+.-active__hmac7- {
+  background-color: #232d5c; }
+
+.-notActive__34VIb- {
+  background-color: #c6d4cf; }
+
+ul.-positionCircles__wrV6f- {
+  position: relative;
+  z-index: 10;
+  margin-top: 35px;
+  margin-bottom: 0;
+  padding: 0;
+  width: 100%;
+  text-align: center; }
+  ul.-positionCircles__wrV6f- li {
+    display: inline-block; }
+  @media only screen and (min-width: 768px) {
+    ul.-positionCircles__wrV6f- {
+      margin-top: 31px; } }
+  ul.-positionCircles__wrV6f-.-vertical__VXH-S- {
+    width: 11px; }
+
+.-buttonsBelowSeparator__1wtnf- {
+  display: inline-block;
+  vertical-align: middle;
+  width: 6px;
+  height: 12px; }
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+.-sliderWrapper__1Kc5W-, .-sliderWrapper__1Kc5W- .buttons-below, .-sliderTabletDesktop__crWOl- {
+  display: block;
+  padding: 0 25px; }
+  @media only screen and (min-width: 768px) {
+    .-sliderWrapper__1Kc5W-, .-sliderWrapper__1Kc5W- .buttons-below, .-sliderTabletDesktop__crWOl- {
+      padding: 0 40px; } }
+  @media only screen and (min-width: 1024px) {
+    .-sliderWrapper__1Kc5W-, .-sliderWrapper__1Kc5W- .buttons-below, .-sliderTabletDesktop__crWOl- {
+      max-width: 1066px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 55px; } }
+
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+h4.-title__1MNbO-, .-respondToContainerContainer__183PT- h4.-respondToContainerTitle__18xRH- {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  width: 100%;
+  text-align: center;
+  color: #000000; }
+
+@media only screen and (min-width: 768px) {
+  h4.-title__1MNbO- {
+    margin-top: 60px;
+    margin-bottom: 50px;
+    line-height: normal; } }
+
+@media only screen and (min-width: 1024px) {
+  h4.-title__1MNbO- {
+    margin-top: 60px;
+    margin-bottom: 40px;
+    line-height: 1.11; } }
+
+.-sliderWrapper__1Kc5W- .track-wrapper {
+  margin-right: -10px;
+  margin-left: -10px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  padding: 0;
+  width: calc(100% + 20px);
+  text-align: center; }
+
+.-sliderWrapper__1Kc5W- :not(.buttons-below) .button-up,
+.-sliderWrapper__1Kc5W- :not(.buttons-below) .button-down {
+  float: none;
+  display: inline-block;
+  width: 11px;
+  height: 100%; }
+
+.-sliderWrapper__1Kc5W- .buttons-below {
+  margin-bottom: 40px;
+  text-align: center; }
+
+.-sliderWrapper__1Kc5W- .buttons-below .button-up,
+.-sliderWrapper__1Kc5W- .buttons-below .button-down {
+  float: none; }
+
+.-prevButton__jBv4b- img {
+  float: left;
+  display: inline-block;
+  vertical-align: middle;
+  width: 11px;
+  height: 19px; }
+
+.-prevButton__jBv4b- .small-body {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 19px;
+  margin-right: 4px;
+  text-align: center; }
+
+.-nextButton__2VQGM- img {
+  float: right;
+  display: inline-block;
+  vertical-align: middle;
+  width: 11px;
+  height: 19px; }
+
+.-nextButton__2VQGM- .small-body {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 19px;
+  margin-left: 4px;
+  text-align: center; }
+
+.-sliderTabletDesktop__crWOl- {
+  position: relative;
+  max-width: 1075px;
+  /* override "BodyMaxWithMediaQueries" as per design */ }
+
+.-sliderTabletDesktop__crWOl- .track-wrapper {
+  display: block;
+  width: inherit;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 60px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.-sliderTabletDesktop__crWOl- .button-up,
+.-sliderTabletDesktop__crWOl- .button-down {
+  position: absolute;
+  top: 50%;
+  width: 11px;
+  height: auto;
+  margin-top: -9.5px;
+  z-index: 99; }
+
+.-sliderTabletDesktop__crWOl- .button-up {
+  left: 55px; }
+
+.-sliderTabletDesktop__crWOl- .button-down {
+  right: 55px; }
+
+.-leftButton__2gKb4-, .-rightButton__2t3sr- {
+  width: 100%; }
+  .-leftButton__2gKb4- img, .-rightButton__2t3sr- img {
+    width: 100%;
+    height: auto; }
+
+.-respondToContainerContainer__183PT- {
+  width: 100%; }
+  .-respondToContainerContainer__183PT- > .container-size-tablet h4.-respondToContainerTitle__18xRH- {
+    margin-top: 60px;
+    margin-bottom: 50px;
+    line-height: normal; }
+  .-respondToContainerContainer__183PT- > .container-size-desktop h4.-respondToContainerTitle__18xRH- {
+    margin-top: 60px;
+    margin-bottom: 40px;
+    line-height: 1.11; }
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+.-image__3lYRN- {
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center; }
+
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+.-sliderWrapper__3RUxF-, .-sliderWrapper__3RUxF- .buttons-below, .-sliderTabletDesktop__17zzT- {
+  display: block;
+  padding: 0 25px; }
+  @media only screen and (min-width: 768px) {
+    .-sliderWrapper__3RUxF-, .-sliderWrapper__3RUxF- .buttons-below, .-sliderTabletDesktop__17zzT- {
+      padding: 0 40px; } }
+  @media only screen and (min-width: 1024px) {
+    .-sliderWrapper__3RUxF-, .-sliderWrapper__3RUxF- .buttons-below, .-sliderTabletDesktop__17zzT- {
+      max-width: 1066px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 55px; } }
+
+.-image__3lYRN- {
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center; }
+
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+h4.-title__3UjRB-, .-respondToContainerContainer__2IEBM- h4.-respondToContainerTitle__1xUew- {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  width: 100%;
+  text-align: center;
+  color: #000000; }
+
+@media only screen and (min-width: 768px) {
+  h4.-title__3UjRB- {
+    margin-top: 60px;
+    margin-bottom: 50px;
+    line-height: normal; } }
+
+@media only screen and (min-width: 1024px) {
+  h4.-title__3UjRB- {
+    margin-top: 60px;
+    margin-bottom: 40px;
+    line-height: 1.11; } }
+
+.-sliderWrapper__3RUxF- .track-wrapper {
+  margin-right: -10px;
+  margin-left: -10px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  padding: 0;
+  width: calc(100% + 20px);
+  text-align: center; }
+
+.-sliderWrapper__3RUxF- :not(.buttons-below) .button-up,
+.-sliderWrapper__3RUxF- :not(.buttons-below) .button-down {
+  float: none;
+  display: inline-block;
+  width: 11px;
+  height: 100%; }
+
+.-sliderWrapper__3RUxF- .buttons-below {
+  margin-bottom: 40px;
+  text-align: center; }
+
+.-sliderWrapper__3RUxF- .buttons-below .button-up,
+.-sliderWrapper__3RUxF- .buttons-below .button-down {
+  float: none; }
+
+.-prevButton__3gD9Z- img {
+  float: left;
+  display: inline-block;
+  vertical-align: middle;
+  width: 11px;
+  height: 19px; }
+
+.-prevButton__3gD9Z- .small-body {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 19px;
+  margin-right: 4px;
+  text-align: center; }
+
+.-nextButton__1eeoH- img {
+  float: right;
+  display: inline-block;
+  vertical-align: middle;
+  width: 11px;
+  height: 19px; }
+
+.-nextButton__1eeoH- .small-body {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 19px;
+  margin-left: 4px;
+  text-align: center; }
+
+.-sliderTabletDesktop__17zzT- {
+  position: relative;
+  max-width: 1075px;
+  /* override "BodyMaxWithMediaQueries" as per design */ }
+
+.-sliderTabletDesktop__17zzT- .track-wrapper {
+  display: block;
+  width: inherit;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 60px;
+  box-sizing: border-box; }
+
+.-sliderTabletDesktop__17zzT- .button-up,
+.-sliderTabletDesktop__17zzT- .button-down {
+  position: absolute;
+  top: 50%;
+  width: 11px;
+  height: auto;
+  margin-top: -9.5px;
+  z-index: 99; }
+
+.-sliderTabletDesktop__17zzT- .button-up {
+  left: 55px; }
+
+.-sliderTabletDesktop__17zzT- .button-down {
+  right: 55px; }
+
+.-leftButton__3ftP7-, .-rightButton__344o2- {
+  width: 100%; }
+  .-leftButton__3ftP7- img, .-rightButton__344o2- img {
+    width: 100%;
+    height: auto; }
+
+.-respondToContainerContainer__2IEBM- {
+  width: 100%; }
+  .-respondToContainerContainer__2IEBM- > .container-size-tablet h4.-respondToContainerTitle__1xUew- {
+    margin-top: 60px;
+    margin-bottom: 50px;
+    line-height: normal; }
+  .-respondToContainerContainer__2IEBM- > .container-size-desktop h4.-respondToContainerTitle__1xUew- {
+    margin-top: 60px;
+    margin-bottom: 40px;
+    line-height: 1.11; }
+
+.-topIcons__1-mu9-, .-image__3lYRN-, .-sku__2WUJG-.small-body, h6.-title__3UjRB- {
+  width: 100%;
+  max-width: 150px;
+  margin: 0 auto; }
+  @media only screen and (min-width: 768px) {
+    .-topIcons__1-mu9-, .-image__3lYRN-, .-sku__2WUJG-.small-body, h6.-title__3UjRB- {
+      max-width: 170px; } }
+
+.-productScrollerProduct__20JIc- {
+  padding: 0 10px; }
+  @media only screen and (min-width: 768px) {
+    .-productScrollerProduct__20JIc- {
+      padding: 0 22.5px; } }
+
+.-elementWrapper__2hqi0- {
+  width: 100%; }
+
+.-topIcons__1-mu9- {
+  height: 30px; }
+
+.-new__3z5q1- {
+  display: inline-block;
+  vertical-align: top;
+  float: left;
+  color: #e23e2f; }
+
+.-complianceIconWrapper__dwr3_- {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 5px;
+  width: 23px;
+  height: 22px;
+  overflow: hidden; }
+
+.-complianceIcon__3ILXl- {
+  max-width: 100%;
+  height: 100%; }
+
+.-compliance__1qFIE- {
+  display: inline-block;
+  vertical-align: top;
+  float: right;
+  text-align: right; }
+
+.-image__3lYRN- {
+  display: inline-block;
+  margin-bottom: 3px;
+  height: 161px; }
+
+.small-body.-sku__2WUJG- {
+  display: inline-block;
+  margin-bottom: 12px;
+  text-align: center; }
+
+h6.-title__3UjRB- {
+  display: inline-block;
+  line-height: normal;
+  text-align: center;
+  color: #000000; }
+#lightbox .-scrollableListOpensInLightbox__Pozy2- {
+  width: 100%;
+  height: 100%; }
+
+#lightbox .-scrollableListOpensInLightbox__Pozy2- .track-item > :first-child,
+#lightbox .-scrollableListOpensInLightbox__Pozy2- .track-item-vertical > :first-child {
+  display: none; }
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+.-tab__3tBID- h5.-tabText__2E9XG- {
+  display: inline; }
+
+.-tab__3tBID-.-active__iiMpa- {
+  background-color: #2f3d6f; }
+  .-tab__3tBID-.-active__iiMpa- h5.-tabText__2E9XG- {
+    color: #ffffff; }
+
+@media only screen and (min-width: 768px) {
+  .-tab__3tBID- h5.-tabText__2E9XG- {
+    font-size: 13px; } }

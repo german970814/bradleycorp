@@ -20,7 +20,9 @@ class BCorpLink extends Component {
   render () {
     const internal = removeHostFromUrl(this.props.url)
 
-    return internal ? this.props.renderInternal(internal) : this.props.renderExternal(this.props.url)
+    return internal
+      ? this.props.renderInternal(internal)
+      : this.props.renderExternal(this.props.url)
   }
 }
 
