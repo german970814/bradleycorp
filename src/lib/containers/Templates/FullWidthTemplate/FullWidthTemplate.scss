@@ -11,10 +11,12 @@ $fadeInSpeed: 500ms;
     @extend %fillRelativeParent;
     @extend %coverBackground;
     opacity: 0.67;
-    z-index: -1;
+    z-index: 0;
   }
 
   .hero {
+    position: relative;
+    z-index: 1;
     padding: 60px 30px;
     width: 100%;
     box-sizing: border-box;
