@@ -4,9 +4,7 @@ const api = {}
 
 const dev = false
 
-api.host = dev
-  ? `http://bradley.test`
-  : `http://bradleydev.twoxfour.com`
+api.host = dev ? `http://bradley.test` : `http://bradleydev.twoxfour.com`
 
 api.hostTheWashfountain = dev
   ? `http://thewashfountain.bradley.test`
@@ -49,7 +47,9 @@ if (location.href.includes(api.urlTheWashfountain)) {
 api.namespace = `bcorp/v1/`
 
 api.baseURL = `${api.host}/index.php/wp-json/${api.namespace}`
-api.baseURLTheWashfountain = `${api.hostTheWashfountain}/index.php/wp-json/${api.namespace}`
+api.baseURLTheWashfountain = `${api.hostTheWashfountain}/index.php/wp-json/${
+  api.namespace
+}`
 api.baseURLBIMRevit = `${api.hostBIMRevit}/index.php/wp-json/${api.namespace}`
 
 api.queryRoute = `wp-query`

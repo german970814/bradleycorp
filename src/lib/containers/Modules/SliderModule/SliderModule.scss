@@ -1,7 +1,7 @@
-@import "../../../../scss/partials/variables";
-@import "../../../../scss/partials/mixins";
-@import "../../../../scss/partials/grid";
-@import "../../../../scss/partials/helpers";
+@import '../../../../scss/partials/variables';
+@import '../../../../scss/partials/mixins';
+@import '../../../../scss/partials/grid';
+@import '../../../../scss/partials/helpers';
 
 .sliderModule {
   position: relative;
@@ -11,16 +11,17 @@
    */
 
   > :global(.container-size-mobile) {
-
     h3.heading {
       margin-bottom: 30px;
       text-align: center;
     }
 
-    .sliderWrapper, .sliderWrapperTabletDesktop {
+    .sliderWrapper,
+    .sliderWrapperTabletDesktop {
       background-color: transparent;
 
-      :global(.button-up), :global(.button-down) {
+      :global(.button-up),
+      :global(.button-down) {
         display: none;
       }
 
@@ -29,25 +30,36 @@
         text-align: right;
       }
 
-      &:global(.module-accent-color-blue) :global(.position-circles) li div:global(.active) {
+      &:global(.module-accent-color-blue)
+        :global(.position-circles)
+        li
+        div:global(.active) {
         background-color: $navy;
       }
 
-      &:global(.module-accent-color-brown) :global(.position-circles) li div:global(.active) {
+      &:global(.module-accent-color-brown)
+        :global(.position-circles)
+        li
+        div:global(.active) {
         background-color: $brown;
       }
 
-      &:global(.module-accent-color-orange) :global(.position-circles) li div:global(.active) {
+      &:global(.module-accent-color-orange)
+        :global(.position-circles)
+        li
+        div:global(.active) {
         background-color: $orange;
       }
 
-      &:global(.module-accent-color-green) :global(.position-circles) li div:global(.active) {
+      &:global(.module-accent-color-green)
+        :global(.position-circles)
+        li
+        div:global(.active) {
         background-color: $green;
       }
     }
 
     .sliderItem {
-
       .imageWrapper {
         @include col(1);
 
@@ -85,7 +97,6 @@
    */
 
   > :global(.container-size-tablet) {
-
     h3.heading {
       text-align: left;
     }
@@ -115,7 +126,7 @@
         }
 
         .arrowWrapper {
-          text-align: left;
+          float: left;
         }
       }
     }
@@ -131,7 +142,6 @@
    */
 
   > :global(.container-size-desktop) {
-
     h3.heading {
       margin-bottom: 40px;
     }
@@ -141,9 +151,7 @@
     }
 
     .sliderItem {
-
       .contentWrapper {
-
         h2.title {
           margin-bottom: 35px;
         }
