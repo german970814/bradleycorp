@@ -10,16 +10,17 @@ const ProductDetailLoadable = Loadable({
 })
 
 const CustomizableLoadable = Loadable({
-  loader: () => import('../../../lib/containers/Pages/Customizable/Customizable'),
+  loader: () =>
+    import('../../../lib/containers/Pages/Customizable/Customizable'),
   loading: Loading
 })
 
 const Main = props => {
   return (
     <Switch>
-      <Route exact path='/' component={Home}/>
-      <Route exact path='/product/:slug' component={ProductDetailLoadable}/>
-      <Route exact path='/:slug' component={CustomizableLoadable}/>
+      <Route exact path="/" component={Home} />
+      <Route exact path="/product/:slug" component={ProductDetailLoadable} />
+      <Route exact path="/:slug" component={CustomizableLoadable} />
     </Switch>
   )
 }

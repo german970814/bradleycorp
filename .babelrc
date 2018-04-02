@@ -1,11 +1,4 @@
 {
-  "presets": [
-    "react",
-    "env",
-    "stage-0"
-  ],
-  "plugins": [
-    "transform-runtime",
-    "syntax-dynamic-import"
-  ]
+  "presets": ["react", "env", "stage-0", "flow"],
+  "plugins": ["transform-runtime", "syntax-dynamic-import"]
 }
