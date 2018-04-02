@@ -24,7 +24,7 @@ SocialMediaIcon.propTypes = {
     'facebook',
     'google',
     'instagram',
-    'pinerest',
+    'pinterest',
     'twitter',
     'youtube'
   ]).isRequired,
