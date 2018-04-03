@@ -2,7 +2,7 @@
 
 .postPrimary {
   .title {
-    margin-bottom: 15px;
+    margin-bottom: 13px;
   }
 
   .meta {
@@ -18,6 +18,10 @@
       padding-right: 12px;
     }
 
+    @include respond-to(desktop) {
+      padding-right: 15px;
+    }
+
     .image {
       margin-bottom: 30px;
       width: 100%;
@@ -27,6 +31,10 @@
   .contentContainer {
     @include respond-to(tablet) {
       padding-left: 12px;
+    }
+
+    @include respond-to(desktop) {
+      padding-right: 15px;
     }
 
     .content {
