@@ -101,9 +101,15 @@ class PostPrimary extends Component<Props> {
       <div className={style.postPrimary}>
         {this.renderTitle()}
         {this.renderPostMeta()}
-        {this.renderImage()}
-        {this.renderContent()}
-        {this.renderReadMore()}
+        <div className={'row'}>
+          <div className={`col1 col2-tablet ${style.imageContainer}`}>
+            {this.renderImage()}
+          </div>
+          <div className={`col1 col2-tablet ${style.contentContainer}`}>
+            {this.renderContent()}
+            {this.renderReadMore()}
+          </div>
+        </div>
         {this.renderTags()}
       </div>
     )
