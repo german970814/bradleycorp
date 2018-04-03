@@ -1,17 +1,21 @@
 // @flow
 
+type WPPost = {
+  ID: number,
+  post_title: string,
+  post_content: string,
+  post_excerpt: string,
+  post_date: '',
+  author_display_name?: ''
+}
+
 type BCorpPost = {
-  post: {
-    ID: number,
-    post_title: string,
-    post_content: string,
-    post_excerpt: string
-  },
-  meta?: {},
-  terms?: {},
+  post: WPPost,
+  meta: {},
+  terms: {},
   media: {
     featured_image: '' | Array<mixed>
   }
 }
 
-export type { BCorpPost }
+export type { BCorpPost, WPPost }

@@ -1,16 +1,32 @@
+// @flow
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import type { Match } from 'react-router-dom'
+import type { WPPost, BCorpPost } from '../../../types/post_types'
+import type { Widget } from '../../Widgets/widget_types'
+import { validChain } from '../../../bcorpObject'
 import { site, sitePrettyName } from '../../../../api'
 import BIMRevitClient from '../../../../api/bimRevit_client'
 import TheWashfountainClient from '../../../../api/theWashfountain_client'
 import WidgetsClient from '../../../../api/widgets_client'
-import { validChain } from '../../../bcorpObject'
 import WidgetBuilder from '../../Widgets/WidgetBuilder'
 import RightSidebarTemplate from '../../Templates/RightSidebarTemplate/RightSidebarTemplate'
 import style from './BlogLandingPage.scss'
 
-class BlogLandingPage extends Component {
-  constructor (props) {
+type Props = {
+  match: Match
+}
+
+type State = {
+  posts: Array<WPPost>,
+  widgets: Array<Widget>
+}
+
+class BlogLandingPage extends Component<Props, State> {
+  defaultPostState: BCorpPost
+  defaultWidgetState: Widget
+  defaultState: State
+
+  constructor (props: Props) {
     super(props)
 
     /**
@@ -20,24 +36,27 @@ class BlogLandingPage extends Component {
     this.defaultPostState = {
       post: {
         ID: 1,
-        'post_title': '',
-        'author_display_name': '',
-        'post_date': ''
+        post_title: 'loading',
+        post_content: 'loading',
+        post_excerpt: 'loading',
+        author_display_name: '',
+        post_date: ''
+      },
+      meta: {},
+      terms: {},
+      media: {
+        featured_image: ''
       }
     }
 
     this.defaultWidgetState = {
-      type: '',
+      type: 'bcorp_cta_widget',
       data: {}
     }
 
     this.defaultState = {
-      posts: [
-        this.defaultPostState
-      ],
-      widgets: [
-        this.defaultWidgetState
-      ]
+      posts: [this.defaultPostState.post],
+      widgets: [this.defaultWidgetState]
     }
 
     this.state = this.defaultState
@@ -57,9 +76,11 @@ class BlogLandingPage extends Component {
    * @param  {[object]} nextProps
    * @return {[void]}
    */
-  componentWillReceiveProps (nextProps) {
-    if (!validChain(this.props, 'match', 'params', 'slug') ||
-      !validChain(nextProps, 'match', 'params', 'slug')) {
+  componentWillReceiveProps (nextProps: Props) {
+    if (
+      !validChain(this.props, 'match', 'params', 'slug') ||
+      !validChain(nextProps, 'match', 'params', 'slug')
+    ) {
       return
     }
 
@@ -69,22 +90,25 @@ class BlogLandingPage extends Component {
   }
 
   render () {
+    console.log(this.state)
     return (
-      <div className={style.blogLandingPage} >
+      <div className={style.blogLandingPage}>
         <RightSidebarTemplate
           data={{
-            'page_title': sitePrettyName
+            page_title: sitePrettyName
           }}
-          renderModules={
-            () => {
-              return <div className={style.blogPosts} />
-            }
-          }
-          renderRightSidebarWidgets={
-            () => {
-              return <WidgetBuilder widgetData={this.state.widgets} pageSlug={this.props.match.params.slug} />
-            }
-          } />
+          renderModules={() => {
+            return <div className={style.blogPosts} />
+          }}
+          renderRightSidebarWidgets={() => {
+            return (
+              <WidgetBuilder
+                widgetData={this.state.widgets}
+                pageSlug={this.props.match.params.slug}
+              />
+            )
+          }}
+        />
       </div>
     )
   }
@@ -135,10 +159,6 @@ class BlogLandingPage extends Component {
       console.log(err)
     }
   }
-}
-
-BlogLandingPage.propTypes = {
-  match: PropTypes.object.isRequired
 }
 
 export default BlogLandingPage
