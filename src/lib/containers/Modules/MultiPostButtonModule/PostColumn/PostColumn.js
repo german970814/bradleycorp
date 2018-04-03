@@ -81,7 +81,7 @@ class PostColumn extends Component<Props> {
     const { post } = this.props
     const excerpt = getExcerpt(
       post.post['post_excerpt'],
-      post.post['post_content'],
+      post.post['post_content'] || '',
       'short'
     )
 

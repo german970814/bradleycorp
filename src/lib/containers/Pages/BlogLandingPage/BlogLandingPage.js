@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react'
 import type { Match } from 'react-router-dom'
-import type { WPPost, BCorpPost } from '../../../types/post_types'
+import type { BCorpPost } from '../../../types/post_types'
 import type { Widget } from '../../Widgets/widget_types'
 import { validChain } from '../../../bcorpObject'
 import { site, sitePrettyName } from '../../../../api'
@@ -10,6 +10,7 @@ import TheWashfountainClient from '../../../../api/theWashfountain_client'
 import WidgetsClient from '../../../../api/widgets_client'
 import WidgetBuilder from '../../Widgets/WidgetBuilder'
 import RightSidebarTemplate from '../../Templates/RightSidebarTemplate/RightSidebarTemplate'
+import Posts from './Posts/Posts'
 import style from './BlogLandingPage.scss'
 
 type Props = {
@@ -17,7 +18,7 @@ type Props = {
 }
 
 type State = {
-  posts: Array<WPPost>,
+  posts: Array<BCorpPost>,
   widgets: Array<Widget>
 }
 
@@ -36,9 +37,9 @@ class BlogLandingPage extends Component<Props, State> {
     this.defaultPostState = {
       post: {
         ID: 1,
-        post_title: 'loading',
-        post_content: 'loading',
-        post_excerpt: 'loading',
+        post_title: '',
+        post_content: '',
+        post_excerpt: '',
         author_display_name: '',
         post_date: ''
       },
@@ -55,7 +56,7 @@ class BlogLandingPage extends Component<Props, State> {
     }
 
     this.defaultState = {
-      posts: [this.defaultPostState.post],
+      posts: [this.defaultPostState],
       widgets: [this.defaultWidgetState]
     }
 
@@ -98,7 +99,7 @@ class BlogLandingPage extends Component<Props, State> {
             page_title: sitePrettyName
           }}
           renderModules={() => {
-            return <div className={style.blogPosts} />
+            return <Posts data={this.state.posts} />
           }}
           renderRightSidebarWidgets={() => {
             return (

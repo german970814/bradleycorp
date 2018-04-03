@@ -4,6 +4,7 @@ import BIMRevitClient from '../../../../api/bimRevit_client'
 import TheWashfountainClient from '../../../../api/theWashfountain_client'
 import { urlBIMRevit, urlTheWashfountain } from '../../../../api'
 import { createCPTUrl } from '../../../../lib/bcorpUrl'
+import PostMetaData from '../../../components/PostMetaData/PostMetaData'
 import BCorpWidget from '../BCorpWidget'
 import style from './RecentPostsWidget.scss'
 
@@ -18,16 +19,14 @@ class RecentPostsWidget extends BCorpWidget {
     this.defaultPostState = {
       post: {
         ID: 1,
-        'post_title': '',
-        'author_display_name': '',
-        'post_date': ''
+        post_title: '',
+        author_display_name: '',
+        post_date: ''
       }
     }
 
     this.defaultState = {
-      posts: [
-        this.defaultPostState
-      ]
+      posts: [this.defaultPostState]
     }
 
     this.state = this.defaultState
@@ -38,7 +37,11 @@ class RecentPostsWidget extends BCorpWidget {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.blog !== this.props.blog || nextProps.numberposts !== this.props.numberposts || nextProps.title !== this.props.title) {
+    if (
+      nextProps.blog !== this.props.blog ||
+      nextProps.numberposts !== this.props.numberposts ||
+      nextProps.title !== this.props.title
+    ) {
       this.getPosts()
     }
   }
@@ -66,14 +69,16 @@ class RecentPostsWidget extends BCorpWidget {
         <a
           key={index}
           href={this.getLink(post.post)}
-          className={style.recentPost} >
-
-          <div className={`link-navy ${style.title}`} >{post.post['post_title']}</div>
-
-          <div className={`post-meta-data ${style.postMeta}`} >
-            {`by ${post.post['author_display_name']} posted at ${post.post['post_date']}`}
+          className={style.recentPost}>
+          <div className={`link-navy ${style.title}`}>
+            {post.post['post_title']}
           </div>
 
+          <PostMetaData
+            className={style.postMeta}
+            authorName={post.post['author_display_name']}
+            date={post.post['post_date']}
+          />
         </a>
       )
     })

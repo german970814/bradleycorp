@@ -210,6 +210,12 @@
   color: $slate-grey;
 }
 
+%post-tag {
+  font-family: Helvetica;
+  font-size: 10px;
+  color: $slate-grey;
+}
+
 %link-navy {
   @extend %body;
   line-height: normal;

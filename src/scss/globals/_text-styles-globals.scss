@@ -75,6 +75,10 @@ body {
   @extend %post-meta-data;
 }
 
+:global .post-tag :local {
+  @extend %post-tag;
+}
+
 :global .link-navy :local {
   @extend %link-navy;
 }

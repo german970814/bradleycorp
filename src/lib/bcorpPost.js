@@ -23,9 +23,7 @@ export function getExcerpt (
 
   if (excerpt) {
     return nWords(excerpt, excerptLength)
-  } else if (postContent) {
-    return nWords(postContent, excerptLength)
   } else {
-    return ''
+    return nWords(postContent, excerptLength)
   }
 }
