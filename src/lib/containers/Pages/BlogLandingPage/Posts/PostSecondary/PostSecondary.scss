@@ -1,42 +1,41 @@
 @import '../../../../../../scss/partials/mixins';
+@import '../../../../../../scss/partials/variables';
 
-.postPrimary {
-  h2.title {
-    margin-bottom: 13px;
+.postSecondary {
+  @include respond-to(tablet) {
+    &:nth-child(2) {
+      padding-right: 12px;
+    }
+    &:nth-child(3) {
+      padding-left: 12px;
+    }
+  }
+
+  h5.title {
+    margin-bottom: 7px;
+    color: $black;
+
+    @include respond-to(tablet) {
+      margin-bottom: 12px;
+    }
   }
 
   .meta {
     margin-bottom: 17px;
 
     @include respond-to(tablet) {
-      margin-bottom: 27px;
+      margin-bottom: 25px;
     }
   }
 
   .imageContainer {
-    @include respond-to(tablet) {
-      padding-right: 12px;
-    }
-
-    @include respond-to(desktop) {
-      padding-right: 15px;
-    }
-
     .image {
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       width: 100%;
     }
   }
 
   .contentContainer {
-    @include respond-to(tablet) {
-      padding-left: 12px;
-    }
-
-    @include respond-to(desktop) {
-      padding-right: 15px;
-    }
-
     .content {
       margin-bottom: 30px;
     }
