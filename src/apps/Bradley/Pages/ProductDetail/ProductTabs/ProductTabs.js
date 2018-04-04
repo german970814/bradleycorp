@@ -21,7 +21,13 @@ class ProductTabs extends Component {
 
   render () {
     const theTabs = this.getTabs()
-    const tabWidth = `120px`// `calc(${100 / theTabs.length}% - 3px)`
+
+    if (theTabs.length === 0) {
+      // just creates some space at the bottom of the page
+      return <div style={{ height: '60px' }} />
+    }
+
+    const tabWidth = `120px` // `calc(${100 / theTabs.length}% - 3px)`
     return (
       <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
         {match =>
@@ -31,7 +37,7 @@ class ProductTabs extends Component {
               tabWrapperClassName={style.tabsWrapper}
               activeTabClassName={`${style.activeTabContent} row`}
               tabClassName={style.productDetailTabs}
-              tabsUlClassName={style.productDetailTabsUl} >
+              tabsUlClassName={style.productDetailTabsUl}>
               {theTabs}
             </Tabs>
           ) : (
@@ -41,7 +47,7 @@ class ProductTabs extends Component {
               tabWrapperClassName={style.tabsWrapperDesktop}
               activeTabClassName={`${style.activeTabContentDesktop} row`}
               tabClassName={style.productDetailTabsDesktop}
-              tabsUlClassName={style.productDetailTabsUlDesktop} >
+              tabsUlClassName={style.productDetailTabsUlDesktop}>
               {theTabs}
             </TabsDesktop>
           )
