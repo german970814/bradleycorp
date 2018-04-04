@@ -15,7 +15,7 @@
     "precommit": "npm-run-all lint flow",
     "start:dev": "npm-run-all precommit dev-server",
     "start:dev:washfountain": "npm-run-all precommit dev-server-washfountain",
-    "start:dev:bimrevit": "npm-run-all check dev-server-bimrevit",
+    "start:dev:bimrevit": "npm-run-all precommit dev-server-bimrevit",
     "build": "webpack -p"
   },
   "author": "2x4",

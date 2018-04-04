@@ -2,7 +2,6 @@ import axios from 'axios'
 import api from './index'
 
 const WidgetsClient = {
-
   getBySidebarSlug (sidebar) {
     const url = `${api.baseURL}widgets`
     const params = { sidebar }
@@ -11,7 +10,7 @@ const WidgetsClient = {
   },
 
   getRightSidebar () {
-    return this.getBySidebarSlug('right_sidebar')
+    return this.getBySidebarSlug('right_sidebar_1')
   }
 }
 

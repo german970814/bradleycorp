@@ -26,14 +26,14 @@ class Customizable extends Component {
     super(props)
 
     this.defaultState = {
-      'module_data': {
+      module_data: {
         content: '',
         rows: []
       },
-      'widget_data': {
-        'right_sidebar': []
+      widget_data: {
+        right_sidebar: []
       },
-      'page_template_data': {
+      page_template_data: {
         template: ''
       }
     }
@@ -57,8 +57,10 @@ class Customizable extends Component {
    * @return {[void]}
    */
   componentWillReceiveProps (nextProps) {
-    if (!validChain(this.props, 'match', 'params', 'slug') ||
-      !validChain(nextProps, 'match', 'params', 'slug')) {
+    if (
+      !validChain(this.props, 'match', 'params', 'slug') ||
+      !validChain(nextProps, 'match', 'params', 'slug')
+    ) {
       return
     }
 
@@ -75,21 +77,41 @@ class Customizable extends Component {
    */
   render () {
     return (
-      <div className={style.customizable} >
+      <div className={style.customizable}>
         <TemplateFactory
           templateSlug={this.state['page_template_data'].template}
           data={this.state['page_template_data']}
           pageSlug={this.props.match.params.slug}
-          renderModules={
-            () => {
-              return <ModuleBuilder moduleData={this.state['module_data']} pageSlug={this.props.match.params.slug} />
+          renderModules={() => {
+            return (
+              <ModuleBuilder
+                moduleData={this.state['module_data']}
+                pageSlug={this.props.match.params.slug}
+              />
+            )
+          }}
+          renderRightSidebarWidgets={() => {
+            if (
+              !validChain(
+                this.state['page_template_data'].metaboxes['sidebar_select']
+              )
+            ) {
+              return null
+            } else {
+              const selectedSidebar = this.state['page_template_data']
+                .metaboxes['sidebar_select']
+              return (
+                <WidgetBuilder
+                  widgetArea={
+                    this.state['page_template_data'].metaboxes['sidebar_select']
+                  }
+                  widgetData={this.state['widget_data'][selectedSidebar]}
+                  pageSlug={this.props.match.params.slug}
+                />
+              )
             }
-          }
-          renderRightSidebarWidgets={
-            () => {
-              return <WidgetBuilder widgetData={this.state['widget_data']['right_sidebar']} pageSlug={this.props.match.params.slug} />
-            }
-          } />
+          }}
+        />
       </div>
     )
   }

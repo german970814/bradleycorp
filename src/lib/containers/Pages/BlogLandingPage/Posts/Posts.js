@@ -26,31 +26,31 @@ function getPostElement (post: BCorpPost, index: number) {
     return <PostPrimary key={index} post={post} />
   } else if (index === 1) {
     return (
-      <Fragment>
+      <Fragment key={index}>
         <Divider className={`col1 ${style.divider}`} fullWidth />
-        <PostSecondary key={index} post={post} />
+        <PostSecondary post={post} />
       </Fragment>
     )
   } else if (index === 2) {
     return <PostSecondary key={index} post={post} />
   } else if (index === 3) {
     return (
-      <Fragment>
+      <Fragment key={index}>
         <Divider className={`col1 ${style.divider}`} fullWidth />
-        <PostRemaining key={index} post={post} />
+        <PostRemaining post={post} />
       </Fragment>
     )
   } else {
     return (
-      <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
+      <Media key={index} query={{ maxWidth: MOBILEMAXWIDTH }}>
         {match =>
           match ? (
             <Fragment>
               <Divider className={`col1 ${style.divider}`} fullWidth />
-              <PostRemaining key={index} post={post} />
+              <PostRemaining post={post} />
             </Fragment>
           ) : (
-            <PostRemaining key={index} post={post} />
+            <PostRemaining post={post} />
           )
         }
       </Media>
