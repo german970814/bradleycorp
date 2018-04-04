@@ -89,6 +89,13 @@
   width: 16.66667%;
   box-sizing: border-box; }
 
+.col4x3 {
+  display: block;
+  float: left;
+  min-height: 1px;
+  width: 75%;
+  box-sizing: border-box; }
+
 @media only screen and (min-width: 768px) {
   .col1-tablet {
     display: block;
@@ -135,6 +142,14 @@
     width: 33.23333%;
     vertical-align: top;
     float: none;
+    box-sizing: border-box; } }
+
+@media only screen and (min-width: 1024px) {
+  .col1-desktop {
+    display: block;
+    float: left;
+    min-height: 1px;
+    width: 100%;
     box-sizing: border-box; } }
 
 @media only screen and (min-width: 1024px) {
@@ -315,6 +330,11 @@ h6 {
   line-height: normal;
   color: #58595b; }
 
+.post-tag {
+  font-family: Helvetica;
+  font-size: 10px;
+  color: #58595b; }
+
 .link-navy {
   line-height: normal;
   color: #2f3d6f; }
@@ -352,6 +372,16 @@ h6 {
 .container-size-desktop .hero-headline {
   font-size: 90px;
   letter-spacing: 9px; }
+
+.hero-intro {
+  font-family: "CentraleSansPro";
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.31;
+  letter-spacing: 3.2px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff; }
 
 .container-size-desktop .hero-copy, .container-size-tablet .hero-copy, .hero-copy, .container-size-mobile .hero-copy {
   font-family: "CentraleSansPro";
@@ -428,6 +458,18 @@ h6 {
   .hero-headline {
     font-size: 90px;
     letter-spacing: 9px; } }
+
+@media only screen and (min-width: 768px) {
+  .hero-intro {
+    font-size: 20px;
+    line-height: 1.36;
+    letter-spacing: 3.9px; } }
+
+@media only screen and (min-width: 1024px) {
+  .hero-intro {
+    font-size: 24px;
+    line-height: 1.33;
+    letter-spacing: 4.8px; } }
 
 @media only screen and (min-width: 768px) {
   .hero-copy {
@@ -796,6 +838,27 @@ img[class*="wp-image-"] {
 .-title__1MZPX- {
   display: inline-block;
   width: 100%; }
+div.-postMeta__Zoz36- {
+  margin-bottom: 20px; }
+/* Color palette */
+/* Global Sizes */
+/* Fonts */
+/* Breakpoints */
+/* Note: these values are exported and used globally throughout the js too, so changing here will change for everything */
+
+/* Padding */
+.-postTags__2-aTK- {
+  float: left;
+  width: 100%; }
+  .-postTags__2-aTK- .-tag__2vCi0- {
+    display: block;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 0 12px;
+    line-height: 23px;
+    border-radius: 3px;
+    background-color: #d1d3d4; }
 .-socialMediaIcon__3YfFm- {
   display: block;
   float: left; }

@@ -11,13 +11,14 @@ import BlogUpdatesWidget from './NewsletterWidget/BlogUpdatesWidget/BlogUpdatesW
  * @param {[object]} props
  * @return {[component]}
  */
-const WidgetFactory = ({ type, data }) => {
+const WidgetFactory = ({ type, data, widgetClass }) => {
   if (!type) {
     return null
   }
 
   const sharedProps = {
-    title: data['title']
+    title: data['title'],
+    className: widgetClass
   }
 
   switch (type) {
@@ -27,7 +28,8 @@ const WidgetFactory = ({ type, data }) => {
           {...sharedProps}
           text={data['display_text']}
           link={data['link_url']}
-          linkText={data['link_text']} />
+          linkText={data['link_text']}
+        />
       )
 
     case 'bcorp_recent_posts_widget':
@@ -35,7 +37,8 @@ const WidgetFactory = ({ type, data }) => {
         <RecentPostsWidget
           {...sharedProps}
           numberposts={data['number']}
-          blog={data['blog']} />
+          blog={data['blog']}
+        />
       )
 
     case 'bcorp_newsletter_widget':
@@ -43,7 +46,8 @@ const WidgetFactory = ({ type, data }) => {
         <NewsletterWidget
           {...sharedProps}
           description={data['description']}
-          linkText={data['link_text']} />
+          linkText={data['link_text']}
+        />
       )
 
     case 'bcorp_blog_updates_widget':
@@ -52,7 +56,8 @@ const WidgetFactory = ({ type, data }) => {
           {...sharedProps}
           description={data['display_text']}
           linkText={data['link_text']}
-          blog={data['blog']} />
+          blog={data['blog']}
+        />
       )
 
     default:
@@ -62,7 +67,8 @@ const WidgetFactory = ({ type, data }) => {
 
 WidgetFactory.propTypes = {
   type: PropTypes.string.isRequired,
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired,
+  widgetClass: PropTypes.string
 }
 
 export default WidgetFactory

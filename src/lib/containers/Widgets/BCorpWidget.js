@@ -30,22 +30,18 @@ class BCorpWidget extends Component {
 
   render () {
     return (
-      <div
-        className={`${style.widget}`} >
-
+      <div className={`${style.widget} ${this.props.className}`}>
         {this.renderTitle()}
 
-        <div className={`${style.contentBox}`} >
-          {this.renderContentBox()}
-        </div>
-
+        <div className={`${style.contentBox}`}>{this.renderContentBox()}</div>
       </div>
     )
   }
 }
 
 BCorpWidget.propTypes = {
-  title: PropTypes.string
+  title: PropTypes.string,
+  className: PropTypes.string
 }
 
 export default BCorpWidget

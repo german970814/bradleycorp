@@ -18,18 +18,19 @@ class RightSidebarTemplate extends Component {
 
   render () {
     return (
-      <div className={`row ${defaultStyle.defaultTemplate} ${style.RightSidebarTemplate}`}>
-
+      <div
+        className={`row ${defaultStyle.defaultTemplate} ${
+          style.RightSidebarTemplate
+        }`}>
         {this.renderTitle()}
 
-        <div className={`col1 col3x2-desktop ${style.content}`} >
+        <div className={`col1 col3x2-desktop ${style.content}`}>
           {this.props.renderModules()}
         </div>
 
-        <div className={`col1 col2-tablet col3-desktop ${style.sidebar}`} >
+        <div className={`col1 col3-desktop ${style.sidebar}`}>
           {this.props.renderRightSidebarWidgets()}
         </div>
-
       </div>
     )
   }

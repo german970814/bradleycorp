@@ -1,17 +1,37 @@
+// @flow
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import type { Widget } from './widget_types'
 import WidgetFactory from './WidgetFactory'
+
+type Props = {
+  widgetClass?: string,
+  /**
+   * Array of data for all widgets in the given widget area,
+   */
+  widgetData: Array<Widget>,
+  /**
+   * The page slug, so we know when to re run the whole build sequence
+   */
+  pageSlug: string
+}
 
 /**
  * This is the main entry point for rendering widgets,
  * if you need widgets, you'll need to use this component and pass it the widgets data
  */
-class WidgetBuilder extends Component {
+class WidgetBuilder extends Component<Props> {
   renderWidgets () {
     const { widgetData } = this.props
 
     return widgetData.map((widgetData, index) => {
-      return <WidgetFactory key={index} type={widgetData.type} data={widgetData.data} />
+      return (
+        <WidgetFactory
+          key={index}
+          widgetClass={this.props.widgetClass}
+          type={widgetData.type}
+          data={widgetData.data}
+        />
+      )
     })
   }
 
@@ -22,32 +42,6 @@ class WidgetBuilder extends Component {
 
     return this.renderWidgets()
   }
-}
-
-WidgetBuilder.propTypes = {
-  /**
-   * Array of data for all widgets in the given widget area,
-   * each array element should have shape:
-   *
-   * {
-   *   @var type string: The widget slug as registered in WP, eg bcorp_cta_widget,
-   *   @var data array: The data for the widget's fields
-   * }
-   *
-   * @type {[Object]}
-   */
-  widgetData: PropTypes.arrayOf(
-    PropTypes.shape({
-      type: PropTypes.string,
-      data: PropTypes.object
-    })
-  ),
-  /**
-   * The page slug, so we know when to re run the whole build sequence
-   *
-   * @type {[string]}
-   */
-  pageSlug: PropTypes.string
 }
 
 export default WidgetBuilder

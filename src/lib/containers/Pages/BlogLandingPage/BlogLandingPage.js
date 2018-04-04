@@ -91,7 +91,6 @@ class BlogLandingPage extends Component<Props, State> {
   }
 
   render () {
-    console.log(this.state)
     return (
       <div className={style.blogLandingPage}>
         <RightSidebarTemplate
@@ -108,6 +107,9 @@ class BlogLandingPage extends Component<Props, State> {
           renderRightSidebarWidgets={() => {
             return (
               <WidgetBuilder
+                widgetClass={`col1 col2-tablet col1-desktop ${
+                  style.blogLPWidget
+                }`}
                 widgetData={this.state.widgets}
                 pageSlug={this.props.match.params.slug}
               />
