@@ -93,12 +93,17 @@ class PostPrimary extends Component<Props> {
       return
     }
 
-    return <PostTags tags={this.props.post.terms.post_tag} />
+    return (
+      <PostTags
+        tags={this.props.post.terms.post_tag}
+        className={style.postTags}
+      />
+    )
   }
 
   render () {
     return (
-      <div className={style.postPrimary}>
+      <div className={`col1 ${style.postPrimary}`}>
         {this.renderTitle()}
         {this.renderPostMeta()}
         <div className={'row'}>

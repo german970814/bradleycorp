@@ -99,7 +99,11 @@ class BlogLandingPage extends Component<Props, State> {
             page_title: sitePrettyName
           }}
           renderModules={() => {
-            return <Posts data={this.state.posts} />
+            return (
+              <div className={'row'}>
+                <Posts data={this.state.posts} />
+              </div>
+            )
           }}
           renderRightSidebarWidgets={() => {
             return (

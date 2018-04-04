@@ -34,7 +34,7 @@ Divider.propTypes = {
    */
   color: PropTypes.string,
   /**
-   * Will take fullwidth minus the theme body padding
+   * Will take full width of its' container
    */
   fullWidth: PropTypes.bool
 }

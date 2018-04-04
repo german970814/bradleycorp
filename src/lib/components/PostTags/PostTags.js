@@ -4,7 +4,8 @@ import type { WPPostTag } from '../../types/post_types'
 import style from './PostTags.scss'
 
 type Props = {
-  tags: Array<WPPostTag>
+  tags: Array<WPPostTag>,
+  className: string
 }
 
 const PostTags = (props: Props) => {
@@ -13,7 +14,7 @@ const PostTags = (props: Props) => {
   }
 
   return (
-    <div className={style.postTags}>
+    <div className={`${style.postTags} ${props.className || ''}`}>
       {props.tags.map((tag, index) => {
         return (
           <div key={index} className={`post-tag ${style.tag}`}>

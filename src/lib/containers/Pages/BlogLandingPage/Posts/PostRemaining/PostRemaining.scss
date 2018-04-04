@@ -1,0 +1,66 @@
+@import '../../../../../../scss/partials/mixins';
+@import '../../../../../../scss/partials/variables';
+
+.postRemaining {
+  h5.title {
+    margin-bottom: 7px;
+    color: $black;
+
+    @include respond-to(tablet) {
+      margin-bottom: 13px;
+    }
+  }
+
+  .meta {
+    margin-bottom: 17px;
+
+    @include respond-to(tablet) {
+      margin-bottom: 23px;
+    }
+  }
+
+  .imageContainer {
+    padding-right: 7px;
+    margin-bottom: 20px;
+
+    @include respond-to(tablet) {
+      padding-right: 9px;
+    }
+
+    .image {
+      width: 100%;
+    }
+  }
+
+  .titleContainer {
+    padding-left: 7px;
+  }
+
+  .contentContainer {
+    @include respond-to(tablet) {
+      padding-left: 9px;
+    }
+  }
+
+  .content {
+    margin-bottom: 30px;
+  }
+
+  .postTags {
+    margin-bottom: 20px;
+
+    @include respond-to(tablet) {
+      margin-bottom: 30px;
+    }
+  }
+
+  &:last-child {
+    margin-bottom: 30px;
+
+    .postTags {
+      @include respond-to(tablet) {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

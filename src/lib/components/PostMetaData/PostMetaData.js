@@ -26,7 +26,7 @@ const PostMetaData = (props: Props) => {
   if (props.date) {
     const date = new Date(props.date)
     const prettyDate = moment(date).format('MMMM Do YYYY, h:mm a')
-    dateInfo = props.date ? `posted at ${prettyDate}` : ''
+    dateInfo = props.date ? `posted on ${prettyDate}` : ''
   }
 
   return (

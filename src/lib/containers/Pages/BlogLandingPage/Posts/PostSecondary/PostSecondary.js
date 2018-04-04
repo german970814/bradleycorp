@@ -93,7 +93,12 @@ class PostSecondary extends Component<Props> {
       return
     }
 
-    return <PostTags tags={this.props.post.terms.post_tag} />
+    return (
+      <PostTags
+        tags={this.props.post.terms.post_tag}
+        className={style.postTags}
+      />
+    )
   }
 
   render () {

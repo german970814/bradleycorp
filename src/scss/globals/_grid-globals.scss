@@ -4,13 +4,12 @@
   all the globals get built again
  */
 
-@import "../partials/grid";
+@import '../partials/grid';
 
 //
 // GLOBAL CSS
 //
 // Add a new one only when you need it. Trying to keep css minimal
-
 
 //TODO: make sure these are not defined globally anywhere else
 
@@ -41,6 +40,10 @@
 
   .col6 {
     @include col(6);
+  }
+
+  .col4x3 {
+    @include col(4 / 3);
   }
 
   // globals with media queries
