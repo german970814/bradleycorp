@@ -111,7 +111,7 @@ class BlogLandingPage extends Component<Props, State> {
                   style.blogLPWidget
                 }`}
                 widgetData={this.state.widgets}
-                pageSlug={this.props.match.params.slug}
+                pagePath={this.props.match.url}
               />
             )
           }}

@@ -26,7 +26,7 @@ type Props = {
   /**
    * Used in the templates to know when to re run any init functions
    */
-  pageSlug: string
+  pagePath: string
 }
 
 /**
@@ -50,7 +50,7 @@ const TemplateFactory = (props: Props): React.Node => {
         <FullWidthTemplate
           data={props.data}
           renderModules={props.renderModules}
-          pageSlug={props.pageSlug}
+          pagePath={props.pagePath}
         />
       )
 
@@ -76,7 +76,6 @@ const TemplateFactory = (props: Props): React.Node => {
           <LeftSidebarTemplate
             data={props.data}
             renderModules={props.renderModules}
-            pageSlug={props.pageSlug}
           />
         )
       }

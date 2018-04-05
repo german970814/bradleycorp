@@ -93,7 +93,7 @@ class Customizable extends Component<Props, State> {
         <WidgetBuilder
           widgetArea={metaboxes['sidebar_select']}
           widgetData={this.state['widget_data'][selectedSidebar]}
-          pageSlug={this.props.match.params.slug}
+          pagePath={this.props.match.url}
         />
       ) : null
     }
@@ -115,12 +115,12 @@ class Customizable extends Component<Props, State> {
         <TemplateFactory
           templateSlug={this.state['page_template_data'].template}
           data={this.state['page_template_data']}
-          pageSlug={this.props.match.params.slug}
+          pagePath={this.props.match.url}
           renderModules={() => {
             return (
               <ModuleBuilder
                 moduleData={this.state['module_data']}
-                pageSlug={this.props.match.params.slug}
+                pagePath={this.props.match.url}
               />
             )
           }}

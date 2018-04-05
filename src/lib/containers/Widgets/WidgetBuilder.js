@@ -10,9 +10,9 @@ type Props = {
    */
   widgetData: Array<Widget>,
   /**
-   * The page slug, so we know when to re run the whole build sequence
+   * The page path, so we know when to re run the whole build sequence
    */
-  pageSlug: string
+  pagePath: string
 }
 
 /**

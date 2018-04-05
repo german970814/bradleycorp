@@ -9,7 +9,7 @@ import style from './FullWidthTemplate.scss'
 type Props = {
   data: BCorpPageTemplateData,
   renderModules: () => React.Node,
-  pageSlug: string
+  pagePath: string
 }
 
 type State = {
@@ -35,13 +35,13 @@ class FullWidthTemplate extends React.Component<Props, State> {
   }
 
   componentWillReceiveProps (nextProps: Props) {
-    if (nextProps.pageSlug !== this.props.pageSlug) {
+    if (nextProps.pagePath !== this.props.pagePath) {
       this.resetText()
     }
   }
 
   componentDidUpdate (prevProps: Props) {
-    if (prevProps.pageSlug !== this.props.pageSlug) {
+    if (prevProps.pagePath !== this.props.pagePath) {
       this.fadeTextIn()
     }
   }

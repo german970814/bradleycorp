@@ -63,7 +63,9 @@ class ModuleBuilder extends Component {
    */
   renderRows () {
     return this.props.moduleData.rows.map(row => {
-      const rowNode = document.querySelector(`[data-row-id="${row.atts['row_id']}"]`)
+      const rowNode = document.querySelector(
+        `[data-row-id="${row.atts['row_id']}"]`
+      )
       const columnNodes = Array.from(rowNode.querySelectorAll(`.bcorp-column`))
       // make sure there is no space on the p element holding
       // this row. This allows us to mix formatted text with our
@@ -78,7 +80,9 @@ class ModuleBuilder extends Component {
   renderColumns (columnNodes, row, rowNode) {
     return columnNodes.map((columnNode, index) => {
       const colData = row.columns[index]
-      const moduleNodes = Array.from(columnNode.getElementsByClassName(`bcorp-module`))
+      const moduleNodes = Array.from(
+        columnNode.getElementsByClassName(`bcorp-module`)
+      )
 
       return this.renderModules(moduleNodes, colData, rowNode)
     })
@@ -88,9 +92,10 @@ class ModuleBuilder extends Component {
     return moduleNodes.map((moduleNode, index) => {
       const moduleData = colData.modules[index]
 
-      return ReactDOM.createPortal((
-        <ModuleFactory data={moduleData} rowNode={rowNode} />
-      ), moduleNode)
+      return ReactDOM.createPortal(
+        <ModuleFactory data={moduleData} rowNode={rowNode} />,
+        moduleNode
+      )
     })
   }
 
@@ -110,25 +115,28 @@ class ModuleBuilder extends Component {
     }
     return (
       <React.Fragment>
-
         {ReactHtmlParser(this.props.moduleData.content, {
           transform: function (node, i) {
             // console.log( node )
-            if (node &&
+            if (
+              node &&
               node.name === 'a' &&
               node.attribs &&
-              node.attribs.href.match(/\.(pdf|doc|docx|docm|docb)$/) !== null) {
-              return <FileDownloadLink
-                key={i}
-                title={node.children[0].data}
-                titleClass={`link-orange`}
-                link={node.attribs.href} />
+              node.attribs.href.match(/\.(pdf|doc|docx|docm|docb)$/) !== null
+            ) {
+              return (
+                <FileDownloadLink
+                  key={i}
+                  title={node.children[0].data}
+                  titleClass={`link-orange`}
+                  link={node.attribs.href}
+                />
+              )
             }
           }
         })}
 
         {this.renderModulePortals()}
-
       </React.Fragment>
     )
   }
@@ -150,11 +158,11 @@ ModuleBuilder.propTypes = {
     rows: PropTypes.array
   }),
   /**
-   * The page slug, so we know when to re run the whole build sequence
+   * The page path, so we know when to re run the whole build sequence
    *
    * @type {[string]}
    */
-  pageSlug: PropTypes.string
+  pagePath: PropTypes.string
 }
 
 export default ModuleBuilder

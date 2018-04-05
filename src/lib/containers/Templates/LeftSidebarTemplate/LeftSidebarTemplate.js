@@ -19,8 +19,7 @@ type Props = {
   /**
    * A render function for the modules
    */
-  renderModules: () => React.Node,
-  pageSlug: string
+  renderModules: () => React.Node
 }
 
 type State = {
@@ -37,12 +36,12 @@ class LeftSidebarTemplate extends React.Component<Props, State> {
   }
 
   componentDidMount () {
-    this.getHeirarchy()
+    this.getHeirarchy(this.props.data['page_id'])
   }
 
   componentWillReceiveProps (nextProps: Props) {
-    if (nextProps.pageSlug !== this.props.pageSlug) {
-      this.getHeirarchy()
+    if (nextProps.data['page_id'] !== this.props.data['page_id']) {
+      this.getHeirarchy(nextProps.data['page_id'])
     }
   }
 
@@ -69,12 +68,11 @@ class LeftSidebarTemplate extends React.Component<Props, State> {
     )
   }
 
-  async getHeirarchy () {
+  async getHeirarchy (pageID: number) {
+    console.log(pageID)
     try {
       const client = new CPTClient('page')
-      const heirarchyResponse = await client.getHeirarchyById(
-        this.props.data.page_id
-      )
+      const heirarchyResponse = await client.getHeirarchyById(pageID)
       const heirarchyData: BCorpPostHeirarchyResponse = heirarchyResponse.data
 
       // if we're loading a left sidebar template then
