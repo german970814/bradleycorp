@@ -19,11 +19,15 @@ type BCorpCustomPageRow = {
   columns: Array<BCorpCustomPageColumn>
 }
 
+type BCorpMetaboxes = {
+  sidebar_select?: string
+}
+
 type BCorpPageTemplateData = {
   page_id: number,
   page_title: string,
   template: string,
-  metaboxes: {},
+  metaboxes: false | BCorpMetaboxes,
   featured_image: false | Array<WPFeaturedImageArrayTypes>,
   has_parent: boolean,
   has_children: boolean

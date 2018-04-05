@@ -218,6 +218,9 @@ class FullWidthTemplate extends React.Component<Props, State> {
       tagline: false,
       copy: false
     }
+    if (!data.metaboxes) {
+      return shouldRender
+    }
 
     if (
       validChain(data, 'metaboxes', 'page_hero', 'title') &&

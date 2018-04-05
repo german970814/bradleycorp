@@ -20,6 +20,7 @@ const Main = props => {
     <Switch>
       <Route exact path="/" component={Home} />
       <Route exact path="/product/:slug" component={ProductDetailLoadable} />
+      <Route exact path="/*/:slug" component={CustomizableLoadable} />
       <Route exact path="/:slug" component={CustomizableLoadable} />
     </Switch>
   )

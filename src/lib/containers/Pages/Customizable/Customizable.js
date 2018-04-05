@@ -1,11 +1,19 @@
+// @flow
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import type { Match } from 'react-router-dom'
+import type { BCorpCustomPage } from '../../../types/customPage_types'
 import CustomPageApiClient from '../../../../api/customPage_client'
 import { validChain } from '../../../bcorpObject'
 import TemplateFactory from '../../Templates/TemplateFactory'
 import ModuleBuilder from '../../Modules/ModuleBuilder'
 import WidgetBuilder from '../../Widgets/WidgetBuilder'
 import style from './Customizable.scss'
+
+type Props = {
+  match: Match
+}
+
+type State = BCorpCustomPage
 
 /**
  *
@@ -21,8 +29,10 @@ import style from './Customizable.scss'
  * This is also level at which we apply the global styling for the module grid
  *
  */
-class Customizable extends Component {
-  constructor (props) {
+class Customizable extends Component<Props, State> {
+  defaultState: BCorpCustomPage
+
+  constructor (props: Props) {
     super(props)
 
     this.defaultState = {
@@ -30,11 +40,15 @@ class Customizable extends Component {
         content: '',
         rows: []
       },
-      widget_data: {
-        right_sidebar: []
-      },
+      widget_data: {},
       page_template_data: {
-        template: ''
+        page_id: 0,
+        page_title: 'Loading..',
+        template: 'default',
+        metaboxes: false,
+        featured_image: false,
+        has_parent: false,
+        has_children: false
       }
     }
 
@@ -46,8 +60,8 @@ class Customizable extends Component {
       return
     }
 
-    const { slug } = this.props.match.params
-    this.getPage(slug)
+    const { match } = this.props
+    this.getPage(match)
   }
 
   /**
@@ -56,16 +70,32 @@ class Customizable extends Component {
    * @param  {[object]} nextProps
    * @return {[void]}
    */
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps (nextProps: Props) {
     if (
-      !validChain(this.props, 'match', 'params', 'slug') ||
-      !validChain(nextProps, 'match', 'params', 'slug')
+      !validChain(this.props, 'match', 'url') ||
+      !validChain(nextProps, 'match', 'url')
     ) {
+      console.warn(`url invalid for match: `, nextProps.match)
       return
     }
 
-    if (nextProps.match.params.slug !== this.props.match.params.slug) {
-      this.getPage(nextProps.match.params.slug)
+    if (nextProps.match.url !== this.props.match.url) {
+      this.getPage(nextProps.match)
+    }
+  }
+
+  renderRightSidebarWidgets () {
+    const metaboxes = this.state['page_template_data'].metaboxes
+    if (metaboxes) {
+      const selectedSidebar = metaboxes['sidebar_select']
+
+      return selectedSidebar && this.state['widget_data'][selectedSidebar] ? (
+        <WidgetBuilder
+          widgetArea={metaboxes['sidebar_select']}
+          widgetData={this.state['widget_data'][selectedSidebar]}
+          pageSlug={this.props.match.params.slug}
+        />
+      ) : null
     }
   }
 
@@ -76,6 +106,10 @@ class Customizable extends Component {
    * @return {[void]}
    */
   render () {
+    if (!this.state['page_template_data']['page_id'] === 0) {
+      return null
+    }
+
     return (
       <div className={style.customizable}>
         <TemplateFactory
@@ -90,27 +124,7 @@ class Customizable extends Component {
               />
             )
           }}
-          renderRightSidebarWidgets={() => {
-            if (
-              !validChain(
-                this.state['page_template_data'].metaboxes['sidebar_select']
-              )
-            ) {
-              return null
-            } else {
-              const selectedSidebar = this.state['page_template_data']
-                .metaboxes['sidebar_select']
-              return (
-                <WidgetBuilder
-                  widgetArea={
-                    this.state['page_template_data'].metaboxes['sidebar_select']
-                  }
-                  widgetData={this.state['widget_data'][selectedSidebar]}
-                  pageSlug={this.props.match.params.slug}
-                />
-              )
-            }
-          }}
+          renderRightSidebarWidgets={this.renderRightSidebarWidgets.bind(this)}
         />
       </div>
     )
@@ -119,13 +133,19 @@ class Customizable extends Component {
   /**
    * We use the page slug in the url to request the correct page data
    *
-   * @param  {[string]}  slug page slug from url
+   * @param  {[string]}  match React-Router match object
    */
-  async getPage (slug) {
+  async getPage (match: Match) {
     try {
       const customPageAPIClient = new CustomPageApiClient()
-      const page = await customPageAPIClient.getBySlug(slug)
-      const pageData = page.data
+      // only other alternative for custom page route is '/*/:slug'
+      // so we have to get by path
+      const page =
+        match.path === '/:slug'
+          ? await customPageAPIClient.getBySlug(match.params.slug)
+          : await customPageAPIClient.getByPath(match.url)
+
+      const pageData: BCorpCustomPage = page.data
 
       // set state leaving defaults where there exists no data in the request
       return this.setState(Object.assign({}, this.defaultState, pageData))
@@ -133,10 +153,6 @@ class Customizable extends Component {
       console.log(err)
     }
   }
-}
-
-Customizable.propTypes = {
-  match: PropTypes.object.isRequired
 }
 
 export default Customizable
