@@ -58,7 +58,7 @@ class SinglePostModule extends PostGettingModule {
     }
 
     return (
-      <Link to={createCPTUrl(post)} replace>
+      <Link to={createCPTUrl(post) || '#'} replace>
         <h2 className={`${style.title} ${this.skinClass}`}>
           {post['post_title']}
         </h2>
@@ -123,7 +123,10 @@ class SinglePostModule extends PostGettingModule {
 
     return (
       <div className={`row ${style.buttonsWrapper}`}>
-        <Link className={`${style.button}`} to={createCPTUrl(post)} replace>
+        <Link
+          className={`${style.button}`}
+          to={createCPTUrl(post) || '#'}
+          replace>
           <button
             className={`button-orange ${style.button1} ${
               this.accentColorClass

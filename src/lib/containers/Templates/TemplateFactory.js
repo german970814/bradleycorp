@@ -39,6 +39,11 @@ type Props = {
  */
 const TemplateFactory = (props: Props): React.Node => {
   const template = props.data.template
+
+  if (!template) {
+    return null
+  }
+
   switch (template) {
     case 'full-width-page':
       return (
@@ -59,11 +64,19 @@ const TemplateFactory = (props: Props): React.Node => {
       )
 
     case 'default':
+      /**
+       * Just to reiterate documentation in back end..
+       *
+       * has_children true => existence of immediate children.
+       *
+       * @see bcorp-custom-page-response-shape-class.php
+       */
       if (props.data.has_parent || props.data.has_children) {
         return (
           <LeftSidebarTemplate
             data={props.data}
             renderModules={props.renderModules}
+            pageSlug={props.pageSlug}
           />
         )
       }

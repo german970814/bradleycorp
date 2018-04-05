@@ -14,4 +14,20 @@ type Module = {
     | 'module_text_background_peeler'
 }
 
-export type { Module }
+type MenuModuleLink = {
+  /**
+   * Optional so we can have menu blocks without the parent link
+   */
+  url?: string,
+  /**
+   * Optional so we can have menu blocks without the parent link
+   */
+  title?: string
+}
+
+type MenuModuleMenuBlockData = {
+  ...MenuModuleLink,
+  children: Array<MenuModuleLink>
+}
+
+export type { Module, MenuModuleMenuBlockData }

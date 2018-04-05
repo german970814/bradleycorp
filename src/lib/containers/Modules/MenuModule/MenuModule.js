@@ -38,23 +38,14 @@ class MenuModule extends BCorpModule {
       return
     }
 
-    return (
-      <h3 className={style.title} >
-        {this.props.title}
-      </h3>
-    )
+    return <h3 className={style.title}>{this.props.title}</h3>
   }
 
   renderMenuBlocks () {
     return this.state.menuBlocks.map((menuBlock, index) => {
       return (
-        <div
-          key={index}
-          className={style.menuBlockWrapper} >
-
-          <MenuBlock
-            blockData={menuBlock} />
-
+        <div key={index} className={style.menuBlockWrapper}>
+          <MenuBlock blockData={menuBlock} />
         </div>
       )
     })
@@ -62,12 +53,10 @@ class MenuModule extends BCorpModule {
 
   renderModule () {
     return (
-      <div className={`row ${this.containerClassName}`} >
-
+      <div className={`row ${this.containerClassName}`}>
         {this.renderTitle()}
 
         {this.renderMenuBlocks()}
-
       </div>
     )
   }
@@ -86,7 +75,10 @@ class MenuModule extends BCorpModule {
 
   async getMenu (menuSlug) {
     try {
-      const menuResponse = await NavMenuApiClient.getNavMenuBySlug(menuSlug, true)
+      const menuResponse = await NavMenuApiClient.getNavMenuBySlug(
+        menuSlug,
+        true
+      )
       const menuData = menuResponse.data
 
       this.setState({ menuBlocks: menuData })

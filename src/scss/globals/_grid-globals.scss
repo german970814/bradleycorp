@@ -66,6 +66,18 @@
     }
   }
 
+  .col4-tablet {
+    @include respond-to(tablet) {
+      @include col(4);
+    }
+  }
+
+  .col4x3-tablet {
+    @include respond-to(tablet) {
+      @include col(4 / 3);
+    }
+  }
+
   .col6-tablet {
     @include respond-to(tablet) {
       @include col(6);

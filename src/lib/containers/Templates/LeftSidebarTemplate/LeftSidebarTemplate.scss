@@ -1,9 +1,22 @@
 @import '../../../../scss/partials/mixins';
+@import '../../../../scss/partials/grid';
+
+$leftSidebarWidth: 17%;
 
 .LeftSidebarTemplate {
   .sidebar {
+    @include respond-to(tablet) {
+      padding-right: 3%;
+    }
+
     @include respond-to(desktop) {
-      padding-right: 2.5%;
+      padding-right: 4%;
+      width: $leftSidebarWidth;
+    }
+  }
+  .content {
+    @include respond-to(desktop) {
+      width: 100% - $leftSidebarWidth;
     }
   }
 }
