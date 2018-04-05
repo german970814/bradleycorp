@@ -31,7 +31,8 @@ class PostColumn extends Component<Props> {
 
   componentWillReceiveProps (nextProps: Props) {
     if (nextProps.post) {
-      this.postLink = createCPTUrl(nextProps.post.post)
+      const link = createCPTUrl(nextProps.post.post)
+      this.postLink = link || '#'
     }
   }
 
