@@ -20,13 +20,13 @@ class DefaultTemplate extends React.Component<Props> {
   }
 }
 
-export function renderTitle (title?: string, className: string): React.Node {
+export function renderTitle (title?: string, className?: string): React.Node {
   if (!title) {
     return null
   }
 
   return (
-    <div className={`${className} ${defaultStyle.pageTitle}`}>
+    <div className={`${className || ''} ${defaultStyle.pageTitle}`}>
       <h1>{title}</h1>
     </div>
   )
