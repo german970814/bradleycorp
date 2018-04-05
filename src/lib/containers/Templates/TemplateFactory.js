@@ -1,8 +1,33 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import * as React from 'react'
+import type { BCorpPageTemplateData } from '../../types/customPage_types'
 import FullWidthTemplate from './FullWidthTemplate/FullWidthTemplate'
 import RightSidebarTemplate from './RightSidebarTemplate/RightSidebarTemplate'
+import LeftSidebarTemplate from './LeftSidebarTemplate/LeftSidebarTemplate'
 import DefaultTemplate from './DefaultTemplate/DefaultTemplate'
+
+type Props = {
+  /*
+    The slug of the template to render, eg full-width-page
+   */
+  templateSlug: string,
+  /**
+   * The page template data, this will simply be passed through to the resulting template
+   */
+  data: BCorpPageTemplateData,
+  /**
+   * A render function for the modules, this is just passed on to the template
+   */
+  renderModules: () => React.Node,
+  /**
+   * A render function for the widgets, this is just passed on to the template
+   */
+  renderRightSidebarWidgets: () => React.Node,
+  /**
+   * Used in the templates to know when to re run any init functions
+   */
+  pageSlug: string
+}
 
 /**
  * Given page template data, we pass it through to the correct template component
@@ -12,70 +37,47 @@ import DefaultTemplate from './DefaultTemplate/DefaultTemplate'
  * @param {[object]} props
  * @return {[component]}
  */
-const TemplateFactory = props => {
-  if (!props.templateSlug || props.templateSlug === '') {
-    return null
-  }
-
-  const templateProps = {
-    data: props.data,
-    renderModules: props.renderModules,
-    renderRightSidebarWidgets: props.renderRightSidebarWidgets,
-    pageSlug: props.pageSlug
-  }
-
-  return getTemplateComponent(props.templateSlug, templateProps)
-}
-
-/**
- * Get the correct template component with props
- *
- * @param  {[string]} template      the template slug
- * @param  {[object]} templateProps props to pass to the correct template component
- * @return {[component]}               [description]
- */
-function getTemplateComponent (template, templateProps) {
-  if (!template || !templateProps) {
-    return
-  }
-
+const TemplateFactory = (props: Props): React.Node => {
+  const template = props.data.template
   switch (template) {
     case 'full-width-page':
-      return <FullWidthTemplate {...templateProps} />
+      return (
+        <FullWidthTemplate
+          data={props.data}
+          renderModules={props.renderModules}
+          pageSlug={props.pageSlug}
+        />
+      )
 
     case 'right-sidebar':
-      return <RightSidebarTemplate {...templateProps} />
+      return (
+        <RightSidebarTemplate
+          data={props.data}
+          renderModules={props.renderModules}
+          renderRightSidebarWidgets={props.renderRightSidebarWidgets}
+        />
+      )
 
     case 'default':
-      return <DefaultTemplate {...templateProps} />
+      if (props.data.has_parent || props.data.has_children) {
+        return (
+          <LeftSidebarTemplate
+            data={props.data}
+            renderModules={props.renderModules}
+          />
+        )
+      }
+      return <DefaultTemplate {...props} />
 
     default:
       console.warn(`Couldn't find component for template ${template}`)
-      return <DefaultTemplate {...templateProps} />
+      return (
+        <DefaultTemplate
+          data={props.data}
+          renderModules={props.renderModules}
+        />
+      )
   }
-}
-
-TemplateFactory.propTypes = {
-  /*
-    The slug of the template to render, eg full-width-page
-   */
-  templateSlug: PropTypes.string.isRequired,
-  /**
-   * The page template data, this will simply be passed through to the resulting template
-   */
-  data: PropTypes.object,
-  /**
-   * A render function for the modules, this is just passed on to the template
-   */
-  renderModules: PropTypes.func.isRequired,
-  /**
-   * A render function for the widgets, this is just passed on to the template
-   */
-  renderRightSidebarWidgets: PropTypes.func.isRequired,
-  /**
-   * Used in the templates to know when to re run any init functions
-   */
-  pageSlug: PropTypes.string
 }
 
 export default TemplateFactory

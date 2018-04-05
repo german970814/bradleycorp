@@ -9,6 +9,8 @@ type WPPost = {
   author_display_name?: ''
 }
 
+type WPFeaturedImageArrayTypes = string | number | boolean
+
 type WPPostTag = {
   count: number,
   description?: string,
@@ -29,8 +31,8 @@ type BCorpPost = {
     post_tag?: Array<WPPostTag>
   },
   media: {
-    featured_image: '' | Array<mixed>
+    featured_image: '' | Array<WPFeaturedImageArrayTypes>
   }
 }
 
-export type { BCorpPost, WPPost, WPPostTag }
+export type { BCorpPost, WPPost, WPPostTag, WPFeaturedImageArrayTypes }

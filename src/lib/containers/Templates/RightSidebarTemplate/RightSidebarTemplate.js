@@ -1,28 +1,34 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import * as React from 'react'
+import { renderTitle } from '../DefaultTemplate/DefaultTemplate'
 import style from './RightSidebarTemplate.scss'
 import defaultStyle from '../Templates.scss'
 
-class RightSidebarTemplate extends Component {
-  renderTitle () {
-    if (!this.props.data.page_title) {
-      return
-    }
+type Props = {
+  /**
+   * The page template data
+   */
+  data: {
+    page_title: string
+  },
+  /**
+   * A render function for the modules
+   */
+  renderModules: () => React.Node,
+  /**
+   * A render function for the widgets
+   */
+  renderRightSidebarWidgets: () => React.Node
+}
 
-    return (
-      <div className={`col1 ${defaultStyle.pageTitle}`}>
-        <h1>{this.props.data.page_title}</h1>
-      </div>
-    )
-  }
-
+class RightSidebarTemplate extends React.Component<Props> {
   render () {
     return (
       <div
         className={`row ${defaultStyle.defaultTemplate} ${
           style.RightSidebarTemplate
         }`}>
-        {this.renderTitle()}
+        {renderTitle(this.props.data.page_title, 'col1')}
 
         <div className={`col1 col3x2-desktop ${style.content}`}>
           {this.props.renderModules()}
@@ -34,15 +40,6 @@ class RightSidebarTemplate extends Component {
       </div>
     )
   }
-}
-
-RightSidebarTemplate.propTypes = {
-  /**
-   * Only requires 'page_title' to feature on the data object
-   */
-  data: PropTypes.object,
-  renderModules: PropTypes.func.isRequired,
-  renderRightSidebarWidgets: PropTypes.func.isRequired
 }
 
 export default RightSidebarTemplate

@@ -22,7 +22,10 @@ class CPTApiClient {
 
   getByIdArray (idArray, postsPerPage = 10) {
     const url = `${api.baseURL}${this.cptName}`
-    const params = { id_array: JSON.stringify(idArray), posts_per_page: postsPerPage }
+    const params = {
+      id_array: JSON.stringify(idArray),
+      posts_per_page: postsPerPage
+    }
 
     return axios.get(url, { params })
   }
@@ -36,15 +39,25 @@ class CPTApiClient {
 
   getByTaxAndTermArray (taxName, termSlugArray) {
     const url = `${api.baseURL}${this.cptName}`
-    const params = { tax_name: taxName, term_slug_array: JSON.stringify(termSlugArray) }
+    const params = {
+      tax_name: taxName,
+      term_slug_array: JSON.stringify(termSlugArray)
+    }
+
+    return axios.get(url, { params })
+  }
+
+  getHeirarchyById (id) {
+    const url = `${api.baseURL}${this.cptName}-heirarchy`
+    const params = { id }
 
     return axios.get(url, { params })
   }
 
   get (page = 1) {
     const args = {
-      'post_type': this.cptName,
-      'paged': page
+      post_type: this.cptName,
+      paged: page
     }
 
     return api.query({ args })

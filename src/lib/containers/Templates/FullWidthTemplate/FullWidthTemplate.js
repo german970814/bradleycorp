@@ -1,13 +1,25 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import * as React from 'react'
+import type { BCorpPageTemplateData } from '../../../types/customPage_types'
 import { validChain } from '../../../bcorpObject'
 import { lookupColor } from '../../../bcorpStyles'
 import VideoBackground from '../../../components/BCorpVideo/VideoBackground/VideoBackground'
 import BCorpBackground from '../../../components/BCorpBackground/BCorpBackground'
 import style from './FullWidthTemplate.scss'
 
-class FullWidthTemplate extends Component {
-  constructor (props) {
+type Props = {
+  data: BCorpPageTemplateData,
+  renderModules: () => React.Node,
+  pageSlug: string
+}
+
+type State = {
+  showTagline: boolean,
+  showTitle: boolean,
+  showCopy: boolean
+}
+
+class FullWidthTemplate extends React.Component<Props, State> {
+  constructor (props: Props) {
     super(props)
 
     this.defaultState = {
@@ -22,13 +34,13 @@ class FullWidthTemplate extends Component {
     this.fadeTextIn()
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps (nextProps: Props) {
     if (nextProps.pageSlug !== this.props.pageSlug) {
       this.resetText()
     }
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate (prevProps: Props) {
     if (prevProps.pageSlug !== this.props.pageSlug) {
       this.fadeTextIn()
     }
@@ -59,7 +71,7 @@ class FullWidthTemplate extends Component {
     this.setState({ showCopy: true })
   }
 
-  renderTitle (shouldRender) {
+  renderTitle (shouldRender: boolean) {
     if (!shouldRender) {
       return
     }
@@ -77,7 +89,7 @@ class FullWidthTemplate extends Component {
     )
   }
 
-  renderTagline (shouldRender) {
+  renderTagline (shouldRender: boolean) {
     if (!shouldRender) {
       return
     }
@@ -95,7 +107,7 @@ class FullWidthTemplate extends Component {
     )
   }
 
-  renderCopy (shouldRender) {
+  renderCopy (shouldRender: boolean) {
     if (!shouldRender) {
       return
     }
@@ -199,7 +211,7 @@ class FullWidthTemplate extends Component {
     )
   }
 
-  heroShouldRender () {
+  heroShouldRender (): boolean {
     const { data } = this.props
     const shouldRender = {
       title: false,
@@ -232,12 +244,6 @@ class FullWidthTemplate extends Component {
 
     return shouldRender
   }
-}
-
-FullWidthTemplate.propTypes = {
-  data: PropTypes.object,
-  renderModules: PropTypes.func.isRequired,
-  pageSlug: PropTypes.string
 }
 
 export default FullWidthTemplate

@@ -1,29 +1,35 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import * as React from 'react'
 import defaultStyle from '../Templates.scss'
 
-class DefaultTemplate extends Component {
-  renderTitle () {
-    return (
-      <div className={defaultStyle.pageTitle}>
-        <h1>{this.props.data.page_title}</h1>
-      </div>
-    )
-  }
+type Props = {
+  data: {
+    page_title: string
+  },
+  renderModules: () => React.Node
+}
 
+class DefaultTemplate extends React.Component<Props> {
   render () {
     return (
       <div className={defaultStyle.defaultTemplate}>
-        {this.renderTitle()}
+        {renderTitle(this.props.data.page_title)}
         {this.props.renderModules()}
       </div>
     )
   }
 }
 
-DefaultTemplate.propTypes = {
-  data: PropTypes.object,
-  renderModules: PropTypes.func.isRequired
+export function renderTitle (title?: string, className: string): React.Node {
+  if (!title) {
+    return null
+  }
+
+  return (
+    <div className={`${className} ${defaultStyle.pageTitle}`}>
+      <h1>{title}</h1>
+    </div>
+  )
 }
 
 export default DefaultTemplate

@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import type { Match } from 'react-router-dom'
 import type { BCorpPost } from '../../../types/post_types'
-import type { Widget } from '../../Widgets/widget_types'
+import type { Widget } from '../../../types/widget_types'
 import { validChain } from '../../../bcorpObject'
 import { site, sitePrettyName } from '../../../../api'
 import BIMRevitClient from '../../../../api/bimRevit_client'

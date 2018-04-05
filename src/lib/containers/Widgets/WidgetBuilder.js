@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react'
-import type { Widget } from './widget_types'
+import type { Widget } from '../../types/widget_types'
 import WidgetFactory from './WidgetFactory'
 
 type Props = {

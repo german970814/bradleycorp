@@ -1,0 +1,9 @@
+@import '../../../../scss/partials/mixins';
+
+.LeftSidebarTemplate {
+  .sidebar {
+    @include respond-to(desktop) {
+      padding-right: 2.5%;
+    }
+  }
+}
