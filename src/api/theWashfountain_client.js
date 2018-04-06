@@ -1,3 +1,4 @@
+// @flow
 import axios from 'axios'
 import api from './index'
 
@@ -8,8 +9,7 @@ import api from './index'
  * @type {Object}
  */
 const TheWashfountainClient = {
-
-  getRecentPosts (numberposts) {
+  getRecentPosts (numberposts: number) {
     const url = `${api.baseURLTheWashfountain}posts`
     const params = { numberposts }
 

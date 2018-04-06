@@ -135,7 +135,8 @@ class BlogLandingPage extends Component<Props, State> {
         return
       }
 
-      const response = await client.getRecentPosts(6)
+      // passing 0 means we use WP get_posts default number of posts (currently 5)
+      const response = await client.getRecentPosts(0)
       const postsData = response.data
 
       const posts = postsData.map(postData => {
