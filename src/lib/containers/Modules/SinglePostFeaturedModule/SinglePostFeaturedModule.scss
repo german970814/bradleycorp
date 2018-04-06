@@ -1,8 +1,8 @@
-@import "../../../../scss/partials/variables";
-@import "../../../../scss/partials/mixins";
-@import "../../../../scss/partials/helpers";
-@import "../../../../scss/partials/grid";
-@import "../../../components/BCorpBackground/BCorpBackground";
+@import '../../../../scss/partials/variables';
+@import '../../../../scss/partials/mixins';
+@import '../../../../scss/partials/helpers';
+@import '../../../../scss/partials/grid';
+@import '../../../components/BCorpBackground/BCorpBackground';
 
 .singlePostFeaturedModule {
   @extend %bcorpBackgroundParent;
@@ -16,7 +16,6 @@
   }
 
   :global(.container-size-mobile) {
-
     $paddingBottom: 30px;
 
     padding-top: 60px;
@@ -54,14 +53,14 @@
       height: 20px;
 
       .arrow {
-        width: auto;
+        // width needs setting absolutely for IE support
+        width: 41px;
         height: 100%;
       }
     }
   }
 
   :global(.container-size-tablet) {
-
     $padding: 30px;
 
     padding: $padding;
@@ -88,7 +87,6 @@
   }
 
   :global(.container-size-desktop) {
-
     $padding: 40px;
 
     padding: $padding;
