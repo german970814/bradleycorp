@@ -44,7 +44,8 @@
       margin-bottom: 30px;
 
       @include respond-to(tablet) {
-        padding: 0 25px;
+        padding-left: 25px;
+        padding-right: 25px;
         width: auto;
       }
     }
