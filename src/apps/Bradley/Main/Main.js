@@ -15,6 +15,9 @@ const CustomizableLoadable = Loadable({
   loading: Loading
 })
 
+// Note: <Route exact path="/post/:slug" component={...} /> ie Blog post route
+// will use right sidebar template and get blog_sidebar
+
 const Main = props => {
   return (
     <Switch>

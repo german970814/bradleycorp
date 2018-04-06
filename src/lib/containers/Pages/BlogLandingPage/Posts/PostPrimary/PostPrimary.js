@@ -20,7 +20,7 @@ class PostPrimary extends Component<Props> {
     }
 
     return (
-      <Link to={createCPTUrl(this.props.post.post)} replace>
+      <Link to={createCPTUrl(this.props.post.post) || '#'} replace>
         <h2 className={style.title}>{this.props.post.post.post_title}</h2>
       </Link>
     )
@@ -44,7 +44,7 @@ class PostPrimary extends Component<Props> {
     }
 
     return (
-      <Link to={createCPTUrl(this.props.post.post)} replace>
+      <Link to={createCPTUrl(this.props.post.post) || '#'} replace>
         <div className={style.image}>
           <ImageFrame
             src={featuredImage[0]}
@@ -79,7 +79,7 @@ class PostPrimary extends Component<Props> {
 
   renderReadMore () {
     return (
-      <Link to={createCPTUrl(this.props.post.post)} replace>
+      <Link to={createCPTUrl(this.props.post.post) || '#'} replace>
         <button className={style.button}>{'READ MORE'}</button>
       </Link>
     )

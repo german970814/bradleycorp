@@ -51,7 +51,7 @@ class BlogLandingPage extends Component<Props, State> {
     }
 
     this.defaultWidgetState = {
-      type: 'bcorp_cta_widget',
+      type: '',
       data: {}
     }
 
@@ -154,8 +154,8 @@ class BlogLandingPage extends Component<Props, State> {
    */
   async getWidgets () {
     try {
-      const response = await WidgetsClient.getRightSidebar()
-      const widgetsData = response.data
+      const response = await WidgetsClient.getBlogSidebar()
+      const widgetsData: Array<Widget> = response.data
 
       const widgets = widgetsData.map(widgetData => {
         return Object.assign({}, this.defaultWidgetState, widgetData)

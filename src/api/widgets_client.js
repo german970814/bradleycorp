@@ -9,8 +9,8 @@ const WidgetsClient = {
     return axios.get(url, { params })
   },
 
-  getRightSidebar () {
-    return this.getBySidebarSlug('right_sidebar_1')
+  getBlogSidebar () {
+    return this.getBySidebarSlug('blog_sidebar')
   }
 }
 

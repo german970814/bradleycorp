@@ -69,7 +69,6 @@ class LeftSidebarTemplate extends React.Component<Props, State> {
   }
 
   async getHeirarchy (pageID: number) {
-    console.log(pageID)
     try {
       const client = new CPTClient('page')
       const heirarchyResponse = await client.getHeirarchyById(pageID)

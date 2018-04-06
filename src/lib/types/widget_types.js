@@ -2,6 +2,7 @@
 
 type Widget = {
   type:
+    | ''
     | 'bcorp_cta_widget'
     | 'bcorp_recent_posts_widget'
     | 'bcorp_newsletter_widget'

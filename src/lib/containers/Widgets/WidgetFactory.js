@@ -12,7 +12,7 @@ import BlogUpdatesWidget from './NewsletterWidget/BlogUpdatesWidget/BlogUpdatesW
  * @return {[component]}
  */
 const WidgetFactory = ({ type, data, widgetClass }) => {
-  if (!type) {
+  if (!type || type === '') {
     return null
   }
 
