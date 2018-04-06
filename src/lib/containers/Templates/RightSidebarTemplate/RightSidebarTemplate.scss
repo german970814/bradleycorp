@@ -1,10 +1,13 @@
-@import "../../../../scss/partials/mixins";
+@import '../../../../scss/partials/mixins';
 
 .RightSidebarTemplate {
-
   .sidebar {
     @include respond-to(desktop) {
       padding-left: 2.5%;
     }
+  }
+
+  .content {
+    margin-bottom: 40px;
   }
 }

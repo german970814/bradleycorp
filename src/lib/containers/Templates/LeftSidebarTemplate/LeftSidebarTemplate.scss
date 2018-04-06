@@ -5,6 +5,8 @@ $leftSidebarWidth: 17%;
 
 .LeftSidebarTemplate {
   .sidebar {
+    margin-bottom: 40px;
+
     @include respond-to(tablet) {
       padding-right: 3%;
     }
@@ -15,6 +17,8 @@ $leftSidebarWidth: 17%;
     }
   }
   .content {
+    margin-bottom: 40px;
+
     @include respond-to(desktop) {
       width: 100% - $leftSidebarWidth;
     }

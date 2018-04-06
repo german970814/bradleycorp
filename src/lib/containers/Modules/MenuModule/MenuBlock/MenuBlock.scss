@@ -1,8 +1,34 @@
-@import "../../../../../scss/partials/variables";
+@import '../../../../../scss/partials/variables';
 
-h6.blockTitle {
-  // should be 10 but we have 3px extra space from the dont style
-  margin-bottom: 7px;
+$parentTitleMarginBottom: 7px;
+$iconHeight: 20px;
+
+.title {
+  position: relative;
+  min-height: $iconHeight;
+
+  &.noParent {
+    min-height: $parentTitleMarginBottom + $iconHeight;
+  }
+
+  h6.blockTitle {
+    // should be 10 but we have 3px extra space from the dont style
+    margin-bottom: $parentTitleMarginBottom;
+
+    &.collapsible {
+      margin-right: 40px;
+    }
+  }
+
+  img.collapsibleIcon {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    padding: 20px;
+    width: $iconHeight;
+    height: $iconHeight;
+    cursor: pointer;
+  }
 }
 
 .arrowWrapper {

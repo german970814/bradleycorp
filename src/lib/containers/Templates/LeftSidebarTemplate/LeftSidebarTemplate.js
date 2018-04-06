@@ -2,6 +2,8 @@
 import * as React from 'react'
 import type { MenuModuleMenuBlockData } from '../../../types/module_types'
 import type { BCorpPostHeirarchyResponse } from '../../../types/post_types'
+import Media from 'react-media'
+import { MOBILEMAXWIDTH } from '../../../../globals'
 import CPTClient from '../../../../api/cpt_client'
 import { renderTitle } from '../DefaultTemplate/DefaultTemplate'
 import MenuBlock from '../../Modules/MenuModule/MenuBlock/MenuBlock'
@@ -46,7 +48,17 @@ class LeftSidebarTemplate extends React.Component<Props, State> {
   }
 
   renderLeftSidebar () {
-    return <MenuBlock blockData={this.state.menuBlock} />
+    return (
+      <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
+        {match =>
+          match ? (
+            <MenuBlock blockData={this.state.menuBlock} collapsible />
+          ) : (
+            <MenuBlock blockData={this.state.menuBlock} />
+          )
+        }
+      </Media>
+    )
   }
 
   render () {
