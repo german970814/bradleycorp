@@ -30,6 +30,13 @@ class CPTApiClient {
     return axios.get(url, { params })
   }
 
+  getLatest (numberPosts = 0) {
+    const url = `${api.baseURL}${this.cptName}`
+    const params = { posts_per_page: numberPosts }
+
+    return axios.get(url, { params })
+  }
+
   getByTax (taxName, termSlug) {
     const url = `${api.baseURL}${this.cptName}`
     const params = { tax_name: taxName, term_slug: termSlug }

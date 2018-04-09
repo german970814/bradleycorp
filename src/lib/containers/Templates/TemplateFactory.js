@@ -4,6 +4,7 @@ import type { BCorpPageTemplateData } from '../../types/customPage_types'
 import FullWidthTemplate from './FullWidthTemplate/FullWidthTemplate'
 import RightSidebarTemplate from './RightSidebarTemplate/RightSidebarTemplate'
 import LeftSidebarTemplate from './LeftSidebarTemplate/LeftSidebarTemplate'
+import FAQTemplate from './LeftSidebarTemplate/FAQTemplate/FAQTemplate'
 import DefaultTemplate from './DefaultTemplate/DefaultTemplate'
 
 type Props = {
@@ -62,6 +63,9 @@ const TemplateFactory = (props: Props): React.Node => {
           renderRightSidebarWidgets={props.renderRightSidebarWidgets}
         />
       )
+
+    case 'faq':
+      return <FAQTemplate data={props.data} />
 
     case 'default':
       /**
