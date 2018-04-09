@@ -13,7 +13,7 @@ import style from './PostRemaining.scss'
 
 type Props = {
   post: BCorpPost
-}
+};
 
 class PostRemaining extends Component<Props> {
   renderTitle () {
@@ -22,7 +22,7 @@ class PostRemaining extends Component<Props> {
     }
 
     return (
-      <Link to={createCPTUrl(this.props.post.post)} replace>
+      <Link to={createCPTUrl(this.props.post.post) || '#'} replace>
         <h5 className={style.title}>{this.props.post.post.post_title}</h5>
       </Link>
     )
@@ -46,7 +46,7 @@ class PostRemaining extends Component<Props> {
     }
 
     return (
-      <Link to={createCPTUrl(this.props.post.post)} replace>
+      <Link to={createCPTUrl(this.props.post.post) || '#'} replace>
         <div className={style.image}>
           <ImageFrame
             src={featuredImage[0]}

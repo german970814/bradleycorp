@@ -11,7 +11,7 @@ import style from './PostPrimary.scss'
 
 type Props = {
   post: BCorpPost
-}
+};
 
 class PostPrimary extends Component<Props> {
   renderTitle () {
