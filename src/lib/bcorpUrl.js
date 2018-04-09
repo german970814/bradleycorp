@@ -1,5 +1,6 @@
 // @flow
 import type { WPPost } from './types/post_types'
+import type { WPTerm } from './types/term_types'
 import { host } from '../api'
 
 const bcorpUrl = {}
@@ -8,7 +9,7 @@ const bcorpUrl = {}
  * Use this to create urls for custom post type pages.
  * If we update the permalinks structure in Wordpress we can just update this function to match.
  *
- * @param  {[object]} post a fetched WP_Post object
+ * @param  {object} post a fetched WP_Post object
  * @return {string|boolean}      The url ready for use with react-router
  */
 bcorpUrl.createCPTUrl = (post: WPPost): false | string => {
@@ -18,6 +19,21 @@ bcorpUrl.createCPTUrl = (post: WPPost): false | string => {
 
   if (post['post_type'] && post['post_name']) {
     return `/${post['post_type']}/${post['post_name']}`
+  }
+
+  return false
+}
+
+/**
+ * Use this to create urls for terms linking to their archive page.
+ * If we update the permalinks structure in Wordpress we can just update this function to match.
+ *
+ * @param  {object} post a fetched WP_Term object
+ * @return {string|boolean}      The url ready for use with react-router
+ */
+bcorpUrl.createArchiveUrl = (term: WPTerm): false | string => {
+  if (term.taxonomy && term.slug) {
+    return `/${term.taxonomy}/${term.slug}`
   }
 
   return false

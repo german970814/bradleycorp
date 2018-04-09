@@ -1,10 +1,12 @@
 // @flow
 import React from 'react'
-import type { WPPostTag } from '../../types/post_types'
+import type { WPPostTagTerm } from '../../types/term_types'
+import { Link } from 'react-router-dom'
+import { createArchiveUrl } from '../../bcorpUrl'
 import style from './PostTags.scss'
 
 type Props = {
-  tags: Array<WPPostTag>,
+  tags: Array<WPPostTagTerm>,
   className: string
 }
 
@@ -17,9 +19,9 @@ const PostTags = (props: Props) => {
     <div className={`${style.postTags} ${props.className || ''}`}>
       {props.tags.map((tag, index) => {
         return (
-          <div key={index} className={`post-tag ${style.tag}`}>
-            {tag.name}
-          </div>
+          <Link key={index} to={createArchiveUrl(tag) || '#'} replace>
+            <div className={`post-tag ${style.tag}`}>{tag.name}</div>
+          </Link>
         )
       })}
     </div>

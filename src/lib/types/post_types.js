@@ -1,4 +1,5 @@
 // @flow
+import type { WPPostTagTerm, WPCategoryTerm } from './term_types'
 
 // TODO: bit of a job, but would be nice to have our type enforce all the usual WP_Post properties
 type WPPost = {
@@ -18,31 +19,19 @@ type WPPost = {
 
 type WPPostWithPath = WPPost & { path: string }
 
-type WPFeaturedImageArrayTypes = string | number | boolean
-
-type WPPostTag = {
-  count: number,
-  description?: string,
-  filter: string,
-  name: string,
-  parent: number,
-  slug: string,
-  taxonomy: string,
-  term_group: number,
-  term_id: number,
-  term_taxonomy_id: number
-}
-
 type BCorpPostHeirarchyResponse = {
   parent: false | WPPostWithPath,
   children: false | Array<WPPostWithPath>
 }
 
+type WPFeaturedImageArrayTypes = string | number | boolean
+
 type BCorpPost = {
   post: WPPost,
   meta: {},
   terms: {
-    post_tag?: Array<WPPostTag>
+    post_tag?: Array<WPPostTagTerm>,
+    category?: Array<WPCategoryTerm>
   },
   media: {
     featured_image: '' | Array<WPFeaturedImageArrayTypes>
@@ -52,7 +41,6 @@ type BCorpPost = {
 export type {
   BCorpPost,
   WPPost,
-  WPPostTag,
   WPFeaturedImageArrayTypes,
   BCorpPostHeirarchyResponse
 }
