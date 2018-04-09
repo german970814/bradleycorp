@@ -1,0 +1,70 @@
+@import '../../../scss/partials/variables';
+@import '../../../scss/partials/mixins';
+
+$arrowWidth: 20px;
+$rightMarginTablet: 10px;
+$rightMarginDesktop: 20px;
+
+.DropDownTab {
+  margin-bottom: 30px;
+
+  @include respond-to(desktop) {
+    margin-bottom: 40px;
+  }
+
+  .tab {
+    position: relative;
+    margin-bottom: 30px;
+    padding-left: 0px;
+    width: 100%;
+    box-sizing: border-box;
+
+    @include respond-to(tablet) {
+      padding-left: 20px;
+    }
+
+    @include respond-to(desktop) {
+      margin-bottom: 40px;
+    }
+
+    .title {
+      padding-right: $arrowWidth + 15px;
+
+      @include respond-to(tablet) {
+        padding-right: $arrowWidth + $rightMarginTablet + 40px;
+      }
+
+      @include respond-to(desktop) {
+        padding-right: $arrowWidth + $rightMarginDesktop + 40px;
+      }
+    }
+
+    .arrow {
+      position: absolute;
+      right: 0;
+      top: 2px;
+      width: $arrowWidth;
+      height: auto;
+
+      @include respond-to(tablet) {
+        right: $rightMarginTablet;
+      }
+
+      @include respond-to(desktop) {
+        right: $rightMarginDesktop;
+      }
+    }
+
+    .content {
+      margin-top: 15px;
+
+      @include respond-to(tablet) {
+        margin-top: 20px;
+      }
+    }
+  }
+
+  .title {
+    color: $black;
+  }
+}

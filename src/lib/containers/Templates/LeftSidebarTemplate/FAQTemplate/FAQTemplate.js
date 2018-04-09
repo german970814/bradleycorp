@@ -3,6 +3,7 @@ import * as React from 'react'
 import type { BCorpPost, WPPost } from '../../../../types/post_types'
 import CPTApiClient from '../../../../../api/cpt_client'
 import LeftSidebarTemplate from '../LeftSidebarTemplate'
+import DropDownTab from '../../../DropDownTab/DropDownTab'
 
 type Props = {
   /**
@@ -33,12 +34,17 @@ class FAQTemplate extends React.Component<Props, State> {
 
   renderFAQ () {
     return this.state.faqs.map((faq, index) => {
-      return (
-        <div key={index}>
-          <h1>{faq['post_title']}</h1>
-          <div>{faq['post_content']}</div>
-        </div>
-      )
+      if (!faq['post_title'] || !faq['post_content']) {
+        return null
+      } else {
+        return (
+          <DropDownTab
+            key={index}
+            title={faq['post_title']}
+            content={faq['post_content']}
+          />
+        )
+      }
     })
   }
 
@@ -54,7 +60,7 @@ class FAQTemplate extends React.Component<Props, State> {
   async getFAQs () {
     try {
       const client = new CPTApiClient('faq')
-      const faqResponse = await client.getLatest()
+      const faqResponse = await client.getLatest(-1)
       const faqData: Array<BCorpPost> = faqResponse.data
 
       const faqs = faqData.map(faq => {
