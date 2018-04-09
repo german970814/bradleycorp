@@ -22,8 +22,6 @@ class DropDownTab extends Component<Props, State> {
   }
 
   toggleOpen (event: SyntheticEvent<HTMLDivElement>) {
-    event.preventDefault()
-
     this.setState({ open: !this.state.open })
   }
 
@@ -55,9 +53,13 @@ class DropDownTab extends Component<Props, State> {
   render () {
     return (
       <div className={`drop-down-tab ${style.DropDownTab}`}>
-        <div className={style.tab} onClick={this.toggleOpen.bind(this)}>
-          <h5 className={`${style.title}`}>{this.props.title}</h5>
-          {this.renderUpDownArrow()}
+        <div className={style.tab}>
+          <div
+            className={style.titleArrowGroup}
+            onClick={this.toggleOpen.bind(this)}>
+            <h5 className={`${style.title}`}>{this.props.title}</h5>
+            {this.renderUpDownArrow()}
+          </div>
           {this.renderContent()}
         </div>
         <Divider fullWidth />

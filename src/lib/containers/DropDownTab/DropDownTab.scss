@@ -27,31 +27,35 @@ $rightMarginDesktop: 20px;
       margin-bottom: 40px;
     }
 
-    .title {
-      padding-right: $arrowWidth + 15px;
+    .titleArrowGroup {
+      cursor: pointer;
 
-      @include respond-to(tablet) {
-        padding-right: $arrowWidth + $rightMarginTablet + 40px;
+      .title {
+        padding-right: $arrowWidth + 15px;
+
+        @include respond-to(tablet) {
+          padding-right: $arrowWidth + $rightMarginTablet + 40px;
+        }
+
+        @include respond-to(desktop) {
+          padding-right: $arrowWidth + $rightMarginDesktop + 40px;
+        }
       }
 
-      @include respond-to(desktop) {
-        padding-right: $arrowWidth + $rightMarginDesktop + 40px;
-      }
-    }
+      .arrow {
+        position: absolute;
+        right: 0;
+        top: 2px;
+        width: $arrowWidth;
+        height: auto;
 
-    .arrow {
-      position: absolute;
-      right: 0;
-      top: 2px;
-      width: $arrowWidth;
-      height: auto;
+        @include respond-to(tablet) {
+          right: $rightMarginTablet;
+        }
 
-      @include respond-to(tablet) {
-        right: $rightMarginTablet;
-      }
-
-      @include respond-to(desktop) {
-        right: $rightMarginDesktop;
+        @include respond-to(desktop) {
+          right: $rightMarginDesktop;
+        }
       }
     }
 
