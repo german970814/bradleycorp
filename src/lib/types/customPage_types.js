@@ -2,6 +2,7 @@
 import type { Module } from './module_types'
 import type { Widget } from './widget_types'
 import type { WPFeaturedImageArrayTypes } from './post_types'
+import type { BCorpColor } from './styleguide_types'
 
 type BCorpCustomPageColumn = {
   atts: {
@@ -19,7 +20,16 @@ type BCorpCustomPageRow = {
   columns: Array<BCorpCustomPageColumn>
 }
 
+type BCorpPageHeroData = {
+  title?: string,
+  tagline?: string,
+  copy?: string,
+  video_url?: string,
+  overlay?: BCorpColor
+}
+
 type BCorpMetaboxes = {
+  page_hero?: BCorpPageHeroData,
   sidebar_select?: string
 }
 

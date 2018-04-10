@@ -1,10 +1,7 @@
+// @flow
 import * as React from 'react'
 import type { BCorpPageTemplateData } from '../../../types/customPage_types'
-import { validChain } from '../../../bcorpObject'
-import { lookupColor } from '../../../bcorpStyles'
-import VideoBackground from '../../../components/BCorpVideo/VideoBackground/VideoBackground'
-import BCorpBackground from '../../../components/BCorpBackground/BCorpBackground'
-import style from './FullWidthTemplate.scss'
+import PageHero from '../../PageHero/PageHero'
 
 type Props = {
   data: BCorpPageTemplateData,
@@ -12,240 +9,48 @@ type Props = {
   pagePath: string
 }
 
-type State = {
-  showTagline: boolean,
-  showTitle: boolean,
-  showCopy: boolean
-}
-
-class FullWidthTemplate extends React.Component<Props, State> {
-  constructor (props: Props) {
-    super(props)
-
-    this.defaultState = {
-      showTagline: false,
-      showTitle: false,
-      showCopy: false
-    }
-    this.state = this.defaultState
-  }
-
-  componentDidMount () {
-    this.fadeTextIn()
-  }
-
-  componentWillReceiveProps (nextProps: Props) {
-    if (nextProps.pagePath !== this.props.pagePath) {
-      this.resetText()
-    }
-  }
-
-  componentDidUpdate (prevProps: Props) {
-    if (prevProps.pagePath !== this.props.pagePath) {
-      this.fadeTextIn()
-    }
-  }
-
-  resetText () {
-    clearTimeout(this.taglineTimer)
-    clearTimeout(this.titleTimer)
-    clearTimeout(this.copyTimer)
-    this.setState(this.defaultState)
-  }
-
-  fadeTextIn () {
-    this.taglineTimer = setTimeout(this.showTagline.bind(this), 1000)
-    this.titleTimer = setTimeout(this.showTitle.bind(this), 2000)
-    this.copyTimer = setTimeout(this.showCopy.bind(this), 3000)
-  }
-
-  showTagline () {
-    this.setState({ showTagline: true })
-  }
-
-  showTitle () {
-    this.setState({ showTitle: true })
-  }
-
-  showCopy () {
-    this.setState({ showCopy: true })
-  }
-
-  renderTitle (shouldRender: boolean) {
-    if (!shouldRender) {
-      return
-    }
-
+class FullWidthTemplate extends React.Component<Props> {
+  renderHero () {
     const { data } = this.props
 
-    return (
-      <div
-        style={{
-          opacity: this.state.showTitle ? 1 : 0
-        }}
-        className={`col1 hero-headline ${style.title}`}>
-        {data.metaboxes['page_hero'].title}
-      </div>
-    )
-  }
-
-  renderTagline (shouldRender: boolean) {
-    if (!shouldRender) {
-      return
-    }
-
-    const { data } = this.props
-
-    return (
-      <div
-        style={{
-          opacity: this.state.showTagline ? 1 : 0
-        }}
-        className={`col1 hero-intro ${style.tagline}`}>
-        {data.metaboxes['page_hero'].tagline}
-      </div>
-    )
-  }
-
-  renderCopy (shouldRender: boolean) {
-    if (!shouldRender) {
-      return
-    }
-
-    const { data } = this.props
-
-    return (
-      <div
-        style={{
-          opacity: this.state.showCopy ? 1 : 0
-        }}
-        className={`col1 hero-copy ${style.copy}`}>
-        {data.metaboxes['page_hero'].copy}
-      </div>
-    )
-  }
-
-  renderHeroBackground () {
-    if (
-      !this.props.data.metaboxes['page_hero']['video_url'] ||
-      !this.heroNode
-    ) {
-      return this.renderHeroBackgroundImage()
-    }
-
-    return this.renderHeroBackgroundVideo()
-  }
-
-  renderHeroBackgroundImage () {
-    return (
-      <BCorpBackground
-        imageSrc={this.getHeroBackgroundImageSrc()}
-        overlay={this.props.data.metaboxes['page_hero']['overlay']}
-        imageOpacity={0.33}
+    return data.metaboxes && data.metaboxes['page_hero'] ? (
+      <PageHero
+        tagline={data.metaboxes['page_hero'].tagline}
+        title={data.metaboxes['page_hero'].title}
+        copy={data.metaboxes['page_hero'].copy}
+        videoUrl={data.metaboxes['page_hero']['video_url']}
+        imgSrc={
+          data['featured_image'] && data['featured_image'][0]
+            ? data['featured_image'][0].toString()
+            : undefined
+        }
+        overlay={data.metaboxes['page_hero'].overlay}
+      />
+    ) : (
+      <PageHero
+        imgSrc={
+          data['featured_image'] && data['featured_image'][0]
+            ? data['featured_image'][0].toString()
+            : undefined
+        }
       />
     )
   }
 
-  renderHeroBackgroundVideo () {
-    return (
-      <React.Fragment>
-        <VideoBackground
-          node={this.heroNode}
-          url={this.props.data.metaboxes['page_hero']['video_url']}
-          placeholder={this.getHeroBackgroundImageSrc()}
-        />
-
-        <div
-          style={{
-            backgroundColor: lookupColor(
-              this.props.data.metaboxes['page_hero']['overlay']
-            )
-          }}
-          className={style.videoOverlay}
-        />
-      </React.Fragment>
-    )
-  }
-
-  getHeroBackgroundImageSrc () {
-    if (
-      !this.props.data['featured_image'] ||
-      this.props.data['featured_image'].length === 0
-    ) {
-      return undefined
-    }
-
-    return this.props.data['featured_image'][0]
-  }
-
-  renderHero () {
-    const shouldRender = this.heroShouldRender()
-
-    if (!shouldRender) {
-      return
-    }
-
-    return (
-      <div
-        ref={node => {
-          this.heroNode = node
-        }}
-        className={style.heroWrapper}>
-        {this.renderHeroBackground()}
-
-        <div className={`row ${style.hero}`}>
-          {this.renderTagline(shouldRender.tagline)}
-          {this.renderTitle(shouldRender.title)}
-          {this.renderCopy(shouldRender.copy)}
-        </div>
-      </div>
-    )
-  }
-
   render () {
+    const { data } = this.props
+
+    if (!data) {
+      return null
+    }
+
     return (
-      <div className={style.FullWidthTemplate}>
+      <div className={'full-width-template'}>
         {this.renderHero()}
+
         {this.props.renderModules()}
       </div>
     )
-  }
-
-  heroShouldRender (): boolean {
-    const { data } = this.props
-    const shouldRender = {
-      title: false,
-      tagline: false,
-      copy: false
-    }
-    if (!data.metaboxes) {
-      return shouldRender
-    }
-
-    if (
-      validChain(data, 'metaboxes', 'page_hero', 'title') &&
-      data.metaboxes['page_hero'].title
-    ) {
-      shouldRender.title = true
-    }
-    if (
-      validChain(data, 'metaboxes', 'page_hero', 'tagline') &&
-      data.metaboxes['page_hero'].tagline
-    ) {
-      shouldRender.tagline = true
-    }
-    if (
-      validChain(data, 'metaboxes', 'page_hero', 'copy') &&
-      data.metaboxes['page_hero'].copy
-    ) {
-      shouldRender.copy = true
-    }
-
-    if (!shouldRender.title && !shouldRender.tagline && !shouldRender.copy) {
-      return false
-    }
-
-    return shouldRender
   }
 }
 

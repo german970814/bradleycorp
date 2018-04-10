@@ -34,14 +34,11 @@ class ModuleBuilder extends Component {
   }
 
   /**
-   * TODO: I can't see a better way of knowing when to update the page than checking the whole content string,
-   *       but it can sometimes be massive.
-   *       Definitelt some optimisation to be done here
+   * Very important... To re run the module build process
+   * you need to unmount and remount the component
    */
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.moduleData.content !== this.props.moduleData.content) {
-      this.setState({ htmlIsSet: false })
-    }
+  componentDidMount () {
+    this.setState({ htmlIsSet: false })
   }
 
   /**

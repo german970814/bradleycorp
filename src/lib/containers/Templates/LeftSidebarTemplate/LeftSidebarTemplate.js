@@ -106,8 +106,6 @@ class LeftSidebarTemplate extends React.Component<Props, State> {
         return
       }
 
-      console.log(treeData)
-
       const menuBlocks: Array<MenuModuleMenuBlockData> = treeData.map(
         heirarchyData => {
           return this.buildMenuBlock(heirarchyData)
@@ -127,8 +125,6 @@ class LeftSidebarTemplate extends React.Component<Props, State> {
     // make sure we have an array type
     const dataChildren = heirarchyData.children ? heirarchyData.children : []
 
-    console.log(heirarchyData)
-
     if (heirarchyData.parent) {
       menuBlock.title = heirarchyData.parent['post_title']
       menuBlock.url = heirarchyData.parent.path
@@ -144,8 +140,6 @@ class LeftSidebarTemplate extends React.Component<Props, State> {
         menuBlock.children = [...menuBlock.children, childLink]
       })
     }
-
-    console.log(menuBlock)
 
     return menuBlock
   }

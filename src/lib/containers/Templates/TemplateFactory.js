@@ -32,8 +32,8 @@ type Props = {
 
 /**
  * Given page template data, we pass it through to the correct template component
- * along with render functions for the modules and widgets, to be inserted into the correct position
- * by the template component
+ * along with render functions for the modules and widgets, if required by the template,
+ * to be inserted into the correct position by the template component
  *
  * @param {[object]} props
  * @return {[component]}
