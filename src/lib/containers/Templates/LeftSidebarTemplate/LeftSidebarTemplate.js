@@ -1,7 +1,10 @@
 // @flow
 import * as React from 'react'
 import type { MenuModuleMenuBlockData } from '../../../types/module_types'
-import type { BCorpPostHeirarchyResponse } from '../../../types/post_types'
+import type {
+  BCorpPostTreeResponse,
+  BCorpPostHeirarchyResponse
+} from '../../../types/post_types'
 import Media from 'react-media'
 import { MOBILEMAXWIDTH } from '../../../../globals'
 import CPTClient from '../../../../api/cpt_client'
@@ -25,7 +28,7 @@ type Props = {
 }
 
 type State = {
-  menuBlock: MenuModuleMenuBlockData
+  menuBlocks: Array<MenuModuleMenuBlockData>
 }
 
 class LeftSidebarTemplate extends React.Component<Props, State> {
@@ -33,30 +36,36 @@ class LeftSidebarTemplate extends React.Component<Props, State> {
     super(props)
 
     this.state = {
-      menuBlock: { children: [] }
+      menuBlocks: [{ children: [] }]
     }
   }
 
   componentDidMount () {
-    this.getHeirarchy(this.props.data['page_id'])
+    this.getTree(this.props.data['page_id'])
   }
 
   componentWillReceiveProps (nextProps: Props) {
     if (nextProps.data['page_id'] !== this.props.data['page_id']) {
-      this.getHeirarchy(nextProps.data['page_id'])
+      this.getTree(nextProps.data['page_id'])
     }
+  }
+
+  renderMenuBlocks (collapsible: boolean) {
+    return this.state.menuBlocks.map((menuBlock, index) => {
+      return (
+        <MenuBlock
+          key={index}
+          blockData={menuBlock}
+          collapsible={collapsible}
+        />
+      )
+    })
   }
 
   renderLeftSidebar () {
     return (
       <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
-        {match =>
-          match ? (
-            <MenuBlock blockData={this.state.menuBlock} collapsible />
-          ) : (
-            <MenuBlock blockData={this.state.menuBlock} />
-          )
-        }
+        {match => this.renderMenuBlocks(match)}
       </Media>
     )
   }
@@ -80,25 +89,32 @@ class LeftSidebarTemplate extends React.Component<Props, State> {
     )
   }
 
-  async getHeirarchy (pageID: number) {
+  async getTree (pageID: number) {
     try {
       const client = new CPTClient('page')
-      const heirarchyResponse = await client.getHeirarchyById(pageID)
-      const heirarchyData: BCorpPostHeirarchyResponse = heirarchyResponse.data
+      const treeResponse = await client.getTreeById(pageID)
+      const treeData: BCorpPostTreeResponse = treeResponse.data
 
       // if we're loading a left sidebar template then
       // the custom page response had has_parent or has_children as true.
       //
       // however, it's a separate request, so better to be safe than sorry!
-      if (!heirarchyData.parent && !heirarchyData.children) {
+      if (
+        treeData.length === 0 ||
+        (!treeData[0].parent && !treeData[0].children)
+      ) {
         return
       }
 
-      const menuBlock: MenuModuleMenuBlockData = this.buildMenuBlock(
-        heirarchyData
+      console.log(treeData)
+
+      const menuBlocks: Array<MenuModuleMenuBlockData> = treeData.map(
+        heirarchyData => {
+          return this.buildMenuBlock(heirarchyData)
+        }
       )
 
-      this.setState({ menuBlock })
+      this.setState({ menuBlocks })
     } catch (err) {
       console.log(err)
     }
@@ -110,6 +126,8 @@ class LeftSidebarTemplate extends React.Component<Props, State> {
     const menuBlock: MenuModuleMenuBlockData = { children: [] }
     // make sure we have an array type
     const dataChildren = heirarchyData.children ? heirarchyData.children : []
+
+    console.log(heirarchyData)
 
     if (heirarchyData.parent) {
       menuBlock.title = heirarchyData.parent['post_title']
@@ -126,6 +144,8 @@ class LeftSidebarTemplate extends React.Component<Props, State> {
         menuBlock.children = [...menuBlock.children, childLink]
       })
     }
+
+    console.log(menuBlock)
 
     return menuBlock
   }

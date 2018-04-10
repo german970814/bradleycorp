@@ -24,6 +24,8 @@ type BCorpPostHeirarchyResponse = {
   children: false | Array<WPPostWithPath>
 }
 
+type BCorpPostTreeResponse = Array<BCorpPostHeirarchyResponse>
+
 type WPFeaturedImageArrayTypes = string | number | boolean
 
 type BCorpPost = {
@@ -42,5 +44,6 @@ export type {
   BCorpPost,
   WPPost,
   WPFeaturedImageArrayTypes,
-  BCorpPostHeirarchyResponse
+  BCorpPostHeirarchyResponse,
+  BCorpPostTreeResponse
 }
