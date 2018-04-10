@@ -9,6 +9,12 @@ const ProductDetailLoadable = Loadable({
   loading: Loading
 })
 
+const LiteratureAndChipSamplesLoadable = Loadable({
+  loader: () =>
+    import('../Pages/LiteratureAndChipSamples/LiteratureAndChipSamples'),
+  loading: Loading
+})
+
 const CustomizableLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/Customizable/Customizable'),
@@ -23,6 +29,11 @@ const Main = props => {
     <Switch>
       <Route exact path="/" component={Home} />
       <Route exact path="/product/:slug" component={ProductDetailLoadable} />
+      <Route
+        exact
+        path="/literature-and-chip-samples"
+        component={LiteratureAndChipSamplesLoadable}
+      />
       <Route exact path="/*/:slug" component={CustomizableLoadable} />
       <Route exact path="/:slug" component={CustomizableLoadable} />
     </Switch>
