@@ -4,11 +4,15 @@ import type {
   LiteraturePost,
   ChipSamplePost
 } from '../../../../lib/types/cpt_types'
+import CPTApiClient from '../../../../api/cpt_client'
 import RightSidebarTemplate from '../../../../lib/containers/Templates/RightSidebarTemplate/RightSidebarTemplate'
 import PostTypeSelector from './PostTypeSelector/PostTypeSelector'
 import Shipment from './CurrentRequest/Shipment/Shipment'
 import Downloads from './CurrentRequest/Downloads/Downloads'
+import Options from './Options/Options'
 // import style from './LiteratureAndChipSamples.scss'
+
+type PostTypeOptions = 'literature' | 'chipSamples'
 
 type LiteratureFilters = {
   productLine: string,
@@ -39,8 +43,6 @@ type DownloadTypes = {
   literature?: Array<LiteraturePost>
 }
 
-type PostTypeOptions = 'literature' | 'chipSamples'
-
 type Props = {}
 
 type State = {
@@ -64,18 +66,36 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
     }
   }
 
+  componentDidMount () {
+    this.getOptions('literature')
+  }
+
   updateSelected (newSelected: PostTypeOptions) {
     if (newSelected !== this.state.selected) {
+      this.onUpdateSelected(newSelected)
       return this.setState({ selected: newSelected })
+    }
+  }
+
+  onUpdateSelected (newSelected: PostTypeOptions) {
+    if (
+      newSelected === 'chipSamples' &&
+      (!this.state.options.chipSamples ||
+        !this.state.options.chipSamples.length)
+    ) {
+      this.getOptions('chipSamples')
     }
   }
 
   renderOptions () {
     return (
-      <PostTypeSelector
-        selected={this.state.selected}
-        updateSelected={this.updateSelected.bind(this)}
-      />
+      <React.Fragment>
+        <PostTypeSelector
+          selected={this.state.selected}
+          updateSelected={this.updateSelected.bind(this)}
+        />
+        <Options />
+      </React.Fragment>
     )
   }
 
@@ -97,6 +117,30 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
         renderRightSidebarWidgets={this.renderCurrentRequest.bind(this)}
       />
     )
+  }
+
+  async getOptions (postType: PostTypeOptions) {
+    try {
+      if (postType === 'literature') {
+        const client = new CPTApiClient(postType)
+        const response = await client.getLatest(-1)
+
+        const optionsData: Array<LiteraturePost> = response.data
+
+        const options = { ...this.state.options, literature: optionsData }
+        return this.setState({ options })
+      } else if (postType === 'chipSamples') {
+        const client = new CPTApiClient('chip')
+        const response = await client.getLatest(-1)
+
+        const optionsData: Array<ChipSamplePost> = response.data
+
+        const options = { ...this.state.options, chipSamples: optionsData }
+        return this.setState({ options })
+      }
+    } catch (err) {
+      console.log(err)
+    }
   }
 }
 
