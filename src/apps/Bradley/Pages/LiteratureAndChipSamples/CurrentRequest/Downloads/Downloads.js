@@ -1,11 +1,8 @@
 // @flow
 import * as React from 'react'
-import type {
-  LiteraturePost,
-  ChipSamplePost
-} from '../../../../../../lib/types/cpt_types'
+import type { LiteraturePost } from '../../../../../../lib/types/cpt_types'
 import BCorpWidget from '../../../../../../lib/containers/Widgets/BCorpWidget'
-import style from './Downloads.scss'
+// import style from './Downloads.scss'
 
 type Props = {
   literature?: Array<LiteraturePost>

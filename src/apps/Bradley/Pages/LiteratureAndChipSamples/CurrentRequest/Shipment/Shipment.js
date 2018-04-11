@@ -5,7 +5,7 @@ import type {
   ChipSamplePost
 } from '../../../../../../lib/types/cpt_types'
 import BCorpWidget from '../../../../../../lib/containers/Widgets/BCorpWidget'
-import style from './Shipment.scss'
+// import style from './Shipment.scss'
 
 type Props = {
   literature?: Array<LiteraturePost>,
