@@ -1,15 +1,22 @@
-import React from 'react'
+// @flow
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ArrowButton from '../../../../lib/components/ArrowButton/ArrowButton'
 import BCorpWidget from '../BCorpWidget'
 import style from './CTAWidget.scss'
 
+type Props = {
+  title: string,
+  text?: string,
+  link?: string,
+  linkText?: string,
+  mediaSrc?: string
+}
+
 /**
  * The CTA Widget
- *
- * @extends BCorpWidget
  */
-class CTAWidget extends BCorpWidget {
+class CTAWidget extends Component<Props> {
   renderMedia () {
     return null
   }
@@ -32,34 +39,21 @@ class CTAWidget extends BCorpWidget {
     }
 
     return (
-      <div className={style.button} >
-        <ArrowButton text={linkText} link={link} />
+      <div className={style.button}>
+        <ArrowButton text={linkText || ''} link={link} />
       </div>
     )
   }
 
-  renderContentBox () {
+  render () {
     return (
-      <React.Fragment>
+      <BCorpWidget title={this.props.title}>
         {this.renderMedia()}
         {this.renderText()}
         {this.renderButton()}
-      </React.Fragment>
+      </BCorpWidget>
     )
   }
-
-  render () {
-    return super.render()
-  }
-}
-
-CTAWidget.propTypes = {
-  ...BCorpWidget.propTypes,
-
-  text: PropTypes.string,
-  link: PropTypes.string,
-  linkText: PropTypes.string,
-  mediaSrc: PropTypes.string
 }
 
 export default CTAWidget

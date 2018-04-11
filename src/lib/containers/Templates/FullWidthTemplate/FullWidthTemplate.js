@@ -20,8 +20,10 @@ class FullWidthTemplate extends React.Component<Props> {
         copy={data.metaboxes['page_hero'].copy}
         videoUrl={data.metaboxes['page_hero']['video_url']}
         imgSrc={
-          data['featured_image'] && data['featured_image'][0]
-            ? data['featured_image'][0].toString()
+          data['featured_image'] &&
+          data['featured_image'].length &&
+          typeof data['featured_image'][0] === 'string'
+            ? data['featured_image'][0]
             : undefined
         }
         overlay={data.metaboxes['page_hero'].overlay}
@@ -29,8 +31,10 @@ class FullWidthTemplate extends React.Component<Props> {
     ) : (
       <PageHero
         imgSrc={
-          data['featured_image'] && data['featured_image'][0]
-            ? data['featured_image'][0].toString()
+          data['featured_image'] &&
+          data['featured_image'].length &&
+          typeof data['featured_image'][0] === 'string'
+            ? data['featured_image'][0]
             : undefined
         }
       />

@@ -23,9 +23,9 @@ type State = {
 
 class PageHero extends React.Component<Props, State> {
   defaultState: State
-  taglineTimer: Timeout
-  titleTimer: Timeout
-  copyTimer: Timeout
+  taglineTimer: TimeoutID = setTimeout(() => {}, 1000)
+  titleTimer: TimeoutID = setTimeout(() => {}, 2000)
+  copyTimer: TimeoutID = setTimeout(() => {}, 3000)
   heroNode: ?HTMLDivElement
 
   constructor (props: Props) {

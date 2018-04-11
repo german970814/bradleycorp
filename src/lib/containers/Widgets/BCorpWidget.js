@@ -1,21 +1,24 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import * as React from 'react'
 import style from './BCorpWidget.scss'
 
+type Props = {
+  children: React.Node,
+  title: string,
+  className?: string
+}
+
 /**
- * Base class for all widgets to extend
+ * Base class for all widgets to compose
  *
  * This component contains the core functionality and layout that all widgets must share
  * namely, the title and the content box
  *
  * When creating a widget...
- * extend this class,
- * use renderContentBox as you would use render, you need only worry about the widgets' actual content
- * call super.render in the render function
- *
- * @extends Component
+ * extend this component using composition,
+ * whatever is given to this component as children will be displayed in the content box
  */
-class BCorpWidget extends Component {
+class BCorpWidget extends React.Component<Props> {
   renderTitle () {
     const { title } = this.props
 
@@ -26,22 +29,15 @@ class BCorpWidget extends Component {
     return <h4 className={style.title}>{title}</h4>
   }
 
-  renderContentBox () {}
-
   render () {
     return (
-      <div className={`${style.widget} ${this.props.className}`}>
+      <div className={`${style.widget} ${this.props.className || ''}`}>
         {this.renderTitle()}
 
-        <div className={`${style.contentBox}`}>{this.renderContentBox()}</div>
+        <div className={`${style.contentBox}`}>{this.props.children}</div>
       </div>
     )
   }
-}
-
-BCorpWidget.propTypes = {
-  title: PropTypes.string,
-  className: PropTypes.string
 }
 
 export default BCorpWidget

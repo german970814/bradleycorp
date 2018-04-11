@@ -1,5 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import React, { Component } from 'react'
+import type { BlogName } from '../../../types/blog_types'
+import type { WPPost, BCorpPost } from '../../../types/post_types'
 import BIMRevitClient from '../../../../api/bimRevit_client'
 import TheWashfountainClient from '../../../../api/theWashfountain_client'
 import { urlBIMRevit, urlTheWashfountain } from '../../../../api'
@@ -8,35 +10,34 @@ import PostMetaData from '../../../components/PostMetaData/PostMetaData'
 import BCorpWidget from '../BCorpWidget'
 import style from './RecentPostsWidget.scss'
 
-class RecentPostsWidget extends BCorpWidget {
-  constructor (props) {
+type Props = {
+  title: string,
+  numberposts: number,
+  blog: BlogName
+}
+
+type State = {
+  posts: Array<{ post: WPPost }>
+}
+
+class RecentPostsWidget extends Component<Props, State> {
+  defaultPostState: { post: WPPost }
+
+  constructor (props: Props) {
     super(props)
 
-    /**
-     * Default state, post object response is merged shallowly with this
-     * so we can be sure of what state we definitely have
-     */
-    this.defaultPostState = {
-      post: {
-        ID: 1,
-        post_title: '',
-        author_display_name: '',
-        post_date: ''
-      }
-    }
+    this.defaultPostState = { post: { ID: 0 } }
 
-    this.defaultState = {
+    this.state = {
       posts: [this.defaultPostState]
     }
-
-    this.state = this.defaultState
   }
 
   componentDidMount () {
     this.getPosts()
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps (nextProps: Props) {
     if (
       nextProps.blog !== this.props.blog ||
       nextProps.numberposts !== this.props.numberposts ||
@@ -53,11 +54,11 @@ class RecentPostsWidget extends BCorpWidget {
    * @param  {[object]} post WP_Post object
    * @return {[string]}      The post href
    */
-  getLink (post) {
+  getLink (post: WPPost) {
     if (this.props.blog === 'washfountain') {
-      return `${urlTheWashfountain}${createCPTUrl(post)}`
+      return `${urlTheWashfountain}${createCPTUrl(post) || '#'}`
     } else if (this.props.blog === 'bim-revit') {
-      return `${urlBIMRevit}${createCPTUrl(post)}`
+      return `${urlBIMRevit}${createCPTUrl(post) || '#'}`
     } else {
       return '#'
     }
@@ -85,7 +86,11 @@ class RecentPostsWidget extends BCorpWidget {
   }
 
   render () {
-    return super.render()
+    return (
+      <BCorpWidget title={this.props.title}>
+        {this.renderContentBox()}
+      </BCorpWidget>
+    )
   }
 
   /**
@@ -105,7 +110,7 @@ class RecentPostsWidget extends BCorpWidget {
       }
 
       const response = await client.getRecentPosts(this.props.numberposts)
-      const postsData = response.data
+      const postsData: Array<BCorpPost> = response.data
 
       const posts = postsData.map(postData => {
         return Object.assign({}, this.defaultPostState, postData)
@@ -116,13 +121,6 @@ class RecentPostsWidget extends BCorpWidget {
       console.log(err)
     }
   }
-}
-
-RecentPostsWidget.propTypes = {
-  ...BCorpWidget.propTypes,
-
-  numberposts: PropTypes.number.isRequired,
-  blog: PropTypes.oneOf(['washfountain', 'bim-revit']).isRequired
 }
 
 export default RecentPostsWidget

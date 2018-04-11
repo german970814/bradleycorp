@@ -1,33 +1,49 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import React, { Component } from 'react'
 import ArrowButton from '../../../../lib/components/ArrowButton/ArrowButton'
 import BCorpWidget from '../BCorpWidget'
 import style from './NewsletterWidget.scss'
 
+type Props = {
+  title: string,
+  description?: string,
+  linkText?: string,
+  handleSubmit?: (event: SyntheticEvent<HTMLFormElement>) => void
+}
+
+type State = {
+  value?: string
+}
+
 /**
  * The Newsletter Widget
- *
- * @extends BCorpWidget
  */
-class NewsletterWidget extends BCorpWidget {
-  constructor (props) {
+class NewsletterWidget extends Component<Props, State> {
+  form: ?HTMLFormElement
+
+  constructor (props: Props) {
     super(props)
 
-    this.state = {value: ''}
+    this.state = { value: '' }
   }
 
-  handleSubmit (e) {
+  handleSubmit (event: SyntheticEvent<HTMLFormElement>) {
+    if (this.props.handleSubmit) {
+      return this.props.handleSubmit(event)
+    }
     console.log(`submitted newletter signup form`)
-    e.preventDefault()
+    event.preventDefault()
   }
 
-  handleChange (e) {
-    this.setState({ value: e.target.value })
+  handleChange (event: SyntheticInputEvent<HTMLInputElement>) {
+    this.setState({ value: event.target.value })
   }
 
-  handleClick (e) {
+  handleClick (event: SyntheticEvent<HTMLFormElement>) {
     // simply calling this.form.submit() won't dispatch the submit event automatically, and the page will reload
-    this.form.dispatchEvent(new Event('submit'))
+    if (this.form) {
+      this.form.dispatchEvent(new Event('submit'))
+    }
   }
 
   renderDescription () {
@@ -47,7 +63,8 @@ class NewsletterWidget extends BCorpWidget {
         type={'text'}
         value={this.state.value}
         onChange={this.handleChange.bind(this)}
-        placeholder={'Email Address'} />
+        placeholder={'Email Address'}
+      />
     )
   }
 
@@ -55,43 +72,28 @@ class NewsletterWidget extends BCorpWidget {
     const { linkText } = this.props
 
     return (
-      <div
-        className={style.button}
-        onClick={this.handleClick.bind(this)} >
+      <div className={style.button} onClick={this.handleClick.bind(this)}>
         <ArrowButton text={linkText} />
       </div>
     )
   }
 
-  renderContentBox () {
+  render () {
     return (
-      <React.Fragment>
-
+      <BCorpWidget title={this.props.title}>
         {this.renderDescription()}
 
         <form
-          ref={node => { this.form = node }}
-          onSubmit={this.handleSubmit.bind(this)} >
-
+          ref={node => {
+            this.form = node
+          }}
+          onSubmit={this.handleSubmit.bind(this)}>
           {this.renderInput()}
           {this.renderSubmitButton()}
-
         </form>
-
-      </React.Fragment>
+      </BCorpWidget>
     )
   }
-
-  render () {
-    return super.render()
-  }
-}
-
-NewsletterWidget.propTypes = {
-  ...BCorpWidget.propTypes,
-
-  description: PropTypes.string,
-  linkText: PropTypes.string
 }
 
 export default NewsletterWidget
