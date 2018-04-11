@@ -1,24 +1,29 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import * as React from 'react'
+import type { Widget } from '../../types/widget_types'
 import CTAWidget from './CTAWidget/CTAWidget'
 import RecentPostsWidget from './RecentPostsWidget/RecentPostsWidget'
 import NewsletterWidget from './NewsletterWidget/NewsletterWidget'
 import BlogUpdatesWidget from './NewsletterWidget/BlogUpdatesWidget/BlogUpdatesWidget'
 
+type Props = Widget & {
+  widgetClass?: string,
+  twoColsOnTablet?: boolean
+}
+
 /**
  * Given data about a widget, we return the correct component with the necessary props
  *
- * @param {[object]} props
- * @return {[component]}
+ * @param {object} props
+ * @return {component}
  */
-const WidgetFactory = ({ type, data, widgetClass }) => {
-  if (!type || type === '') {
-    return null
-  }
+const WidgetFactory = (props: Props): React.Node => {
+  const { data, type, twoColsOnTablet } = props
 
   const sharedProps = {
     title: data['title'],
-    className: widgetClass
+    className: props.widgetClass,
+    twoColsOnTablet
   }
 
   switch (type) {
@@ -63,12 +68,6 @@ const WidgetFactory = ({ type, data, widgetClass }) => {
     default:
       return null
   }
-}
-
-WidgetFactory.propTypes = {
-  type: PropTypes.string.isRequired,
-  data: PropTypes.object.isRequired,
-  widgetClass: PropTypes.string
 }
 
 export default WidgetFactory

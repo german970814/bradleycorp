@@ -12,7 +12,12 @@ type Props = {
   /**
    * The page path, so we know when to re run the whole build sequence
    */
-  pagePath: string
+  pagePath: string,
+  /**
+   * Set true if you're using a right sidebar template to render the widget
+   * and you want it to split into two columns for a tablet sized screen
+   */
+  twoColsOnTablet?: boolean
 }
 
 /**
@@ -30,6 +35,7 @@ class WidgetBuilder extends Component<Props> {
           widgetClass={this.props.widgetClass}
           type={widgetData.type}
           data={widgetData.data}
+          twoColsOnTablet={this.props.twoColsOnTablet}
         />
       )
     })

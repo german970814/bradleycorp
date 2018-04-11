@@ -6,6 +6,8 @@ import type {
 } from '../../../../lib/types/cpt_types'
 import RightSidebarTemplate from '../../../../lib/containers/Templates/RightSidebarTemplate/RightSidebarTemplate'
 import PostTypeSelector from './PostTypeSelector/PostTypeSelector'
+import Shipment from './CurrentRequest/Shipment/Shipment'
+import Downloads from './CurrentRequest/Downloads/Downloads'
 // import style from './LiteratureAndChipSamples.scss'
 
 type LiteratureFilters = {
@@ -70,15 +72,19 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
   }
 
   renderCurrentRequest () {
-    return <div>{'current request'}</div>
+    return (
+      <React.Fragment>
+        <Shipment />
+        <Downloads />
+      </React.Fragment>
+    )
   }
 
   render () {
     console.log(this.state)
-    const pageTitle = 'Literature & Chip Samples'
     return (
       <RightSidebarTemplate
-        data={{ page_title: pageTitle }}
+        data={{ page_title: 'Literature & Chip Samples' }}
         renderModules={this.renderOptions.bind(this)}
         renderRightSidebarWidgets={this.renderCurrentRequest.bind(this)}
       />

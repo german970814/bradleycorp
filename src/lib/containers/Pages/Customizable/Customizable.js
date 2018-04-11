@@ -102,6 +102,7 @@ class Customizable extends Component<Props, State> {
           widgetArea={metaboxes['sidebar_select']}
           widgetData={this.state['widget_data'][selectedSidebar]}
           pagePath={this.props.match.url}
+          twoColsOnTablet
         />
       ) : (
         <Loading />

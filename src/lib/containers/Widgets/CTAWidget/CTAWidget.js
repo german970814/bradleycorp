@@ -9,7 +9,8 @@ type Props = {
   text?: string,
   link?: string,
   linkText?: string,
-  mediaSrc?: string
+  mediaSrc?: string,
+  twoColsOnTablet?: boolean
 }
 
 /**
@@ -46,7 +47,9 @@ class CTAWidget extends Component<Props> {
 
   render () {
     return (
-      <BCorpWidget title={this.props.title}>
+      <BCorpWidget
+        title={this.props.title}
+        twoColsOnTablet={this.props.twoColsOnTablet}>
         {this.renderMedia()}
         {this.renderText()}
         {this.renderButton()}

@@ -13,7 +13,8 @@ import style from './RecentPostsWidget.scss'
 type Props = {
   title: string,
   numberposts: number,
-  blog: BlogName
+  blog: BlogName,
+  twoColsOnTablet?: boolean
 }
 
 type State = {
@@ -87,7 +88,9 @@ class RecentPostsWidget extends Component<Props, State> {
 
   render () {
     return (
-      <BCorpWidget title={this.props.title}>
+      <BCorpWidget
+        title={this.props.title}
+        twoColsOnTablet={this.props.twoColsOnTablet}>
         {this.renderContentBox()}
       </BCorpWidget>
     )

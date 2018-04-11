@@ -8,7 +8,8 @@ type Props = {
   title: string,
   description?: string,
   linkText?: string,
-  handleSubmit?: (event: SyntheticEvent<HTMLFormElement>) => void
+  handleSubmit?: (event: SyntheticEvent<HTMLFormElement>) => void,
+  twoColsOnTablet?: boolean
 }
 
 type State = {
@@ -80,7 +81,9 @@ class NewsletterWidget extends Component<Props, State> {
 
   render () {
     return (
-      <BCorpWidget title={this.props.title}>
+      <BCorpWidget
+        title={this.props.title}
+        twoColsOnTablet={this.props.twoColsOnTablet}>
         {this.renderDescription()}
 
         <form

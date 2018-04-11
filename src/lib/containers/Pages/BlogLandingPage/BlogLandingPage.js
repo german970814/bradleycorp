@@ -52,7 +52,9 @@ class BlogLandingPage extends Component<Props, State> {
 
     this.defaultWidgetState = {
       type: '',
-      data: {}
+      data: {
+        title: 'Loading Widget...'
+      }
     }
 
     this.defaultState = {
@@ -107,11 +109,9 @@ class BlogLandingPage extends Component<Props, State> {
           renderRightSidebarWidgets={() => {
             return (
               <WidgetBuilder
-                widgetClass={`col1 col2-tablet col1-desktop ${
-                  style.blogLPWidget
-                }`}
                 widgetData={this.state.widgets}
                 pagePath={this.props.match.url}
+                twoColsOnTablet
               />
             )
           }}

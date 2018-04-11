@@ -5,7 +5,12 @@ import style from './BCorpWidget.scss'
 type Props = {
   children: React.Node,
   title: string,
-  className?: string
+  className?: string,
+  /**
+   * Set true if you're using a right sidebar template to render the widget
+   * and you want it to split into two columns for a tablet sized screen
+   */
+  twoColsOnTablet?: boolean
 }
 
 /**
@@ -30,8 +35,13 @@ class BCorpWidget extends React.Component<Props> {
   }
 
   render () {
+    const twoColsClass = this.props.twoColsOnTablet
+      ? `col1 col2-tablet col1-desktop ${style.twoCols}`
+      : ''
     return (
-      <div className={`${style.widget} ${this.props.className || ''}`}>
+      <div
+        className={`${style.widget} ${twoColsClass} ${this.props.className ||
+          ''}`}>
         {this.renderTitle()}
 
         <div className={`${style.contentBox}`}>{this.props.children}</div>

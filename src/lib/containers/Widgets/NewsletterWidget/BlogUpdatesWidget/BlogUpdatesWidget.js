@@ -7,7 +7,8 @@ type Props = {
   title: string,
   description?: string,
   linkText?: string,
-  blog: BlogName
+  blog: BlogName,
+  twoColsOnTablet?: boolean
 }
 
 /**
@@ -31,6 +32,7 @@ class BlogUpdatesWidget extends Component<Props> {
         linkText={this.props.linkText}
         blog={this.props.blog}
         handleSubmit={this.handleSubmit.bind(this)}
+        twoColsOnTablet={this.props.twoColsOnTablet}
       />
     )
   }
