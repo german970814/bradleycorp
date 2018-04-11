@@ -1,11 +1,11 @@
 // @flow
 import React from 'react'
-import type { PostTypeOptons } from '../LiteratureAndChipSamples'
+import type { PostTypeOptions } from '../LiteratureAndChipSamples'
 import style from './PostTypeSelector.scss'
 
 type Props = {
-  selected: PostTypeOptons,
-  updateSelected: (newSelected: PostTypeOptons) => void
+  selected: PostTypeOptions,
+  updateSelected: (newSelected: PostTypeOptions) => void
 }
 
 const PostTypeSelector = (props: Props) => {

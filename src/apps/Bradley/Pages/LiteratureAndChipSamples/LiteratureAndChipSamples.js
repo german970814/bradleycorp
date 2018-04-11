@@ -20,27 +20,35 @@ type ChipSampleFilters = {
   materialType: string
 }
 
-type PostTypeOptons = 'literature' | 'chipSamples'
+type FiltersTypes = {
+  literature?: LiteratureFilters,
+  chipSampes?: ChipSampleFilters
+}
+
+type OptionsTypes = {
+  literature?: Array<LiteraturePost>,
+  chipSamples?: Array<ChipSamplePost>
+}
+
+type ShipmentTypes = {
+  literature?: Array<LiteraturePost>,
+  chipSamples?: Array<ChipSamplePost>
+}
+
+type DownloadTypes = {
+  literature?: Array<LiteraturePost>
+}
+
+type PostTypeOptions = 'literature' | 'chipSamples'
 
 type Props = {}
 
 type State = {
-  options: {
-    literature?: Array<LiteraturePost>,
-    chipSamples?: Array<ChipSamplePost>
-  },
-  filters: {
-    literature?: LiteratureFilters,
-    chipSampes?: ChipSampleFilters
-  },
-  shipment: {
-    literature?: Array<LiteraturePost>,
-    chipSamples?: Array<ChipSamplePost>
-  },
-  download: {
-    literature?: Array<LiteraturePost>
-  },
-  selected: PostTypeOptons
+  options: OptionsTypes,
+  filters: FiltersTypes,
+  shipment: ShipmentTypes,
+  download: DownloadTypes,
+  selected: PostTypeOptions
 }
 
 class LiteratureAndChipSamples extends React.Component<Props, State> {
@@ -56,7 +64,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
     }
   }
 
-  updateSelected (newSelected: PostTypeOptons) {
+  updateSelected (newSelected: PostTypeOptions) {
     if (newSelected !== this.state.selected) {
       return this.setState({ selected: newSelected })
     }
@@ -93,4 +101,10 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
 }
 
 export default LiteratureAndChipSamples
-export type { PostTypeOptons }
+export type {
+  PostTypeOptions,
+  OptionsTypes,
+  FiltersTypes,
+  ShipmentTypes,
+  DownloadTypes
+}
