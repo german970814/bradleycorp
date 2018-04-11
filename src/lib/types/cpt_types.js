@@ -4,4 +4,6 @@ type LiteraturePost = WPPost & { post_type: 'literature' }
 
 type ChipSamplePost = WPPost & { post_type: 'chip_sample' }
 
-export type { LiteraturePost, ChipSamplePost }
+type NavMenuItem = WPPost & { post_type: 'nav_menu_item' }
+
+export type { LiteraturePost, ChipSamplePost, NavMenuItem }
