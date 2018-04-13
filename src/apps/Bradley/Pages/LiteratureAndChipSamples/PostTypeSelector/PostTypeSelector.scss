@@ -5,6 +5,14 @@
   margin-bottom: 30px;
   text-align: center;
 
+  @include respond-to(tablet) {
+    margin-bottom: 45px;
+  }
+
+  @include respond-to(desktop) {
+    margin-bottom: 60px;
+  }
+
   .postTypeSelectButton {
     border: solid 1px $silver;
     height: 60px;
