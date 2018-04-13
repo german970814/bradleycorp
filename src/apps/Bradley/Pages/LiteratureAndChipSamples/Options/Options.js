@@ -13,6 +13,9 @@ type Props = {
   selected: PostTypeOptions
 }
 
+/**
+ * Class responsible for applying the filters to and rendering the options
+ */
 class Options extends React.Component<Props> {
   render () {
     return null

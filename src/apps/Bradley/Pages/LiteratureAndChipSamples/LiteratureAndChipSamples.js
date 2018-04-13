@@ -10,6 +10,7 @@ import PostTypeSelector from './PostTypeSelector/PostTypeSelector'
 import Shipment from './CurrentRequest/Shipment/Shipment'
 import Downloads from './CurrentRequest/Downloads/Downloads'
 import Options from './Options/Options'
+import Filters from './Filters/Filters'
 // import style from './LiteratureAndChipSamples.scss'
 
 type PostTypeOptions = 'literature' | 'chipSamples'
@@ -17,7 +18,7 @@ type PostTypeOptions = 'literature' | 'chipSamples'
 type LiteratureFilters = {
   productLine: string,
   language: string,
-  search: string
+  search?: string
 }
 
 type ChipSampleFilters = {
@@ -25,8 +26,8 @@ type ChipSampleFilters = {
 }
 
 type FiltersTypes = {
-  literature?: LiteratureFilters,
-  chipSampes?: ChipSampleFilters
+  literature: LiteratureFilters,
+  chipSamples: ChipSampleFilters
 }
 
 type OptionsTypes = {
@@ -59,7 +60,16 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
 
     this.state = {
       options: {},
-      filters: {},
+      filters: {
+        literature: {
+          productLine: 'product-line',
+          language: 'english',
+          search: ''
+        },
+        chipSamples: {
+          materialType: 'material-type'
+        }
+      },
       shipment: {},
       download: {},
       selected: 'literature'
@@ -70,7 +80,11 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
     this.getOptions('literature')
   }
 
-  updateSelected (newSelected: PostTypeOptions) {
+  updateFilters (newFilters: FiltersTypes): void {
+    this.setState({ filters: newFilters })
+  }
+
+  updateSelected (newSelected: PostTypeOptions): void {
     if (newSelected !== this.state.selected) {
       this.onUpdateSelected(newSelected)
       return this.setState({ selected: newSelected })
@@ -94,7 +108,17 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
           selected={this.state.selected}
           updateSelected={this.updateSelected.bind(this)}
         />
-        <Options />
+        <Filters
+          options={this.state.options}
+          filters={this.state.filters}
+          selected={this.state.selected}
+          updateFilters={this.updateFilters.bind(this)}
+        />
+        <Options
+          filters={this.state.filters}
+          options={this.state.options}
+          selected={this.state.selected}
+        />
       </React.Fragment>
     )
   }
