@@ -8,6 +8,7 @@ import type {
 import ProductLineSelect from './ProductLineSelect'
 import LanguageSelect from './LanguageSelect'
 import LiteratureSearch from './LiteratureSearch'
+import MaterialTypeSelect from './MaterialTypeSelect'
 import style from './Filters.scss'
 
 type Props = {
@@ -43,7 +44,13 @@ class Filters extends React.Component<Props> {
   }
 
   renderFiltersChipSamples () {
-    return null
+    return (
+      <MaterialTypeSelect
+        chipSamples={this.props.options.chipSamples}
+        filters={this.props.filters}
+        updateFilters={this.props.updateFilters}
+      />
+    )
   }
 
   render () {
