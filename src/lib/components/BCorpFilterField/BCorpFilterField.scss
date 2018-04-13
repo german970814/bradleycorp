@@ -1,0 +1,117 @@
+@import '../../../scss/partials/variables';
+@import '../../../scss/partials/text-styles';
+@import '../../../scss/partials/mixins';
+
+$borderThickness: 1px;
+$borderRadius: 6px;
+$tabletGapBetweenFilters: 24px;
+
+%inputStyle {
+  @extend %body;
+  width: 100%;
+  border: solid $borderThickness $silver;
+  border-radius: $borderRadius;
+  padding: 7px;
+  background-color: #fff;
+  color: $steel-grey;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+h5.title {
+  padding-bottom: 8px;
+  color: $navy;
+}
+
+.select {
+  position: relative;
+  padding-bottom: 20px;
+
+  @include respond-to(tablet) {
+    padding-left: ($tabletGapBetweenFilters / 2);
+    padding-right: ($tabletGapBetweenFilters / 2);
+    padding-bottom: 0px;
+  }
+
+  select {
+    @extend %inputStyle;
+  }
+
+  /*
+  *
+  * Looks like this styling is added automatically by the device
+  *
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid $steel-grey;
+    transform: translateY(6px);
+
+    @include respond-to(tablet) {
+      right: ($tabletGapBetweenFilters / 2);
+    }
+  }
+
+  // up arrow
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 5px solid $steel-grey;
+    transform: translateY(-1px);
+
+    @include respond-to(tablet) {
+      right: ($tabletGapBetweenFilters / 2);
+    }
+  }
+  */
+}
+
+.search {
+  position: relative;
+
+  @include respond-to(tablet) {
+    padding-left: ($tabletGapBetweenFilters / 2);
+    padding-right: ($tabletGapBetweenFilters / 2);
+    padding-bottom: 0px;
+  }
+
+  input {
+    @extend %inputStyle;
+  }
+
+  .iconContainer {
+    position: absolute;
+    bottom: $borderThickness;
+    right: $borderThickness;
+    border-radius: 0px ($borderRadius - $borderThickness)
+      ($borderRadius - $borderThickness) 0px;
+    padding: 10px;
+    width: 32px;
+    height: 34px - 2 * $borderThickness;
+    background-color: $navy;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    @include respond-to(tablet) {
+      right: $borderThickness + ($tabletGapBetweenFilters / 2);
+    }
+
+    img {
+      float: left;
+      width: 100%;
+      height: auto;
+    }
+  }
+}

@@ -2,10 +2,11 @@
 import * as React from 'react'
 import type { ChipSamplePost } from '../../../../../lib/types/cpt_types'
 import type { FiltersTypes } from '../LiteratureAndChipSamples'
+import BCorpSelectField from '../../../../../lib/components/BCorpFilterField/BCorpSelectField'
 import style from './Filters.scss'
 
 type MaterialTypes = {
-  [number | string]: string
+  [number | string]: ?string
 }
 
 type Props = {
@@ -24,42 +25,23 @@ class MaterialTypeSelect extends React.Component<Props> {
     this.props.updateFilters(newFilters)
   }
 
-  renderOptions (materialTypes: MaterialTypes) {
-    if (
-      !this.props.chipSamples ||
-      !this.props.chipSamples.length ||
-      !Object.keys(materialTypes).length
-    ) {
-      return
-    }
-
-    return Object.keys(materialTypes).map((termId, index) => {
-      return (
-        <option key={index} value={termId}>
-          {materialTypes[termId]}
-        </option>
-      )
-    })
-  }
-
   render () {
-    const materialTypes = this.getMaterialTypes()
+    const materialTypes: MaterialTypes = this.getMaterialTypes()
 
     return (
-      <div
-        className={`col4x3 col3-tablet ${style.select} ${style.materialType}`}>
-        <h5 className={style.title}>Material Type</h5>
-        <select
-          value={this.props.filters.chipSamples.materialType}
-          onChange={this.handleChange.bind(this)}>
-          <option value="materialType">Material Type</option>
-          {this.renderOptions(materialTypes)}
-        </select>
-      </div>
+      <BCorpSelectField
+        defaultOptionId={'0'}
+        defaultOptionName={'Material Type'}
+        options={materialTypes}
+        filterState={this.props.filters.chipSamples.materialType}
+        handleChange={this.handleChange.bind(this)}
+        title={'Material Type'}
+        className={`col4x3 col3-tablet ${style.materialType}`}
+      />
     )
   }
 
-  getMaterialTypes () {
+  getMaterialTypes (): MaterialTypes {
     const materialTypes = {}
 
     if (!this.props.chipSamples) {
