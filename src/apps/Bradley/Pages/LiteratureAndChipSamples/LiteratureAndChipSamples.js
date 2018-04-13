@@ -4,9 +4,12 @@ import type {
   LiteraturePost,
   ChipSamplePost
 } from '../../../../lib/types/cpt_types'
+import Media from 'react-media'
+import { MOBILEMAXWIDTH } from '../../../../globals'
 import CPTApiClient from '../../../../api/cpt_client'
 import RightSidebarTemplate from '../../../../lib/containers/Templates/RightSidebarTemplate/RightSidebarTemplate'
 import PostTypeSelector from './PostTypeSelector/PostTypeSelector'
+import MobileShowCurrentRequestButton from './MobileShowCurrentRequestButton/MobileShowCurrentRequestButton'
 import Shipment from './CurrentRequest/Shipment/Shipment'
 import Downloads from './CurrentRequest/Downloads/Downloads'
 import Options from './Options/Options'
@@ -51,7 +54,8 @@ type State = {
   filters: FiltersTypes,
   shipment: ShipmentTypes,
   download: DownloadTypes,
-  selected: PostTypeOptions
+  selected: PostTypeOptions,
+  showCurrentRequestMobile: boolean
 }
 
 class LiteratureAndChipSamples extends React.Component<Props, State> {
@@ -72,7 +76,8 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
       },
       shipment: {},
       download: {},
-      selected: 'literature'
+      selected: 'literature',
+      showCurrentRequestMobile: false
     }
   }
 
@@ -82,6 +87,10 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
 
   updateFilters (newFilters: FiltersTypes): void {
     this.setState({ filters: newFilters })
+  }
+
+  updateShowCurrentRequestMobile (value: boolean): void {
+    this.setState({ showCurrentRequestMobile: value })
   }
 
   updateSelected (newSelected: PostTypeOptions): void {
@@ -101,7 +110,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
     }
   }
 
-  renderOptions () {
+  renderOptions (isMobile: boolean) {
     return (
       <React.Fragment>
         <PostTypeSelector
@@ -114,6 +123,14 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
           selected={this.state.selected}
           updateFilters={this.updateFilters.bind(this)}
         />
+        {isMobile ? (
+          <MobileShowCurrentRequestButton
+            mobileShowCurrentRequest={this.state.showCurrentRequestMobile}
+            updateMobileShowCurrentRequest={this.updateShowCurrentRequestMobile.bind(
+              this
+            )}
+          />
+        ) : null}
         <Options
           filters={this.state.filters}
           options={this.state.options}
@@ -123,23 +140,47 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
     )
   }
 
-  renderCurrentRequest () {
+  renderCurrentRequest (isMobile: boolean) {
     return (
       <React.Fragment>
+        {isMobile ? (
+          <MobileShowCurrentRequestButton
+            mobileShowCurrentRequest={this.state.showCurrentRequestMobile}
+            updateMobileShowCurrentRequest={this.updateShowCurrentRequestMobile.bind(
+              this
+            )}
+          />
+        ) : null}
         <Shipment />
         <Downloads />
       </React.Fragment>
     )
   }
 
+  renderContent (isMobile: boolean) {
+    return this.state.showCurrentRequestMobile
+      ? this.renderCurrentRequest(isMobile)
+      : this.renderOptions(isMobile)
+  }
+
+  renderRightSidebarWidgets (isMobile: boolean) {
+    return isMobile ? null : this.renderCurrentRequest(isMobile)
+  }
+
   render () {
     console.log(this.state)
     return (
-      <RightSidebarTemplate
-        data={{ page_title: 'Literature & Chip Samples' }}
-        renderModules={this.renderOptions.bind(this)}
-        renderRightSidebarWidgets={this.renderCurrentRequest.bind(this)}
-      />
+      <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
+        {match => (
+          <RightSidebarTemplate
+            data={{ page_title: 'Literature & Chip Samples' }}
+            renderModules={() => this.renderContent(match)}
+            renderRightSidebarWidgets={() =>
+              this.renderRightSidebarWidgets(match)
+            }
+          />
+        )}
+      </Media>
     )
   }
 
