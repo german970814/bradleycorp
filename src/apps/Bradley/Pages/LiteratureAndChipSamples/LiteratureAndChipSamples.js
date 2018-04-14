@@ -58,6 +58,10 @@ type State = {
   showCurrentRequestMobile: boolean
 }
 
+const productLineFilterDefault: string = 'product-line'
+const languageFilterDefault: string = 'language'
+const materialTypeFilterDefault: string = 'material-type'
+
 class LiteratureAndChipSamples extends React.Component<Props, State> {
   constructor (props: Props) {
     super(props)
@@ -66,12 +70,12 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
       options: {},
       filters: {
         literature: {
-          productLine: 'product-line',
-          language: 'english',
+          productLine: productLineFilterDefault,
+          language: languageFilterDefault,
           search: ''
         },
         chipSamples: {
-          materialType: 'material-type'
+          materialType: materialTypeFilterDefault
         }
       },
       shipment: {},
@@ -210,6 +214,11 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
 }
 
 export default LiteratureAndChipSamples
+export {
+  productLineFilterDefault,
+  languageFilterDefault,
+  materialTypeFilterDefault
+}
 export type {
   PostTypeOptions,
   OptionsTypes,

@@ -2,6 +2,7 @@
 import * as React from 'react'
 import type { ChipSamplePost } from '../../../../../lib/types/cpt_types'
 import type { FiltersTypes } from '../LiteratureAndChipSamples'
+import { materialTypeFilterDefault } from '../LiteratureAndChipSamples'
 import BCorpSelectField from '../../../../../lib/components/BCorpFilterField/BCorpSelectField'
 import style from './Filters.scss'
 
@@ -30,7 +31,7 @@ class MaterialTypeSelect extends React.Component<Props> {
 
     return (
       <BCorpSelectField
-        defaultOptionId={'0'}
+        defaultOptionId={materialTypeFilterDefault}
         defaultOptionName={'Material Type'}
         options={materialTypes}
         filterState={this.props.filters.chipSamples.materialType}

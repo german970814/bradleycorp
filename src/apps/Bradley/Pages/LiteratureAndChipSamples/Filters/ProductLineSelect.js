@@ -2,6 +2,7 @@
 import * as React from 'react'
 import type { LiteraturePost } from '../../../../../lib/types/cpt_types'
 import type { FiltersTypes } from '../LiteratureAndChipSamples'
+import { productLineFilterDefault } from '../LiteratureAndChipSamples'
 import BCorpSelectField from '../../../../../lib/components/BCorpFilterField/BCorpSelectField'
 import style from './Filters.scss'
 
@@ -30,7 +31,7 @@ class ProductLineSelect extends React.Component<Props> {
 
     return (
       <BCorpSelectField
-        defaultOptionId={'0'}
+        defaultOptionId={productLineFilterDefault}
         defaultOptionName={'Product Line'}
         options={productLines}
         filterState={this.props.filters.literature.productLine}

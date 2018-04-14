@@ -1,5 +1,5 @@
 // @flow
-
+import type { BCorpPost } from './types/post_types'
 import { nWords } from './bcorpString'
 
 export function isNew (date: string): boolean {
@@ -26,4 +26,27 @@ export function getExcerpt (
   } else {
     return nWords(postContent, excerptLength)
   }
+}
+
+export function filterPostsByTerm (
+  posts: Array<BCorpPost>,
+  termName: string,
+  termId: number | string
+): Array<BCorpPost> {
+  const termIdNumber = parseInt(termId)
+
+  if (isNaN(termIdNumber)) {
+    console.warn(`Could not parse ${termId} as integer`)
+    return posts
+  }
+
+  return posts.filter(post => {
+    if (!post.terms[termName] || !post.terms[termName].constructor === Array) {
+      return false
+    } else {
+      return post.terms[termName].some(postTerm => {
+        return postTerm.term_id === termIdNumber
+      })
+    }
+  })
 }
