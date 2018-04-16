@@ -21,4 +21,19 @@ $height: 60px;
     line-height: $height;
     color: #fff;
   }
+
+  .arrow {
+    position: absolute;
+    top: 19px;
+    width: 12px;
+    height: 21px;
+
+    &.arrowLeft {
+      left: 25px;
+    }
+
+    &.arrowRight {
+      right: 25px;
+    }
+  }
 }

@@ -19,6 +19,17 @@ const MobileShowCurrentRequestButton = (props: Props) => {
           ? 'BACK TO OPTIONS'
           : 'VIEW CURRENT REQUEST'}
       </h6>
+      {props.mobileShowCurrentRequest ? (
+        <img
+          className={`${style.arrowLeft} ${style.arrow}`}
+          src={require('../../../../../images/slideshow-arrow/slideshow-arrow-l@2x.png')}
+        />
+      ) : (
+        <img
+          className={`${style.arrowRight} ${style.arrow}`}
+          src={require('../../../../../images/slideshow-arrow/slideshow-arrow-r@2x.png')}
+        />
+      )}
     </div>
   )
 }
