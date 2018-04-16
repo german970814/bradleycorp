@@ -1,0 +1,81 @@
+@import '../../../../../../scss/partials/variables';
+@import '../../../../../../scss/partials/mixins';
+
+.option {
+  position: relative;
+  margin-bottom: 10px;
+
+  .imgContainer {
+    display: inline-block;
+    vertical-align: middle;
+
+    .featuredImage {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .contentContainer {
+    display: inline-block;
+    vertical-align: middle;
+
+    h5.title {
+      margin-left: 10px;
+      padding-right: 90px;
+      color: $black;
+
+      @include respond-to-max(tablet) {
+        font-size: 12px;
+      }
+    }
+
+    .addButton {
+      position: absolute;
+      top: 50%;
+      right: 40px;
+      width: 30px;
+      height: 30px;
+      transform: translateY(-15px);
+      background-color: $green;
+
+      .addButtonLines {
+        position: relative;
+
+        &:before {
+          position: absolute;
+          content: '';
+          top: 14px;
+          left: 7px;
+          width: 16px;
+          height: 2px;
+          background-color: #fff;
+        }
+
+        &:after {
+          position: absolute;
+          content: '';
+          top: 7px;
+          left: 14px;
+          width: 2px;
+          height: 16px;
+          background-color: #fff;
+        }
+      }
+    }
+  }
+}
+
+.option.literature {
+}
+
+.option.chipSample {
+  .contentContainer {
+    h5.title {
+      padding-right: 50px;
+    }
+
+    .addButton {
+      right: 0px;
+    }
+  }
+}

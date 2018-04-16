@@ -11,6 +11,7 @@ import {
   materialTypeFilterDefault
 } from '../LiteratureAndChipSamples'
 import { filterPostsByTerm } from '../../../../../lib/bcorpPost'
+import Option from './Option/Option'
 
 type Props = {
   options: OptionsTypes,
@@ -53,7 +54,7 @@ class Options extends React.Component<Props> {
 
     return literature && literature.length
       ? literature.map((literature, index) => {
-        return <div key={index}>{literature.post.post_title}</div>
+        return <Option key={index} post={literature} />
       })
       : null
   }
@@ -77,7 +78,7 @@ class Options extends React.Component<Props> {
 
     return chipSamples && chipSamples.length
       ? chipSamples.map((chipSamples, index) => {
-        return <div key={index}>{chipSamples.post.post_title}</div>
+        return <Option key={index} post={chipSamples} />
       })
       : null
   }

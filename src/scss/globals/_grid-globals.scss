@@ -34,6 +34,10 @@
     @include col(4);
   }
 
+  .inline-col4-middle {
+    @include inline-col(4, middle);
+  }
+
   .col5 {
     @include col(5);
   }
@@ -44,6 +48,10 @@
 
   .col4x3 {
     @include col(4 / 3);
+  }
+
+  .inline-col4x3-middle {
+    @include inline-col(4 / 3, middle);
   }
 
   // globals with media queries
