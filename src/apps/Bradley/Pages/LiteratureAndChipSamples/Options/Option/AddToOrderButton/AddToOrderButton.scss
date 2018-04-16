@@ -1,5 +1,6 @@
 @import '../../../../../../../scss/partials/variables';
 @import '../../../../../../../scss/partials/mixins';
+@import '../../../../../../../scss/partials/buttons';
 
 $addButtonMobileWidth: 30px;
 
@@ -37,6 +38,25 @@ $addButtonMobileWidth: 30px;
   padding: {
     left: 17px;
     right: 17px;
+  }
+
+  @include respond-to(desktop) {
+    // extend button-border-dark-gray
+    border: solid 1px $dark-gray;
+    background-color: transparent;
+    color: $dark-gray;
+
+    &:hover {
+      // extend button
+      border: none;
+      background-color: $green;
+      color: #ffffff;
+      width: auto;
+      padding: {
+        left: 17px;
+        right: 17px;
+      }
+    }
   }
 }
 

@@ -77,7 +77,9 @@ class AddToOrderButton extends React.Component<Props, State> {
   }
 
   renderDesktop () {
-    return <button className={style.addButtonDesktop}>{'ADD TO ORDER'}</button>
+    return (
+      <button className={`${style.addButtonDesktop}`}>{'ADD TO ORDER'}</button>
+    )
   }
 
   renderMobile () {

@@ -7,14 +7,12 @@
 
   @include respond-to(tablet) {
     margin-bottom: 30px;
-    padding-right: 45px;
+    padding-right: 6%;
   }
 
   @include respond-to(desktop) {
-    padding-right: 90px;
-
-    &:nth-child(2n + 1) {
-      padding-right: 60px;
+    &:nth-child(2n) {
+      padding-right: 4%;
     }
   }
 
