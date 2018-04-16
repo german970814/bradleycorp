@@ -1,6 +1,10 @@
 // @flow
 import * as React from 'react'
 import type {
+  LiteraturePost,
+  ChipSamplePost
+} from '../../../../../lib/types/cpt_types'
+import type {
   OptionsTypes,
   FiltersTypes,
   PostTypeOptions
@@ -17,6 +21,8 @@ type Props = {
   options: OptionsTypes,
   filters: FiltersTypes,
   selected: PostTypeOptions,
+  addToShipment: (postToAdd: LiteraturePost | ChipSamplePost) => void,
+  addToDownloads: (postToAdd: LiteraturePost) => void,
   isMobile: boolean
 }
 
@@ -59,6 +65,8 @@ class Options extends React.Component<Props> {
           <Option
             key={index}
             post={literature}
+            addToShipment={this.props.addToShipment}
+            addToDownloads={this.props.addToDownloads}
             isMobile={this.props.isMobile}
           />
         )
@@ -89,6 +97,8 @@ class Options extends React.Component<Props> {
           <Option
             key={index}
             post={chipSamples}
+            addToShipment={this.props.addToShipment}
+            addToDownloads={this.props.addToDownloads}
             isMobile={this.props.isMobile}
           />
         )

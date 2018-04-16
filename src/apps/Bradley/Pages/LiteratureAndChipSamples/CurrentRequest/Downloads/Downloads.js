@@ -4,7 +4,9 @@ import type { DownloadTypes } from '../../LiteratureAndChipSamples'
 import BCorpWidget from '../../../../../../lib/containers/Widgets/BCorpWidget'
 // import style from './Downloads.scss'
 
-type Props = DownloadTypes
+type Props = {
+  downloads?: DownloadTypes
+}
 
 class Downloads extends React.Component<Props> {
   render () {

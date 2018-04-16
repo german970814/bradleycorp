@@ -38,22 +38,17 @@ type OptionsTypes = {
   chipSamples?: Array<ChipSamplePost>
 }
 
-type ShipmentTypes = {
-  literature?: Array<LiteraturePost>,
-  chipSamples?: Array<ChipSamplePost>
-}
+type ShipmentTypes = Array<LiteraturePost | ChipSamplePost>
 
-type DownloadTypes = {
-  literature?: Array<LiteraturePost>
-}
+type DownloadTypes = Array<LiteraturePost>
 
 type Props = {}
 
 type State = {
   options: OptionsTypes,
   filters: FiltersTypes,
-  shipment: ShipmentTypes,
-  download: DownloadTypes,
+  shipment?: ShipmentTypes,
+  downloads?: DownloadTypes,
   selected: PostTypeOptions,
   showCurrentRequestMobile: boolean
 }
@@ -78,8 +73,6 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
           materialType: materialTypeFilterDefault
         }
       },
-      shipment: {},
-      download: {},
       selected: 'literature',
       showCurrentRequestMobile: false
     }
@@ -87,6 +80,28 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
 
   componentDidMount () {
     this.getOptions('literature')
+  }
+
+  updateShipment (newShipment: ShipmentTypes): void {
+    this.setState({ shipment: newShipment })
+  }
+
+  addToShipment (postToAdd: LiteraturePost | ChipSamplePost): void {
+    const newShipment = this.state.shipment
+      ? [...this.state.shipment, postToAdd]
+      : [postToAdd]
+    this.setState({ shipment: newShipment })
+  }
+
+  updateDownloads (newDownloads: DownloadTypes): void {
+    this.setState({ downloads: newDownloads })
+  }
+
+  addToDownloads (postToAdd: LiteraturePost): void {
+    const newDownloads = this.state.downloads
+      ? [...this.state.downloads, postToAdd]
+      : [postToAdd]
+    this.setState({ downloads: newDownloads })
   }
 
   updateFilters (newFilters: FiltersTypes): void {
@@ -139,6 +154,8 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
           filters={this.state.filters}
           options={this.state.options}
           selected={this.state.selected}
+          addToShipment={this.addToShipment.bind(this)}
+          addToDownloads={this.addToDownloads.bind(this)}
           isMobile={isMobile}
         />
       </React.Fragment>

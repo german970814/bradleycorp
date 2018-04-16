@@ -4,7 +4,9 @@ import type { ShipmentTypes } from '../../LiteratureAndChipSamples'
 import BCorpWidget from '../../../../../../lib/containers/Widgets/BCorpWidget'
 // import style from './Shipment.scss'
 
-type Props = ShipmentTypes
+type Props = {
+  shipment?: ShipmentTypes
+}
 
 class Shipment extends React.Component<Props> {
   render () {

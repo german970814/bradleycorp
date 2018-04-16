@@ -1,10 +1,16 @@
 // @flow
 import * as React from 'react'
+import type {
+  LiteraturePost,
+  ChipSamplePost
+} from '../../../../../../../lib/types/cpt_types'
 import style from './AddToOrderButton.scss'
 
 type Props = {
+  addToShipment: (postToAdd: LiteraturePost | ChipSamplePost) => void,
+  addToDownloads: (postToAdd: LiteraturePost) => void,
   isMobile: boolean,
-  postType?: 'literature' | 'chip'
+  post: LiteraturePost | ChipSamplePost
 }
 
 type State = {
@@ -18,24 +24,26 @@ class AddToOrderButton extends React.Component<Props, State> {
     this.state = { isClicked: false }
   }
 
-  toggleHover () {
+  toggleClicked () {
     this.setState({ isClicked: !this.state.isClicked })
   }
 
-  hover () {
+  clicked () {
     this.setState({ isClicked: true })
   }
 
-  hoverOff () {
+  clickedOff () {
     this.setState({ isClicked: false })
   }
 
   handleAddToShipmentClick () {
-    console.log('click')
+    this.clickedOff()
+    this.props.addToShipment(this.props.post)
   }
 
   handleAddToDownloadsClick () {
-    console.log('click')
+    this.clickedOff()
+    this.props.addToDownloads(this.props.post)
   }
 
   renderAddToShipment () {
@@ -77,15 +85,26 @@ class AddToOrderButton extends React.Component<Props, State> {
   }
 
   renderDesktop () {
-    return (
-      <button className={`${style.addButtonDesktop}`}>{'ADD TO ORDER'}</button>
+    return this.state.isClicked ? (
+      <React.Fragment>
+        {this.renderAddToShipment()}
+        {this.renderAddToDownloads()}
+      </React.Fragment>
+    ) : (
+      <button
+        className={`${style.addButtonDesktop}`}
+        onClick={this.clicked.bind(this)}>
+        {'ADD TO ORDER'}
+      </button>
     )
   }
 
   renderMobile () {
-    return this.props.postType === 'literature' ? (
+    return this.props.post.post.post_type === 'literature' ? (
       <React.Fragment>
-        <div className={style.addButton} onClick={this.toggleHover.bind(this)}>
+        <div
+          className={style.addButton}
+          onClick={this.toggleClicked.bind(this)}>
           <div className={style.addButtonLines} />
         </div>
         {this.state.isClicked ? this.renderShipmentOrDownloadMobile() : null}

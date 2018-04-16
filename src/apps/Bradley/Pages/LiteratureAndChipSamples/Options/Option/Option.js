@@ -9,6 +9,8 @@ import style from './Option.scss'
 
 type Props = {
   post: LiteraturePost | ChipSamplePost,
+  addToShipment: (postToAdd: LiteraturePost | ChipSamplePost) => void,
+  addToDownloads: (postToAdd: LiteraturePost) => void,
   isMobile: boolean
 }
 
@@ -33,8 +35,10 @@ const Option = (props: Props) => {
   const addButton = (
     <div className={props.isMobile ? style.addButton : style.addButtonDesktop}>
       <AddToOrderButton
+        addToShipment={props.addToShipment}
+        addToDownloads={props.addToDownloads}
         isMobile={props.isMobile}
-        postType={props.post.post.post_type}
+        post={props.post}
       />
     </div>
   )
