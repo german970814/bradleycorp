@@ -3,7 +3,8 @@ import * as React from 'react'
 import style from './AddToOrderButton.scss'
 
 type Props = {
-  isMobile: boolean
+  isMobile: boolean,
+  postType?: 'literature' | 'chip'
 }
 
 type State = {
@@ -80,13 +81,19 @@ class AddToOrderButton extends React.Component<Props, State> {
   }
 
   renderMobile () {
-    return (
+    return this.props.postType === 'literature' ? (
       <React.Fragment>
         <div className={style.addButton} onClick={this.toggleHover.bind(this)}>
           <div className={style.addButtonLines} />
         </div>
         {this.state.isHovered ? this.renderShipmentOrDownloadMobile() : null}
       </React.Fragment>
+    ) : (
+      <div
+        className={style.addButton}
+        onClick={this.handleAddToShipmentClick.bind(this)}>
+        <div className={style.addButtonLines} />
+      </div>
     )
   }
 

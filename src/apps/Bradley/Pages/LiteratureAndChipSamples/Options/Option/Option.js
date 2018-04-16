@@ -32,7 +32,10 @@ const Option = (props: Props) => {
 
   const addButton = (
     <div className={style.addButton}>
-      <AddToOrderButton isMobile={props.isMobile} />
+      <AddToOrderButton
+        isMobile={props.isMobile}
+        postType={props.post.post.post_type}
+      />
     </div>
   )
 
