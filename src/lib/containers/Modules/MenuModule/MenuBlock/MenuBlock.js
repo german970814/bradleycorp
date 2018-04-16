@@ -12,11 +12,11 @@ type Props = {
    * Allow child link to collapse under parent
    */
   collapsible?: boolean
-}
+};
 
 type State = {
   collapsed: boolean
-}
+};
 
 class MenuBlock extends React.Component<Props, State> {
   constructor (props: Props) {
