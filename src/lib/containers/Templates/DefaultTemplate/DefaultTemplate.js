@@ -7,7 +7,7 @@ type Props = {
     page_title: string
   },
   renderModules: () => React.Node
-}
+};
 
 class DefaultTemplate extends React.Component<Props> {
   render () {
