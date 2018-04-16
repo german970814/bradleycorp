@@ -16,7 +16,8 @@ import Option from './Option/Option'
 type Props = {
   options: OptionsTypes,
   filters: FiltersTypes,
-  selected: PostTypeOptions
+  selected: PostTypeOptions,
+  isMobile: boolean
 }
 
 /**
@@ -54,7 +55,13 @@ class Options extends React.Component<Props> {
 
     return literature && literature.length
       ? literature.map((literature, index) => {
-        return <Option key={index} post={literature} />
+        return (
+          <Option
+            key={index}
+            post={literature}
+            isMobile={this.props.isMobile}
+          />
+        )
       })
       : null
   }
@@ -78,7 +85,13 @@ class Options extends React.Component<Props> {
 
     return chipSamples && chipSamples.length
       ? chipSamples.map((chipSamples, index) => {
-        return <Option key={index} post={chipSamples} />
+        return (
+          <Option
+            key={index}
+            post={chipSamples}
+            isMobile={this.props.isMobile}
+          />
+        )
       })
       : null
   }

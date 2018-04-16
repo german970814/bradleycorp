@@ -4,10 +4,12 @@ import type {
   LiteraturePost,
   ChipSamplePost
 } from '../../../../../../lib/types/cpt_types'
+import AddToOrderButton from './AddToOrderButton/AddToOrderButton'
 import style from './Option.scss'
 
 type Props = {
-  post: LiteraturePost | ChipSamplePost
+  post: LiteraturePost | ChipSamplePost,
+  isMobile: boolean
 }
 
 const Option = (props: Props) => {
@@ -30,11 +32,11 @@ const Option = (props: Props) => {
 
   const addButton = (
     <div className={style.addButton}>
-      <div className={style.addButtonLines} />
+      <AddToOrderButton isMobile={props.isMobile} />
     </div>
   )
 
-  return (
+  return props.isMobile ? (
     <div className={`row ${style.option} ${postTypeClassName}`}>
       <div className={`inline-col4-middle ${style.imgContainer}`}>
         {featuredImage}
@@ -44,7 +46,7 @@ const Option = (props: Props) => {
         {addButton}
       </div>
     </div>
-  )
+  ) : null
 }
 
 export default Option

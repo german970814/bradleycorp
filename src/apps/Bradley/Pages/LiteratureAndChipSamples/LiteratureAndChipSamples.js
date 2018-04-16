@@ -139,6 +139,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
           filters={this.state.filters}
           options={this.state.options}
           selected={this.state.selected}
+          isMobile={isMobile}
         />
       </React.Fragment>
     )
