@@ -16,6 +16,8 @@ $tabletGapBetweenFilters: 24px;
   color: $steel-grey;
   box-sizing: border-box;
   cursor: pointer;
+  -moz-appearance: none;
+  -webkit-appearance: none;
 }
 
 h5.title {
@@ -26,6 +28,8 @@ h5.title {
 .select {
   position: relative;
   padding-bottom: 20px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
 
   @include respond-to(tablet) {
     padding-left: ($tabletGapBetweenFilters / 2);
@@ -37,10 +41,6 @@ h5.title {
     @extend %inputStyle;
   }
 
-  /*
-  *
-  * Looks like this styling is added automatically by the device
-  *
   &::after {
     content: '';
     position: absolute;
@@ -54,7 +54,9 @@ h5.title {
     transform: translateY(6px);
 
     @include respond-to(tablet) {
-      right: ($tabletGapBetweenFilters / 2);
+      right: ($tabletGapBetweenFilters / 2) + 10px;
+      top: unset;
+      bottom: 16px;
     }
   }
 
@@ -72,10 +74,11 @@ h5.title {
     transform: translateY(-1px);
 
     @include respond-to(tablet) {
-      right: ($tabletGapBetweenFilters / 2);
+      right: ($tabletGapBetweenFilters / 2) + 10px;
+      top: unset;
+      bottom: 16px;
     }
   }
-  */
 }
 
 .search {
