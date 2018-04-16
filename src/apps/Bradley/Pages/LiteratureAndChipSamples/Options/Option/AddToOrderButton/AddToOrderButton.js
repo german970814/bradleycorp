@@ -8,26 +8,26 @@ type Props = {
 }
 
 type State = {
-  isHovered: boolean
+  isClicked: boolean
 }
 
 class AddToOrderButton extends React.Component<Props, State> {
   constructor (props: Props) {
     super(props)
 
-    this.state = { isHovered: false }
+    this.state = { isClicked: false }
   }
 
   toggleHover () {
-    this.setState({ isHovered: !this.state.isHovered })
+    this.setState({ isClicked: !this.state.isClicked })
   }
 
   hover () {
-    this.setState({ isHovered: true })
+    this.setState({ isClicked: true })
   }
 
   hoverOff () {
-    this.setState({ isHovered: false })
+    this.setState({ isClicked: false })
   }
 
   handleAddToShipmentClick () {
@@ -77,7 +77,7 @@ class AddToOrderButton extends React.Component<Props, State> {
   }
 
   renderDesktop () {
-    return null
+    return <button className={style.addButtonDesktop}>{'ADD TO ORDER'}</button>
   }
 
   renderMobile () {
@@ -86,7 +86,7 @@ class AddToOrderButton extends React.Component<Props, State> {
         <div className={style.addButton} onClick={this.toggleHover.bind(this)}>
           <div className={style.addButtonLines} />
         </div>
-        {this.state.isHovered ? this.renderShipmentOrDownloadMobile() : null}
+        {this.state.isClicked ? this.renderShipmentOrDownloadMobile() : null}
       </React.Fragment>
     ) : (
       <div

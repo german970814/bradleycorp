@@ -32,6 +32,14 @@ $addButtonMobileWidth: 30px;
   }
 }
 
+.addButtonDesktop {
+  width: auto;
+  padding: {
+    left: 17px;
+    right: 17px;
+  }
+}
+
 .shipmentOrDownloadMobileContainer {
   position: absolute;
   top: -14px;

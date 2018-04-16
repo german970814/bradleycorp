@@ -97,9 +97,13 @@ class Options extends React.Component<Props> {
   }
 
   render () {
-    return this.props.selected === 'literature'
-      ? this.renderLiterature()
-      : this.renderChipSamples()
+    return (
+      <div className={'row'}>
+        {this.props.selected === 'literature'
+          ? this.renderLiterature()
+          : this.renderChipSamples()}
+      </div>
+    )
   }
 }
 

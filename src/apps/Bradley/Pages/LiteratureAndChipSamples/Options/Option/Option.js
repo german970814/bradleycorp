@@ -31,7 +31,7 @@ const Option = (props: Props) => {
   ) : null
 
   const addButton = (
-    <div className={style.addButton}>
+    <div className={props.isMobile ? style.addButton : style.addButtonDesktop}>
       <AddToOrderButton
         isMobile={props.isMobile}
         postType={props.post.post.post_type}
@@ -40,16 +40,28 @@ const Option = (props: Props) => {
   )
 
   return props.isMobile ? (
-    <div className={`row ${style.option} ${postTypeClassName}`}>
-      <div className={`inline-col4-middle ${style.imgContainer}`}>
-        {featuredImage}
-      </div>
-      <div className={`inline-col4x3-middle ${style.contentContainer}`}>
-        {title}
-        {addButton}
+    <div className={`col1 ${style.option} ${postTypeClassName}`}>
+      <div className={'row'}>
+        <div className={`inline-col4-middle ${style.imgContainer}`}>
+          {featuredImage}
+        </div>
+        <div className={`inline-col4x3-middle ${style.contentContainer}`}>
+          {title}
+          {addButton}
+        </div>
       </div>
     </div>
-  ) : null
+  ) : (
+    <div className={`col2 ${style.option} ${postTypeClassName}`}>
+      <div className={'row'}>
+        <div className={`col4 ${style.imgContainer}`}>{featuredImage}</div>
+        <div className={`col4x3 ${style.contentContainer}`}>
+          {title}
+          {addButton}
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default Option
