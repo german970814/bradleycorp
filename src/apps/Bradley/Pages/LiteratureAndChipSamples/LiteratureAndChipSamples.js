@@ -38,7 +38,11 @@ type OptionsTypes = {
   chipSamples?: Array<ChipSamplePost>
 }
 
-type ShipmentTypes = Array<LiteraturePost | ChipSamplePost>
+type ShipmentTypes = Array<{
+  num: number,
+  postID: number,
+  post: LiteraturePost | ChipSamplePost
+}>
 
 type DownloadTypes = Array<LiteraturePost>
 
@@ -87,10 +91,60 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
   }
 
   addToShipment (postToAdd: LiteraturePost | ChipSamplePost): void {
-    const newShipment = this.state.shipment
-      ? [...this.state.shipment, postToAdd]
-      : [postToAdd]
-    this.setState({ shipment: newShipment })
+    const postID = postToAdd.post.ID
+
+    if (this.state.shipment) {
+      const indexToUpdate = this.state.shipment.findIndex(shipment => {
+        return shipment.postID === postID
+      })
+      const newShipment = this.state.shipment || []
+
+      if (indexToUpdate === -1) {
+        return this.setState({
+          shipment: [
+            ...newShipment,
+            {
+              num: 1,
+              postID,
+              post: postToAdd
+            }
+          ]
+        })
+      } else {
+        newShipment[indexToUpdate].num += 1
+
+        this.setState({ shipment: newShipment })
+      }
+    } else {
+      return this.setState({
+        shipment: [
+          {
+            num: 1,
+            postID,
+            post: postToAdd
+          }
+        ]
+      })
+    }
+  }
+
+  removeFromShipment (idToRemove: number): void {
+    if (this.state.shipment) {
+      const indexToRemove = this.state.shipment.findIndex(shipment => {
+        return shipment.postID === idToRemove
+      })
+      const newShipment = this.state.shipment || []
+
+      if (indexToRemove === -1) {
+        console.warn(
+          `Couldnt find post with id ${idToRemove} in shipment state`
+        )
+      } else {
+        newShipment.splice(indexToRemove, 1)
+
+        this.setState({ shipment: newShipment })
+      }
+    }
   }
 
   updateDownloads (newDownloads: DownloadTypes): void {
@@ -102,6 +156,25 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
       ? [...this.state.downloads, postToAdd]
       : [postToAdd]
     this.setState({ downloads: newDownloads })
+  }
+
+  removeFromDownloads (idToRemove: number): void {
+    if (this.state.downloads) {
+      const indexToRemove = this.state.downloads.findIndex(download => {
+        return download.post.ID === idToRemove
+      })
+      const newDownloads = this.state.downloads || []
+
+      if (indexToRemove === -1) {
+        console.warn(
+          `Couldnt find post with id ${idToRemove} in download state`
+        )
+      } else {
+        newDownloads.splice(indexToRemove, 1)
+
+        this.setState({ downloads: newDownloads })
+      }
+    }
   }
 
   updateFilters (newFilters: FiltersTypes): void {
