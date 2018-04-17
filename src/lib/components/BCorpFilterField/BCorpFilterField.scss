@@ -20,6 +20,32 @@ $tabletGapBetweenFilters: 24px;
   -webkit-appearance: none;
 }
 
+%downArrow {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid $steel-grey;
+  transform: translateY(6px);
+}
+
+%upArrow {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 5px solid $steel-grey;
+  transform: translateY(-1px);
+}
+
 h5.title {
   padding-bottom: 8px;
   color: $navy;
@@ -42,16 +68,7 @@ h5.title {
   }
 
   &::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    width: 0;
-    height: 0;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 5px solid $steel-grey;
-    transform: translateY(6px);
+    @extend %downArrow;
 
     @include respond-to(tablet) {
       right: ($tabletGapBetweenFilters / 2) + 10px;
@@ -62,16 +79,7 @@ h5.title {
 
   // up arrow
   &::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    width: 0;
-    height: 0;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-bottom: 5px solid $steel-grey;
-    transform: translateY(-1px);
+    @extend %upArrow;
 
     @include respond-to(tablet) {
       right: ($tabletGapBetweenFilters / 2) + 10px;
@@ -116,5 +124,29 @@ h5.title {
       width: 100%;
       height: auto;
     }
+  }
+}
+
+.number {
+  position: relative;
+  height: 23px;
+  width: 36px;
+
+  input {
+    @extend %inputStyle;
+    width: 100%;
+    padding: 2px 5px;
+  }
+
+  b:nth-child(2) {
+    @extend %upArrow;
+    top: 7px;
+    right: 5px;
+  }
+
+  b:nth-child(3) {
+    @extend %downArrow;
+    top: 7px;
+    right: 5px;
   }
 }

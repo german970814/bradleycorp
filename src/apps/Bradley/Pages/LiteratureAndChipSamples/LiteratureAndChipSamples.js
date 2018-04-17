@@ -38,17 +38,21 @@ type OptionsTypes = {
   chipSamples?: Array<ChipSamplePost>
 }
 
+type ShipmentLiteratureObject = {
+  num: number,
+  postID: number,
+  post: LiteraturePost
+}
+
+type ShipmentChipSampleObject = {
+  num: number,
+  postID: number,
+  post: ChipSamplePost
+}
+
 type ShipmentTypes = {
-  literature?: Array<{
-    num: number,
-    postID: number,
-    post: LiteraturePost
-  }>,
-  chipSamples?: Array<{
-    num: number,
-    postID: number,
-    post: ChipSamplePost
-  }>
+  literature?: Array<ShipmentLiteratureObject>,
+  chipSamples?: Array<ShipmentChipSampleObject>
 }
 
 type DownloadTypes = Array<LiteraturePost>
@@ -116,6 +120,36 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
     }
   }
 
+  incrementPostInShipment (
+    idToIncrement: number,
+    newNumber: number,
+    postType: PostTypeOptions
+  ): void {
+    const shipment = this.state.shipment || {}
+    const shipmentPostType = shipment[postType] || []
+
+    if (!this.state.shipment || !this.state.shipment[postType]) {
+      return
+    }
+
+    const indexToIncrement = this.state.shipment[postType].findIndex(
+      shipment => {
+        return shipment.postID === idToIncrement
+      }
+    )
+
+    if (indexToIncrement === -1) {
+      console.warn(
+        `Couldnt find post with id ${idToIncrement} in shipment state`
+      )
+    } else {
+      shipmentPostType[indexToIncrement].num = newNumber
+      shipment[postType] = shipmentPostType
+
+      this.setState({ shipment })
+    }
+  }
+
   removeFromShipment (postToRemove: LiteraturePost | ChipSamplePost): void {
     const postID = postToRemove.post.ID
     const postType = postToRemove.post.post_type
@@ -123,21 +157,20 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
     const shipmentPostType = shipment[postType] || []
 
     if (!this.state.shipment || !this.state.shipment[postType]) {
+      return
+    }
+
+    const indexToRemove = this.state.shipment[postType].findIndex(shipment => {
+      return shipment.postID === postID
+    })
+
+    if (indexToRemove === -1) {
+      console.warn(`Couldnt find post with id ${postID} in shipment state`)
     } else {
-      const indexToRemove = this.state.shipment[postType].findIndex(
-        shipment => {
-          return shipment.postID === postID
-        }
-      )
+      shipmentPostType.splice(indexToRemove, 1)
+      shipment[postType] = shipmentPostType
 
-      if (indexToRemove === -1) {
-        console.warn(`Couldnt find post with id ${postID} in shipment state`)
-      } else {
-        shipmentPostType.splice(indexToRemove, 1)
-        shipment[postType] = shipmentPostType
-
-        this.setState({ shipment })
-      }
+      this.setState({ shipment })
     }
   }
 
@@ -241,10 +274,13 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
           />
         ) : null}
         <Shipment
+          shipment={this.state.shipment}
           addToShipment={this.addToShipment.bind(this)}
           removeFromShipment={this.removeFromShipment.bind(this)}
+          incrementPostInShipment={this.incrementPostInShipment.bind(this)}
         />
         <Downloads
+          downloads={this.state.downloads}
           addToDownloads={this.addToDownloads.bind(this)}
           removeFromDownloads={this.removeFromDownloads.bind(this)}
         />
@@ -378,5 +414,7 @@ export type {
   OptionsTypes,
   FiltersTypes,
   ShipmentTypes,
-  DownloadTypes
+  DownloadTypes,
+  ShipmentChipSampleObject,
+  ShipmentLiteratureObject
 }
