@@ -6,9 +6,10 @@ import type {
   PostTypeOptions
 } from '../../../../../../lib/types/cpt_types'
 import type { ShipmentTypes } from '../../LiteratureAndChipSamples'
+import Divider from '../../../../../../lib/components/Divider/Divider'
 import BCorpWidget from '../../../../../../lib/containers/Widgets/BCorpWidget'
 import ShipmentItem from './ShipmentItem/ShipmentItem'
-// import style from './Shipment.scss'
+import style from './Shipment.scss'
 
 type Props = {
   shipment?: ShipmentTypes,
@@ -24,7 +25,7 @@ type Props = {
 class Shipment extends React.Component<Props> {
   renderLiteratureItems () {
     if (!this.props.shipment || !this.props.shipment.literature) {
-      return
+      return "You haven't added any Literature yet"
     }
 
     return this.props.shipment.literature.map((literature, index) => {
@@ -40,48 +41,80 @@ class Shipment extends React.Component<Props> {
     })
   }
 
-  render () {
-    const content = this.shipmentIsEmpty()
-      ? 'You currently have no items in your shipment'
-      : this.renderLiteratureItems()
+  renderChipSampleItems () {
+    if (!this.props.shipment || !this.props.shipment.chip) {
+      return "You haven't added any Chip Samples yet"
+    }
 
+    return this.props.shipment.chip.map((chipSample, index) => {
+      return (
+        <ShipmentItem
+          key={index}
+          shipmentObject={chipSample}
+          addToShipment={this.props.addToShipment}
+          removeFromShipment={this.props.removeFromShipment}
+          incrementPostInShipment={this.props.incrementPostInShipment}
+        />
+      )
+    })
+  }
+
+  renderLegal () {
+    return (
+      <div className={style.legalWrapper}>
+        <p className={`legal ${style.legal}`}>
+          {
+            'Note: Most orders ship within 2 business days. Larger orders may require additional processing time.'
+          }
+        </p>
+        <p className={`legal ${style.legal}`}>
+          {'For questions about your order, please contact '}
+          <a href="mailto:litrequest@bradleycorp.com">
+            {'litrequest@bradleycorp.com'}
+          </a>
+        </p>
+        <p className={`legal ${style.legal}`}>
+          {
+            'Please include the order number provided at the end of this transaction.'
+          }
+        </p>
+      </div>
+    )
+  }
+
+  renderContent () {
+    return (
+      <div className={style.contentWrapper}>
+        <h6 className={style.title}>Literature</h6>
+        <div className={style.literatureWrapper}>
+          {this.renderLiteratureItems()}
+        </div>
+
+        <Divider className={style.divider} fullWidth />
+
+        <h6 className={style.title}>Chip Samples</h6>
+        <div className={style.chipSamplesWrapper}>
+          {this.renderChipSampleItems()}
+        </div>
+
+        <div className={style.buttonWrapper}>
+          <button className={style.button}>{'ENTER SHIPPING INFO'}</button>
+        </div>
+
+        {this.renderLegal()}
+      </div>
+    )
+  }
+
+  render () {
     return (
       <BCorpWidget
         title={'Your Shipment'}
         className={'col1 col2-tablet col1-desktop'}
         twoColsOnTablet>
-        {content}
+        {this.renderContent()}
       </BCorpWidget>
     )
-  }
-
-  shipmentIsEmpty (): boolean {
-    let literatureEmpty = true
-    let chipSamplesEmpty = true
-
-    if (!this.props.shipment) {
-      return true
-    }
-
-    if (
-      this.props.shipment.literature &&
-      this.props.shipment.literature.length
-    ) {
-      literatureEmpty = false
-    }
-
-    if (
-      this.props.shipment.chipSamples &&
-      this.props.shipment.chipSamples.length
-    ) {
-      chipSamplesEmpty = false
-    }
-
-    if (literatureEmpty && chipSamplesEmpty) {
-      return true
-    } else {
-      return false
-    }
   }
 }
 

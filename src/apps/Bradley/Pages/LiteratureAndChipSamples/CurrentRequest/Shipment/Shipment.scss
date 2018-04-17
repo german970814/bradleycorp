@@ -1,0 +1,54 @@
+@import '../../../../../../scss/partials/variables';
+@import '../../../../../../scss/partials/mixins';
+
+.title {
+  margin-bottom: 13px;
+  color: $black;
+}
+
+.literatureWrapper {
+  margin-bottom: 20px;
+}
+
+.divider {
+  margin-bottom: 20px;
+}
+
+.chipSamplesWrapper {
+  margin-bottom: 30px;
+
+  @include respond-to(tablet) {
+    margin-bottom: 40px;
+  }
+}
+
+.buttonWrapper {
+  margin-bottom: 30px;
+  text-align: center;
+
+  @include respond-to(tablet) {
+    margin-bottom: 40px;
+  }
+
+  button.button {
+    @include respond-to(tablet) {
+      padding-left: 20px;
+      padding-right: 20px;
+      width: auto;
+    }
+  }
+}
+
+.legal:global(.legal) {
+  margin-bottom: 10px;
+  color: $steel-grey;
+
+  &:last-child {
+    margin-bottom: 0px;
+  }
+
+  a {
+    color: $navy;
+    text-decoration: underline;
+  }
+}

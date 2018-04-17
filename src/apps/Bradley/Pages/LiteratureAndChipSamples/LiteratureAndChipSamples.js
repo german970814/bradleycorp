@@ -16,7 +16,7 @@ import Options from './Options/Options'
 import Filters from './Filters/Filters'
 // import style from './LiteratureAndChipSamples.scss'
 
-type PostTypeOptions = 'literature' | 'chipSamples'
+type PostTypeOptions = 'literature' | 'chip'
 
 type LiteratureFilters = {
   productLine: string,
@@ -52,7 +52,7 @@ type ShipmentChipSampleObject = {
 
 type ShipmentTypes = {
   literature?: Array<ShipmentLiteratureObject>,
-  chipSamples?: Array<ShipmentChipSampleObject>
+  chip?: Array<ShipmentChipSampleObject>
 }
 
 type DownloadTypes = Array<LiteraturePost>
@@ -221,11 +221,11 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
 
   onUpdateSelected (newSelected: PostTypeOptions) {
     if (
-      newSelected === 'chipSamples' &&
+      newSelected === 'chip' &&
       (!this.state.options.chipSamples ||
         !this.state.options.chipSamples.length)
     ) {
-      this.getOptions('chipSamples')
+      this.getOptions('chip')
     }
   }
 
@@ -325,7 +325,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
 
         const options = { ...this.state.options, literature: optionsData }
         return this.setState({ options })
-      } else if (postType === 'chipSamples') {
+      } else if (postType === 'chip') {
         const client = new CPTApiClient('chip')
         const response = await client.getLatest(-1)
 
