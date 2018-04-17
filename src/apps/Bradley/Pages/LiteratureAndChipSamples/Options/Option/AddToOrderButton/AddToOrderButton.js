@@ -46,6 +46,26 @@ class AddToOrderButton extends React.Component<Props, State> {
     this.props.addToDownloads(this.props.post)
   }
 
+  handleMobileClick () {
+    if (this.isPrintable()) {
+      return this.toggleClicked()
+    } else {
+      return this.props.post.post.post_type === 'literature'
+        ? this.handleAddToDownloadsClick()
+        : this.handleAddToShipmentClick()
+    }
+  }
+
+  handleDesktopClick () {
+    if (this.isPrintable()) {
+      return this.clicked()
+    } else {
+      return this.props.post.post.post_type === 'literature'
+        ? this.handleAddToDownloadsClick()
+        : this.handleAddToShipmentClick()
+    }
+  }
+
   renderAddToShipment () {
     return (
       <button
@@ -85,7 +105,7 @@ class AddToOrderButton extends React.Component<Props, State> {
   }
 
   renderDesktop () {
-    return this.state.isClicked ? (
+    return this.state.isClicked && this.isPrintable() ? (
       <React.Fragment>
         {this.renderAddToShipment()}
         {this.renderAddToDownloads()}
@@ -93,33 +113,41 @@ class AddToOrderButton extends React.Component<Props, State> {
     ) : (
       <button
         className={`${style.addButtonDesktop}`}
-        onClick={this.clicked.bind(this)}>
+        onClick={this.handleDesktopClick.bind(this)}>
         {'ADD TO ORDER'}
       </button>
     )
   }
 
   renderMobile () {
-    return this.props.post.post.post_type === 'literature' ? (
+    return (
       <React.Fragment>
         <div
           className={style.addButton}
-          onClick={this.toggleClicked.bind(this)}>
+          onClick={this.handleMobileClick.bind(this)}>
           <div className={style.addButtonLines} />
         </div>
-        {this.state.isClicked ? this.renderShipmentOrDownloadMobile() : null}
+        {this.state.isClicked && this.isPrintable()
+          ? this.renderShipmentOrDownloadMobile()
+          : null}
       </React.Fragment>
-    ) : (
-      <div
-        className={style.addButton}
-        onClick={this.handleAddToShipmentClick.bind(this)}>
-        <div className={style.addButtonLines} />
-      </div>
     )
   }
 
   render () {
     return this.props.isMobile ? this.renderMobile() : this.renderDesktop()
+  }
+
+  isPrintable (): boolean {
+    if (this.props.post.post.post_type !== 'literature') {
+      return false
+    } else {
+      if (this.props.post.meta.can_print === '1') {
+        return true
+      } else {
+        return false
+      }
+    }
   }
 }
 
