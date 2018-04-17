@@ -34,6 +34,7 @@ const WidgetFactory = (props: Props): React.Node => {
           text={data['display_text']}
           link={data['link_url']}
           linkText={data['link_text']}
+          mediaSrc={data['media']}
         />
       )
 
