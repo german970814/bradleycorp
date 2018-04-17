@@ -1,11 +1,17 @@
 // @flow
 import * as React from 'react'
+import type {
+  LiteraturePost,
+  ChipSamplePost
+} from '../../../../../../lib/types/cpt_types'
 import type { ShipmentTypes } from '../../LiteratureAndChipSamples'
 import BCorpWidget from '../../../../../../lib/containers/Widgets/BCorpWidget'
 // import style from './Shipment.scss'
 
 type Props = {
-  shipment?: ShipmentTypes
+  shipment?: ShipmentTypes,
+  addToShipment: (postToAdd: LiteraturePost | ChipSamplePost) => void,
+  removeFromShipment: (idToRemove: number) => void
 }
 
 class Shipment extends React.Component<Props> {

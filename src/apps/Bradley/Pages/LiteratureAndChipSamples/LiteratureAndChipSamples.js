@@ -38,11 +38,18 @@ type OptionsTypes = {
   chipSamples?: Array<ChipSamplePost>
 }
 
-type ShipmentTypes = Array<{
-  num: number,
-  postID: number,
-  post: LiteraturePost | ChipSamplePost
-}>
+type ShipmentTypes = {
+  literature?: Array<{
+    num: number,
+    postID: number,
+    post: LiteraturePost
+  }>,
+  chipSamples?: Array<{
+    num: number,
+    postID: number,
+    post: ChipSamplePost
+  }>
+}
 
 type DownloadTypes = Array<LiteraturePost>
 
@@ -91,58 +98,45 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
   }
 
   addToShipment (postToAdd: LiteraturePost | ChipSamplePost): void {
-    const postID = postToAdd.post.ID
+    const postType = postToAdd.post.post_type
 
-    if (this.state.shipment) {
-      const indexToUpdate = this.state.shipment.findIndex(shipment => {
-        return shipment.postID === postID
-      })
-      const newShipment = this.state.shipment || []
+    // shipment hasnt yet been initialised
+    if (!this.state.shipment) {
+      this.createNewShipmentWithPost(postToAdd)
+    }
 
-      if (indexToUpdate === -1) {
-        return this.setState({
-          shipment: [
-            ...newShipment,
-            {
-              num: 1,
-              postID,
-              post: postToAdd
-            }
-          ]
-        })
-      } else {
-        newShipment[indexToUpdate].num += 1
+    // shipment initialised but not for this post type
+    if (this.state.shipment && !this.state.shipment[postType]) {
+      this.createNewPostTypeInShipmentWithPost(postToAdd)
+    }
 
-        this.setState({ shipment: newShipment })
-      }
-    } else {
-      return this.setState({
-        shipment: [
-          {
-            num: 1,
-            postID,
-            post: postToAdd
-          }
-        ]
-      })
+    // shipment and post type in shipment already initialised
+    if (this.state.shipment && this.state.shipment[postType]) {
+      this.addPostToExistingShipment(postToAdd)
     }
   }
 
-  removeFromShipment (idToRemove: number): void {
-    if (this.state.shipment) {
-      const indexToRemove = this.state.shipment.findIndex(shipment => {
-        return shipment.postID === idToRemove
-      })
-      const newShipment = this.state.shipment || []
+  removeFromShipment (postToRemove: LiteraturePost | ChipSamplePost): void {
+    const postID = postToRemove.post.ID
+    const postType = postToRemove.post.post_type
+    const shipment = this.state.shipment || {}
+    const shipmentPostType = shipment[postType] || []
+
+    if (!this.state.shipment || !this.state.shipment[postType]) {
+    } else {
+      const indexToRemove = this.state.shipment[postType].findIndex(
+        shipment => {
+          return shipment.postID === postID
+        }
+      )
 
       if (indexToRemove === -1) {
-        console.warn(
-          `Couldnt find post with id ${idToRemove} in shipment state`
-        )
+        console.warn(`Couldnt find post with id ${postID} in shipment state`)
       } else {
-        newShipment.splice(indexToRemove, 1)
+        shipmentPostType.splice(indexToRemove, 1)
+        shipment[postType] = shipmentPostType
 
-        this.setState({ shipment: newShipment })
+        this.setState({ shipment })
       }
     }
   }
@@ -246,8 +240,14 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
             )}
           />
         ) : null}
-        <Shipment />
-        <Downloads />
+        <Shipment
+          addToShipment={this.addToShipment.bind(this)}
+          removeFromShipment={this.removeFromShipment.bind(this)}
+        />
+        <Downloads
+          addToDownloads={this.addToDownloads.bind(this)}
+          removeFromDownloads={this.removeFromDownloads.bind(this)}
+        />
       </React.Fragment>
     )
   }
@@ -300,6 +300,69 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
       }
     } catch (err) {
       console.log(err)
+    }
+  }
+
+  createNewShipmentWithPost (post: LiteraturePost | ChipSamplePost): void {
+    const postID = post.post.ID
+    const postType = post.post.post_type
+    const shipment = {}
+
+    shipment[postType] = [
+      {
+        num: 1,
+        postID,
+        post
+      }
+    ]
+    this.setState({ shipment })
+  }
+
+  createNewPostTypeInShipmentWithPost (
+    post: LiteraturePost | ChipSamplePost
+  ): void {
+    const postID = post.post.ID
+    const postType = post.post.post_type
+
+    const shipment = { ...this.state.shipment }
+    shipment[postType] = [
+      {
+        num: 1,
+        postID,
+        post
+      }
+    ]
+    this.setState({ shipment })
+  }
+
+  addPostToExistingShipment (postToAdd: LiteraturePost | ChipSamplePost): void {
+    const postID = postToAdd.post.ID
+    const postType = postToAdd.post.post_type
+    const shipment = this.state.shipment || {}
+    let shipmentPostType = shipment[postType] || []
+
+    const indexToUpdate = shipment[postType].findIndex(shipment => {
+      return shipment.postID === postID
+    })
+
+    // post hasnt already been added
+    if (indexToUpdate === -1) {
+      shipmentPostType = [
+        ...shipmentPostType,
+        {
+          num: 1,
+          postID,
+          post: postToAdd
+        }
+      ]
+      shipment[postType] = shipmentPostType
+      return this.setState({ shipment })
+    } else {
+      // post already exists in shipment
+      shipmentPostType[indexToUpdate].num += 1
+      shipment[postType] = shipmentPostType
+
+      return this.setState({ shipment })
     }
   }
 }
