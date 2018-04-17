@@ -6,11 +6,11 @@ import style from './DropDownTab.scss'
 type Props = {
   title: string,
   content: string
-}
+};
 
 type State = {
   open: boolean
-}
+};
 
 class DropDownTab extends Component<Props, State> {
   constructor (props: Props) {
