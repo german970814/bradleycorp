@@ -11,7 +11,7 @@ import style from './PostSecondary.scss'
 
 type Props = {
   post: BCorpPost
-};
+}
 
 class PostSecondary extends Component<Props> {
   renderTitle () {
@@ -32,6 +32,7 @@ class PostSecondary extends Component<Props> {
         className={style.meta}
         authorName={this.props.post.post.author_display_name}
         date={this.props.post.post.post_date}
+        format={1}
       />
     )
   }
