@@ -18,7 +18,15 @@ type Props = {
  */
 class CTAWidget extends Component<Props> {
   renderMedia () {
-    return null
+    const { mediaSrc } = this.props
+
+    if (!mediaSrc) {
+      return
+    }
+
+    return <div className={style.mediaWrapper}>
+      <img src={mediaSrc} className={style.theMedia} />
+    </div>
   }
 
   renderText () {
