@@ -3,11 +3,11 @@
 
 .postRemaining {
   h5.title {
-    margin-bottom: 7px;
+    margin-bottom: 4px;
     color: $black;
 
     @include respond-to(tablet) {
-      margin-bottom: 13px;
+      margin-bottom: 8px;
     }
   }
 
