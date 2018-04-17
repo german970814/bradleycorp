@@ -13,11 +13,11 @@ type Props = {
     page_id: number,
     page_title: string
   }
-}
+};
 
 type State = {
   faqs: Array<WPPost>
-}
+};
 
 class FAQTemplate extends React.Component<Props, State> {
   constructor (props: Props) {

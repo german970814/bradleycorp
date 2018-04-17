@@ -11,7 +11,7 @@ import style from './Posts.scss'
 
 type Props = {
   data: Array<BCorpPost>
-};
+}
 
 const Posts = (props: Props) => {
   const posts = props.data
