@@ -15,12 +15,12 @@ import style from './BlogLandingPage.scss'
 
 type Props = {
   match: Match
-}
+};
 
 type State = {
   posts: Array<BCorpPost>,
   widgets: Array<Widget>
-}
+};
 
 class BlogLandingPage extends Component<Props, State> {
   defaultPostState: BCorpPost
