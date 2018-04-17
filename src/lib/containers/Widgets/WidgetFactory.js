@@ -9,7 +9,7 @@ import BlogUpdatesWidget from './NewsletterWidget/BlogUpdatesWidget/BlogUpdatesW
 type Props = Widget & {
   widgetClass?: string,
   twoColsOnTablet?: boolean
-}
+};
 
 /**
  * Given data about a widget, we return the correct component with the necessary props

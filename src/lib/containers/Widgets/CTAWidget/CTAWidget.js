@@ -11,7 +11,7 @@ type Props = {
   linkText?: string,
   mediaSrc?: string,
   twoColsOnTablet?: boolean
-}
+};
 
 /**
  * The CTA Widget

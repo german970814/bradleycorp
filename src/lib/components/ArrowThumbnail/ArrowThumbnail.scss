@@ -8,19 +8,17 @@ $arrowMargin: 13px;
 
 .arrowWrapper {
   position: absolute;
+  top: 3.5px;
   left: 0;
-  top: 0;
-  height: 100%;
-}
-
-.arrow {
-  display: inline-block;
-  vertical-align: middle;
-  width: $arrowWidth;
-  height: 9px;
 }
 
 .wrapChildren {
   display: inline-block;
-  vertical-align: middle;
+  vertical-align: top;
+}
+
+.arrow {
+  display: block;
+  width: $arrowWidth;
+  height: 9px;
 }

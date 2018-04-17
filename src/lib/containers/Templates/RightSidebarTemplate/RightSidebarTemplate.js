@@ -19,7 +19,7 @@ type Props = {
    * A render function for the widgets
    */
   renderRightSidebarWidgets: () => React.Node
-}
+};
 
 class RightSidebarTemplate extends React.Component<Props> {
   render () {
