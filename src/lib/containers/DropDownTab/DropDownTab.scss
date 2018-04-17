@@ -64,6 +64,10 @@ $rightMarginDesktop: 20px;
 
       @include respond-to(tablet) {
         margin-top: 20px;
+        max-width: 408px;
+      }
+      @include respond-to(desktop) {
+        max-width: 639px;
       }
     }
   }
