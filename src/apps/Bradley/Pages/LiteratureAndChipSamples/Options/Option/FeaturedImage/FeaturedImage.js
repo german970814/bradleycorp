@@ -4,6 +4,7 @@ import type {
   LiteraturePost,
   ChipSamplePost
 } from '../../../../../../../lib/types/cpt_types'
+import LightboxV2 from '../../../../../../../lib/containers/Lightbox/LightboxV2'
 import style from './FeaturedImage.scss'
 
 type Props = {
@@ -63,13 +64,31 @@ class FeaturedImage extends React.Component<Props, State> {
         </div>
       </a>
     ) : (
-      <div
-        className={style.featuredImage}
-        onMouseEnter={this.onMouseEnter.bind(this)}
-        onMouseLeave={this.onMouseLeave.bind(this)}>
-        <img src={this.props.post.media.featured_image[0]} className={'row'} />
-        {this.renderOverlay()}
-      </div>
+      <LightboxV2
+        renderChildren={openLightbox => {
+          return (
+            <div
+              className={style.featuredImage}
+              onClick={openLightbox}
+              onMouseEnter={this.onMouseEnter.bind(this)}
+              onMouseLeave={this.onMouseLeave.bind(this)}>
+              <img
+                src={this.props.post.media.featured_image[0]}
+                className={'row'}
+              />
+              {this.renderOverlay()}
+            </div>
+          )
+        }}
+        renderLightboxContents={() => {
+          return (
+            <img
+              src={this.props.post.media.featured_image[0]}
+              className={`row ${style.lightboxImage}`}
+            />
+          )
+        }}
+      />
     )
   }
 }
