@@ -57,17 +57,18 @@ class FeaturedImage extends React.Component<Props, State> {
           onMouseLeave={this.onMouseLeave.bind(this)}>
           <img
             src={this.props.post.media.featured_image[0]}
-            className={style.featuredImage}
+            className={'row'}
           />
           {this.renderOverlay()}
         </div>
       </a>
     ) : (
-      <div className={style.featuredImage}>
-        <img
-          src={this.props.post.media.featured_image[0]}
-          className={style.featuredImage}
-        />
+      <div
+        className={style.featuredImage}
+        onMouseEnter={this.onMouseEnter.bind(this)}
+        onMouseLeave={this.onMouseLeave.bind(this)}>
+        <img src={this.props.post.media.featured_image[0]} className={'row'} />
+        {this.renderOverlay()}
       </div>
     )
   }
