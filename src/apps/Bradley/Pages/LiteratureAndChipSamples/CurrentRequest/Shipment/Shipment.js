@@ -9,11 +9,11 @@ import type { ShipmentTypes } from '../../LiteratureAndChipSamples'
 import Divider from '../../../../../../lib/components/Divider/Divider'
 import BCorpWidget from '../../../../../../lib/containers/Widgets/BCorpWidget'
 import ShipmentItem from './ShipmentItem/ShipmentItem'
+import sharedStyle from '../CurrentRequest.scss'
 import style from './Shipment.scss'
 
 type Props = {
   shipment?: ShipmentTypes,
-  addToShipment: (postToAdd: LiteraturePost | ChipSamplePost) => void,
   removeFromShipment: (postToRemove: LiteraturePost | ChipSamplePost) => void,
   incrementPostInShipment: (
     idToIncrement: number,
@@ -33,7 +33,6 @@ class Shipment extends React.Component<Props> {
         <ShipmentItem
           key={index}
           shipmentObject={literature}
-          addToShipment={this.props.addToShipment}
           removeFromShipment={this.props.removeFromShipment}
           incrementPostInShipment={this.props.incrementPostInShipment}
         />
@@ -51,7 +50,6 @@ class Shipment extends React.Component<Props> {
         <ShipmentItem
           key={index}
           shipmentObject={chipSample}
-          addToShipment={this.props.addToShipment}
           removeFromShipment={this.props.removeFromShipment}
           incrementPostInShipment={this.props.incrementPostInShipment}
         />
@@ -85,14 +83,14 @@ class Shipment extends React.Component<Props> {
   renderContent () {
     return (
       <div className={style.contentWrapper}>
-        <h6 className={style.title}>Literature</h6>
+        <h6 className={sharedStyle.title}>Literature</h6>
         <div className={style.literatureWrapper}>
           {this.renderLiteratureItems()}
         </div>
 
         <Divider className={style.divider} fullWidth />
 
-        <h6 className={style.title}>Chip Samples</h6>
+        <h6 className={sharedStyle.title}>Chip Samples</h6>
         <div className={style.chipSamplesWrapper}>
           {this.renderChipSampleItems()}
         </div>

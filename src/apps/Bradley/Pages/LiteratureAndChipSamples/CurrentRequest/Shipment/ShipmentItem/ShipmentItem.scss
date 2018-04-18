@@ -1,11 +1,9 @@
 @import '../../../../../../../scss/partials/mixins';
 
-$paddingTopBottom: 5px;
-
 .shipmentItem {
   position: relative;
   margin-bottom: 10px;
-  padding: $paddingTopBottom 0px;
+  padding: 5px 0px;
 
   .title {
     padding-right: 110px;
@@ -16,19 +14,5 @@ $paddingTopBottom: 5px;
     position: absolute;
     right: 32px;
     top: 1px;
-  }
-
-  .removeWrapper {
-    position: absolute;
-    top: $paddingTopBottom;
-    right: 0;
-    width: 12px;
-    height: 12px;
-
-    img {
-      width: 100%;
-      height: auto;
-      max-height: 100%;
-    }
   }
 }

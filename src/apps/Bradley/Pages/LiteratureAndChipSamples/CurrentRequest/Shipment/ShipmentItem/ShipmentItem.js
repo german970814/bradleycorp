@@ -8,11 +8,11 @@ import type {
   ShipmentLiteratureObject
 } from '../../../../../../../lib/types/cpt_types'
 import BCorpNumberField from '../../../../../../../lib/components/BCorpFilterField/BCorpNumberField'
+import sharedStyle from '../../CurrentRequest.scss'
 import style from './ShipmentItem.scss'
 
 type Props = {
   shipmentObject: ShipmentChipSampleObject | ShipmentLiteratureObject,
-  addToShipment: (postToAdd: LiteraturePost | ChipSamplePost) => void,
   removeFromShipment: (postToRemove: LiteraturePost | ChipSamplePost) => void,
   incrementPostInShipment: (
     idToIncrement: number,
@@ -52,7 +52,7 @@ class ShipmentItem extends React.Component<Props> {
   renderRemove () {
     return (
       <div
-        className={style.removeWrapper}
+        className={sharedStyle.removeWrapper}
         onClick={() =>
           this.props.removeFromShipment(this.props.shipmentObject.post)
         }>

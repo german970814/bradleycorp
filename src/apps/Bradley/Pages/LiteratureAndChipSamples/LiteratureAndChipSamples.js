@@ -275,13 +275,11 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
         ) : null}
         <Shipment
           shipment={this.state.shipment}
-          addToShipment={this.addToShipment.bind(this)}
           removeFromShipment={this.removeFromShipment.bind(this)}
           incrementPostInShipment={this.incrementPostInShipment.bind(this)}
         />
         <Downloads
           downloads={this.state.downloads}
-          addToDownloads={this.addToDownloads.bind(this)}
           removeFromDownloads={this.removeFromDownloads.bind(this)}
         />
       </React.Fragment>
@@ -403,11 +401,16 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
   }
 }
 
+function download (literature: LiteraturePost) {
+  console.log('download')
+}
+
 export default LiteratureAndChipSamples
 export {
   productLineFilterDefault,
   languageFilterDefault,
-  materialTypeFilterDefault
+  materialTypeFilterDefault,
+  download
 }
 export type {
   PostTypeOptions,

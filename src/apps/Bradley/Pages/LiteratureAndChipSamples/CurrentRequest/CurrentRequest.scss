@@ -1,0 +1,21 @@
+@import '../../../../../scss/partials/variables';
+@import '../../../../../scss/partials/mixins';
+
+.title {
+  margin-bottom: 13px;
+  color: $black;
+}
+
+.removeWrapper {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  width: 12px;
+  height: 12px;
+
+  img {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+  }
+}
