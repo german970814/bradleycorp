@@ -1,3 +1,5 @@
+@import '../../../../../../scss/partials/mixins';
+
 .download {
   position: relative;
   margin-bottom: 16px;
@@ -9,5 +11,21 @@
 
   .removeWrapper {
     top: 0;
+  }
+}
+
+.buttonWrapper {
+  text-align: center;
+
+  button.button {
+    margin-top: 25px;
+
+    @include respond-to(tablet) {
+      width: auto;
+      padding: {
+        left: 20px;
+        right: 20px;
+      }
+    }
   }
 }

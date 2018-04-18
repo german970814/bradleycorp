@@ -58,6 +58,26 @@
       right: 40px;
       transform: translateY(-15px);
     }
+
+    .downloadIcon {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: 19px;
+      height: 30px;
+      transform: translateY(-15px);
+
+      @include respond-to(tablet) {
+        position: static;
+        float: left;
+        margin-left: 20px;
+        transform: translateY(6px);
+      }
+
+      @include respond-to(desktop) {
+        margin-left: 16px;
+      }
+    }
   }
 }
 

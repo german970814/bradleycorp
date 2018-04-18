@@ -34,6 +34,7 @@ $addButtonMobileWidth: 30px;
 }
 
 .addButtonDesktop {
+  float: left;
   width: auto;
   padding: {
     left: 17px;
@@ -48,7 +49,7 @@ $addButtonMobileWidth: 30px;
 
     &:hover {
       // extend button
-      border: none;
+      border: solid 1px #fff;
       background-color: $green;
       color: #ffffff;
       width: auto;

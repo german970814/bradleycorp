@@ -402,7 +402,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
 }
 
 function download (literature: LiteraturePost) {
-  console.log('download')
+  console.log(`download ${literature.meta.literature_pdf}`)
 }
 
 export default LiteratureAndChipSamples

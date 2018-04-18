@@ -23,7 +23,11 @@ class Downloads extends React.Component<Props> {
   }
 
   renderLiterature () {
-    if (!this.props.downloads || !this.props.downloads.constructor === Array) {
+    if (
+      !this.props.downloads ||
+      !this.props.downloads.constructor === Array ||
+      !this.props.downloads.length
+    ) {
       return "You haven't added any Literature to downloads yet"
     }
 
@@ -53,11 +57,13 @@ class Downloads extends React.Component<Props> {
 
         {this.renderLiterature()}
 
-        <button
-          className={`button-orange ${style.button}`}
-          onClick={this.onClickButton.bind(this)}>
-          {'DOWNLOAD'}
-        </button>
+        <div className={style.buttonWrapper}>
+          <button
+            className={`button-orange ${style.button}`}
+            onClick={this.onClickButton.bind(this)}>
+            {'DOWNLOAD'}
+          </button>
+        </div>
       </React.Fragment>
     )
   }

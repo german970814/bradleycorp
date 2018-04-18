@@ -5,6 +5,7 @@ import type {
   ChipSamplePost
 } from '../../../../../../lib/types/cpt_types'
 import AddToOrderButton from './AddToOrderButton/AddToOrderButton'
+import DownloadIcon from './DownloadIcon/DownloadIcon'
 import style from './Option.scss'
 
 type Props = {
@@ -43,6 +44,13 @@ const Option = (props: Props) => {
     </div>
   )
 
+  const downloadIcon =
+    props.post.post.post_type === 'literature' ? (
+      <div className={style.downloadIcon}>
+        <DownloadIcon literature={props.post} isMobile={props.isMobile} />
+      </div>
+    ) : null
+
   return props.isMobile ? (
     <div className={`col1 ${style.option} ${postTypeClassName}`}>
       <div className={'row'}>
@@ -52,6 +60,7 @@ const Option = (props: Props) => {
         <div className={`inline-col4x3-middle ${style.contentContainer}`}>
           {title}
           {addButton}
+          {downloadIcon}
         </div>
       </div>
     </div>
@@ -62,6 +71,7 @@ const Option = (props: Props) => {
         <div className={`col4x3 ${style.contentContainer}`}>
           {title}
           {addButton}
+          {downloadIcon}
         </div>
       </div>
     </div>
