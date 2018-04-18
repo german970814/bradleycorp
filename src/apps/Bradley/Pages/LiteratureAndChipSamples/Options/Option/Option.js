@@ -6,6 +6,7 @@ import type {
 } from '../../../../../../lib/types/cpt_types'
 import AddToOrderButton from './AddToOrderButton/AddToOrderButton'
 import DownloadIcon from './DownloadIcon/DownloadIcon'
+import FeaturedImage from './FeaturedImage/FeaturedImage'
 import style from './Option.scss'
 
 type Props = {
@@ -15,67 +16,74 @@ type Props = {
   isMobile: boolean
 }
 
-const Option = (props: Props) => {
-  const postTypeClassName =
-    props.post.post.post_type === 'literature'
-      ? style.literature
-      : style.chipSample
-
-  const featuredImage =
-    props.post.media.featured_image.constructor === Array ? (
-      <img
-        src={props.post.media.featured_image[0]}
-        className={style.featuredImage}
-      />
+class Option extends React.Component<Props> {
+  renderTitle () {
+    return this.props.post.post.post_title ? (
+      <h5 className={style.title}>{this.props.post.post.post_title}</h5>
     ) : null
+  }
 
-  const title = props.post.post.post_title ? (
-    <h5 className={style.title}>{props.post.post.post_title}</h5>
-  ) : null
+  renderAddButton () {
+    return (
+      <div
+        className={
+          this.props.isMobile ? style.addButton : style.addButtonDesktop
+        }>
+        <AddToOrderButton
+          addToShipment={this.props.addToShipment}
+          addToDownloads={this.props.addToDownloads}
+          isMobile={this.props.isMobile}
+          post={this.props.post}
+        />
+      </div>
+    )
+  }
 
-  const addButton = (
-    <div className={props.isMobile ? style.addButton : style.addButtonDesktop}>
-      <AddToOrderButton
-        addToShipment={props.addToShipment}
-        addToDownloads={props.addToDownloads}
-        isMobile={props.isMobile}
-        post={props.post}
-      />
-    </div>
-  )
-
-  const downloadIcon =
-    props.post.post.post_type === 'literature' ? (
+  renderDownloadIcon () {
+    return this.props.post.post.post_type === 'literature' ? (
       <div className={style.downloadIcon}>
-        <DownloadIcon literature={props.post} isMobile={props.isMobile} />
+        <DownloadIcon
+          literature={this.props.post}
+          isMobile={this.props.isMobile}
+        />
       </div>
     ) : null
+  }
 
-  return props.isMobile ? (
-    <div className={`col1 ${style.option} ${postTypeClassName}`}>
-      <div className={'row'}>
-        <div className={`inline-col4-middle ${style.imgContainer}`}>
-          {featuredImage}
-        </div>
-        <div className={`inline-col4x3-middle ${style.contentContainer}`}>
-          {title}
-          {addButton}
-          {downloadIcon}
-        </div>
-      </div>
-    </div>
-  ) : (
-    <div className={`col2 ${style.option} ${postTypeClassName}`}>
-      <div className={'row'}>
-        <div className={`col4 ${style.imgContainer}`}>{featuredImage}</div>
-        <div className={`col4x3 ${style.contentContainer}`}>
-          {title}
-          {addButton}
-          {downloadIcon}
+  render () {
+    const postTypeClassName =
+      this.props.post.post.post_type === 'literature'
+        ? style.literature
+        : style.chipSample
+
+    return this.props.isMobile ? (
+      <div className={`col1 ${style.option} ${postTypeClassName}`}>
+        <div className={'row'}>
+          <div className={`inline-col4-middle ${style.imgContainer}`}>
+            <FeaturedImage post={this.props.post} />
+          </div>
+          <div className={`inline-col4x3-middle ${style.contentContainer}`}>
+            {this.renderTitle()}
+            {this.renderAddButton()}
+            {this.renderDownloadIcon()}
+          </div>
         </div>
       </div>
-    </div>
-  )
+    ) : (
+      <div className={`col2 ${style.option} ${postTypeClassName}`}>
+        <div className={'row'}>
+          <div className={`col4 ${style.imgContainer}`}>
+            <FeaturedImage post={this.props.post} />
+          </div>
+          <div className={`col4x3 ${style.contentContainer}`}>
+            {this.renderTitle()}
+            {this.renderAddButton()}
+            {this.renderDownloadIcon()}
+          </div>
+        </div>
+      </div>
+    )
+  }
 }
 
 export default Option
