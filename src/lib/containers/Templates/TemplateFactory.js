@@ -67,6 +67,16 @@ const TemplateFactory = (props: Props): React.Node => {
     case 'faq':
       return <FAQTemplate data={props.data} />
 
+    // this isn't technically an option in the drop down
+    // but it looks like it got added when importing the pages
+    case 'left-sidebar':
+      return (
+        <LeftSidebarTemplate
+          data={props.data}
+          renderModules={props.renderModules}
+        />
+      )
+
     case 'default':
       /**
        * Just to reiterate documentation in back end..
