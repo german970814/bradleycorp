@@ -1,0 +1,19 @@
+@import '../../../../../scss/partials/variables';
+@import '../../../../../scss/partials/mixins';
+
+.group {
+  margin-bottom: 20px;
+
+  @include respond-to(tablet) {
+    margin-bottom: 15px;
+  }
+
+  @include respond-to(desktop) {
+    margin-bottom: 20px;
+  }
+
+  .groupTitle {
+    margin-bottom: 10px;
+    color: $navy;
+  }
+}

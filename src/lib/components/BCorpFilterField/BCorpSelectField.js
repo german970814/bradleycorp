@@ -14,7 +14,7 @@ type Props = {
   /**
    * We expect that the state is being managed and updated somewhere higher up the tree
    */
-  filterState: string,
+  filterState: string | number,
   handleChange: (event: SyntheticInputEvent<HTMLSelectElement>) => void,
   title?: string,
   className?: string

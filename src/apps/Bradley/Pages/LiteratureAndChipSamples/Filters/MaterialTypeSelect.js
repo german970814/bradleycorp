@@ -22,7 +22,7 @@ type Props = {
 class MaterialTypeSelect extends React.Component<Props> {
   handleChange (event: SyntheticInputEvent<HTMLSelectElement>) {
     const newFilters = { ...this.props.filters }
-    newFilters.chipSamples.materialType = event.target.value
+    newFilters.chipSamples.materialType = parseInt(event.target.value)
     this.props.updateFilters(newFilters)
   }
 

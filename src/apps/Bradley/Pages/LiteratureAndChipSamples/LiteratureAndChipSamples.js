@@ -25,7 +25,7 @@ type LiteratureFilters = {
 }
 
 type ChipSampleFilters = {
-  materialType: string
+  materialType: number
 }
 
 type FiltersTypes = {
@@ -70,7 +70,7 @@ type State = {
 
 const productLineFilterDefault: string = 'product-line'
 const languageFilterDefault: string = 'language'
-const materialTypeFilterDefault: string = 'material-type'
+const materialTypeFilterDefault: number = 0
 
 class LiteratureAndChipSamples extends React.Component<Props, State> {
   constructor (props: Props) {
