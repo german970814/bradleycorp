@@ -2,10 +2,12 @@
 import * as React from 'react'
 import type { LiteraturePost } from '../../../../../lib/types/cpt_types'
 import type { FiltersTypes } from '../LiteratureAndChipSamples'
+import { languageFilterDefault } from '../LiteratureAndChipSamples'
+import BCorpSelectField from '../../../../../lib/components/BCorpFilterField/BCorpSelectField'
 import style from './Filters.scss'
 
 type Languages = {
-  [number | string]: string
+  [number | string]: ?string
 }
 
 type Props = {
@@ -15,7 +17,7 @@ type Props = {
 }
 
 /**
- * Class responsible for displaying and updating the language filter
+ * Class responsible for getting options for and updating the language filter
  */
 class LanguageSelect extends React.Component<Props> {
   handleChange (event: SyntheticInputEvent<HTMLSelectElement>) {
@@ -24,41 +26,23 @@ class LanguageSelect extends React.Component<Props> {
     this.props.updateFilters(newFilters)
   }
 
-  renderOptions (languages: Languages) {
-    if (
-      !this.props.literature ||
-      !this.props.literature.length ||
-      !Object.keys(languages).length
-    ) {
-      return
-    }
-
-    return Object.keys(languages).map((termId, index) => {
-      return (
-        <option key={index} value={termId}>
-          {languages[termId]}
-        </option>
-      )
-    })
-  }
-
   render () {
-    const languages = this.getLanguages()
+    const languages: Languages = this.getLanguages()
 
     return (
-      <div className={`col2 col4-tablet ${style.select} ${style.language}`}>
-        <h5 className={style.title}>Language</h5>
-        <select
-          value={this.props.filters.literature.language}
-          onChange={this.handleChange.bind(this)}>
-          <option value="language">Language</option>
-          {this.renderOptions(languages)}
-        </select>
-      </div>
+      <BCorpSelectField
+        defaultOptionId={languageFilterDefault}
+        defaultOptionName={'Language'}
+        options={languages}
+        filterState={this.props.filters.literature.language}
+        handleChange={this.handleChange.bind(this)}
+        title={'Language'}
+        className={`col2 col4-tablet ${style.language}`}
+      />
     )
   }
 
-  getLanguages () {
+  getLanguages (): Languages {
     const languages = {}
 
     if (!this.props.literature) {

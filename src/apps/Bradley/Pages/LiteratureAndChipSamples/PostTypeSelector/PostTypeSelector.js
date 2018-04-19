@@ -10,7 +10,7 @@ type Props = {
 
 const PostTypeSelector = (props: Props) => {
   const literatureActive = props.selected === 'literature' ? style.active : ''
-  const chipSamplesActive = props.selected === 'chipSamples' ? style.active : ''
+  const chipSamplesActive = props.selected === 'chip' ? style.active : ''
 
   return (
     <div className={`row ${style.postTypeSelector}`}>
@@ -20,7 +20,7 @@ const PostTypeSelector = (props: Props) => {
         <h6>{'LITERATURE'}</h6>
       </div>
       <div
-        onClick={() => props.updateSelected('chipSamples')}
+        onClick={() => props.updateSelected('chip')}
         className={`col2 ${style.postTypeSelectButton} ${chipSamplesActive}`}>
         <h6>{'CHIP SAMPLES'}</h6>
       </div>

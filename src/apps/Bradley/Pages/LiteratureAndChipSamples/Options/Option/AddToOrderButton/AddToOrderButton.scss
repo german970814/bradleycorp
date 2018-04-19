@@ -1,0 +1,123 @@
+@import '../../../../../../../scss/partials/variables';
+@import '../../../../../../../scss/partials/mixins';
+@import '../../../../../../../scss/partials/buttons';
+
+$addButtonMobileWidth: 30px;
+
+.addButton {
+  position: relative;
+  width: $addButtonMobileWidth;
+  height: $addButtonMobileWidth;
+  background-color: $green;
+
+  .addButtonLines {
+    &:before {
+      position: absolute;
+      content: '';
+      top: 14px;
+      left: 7px;
+      width: 16px;
+      height: 2px;
+      background-color: #fff;
+    }
+
+    &:after {
+      position: absolute;
+      content: '';
+      top: 7px;
+      left: 14px;
+      width: 2px;
+      height: 16px;
+      background-color: #fff;
+    }
+  }
+}
+
+.addButtonDesktop {
+  float: left;
+  width: auto;
+  padding: {
+    left: 17px;
+    right: 17px;
+  }
+
+  @include respond-to(desktop) {
+    // extend button-border-dark-gray
+    border: solid 1px $dark-gray;
+    background-color: transparent;
+    color: $dark-gray;
+
+    &:hover {
+      // extend button
+      border: solid 1px #fff;
+      background-color: $green;
+      color: #ffffff;
+      width: auto;
+      padding: {
+        left: 17px;
+        right: 17px;
+      }
+    }
+  }
+}
+
+.shipmentOrDownloadMobileContainer {
+  position: absolute;
+  top: -14px;
+  right: $addButtonMobileWidth + 20px;
+  padding: 8px;
+  width: 162px;
+  border-radius: 6px;
+  box-shadow: 0px 1px 2.9px 0.1px rgba(0, 0, 0, 0.5);
+  background-color: #fff;
+  border: solid 1px $silver;
+  box-sizing: border-box;
+
+  .relativePosition {
+    position: relative;
+
+    .rightTriangle {
+      position: absolute;
+      top: 13px;
+      right: -15px;
+      display: block;
+      height: 14px;
+      transform: rotate(45deg);
+      width: 14px;
+      box-shadow: 2px -2px 2.9px 0px rgba(0, 0, 0, 0.3);
+      background-color: #fff;
+    }
+  }
+}
+
+.iconButton,
+.iconButton:global(.button-orange) {
+  float: left;
+  position: relative;
+  z-index: 2;
+  padding: 6px 22px;
+  width: 70px;
+  height: 40px;
+
+  &.addToShipment {
+    margin-right: 4px;
+  }
+
+  &.addToDownloads {
+    padding: 8px 22px;
+
+    img {
+      width: auto;
+      height: 100%;
+    }
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.relativePosition {
+  position: relative;
+}

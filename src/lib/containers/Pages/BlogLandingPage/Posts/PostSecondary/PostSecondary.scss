@@ -12,11 +12,11 @@
   }
 
   h5.title {
-    margin-bottom: 7px;
+    margin-bottom: 5px;
     color: $black;
 
     @include respond-to(tablet) {
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
   }
 

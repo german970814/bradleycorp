@@ -2,10 +2,12 @@
 import * as React from 'react'
 import type { LiteraturePost } from '../../../../../lib/types/cpt_types'
 import type { FiltersTypes } from '../LiteratureAndChipSamples'
+import { productLineFilterDefault } from '../LiteratureAndChipSamples'
+import BCorpSelectField from '../../../../../lib/components/BCorpFilterField/BCorpSelectField'
 import style from './Filters.scss'
 
-type ProductLine = {
-  [number | string]: string
+type ProductLines = {
+  [number | string]: ?string
 }
 
 type Props = {
@@ -15,7 +17,7 @@ type Props = {
 }
 
 /**
- * Class responsible for displaying and updating the product line filter
+ * Class responsible for getting options for and updating the product line filter
  */
 class ProductLineSelect extends React.Component<Props> {
   handleChange (event: SyntheticInputEvent<HTMLSelectElement>) {
@@ -24,41 +26,23 @@ class ProductLineSelect extends React.Component<Props> {
     this.props.updateFilters(newFilters)
   }
 
-  renderOptions (productLines: ProductLine) {
-    if (
-      !this.props.literature ||
-      !this.props.literature.length ||
-      !Object.keys(productLines).length
-    ) {
-      return
-    }
-
-    return Object.keys(productLines).map((termId, index) => {
-      return (
-        <option key={index} value={termId}>
-          {productLines[termId]}
-        </option>
-      )
-    })
-  }
-
   render () {
-    const productLines = this.getProductLines()
+    const productLines: ProductLines = this.getProductLines()
 
     return (
-      <div className={`col2 col4-tablet ${style.select} ${style.productLine}`}>
-        <h5 className={style.title}>Product Line</h5>
-        <select
-          value={this.props.filters.literature.productLine}
-          onChange={this.handleChange.bind(this)}>
-          <option value="product-line">Product Line</option>
-          {this.renderOptions(productLines)}
-        </select>
-      </div>
+      <BCorpSelectField
+        defaultOptionId={productLineFilterDefault}
+        defaultOptionName={'Product Line'}
+        options={productLines}
+        filterState={this.props.filters.literature.productLine}
+        handleChange={this.handleChange.bind(this)}
+        title={'Product Line'}
+        className={`col2 col4-tablet ${style.productLine}`}
+      />
     )
   }
 
-  getProductLines () {
+  getProductLines (): ProductLines {
     const productLines = {}
 
     if (!this.props.literature) {

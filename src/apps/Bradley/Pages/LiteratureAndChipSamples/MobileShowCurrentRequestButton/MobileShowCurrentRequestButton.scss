@@ -1,0 +1,39 @@
+@import '../../../../../scss/partials/variables';
+
+$height: 60px;
+
+.mobileShowCurrentRequestButton {
+  position: relative;
+  margin: {
+    left: -$MobileBodyPadding;
+    right: -$MobileBodyPadding;
+    bottom: 30px;
+  }
+  padding: {
+    left: $MobileBodyPadding;
+    right: $MobileBodyPadding;
+  }
+  height: $height;
+  background-color: $gray;
+  text-align: center;
+
+  h6 {
+    line-height: $height;
+    color: #fff;
+  }
+
+  .arrow {
+    position: absolute;
+    top: 19px;
+    width: 12px;
+    height: 21px;
+
+    &.arrowLeft {
+      left: 25px;
+    }
+
+    &.arrowRight {
+      right: 25px;
+    }
+  }
+}

@@ -1,0 +1,97 @@
+@import '../../../../../../scss/partials/variables';
+@import '../../../../../../scss/partials/mixins';
+
+.option {
+  position: relative;
+  margin-bottom: 10px;
+
+  @include respond-to(tablet) {
+    margin-bottom: 30px;
+    padding-right: 6%;
+  }
+
+  @include respond-to(desktop) {
+    &:nth-child(2n) {
+      padding-right: 4%;
+    }
+  }
+
+  .imgContainer {
+    display: inline-block;
+    vertical-align: middle;
+
+    .featuredImage {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .contentContainer {
+    display: inline-block;
+    vertical-align: middle;
+
+    @include respond-to(tablet) {
+      padding-top: 12px;
+      padding-left: 20px;
+    }
+
+    h5.title {
+      margin-left: 10px;
+      padding-right: 90px;
+      color: $black;
+
+      @include respond-to-max(tablet) {
+        font-size: 12px;
+      }
+
+      @include respond-to(tablet) {
+        width: 100%;
+        margin-bottom: 12px;
+        margin-left: 0;
+        padding-right: 0;
+      }
+    }
+
+    .addButton {
+      position: absolute;
+      top: 50%;
+      right: 40px;
+      transform: translateY(-15px);
+    }
+
+    .downloadIcon {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: 19px;
+      height: 30px;
+      transform: translateY(-15px);
+
+      @include respond-to(tablet) {
+        position: static;
+        float: left;
+        margin-left: 20px;
+        transform: translateY(6px);
+      }
+
+      @include respond-to(desktop) {
+        margin-left: 16px;
+      }
+    }
+  }
+}
+
+.option.literature {
+}
+
+.option.chipSample {
+  .contentContainer {
+    h5.title {
+      padding-right: 50px;
+    }
+
+    .addButton {
+      right: 0px;
+    }
+  }
+}

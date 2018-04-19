@@ -1,5 +1,5 @@
 // @flow
-import type { WPPostTagTerm, WPCategoryTerm } from './term_types'
+import type { WPTerm, WPPostTagTerm, WPCategoryTerm } from './term_types'
 
 // TODO: bit of a job, but would be nice to have our type enforce all the usual WP_Post properties
 type WPPost = {
@@ -32,6 +32,7 @@ type BCorpPost = {
   post: WPPost,
   meta: {},
   terms: {
+    [string]: ?Array<WPTerm>,
     post_tag?: Array<WPPostTagTerm>,
     category?: Array<WPCategoryTerm>
   },

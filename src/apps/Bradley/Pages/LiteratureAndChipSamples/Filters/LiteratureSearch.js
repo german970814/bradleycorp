@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react'
 import type { FiltersTypes } from '../LiteratureAndChipSamples'
-import style from './Filters.scss'
+import BCorpSearchField from '../../../../../lib/components/BCorpFilterField/BCorpSearchField'
 
 type Props = {
   filters: FiltersTypes,
@@ -20,19 +20,12 @@ class LiteratureSearch extends React.Component<Props> {
 
   render () {
     return (
-      <div className={`col1 col2-tablet ${style.search}`}>
-        <h5 className={style.title}>Search</h5>
-        <input
-          value={this.props.filters.literature.search}
-          onChange={this.handleChange.bind(this)}
-          type={'text'}
-        />
-        <div className={style.iconContainer}>
-          <img
-            src={require('../../../../../images/magnifying-glass/magnifying-glass-white@2x.png')}
-          />
-        </div>
-      </div>
+      <BCorpSearchField
+        filterState={this.props.filters.literature.search}
+        handleChange={this.handleChange.bind(this)}
+        title={'Search'}
+        className={`col1 col2-tablet`}
+      />
     )
   }
 }

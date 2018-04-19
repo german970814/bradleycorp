@@ -80,6 +80,7 @@ class RecentPostsWidget extends Component<Props, State> {
             className={style.postMeta}
             authorName={post.post['author_display_name']}
             date={post.post['post_date']}
+            format={2}
           />
         </a>
       )

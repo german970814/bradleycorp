@@ -35,7 +35,7 @@ class ModuleBuilder extends Component {
 
   /**
    * Very important... To re run the module build process
-   * you need to unmount and remount the component
+   * you need to unmount and remount this component
    */
   componentDidMount () {
     this.setState({ htmlIsSet: false })

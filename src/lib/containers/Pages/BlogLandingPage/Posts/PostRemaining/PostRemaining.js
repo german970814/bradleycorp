@@ -13,7 +13,7 @@ import style from './PostRemaining.scss'
 
 type Props = {
   post: BCorpPost
-};
+}
 
 class PostRemaining extends Component<Props> {
   renderTitle () {
@@ -34,6 +34,7 @@ class PostRemaining extends Component<Props> {
         className={style.meta}
         authorName={this.props.post.post.author_display_name}
         date={this.props.post.post.post_date}
+        format={1}
       />
     )
   }

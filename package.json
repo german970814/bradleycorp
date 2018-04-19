@@ -40,6 +40,7 @@
     "react-html-parser": "^2.0.2",
     "react-loadable": "^5.3.1",
     "react-media": "^1.6.1",
+    "react-numeric-input": "^2.2.3",
     "react-router-dom": "^4.2.2",
     "react-vimeo": "^2.0.0",
     "react-youtube": "^7.5.0",

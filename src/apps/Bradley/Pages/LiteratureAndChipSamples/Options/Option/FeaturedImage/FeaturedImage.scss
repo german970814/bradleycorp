@@ -1,0 +1,51 @@
+@import '../../../../../../../scss/partials/variables';
+
+.featuredImage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  img {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+  }
+
+  .overlay {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: $navy;
+    opacity: 0.75;
+  }
+
+  .viewIcon {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    width: 22px;
+    height: 13px;
+    transform: translate(-11px, -15px);
+  }
+
+  .view {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    transform: translateY(4px);
+  }
+}
+
+.lightboxImage {
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+}

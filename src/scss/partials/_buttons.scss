@@ -1,0 +1,50 @@
+@import './variables';
+
+%button {
+  border: none;
+  width: 100%;
+  height: $buttonHeight;
+  background-color: $green;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: $CentraleSansPro;
+  font-size: 13px;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  line-height: 42px;
+  outline: none;
+  text-transform: uppercase;
+}
+
+%button-orange {
+  @extend %button;
+  background-color: $orange;
+}
+
+%button-brown {
+  @extend %button;
+  background-color: $brown;
+}
+
+%button-border-slate-grey {
+  @extend %button;
+  border: solid 1px $slate-grey;
+  background-color: transparent;
+  color: $slate-grey;
+}
+
+%button-border-dark-gray {
+  @extend %button;
+  border: solid 1px $dark-gray;
+  background-color: transparent;
+  color: $dark-gray;
+}
+
+%button-border-red {
+  @extend %button;
+  border: solid 1px #e51616;
+  background-color: transparent;
+  color: #e51616;
+}

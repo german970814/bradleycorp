@@ -1,0 +1,18 @@
+@import '../../../../../../../scss/partials/mixins';
+
+.shipmentItem {
+  position: relative;
+  margin-bottom: 10px;
+  padding: 5px 0px;
+
+  .title {
+    padding-right: 110px;
+    box-sizing: border-box;
+  }
+
+  .number {
+    position: absolute;
+    right: 32px;
+    top: 1px;
+  }
+}
