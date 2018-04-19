@@ -58,7 +58,10 @@ class MaterialTypeSelect extends React.Component<Props> {
       }
 
       chipSamples.terms.material_type.forEach(materialType => {
-        if (!Object.keys(materialTypes).includes(materialType.term_id)) {
+        if (
+          !Object.keys(materialTypes).includes(materialType.term_id) &&
+          materialType.parent === 0
+        ) {
           materialTypes[materialType.term_id] = materialType.name
         }
       })
