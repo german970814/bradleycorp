@@ -14,6 +14,7 @@ $iconHeight: 20px;
   h6.blockTitle {
     // should be 10 but we have 3px extra space from the dont style
     margin-bottom: $parentTitleMarginBottom;
+    color: $gray;
 
     &.collapsible {
       margin-right: 40px;

@@ -53,11 +53,9 @@ class LeftSidebarTemplate extends React.Component<Props, State> {
   renderMenuBlocks (collapsible: boolean) {
     return this.state.menuBlocks.map((menuBlock, index) => {
       return (
-        <MenuBlock
-          key={index}
-          blockData={menuBlock}
-          collapsible={collapsible}
-        />
+        <div key={index} className={style.menuBlockWrapper}>
+          <MenuBlock blockData={menuBlock} collapsible={collapsible} />
+        </div>
       )
     })
   }
