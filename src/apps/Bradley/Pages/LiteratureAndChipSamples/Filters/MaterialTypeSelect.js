@@ -1,17 +1,14 @@
 // @flow
 import * as React from 'react'
 import type { ChipSamplePost } from '../../../../../lib/types/cpt_types'
-import type { FiltersTypes } from '../LiteratureAndChipSamples'
+import type { FiltersTypes, MaterialTypes } from '../LiteratureAndChipSamples'
 import { materialTypeFilterDefault } from '../LiteratureAndChipSamples'
 import BCorpSelectField from '../../../../../lib/components/BCorpFilterField/BCorpSelectField'
 import style from './Filters.scss'
 
-type MaterialTypes = {
-  [number | string]: ?string
-}
-
 type Props = {
   chipSamples?: Array<ChipSamplePost>,
+  materialTypes: MaterialTypes,
   filters: FiltersTypes,
   updateFilters: (newFilters: FiltersTypes) => void
 }
@@ -27,47 +24,17 @@ class MaterialTypeSelect extends React.Component<Props> {
   }
 
   render () {
-    const materialTypes: MaterialTypes = this.getMaterialTypes()
-
     return (
       <BCorpSelectField
         defaultOptionId={materialTypeFilterDefault}
         defaultOptionName={'Material Type'}
-        options={materialTypes}
+        options={this.props.materialTypes}
         filterState={this.props.filters.chipSamples.materialType}
         handleChange={this.handleChange.bind(this)}
         title={'Material Type'}
         className={`col4x3 col3-tablet ${style.materialType}`}
       />
     )
-  }
-
-  getMaterialTypes (): MaterialTypes {
-    const materialTypes = {}
-
-    if (!this.props.chipSamples) {
-      return materialTypes
-    }
-
-    this.props.chipSamples.forEach(chipSamples => {
-      if (
-        !chipSamples.terms.material_type ||
-        !chipSamples.terms.material_type.length
-      ) {
-        return
-      }
-
-      chipSamples.terms.material_type.forEach(materialType => {
-        if (
-          !Object.keys(materialTypes).includes(materialType.term_id) &&
-          materialType.parent === 0
-        ) {
-          materialTypes[materialType.term_id] = materialType.name
-        }
-      })
-    })
-
-    return materialTypes
   }
 }
 

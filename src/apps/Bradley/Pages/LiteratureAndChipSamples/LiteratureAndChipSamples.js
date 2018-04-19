@@ -4,6 +4,7 @@ import type {
   LiteraturePost,
   ChipSamplePost
 } from '../../../../lib/types/cpt_types'
+import type { WPMaterialTypeTerm } from '../../../../lib/types/term_types'
 import Media from 'react-media'
 import { MOBILEMAXWIDTH } from '../../../../globals'
 import CPTApiClient from '../../../../api/cpt_client'
@@ -26,6 +27,10 @@ type LiteratureFilters = {
 
 type ChipSampleFilters = {
   materialType: number
+}
+
+type MaterialTypes = {
+  [number | string]: ?string
 }
 
 type FiltersTypes = {
@@ -65,6 +70,7 @@ type State = {
   shipment?: ShipmentTypes,
   downloads?: DownloadTypes,
   selected: PostTypeOptions,
+  materialTypes: MaterialTypes,
   showCurrentRequestMobile: boolean
 }
 
@@ -89,6 +95,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
         }
       },
       selected: 'literature',
+      materialTypes: {},
       showCurrentRequestMobile: false
     }
   }
@@ -226,6 +233,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
         !this.state.options.chipSamples.length)
     ) {
       this.getOptions('chip')
+      this.getMaterialTypes()
     }
   }
 
@@ -238,6 +246,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
         />
         <Filters
           options={this.state.options}
+          materialTypes={this.state.materialTypes}
           filters={this.state.filters}
           selected={this.state.selected}
           updateFilters={this.updateFilters.bind(this)}
@@ -337,6 +346,50 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
     }
   }
 
+  async getMaterialTypes () {
+    try {
+      const client = new CPTApiClient('chip')
+      const response = await client.getTermsByTax('material_type')
+
+      if (!response.data.material_type) {
+        console.warn(
+          'couldnt find material_type tax in chip-terms GET response'
+        )
+        return
+      }
+
+      const materialTypesData: Array<WPMaterialTypeTerm> =
+        response.data.material_type
+
+      return this.setState({
+        materialTypes: this.createMaterialTypesObject(materialTypesData)
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  createMaterialTypesObject (
+    materialTypes: Array<WPMaterialTypeTerm>
+  ): MaterialTypes {
+    const materialTypesObject = {}
+
+    if (!materialTypes) {
+      return materialTypesObject
+    }
+
+    materialTypes.forEach(materialType => {
+      if (
+        !Object.keys(materialTypesObject).includes(materialType.term_id) &&
+        materialType.parent === 0
+      ) {
+        materialTypesObject[materialType.term_id] = materialType.name
+      }
+    })
+
+    return materialTypesObject
+  }
+
   createNewShipmentWithPost (post: LiteraturePost | ChipSamplePost): void {
     const postID = post.post.ID
     const postType = post.post.post_type
@@ -419,5 +472,6 @@ export type {
   ShipmentTypes,
   DownloadTypes,
   ShipmentChipSampleObject,
-  ShipmentLiteratureObject
+  ShipmentLiteratureObject,
+  MaterialTypes
 }

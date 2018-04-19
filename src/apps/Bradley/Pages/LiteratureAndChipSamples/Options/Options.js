@@ -88,7 +88,8 @@ class Options extends React.Component<Props> {
       chipSamples = filterPostsByTerm(
         chipSamples,
         'material_type',
-        this.props.filters.chipSamples.materialType
+        this.props.filters.chipSamples.materialType,
+        true
       )
     }
 

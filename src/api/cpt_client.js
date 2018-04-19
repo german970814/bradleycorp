@@ -68,6 +68,19 @@ class CPTApiClient {
     return axios.get(url, { params })
   }
 
+  getTerms () {
+    const url = `${api.baseURL}${this.cptName}-terms`
+
+    return axios.get(url)
+  }
+
+  getTermsByTax (taxName) {
+    const url = `${api.baseURL}${this.cptName}-terms`
+    const params = { 'tax-name': taxName }
+
+    return axios.get(url, { params })
+  }
+
   get (page = 1) {
     const args = {
       post_type: this.cptName,
@@ -75,12 +88,6 @@ class CPTApiClient {
     }
 
     return api.query({ args })
-  }
-
-  getTerms () {
-    const url = `${api.baseURL}${this.cptName}-terms`
-
-    return api.get(url)
   }
 }
 

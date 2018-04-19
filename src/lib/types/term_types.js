@@ -17,4 +17,6 @@ type WPPostTagTerm = WPTerm & { taxonomy: 'post_tag' }
 
 type WPCategoryTerm = WPTerm & { taxonomy: 'category' }
 
-export type { WPTerm, WPPostTagTerm, WPCategoryTerm }
+type WPMaterialTypeTerm = WPTerm & { taxonomy: 'material_type' }
+
+export type { WPTerm, WPPostTagTerm, WPCategoryTerm, WPMaterialTypeTerm }
