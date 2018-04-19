@@ -18,10 +18,14 @@
 
   .contentBox {
     border: solid 1px $silver;
-    padding: 15px;
+    padding: 10px;
     padding-bottom: 20px;
     box-shadow: 0px 8px 30px 0 rgba(209, 211, 212, 0.59);
     background-color: #fff;
+
+    @include respond-to(tablet) {
+      padding: 15px;
+    }
   }
 
   &:last-child {
