@@ -17,7 +17,8 @@ type Widget = {
     link_text?: string,
     link_url?: string,
     number?: number,
-    blog?: BlogName
+    blog?: BlogName,
+    media?: string
   }
 }
 
