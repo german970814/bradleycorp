@@ -3,6 +3,7 @@ import * as React from 'react'
 import { renderTitle } from '../DefaultTemplate/DefaultTemplate'
 import style from './RightSidebarTemplate.scss'
 import defaultStyle, { titlemarginbottom } from '../Templates.scss'
+import { TABLETMAXWIDTH } from '../../../../globals'
 
 type Props = {
   /**
@@ -63,6 +64,8 @@ class RightSidebarTemplate extends React.Component<Props, State> {
     if (!nextProps.widgetsMoveWithScroll) {
       window.removeEventListener('scroll', this.onScroll.bind(this))
     } else {
+      // will not add a duplicate
+      window.addEventListener('scroll', this.onScroll.bind(this))
       // calling this will work out if we need to set the state back to false or not
       this.onScroll()
     }
@@ -116,6 +119,11 @@ class RightSidebarTemplate extends React.Component<Props, State> {
     const sidebarNode = this.sidebarNode
     const contentNode = this.contentNode
     const titleMarginBottomNumber = this.titleMarginBottom
+
+    if (window.innerWidth <= TABLETMAXWIDTH) {
+      sidebarNode.style.width = '100%'
+      return this.setState({ isSidebarFixed: false })
+    }
 
     const boundingClientRect = sidebarNode.getBoundingClientRect()
     const contentBoundingClientRect = contentNode.getBoundingClientRect()
