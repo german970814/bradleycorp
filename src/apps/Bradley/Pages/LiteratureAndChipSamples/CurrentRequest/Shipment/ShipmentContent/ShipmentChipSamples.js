@@ -22,7 +22,11 @@ type Props = {
 
 class ShipmentChipSamples extends React.Component<Props> {
   renderChipSampleItems () {
-    if (!this.props.shipment || !this.props.shipment.chip) {
+    if (
+      !this.props.shipment ||
+      !this.props.shipment.chip ||
+      !this.props.shipment.chip.length
+    ) {
       return "You haven't added any Chip Samples yet"
     }
 

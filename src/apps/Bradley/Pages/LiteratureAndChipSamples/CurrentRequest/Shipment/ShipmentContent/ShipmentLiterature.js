@@ -22,7 +22,11 @@ type Props = {
 
 class ShipmentLiterature extends React.Component<Props> {
   renderLiteratureItems () {
-    if (!this.props.shipment || !this.props.shipment.literature) {
+    if (
+      !this.props.shipment ||
+      !this.props.shipment.literature ||
+      !this.props.shipment.literature.length
+    ) {
       return "You haven't added any Literature yet"
     }
 
