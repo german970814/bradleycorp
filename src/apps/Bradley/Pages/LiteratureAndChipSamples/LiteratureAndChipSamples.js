@@ -316,6 +316,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
             renderRightSidebarWidgets={() =>
               this.renderRightSidebarWidgets(match)
             }
+            widgetsMoveWithScroll
           />
         )}
       </Media>
