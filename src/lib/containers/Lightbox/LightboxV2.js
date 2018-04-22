@@ -1,9 +1,7 @@
 // @flow
 import * as React from 'react'
 import ReactDOM from 'react-dom'
-import LightboxCloseButton from './LightboxCloseButton'
-import VerticalAlignHelper from '../../components/VerticalAlignHelper/VerticalAlignHelper'
-import style from './Lightbox.scss'
+import style from './LightboxV2.scss'
 
 type Props = {
   renderChildren: (() => void) => React.Node,
@@ -79,12 +77,20 @@ class LightboxV2 extends React.Component<Props, State> {
         <div
           className={`${style.background} ${this.props.backgroundClass || ''}`}
           onClick={this.closeLightbox.bind(this)}>
-          <VerticalAlignHelper />
-
-          <div className={style.lightbox}>
+          <div
+            onClick={e => {
+              e.stopPropagation()
+            }}
+            className={style.lightbox}>
             {this.props.renderLightboxContents()}
-
-            <LightboxCloseButton onClick={this.closeLightbox.bind(this)} />
+          </div>
+          <div
+            className={style.closeButtonWrapper}
+            onClick={this.closeLightbox.bind(this)}>
+            <img
+              className={style.closeButton}
+              src={require('../../../images/icon-close/icon-close@2x.png')}
+            />
           </div>
         </div>,
         lightboxNode
