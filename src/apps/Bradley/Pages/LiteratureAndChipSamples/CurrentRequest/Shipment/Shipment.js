@@ -15,7 +15,6 @@ import ShippingInfo from '../ShippingInfo/ShippingInfo'
 import ShipmentLiterature from './ShipmentLiterature'
 import ShipmentChipSamples from './ShipmentChipSamples'
 import ShipmentLegal from './ShipmentLegal'
-import ShipmentItem from './ShipmentItem/ShipmentItem'
 import style from './Shipment.scss'
 
 type Props = {
@@ -30,40 +29,6 @@ type Props = {
 }
 
 class Shipment extends React.Component<Props> {
-  renderLiteratureItems () {
-    if (!this.props.shipment || !this.props.shipment.literature) {
-      return "You haven't added any Literature yet"
-    }
-
-    return this.props.shipment.literature.map((literature, index) => {
-      return (
-        <ShipmentItem
-          key={index}
-          shipmentObject={literature}
-          removeFromShipment={this.props.removeFromShipment}
-          incrementPostInShipment={this.props.incrementPostInShipment}
-        />
-      )
-    })
-  }
-
-  renderChipSampleItems () {
-    if (!this.props.shipment || !this.props.shipment.chip) {
-      return "You haven't added any Chip Samples yet"
-    }
-
-    return this.props.shipment.chip.map((chipSample, index) => {
-      return (
-        <ShipmentItem
-          key={index}
-          shipmentObject={chipSample}
-          removeFromShipment={this.props.removeFromShipment}
-          incrementPostInShipment={this.props.incrementPostInShipment}
-        />
-      )
-    })
-  }
-
   renderContent () {
     return (
       <div className={style.contentWrapper}>

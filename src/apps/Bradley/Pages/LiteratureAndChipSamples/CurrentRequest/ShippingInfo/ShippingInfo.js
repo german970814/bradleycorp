@@ -15,7 +15,12 @@ class ShippingInfo extends React.Component<Props, State> {
     return (
       <LightboxV2
         renderChildren={openLightbox => {
-          return <ShippingInfoButton onClick={openLightbox} />
+          return (
+            <ShippingInfoButton
+              onClick={openLightbox}
+              text={'ENTER SHIPPING INFO'}
+            />
+          )
         }}
         renderLightboxContents={() => {
           return null
