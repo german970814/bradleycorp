@@ -5,15 +5,22 @@ import type {
   ChipSamplePost,
   PostTypeOptions
 } from '../../../../../../lib/types/cpt_types'
-import type { ShipmentTypes } from '../../LiteratureAndChipSamples'
+import type {
+  ShipmentTypes,
+  ShippingInfoType
+} from '../../LiteratureAndChipSamples'
 import Divider from '../../../../../../lib/components/Divider/Divider'
 import BCorpWidget from '../../../../../../lib/containers/Widgets/BCorpWidget'
+import ShippingInfo from '../ShippingInfo/ShippingInfo'
+import ShipmentLiterature from './ShipmentLiterature'
+import ShipmentChipSamples from './ShipmentChipSamples'
+import ShipmentLegal from './ShipmentLegal'
 import ShipmentItem from './ShipmentItem/ShipmentItem'
-import sharedStyle from '../CurrentRequest.scss'
 import style from './Shipment.scss'
 
 type Props = {
   shipment?: ShipmentTypes,
+  shippingInfo: ShippingInfoType,
   removeFromShipment: (postToRemove: LiteraturePost | ChipSamplePost) => void,
   incrementPostInShipment: (
     idToIncrement: number,
@@ -57,49 +64,26 @@ class Shipment extends React.Component<Props> {
     })
   }
 
-  renderLegal () {
-    return (
-      <div className={style.legalWrapper}>
-        <p className={`legal ${style.legal}`}>
-          {
-            'Note: Most orders ship within 2 business days. Larger orders may require additional processing time.'
-          }
-        </p>
-        <p className={`legal ${style.legal}`}>
-          {'For questions about your order, please contact '}
-          <a href="mailto:litrequest@bradleycorp.com">
-            {'litrequest@bradleycorp.com'}
-          </a>
-        </p>
-        <p className={`legal ${style.legal}`}>
-          {
-            'Please include the order number provided at the end of this transaction.'
-          }
-        </p>
-      </div>
-    )
-  }
-
   renderContent () {
     return (
       <div className={style.contentWrapper}>
-        <h6 className={sharedStyle.title}>Literature</h6>
-        <div className={style.literatureWrapper}>
-          {this.renderLiteratureItems()}
-        </div>
+        <ShipmentLiterature
+          shipment={this.props.shipment}
+          removeFromShipment={this.props.removeFromShipment}
+          incrementPostInShipment={this.props.incrementPostInShipment}
+        />
 
         <Divider className={style.divider} fullWidth />
 
-        <h6 className={sharedStyle.title}>Chip Samples</h6>
-        <div className={style.chipSamplesWrapper}>
-          {this.renderChipSampleItems()}
-        </div>
+        <ShipmentChipSamples
+          shipment={this.props.shipment}
+          removeFromShipment={this.props.removeFromShipment}
+          incrementPostInShipment={this.props.incrementPostInShipment}
+        />
 
-        <div className={style.buttonWrapper}>
-          <button className={style.button}>{'ENTER SHIPPING INFO'}</button>
-        </div>
+        <ShippingInfo shippingInfo={this.props.shippingInfo} />
 
-        {this.renderLegal()}
+        <ShipmentLegal />
       </div>
     )
   }

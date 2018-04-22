@@ -19,6 +19,12 @@ import Filters from './Filters/Filters'
 
 type PostTypeOptions = 'literature' | 'chip'
 
+type MaterialTypes = {
+  [number | string]: ?string
+}
+
+/* Filter Types */
+
 type LiteratureFilters = {
   productLine: string,
   language: string,
@@ -29,19 +35,19 @@ type ChipSampleFilters = {
   materialType: number
 }
 
-type MaterialTypes = {
-  [number | string]: ?string
-}
-
 type FiltersTypes = {
   literature: LiteratureFilters,
   chipSamples: ChipSampleFilters
 }
 
+/* Option Types */
+
 type OptionsTypes = {
   literature?: Array<LiteraturePost>,
   chipSamples?: Array<ChipSamplePost>
 }
+
+/* Shipment Types */
 
 type ShipmentLiteratureObject = {
   num: number,
@@ -60,7 +66,25 @@ type ShipmentTypes = {
   chip?: Array<ShipmentChipSampleObject>
 }
 
+/* Download Types */
+
 type DownloadTypes = Array<LiteraturePost>
+
+/* Shipping Info */
+
+type ShippingInfoType = {
+  fullName?: string,
+  title?: string,
+  companyName?: string,
+  mailingAddress?: string,
+  city?: string,
+  state?: string,
+  postCode?: string,
+  country?: string,
+  email?: string,
+  phone?: string,
+  normallyPurchaseFrom?: string
+}
 
 type Props = {}
 
@@ -69,6 +93,7 @@ type State = {
   filters: FiltersTypes,
   shipment?: ShipmentTypes,
   downloads?: DownloadTypes,
+  shippingInfo: ShippingInfoType,
   selected: PostTypeOptions,
   materialTypes: MaterialTypes,
   showCurrentRequestMobile: boolean
@@ -94,6 +119,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
           materialType: materialTypeFilterDefault
         }
       },
+      shippingInfo: {},
       selected: 'literature',
       materialTypes: {},
       showCurrentRequestMobile: false
@@ -284,6 +310,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
         ) : null}
         <Shipment
           shipment={this.state.shipment}
+          shippingInfo={this.state.shippingInfo}
           removeFromShipment={this.removeFromShipment.bind(this)}
           incrementPostInShipment={this.incrementPostInShipment.bind(this)}
         />
@@ -471,6 +498,7 @@ export type {
   OptionsTypes,
   FiltersTypes,
   ShipmentTypes,
+  ShippingInfoType,
   DownloadTypes,
   ShipmentChipSampleObject,
   ShipmentLiteratureObject,
