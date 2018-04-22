@@ -12,7 +12,7 @@ import type {
 import LightboxV2 from '../../../../../../../lib/containers/Lightbox/LightboxV2'
 import ShipmentContent from '../ShipmentContent/ShipmentContent'
 import ShippingInfoButton from './ShippingInfoButton/ShippingInfoButton'
-import style from './ShippingInfo.scss'
+import ShippingInfoDisplayBox from './ShippingInfoDisplayBox/ShippingInfoDisplayBox'
 
 type Props = {
   shipment?: ShipmentTypes,
@@ -41,19 +41,16 @@ class ShippingInfo extends React.Component<Props, State> {
         }}
         renderLightboxContents={() => {
           return (
-            <div className={style.shippingInfo}>
-              <h5 className={style.title}>{'Please confirm your order'}</h5>
-              <div className={style.contentContainer}>
-                <ShipmentContent
-                  shipment={this.props.shipment}
-                  removeFromShipment={this.props.removeFromShipment}
-                  incrementPostInShipment={this.props.incrementPostInShipment}
-                  renderButton={() => {
-                    return null
-                  }}
-                />
-              </div>
-            </div>
+            <ShippingInfoDisplayBox title={'Please confirm your order'}>
+              <ShipmentContent
+                shipment={this.props.shipment}
+                removeFromShipment={this.props.removeFromShipment}
+                incrementPostInShipment={this.props.incrementPostInShipment}
+                renderButton={() => {
+                  return null
+                }}
+              />
+            </ShippingInfoDisplayBox>
           )
         }}
       />
