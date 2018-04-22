@@ -6,7 +6,7 @@ import type {
   PostTypeOptions
 } from '../../../../../../../lib/types/cpt_types'
 import type { ShipmentTypes } from '../../../LiteratureAndChipSamples'
-import ShipmentItem from '../ShipmentItem/ShipmentItem'
+import ShipmentItem from './ShipmentItem/ShipmentItem'
 import sharedStyle from '../../CurrentRequest.scss'
 import style from './ShipmentContent.scss'
 

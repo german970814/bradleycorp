@@ -10,7 +10,7 @@ import type {
   ShippingInfoType
 } from '../../../LiteratureAndChipSamples'
 import Divider from '../../../../../../../lib/components/Divider/Divider'
-import ShippingInfo from '../../ShippingInfo/ShippingInfo'
+import ShippingInfo from '../ShippingInfo/ShippingInfo'
 import ShipmentLiterature from './ShipmentLiterature'
 import ShipmentChipSamples from './ShipmentChipSamples'
 import ShipmentLegal from './ShipmentLegal'
@@ -18,13 +18,14 @@ import style from './ShipmentContent.scss'
 
 type Props = {
   shipment?: ShipmentTypes,
-  shippingInfo: ShippingInfoType,
+  shippingInfo?: ShippingInfoType,
   removeFromShipment: (postToRemove: LiteraturePost | ChipSamplePost) => void,
   incrementPostInShipment: (
     idToIncrement: number,
     newNumber: number,
     postType: PostTypeOptions
-  ) => void
+  ) => void,
+  renderButton?: () => React.Node
 }
 
 class ShipmentContent extends React.Component<Props> {
@@ -45,7 +46,16 @@ class ShipmentContent extends React.Component<Props> {
           incrementPostInShipment={this.props.incrementPostInShipment}
         />
 
-        <ShippingInfo shippingInfo={this.props.shippingInfo} />
+        {this.props.renderButton ? (
+          this.props.renderButton()
+        ) : (
+          <ShippingInfo
+            shipment={this.props.shipment}
+            shippingInfo={this.props.shippingInfo || {}}
+            removeFromShipment={this.props.removeFromShipment}
+            incrementPostInShipment={this.props.incrementPostInShipment}
+          />
+        )}
 
         <ShipmentLegal />
       </div>
