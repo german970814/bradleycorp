@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react'
-
-import style from './Shipment.scss'
+import style from './ShipmentContent.scss'
 
 const ShipmentLegal = () => {
   return (
