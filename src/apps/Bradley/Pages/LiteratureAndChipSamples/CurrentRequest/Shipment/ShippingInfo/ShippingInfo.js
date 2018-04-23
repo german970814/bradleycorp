@@ -10,9 +10,9 @@ import type {
   ShippingInfoType
 } from '../../../LiteratureAndChipSamples'
 import LightboxV2 from '../../../../../../../lib/containers/Lightbox/LightboxV2/LightboxV2'
+import LightboxTitleBannerContentBox from '../../../../../../../lib/containers/Lightbox/LightboxTitleBannerContentBox/LightboxTitleBannerContentBox'
 import ShipmentContent from '../ShipmentContent/ShipmentContent'
 import ShippingInfoButton from './ShippingInfoButton/ShippingInfoButton'
-import ShippingInfoDisplayBox from './ShippingInfoDisplayBox/ShippingInfoDisplayBox'
 import ShippingInfoForm from './ShippingInfoForm/ShippingInfoForm'
 import style from './ShippingInfo.scss'
 
@@ -48,7 +48,7 @@ class ShippingInfo extends React.Component<Props, State> {
   getContent () {
     if (this.state.stage === 1) {
       return (
-        <ShippingInfoDisplayBox title={'Please confirm your order'}>
+        <LightboxTitleBannerContentBox title={'Please confirm your order'}>
           <ShipmentContent
             shipment={this.props.shipment}
             removeFromShipment={this.props.removeFromShipment}
@@ -65,27 +65,27 @@ class ShippingInfo extends React.Component<Props, State> {
               )
             }}
           />
-        </ShippingInfoDisplayBox>
+        </LightboxTitleBannerContentBox>
       )
     }
 
     if (this.state.stage === 2) {
       return (
-        <ShippingInfoDisplayBox
+        <LightboxTitleBannerContentBox
           title={'Enter your shipping information below.'}>
           <ShippingInfoForm
             shippingInfo={this.props.shippingInfo}
             updateShippingInfo={this.props.updateShippingInfo}
           />
-        </ShippingInfoDisplayBox>
+        </LightboxTitleBannerContentBox>
       )
     }
 
     if (this.state.stage === 3) {
       return (
-        <ShippingInfoDisplayBox title={'Order processed!'}>
+        <LightboxTitleBannerContentBox title={'Order processed!'}>
           <div />
-        </ShippingInfoDisplayBox>
+        </LightboxTitleBannerContentBox>
       )
     }
   }
