@@ -72,18 +72,21 @@ type DownloadTypes = Array<LiteraturePost>
 
 /* Shipping Info */
 
+type ShippingInfoField =
+  | 'fullName'
+  | 'title'
+  | 'companyName'
+  | 'mailingAddress'
+  | 'city'
+  | 'state'
+  | 'postCode'
+  | 'country'
+  | 'email'
+  | 'phone'
+  | 'normallyPurchaseFrom'
+
 type ShippingInfoType = {
-  fullName?: string,
-  title?: string,
-  companyName?: string,
-  mailingAddress?: string,
-  city?: string,
-  state?: string,
-  postCode?: string,
-  country?: string,
-  email?: string,
-  phone?: string,
-  normallyPurchaseFrom?: string
+  [ShippingInfoField]: ?string
 }
 
 type Props = {}
@@ -504,6 +507,7 @@ export type {
   FiltersTypes,
   ShipmentTypes,
   ShippingInfoType,
+  ShippingInfoField,
   DownloadTypes,
   ShipmentChipSampleObject,
   ShipmentLiteratureObject,

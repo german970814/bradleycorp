@@ -1,0 +1,27 @@
+@import '../../../../../../../../scss/partials/mixins';
+
+%colWrapper {
+  margin-bottom: 10px;
+
+  @include respond-to(tablet) {
+    margin-bottom: 14px;
+  }
+}
+
+.shippingInfoForm {
+  .colWrapperLeft {
+    @extend %colWrapper;
+
+    @include respond-to(tablet) {
+      padding-right: 10px;
+    }
+  }
+
+  .colWrapperRight {
+    @extend %colWrapper;
+
+    @include respond-to(tablet) {
+      padding-left: 10px;
+    }
+  }
+}
