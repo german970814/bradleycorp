@@ -84,7 +84,7 @@ class ShippingInfo extends React.Component<Props, State> {
                   updateShippingInfo={this.props.updateShippingInfo}
                   updateStage={this.updateStage.bind(this)}
                   isMobile={this.props.isMobile}
-                  user={user}
+                  user={user.user}
                 />
               )
             }}

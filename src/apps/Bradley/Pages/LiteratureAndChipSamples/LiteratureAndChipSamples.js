@@ -84,9 +84,23 @@ type ShippingInfoField =
   | 'email'
   | 'phone'
   | 'normallyPurchaseFrom'
+  | 'userArea'
+
+type ShippingInfoUserAreaField =
+  | 'overnight'
+  | 'carrier'
+  | 'account'
+  | 'rep'
+  | 'requestEmail'
+  | 'notes'
+
+type ShippingInfoUserAreaType = {
+  [ShippingInfoUserAreaField]: ?string
+}
 
 type ShippingInfoType = {
-  [ShippingInfoField]: ?string
+  [ShippingInfoField]: ?string,
+  userArea: ShippingInfoUserAreaType
 }
 
 type Props = {}
@@ -105,6 +119,7 @@ type State = {
 const productLineFilterDefault: string = 'product-line'
 const languageFilterDefault: string = 'language'
 const materialTypeFilterDefault: number = 0
+const shippingInfoDefault: ShippingInfoType = { userArea: {} }
 
 class LiteratureAndChipSamples extends React.Component<Props, State> {
   constructor (props: Props) {
@@ -122,7 +137,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
           materialType: materialTypeFilterDefault
         }
       },
-      shippingInfo: {},
+      shippingInfo: shippingInfoDefault,
       selected: 'literature',
       materialTypes: {},
       showCurrentRequestMobile: false
@@ -504,6 +519,7 @@ export {
   productLineFilterDefault,
   languageFilterDefault,
   materialTypeFilterDefault,
+  shippingInfoDefault,
   download
 }
 export type {
@@ -513,6 +529,8 @@ export type {
   ShipmentTypes,
   ShippingInfoType,
   ShippingInfoField,
+  ShippingInfoUserAreaField,
+  ShippingInfoUserAreaType,
   DownloadTypes,
   ShipmentChipSampleObject,
   ShipmentLiteratureObject,

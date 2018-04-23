@@ -9,6 +9,7 @@ import type {
   ShipmentTypes,
   ShippingInfoType
 } from '../../../LiteratureAndChipSamples'
+import { shippingInfoDefault } from '../../../LiteratureAndChipSamples'
 import Divider from '../../../../../../../lib/components/Divider/Divider'
 import ShippingInfo from '../ShippingInfo/ShippingInfo'
 import ShipmentLiterature from './ShipmentLiterature'
@@ -53,7 +54,7 @@ class ShipmentContent extends React.Component<Props> {
         ) : (
           <ShippingInfo
             shipment={this.props.shipment}
-            shippingInfo={this.props.shippingInfo || {}}
+            shippingInfo={this.props.shippingInfo || shippingInfoDefault}
             updateShippingInfo={this.props.updateShippingInfo}
             removeFromShipment={this.props.removeFromShipment}
             incrementPostInShipment={this.props.incrementPostInShipment}

@@ -10,4 +10,9 @@ type User =
     }
   | false
 
-export type { User }
+type UserContext = {
+  user: User,
+  updateUser: (user: User) => void
+}
+
+export type { User, UserContext }

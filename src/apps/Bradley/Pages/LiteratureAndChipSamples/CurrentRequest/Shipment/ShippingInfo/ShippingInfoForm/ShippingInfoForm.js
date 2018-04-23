@@ -3,13 +3,16 @@ import * as React from 'react'
 import type { User } from '../../../../../../../../lib/types/user_types'
 import type {
   ShippingInfoType,
-  ShippingInfoField
+  ShippingInfoField,
+  ShippingInfoUserAreaType
 } from '../../../../LiteratureAndChipSamples'
+import { shippingInfoDefault } from '../../../../LiteratureAndChipSamples'
 import type { stageTypes } from '../ShippingInfo'
 import { USStates } from '../../../../../../../../lib/externalConstantData/USStates'
 import { getCountriesForSelectFieldOptions } from '../../../../../../../../lib/externalConstantData/WorldCountries'
 import BCorpSelectField from '../../../../../../../../lib/components/BCorpFilterField/BCorpSelectField'
 import BCorpInputField from '../../../../../../../../lib/components/BCorpFilterField/BCorpInputField'
+import UserArea from './UserArea/UserArea'
 import style from './ShippingInfoForm.scss'
 
 type Props = {
@@ -21,9 +24,20 @@ type Props = {
 }
 
 class ShippingInfoForm extends React.Component<Props> {
-  updateShippingInfoProperty (propertyName: ShippingInfoField, value: string) {
+  updateShippingInfoProperty (
+    propertyName: ShippingInfoField,
+    value: string
+  ): void {
     const newShippingInfo = this.props.shippingInfo
-    newShippingInfo[propertyName] = value
+    if (propertyName !== 'userArea') {
+      newShippingInfo[propertyName] = value
+      return this.props.updateShippingInfo(newShippingInfo)
+    }
+  }
+
+  updateShippingInfoUserArea (newUserArea: ShippingInfoUserAreaType): void {
+    const newShippingInfo = this.props.shippingInfo
+    newShippingInfo.userArea = newUserArea
     return this.props.updateShippingInfo(newShippingInfo)
   }
 
@@ -186,6 +200,14 @@ class ShippingInfoForm extends React.Component<Props> {
           />
         </div>
 
+        <div className={`col1 ${style.userArea}`}>
+          <UserArea
+            user={this.props.user}
+            shippingInfoUserArea={this.props.shippingInfo.userArea || {}}
+            updateUserArea={this.updateShippingInfoUserArea.bind(this)}
+          />
+        </div>
+
         <div className={`col1 ${style.bottomButtons}`}>
           <button
             className={style.submit}
@@ -207,7 +229,7 @@ class ShippingInfoForm extends React.Component<Props> {
               <button
                 className={`button-border-red ${style.clear}`}
                 onClick={() => {
-                  return this.props.updateShippingInfo({})
+                  return this.props.updateShippingInfo(shippingInfoDefault)
                 }}>
                 {'CLEAR FORM'}
               </button>
@@ -217,7 +239,7 @@ class ShippingInfoForm extends React.Component<Props> {
               <button
                 className={`button-border-red ${style.clear}`}
                 onClick={() => {
-                  return this.props.updateShippingInfo({})
+                  return this.props.updateShippingInfo(shippingInfoDefault)
                 }}>
                 {'CLEAR FORM'}
               </button>
