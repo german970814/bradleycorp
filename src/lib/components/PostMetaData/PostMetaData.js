@@ -20,6 +20,7 @@ type Props = {
 
 /**
  * Displays extra post info such as author and date posted.
+ * Can choose between two possible formats for the data.
  */
 const PostMetaData = (props: Props) => {
   if (!props.authorName && !props.date) {
