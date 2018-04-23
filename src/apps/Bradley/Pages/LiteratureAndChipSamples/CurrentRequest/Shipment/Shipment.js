@@ -15,6 +15,7 @@ import ShipmentContent from './ShipmentContent/ShipmentContent'
 type Props = {
   shipment?: ShipmentTypes,
   shippingInfo: ShippingInfoType,
+  updateShippingInfo: (newShippingInfo: ShippingInfoType) => void,
   removeFromShipment: (postToRemove: LiteraturePost | ChipSamplePost) => void,
   incrementPostInShipment: (
     idToIncrement: number,
@@ -33,6 +34,7 @@ class Shipment extends React.Component<Props> {
         <ShipmentContent
           shipment={this.props.shipment}
           shippingInfo={this.props.shippingInfo}
+          updateShippingInfo={this.props.updateShippingInfo}
           removeFromShipment={this.props.removeFromShipment}
           incrementPostInShipment={this.props.incrementPostInShipment}
         />

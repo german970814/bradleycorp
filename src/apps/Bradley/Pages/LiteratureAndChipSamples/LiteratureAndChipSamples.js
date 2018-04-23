@@ -130,6 +130,10 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
     this.getOptions('literature')
   }
 
+  updateShippingInfo (newShippingInfo: ShippingInfoType): void {
+    this.setState({ shippingInfo: newShippingInfo })
+  }
+
   updateShipment (newShipment: ShipmentTypes): void {
     this.setState({ shipment: newShipment })
   }
@@ -311,6 +315,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
         <Shipment
           shipment={this.state.shipment}
           shippingInfo={this.state.shippingInfo}
+          updateShippingInfo={this.updateShippingInfo.bind(this)}
           removeFromShipment={this.removeFromShipment.bind(this)}
           incrementPostInShipment={this.incrementPostInShipment.bind(this)}
         />

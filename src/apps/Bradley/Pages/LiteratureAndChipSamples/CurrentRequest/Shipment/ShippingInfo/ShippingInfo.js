@@ -13,11 +13,13 @@ import LightboxV2 from '../../../../../../../lib/containers/Lightbox/LightboxV2'
 import ShipmentContent from '../ShipmentContent/ShipmentContent'
 import ShippingInfoButton from './ShippingInfoButton/ShippingInfoButton'
 import ShippingInfoDisplayBox from './ShippingInfoDisplayBox/ShippingInfoDisplayBox'
+import ShippingInfoForm from './ShippingInfoForm/ShippingInfoForm'
 import style from './ShippingInfo.scss'
 
 type Props = {
   shipment?: ShipmentTypes,
   shippingInfo: ShippingInfoType,
+  updateShippingInfo: (newShippingInfo: ShippingInfoType) => void,
   removeFromShipment: (postToRemove: LiteraturePost | ChipSamplePost) => void,
   incrementPostInShipment: (
     idToIncrement: number,
@@ -51,6 +53,7 @@ class ShippingInfo extends React.Component<Props, State> {
             shipment={this.props.shipment}
             removeFromShipment={this.props.removeFromShipment}
             incrementPostInShipment={this.props.incrementPostInShipment}
+            updateShippingInfo={this.props.updateShippingInfo}
             renderButton={() => {
               return (
                 <ShippingInfoButton
@@ -70,7 +73,10 @@ class ShippingInfo extends React.Component<Props, State> {
       return (
         <ShippingInfoDisplayBox
           title={'Enter your shipping information below.'}>
-          <div />
+          <ShippingInfoForm
+            shippingInfo={this.props.shippingInfo}
+            updateShippingInfo={this.props.updateShippingInfo}
+          />
         </ShippingInfoDisplayBox>
       )
     }

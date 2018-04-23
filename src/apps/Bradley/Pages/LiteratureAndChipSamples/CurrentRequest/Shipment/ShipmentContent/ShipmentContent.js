@@ -19,6 +19,7 @@ import style from './ShipmentContent.scss'
 type Props = {
   shipment?: ShipmentTypes,
   shippingInfo?: ShippingInfoType,
+  updateShippingInfo: (newShippingInfo: ShippingInfoType) => void,
   removeFromShipment: (postToRemove: LiteraturePost | ChipSamplePost) => void,
   incrementPostInShipment: (
     idToIncrement: number,
@@ -52,6 +53,7 @@ class ShipmentContent extends React.Component<Props> {
           <ShippingInfo
             shipment={this.props.shipment}
             shippingInfo={this.props.shippingInfo || {}}
+            updateShippingInfo={this.props.updateShippingInfo}
             removeFromShipment={this.props.removeFromShipment}
             incrementPostInShipment={this.props.incrementPostInShipment}
           />
