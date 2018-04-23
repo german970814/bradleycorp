@@ -22,7 +22,9 @@ type Props = {
    * Can pass a listener to lightbox close event
    */
   onLightboxClose?: () => void,
-  fitLightboxToContent?: boolean
+  fitLightboxToContent?: boolean,
+  fullWidth?: boolean,
+  maxWidth?: string
 }
 
 type State = {
@@ -90,18 +92,23 @@ class LightboxV2 extends React.Component<Props, State> {
       ? style.fitLightboxToContent
       : ''
 
+    const fullWidthClass = this.props.fullWidth ? style.fullWidth : ''
+
     if (this.state.isOpen) {
       return ReactDOM.createPortal(
         <div
           className={`${style.background} ${this.props.backgroundClass ||
-            ''} ${fitToContentClass || ''}`}
+            ''} ${fitToContentClass || ''} ${fullWidthClass || ''}`}
           onClick={this.closeLightbox.bind(this)}>
-          <div className={style.lightboxWrapper}>
+          <div className={`lightbox-wrapper ${style.lightboxWrapper}`}>
             <div
               onClick={e => {
                 e.stopPropagation()
               }}
-              className={style.lightbox}>
+              style={{
+                maxWidth: this.props.maxWidth
+              }}
+              className={`lightbox ${style.lightbox}`}>
               {this.props.renderLightboxContents()}
               {this.renderCloseButton()}
             </div>
