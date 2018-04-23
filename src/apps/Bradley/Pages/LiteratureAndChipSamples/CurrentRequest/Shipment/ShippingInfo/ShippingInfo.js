@@ -25,7 +25,8 @@ type Props = {
     idToIncrement: number,
     newNumber: number,
     postType: PostTypeOptions
-  ) => void
+  ) => void,
+  isMobile: boolean
 }
 
 type stageTypes = 1 | 2 | 3
@@ -64,6 +65,7 @@ class ShippingInfo extends React.Component<Props, State> {
                 />
               )
             }}
+            isMobile={this.props.isMobile}
           />
         </LightboxTitleBannerContentBox>
       )
@@ -76,6 +78,8 @@ class ShippingInfo extends React.Component<Props, State> {
           <ShippingInfoForm
             shippingInfo={this.props.shippingInfo}
             updateShippingInfo={this.props.updateShippingInfo}
+            updateStage={this.updateStage.bind(this)}
+            isMobile={this.props.isMobile}
           />
         </LightboxTitleBannerContentBox>
       )
@@ -124,3 +128,4 @@ class ShippingInfo extends React.Component<Props, State> {
 }
 
 export default ShippingInfo
+export type { stageTypes }

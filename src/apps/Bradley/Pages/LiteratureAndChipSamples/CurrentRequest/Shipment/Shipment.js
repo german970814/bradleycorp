@@ -21,7 +21,8 @@ type Props = {
     idToIncrement: number,
     newNumber: number,
     postType: PostTypeOptions
-  ) => void
+  ) => void,
+  isMobile: boolean
 }
 
 class Shipment extends React.Component<Props> {
@@ -37,6 +38,7 @@ class Shipment extends React.Component<Props> {
           updateShippingInfo={this.props.updateShippingInfo}
           removeFromShipment={this.props.removeFromShipment}
           incrementPostInShipment={this.props.incrementPostInShipment}
+          isMobile={this.props.isMobile}
         />
       </BCorpWidget>
     )

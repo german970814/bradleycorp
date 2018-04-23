@@ -321,6 +321,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
           updateShippingInfo={this.updateShippingInfo.bind(this)}
           removeFromShipment={this.removeFromShipment.bind(this)}
           incrementPostInShipment={this.incrementPostInShipment.bind(this)}
+          isMobile={isMobile}
         />
         <Downloads
           downloads={this.state.downloads}
@@ -331,9 +332,13 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
   }
 
   renderContent (isMobile: boolean) {
-    return this.state.showCurrentRequestMobile
-      ? this.renderCurrentRequest(isMobile)
-      : this.renderOptions(isMobile)
+    if (isMobile) {
+      return this.state.showCurrentRequestMobile
+        ? this.renderCurrentRequest(isMobile)
+        : this.renderOptions(isMobile)
+    } else {
+      return this.renderOptions(isMobile)
+    }
   }
 
   renderRightSidebarWidgets (isMobile: boolean) {

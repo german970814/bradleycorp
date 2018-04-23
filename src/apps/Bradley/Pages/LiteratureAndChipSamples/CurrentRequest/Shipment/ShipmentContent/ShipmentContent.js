@@ -26,7 +26,8 @@ type Props = {
     newNumber: number,
     postType: PostTypeOptions
   ) => void,
-  renderButton?: () => React.Node
+  renderButton?: () => React.Node,
+  isMobile: boolean
 }
 
 class ShipmentContent extends React.Component<Props> {
@@ -56,6 +57,7 @@ class ShipmentContent extends React.Component<Props> {
             updateShippingInfo={this.props.updateShippingInfo}
             removeFromShipment={this.props.removeFromShipment}
             incrementPostInShipment={this.props.incrementPostInShipment}
+            isMobile={this.props.isMobile}
           />
         )}
 

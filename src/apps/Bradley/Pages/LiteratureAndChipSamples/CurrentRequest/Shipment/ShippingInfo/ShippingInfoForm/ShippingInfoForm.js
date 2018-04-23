@@ -4,13 +4,18 @@ import type {
   ShippingInfoType,
   ShippingInfoField
 } from '../../../../LiteratureAndChipSamples'
+import type { stageTypes } from '../ShippingInfo'
+import { USStates } from '../../../../../../../../lib/externalConstantData/USStates'
+import { getCountriesForSelectFieldOptions } from '../../../../../../../../lib/externalConstantData/WorldCountries'
 import BCorpSelectField from '../../../../../../../../lib/components/BCorpFilterField/BCorpSelectField'
 import BCorpInputField from '../../../../../../../../lib/components/BCorpFilterField/BCorpInputField'
 import style from './ShippingInfoForm.scss'
 
 type Props = {
   shippingInfo: ShippingInfoType,
-  updateShippingInfo: (newShippingInfo: ShippingInfoType) => void
+  updateShippingInfo: (newShippingInfo: ShippingInfoType) => void,
+  updateStage: (newStage: stageTypes) => void,
+  isMobile: boolean
 }
 
 class ShippingInfoForm extends React.Component<Props> {
@@ -22,7 +27,7 @@ class ShippingInfoForm extends React.Component<Props> {
 
   render () {
     return (
-      <div className={style.shippingInfoForm}>
+      <div className={`row ${style.shippingInfoForm}`}>
         <div
           className={`col1 col2-tablet ${style.colWrapperLeft} ${
             style.inputWrapper
@@ -102,7 +107,7 @@ class ShippingInfoForm extends React.Component<Props> {
             style.colWrapperRight
           }`}>
           <BCorpSelectField
-            className={`col1 col2-tablet`}
+            className={`col1 col2-tablet ${style.selectField}`}
             defaultOptionId={0}
             defaultOptionName={'State / Province'}
             options={this.getStateProvinceOptions()}
@@ -115,17 +120,125 @@ class ShippingInfoForm extends React.Component<Props> {
             }}
           />
         </div>
+
+        <div className={'col1'}>
+          <div className={`row ${style.inputWrapper}`}>
+            <div className={`col1 col2-tablet ${style.colWrapperLeft}`}>
+              <BCorpInputField
+                className={`col2`}
+                filterState={this.props.shippingInfo.postCode || ''}
+                handleChange={event => {
+                  return this.updateShippingInfoProperty(
+                    'postCode',
+                    event.target.value
+                  )
+                }}
+                placeholder={'Postal Code'}
+              />
+              <BCorpSelectField
+                className={`col2 ${style.selectField} ${style.country}`}
+                defaultOptionId={0}
+                defaultOptionName={'Country'}
+                options={this.getCountryOptions()}
+                filterState={this.props.shippingInfo.country || 0}
+                handleChange={event => {
+                  return this.updateShippingInfoProperty(
+                    'country',
+                    event.target.value
+                  )
+                }}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div
+          className={`col1 col2-tablet ${style.inputWrapper} ${
+            style.colWrapperLeft
+          }`}>
+          <BCorpInputField
+            filterState={this.props.shippingInfo.email || ''}
+            handleChange={event => {
+              return this.updateShippingInfoProperty(
+                'email',
+                event.target.value
+              )
+            }}
+            placeholder={'Email Address'}
+          />
+        </div>
+
+        <div
+          className={`col1 col2-tablet ${style.inputWrapper} ${
+            style.colWrapperRight
+          }`}>
+          <BCorpInputField
+            filterState={this.props.shippingInfo.phone || ''}
+            handleChange={event => {
+              return this.updateShippingInfoProperty(
+                'phone',
+                event.target.value
+              )
+            }}
+            placeholder={'Phone Number 123-456-7890'}
+          />
+        </div>
+
+        <div className={`col1 ${style.bottomButtons}`}>
+          <button
+            className={style.submit}
+            onClick={() => {
+              return this.props.updateStage(3)
+            }}>
+            {'SUBMIT ORDER'}
+          </button>
+          {/* Need to switch button order on mobile */}
+          {this.props.isMobile ? (
+            <React.Fragment>
+              <button
+                className={`button-border-steel-grey ${style.back}`}
+                onClick={() => {
+                  return this.props.updateStage(1)
+                }}>
+                {'GO BACK'}
+              </button>
+              <button
+                className={`button-border-red ${style.clear}`}
+                onClick={() => {
+                  return this.props.updateShippingInfo({})
+                }}>
+                {'CLEAR FORM'}
+              </button>
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <button
+                className={`button-border-red ${style.clear}`}
+                onClick={() => {
+                  return this.props.updateShippingInfo({})
+                }}>
+                {'CLEAR FORM'}
+              </button>
+              <button
+                className={`button-border-steel-grey ${style.back}`}
+                onClick={() => {
+                  return this.props.updateStage(1)
+                }}>
+                {'GO BACK'}
+              </button>
+            </React.Fragment>
+          )}
+        </div>
       </div>
     )
   }
 
   getStateProvinceOptions () {
-    return {
-      '1': 'New York State',
-      '2': 'Ohio',
-      '3': 'California',
-      '4': 'Florida'
-    }
+    return USStates
+  }
+
+  getCountryOptions () {
+    return getCountriesForSelectFieldOptions()
   }
 }
 
