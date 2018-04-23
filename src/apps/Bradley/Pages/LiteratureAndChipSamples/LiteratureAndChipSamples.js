@@ -83,10 +83,10 @@ type ShippingInfoField =
   | 'country'
   | 'email'
   | 'phone'
-  | 'normallyPurchaseFrom'
   | 'userArea'
 
 type ShippingInfoUserAreaField =
+  | 'normallyPurchaseFrom'
   | 'overnight'
   | 'carrier'
   | 'account'
@@ -95,7 +95,8 @@ type ShippingInfoUserAreaField =
   | 'notes'
 
 type ShippingInfoUserAreaType = {
-  [ShippingInfoUserAreaField]: ?string
+  [ShippingInfoUserAreaField]: ?string,
+  normallyPurchaseFrom?: Array<string>
 }
 
 type ShippingInfoType = {

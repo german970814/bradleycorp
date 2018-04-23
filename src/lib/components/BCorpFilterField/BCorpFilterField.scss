@@ -167,3 +167,31 @@ h5.title {
     }
   }
 }
+
+.checkbox {
+  .checkboxOption {
+    position: relative;
+
+    input {
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      border: 1px $silver solid;
+      border-radius: 4px;
+      width: 12px;
+      height: 12px;
+      margin: 0;
+      margin-right: 9px;
+
+      &:checked:before {
+        content: '';
+        background: black;
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        left: 3px;
+        top: 5px;
+        border-radius: 2px;
+      }
+    }
+  }
+}
