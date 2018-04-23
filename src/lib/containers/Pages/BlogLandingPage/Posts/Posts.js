@@ -1,5 +1,5 @@
 // @flow
-import React, { Fragment } from 'react'
+import * as React from 'react'
 import type { BCorpPost } from '../../../../types/post_types'
 import Media from 'react-media'
 import { MOBILEMAXWIDTH } from '../../../../../globals'
@@ -13,7 +13,7 @@ type Props = {
   data: Array<BCorpPost>
 }
 
-const Posts = (props: Props) => {
+const Posts: React.StatelessFunctionalComponent<Props> = (props: Props) => {
   const posts = props.data
 
   return posts.map((post: BCorpPost, index: number) => {
@@ -21,34 +21,34 @@ const Posts = (props: Props) => {
   })
 }
 
-function getPostElement (post: BCorpPost, index: number) {
+function getPostElement (post: BCorpPost, index: number): React.Node {
   if (index === 0) {
     return <PostPrimary key={index} post={post} />
   } else if (index === 1) {
     return (
-      <Fragment key={index}>
+      <React.Fragment key={index}>
         <Divider className={`col1 ${style.divider}`} fullWidth />
         <PostSecondary post={post} />
-      </Fragment>
+      </React.Fragment>
     )
   } else if (index === 2) {
     return <PostSecondary key={index} post={post} />
   } else if (index === 3) {
     return (
-      <Fragment key={index}>
+      <React.Fragment key={index}>
         <Divider className={`col1 ${style.divider}`} fullWidth />
         <PostRemaining post={post} />
-      </Fragment>
+      </React.Fragment>
     )
   } else {
     return (
       <Media key={index} query={{ maxWidth: MOBILEMAXWIDTH }}>
         {match =>
           match ? (
-            <Fragment>
+            <React.Fragment>
               <Divider className={`col1 ${style.divider}`} fullWidth />
               <PostRemaining post={post} />
-            </Fragment>
+            </React.Fragment>
           ) : (
             <PostRemaining post={post} />
           )
