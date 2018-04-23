@@ -1,0 +1,19 @@
+@import '../../../../../../../../../scss/partials/text-styles';
+@import '../../../../../../../../../scss/partials/variables';
+
+.normallyPurchaseFrom {
+  margin-bottom: 30px;
+
+  .checkboxField {
+    :global(.checkbox-title) {
+      @extend %body;
+      padding-bottom: 15px;
+      font-weight: bold;
+      color: $black;
+    }
+
+    .checkboxOption {
+      margin-bottom: 10px;
+    }
+  }
+}

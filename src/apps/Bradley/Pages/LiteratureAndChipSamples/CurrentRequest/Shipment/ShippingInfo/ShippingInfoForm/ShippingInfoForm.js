@@ -187,7 +187,7 @@ class ShippingInfoForm extends React.Component<Props> {
         <div
           className={`col1 col2-tablet ${style.inputWrapper} ${
             style.colWrapperRight
-          }`}>
+          } ${style.phone}`}>
           <BCorpInputField
             filterState={this.props.shippingInfo.phone || ''}
             handleChange={event => {

@@ -24,6 +24,14 @@
     @include respond-to(tablet) {
       padding-left: 10px;
     }
+
+    &.phone {
+      margin-bottom: 30px;
+
+      @include respond-to(tablet) {
+        margin-bottom: 40px;
+      }
+    }
   }
 
   .selectField {

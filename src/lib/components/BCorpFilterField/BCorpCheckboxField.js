@@ -49,9 +49,6 @@ class BCorpCheckboxField extends React.Component<Props> {
             key={index}
             className={`checkbox-option ${this.props
               .checkboxOptionClassName || ''} ${style.checkboxOption}`}>
-            <div className={style.checkboxBox}>
-              <div className={style.checkboxBoxInner} />
-            </div>
             <input
               onChange={this.handleChange.bind(this)}
               type="checkbox"
@@ -68,7 +65,9 @@ class BCorpCheckboxField extends React.Component<Props> {
     return (
       <div className={`${style.checkbox} ${this.props.className || ''}`}>
         {this.props.title ? (
-          <h5 className={style.title}>{this.props.title}</h5>
+          <h5 className={`checkbox-title ${style.title}`}>
+            {this.props.title}
+          </h5>
         ) : null}
         {this.renderOptions()}
       </div>
