@@ -4,7 +4,7 @@ import type {
   LiteraturePost,
   ChipSamplePost
 } from '../../../../../../../lib/types/cpt_types'
-import LightboxV2 from '../../../../../../../lib/containers/Lightbox/LightboxV2'
+import LightboxV2 from '../../../../../../../lib/containers/Lightbox/LightboxV2/LightboxV2'
 import style from './FeaturedImage.scss'
 
 type Props = {

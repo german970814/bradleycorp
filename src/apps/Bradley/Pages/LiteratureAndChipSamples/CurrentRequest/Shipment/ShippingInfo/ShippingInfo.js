@@ -9,7 +9,7 @@ import type {
   ShipmentTypes,
   ShippingInfoType
 } from '../../../LiteratureAndChipSamples'
-import LightboxV2 from '../../../../../../../lib/containers/Lightbox/LightboxV2'
+import LightboxV2 from '../../../../../../../lib/containers/Lightbox/LightboxV2/LightboxV2'
 import ShipmentContent from '../ShipmentContent/ShipmentContent'
 import ShippingInfoButton from './ShippingInfoButton/ShippingInfoButton'
 import ShippingInfoDisplayBox from './ShippingInfoDisplayBox/ShippingInfoDisplayBox'
