@@ -21,7 +21,8 @@ type Props = {
   /**
    * Can pass a listener to lightbox close event
    */
-  onLightboxClose?: () => void
+  onLightboxClose?: () => void,
+  fitLightboxToContent?: boolean
 }
 
 type State = {
@@ -64,6 +65,19 @@ class LightboxV2 extends React.Component<Props, State> {
     })
   }
 
+  renderCloseButton () {
+    return (
+      <div
+        className={style.closeButtonWrapper}
+        onClick={this.closeLightbox.bind(this)}>
+        <img
+          className={style.closeButton}
+          src={require('../../../images/icon-close/icon-close@2x.png')}
+        />
+      </div>
+    )
+  }
+
   renderLightbox () {
     const lightboxNode = document.getElementById('lightbox')
 
@@ -72,25 +86,25 @@ class LightboxV2 extends React.Component<Props, State> {
       return
     }
 
+    const fitToContentClass = this.props.fitLightboxToContent
+      ? style.fitLightboxToContent
+      : ''
+
     if (this.state.isOpen) {
       return ReactDOM.createPortal(
         <div
-          className={`${style.background} ${this.props.backgroundClass || ''}`}
+          className={`${style.background} ${this.props.backgroundClass ||
+            ''} ${fitToContentClass || ''}`}
           onClick={this.closeLightbox.bind(this)}>
-          <div
-            onClick={e => {
-              e.stopPropagation()
-            }}
-            className={style.lightbox}>
-            {this.props.renderLightboxContents()}
-          </div>
-          <div
-            className={style.closeButtonWrapper}
-            onClick={this.closeLightbox.bind(this)}>
-            <img
-              className={style.closeButton}
-              src={require('../../../images/icon-close/icon-close@2x.png')}
-            />
+          <div className={style.lightboxWrapper}>
+            <div
+              onClick={e => {
+                e.stopPropagation()
+              }}
+              className={style.lightbox}>
+              {this.props.renderLightboxContents()}
+              {this.renderCloseButton()}
+            </div>
           </div>
         </div>,
         lightboxNode

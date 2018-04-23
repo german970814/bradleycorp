@@ -1,8 +1,10 @@
 @import '../../../../../../../../scss/partials/variables';
+@import '../../../../../../../../lib/containers/Lightbox/LightboxV2';
 
 .shippingInfo {
   width: 100%;
   height: 100%;
+  max-height: $lightboxHeight + vh;
   overflow-y: scroll;
   background-color: #fff;
   text-align: left;

@@ -13,6 +13,7 @@ import LightboxV2 from '../../../../../../../lib/containers/Lightbox/LightboxV2'
 import ShipmentContent from '../ShipmentContent/ShipmentContent'
 import ShippingInfoButton from './ShippingInfoButton/ShippingInfoButton'
 import ShippingInfoDisplayBox from './ShippingInfoDisplayBox/ShippingInfoDisplayBox'
+import style from './ShippingInfo.scss'
 
 type Props = {
   shipment?: ShipmentTypes,
@@ -95,11 +96,12 @@ class ShippingInfo extends React.Component<Props, State> {
           )
         }}
         renderLightboxContents={() => {
-          return <React.Fragment>{this.getContent()}</React.Fragment>
+          return <div className={style.shippingInfo}>{this.getContent()}</div>
         }}
         onLightboxClose={() => {
           return this.updateStage(1)
         }}
+        fitLightboxToContent
       />
     )
   }
