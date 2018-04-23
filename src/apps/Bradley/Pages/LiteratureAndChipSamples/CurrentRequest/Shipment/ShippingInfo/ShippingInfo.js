@@ -25,9 +25,64 @@ type Props = {
   ) => void
 }
 
-type State = {}
+type stageTypes = 1 | 2 | 3
+
+type State = {
+  stage: stageTypes
+}
 
 class ShippingInfo extends React.Component<Props, State> {
+  constructor (props: Props) {
+    super(props)
+
+    this.state = { stage: 1 }
+  }
+
+  updateStage (newStage: stageTypes): void {
+    this.setState({ stage: newStage })
+  }
+
+  getContent () {
+    if (this.state.stage === 1) {
+      return (
+        <ShippingInfoDisplayBox title={'Please confirm your order'}>
+          <ShipmentContent
+            shipment={this.props.shipment}
+            removeFromShipment={this.props.removeFromShipment}
+            incrementPostInShipment={this.props.incrementPostInShipment}
+            renderButton={() => {
+              return (
+                <ShippingInfoButton
+                  onClick={() => {
+                    return this.updateStage(2)
+                  }}
+                  text={'CONFIRM & PROCEED'}
+                />
+              )
+            }}
+          />
+        </ShippingInfoDisplayBox>
+      )
+    }
+
+    if (this.state.stage === 2) {
+      return (
+        <ShippingInfoDisplayBox
+          title={'Enter your shipping information below.'}>
+          <div />
+        </ShippingInfoDisplayBox>
+      )
+    }
+
+    if (this.state.stage === 3) {
+      return (
+        <ShippingInfoDisplayBox title={'Order processed!'}>
+          <div />
+        </ShippingInfoDisplayBox>
+      )
+    }
+  }
+
   render () {
     return (
       <LightboxV2
@@ -40,18 +95,10 @@ class ShippingInfo extends React.Component<Props, State> {
           )
         }}
         renderLightboxContents={() => {
-          return (
-            <ShippingInfoDisplayBox title={'Please confirm your order'}>
-              <ShipmentContent
-                shipment={this.props.shipment}
-                removeFromShipment={this.props.removeFromShipment}
-                incrementPostInShipment={this.props.incrementPostInShipment}
-                renderButton={() => {
-                  return null
-                }}
-              />
-            </ShippingInfoDisplayBox>
-          )
+          return <React.Fragment>{this.getContent()}</React.Fragment>
+        }}
+        onLightboxClose={() => {
+          return this.updateStage(1)
         }}
       />
     )
