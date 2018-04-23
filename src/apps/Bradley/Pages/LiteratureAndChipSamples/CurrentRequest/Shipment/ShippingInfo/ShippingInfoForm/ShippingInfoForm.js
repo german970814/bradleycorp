@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react'
+import type { User } from '../../../../../../../../lib/types/user_types'
 import type {
   ShippingInfoType,
   ShippingInfoField
@@ -15,7 +16,8 @@ type Props = {
   shippingInfo: ShippingInfoType,
   updateShippingInfo: (newShippingInfo: ShippingInfoType) => void,
   updateStage: (newStage: stageTypes) => void,
-  isMobile: boolean
+  isMobile: boolean,
+  user: User
 }
 
 class ShippingInfoForm extends React.Component<Props> {

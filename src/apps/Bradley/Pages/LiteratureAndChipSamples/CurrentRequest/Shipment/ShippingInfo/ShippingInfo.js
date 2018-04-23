@@ -9,6 +9,7 @@ import type {
   ShipmentTypes,
   ShippingInfoType
 } from '../../../LiteratureAndChipSamples'
+import { UserConsumer } from '../../../../../../../lib/contexts/UserContext'
 import LightboxV2 from '../../../../../../../lib/containers/Lightbox/LightboxV2/LightboxV2'
 import LightboxTitleBannerContentBox from '../../../../../../../lib/containers/Lightbox/LightboxTitleBannerContentBox/LightboxTitleBannerContentBox'
 import ShipmentContent from '../ShipmentContent/ShipmentContent'
@@ -75,12 +76,19 @@ class ShippingInfo extends React.Component<Props, State> {
       return (
         <LightboxTitleBannerContentBox
           title={'Enter your shipping information below.'}>
-          <ShippingInfoForm
-            shippingInfo={this.props.shippingInfo}
-            updateShippingInfo={this.props.updateShippingInfo}
-            updateStage={this.updateStage.bind(this)}
-            isMobile={this.props.isMobile}
-          />
+          <UserConsumer>
+            {user => {
+              return (
+                <ShippingInfoForm
+                  shippingInfo={this.props.shippingInfo}
+                  updateShippingInfo={this.props.updateShippingInfo}
+                  updateStage={this.updateStage.bind(this)}
+                  isMobile={this.props.isMobile}
+                  user={user}
+                />
+              )
+            }}
+          </UserConsumer>
         </LightboxTitleBannerContentBox>
       )
     }
