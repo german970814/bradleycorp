@@ -78,7 +78,7 @@ type ShippingInfoField =
   | 'companyName'
   | 'mailingAddress'
   | 'city'
-  | 'state'
+  | 'stateProvince'
   | 'postCode'
   | 'country'
   | 'email'

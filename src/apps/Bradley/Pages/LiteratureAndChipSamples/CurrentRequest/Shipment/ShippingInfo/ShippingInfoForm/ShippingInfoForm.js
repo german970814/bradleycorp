@@ -4,7 +4,7 @@ import type {
   ShippingInfoType,
   ShippingInfoField
 } from '../../../../LiteratureAndChipSamples'
-// import BCorpSelectField from '../../../../../../../../lib/components/BCorpFilterField/BCorpSelectField'
+import BCorpSelectField from '../../../../../../../../lib/components/BCorpFilterField/BCorpSelectField'
 import BCorpInputField from '../../../../../../../../lib/components/BCorpFilterField/BCorpInputField'
 import style from './ShippingInfoForm.scss'
 
@@ -25,7 +25,7 @@ class ShippingInfoForm extends React.Component<Props> {
       <div className={style.shippingInfoForm}>
         <div
           className={`col1 col2-tablet ${style.colWrapperLeft} ${
-            style.fullNameWrapper
+            style.inputWrapper
           }`}>
           <BCorpInputField
             filterState={this.props.shippingInfo.fullName || ''}
@@ -41,7 +41,7 @@ class ShippingInfoForm extends React.Component<Props> {
 
         <div
           className={`col1 col2-tablet ${style.colWrapperRight} ${
-            style.titleWrapper
+            style.inputWrapper
           }`}>
           <BCorpInputField
             className={`col1 col2-tablet`}
@@ -56,7 +56,7 @@ class ShippingInfoForm extends React.Component<Props> {
           />
         </div>
 
-        <div className={`col1 ${style.titleWrapper}`}>
+        <div className={`col1 ${style.inputWrapper}`}>
           <BCorpInputField
             className={`col1 col2-tablet ${style.colWrapperLeft}`}
             filterState={this.props.shippingInfo.companyName || ''}
@@ -70,7 +70,7 @@ class ShippingInfoForm extends React.Component<Props> {
           />
         </div>
 
-        <div className={`col1 ${style.titleWrapper}`}>
+        <div className={`col1 ${style.inputWrapper}`}>
           <BCorpInputField
             className={`col1 col2-tablet ${style.colWrapperLeft}`}
             filterState={this.props.shippingInfo.mailingAddress || ''}
@@ -83,8 +83,49 @@ class ShippingInfoForm extends React.Component<Props> {
             placeholder={'Mailing Address'}
           />
         </div>
+
+        <div
+          className={`col1 col2-tablet ${style.inputWrapper} ${
+            style.colWrapperLeft
+          }`}>
+          <BCorpInputField
+            filterState={this.props.shippingInfo.city || ''}
+            handleChange={event => {
+              return this.updateShippingInfoProperty('city', event.target.value)
+            }}
+            placeholder={'City'}
+          />
+        </div>
+
+        <div
+          className={`col1 col2-tablet ${style.inputWrapper} ${
+            style.colWrapperRight
+          }`}>
+          <BCorpSelectField
+            className={`col1 col2-tablet`}
+            defaultOptionId={0}
+            defaultOptionName={'State / Province'}
+            options={this.getStateProvinceOptions()}
+            filterState={this.props.shippingInfo.stateProvince || 0}
+            handleChange={event => {
+              return this.updateShippingInfoProperty(
+                'stateProvince',
+                event.target.value
+              )
+            }}
+          />
+        </div>
       </div>
     )
+  }
+
+  getStateProvinceOptions () {
+    return {
+      '1': 'New York State',
+      '2': 'Ohio',
+      '3': 'California',
+      '4': 'Florida'
+    }
   }
 }
 
