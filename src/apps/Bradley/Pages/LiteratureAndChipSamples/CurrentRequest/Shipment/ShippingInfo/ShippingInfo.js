@@ -90,6 +90,14 @@ class ShippingInfo extends React.Component<Props, State> {
     }
   }
 
+  getMaxWidth () {
+    // max width includes lightbox padding
+    if (this.state.stage === 2) {
+      return '800px'
+    }
+    return '370px'
+  }
+
   render () {
     return (
       <LightboxV2
@@ -108,6 +116,8 @@ class ShippingInfo extends React.Component<Props, State> {
           return this.updateStage(1)
         }}
         fitLightboxToContent
+        fullWidth={this.state.stage === 2}
+        maxWidth={this.getMaxWidth()}
       />
     )
   }
