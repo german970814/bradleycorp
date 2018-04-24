@@ -154,7 +154,8 @@ h5.title {
 .input {
   width: 100%;
 
-  input {
+  input,
+  textarea {
     @extend %body;
     border: 1px solid $silver;
     padding: 0 10px;
