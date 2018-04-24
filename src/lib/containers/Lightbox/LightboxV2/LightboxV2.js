@@ -1,6 +1,8 @@
 // @flow
 import * as React from 'react'
 import ReactDOM from 'react-dom'
+import type { UpdateBlurType } from '../../../contexts/BlurContext'
+import { BlurConsumer } from '../../../contexts/BlurContext'
 import style from './LightboxV2.scss'
 
 type Props = {
@@ -103,11 +105,14 @@ class LightboxV2 extends React.Component<Props, State> {
     })
   }
 
-  renderCloseButton () {
+  renderCloseButton (updateBlur: UpdateBlurType) {
     return (
       <div
         className={style.closeButtonWrapper}
-        onClick={this.closeLightbox.bind(this)}>
+        onClick={() => {
+          updateBlur(false)
+          this.closeLightbox()
+        }}>
         <img
           className={style.closeButton}
           src={require('../../../../images/icon-close/icon-close@2x.png')}
@@ -116,7 +121,7 @@ class LightboxV2 extends React.Component<Props, State> {
     )
   }
 
-  renderLightbox () {
+  renderLightbox (updateBlur: UpdateBlurType) {
     const lightboxNode = document.getElementById('lightbox')
 
     if (!lightboxNode) {
@@ -135,7 +140,10 @@ class LightboxV2 extends React.Component<Props, State> {
         <div
           className={`${style.background} ${this.props.backgroundClass ||
             ''} ${fitToContentClass || ''} ${fullWidthClass || ''}`}
-          onClick={this.closeLightbox.bind(this)}>
+          onClick={() => {
+            updateBlur(false)
+            this.closeLightbox()
+          }}>
           <div className={`lightbox-wrapper ${style.lightboxWrapper}`}>
             <div
               onClick={e => {
@@ -146,7 +154,7 @@ class LightboxV2 extends React.Component<Props, State> {
               }}
               className={`lightbox ${style.lightbox}`}>
               {this.props.renderLightboxContents()}
-              {this.renderCloseButton()}
+              {this.renderCloseButton(updateBlur)}
             </div>
           </div>
         </div>,
@@ -157,10 +165,19 @@ class LightboxV2 extends React.Component<Props, State> {
 
   render () {
     return (
-      <React.Fragment>
-        {this.props.renderChildren(this.openLightbox.bind(this))}
-        {this.renderLightbox()}
-      </React.Fragment>
+      <BlurConsumer>
+        {({ isBlurred, updateBlur }) => {
+          return (
+            <React.Fragment>
+              {this.props.renderChildren(() => {
+                updateBlur(true)
+                this.openLightbox()
+              })}
+              {this.renderLightbox(updateBlur)}
+            </React.Fragment>
+          )
+        }}
+      </BlurConsumer>
     )
   }
 }

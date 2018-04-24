@@ -1,7 +1,9 @@
 // @flow
 import * as React from 'react'
-import type { User } from '../../../lib/types/user_types'
 import { site } from '../../../api'
+import type { User } from '../../../lib/types/user_types'
+import type { UpdateBlurType } from '../../../lib/contexts/BlurContext'
+import type { UpdateUserType } from '../../../lib/contexts/UserContext'
 import { UserProvider } from '../../../lib/contexts/UserContext'
 import { BlurProvider } from '../../../lib/contexts/BlurContext'
 import Header from '../Header/Header'
@@ -15,9 +17,9 @@ type Props = {}
 
 type State = {
   isBlurred: boolean,
-  updateBlur: (isBlurred: boolean) => void,
+  updateBlur: UpdateBlurType,
   user: User,
-  updateUser: (user: User) => void
+  updateUser: UpdateUserType
 }
 
 class App extends React.Component<Props, State> {

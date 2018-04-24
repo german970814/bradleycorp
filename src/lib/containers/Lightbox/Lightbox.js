@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
+import { BlurConsumer } from '../../contexts/BlurContext'
 import VerticalAlignHelper from '../../components/VerticalAlignHelper/VerticalAlignHelper'
 import LightboxCloseButton from './LightboxCloseButton'
 import style from './Lightbox.scss'
@@ -44,12 +45,15 @@ class Lightbox extends Component {
     })
   }
 
-  renderChildrenWithLightboxAPI () {
+  renderChildrenWithLightboxAPI (updateBlur) {
     const lightboxChildStyle = { cursor: 'zoom-in' }
     const childrenWithAPI = React.Children.map(this.props.children, child => {
       return React.cloneElement(child, {
         style: { ...child.props.style, ...lightboxChildStyle },
-        onClick: this.toggleOpen.bind(this)
+        onClick: () => {
+          updateBlur(true)
+          this.openLightbox()
+        }
       })
     })
 
@@ -68,18 +72,26 @@ class Lightbox extends Component {
     return children[children.length - 1]
   }
 
-  renderLightbox () {
+  renderLightbox (updateBlur) {
     if (this.state.isOpen) {
       return ReactDOM.createPortal(
         <div
           className={[style.background, this.props.backgroundClass].join(' ')}
-          onClick={this.closeLightbox.bind(this)}>
+          onClick={() => {
+            updateBlur(false)
+            this.closeLightbox()
+          }}>
           <VerticalAlignHelper />
 
           <div className={style.lightbox}>
             {this.getLightboxContent()}
 
-            <LightboxCloseButton onClick={this.closeLightbox.bind(this)} />
+            <LightboxCloseButton
+              onClick={() => {
+                updateBlur(false)
+                this.closeLightbox()
+              }}
+            />
           </div>
         </div>,
         document.getElementById('lightbox')
@@ -89,10 +101,16 @@ class Lightbox extends Component {
 
   render () {
     return (
-      <div className={style.childWrapper}>
-        {this.renderChildrenWithLightboxAPI()}
-        {this.renderLightbox()}
-      </div>
+      <BlurConsumer>
+        {({ isBlurred, updateBlur }) => {
+          return (
+            <div className={style.childWrapper}>
+              {this.renderChildrenWithLightboxAPI(updateBlur)}
+              {this.renderLightbox(updateBlur)}
+            </div>
+          )
+        }}
+      </BlurConsumer>
     )
   }
 }
