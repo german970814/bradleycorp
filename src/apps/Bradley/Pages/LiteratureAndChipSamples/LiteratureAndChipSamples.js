@@ -97,7 +97,8 @@ type ShippingInfoUserAreaField =
 
 type ShippingInfoUserAreaType = {
   [ShippingInfoUserAreaField]: ?string,
-  normallyPurchaseFrom?: CheckboxObject
+  normallyPurchaseFrom?: CheckboxObject,
+  overnight?: CheckboxObject
 }
 
 type ShippingInfoType = {

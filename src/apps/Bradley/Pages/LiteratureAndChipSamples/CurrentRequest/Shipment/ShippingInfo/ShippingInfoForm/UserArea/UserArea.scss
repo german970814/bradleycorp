@@ -1,7 +1,9 @@
 @import '../../../../../../../../../scss/partials/text-styles';
 @import '../../../../../../../../../scss/partials/variables';
+@import '../../../../../../../../../scss/partials/mixins';
+@import '../ShippingInfoForm';
 
-.normallyPurchaseFrom {
+.userArea {
   margin-bottom: 30px;
 
   .checkboxField {
@@ -19,5 +21,42 @@
     .other {
       margin-bottom: 0px;
     }
+  }
+
+  .checkboxFieldOvernight {
+    margin-bottom: 30px;
+
+    @include respond-to(tablet) {
+      margin-bottom: 15px;
+    }
+
+    label {
+      color: $black;
+      font-weight: bold;
+    }
+
+    p {
+      margin: 0;
+      margin-top: 18px;
+      color: $steel-grey;
+
+      @include respond-to(tablet) {
+        margin-top: 0px;
+        padding-left: 10px;
+      }
+
+      a {
+        color: $navy;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .carrier {
+    @extend %colWrapper;
+  }
+
+  .repSelect {
+    @extend %colWrapper;
   }
 }
