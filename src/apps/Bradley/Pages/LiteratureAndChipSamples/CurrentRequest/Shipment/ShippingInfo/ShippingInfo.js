@@ -7,7 +7,8 @@ import type {
 } from '../../../../../../../lib/types/cpt_types'
 import type {
   ShipmentTypes,
-  ShippingInfoType
+  ShippingInfoType,
+  ShippingInfoField
 } from '../../../LiteratureAndChipSamples'
 import { UserConsumer } from '../../../../../../../lib/contexts/UserContext'
 import LightboxV2 from '../../../../../../../lib/containers/Lightbox/LightboxV2/LightboxV2'
@@ -34,18 +35,43 @@ type Props = {
 type stageTypes = 1 | 2 | 3
 
 type State = {
-  stage: stageTypes
+  stage: stageTypes,
+  highlightRequiredFields: boolean
 }
 
 class ShippingInfo extends React.Component<Props, State> {
+  requiredFields: Array<ShippingInfoField>
+
   constructor (props: Props) {
     super(props)
 
-    this.state = { stage: 1 }
+    this.state = { stage: 1, highlightRequiredFields: false }
+
+    this.requiredFields = [
+      'fullName',
+      'title',
+      'mailingAddress',
+      'city',
+      'stateProvince',
+      'postCode',
+      'country',
+      'email'
+    ]
   }
 
   updateStage (newStage: stageTypes): void {
+    if (newStage === 2) {
+      this.setState({ highlightRequiredFields: false })
+    }
     this.setState({ stage: newStage })
+  }
+
+  sendOrder (): void {
+    if (this.validateForm()) {
+      return this.setState({ stage: 3 })
+    } else {
+      return this.setState({ highlightRequiredFields: true })
+    }
   }
 
   getContent () {
@@ -84,6 +110,9 @@ class ShippingInfo extends React.Component<Props, State> {
                   shippingInfo={this.props.shippingInfo}
                   updateShippingInfo={this.props.updateShippingInfo}
                   updateStage={this.updateStage.bind(this)}
+                  sendOrder={this.sendOrder.bind(this)}
+                  requiredFields={this.requiredFields}
+                  highlightRequiredFields={this.state.highlightRequiredFields}
                   isMobile={this.props.isMobile}
                   user={user.user}
                 />
@@ -133,6 +162,12 @@ class ShippingInfo extends React.Component<Props, State> {
         maxWidth={this.getMaxWidth()}
       />
     )
+  }
+
+  validateForm () {
+    return this.requiredFields.every(requiredField => {
+      return !!this.props.shippingInfo[requiredField]
+    })
   }
 }
 

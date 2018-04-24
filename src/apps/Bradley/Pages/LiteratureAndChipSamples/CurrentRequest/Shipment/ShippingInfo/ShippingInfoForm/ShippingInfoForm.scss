@@ -56,6 +56,12 @@
     }
   }
 
+  .mailingAddress {
+    &::after {
+      right: 20px;
+    }
+  }
+
   .bottomButtons {
     button {
       @include respond-to(tablet) {
@@ -82,4 +88,8 @@
       }
     }
   }
+}
+
+.highlightRequired {
+  border: 1px solid $red !important;
 }

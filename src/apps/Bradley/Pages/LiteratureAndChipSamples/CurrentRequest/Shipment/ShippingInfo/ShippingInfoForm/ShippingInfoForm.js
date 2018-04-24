@@ -18,6 +18,9 @@ type Props = {
   shippingInfo: ShippingInfoType,
   updateShippingInfo: (newShippingInfo: ShippingInfoType) => void,
   updateStage: (newStage: stageTypes) => void,
+  sendOrder: () => void,
+  requiredFields: Array<ShippingInfoField>,
+  highlightRequiredFields: boolean,
   isMobile: boolean,
   user: User
 }
@@ -40,6 +43,20 @@ class ShippingInfoForm extends React.Component<Props> {
     return this.props.updateShippingInfo(newShippingInfo)
   }
 
+  isRequired (fieldName: ShippingInfoField) {
+    return this.props.requiredFields.includes(fieldName)
+  }
+
+  requiredHighlightClass (fieldName: ShippingInfoField) {
+    if (!this.props.highlightRequiredFields) {
+      return ''
+    } else {
+      return this.isRequired(fieldName) && !this.props.shippingInfo[fieldName]
+        ? style.highlightRequired
+        : ''
+    }
+  }
+
   render () {
     return (
       <div className={`row ${style.shippingInfoForm}`}>
@@ -48,6 +65,7 @@ class ShippingInfoForm extends React.Component<Props> {
             style.inputWrapper
           }`}>
           <BCorpInputField
+            className={this.requiredHighlightClass('fullName')}
             filterState={this.props.shippingInfo.fullName || ''}
             handleChange={event => {
               return this.updateShippingInfoProperty(
@@ -56,6 +74,7 @@ class ShippingInfoForm extends React.Component<Props> {
               )
             }}
             placeholder={'Full Name'}
+            required={this.isRequired('fullName')}
           />
         </div>
 
@@ -64,7 +83,9 @@ class ShippingInfoForm extends React.Component<Props> {
             style.inputWrapper
           }`}>
           <BCorpInputField
-            className={`col1 col2-tablet`}
+            className={`col1 col2-tablet ${this.requiredHighlightClass(
+              'title'
+            )}`}
             filterState={this.props.shippingInfo.title || ''}
             handleChange={event => {
               return this.updateShippingInfoProperty(
@@ -73,12 +94,15 @@ class ShippingInfoForm extends React.Component<Props> {
               )
             }}
             placeholder={'Title'}
+            required={this.isRequired('title')}
           />
         </div>
 
         <div className={`col1 ${style.inputWrapper}`}>
           <BCorpInputField
-            className={`col1 col2-tablet ${style.colWrapperLeft}`}
+            className={`col1 col2-tablet ${
+              style.colWrapperLeft
+            } ${this.requiredHighlightClass('companyName')}`}
             filterState={this.props.shippingInfo.companyName || ''}
             handleChange={event => {
               return this.updateShippingInfoProperty(
@@ -87,12 +111,17 @@ class ShippingInfoForm extends React.Component<Props> {
               )
             }}
             placeholder={'Company Name'}
+            required={this.isRequired('companyName')}
           />
         </div>
 
         <div className={`col1 ${style.inputWrapper}`}>
           <BCorpInputField
-            className={`col1 col2-tablet ${style.colWrapperLeft}`}
+            className={`col1 col2-tablet ${
+              style.colWrapperLeft
+            } ${this.requiredHighlightClass('mailingAddress')} ${
+              style.mailingAddress
+            }`}
             filterState={this.props.shippingInfo.mailingAddress || ''}
             handleChange={event => {
               return this.updateShippingInfoProperty(
@@ -101,6 +130,7 @@ class ShippingInfoForm extends React.Component<Props> {
               )
             }}
             placeholder={'Mailing Address'}
+            required={this.isRequired('mailingAddress')}
           />
         </div>
 
@@ -109,12 +139,13 @@ class ShippingInfoForm extends React.Component<Props> {
             style.colWrapperLeft
           }`}>
           <BCorpInputField
+            className={this.requiredHighlightClass('city')}
             filterState={this.props.shippingInfo.city || ''}
             handleChange={event => {
               return this.updateShippingInfoProperty('city', event.target.value)
             }}
             placeholder={'City'}
-            required
+            required={this.isRequired('city')}
           />
         </div>
 
@@ -123,7 +154,9 @@ class ShippingInfoForm extends React.Component<Props> {
             style.colWrapperRight
           }`}>
           <BCorpSelectField
-            className={`col1 col2-tablet ${style.selectField}`}
+            className={`col1 col2-tablet ${
+              style.selectField
+            } ${this.requiredHighlightClass('stateProvince')}`}
             defaultOptionId={0}
             defaultOptionName={'State / Province'}
             options={this.getStateProvinceOptions()}
@@ -141,7 +174,7 @@ class ShippingInfoForm extends React.Component<Props> {
           <div className={`row ${style.inputWrapper}`}>
             <div className={`col1 col2-tablet ${style.colWrapperLeft}`}>
               <BCorpInputField
-                className={`col2`}
+                className={`col2 ${this.requiredHighlightClass('postCode')}`}
                 filterState={this.props.shippingInfo.postCode || ''}
                 handleChange={event => {
                   return this.updateShippingInfoProperty(
@@ -150,9 +183,12 @@ class ShippingInfoForm extends React.Component<Props> {
                   )
                 }}
                 placeholder={'Postal Code'}
+                required={this.isRequired('postCode')}
               />
               <BCorpSelectField
-                className={`col2 ${style.selectField} ${style.country}`}
+                className={`col2 ${style.selectField} ${
+                  style.country
+                } ${this.requiredHighlightClass('country')}`}
                 defaultOptionId={0}
                 defaultOptionName={'Country'}
                 options={this.getCountryOptions()}
@@ -173,6 +209,7 @@ class ShippingInfoForm extends React.Component<Props> {
             style.colWrapperLeft
           }`}>
           <BCorpInputField
+            className={this.requiredHighlightClass('email')}
             filterState={this.props.shippingInfo.email || ''}
             handleChange={event => {
               return this.updateShippingInfoProperty(
@@ -181,6 +218,7 @@ class ShippingInfoForm extends React.Component<Props> {
               )
             }}
             placeholder={'Email Address'}
+            required={this.isRequired('email')}
           />
         </div>
 
@@ -189,6 +227,7 @@ class ShippingInfoForm extends React.Component<Props> {
             style.colWrapperRight
           } ${style.phone}`}>
           <BCorpInputField
+            className={this.requiredHighlightClass('phone')}
             filterState={this.props.shippingInfo.phone || ''}
             handleChange={event => {
               return this.updateShippingInfoProperty(
@@ -197,6 +236,7 @@ class ShippingInfoForm extends React.Component<Props> {
               )
             }}
             placeholder={'Phone Number 123-456-7890'}
+            required={this.isRequired('phone')}
           />
         </div>
 
@@ -212,7 +252,7 @@ class ShippingInfoForm extends React.Component<Props> {
           <button
             className={style.submit}
             onClick={() => {
-              return this.props.updateStage(3)
+              return this.props.sendOrder()
             }}>
             {'SUBMIT ORDER'}
           </button>
