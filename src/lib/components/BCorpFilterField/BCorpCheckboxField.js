@@ -31,7 +31,7 @@ type Props = {
    * Should be an object with string: string pair attributes.
    * First string is value, second is label.
    */
-  options?: Options,
+  options: Options,
   title?: string,
   className?: string,
   checkboxOptionClassName?: string,
@@ -123,28 +123,33 @@ class BCorpCheckboxField extends React.Component<Props> {
   }
 
   renderOptions () {
-    return this.props.options
-      ? Object.keys(this.props.options).map((optionName, index) => {
-        const label =
-            this.props.options && this.props.options[optionName]
-              ? this.props.options[optionName]
-              : ''
+    return Object.keys(this.props.options).map((optionName, index) => {
+      const checked =
+        this.props.filterState &&
+        this.props.filterState.checkboxes &&
+        this.props.filterState.checkboxes.length &&
+        this.props.filterState.checkboxes.includes(optionName)
 
-        return (
-          <div
-            key={index}
-            className={`checkbox-option ${this.props
-              .checkboxOptionClassName || ''} ${style.checkboxOption}`}>
-            <input
-              onChange={this.handleChange.bind(this)}
-              type="checkbox"
-              value={optionName}
-            />
-            <label htmlFor={optionName}>{label}</label>
-          </div>
-        )
-      })
-      : null
+      const label =
+        this.props.options && this.props.options[optionName]
+          ? this.props.options[optionName]
+          : ''
+
+      return (
+        <div
+          key={index}
+          className={`checkbox-option ${this.props.checkboxOptionClassName ||
+            ''} ${style.checkboxOption}`}>
+          <input
+            onChange={this.handleChange.bind(this)}
+            type="checkbox"
+            value={optionName}
+            checked={checked || false}
+          />
+          <label htmlFor={optionName}>{label}</label>
+        </div>
+      )
+    })
   }
 
   render () {
