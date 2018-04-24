@@ -23,7 +23,7 @@ $tabletGapBetweenFilters: 24px;
 %downArrow {
   content: '';
   position: absolute;
-  top: 50%;
+  bottom: 36px;
   right: 20px;
   width: 0;
   height: 0;
@@ -36,7 +36,7 @@ $tabletGapBetweenFilters: 24px;
 %upArrow {
   content: '';
   position: absolute;
-  top: 50%;
+  bottom: 36px;
   right: 20px;
   width: 0;
   height: 0;

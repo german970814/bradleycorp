@@ -57,8 +57,10 @@
   }
 
   .mailingAddress {
-    &::after {
-      right: 20px;
+    @include respond-to(tablet) {
+      &::after {
+        right: 20px;
+      }
     }
   }
 
