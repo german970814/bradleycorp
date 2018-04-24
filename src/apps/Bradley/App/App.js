@@ -31,14 +31,14 @@ class App extends React.Component<Props, State> {
       updateBlur: (isBlurred: boolean): void => {
         this.setState({ isBlurred })
       },
-      /* user: {
+      user: {
         id: 1,
         firstName: 'matt',
         lastName: 'wills',
         userName: 'mattwills',
         permissions: {}
-      }, */
-      user: false,
+      },
+      // user: false,
       updateUser: (user: User): void => {
         this.setState({ user })
       }

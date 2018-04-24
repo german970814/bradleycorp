@@ -17,7 +17,8 @@ type Props = {
   filterState: string | number,
   handleChange: (event: SyntheticInputEvent<HTMLSelectElement>) => void,
   title?: string,
-  className?: string
+  className?: string,
+  required?: boolean
 }
 
 /**
@@ -45,6 +46,14 @@ class BCorpSelectField extends React.Component<Props> {
   }
 
   render () {
+    const requiredClassName =
+      this.props.required &&
+      (!this.props.filterState ||
+        this.props.filterState === '' ||
+        this.props.filterState === 0)
+        ? style.required
+        : ''
+
     return (
       <div className={`${this.props.className || ''} ${style.select}`}>
         {this.props.title ? (
@@ -58,6 +67,9 @@ class BCorpSelectField extends React.Component<Props> {
           </option>
           {this.renderOptions()}
         </select>
+        {requiredClassName !== '' ? (
+          <div className={requiredClassName} />
+        ) : null}
       </div>
     )
   }

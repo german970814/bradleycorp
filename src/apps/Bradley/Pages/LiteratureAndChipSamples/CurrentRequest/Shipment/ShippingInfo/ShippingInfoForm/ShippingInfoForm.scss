@@ -91,5 +91,8 @@
 }
 
 .highlightRequired {
-  border: 1px solid $red !important;
+  input,
+  select {
+    border: 1px solid $red !important;
+  }
 }

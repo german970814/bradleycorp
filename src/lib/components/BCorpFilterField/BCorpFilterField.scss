@@ -52,7 +52,7 @@ $tabletGapBetweenFilters: 24px;
   &::after {
     @extend %post-meta-data;
     position: absolute;
-    content: '*Required Field';
+    content: '*Required';
     right: 10px;
     bottom: 13px;
     color: $red;
@@ -98,6 +98,14 @@ h5.title {
       right: ($tabletGapBetweenFilters / 2) + 10px;
       top: unset;
       bottom: 16px;
+    }
+  }
+
+  .required {
+    @extend %required;
+
+    &::after {
+      content: '*';
     }
   }
 }

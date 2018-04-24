@@ -167,6 +167,7 @@ class ShippingInfoForm extends React.Component<Props> {
                 event.target.value
               )
             }}
+            required={this.isRequired('stateProvince')}
           />
         </div>
 
@@ -199,6 +200,7 @@ class ShippingInfoForm extends React.Component<Props> {
                     event.target.value
                   )
                 }}
+                required={this.isRequired('country')}
               />
             </div>
           </div>
