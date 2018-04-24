@@ -5,6 +5,7 @@ import type {
   ChipSamplePost
 } from '../../../../lib/types/cpt_types'
 import type { WPMaterialTypeTerm } from '../../../../lib/types/term_types'
+import type { CheckboxObject } from '../../../../lib/components/BCorpFilterField/BCorpCheckboxField'
 import Media from 'react-media'
 import { MOBILEMAXWIDTH } from '../../../../globals'
 import CPTApiClient from '../../../../api/cpt_client'
@@ -96,7 +97,7 @@ type ShippingInfoUserAreaField =
 
 type ShippingInfoUserAreaType = {
   [ShippingInfoUserAreaField]: ?string,
-  normallyPurchaseFrom?: Array<string>
+  normallyPurchaseFrom?: CheckboxObject
 }
 
 type ShippingInfoType = {

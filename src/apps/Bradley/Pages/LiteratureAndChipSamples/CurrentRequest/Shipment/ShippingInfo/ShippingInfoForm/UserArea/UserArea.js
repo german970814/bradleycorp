@@ -2,7 +2,9 @@
 import * as React from 'react'
 import type { User } from '../../../../../../../../../lib/types/user_types'
 import type { ShippingInfoUserAreaType } from '../../../../../LiteratureAndChipSamples'
+import type { CheckboxObject } from '../../../../../../../../../lib/components/BCorpFilterField/BCorpCheckboxField'
 import BCorpCheckboxField from '../../../../../../../../../lib/components/BCorpFilterField/BCorpCheckboxField'
+import sharedStyle from '../ShippingInfoForm.scss'
 import style from './UserArea.scss'
 
 type Props = {
@@ -13,7 +15,7 @@ type Props = {
 
 class UserArea extends React.Component<Props> {
   handleNormallyPurchaseFromChange (
-    newNormallyPurchaseFrom: Array<string>
+    newNormallyPurchaseFrom: CheckboxObject
   ): void {
     const userArea = this.props.shippingInfoUserArea
     userArea.normallyPurchaseFrom = newNormallyPurchaseFrom
@@ -25,14 +27,22 @@ class UserArea extends React.Component<Props> {
       <div className={`col1 ${style.normallyPurchaseFrom}`}>
         <BCorpCheckboxField
           title={'I Normally Purchase From:'}
-          className={`col1 col4x3-tablet ${style.checkboxField}`}
+          className={`col1 col4x3-desktop ${style.checkboxField}`}
           checkboxOptionClassName={`col1 col3-tablet ${style.checkboxOption}`}
+          otherCheckboxClassName={`col2-tablet ${sharedStyle.colWrapperLeft} ${
+            style.other
+          }`}
           filterState={this.props.shippingInfoUserArea.normallyPurchaseFrom}
           handleChange={this.handleNormallyPurchaseFromChange.bind(this)}
           options={{
             div10: 'Div 10 Distributor',
-            foodService: 'Food Service Distributor'
+            foodService: 'Food Service Distributor',
+            plumbing: 'Plumbing Wholesaler',
+            safetyIndMRO: 'Safety/Industrial/MRO',
+            janSan: 'Jan/San Distributor',
+            iAmSpecifier: 'I am a Specifier'
           }}
+          showOtherField
         />
       </div>
     )
