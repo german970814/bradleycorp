@@ -114,6 +114,7 @@ class ShippingInfoForm extends React.Component<Props> {
               return this.updateShippingInfoProperty('city', event.target.value)
             }}
             placeholder={'City'}
+            required
           />
         </div>
 

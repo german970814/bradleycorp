@@ -46,6 +46,19 @@ $tabletGapBetweenFilters: 24px;
   transform: translateY(-1px);
 }
 
+%required {
+  position: relative;
+
+  &::after {
+    @extend %post-meta-data;
+    position: absolute;
+    content: '*Required Field';
+    right: 10px;
+    bottom: 13px;
+    color: $red;
+  }
+}
+
 h5.title {
   padding-bottom: 8px;
   color: $navy;
@@ -166,6 +179,10 @@ h5.title {
     &::placeholder {
       color: $steel-grey;
     }
+  }
+
+  &.required {
+    @extend %required;
   }
 }
 
