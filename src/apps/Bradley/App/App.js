@@ -30,14 +30,14 @@ class App extends React.Component<Props, State> {
 
     this.state = {
       blur: false,
-      user: {
+      /* user: {
         id: 1,
         firstName: 'matt',
         lastName: 'wills',
         userName: 'mattwills',
         permissions: {}
-      },
-      // user: false,
+      }, */
+      user: false,
       updateUser: this.updateUser.bind(this)
     }
   }

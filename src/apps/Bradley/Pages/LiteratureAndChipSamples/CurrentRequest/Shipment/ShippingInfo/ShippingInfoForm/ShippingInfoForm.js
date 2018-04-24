@@ -6,7 +6,6 @@ import type {
   ShippingInfoField,
   ShippingInfoUserAreaType
 } from '../../../../LiteratureAndChipSamples'
-import { shippingInfoDefault } from '../../../../LiteratureAndChipSamples'
 import type { stageTypes } from '../ShippingInfo'
 import { USStates } from '../../../../../../../../lib/externalConstantData/USStates'
 import { getCountriesForSelectFieldOptions } from '../../../../../../../../lib/externalConstantData/WorldCountries'
@@ -229,7 +228,7 @@ class ShippingInfoForm extends React.Component<Props> {
               <button
                 className={`button-border-red ${style.clear}`}
                 onClick={() => {
-                  return this.props.updateShippingInfo(shippingInfoDefault)
+                  return this.props.updateShippingInfo({ userArea: {} })
                 }}>
                 {'CLEAR FORM'}
               </button>
@@ -239,7 +238,7 @@ class ShippingInfoForm extends React.Component<Props> {
               <button
                 className={`button-border-red ${style.clear}`}
                 onClick={() => {
-                  return this.props.updateShippingInfo(shippingInfoDefault)
+                  return this.props.updateShippingInfo({ userArea: {} })
                 }}>
                 {'CLEAR FORM'}
               </button>
