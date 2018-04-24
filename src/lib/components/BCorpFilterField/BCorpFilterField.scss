@@ -194,4 +194,17 @@ h5.title {
       }
     }
   }
+
+  .other {
+    .checkboxOption {
+      margin-bottom: 18px;
+    }
+
+    .fill {
+      input {
+        background-color: $light-gray;
+        border: solid 1px $silver;
+      }
+    }
+  }
 }
