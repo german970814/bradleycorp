@@ -48,6 +48,10 @@ type Props = {
   maxWidth?: string
 }
 
+type InnerLightboxProps = Props & {
+  updateBlur: UpdateBlurType
+}
+
 type State = {
   isOpen: boolean
 }
@@ -69,13 +73,30 @@ type State = {
  * than the designated space and we wanted to close button to stay the same distance below.
  * With these options all combinations should be possible.
  */
-class LightboxV2 extends React.Component<Props, State> {
-  constructor (props: Props) {
+
+class LightboxV2 extends React.Component<Props> {
+  render () {
+    return (
+      <BlurConsumer>
+        {({ isBlurred, updateBlur }) => {
+          return <LightboxV2Inner updateBlur={updateBlur} {...this.props} />
+        }}
+      </BlurConsumer>
+    )
+  }
+}
+
+class LightboxV2Inner extends React.Component<InnerLightboxProps, State> {
+  constructor (props: InnerLightboxProps) {
     super(props)
 
     this.state = {
       isOpen: false
     }
+  }
+
+  componentWillUnmount () {
+    this.props.updateBlur(false)
   }
 
   toggleOpen () {
@@ -89,6 +110,7 @@ class LightboxV2 extends React.Component<Props, State> {
     if (this.props.onLightboxOpen) {
       this.props.onLightboxOpen()
     }
+    this.props.updateBlur(true)
 
     this.setState({
       isOpen: true
@@ -99,20 +121,18 @@ class LightboxV2 extends React.Component<Props, State> {
     if (this.props.onLightboxClose) {
       this.props.onLightboxClose()
     }
+    this.props.updateBlur(false)
 
     this.setState({
       isOpen: false
     })
   }
 
-  renderCloseButton (updateBlur: UpdateBlurType) {
+  renderCloseButton () {
     return (
       <div
         className={style.closeButtonWrapper}
-        onClick={() => {
-          updateBlur(false)
-          this.closeLightbox()
-        }}>
+        onClick={this.closeLightbox.bind(this)}>
         <img
           className={style.closeButton}
           src={require('../../../../images/icon-close/icon-close@2x.png')}
@@ -121,7 +141,7 @@ class LightboxV2 extends React.Component<Props, State> {
     )
   }
 
-  renderLightbox (updateBlur: UpdateBlurType) {
+  renderLightbox () {
     const lightboxNode = document.getElementById('lightbox')
 
     if (!lightboxNode) {
@@ -140,10 +160,7 @@ class LightboxV2 extends React.Component<Props, State> {
         <div
           className={`${style.background} ${this.props.backgroundClass ||
             ''} ${fitToContentClass || ''} ${fullWidthClass || ''}`}
-          onClick={() => {
-            updateBlur(false)
-            this.closeLightbox()
-          }}>
+          onClick={this.closeLightbox.bind(this)}>
           <div className={`lightbox-wrapper ${style.lightboxWrapper}`}>
             <div
               onClick={e => {
@@ -154,7 +171,7 @@ class LightboxV2 extends React.Component<Props, State> {
               }}
               className={`lightbox ${style.lightbox}`}>
               {this.props.renderLightboxContents()}
-              {this.renderCloseButton(updateBlur)}
+              {this.renderCloseButton()}
             </div>
           </div>
         </div>,
@@ -165,19 +182,10 @@ class LightboxV2 extends React.Component<Props, State> {
 
   render () {
     return (
-      <BlurConsumer>
-        {({ isBlurred, updateBlur }) => {
-          return (
-            <React.Fragment>
-              {this.props.renderChildren(() => {
-                updateBlur(true)
-                this.openLightbox()
-              })}
-              {this.renderLightbox(updateBlur)}
-            </React.Fragment>
-          )
-        }}
-      </BlurConsumer>
+      <React.Fragment>
+        {this.props.renderChildren(this.openLightbox.bind(this))}
+        {this.renderLightbox()}
+      </React.Fragment>
     )
   }
 }
