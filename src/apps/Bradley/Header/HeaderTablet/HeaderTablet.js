@@ -8,10 +8,7 @@ import style from './HeaderTablet.scss'
 const HeaderTablet = props => {
   return (
     <header className={style.header}>
-
-      <div
-        className={style.topBar} >
-
+      <div className={style.topBar}>
         <VerticalAlignHelper />
 
         {/*
@@ -24,48 +21,39 @@ const HeaderTablet = props => {
         </div>
         */}
 
-        <div
-          className={style.country} >
+        <div className={style.country}>
           <img
             src={require('../../../../images/flag/flag@2x.png')}
-            className={style.flag} />
+            className={style.flag}
+          />
           <span className={style.countryText}>{'USA'}</span>
         </div>
-
       </div>
 
-      <div
-        className={style.bottomBar} >
-
+      <div className={style.bottomBar}>
         <VerticalAlignHelper />
 
-        <div
-          className={style.burgerMenuWrapper} >
+        <div className={style.burgerMenuWrapper}>
           <BurgerMenu />
         </div>
 
-        <div
-          className={style.logoWrapper} >
-          <div
-            className={style.logo} >
+        <div className={style.logoWrapper}>
+          <div className={style.logo}>
             <img
               src={require('../../../../images/logo-color/logo-color@2x.png')}
-              className={style.logoImage} />
+              className={style.logoImage}
+            />
           </div>
         </div>
 
-        <SearchIcon
-          blurApp={props.blurApp} />
-
+        <SearchIcon />
       </div>
-
     </header>
   )
 }
 
 HeaderTablet.propTypes = {
-  menuItems: PropTypes.array,
-  blurApp: PropTypes.func
+  menuItems: PropTypes.array
 }
 
 export default HeaderTablet

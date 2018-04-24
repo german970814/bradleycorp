@@ -3,6 +3,7 @@ import * as React from 'react'
 import type { User } from '../../../lib/types/user_types'
 import { site } from '../../../api'
 import { UserProvider } from '../../../lib/contexts/UserContext'
+import { BlurProvider } from '../../../lib/contexts/BlurContext'
 import Header from '../Header/Header'
 import Main from '../Main/Main'
 import MainBIMRevit from '../BIMRevit/Main/Main'
@@ -13,23 +14,21 @@ import style from './App.scss'
 type Props = {}
 
 type State = {
-  blur: boolean,
+  isBlurred: boolean,
+  updateBlur: (isBlurred: boolean) => void,
   user: User,
   updateUser: (user: User) => void
 }
 
 class App extends React.Component<Props, State> {
-  updateUser: (user: User) => void
-
   constructor (props: Props) {
     super(props)
 
-    this.updateUser = (user: User) => {
-      this.setState({ user })
-    }
-
     this.state = {
-      blur: false,
+      isBlurred: false,
+      updateBlur: (isBlurred: boolean): void => {
+        this.setState({ isBlurred })
+      },
       /* user: {
         id: 1,
         firstName: 'matt',
@@ -38,12 +37,10 @@ class App extends React.Component<Props, State> {
         permissions: {}
       }, */
       user: false,
-      updateUser: this.updateUser.bind(this)
+      updateUser: (user: User): void => {
+        this.setState({ user })
+      }
     }
-  }
-
-  toggleBlur () {
-    this.setState({ blur: !this.state.blur })
   }
 
   getMain () {
@@ -63,18 +60,20 @@ class App extends React.Component<Props, State> {
   }
 
   render () {
-    const { user, updateUser } = this.state
-    const blurClass = !this.state.blur ? style.blurOut : style.blurIn // the order here is reversed to make sure we start of un blurred
+    const { user, updateUser, isBlurred, updateBlur } = this.state
+    const blurClass = !isBlurred ? style.blurOut : style.blurIn // the order here is reversed to make sure we start of un blurred
     return (
-      <UserProvider value={{ user, updateUser }}>
-        <div className={`${style.app} ${blurClass}`}>
-          <Header blurApp={this.toggleBlur.bind(this)} />
+      <BlurProvider value={{ isBlurred, updateBlur }}>
+        <UserProvider value={{ user, updateUser }}>
+          <div className={`${style.app} ${blurClass}`}>
+            <Header />
 
-          {this.getMain()}
+            {this.getMain()}
 
-          <Footer />
-        </div>
-      </UserProvider>
+            <Footer />
+          </div>
+        </UserProvider>
+      </BlurProvider>
     )
   }
 }

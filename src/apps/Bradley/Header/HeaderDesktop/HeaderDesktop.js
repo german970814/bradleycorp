@@ -8,12 +8,8 @@ import style from './HeaderDesktop.scss'
 const HeaderDesktop = props => {
   return (
     <header className={style.header}>
-
-      <div
-        className={style.topBarColor} >
-        <div
-          className={style.topBar} >
-
+      <div className={style.topBarColor}>
+        <div className={style.topBar}>
           {/*
           <div
             className={style.user} >
@@ -25,50 +21,42 @@ const HeaderDesktop = props => {
           </div>
           */}
 
-          <div
-            className={style.country} >
+          <div className={style.country}>
             <VerticalAlignHelper />
             <img
               src={require('../../../../images/flag/flag@2x.png')}
-              className={style.flag} />
-            <div className={`small-link-gray ${style.countryText}`}>{'USA'}</div>
+              className={style.flag}
+            />
+            <div className={`small-link-gray ${style.countryText}`}>
+              {'USA'}
+            </div>
           </div>
-
         </div>
       </div>
 
-      <div
-        className={style.bottomBar} >
-
-        <div
-          className={style.logoWrapper} >
-          <div
-            className={style.logo} >
+      <div className={style.bottomBar}>
+        <div className={style.logoWrapper}>
+          <div className={style.logo}>
             <img
               src={require('../../../../images/logo-color/logo-color@2x.png')}
-              className={style.logoImage} />
+              className={style.logoImage}
+            />
           </div>
         </div>
 
-        <div
-          className={style.menuItems} >
-          <MenuItems
-            menuItems={props.menuItems} />
+        <div className={style.menuItems}>
+          <MenuItems menuItems={props.menuItems} />
           <VerticalAlignHelper />
         </div>
 
-        <SearchIcon
-          blurApp={props.blurApp} />
-
+        <SearchIcon />
       </div>
-
     </header>
   )
 }
 
 HeaderDesktop.propTypes = {
-  menuItems: PropTypes.array.isRequired,
-  blurApp: PropTypes.func
+  menuItems: PropTypes.array.isRequired
 }
 
 export default HeaderDesktop

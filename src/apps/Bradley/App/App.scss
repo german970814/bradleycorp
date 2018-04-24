@@ -1,4 +1,4 @@
-@import "../../../scss/main";
+@import '../../../scss/main';
 
 $blurPX: 10px;
 
@@ -13,4 +13,5 @@ $blurPX: 10px;
 
 .blurOut {
   filter: blur(0px);
+  transition: filter 0.5s;
 }

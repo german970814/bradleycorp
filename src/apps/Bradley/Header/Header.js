@@ -9,9 +9,7 @@ import HeaderMobile from './HeaderMobile/HeaderMobile'
 import HeaderTablet from './HeaderTablet/HeaderTablet'
 import HeaderDesktop from './HeaderDesktop/HeaderDesktop'
 
-type Props = {
-  blurApp: () => void
-}
+type Props = {}
 
 type State = {
   menuItems?: Array<NavMenuItem>
@@ -36,25 +34,16 @@ class Header extends Component<Props, State> {
         {match =>
           match ? (
             // mobile
-            <HeaderMobile
-              menuItems={this.state.menuItems}
-              blurApp={this.props.blurApp}
-            />
+            <HeaderMobile menuItems={this.state.menuItems} />
           ) : (
             <Media query={{ maxWidth: TABLETMAXWIDTH }}>
               {match =>
                 match ? (
                   // tablet
-                  <HeaderTablet
-                    menuItems={this.state.menuItems}
-                    blurApp={this.props.blurApp}
-                  />
+                  <HeaderTablet menuItems={this.state.menuItems} />
                 ) : (
                   // desktop
-                  <HeaderDesktop
-                    menuItems={this.state.menuItems}
-                    blurApp={this.props.blurApp}
-                  />
+                  <HeaderDesktop menuItems={this.state.menuItems} />
                 )
               }
             </Media>

@@ -8,34 +8,28 @@ import style from './HeaderMobile.scss'
 const HeaderMobile = props => {
   return (
     <header className={style.header}>
-
       <VerticalAlignHelper />
 
-      <div
-        className={style.burgerMenuWrapper} >
+      <div className={style.burgerMenuWrapper}>
         <BurgerMenu />
       </div>
 
-      <div
-        className={style.logoWrapper} >
-        <div
-          className={style.logo} >
+      <div className={style.logoWrapper}>
+        <div className={style.logo}>
           <img
             src={require('../../../../images/logo-color/logo-color@2x.png')}
-            className={style.logoImage} />
+            className={style.logoImage}
+          />
         </div>
       </div>
 
-      <SearchIcon
-        blurApp={props.blurApp} />
-
+      <SearchIcon />
     </header>
   )
 }
 
 HeaderMobile.propTypes = {
-  menuItems: PropTypes.array,
-  blurApp: PropTypes.func
+  menuItems: PropTypes.array
 }
 
 export default HeaderMobile
