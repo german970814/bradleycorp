@@ -7,7 +7,8 @@ type Props = {
   handleChange: (event: SyntheticInputEvent<HTMLInputElement>) => void,
   title?: string,
   placeholder?: string,
-  className?: string
+  className?: string,
+  disabled?: boolean
 }
 
 /**
@@ -29,6 +30,7 @@ class BCorpInputField extends React.Component<Props> {
           onChange={this.handleChange.bind(this)}
           placeholder={this.props.placeholder || ''}
           type={'text'}
+          disabled={this.props.disabled}
         />
       </div>
     )

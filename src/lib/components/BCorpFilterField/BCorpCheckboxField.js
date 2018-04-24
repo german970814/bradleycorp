@@ -16,14 +16,31 @@ type CheckboxObject = {
 }
 
 type Props = {
+  /**
+   * Current state, takes CheckboxObject type.
+   * We expect the state is being managed somewhre higher up the component tree.
+   */
   filterState?: CheckboxObject,
+  /**
+   * A function to update the state higher up the tree.
+   * Should take a CheckboxObject type as an arg.
+   */
   handleChange: (newCheckboxObj: CheckboxObject) => void,
+  /**
+   * The checkbox options.
+   * Should be an object with string: string pair attributes.
+   * First string is value, second is label.
+   */
   options?: Options,
   title?: string,
   className?: string,
   checkboxOptionClassName?: string,
-  otherCheckboxClassName?: string,
-  showOtherField?: boolean
+  /**
+   * If true, an 'other' field will be included at the bottom
+   * with an input field for inputting another option.
+   */
+  showOtherField?: boolean,
+  otherCheckboxClassName?: string
 }
 
 class BCorpCheckboxField extends React.Component<Props> {
@@ -75,12 +92,12 @@ class BCorpCheckboxField extends React.Component<Props> {
         ? this.props.filterState.other.content
         : ''
 
-    const colorState =
+    const inputLocked =
       this.props.filterState &&
       this.props.filterState.other &&
       this.props.filterState.other.checked
-        ? ''
-        : style.fill
+        ? { disabled: false, style: '' }
+        : { disabled: true, style: style.fill }
 
     return this.props.showOtherField ? (
       <div
@@ -96,9 +113,10 @@ class BCorpCheckboxField extends React.Component<Props> {
           <label htmlFor={'checked'}>{'Other (please specify)'}</label>
         </div>
         <BCorpInputField
-          className={`${colorState}`}
+          className={`${inputLocked.style}`}
           filterState={inputState}
           handleChange={this.handleOtherInputChange.bind(this)}
+          disabled={inputLocked.disabled}
         />
       </div>
     ) : null
