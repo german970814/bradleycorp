@@ -59,4 +59,21 @@
   .repSelect {
     @extend %colWrapper;
   }
+
+  .notes {
+    textarea {
+      padding: 10px;
+      height: 112px;
+
+      @include respond-to(tablet) {
+        padding: 15px;
+        height: 148px;
+      }
+
+      &::placeholder {
+        @extend %small-body;
+        font-style: oblique;
+      }
+    }
+  }
 }

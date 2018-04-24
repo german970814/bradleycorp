@@ -9,6 +9,7 @@ import type { CheckboxObject } from '../../../../../../../../../lib/components/B
 import BCorpCheckboxField from '../../../../../../../../../lib/components/BCorpFilterField/BCorpCheckboxField'
 import BCorpInputField from '../../../../../../../../../lib/components/BCorpFilterField/BCorpInputField'
 import BCorpSelectField from '../../../../../../../../../lib/components/BCorpFilterField/BCorpSelectField'
+import BCorpTextareaField from '../../../../../../../../../lib/components/BCorpFilterField/BCorpTextareaField'
 import sharedStyle from '../ShippingInfoForm.scss'
 import style from './UserArea.scss'
 
@@ -147,6 +148,18 @@ class UserArea extends React.Component<Props> {
                 )
               }}
               placeholder={'Request Email Address'}
+            />
+          </div>
+
+          <div className={`row`}>
+            <BCorpTextareaField
+              className={`col1 ${style.notes}`}
+              width={'100%'}
+              filterState={this.props.shippingInfoUserArea.notes || ''}
+              handleChange={event => {
+                return this.updateUserAreaProperty('notes', event.target.value)
+              }}
+              placeholder={'Please add any additional notes here.'}
             />
           </div>
         </div>
