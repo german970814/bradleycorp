@@ -2,7 +2,7 @@
 let x = {
   checkboxes: ['div10','plumbing','janSan'],
   other: {
-    checked: true,
+    checked: false,
     content: 'some other content, this input will be disabled if other is unselected'
   }
 }

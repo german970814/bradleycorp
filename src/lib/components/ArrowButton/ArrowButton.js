@@ -6,8 +6,8 @@ import SVGIcon from '../SVGIcon/SVGIcon'
 import style from './ArrowButton.scss'
 
 // NOTE SET FALSE IF NOT BUILDING STYLEGUIDE
-import '../../../scss/main.scss'
-const styleguide = true
+// import '../../../scss/main.scss'
+const styleguide = false
 if (styleguide) {
   console.warn(
     'Importing main.scss twice, if you arent building the styleguide you need to remove this in ArrowButton.js'
