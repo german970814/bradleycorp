@@ -1,0 +1,46 @@
+@import '../../../../../../../../scss/partials/mixins';
+@import '../../../../../../../../scss/partials/variables';
+
+.orderProcessed {
+  .text {
+    margin-bottom: 25px;
+    color: $steel-grey;
+
+    @include respond-to(tablet) {
+      margin-bottom: 35px;
+    }
+  }
+
+  h6 {
+    margin-bottom: 13px;
+    color: $black;
+  }
+
+  h5 {
+    margin-bottom: 30px;
+    color: $red;
+
+    @include respond-to(tablet) {
+      margin-bottom: 40px;
+    }
+  }
+
+  .buttonWrapper {
+    width: 100%;
+    text-align: center;
+
+    button {
+      padding: 1px 20px 0px 20px;
+      width: auto;
+    }
+
+    @include respond-to-max(tablet) {
+      button {
+        padding: 15px 20px;
+        width: 150px;
+        height: auto;
+        line-height: normal;
+      }
+    }
+  }
+}

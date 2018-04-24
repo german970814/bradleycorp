@@ -15,6 +15,7 @@ import LightboxTitleBannerContentBox from '../../../../../../../lib/containers/L
 import ShipmentContent from '../ShipmentContent/ShipmentContent'
 import ShippingInfoButton from './ShippingInfoButton/ShippingInfoButton'
 import ShippingInfoForm from './ShippingInfoForm/ShippingInfoForm'
+import ShippingInfoOrderProcessed from './ShippingInfoOrderProcessed/ShippingInfoOrderProcessed'
 import style from './ShippingInfo.scss'
 
 type Props = {
@@ -96,7 +97,7 @@ class ShippingInfo extends React.Component<Props, State> {
     if (this.state.stage === 3) {
       return (
         <LightboxTitleBannerContentBox title={'Order processed!'}>
-          <div />
+          <ShippingInfoOrderProcessed />
         </LightboxTitleBannerContentBox>
       )
     }
