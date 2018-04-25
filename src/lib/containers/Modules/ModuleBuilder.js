@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import ReactHtmlParser from 'react-html-parser'
+import ContentTransformer from './transformContent/transformContent'
 import ModuleFactory from './ModuleFactory'
-import FileDownloadLink from '../../components/FileDownloadLink/FileDownloadLink'
 
 /**
  * This component is responsible for building the grid of modules to match the backend UI
@@ -110,26 +110,13 @@ class ModuleBuilder extends Component {
     if (!this.props.moduleData) {
       return null
     }
+
     return (
       <React.Fragment>
         {ReactHtmlParser(this.props.moduleData.content, {
-          transform: function (node, i) {
-            // console.log( node )
-            if (
-              node &&
-              node.name === 'a' &&
-              node.attribs &&
-              node.attribs.href.match(/\.(pdf|doc|docx|docm|docb)$/) !== null
-            ) {
-              return (
-                <FileDownloadLink
-                  key={i}
-                  title={node.children[0].data}
-                  titleClass={`link-orange`}
-                  link={node.attribs.href}
-                />
-              )
-            }
+          transform: (node, index) => {
+            const contentTransformer = new ContentTransformer(node, index)
+            return contentTransformer.transform()
           }
         })}
 
