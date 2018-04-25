@@ -1,0 +1,9 @@
+@import '../../../../scss/partials/mixins';
+
+.bottomSection {
+  margin-top: 40px;
+
+  @include respond-to(tablet) {
+    margin-top: 60px;
+  }
+}

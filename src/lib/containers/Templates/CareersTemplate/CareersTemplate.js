@@ -2,7 +2,9 @@
 import * as React from 'react'
 import type { BCorpPageTemplateData } from '../../../types/customPage_types'
 import FullWidthTemplate from '../FullWidthTemplate/FullWidthTemplate'
+import LeftSidebarTemplate from '../LeftSidebarTemplate/LeftSidebarTemplate'
 import CTAModule from '../../Modules/CTAModule/CTAModule'
+import style from './CareersTemplate.scss'
 
 type Props = {
   data: BCorpPageTemplateData,
@@ -36,11 +38,30 @@ class CareersTemplate extends React.Component<Props> {
 
   render () {
     return (
-      <FullWidthTemplate
-        data={this.props.data}
-        renderModules={this.renderFullWidthTemplateModules.bind(this)}
-        pagePath={this.props.pagePath}
-      />
+      <React.Fragment>
+        <FullWidthTemplate
+          data={this.props.data}
+          renderModules={this.renderFullWidthTemplateModules.bind(this)}
+          pagePath={this.props.pagePath}
+        />
+        <div
+          style={{
+            width: '100%',
+            height: '200px',
+            backgroundColor: 'red'
+          }}
+        />
+        <div className={style.bottomSection}>
+          <LeftSidebarTemplate
+            data={{
+              page_id: this.props.data.page_id,
+              page_title: this.props.data.page_title
+            }}
+            renderModules={this.props.renderModules}
+            hideTitle
+          />
+        </div>
+      </React.Fragment>
     )
   }
 }
