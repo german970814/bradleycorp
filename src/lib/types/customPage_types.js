@@ -28,9 +28,20 @@ type BCorpPageHeroData = {
   overlay?: BCorpColor
 }
 
+type BCorpCareersTemplateData = {
+  cta_text: string,
+  cta_link_text: string,
+  cta_link: string,
+  media_1: string,
+  media_2: string,
+  media_3: string,
+  media_4: string
+}
+
 type BCorpMetaboxes = {
   page_hero?: BCorpPageHeroData,
-  sidebar_select?: string
+  sidebar_select?: string,
+  careers_template?: BCorpCareersTemplateData
 }
 
 type BCorpPageTemplateData = {

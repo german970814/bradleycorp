@@ -5,6 +5,7 @@ import FullWidthTemplate from './FullWidthTemplate/FullWidthTemplate'
 import RightSidebarTemplate from './RightSidebarTemplate/RightSidebarTemplate'
 import LeftSidebarTemplate from './LeftSidebarTemplate/LeftSidebarTemplate'
 import FAQTemplate from './LeftSidebarTemplate/FAQTemplate/FAQTemplate'
+import CareersTemplate from './CareersTemplate/CareersTemplate'
 import DefaultTemplate from './DefaultTemplate/DefaultTemplate'
 
 type Props = {
@@ -66,6 +67,15 @@ const TemplateFactory = (props: Props): React.Node => {
 
     case 'faq':
       return <FAQTemplate data={props.data} />
+
+    case 'careers':
+      return (
+        <CareersTemplate
+          data={props.data}
+          renderModules={props.renderModules}
+          pagePath={props.pagePath}
+        />
+      )
 
     // this isn't technically an option in the drop down
     // but it looks like it got added when importing the pages
