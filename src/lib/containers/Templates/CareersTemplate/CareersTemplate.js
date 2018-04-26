@@ -36,6 +36,21 @@ class CareersTemplate extends React.Component<Props> {
     }
   }
 
+  renderImages () {}
+
+  renderLeftSidebarTemplateModules () {
+    return (
+      <React.Fragment>
+        {this.props.renderModules()}
+        <div id="tgj-badges-container" />
+        <script
+          src="https://thegoodjobs.com/widget/badges_js/e695217b43d6da8d479ab41cb3df9c5b?overlay=true&stack=false&fade=true"
+          type="text/javascript"
+        />
+      </React.Fragment>
+    )
+  }
+
   render () {
     return (
       <React.Fragment>
@@ -51,13 +66,14 @@ class CareersTemplate extends React.Component<Props> {
             backgroundColor: 'red'
           }}
         />
+        {this.renderImages()}
         <div className={style.bottomSection}>
           <LeftSidebarTemplate
             data={{
               page_id: this.props.data.page_id,
               page_title: this.props.data.page_title
             }}
-            renderModules={this.props.renderModules}
+            renderModules={this.renderLeftSidebarTemplateModules.bind(this)}
             hideTitle
           />
         </div>
