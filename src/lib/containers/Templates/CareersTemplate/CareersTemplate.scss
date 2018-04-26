@@ -1,4 +1,14 @@
 @import '../../../../scss/partials/mixins';
+@import '../../../../scss/partials/helpers';
+
+.image {
+  @extend %coverBackground;
+  height: 200px;
+
+  @include respond-to(tablet) {
+    height: 250px;
+  }
+}
 
 .bottomSection {
   margin-top: 40px;

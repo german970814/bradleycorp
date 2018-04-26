@@ -1,6 +1,8 @@
 // @flow
 import * as React from 'react'
 import type { BCorpPageTemplateData } from '../../../types/customPage_types'
+import Media from 'react-media'
+import { MOBILEMAXWIDTH } from '../../../../globals'
 import FullWidthTemplate from '../FullWidthTemplate/FullWidthTemplate'
 import LeftSidebarTemplate from '../LeftSidebarTemplate/LeftSidebarTemplate'
 import CTAModule from '../../Modules/CTAModule/CTAModule'
@@ -36,7 +38,48 @@ class CareersTemplate extends React.Component<Props> {
     }
   }
 
-  renderImages () {}
+  renderImages () {
+    if (
+      !this.props.data.metaboxes ||
+      !this.props.data.metaboxes.careers_template
+    ) {
+      return null
+    } else {
+      const media = [
+        this.props.data.metaboxes.careers_template.media_1,
+        this.props.data.metaboxes.careers_template.media_2,
+        this.props.data.metaboxes.careers_template.media_3,
+        this.props.data.metaboxes.careers_template.media_4
+      ]
+
+      return (
+        <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
+          {match =>
+            match ? (
+              this.renderSlider()
+            ) : (
+              <div className={'row'}>
+                {media.map(media => {
+                  return (
+                    <div
+                      style={{
+                        backgroundImage: `url(${media})`
+                      }}
+                      className={`col2-tablet col4-desktop ${style.image}`}
+                    />
+                  )
+                })}
+              </div>
+            )
+          }
+        </Media>
+      )
+    }
+  }
+
+  renderSlider () {
+    return null
+  }
 
   renderLeftSidebarTemplateModules () {
     return (
@@ -58,13 +101,6 @@ class CareersTemplate extends React.Component<Props> {
           data={this.props.data}
           renderModules={this.renderFullWidthTemplateModules.bind(this)}
           pagePath={this.props.pagePath}
-        />
-        <div
-          style={{
-            width: '100%',
-            height: '200px',
-            backgroundColor: 'red'
-          }}
         />
         {this.renderImages()}
         <div className={style.bottomSection}>
