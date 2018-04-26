@@ -4,15 +4,17 @@ import type { FiltersType } from '../VideoGallery'
 import type { VideoGalleryPost } from '../../../../../lib/types/cpt_types'
 import type { BCorpPost } from '../../../../../lib/types/post_types'
 import { filterDefault } from '../VideoGallery'
+import Video from './Video/Video'
 import CPTApiClient from '../../../../../api/cpt_client'
+import style from './Videos.scss'
 
 type Props = {
   filters: FiltersType
 }
 
-type Video = BCorpPost & { post: VideoGalleryPost }
+type VideoType = BCorpPost & { post: VideoGalleryPost }
 
-type VideoStateType = Array<Video>
+type VideoStateType = Array<VideoType>
 
 type State = {
   videos?: VideoStateType
@@ -26,36 +28,45 @@ class Videos extends React.Component<Props, State> {
   }
 
   componentDidMount () {
-    this.getFilteredVideos()
+    this.getFilteredVideos(this.props)
   }
 
   componentWillReceiveProps (nextProps: Props) {
     if (this.shouldResendRequest(nextProps)) {
-      this.getFilteredVideos()
+      this.getFilteredVideos(nextProps)
     }
   }
 
   render () {
     console.log(this.state)
-    return null
+    return (
+      <div className={style.videos}>
+        {this.state.videos && this.state.videos.length
+          ? this.state.videos.map((video, index) => {
+            return <Video key={index} video={video} />
+          })
+          : null}
+      </div>
+    )
   }
 
-  async getFilteredVideos () {
-    const filters = this.getFiltersFormattedForRequest()
+  async getFilteredVideos (props: Props) {
+    const filters = this.getFiltersFormattedForRequest(props)
+    console.log('requesting', filters)
 
     try {
       const client = new CPTApiClient('video-gallery')
       const response = await client.getByTaxNameAndTermSlugObject(filters, 'OR')
 
-      const videos = response.data
+      const videos: Array<VideoType> = response.data
       return this.setState({ videos })
     } catch (err) {
       console.log(err)
     }
   }
 
-  getFiltersFormattedForRequest () {
-    const { search, ...filters } = this.props.filters
+  getFiltersFormattedForRequest (props: Props) {
+    const { search, ...filters } = props.filters
     const formattedFilters = {}
 
     Object.keys(filters).forEach(filterName => {

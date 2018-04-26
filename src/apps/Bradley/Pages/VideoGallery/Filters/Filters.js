@@ -14,19 +14,19 @@ type Props = {
 
 class Filters extends React.Component<Props> {
   handleVideoTypeChange (event: SyntheticInputEvent<HTMLSelectElement>): void {
-    const newFilters = this.props.filters
+    const newFilters = { ...this.props.filters }
     newFilters.video_gallery_type_cat = event.target.value
     return this.props.updateFilters(newFilters)
   }
 
   handleProductTypeChange (event: SyntheticInputEvent<HTMLSelectElement>): void {
-    const newFilters = this.props.filters
+    const newFilters = { ...this.props.filters }
     newFilters.video_gallery_product_tag = event.target.value
     return this.props.updateFilters(newFilters)
   }
 
   handleSearchSubmit (search: string): void {
-    const newFilters = this.props.filters
+    const newFilters = { ...this.props.filters }
     newFilters.search = search
     return this.props.updateFilters(newFilters)
   }
