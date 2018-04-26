@@ -32,7 +32,6 @@ class Filters extends React.Component<Props> {
   }
 
   render () {
-    console.log(this.props.filterOptions)
     return (
       <div className={`row ${style.filters}`}>
         <div className={`col2 col4-tablet ${style.videoType}`}>
