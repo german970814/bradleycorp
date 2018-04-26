@@ -1,6 +1,9 @@
 // @flow
 import * as React from 'react'
+import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import Videos from './Videos/Videos'
+import Filters from './Filters/Filters'
+import style from './VideoGallery.scss'
 
 const videoTypeDefault: 'videoType' = 'videoType'
 const productTypeDefault: 'productType' = 'productType'
@@ -30,11 +33,31 @@ class VideoGallery extends React.Component<Props, State> {
     }
   }
 
+  updateFilters (filters: FiltersType) {
+    this.setState({ filters })
+  }
+
   render () {
-    return <Videos filters={this.state.filters} />
+    return (
+      <DefaultTemplate
+        data={{ page_title: 'Video Gallery' }}
+        renderModules={() => {
+          return (
+            <div className={style.VideoGallery}>
+              <Filters
+                filters={this.state.filters}
+                updateFilters={this.updateFilters.bind(this)}
+              />
+              <Videos filters={this.state.filters} />
+            </div>
+          )
+        }}
+      />
+    )
   }
 }
 
 export default VideoGallery
 
+export { videoTypeDefault, productTypeDefault }
 export type { FiltersType }
