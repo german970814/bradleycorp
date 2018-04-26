@@ -60,6 +60,23 @@ class CPTApiClient {
     return axios.get(url, { params })
   }
 
+  getByTaxNameAndTermSlugObject (
+    taxNameAndTermSlugObject: {
+      [string]: Array<string>
+    },
+    relation: 'AND' | 'OR'
+  ) {
+    const url = `${api.baseURL}${this.cptName}`
+    const params = {
+      tax_name_term_slug_array: encodeURIComponent(
+        JSON.stringify(taxNameAndTermSlugObject)
+      ),
+      relation
+    }
+
+    return axios.get(url, { params })
+  }
+
   /* GET Terms */
 
   getTerms () {
