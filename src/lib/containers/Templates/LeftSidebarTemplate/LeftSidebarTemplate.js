@@ -79,7 +79,7 @@ class LeftSidebarTemplate extends React.Component<Props, State> {
           ? null
           : renderTitle(this.props.data.page_title, 'col1')}
 
-        <div className={`col1 col4-tablet ${style.sidebar}`}>
+        <div className={`col1 col4-tablet ${style.sidebar} sidebar`}>
           {this.renderLeftSidebar()}
         </div>
 

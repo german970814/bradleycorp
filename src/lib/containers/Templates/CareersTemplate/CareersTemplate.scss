@@ -10,10 +10,22 @@
   }
 }
 
-.bottomSection {
-  margin-top: 40px;
+.slider {
+  .imageInSlider {
+    @extend %coverBackground;
+    height: 180px;
+  }
 
-  @include respond-to(tablet) {
-    margin-top: 60px;
+  :global(.position-circles) {
+    float: left;
+    margin-top: 20px;
+  }
+}
+
+.bottomSection {
+  margin-top: 60px;
+
+  :global(.sidebar) {
+    margin-bottom: 0px;
   }
 }

@@ -6,6 +6,7 @@ import { MOBILEMAXWIDTH } from '../../../../globals'
 import FullWidthTemplate from '../FullWidthTemplate/FullWidthTemplate'
 import LeftSidebarTemplate from '../LeftSidebarTemplate/LeftSidebarTemplate'
 import CTAModule from '../../Modules/CTAModule/CTAModule'
+import ScrollableList from '../../ScrollableList/ScrollableList'
 import style from './CareersTemplate.scss'
 
 type Props = {
@@ -56,12 +57,13 @@ class CareersTemplate extends React.Component<Props> {
         <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
           {match =>
             match ? (
-              this.renderSlider()
+              this.renderSlider(media)
             ) : (
               <div className={'row'}>
-                {media.map(media => {
+                {media.map((media, index) => {
                   return (
                     <div
+                      key={index}
                       style={{
                         backgroundImage: `url(${media})`
                       }}
@@ -77,8 +79,26 @@ class CareersTemplate extends React.Component<Props> {
     }
   }
 
-  renderSlider () {
-    return null
+  renderSlider (media: Array<string>) {
+    return (
+      <ScrollableList
+        showPosition
+        animation={['slide']}
+        slideShow
+        wrapperClassName={style.slider}>
+        {media.map((media, index) => {
+          return (
+            <div
+              key={index}
+              style={{
+                backgroundImage: `url(${media})`
+              }}
+              className={`${style.imageInSlider}`}
+            />
+          )
+        })}
+      </ScrollableList>
+    )
   }
 
   renderLeftSidebarTemplateModules () {
