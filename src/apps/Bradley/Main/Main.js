@@ -15,6 +15,11 @@ const LiteratureAndChipSamplesLoadable = Loadable({
   loading: Loading
 })
 
+const VideoGalleryLoadable = Loadable({
+  loader: () => import('../Pages/VideoGallery/VideoGallery'),
+  loading: Loading
+})
+
 const CustomizableLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/Customizable/Customizable'),
@@ -34,6 +39,7 @@ const Main = props => {
         path="/literature-and-chip-samples"
         component={LiteratureAndChipSamplesLoadable}
       />
+      <Route exact path="/video-gallery" component={VideoGalleryLoadable} />
       <Route exact path="/*/:slug" component={CustomizableLoadable} />
       <Route exact path="/:slug" component={CustomizableLoadable} />
     </Switch>
