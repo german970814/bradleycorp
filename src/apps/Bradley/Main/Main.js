@@ -15,6 +15,11 @@ const LiteratureAndChipSamplesLoadable = Loadable({
   loading: Loading
 })
 
+const VideoGalleryLoadable = Loadable({
+  loader: () => import('../Pages/VideoGallery/VideoGallery'),
+  loading: Loading
+})
+
 const CustomizableLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/Customizable/Customizable'),
@@ -22,8 +27,7 @@ const CustomizableLoadable = Loadable({
 })
 
 const ApplicationGalleryLoadable = Loadable({
-  loader: () =>
-    import ('../Pages/ApplicationGallery/ApplicationGallery'),
+  loader: () => import('../Pages/ApplicationGallery/ApplicationGallery'),
   loading: Loading
 })
 
@@ -40,6 +44,7 @@ const Main = props => {
         path="/literature-and-chip-samples"
         component={LiteratureAndChipSamplesLoadable}
       />
+      <Route exact path="/video-gallery" component={VideoGalleryLoadable} />
       <Route
         exact
         path="/application-gallery"

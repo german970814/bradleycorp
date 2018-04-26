@@ -17,13 +17,13 @@ type State = {
  * Class responsible for displaying and updating the filters
  */
 class Filters extends React.Component<Props, State> {
-  constructor(props: Props) {
+  constructor (props: Props) {
     super(props)
     this.state = {
       filters: {}
     }
   }
-  componentDidMount() {
+  componentDidMount () {
     this.getApplicationGalleryFilters()
   }
 
@@ -42,8 +42,8 @@ class Filters extends React.Component<Props, State> {
     )
   }
 
-  getOptions(filters: Array) {
-    let object = {}
+  getOptions (filters: Object) {
+    const object = {}
     filters.forEach(el => {
       object[el.term_id.toString()] = el.name
     })
@@ -51,13 +51,11 @@ class Filters extends React.Component<Props, State> {
   }
 
   get options () {
-    let object = {}
+    const object = {}
     Object.keys(this.state.filters).forEach((el, ind) => {
 
     })
-    return {
-
-    }
+    return object
   }
 
   render () {
@@ -68,11 +66,11 @@ class Filters extends React.Component<Props, State> {
     )
   }
 
-  async getApplicationGalleryFilters() {
+  async getApplicationGalleryFilters () {
     const client = new CPTApiClient(PostType)
     const response = await client.getTerms()
     console.log(response.data)
-    let filters = {}
+    const filters = {}
     'tax_names' in response.data && response.data.tax_names.forEach(data => {
       filters[data] = response.data[data]
     })

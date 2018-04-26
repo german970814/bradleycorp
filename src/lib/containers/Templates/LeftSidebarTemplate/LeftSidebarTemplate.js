@@ -24,7 +24,8 @@ type Props = {
   /**
    * A render function for the modules
    */
-  renderModules: () => React.Node
+  renderModules: () => React.Node,
+  hideTitle?: boolean
 }
 
 type State = {
@@ -74,9 +75,11 @@ class LeftSidebarTemplate extends React.Component<Props, State> {
         className={`row ${defaultStyle.defaultTemplate} ${
           style.LeftSidebarTemplate
         }`}>
-        {renderTitle(this.props.data.page_title, 'col1')}
+        {this.props.hideTitle
+          ? null
+          : renderTitle(this.props.data.page_title, 'col1')}
 
-        <div className={`col1 col4-tablet ${style.sidebar}`}>
+        <div className={`col1 col4-tablet ${style.sidebar} sidebar`}>
           {this.renderLeftSidebar()}
         </div>
 

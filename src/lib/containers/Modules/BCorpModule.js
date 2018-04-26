@@ -97,13 +97,15 @@ class BCorpModule extends Component {
     this.setSkinClass(this.props)
 
     // eg event name update-row-1
-    this.rowUpdateEventName = `update-row-${this.props.rowNode.getAttribute(
-      'data-row-id'
-    )}`
-    this.rowUpdateEvent = new CustomEvent(this.rowUpdateEventName)
+    if (this.props.rowNode) {
+      this.rowUpdateEventName = `update-row-${this.props.rowNode.getAttribute(
+        'data-row-id'
+      )}`
+      this.rowUpdateEvent = new CustomEvent(this.rowUpdateEventName)
 
-    window.addEventListener(this.rowUpdateEventName, this.updateModuleHeight)
-    window.addEventListener('resize', this.updateModuleHeight)
+      window.addEventListener(this.rowUpdateEventName, this.updateModuleHeight)
+      window.addEventListener('resize', this.updateModuleHeight)
+    }
   }
 
   /**
@@ -130,8 +132,10 @@ class BCorpModule extends Component {
    *
    */
   componentDidUpdate () {
-    this.updateModuleHeight()
-    window.dispatchEvent(this.rowUpdateEvent)
+    if (this.props.rowNode) {
+      this.updateModuleHeight()
+      window.dispatchEvent(this.rowUpdateEvent)
+    }
   }
 
   /**

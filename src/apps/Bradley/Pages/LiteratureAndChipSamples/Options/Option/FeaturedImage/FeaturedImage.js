@@ -5,6 +5,7 @@ import type {
   ChipSamplePost
 } from '../../../../../../../lib/types/cpt_types'
 import LightboxV2 from '../../../../../../../lib/containers/Lightbox/LightboxV2/LightboxV2'
+import FixedAspectRatioBox from '../../../../../../../lib/components/FixedAspectRatioBox/FixedAspectRatioBox'
 import style from './FeaturedImage.scss'
 
 type Props = {
@@ -53,13 +54,12 @@ class FeaturedImage extends React.Component<Props, State> {
     return this.props.post.post.post_type === 'literature' ? (
       <a href={this.props.post.meta.literature_pdf} target="_blank">
         <div
+          style={{
+            backgroundImage: `url(${this.props.post.media.featured_image[0]})`
+          }}
           className={style.featuredImage}
           onMouseEnter={this.onMouseEnter.bind(this)}
           onMouseLeave={this.onMouseLeave.bind(this)}>
-          <img
-            src={this.props.post.media.featured_image[0]}
-            className={'row'}
-          />
           {this.renderOverlay()}
         </div>
       </a>
@@ -67,17 +67,20 @@ class FeaturedImage extends React.Component<Props, State> {
       <LightboxV2
         renderChildren={openLightbox => {
           return (
-            <div
-              className={style.featuredImage}
-              onClick={openLightbox}
-              onMouseEnter={this.onMouseEnter.bind(this)}
-              onMouseLeave={this.onMouseLeave.bind(this)}>
-              <img
-                src={this.props.post.media.featured_image[0]}
-                className={'row'}
-              />
-              {this.renderOverlay()}
-            </div>
+            <FixedAspectRatioBox aspectRatio={0.99999} verticalAlign={'bottom'}>
+              <div
+                style={{
+                  backgroundImage: `url(${
+                    this.props.post.media.featured_image[0]
+                  })`
+                }}
+                className={style.featuredImage}
+                onClick={openLightbox}
+                onMouseEnter={this.onMouseEnter.bind(this)}
+                onMouseLeave={this.onMouseLeave.bind(this)}>
+                {this.renderOverlay()}
+              </div>
+            </FixedAspectRatioBox>
           )
         }}
         renderLightboxContents={() => {

@@ -1,3 +1,4 @@
+// @flow
 import axios from 'axios'
 import api from './index'
 import CPTApiClient from './cpt_client'
@@ -7,14 +8,14 @@ class ProductApiClient extends CPTApiClient {
     super('product')
   }
 
-  getTabs (sku) {
+  getTabs (sku: string) {
     const url = `${api.baseURL}product/tabs`
     const params = { sku }
 
     return axios.get(url, { params })
   }
 
-  getProductDetailPage (slug) {
+  getProductDetailPage (slug: string) {
     const url = `${api.baseURL}page/product-detail`
     const params = { slug }
 

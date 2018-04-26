@@ -8,6 +8,7 @@
   @include respond-to(tablet) {
     margin-bottom: 30px;
     padding-right: 6%;
+    height: 100px;
   }
 
   @include respond-to(desktop) {
@@ -16,66 +17,88 @@
     }
   }
 
-  .imgContainer {
-    display: inline-block;
-    vertical-align: middle;
-
-    .featuredImage {
-      width: 100%;
-      height: auto;
-    }
-  }
-
-  .contentContainer {
-    display: inline-block;
-    vertical-align: middle;
-
+  .optionRow {
     @include respond-to(tablet) {
-      padding-top: 12px;
-      padding-left: 20px;
+      height: 100%;
     }
 
-    h5.title {
-      margin-left: 10px;
-      padding-right: 90px;
-      color: $black;
-
-      @include respond-to-max(tablet) {
-        font-size: 12px;
-      }
-
-      @include respond-to(tablet) {
+    .imgContainer {
+      height: 100%;
+      .featuredImage {
         width: 100%;
-        margin-bottom: 12px;
-        margin-left: 0;
-        padding-right: 0;
+        height: 100%;
       }
     }
 
-    .addButton {
-      position: absolute;
-      top: 50%;
-      right: 40px;
-      transform: translateY(-15px);
-    }
-
-    .downloadIcon {
-      position: absolute;
-      top: 50%;
-      right: 0;
-      width: 19px;
-      height: 30px;
-      transform: translateY(-15px);
+    .contentContainer {
+      display: inline-block;
+      vertical-align: middle;
 
       @include respond-to(tablet) {
-        position: static;
-        float: left;
-        margin-left: 20px;
-        transform: translateY(6px);
+        display: block;
+        padding-top: 12px;
+        padding-bottom: 47px;
+        padding-left: 20px;
+        height: 100%;
       }
 
-      @include respond-to(desktop) {
-        margin-left: 16px;
+      .overflow {
+        overflow-y: hidden;
+        height: 100%;
+
+        h5.title {
+          margin-left: 10px;
+          padding-right: 90px;
+          color: $black;
+
+          @include respond-to-max(tablet) {
+            font-size: 12px;
+          }
+
+          @include respond-to(tablet) {
+            display: inline-block;
+            vertical-align: middle;
+            width: 100%;
+            height: auto;
+            margin-left: 0;
+            padding-right: 0;
+          }
+        }
+      }
+
+      .buttons {
+        @include respond-to(tablet) {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+        }
+
+        .addButton {
+          position: absolute;
+          top: 50%;
+          right: 40px;
+          transform: translateY(-15px);
+        }
+
+        .downloadIcon {
+          position: absolute;
+          top: 50%;
+          right: 0;
+          width: 19px;
+          height: 30px;
+          transform: translateY(-15px);
+
+          @include respond-to(tablet) {
+            position: static;
+            float: left;
+            margin-left: 20px;
+            transform: translateY(6px);
+          }
+
+          @include respond-to(desktop) {
+            margin-left: 16px;
+          }
+        }
       }
     }
   }

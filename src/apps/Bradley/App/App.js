@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react'
+import type { SiteType } from '../../../api'
 import { site } from '../../../api'
 import type { User } from '../../../lib/types/user_types'
 import type { UpdateBlurType } from '../../../lib/contexts/BlurContext'
@@ -46,14 +47,15 @@ class App extends React.Component<Props, State> {
   }
 
   getMain () {
-    switch (site) {
+    const currentSite: SiteType = site
+    switch (currentSite) {
       case 'bcorp':
         return <Main />
 
       case 'thewashfountain':
         return <MainTheWashfountain />
 
-      case 'bimrevit':
+      case 'bim-revit':
         return <MainBIMRevit />
 
       default:

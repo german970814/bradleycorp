@@ -1,0 +1,31 @@
+@import '../../../../scss/partials/mixins';
+@import '../../../../scss/partials/helpers';
+
+.image {
+  @extend %coverBackground;
+  height: 200px;
+
+  @include respond-to(tablet) {
+    height: 250px;
+  }
+}
+
+.slider {
+  .imageInSlider {
+    @extend %coverBackground;
+    height: 180px;
+  }
+
+  :global(.position-circles) {
+    float: left;
+    margin-top: 20px;
+  }
+}
+
+.bottomSection {
+  margin-top: 60px;
+
+  :global(.sidebar) {
+    margin-bottom: 0px;
+  }
+}

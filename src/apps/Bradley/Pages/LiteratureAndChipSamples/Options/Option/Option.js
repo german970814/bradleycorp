@@ -7,6 +7,7 @@ import type {
 import AddToOrderButton from './AddToOrderButton/AddToOrderButton'
 import DownloadIcon from './DownloadIcon/DownloadIcon'
 import FeaturedImage from './FeaturedImage/FeaturedImage'
+import VerticalAlignHelper from '../../../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import style from './Option.scss'
 
 type Props = {
@@ -71,14 +72,20 @@ class Option extends React.Component<Props> {
       </div>
     ) : (
       <div className={`col2 ${style.option} ${postTypeClassName}`}>
-        <div className={'row'}>
+        <div className={`row ${style.optionRow}`}>
           <div className={`col4 ${style.imgContainer}`}>
             <FeaturedImage post={this.props.post} />
           </div>
           <div className={`col4x3 ${style.contentContainer}`}>
-            {this.renderTitle()}
-            {this.renderAddButton()}
-            {this.renderDownloadIcon()}
+            <div className={style.overflow}>
+              <VerticalAlignHelper />
+              {this.renderTitle()}
+            </div>
+
+            <div className={style.buttons}>
+              {this.renderAddButton()}
+              {this.renderDownloadIcon()}
+            </div>
           </div>
         </div>
       </div>
