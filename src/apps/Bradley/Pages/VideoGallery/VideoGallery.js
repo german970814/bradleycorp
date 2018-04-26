@@ -1,12 +1,41 @@
 // @flow
 import * as React from 'react'
+import type { VideoGalleryPost } from '../../../../lib/types/cpt_types'
+import type { BCorpPost } from '../../../../lib/types/post_types'
 import CPTApiClient from '../../../../api/cpt_client'
+
+const videoTypeDefault: 'videoType' = 'videoType'
+const productTypeDefault: 'productType' = 'productType'
+
+type FiltersType = {
+  videoType: string,
+  productType: string,
+  search?: string
+}
+
+type Video = BCorpPost & { post: VideoGalleryPost }
 
 type Props = {}
 
-class VideoGallery extends React.Component<Props> {
+type State = {
+  filters: FiltersType,
+  videos?: Array<Video>
+}
+
+class VideoGallery extends React.Component<Props, State> {
+  constructor (props: Props) {
+    super(props)
+
+    this.state = {
+      filters: {
+        videoType: videoTypeDefault,
+        productType: productTypeDefault,
+        search: ''
+      }
+    }
+  }
+
   render () {
-    console.log(this.getFilteredVideos())
     return null
   }
 
