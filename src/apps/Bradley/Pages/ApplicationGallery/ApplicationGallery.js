@@ -3,14 +3,31 @@ import React, { Component } from 'react'
 import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import CPTApiClient from '../../../../api/cpt_client'
 import FillColumns from '../../../../lib/components/FillColumns/FillColumns'
-import { filterPostsByTerm } from '../../../../lib/bcorpPost'
+import Filters from './Filters/Filters'
+import ImageFrame from '../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
+import type { ApplicationGalleryPost } from '../../../../lib/types/cpt_types'
 
 const PostType = 'application-gallery'
 
 type Props = {}
 
+type MetaType = {
+  app_gallery_img: string,
+  app_gallery_img_filters: Object
+}
+
+type TermsType = {
+  tax_names: Array<string>
+}
+
+type GalleryType = {
+  meta: MetaType,
+  post: ApplicationGalleryPost,
+  terms: TermsType
+}
+
 type State = {
-  gallery: Array,
+  gallery: Array<GalleryType>,
   filters: Object,
   activeFilters: Array<string>
 }
@@ -24,8 +41,14 @@ export default class ApplicationGallery extends Component<Props, State> {
       filters: {},
       activeFilters: []
     }
+  }
 
-    this.renderContent = this.renderContent.bind(this)
+  componentDidMount () {
+    this.getApplicationGallery()
+  }
+
+  updateFilters (newFilters: any): void {
+    this.setState({ filters: newFilters })
   }
 
   renderContent () {
@@ -33,45 +56,31 @@ export default class ApplicationGallery extends Component<Props, State> {
       <div>
         <section id="sidebar">
           <ul>
-            {'tax_names' in this.state.filters &&
-              this.state.filters.tax_names.map((el, idx) => {
-                return (
-                  <ul key={idx}>
-                    {this.state.filters[el].map((ele, ind) => {
-                      return (
-                        <li key={ind}>
-                          <a onClick={() => this.toggleFilter(ele.slug)}>
-                            {ele.name}
-                          </a>
-                        </li>
-                      )
-                    })}
-                  </ul>
-                )
-              })}
-          </ul>
-        </section>
-        <FillColumns colClasses={['col4', 'col4', 'col4']}>
-          {this.state.gallery.length &&
-            this.state.gallery.map((el, idx) => {
+            {'tax_names' in this.state.filters && this.state.filters.tax_names.map((el, idx) => {
               return (
-                <img
-                  src={el.meta.app_gallery_img}
-                  key={idx}
-                  width="400"
-                  height="300"
-                />
+                <ul key={idx}>
+                  {this.state.filters[el].map((ele, ind) => {
+                    return <li key={ind}><a onClick={() => this.toggleFilter(ele.slug)}>{ele.name}</a></li>
+                  })}
+                </ul>
               )
             })}
+          </ul>
+        </section>
+        <Filters filters={{}} updateFilters={this.updateFilters.bind(this)} />
+        <FillColumns colClasses={['col4', 'col4', 'col4']}>
+          {this.state.gallery.map((el, idx) => {
+            return <ImageFrame
+              src={el.meta.app_gallery_img}
+              key={idx}
+              aspectRatio={123 / 270}
+              aspectRatioTablet={152 / 332}
+              aspectRatioDesktop={169 / 370}
+            />
+          })}
         </FillColumns>
       </div>
     )
-  }
-
-  get filteredGallery () {
-    // this.state.activeFilters.forEach(el => {
-    // })
-    // return filterPostsByTerm(this.state.gallery, )
   }
 
   toggleFilter (filter: string) {
@@ -85,15 +94,9 @@ export default class ApplicationGallery extends Component<Props, State> {
     }
   }
 
-  componentDidMount () {
-    this.getApplicationGallery()
-    this.getApplicationGalleryFilters()
-  }
-
   async getApplicationGallery () {
     const client = new CPTApiClient(PostType)
     const response = await client.getLatest(20)
-    console.log(response.data)
     this.setState({
       gallery: response.data.map(post => {
         return post
@@ -101,22 +104,15 @@ export default class ApplicationGallery extends Component<Props, State> {
     })
   }
 
-  async getApplicationGalleryFilters () {
-    const client = new CPTApiClient(PostType)
-    const response = await client.getTerms()
-    console.log(response.data)
-    this.setState({
-      filters: response.data
-    })
-  }
-
   render () {
-    return (
-      <DefaultTemplate
-        data={{ page_title: 'Application Gallery' }}
-        renderModules={() => this.renderContent()}
-        widgetsMoveWithScroll
-      />
-    )
+    return <DefaultTemplate
+      data={{ page_title: 'Application Gallery' }}
+      renderModules={() => this.renderContent()}
+      widgetsMoveWithScroll
+    />
   }
+}
+
+export {
+  PostType
 }

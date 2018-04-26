@@ -19,6 +19,8 @@ type ChipSamplePost = WPPost & { post_type: 'chip_sample' }
 
 type VideoGalleryPost = WPPost & { post_type: 'video-gallery' }
 
+type ApplicationGalleryPost = WPPost & { post_type: 'application-gallery' }
+
 type NavMenuItem = WPPost & { post_type: 'nav_menu_item' }
 
 export type {
@@ -26,5 +28,6 @@ export type {
   LiteraturePost,
   ChipSamplePost,
   VideoGalleryPost,
+  ApplicationGalleryPost,
   NavMenuItem
 }
