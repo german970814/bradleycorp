@@ -12,9 +12,9 @@ class CPTApiClient {
 
   /* GET posts */
 
-  getLatest (numberPosts: number = 0) {
+  getLatest (numberPosts: number = 0, paged?: number) {
     const url = `${api.baseURL}${this.cptName}`
-    const params = { posts_per_page: numberPosts }
+    const params = { posts_per_page: numberPosts, paged }
 
     return axios.get(url, { params })
   }
@@ -33,28 +33,44 @@ class CPTApiClient {
     return axios.get(url, { params })
   }
 
-  getByIdArray (idArray: Array<number>, postsPerPage: number = 10) {
+  getByIdArray (idArray: Array<number>) {
     const url = `${api.baseURL}${this.cptName}`
     const params = {
-      id_array: JSON.stringify(idArray),
-      posts_per_page: postsPerPage
+      id_array: JSON.stringify(idArray)
     }
 
     return axios.get(url, { params })
   }
 
-  getByTax (taxName: string, termSlug: string) {
+  getByTax (
+    taxName: string,
+    termSlug: string,
+    postsPerPage?: number,
+    paged?: number
+  ) {
     const url = `${api.baseURL}${this.cptName}`
-    const params = { tax_name: taxName, term_slug: termSlug }
+    const params = {
+      tax_name: taxName,
+      term_slug: termSlug,
+      posts_per_page: postsPerPage,
+      paged
+    }
 
     return axios.get(url, { params })
   }
 
-  getByTaxAndTermArray (taxName: string, termSlugArray: Array<string>) {
+  getByTaxAndTermArray (
+    taxName: string,
+    termSlugArray: Array<string>,
+    postsPerPage?: number,
+    paged?: number
+  ) {
     const url = `${api.baseURL}${this.cptName}`
     const params = {
       tax_name: taxName,
-      term_slug_array: JSON.stringify(termSlugArray)
+      term_slug_array: JSON.stringify(termSlugArray),
+      posts_per_page: postsPerPage,
+      paged
     }
 
     return axios.get(url, { params })
@@ -64,14 +80,18 @@ class CPTApiClient {
     taxNameAndTermSlugObject: {
       [string]: Array<string>
     },
-    relation: 'AND' | 'OR'
+    relation: 'AND' | 'OR',
+    postsPerPage?: number,
+    paged?: number
   ) {
     const url = `${api.baseURL}${this.cptName}`
     const params = {
       tax_name_term_slug_array: encodeURIComponent(
         JSON.stringify(taxNameAndTermSlugObject)
       ),
-      relation
+      relation,
+      posts_per_page: postsPerPage,
+      paged
     }
 
     return axios.get(url, { params })
