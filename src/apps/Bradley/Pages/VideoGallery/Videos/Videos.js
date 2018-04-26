@@ -47,7 +47,6 @@ class Videos extends React.Component<Props, State> {
     const filters = this.getFiltersFormattedForRequest()
 
     try {
-      console.log(filters)
       const client = new CPTApiClient('video-gallery')
       const response = await client.getByTaxNameAndTermSlugObject(filters, 'OR')
 
