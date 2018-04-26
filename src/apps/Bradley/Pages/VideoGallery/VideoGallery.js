@@ -1,25 +1,20 @@
 // @flow
 import * as React from 'react'
-import type { VideoGalleryPost } from '../../../../lib/types/cpt_types'
-import type { BCorpPost } from '../../../../lib/types/post_types'
-import CPTApiClient from '../../../../api/cpt_client'
+import Videos from './Videos/Videos'
 
 const videoTypeDefault: 'videoType' = 'videoType'
 const productTypeDefault: 'productType' = 'productType'
 
 type FiltersType = {
-  videoType: string,
-  productType: string,
+  video_gallery_type_cat: string,
+  video_gallery_product_tag: string,
   search?: string
 }
-
-type Video = BCorpPost & { post: VideoGalleryPost }
 
 type Props = {}
 
 type State = {
-  filters: FiltersType,
-  videos?: Array<Video>
+  filters: FiltersType
 }
 
 class VideoGallery extends React.Component<Props, State> {
@@ -28,37 +23,18 @@ class VideoGallery extends React.Component<Props, State> {
 
     this.state = {
       filters: {
-        videoType: videoTypeDefault,
-        productType: productTypeDefault,
+        video_gallery_type_cat: videoTypeDefault,
+        video_gallery_product_tag: productTypeDefault,
         search: ''
       }
     }
   }
 
   render () {
-    return null
-  }
-
-  async getFilteredVideos () {
-    const testObject = {
-      video_gallery_product_tag: ['product-group-a'],
-      video_gallery_type_cat: ['installation']
-    }
-
-    try {
-      const client = new CPTApiClient('video-gallery')
-      const response = await client.getByTaxNameAndTermSlugObject(
-        testObject,
-        'OR'
-      )
-
-      const data = response.data
-      console.log(data)
-      return data
-    } catch (err) {
-      console.log(err)
-    }
+    return <Videos filters={this.state.filters} />
   }
 }
 
 export default VideoGallery
+
+export type { FiltersType }
