@@ -1,5 +1,7 @@
 // @flow
 
-type BlogName = 'washfountain' | 'bim-revit'
+type BlogName = 'washfountain' | 'thewashfountain' | 'bim-revit'
 
-export type { BlogName }
+type BlogPrettyName = 'The Washfountain' | 'BIM-Revit'
+
+export type { BlogName, BlogPrettyName }

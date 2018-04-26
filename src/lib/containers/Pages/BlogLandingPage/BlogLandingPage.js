@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react'
+import type { SiteType } from '../../../../api'
 import type { Match } from 'react-router-dom'
 import type { BCorpPost } from '../../../types/post_types'
 import type { Widget } from '../../../types/widget_types'
@@ -125,11 +126,12 @@ class BlogLandingPage extends Component<Props, State> {
    * keeping any required defaults that aren't included in the data
    */
   async getPosts () {
+    const currentSite: SiteType = site
     try {
       let client = {}
-      if (site === 'bimrevit') {
+      if (currentSite === 'bim-revit') {
         client = BIMRevitClient
-      } else if (site === 'thewashfountain') {
+      } else if (currentSite === 'thewashfountain') {
         client = TheWashfountainClient
       } else {
         return

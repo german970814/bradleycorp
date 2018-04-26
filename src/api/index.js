@@ -1,26 +1,80 @@
+'' // @flow
+import type { BlogName, BlogPrettyName } from '../lib/types/blog_types'
 import axios from 'axios'
 
-const api = {}
+type HostType =
+  | 'http://bradley.test'
+  | 'http://bradleydev.twoxfour.com'
+  | 'http://thewashfountain.bradley.test'
+  | 'http://thewashfountain.bradleydev.twoxfour.com'
+  | 'http://bimrevit.bradley.test'
+  | 'http://bimrevit.bradleydev.twoxfour.com'
 
-const dev = false
+type HostTheWashfountainType =
+  | 'http://thewashfountain.bradley.test'
+  | 'http://thewashfountain.bradleydev.twoxfour.com'
 
-api.host = dev ? `http://bradley.test` : `http://bradleydev.twoxfour.com`
+type HostBIMRevitType =
+  | 'http://bimrevit.bradley.test'
+  | 'http://bimrevit.bradleydev.twoxfour.com'
 
-api.hostTheWashfountain = dev
-  ? `http://thewashfountain.bradley.test`
-  : `http://thewashfountain.bradleydev.twoxfour.com`
+type URLTheWashfountainType =
+  | 'http://localhost:8081'
+  | 'http://thewashfountain.site.bradleydev.twoxfour.com'
 
-api.hostBIMRevit = dev
-  ? `http://bimrevit.bradley.test`
-  : `http://bimrevit.bradleydev.twoxfour.com`
+type URLBIMRevitType =
+  | 'http://localhost:8082'
+  | 'http://bimrevit.site.bradleydev.twoxfour.com'
 
-api.urlTheWashfountain = dev
-  ? `http://localhost:8081`
-  : `http://thewashfountain.site.bradleydev.twoxfour.com`
+type SiteType = BlogName | 'bcorp'
 
-api.urlBIMRevit = dev
-  ? `http://localhost:8082`
-  : `http://bimrevit.site.bradleydev.twoxfour.com`
+type API = {
+  host: HostType,
+  hostTheWashfountain: HostTheWashfountainType,
+  hostBIMRevit: HostBIMRevitType,
+  urlTheWashfountain: URLTheWashfountainType,
+  urlBIMRevit: URLBIMRevitType,
+  site: SiteType,
+  sitePrettyName: BlogPrettyName | 'Bradley Corp',
+  namespace: string,
+  baseURL: string,
+  baseURLTheWashfountain: string,
+  baseURLBIMRevit: string,
+  queryRoute: string,
+  query: ({ args?: {} }) => {}
+}
+
+const dev: boolean = false
+
+let site: SiteType = 'bcorp'
+
+let sitePrettyName: BlogPrettyName | 'Bradley Corp' = 'Bradley Corp'
+
+let host: HostType = dev
+  ? 'http://bradley.test'
+  : 'http://bradleydev.twoxfour.com'
+
+const hostTheWashfountain: HostTheWashfountainType = dev
+  ? 'http://thewashfountain.bradley.test'
+  : 'http://thewashfountain.bradleydev.twoxfour.com'
+
+const hostBIMRevit: HostBIMRevitType = dev
+  ? 'http://bimrevit.bradley.test'
+  : 'http://bimrevit.bradleydev.twoxfour.com'
+
+const urlTheWashfountain: URLTheWashfountainType = dev
+  ? 'http://localhost:8081'
+  : 'http://thewashfountain.site.bradleydev.twoxfour.com'
+
+const urlBIMRevit: URLBIMRevitType = dev
+  ? 'http://localhost:8082'
+  : 'http://bimrevit.site.bradleydev.twoxfour.com'
+
+const namespace = 'bcorp/v1/'
+
+const queryRoute = 'wp-query'
+
+const baseURL = `${host}/index.php/wp-json/${namespace}`
 
 /**
  * set the api host depending on the location.href we're currently on
@@ -31,33 +85,49 @@ api.urlBIMRevit = dev
  * Since the blogs and the main site share so much functionality,
  * all we actually need is a different API client host and a different router
  */
-if (location.href.includes(api.urlTheWashfountain)) {
-  api.site = 'thewashfountain'
-  api.sitePrettyName = 'The Washfountain'
-  api.host = api.hostTheWashfountain
-} else if (location.href.includes(api.urlBIMRevit)) {
-  api.site = 'bimrevit'
-  api.sitePrettyName = 'BIM-Revit'
-  api.host = api.hostBIMRevit
-} else {
-  api.site = 'bcorp'
-  api.sitePrettyName = 'Bradley Corp'
+if (location.href.includes(urlTheWashfountain)) {
+  site = 'thewashfountain'
+  sitePrettyName = 'The Washfountain'
+  host = hostTheWashfountain
+} else if (location.href.includes(urlBIMRevit)) {
+  site = 'bim-revit'
+  sitePrettyName = 'BIM-Revit'
+  host = hostBIMRevit
 }
 
-api.namespace = `bcorp/v1/`
+/* Define the API object */
 
-api.baseURL = `${api.host}/index.php/wp-json/${api.namespace}`
-api.baseURLTheWashfountain = `${api.hostTheWashfountain}/index.php/wp-json/${
-  api.namespace
-}`
-api.baseURLBIMRevit = `${api.hostBIMRevit}/index.php/wp-json/${api.namespace}`
+const api: API = {
+  host,
 
-api.queryRoute = `wp-query`
+  hostTheWashfountain,
 
-api.query = ({ args }) => {
-  const url = `${api.baseURL}${api.queryRoute}`
+  hostBIMRevit,
 
-  return axios.post(url, args)
+  urlTheWashfountain,
+
+  urlBIMRevit,
+
+  site,
+
+  sitePrettyName,
+
+  namespace,
+
+  baseURL,
+
+  baseURLTheWashfountain: `${hostTheWashfountain}/index.php/wp-json/${namespace}`,
+
+  baseURLBIMRevit: `${hostBIMRevit}/index.php/wp-json/${namespace}`,
+
+  queryRoute,
+
+  query: ({ args }) => {
+    const url = `${baseURL}${queryRoute}`
+
+    return axios.post(url, args)
+  }
 }
 
 module.exports = api
+export type { SiteType }

@@ -158,7 +158,7 @@ class Customizable extends Component<Props, State> {
       // so we have to get by path
       const page =
         match.path === '/:slug'
-          ? await customPageAPIClient.getBySlug(match.params.slug)
+          ? await customPageAPIClient.getBySlug(match.params.slug || '')
           : await customPageAPIClient.getByPath(match.url)
 
       const pageData: BCorpCustomPage = page.data

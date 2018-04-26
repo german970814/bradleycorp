@@ -1,8 +1,9 @@
+// @flow
 import axios from 'axios'
 import api from './index'
 
 const WidgetsClient = {
-  getBySidebarSlug (sidebar) {
+  getBySidebarSlug (sidebar: string) {
     const url = `${api.baseURL}widgets`
     const params = { sidebar }
 
