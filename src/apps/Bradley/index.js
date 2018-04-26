@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
@@ -9,10 +10,12 @@ import 'custom-event-polyfill'
 
 import App from './App/App'
 
-ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-  ,
-  document.querySelector('main')
-)
+const main = document.querySelector('main')
+if (main) {
+  ReactDOM.render(
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>,
+    main
+  )
+}

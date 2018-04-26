@@ -1,6 +1,8 @@
 // @flow
-import React, { Component } from 'react'
+import * as React from 'react'
+import type { User } from '../../../lib/types/user_types'
 import { site } from '../../../api'
+import { UserProvider } from '../../../lib/contexts/UserContext'
 import Header from '../Header/Header'
 import Main from '../Main/Main'
 import MainBIMRevit from '../BIMRevit/Main/Main'
@@ -11,15 +13,32 @@ import style from './App.scss'
 type Props = {}
 
 type State = {
-  blur: boolean
+  blur: boolean,
+  user: User,
+  updateUser: (user: User) => void
 }
 
-class App extends Component<Props, State> {
+class App extends React.Component<Props, State> {
+  updateUser: (user: User) => void
+
   constructor (props: Props) {
     super(props)
 
+    this.updateUser = (user: User) => {
+      this.setState({ user })
+    }
+
     this.state = {
-      blur: false
+      blur: false,
+      user: {
+        id: 1,
+        firstName: 'matt',
+        lastName: 'wills',
+        userName: 'mattwills',
+        permissions: {}
+      },
+      // user: false,
+      updateUser: this.updateUser.bind(this)
     }
   }
 
@@ -44,15 +63,18 @@ class App extends Component<Props, State> {
   }
 
   render () {
+    const { user, updateUser } = this.state
     const blurClass = !this.state.blur ? style.blurOut : style.blurIn // the order here is reversed to make sure we start of un blurred
     return (
-      <div className={`${style.app} ${blurClass}`}>
-        <Header blurApp={this.toggleBlur.bind(this)} />
+      <UserProvider value={{ user, updateUser }}>
+        <div className={`${style.app} ${blurClass}`}>
+          <Header blurApp={this.toggleBlur.bind(this)} />
 
-        {this.getMain()}
+          {this.getMain()}
 
-        <Footer />
-      </div>
+          <Footer />
+        </div>
+      </UserProvider>
     )
   }
 }

@@ -3,7 +3,8 @@ import * as React from 'react'
 import type {
   OptionsTypes,
   FiltersTypes,
-  PostTypeOptions
+  PostTypeOptions,
+  MaterialTypes
 } from '../LiteratureAndChipSamples'
 import ProductLineSelect from './ProductLineSelect'
 import LanguageSelect from './LanguageSelect'
@@ -13,6 +14,7 @@ import style from './Filters.scss'
 
 type Props = {
   options: OptionsTypes,
+  materialTypes: MaterialTypes,
   filters: FiltersTypes,
   selected: PostTypeOptions,
   updateFilters: (newFilters: FiltersTypes) => void
@@ -47,6 +49,7 @@ class Filters extends React.Component<Props> {
     return (
       <MaterialTypeSelect
         chipSamples={this.props.options.chipSamples}
+        materialTypes={this.props.materialTypes}
         filters={this.props.filters}
         updateFilters={this.props.updateFilters}
       />

@@ -12,9 +12,9 @@ type Props = {
  * Class responsible for displaying and updating the search filter
  */
 class LiteratureSearch extends React.Component<Props> {
-  handleChange (event: SyntheticInputEvent<HTMLInputElement>) {
+  handleSubmit (searchString: string): void {
     const newFilters = { ...this.props.filters }
-    newFilters.literature.search = event.target.value
+    newFilters.literature.search = searchString
     this.props.updateFilters(newFilters)
   }
 
@@ -22,7 +22,7 @@ class LiteratureSearch extends React.Component<Props> {
     return (
       <BCorpSearchField
         filterState={this.props.filters.literature.search}
-        handleChange={this.handleChange.bind(this)}
+        handleSubmit={this.handleSubmit.bind(this)}
         title={'Search'}
         className={`col1 col2-tablet`}
       />

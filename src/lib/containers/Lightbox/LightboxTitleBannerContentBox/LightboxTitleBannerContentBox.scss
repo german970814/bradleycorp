@@ -1,0 +1,23 @@
+@import '../../../../scss/partials/variables';
+@import '../LightboxV2/LightboxV2';
+
+.bannerContentBox {
+  width: 100%;
+  height: 100%;
+  max-height: $lightboxHeight + vh;
+  overflow-y: scroll;
+  background-color: #fff;
+  text-align: left;
+
+  .title {
+    padding: 20px;
+    background-color: $navy;
+    color: #fff;
+  }
+
+  .contentContainer {
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}

@@ -1,0 +1,79 @@
+@import '../../../../../../../../../scss/partials/text-styles';
+@import '../../../../../../../../../scss/partials/variables';
+@import '../../../../../../../../../scss/partials/mixins';
+@import '../ShippingInfoForm';
+
+.userArea {
+  margin-bottom: 30px;
+
+  .checkboxField {
+    :global(.checkbox-title) {
+      @extend %body;
+      padding-bottom: 15px;
+      font-weight: bold;
+      color: $black;
+    }
+
+    .checkboxOption {
+      margin-bottom: 10px;
+    }
+
+    .other {
+      margin-bottom: 0px;
+    }
+  }
+
+  .checkboxFieldOvernight {
+    margin-bottom: 30px;
+
+    @include respond-to(tablet) {
+      margin-bottom: 15px;
+    }
+
+    label {
+      color: $black;
+      font-weight: bold;
+    }
+
+    p {
+      margin: 0;
+      margin-top: 18px;
+      color: $steel-grey;
+
+      @include respond-to(tablet) {
+        margin-top: 0px;
+        padding-left: 10px;
+      }
+
+      a {
+        color: $navy;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .carrier {
+    @extend %colWrapper;
+  }
+
+  .repSelect {
+    @extend %colWrapper;
+  }
+
+  .notes {
+    textarea {
+      padding: 10px;
+      height: 112px;
+
+      @include respond-to(tablet) {
+        padding: 15px;
+        height: 148px;
+      }
+
+      &::placeholder {
+        @extend %small-body;
+        font-style: oblique;
+      }
+    }
+  }
+}

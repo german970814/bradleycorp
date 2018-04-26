@@ -35,6 +35,13 @@
   color: $slate-grey;
 }
 
+%button-border-steel-grey {
+  @extend %button;
+  border: solid 1px $steel-grey;
+  background-color: transparent;
+  color: $steel-grey;
+}
+
 %button-border-dark-gray {
   @extend %button;
   border: solid 1px $dark-gray;

@@ -11,7 +11,7 @@ type Props = {
   linkText?: string,
   mediaSrc?: string,
   twoColsOnTablet?: boolean
-};
+}
 
 /**
  * The CTA Widget
@@ -24,9 +24,11 @@ class CTAWidget extends Component<Props> {
       return
     }
 
-    return <div className={style.mediaWrapper}>
-      <img src={mediaSrc} className={style.theMedia} />
-    </div>
+    return (
+      <div className={style.mediaWrapper}>
+        <img src={mediaSrc} className={style.theMedia} />
+      </div>
+    )
   }
 
   renderText () {

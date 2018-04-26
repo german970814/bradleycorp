@@ -1,0 +1,90 @@
+@import '../../../../scss/partials/helpers';
+@import '../../../../scss/partials/variables';
+@import '../../../../scss/partials/mixins';
+@import '../../../../scss/partials/layout';
+
+$closeButtonHeight: 32px;
+$closeButtonDistanceBelow: 40px;
+$lightboxWidth: 85; // percentage
+$lightboxWidthTabletDesktop: 62; // percentage
+$lightboxHeight: 73; // percentage
+$lightboxHeightPerc: $lightboxHeight + %;
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+
+  // lightbox is a fixed size for content to sit inside
+  .lightboxWrapper {
+    position: absolute;
+    top: (100 - $lightboxHeight - 5)/2 + %;
+    left: (100 - $lightboxWidth)/2 + %;
+    padding: 0 $MobileBodyPadding;
+    width: $lightboxWidth + %;
+    height: $lightboxHeightPerc;
+    box-sizing: border-box;
+
+    @include respond-to(tablet) {
+      padding: 0 $TabletBodyPadding;
+    }
+
+    @include respond-to(desktop) {
+      padding: 0 $DesktopBodyPadding;
+    }
+
+    .lightbox {
+      margin: 0 auto;
+      width: 100%;
+      height: 100%;
+
+      .closeButtonWrapper {
+        position: absolute;
+        height: $closeButtonDistanceBelow + $closeButtonHeight;
+        bottom: -($closeButtonDistanceBelow + $closeButtonHeight);
+        left: 0;
+        text-align: center;
+        width: 100%;
+
+        .closeButton {
+          margin-top: $closeButtonDistanceBelow;
+          width: $closeButtonHeight;
+          height: $closeButtonHeight;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  // lightbox takes size of the content its given
+  &.fitLightboxToContent {
+    .lightboxWrapper {
+      position: absolute;
+      top: (100 - $lightboxHeight - 5)/2 + %;
+      left: 0;
+      width: 100%;
+      height: auto;
+      text-align: center;
+
+      .lightbox {
+        position: relative;
+        display: inline-block;
+        width: auto;
+        height: auto;
+      }
+    }
+  }
+
+  // lightbox takes full width (minus body padding)
+  &.fullWidth {
+    .lightboxWrapper {
+      .lightbox {
+        width: 100%;
+      }
+    }
+  }
+}

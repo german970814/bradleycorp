@@ -1,0 +1,85 @@
+@import '../../../../../../../../scss/partials/mixins';
+@import '../../../../../../../../scss/partials/variables';
+
+%colWrapper {
+  margin-bottom: 10px;
+
+  @include respond-to(tablet) {
+    margin-bottom: 14px;
+  }
+}
+
+.shippingInfoForm {
+  .colWrapperLeft {
+    @extend %colWrapper;
+
+    @include respond-to(tablet) {
+      padding-right: 10px;
+    }
+  }
+
+  .colWrapperRight {
+    @extend %colWrapper;
+
+    @include respond-to(tablet) {
+      padding-left: 10px;
+    }
+
+    &.phone {
+      margin-bottom: 30px;
+
+      @include respond-to(tablet) {
+        margin-bottom: 40px;
+      }
+    }
+  }
+
+  .selectField {
+    padding: 0;
+
+    select {
+      height: 42px;
+      background-color: $light-gray;
+    }
+
+    &:before,
+    &:after {
+      bottom: 21px;
+    }
+
+    &.country {
+      padding-left: 10px;
+
+      @include respond-to(tablet) {
+        padding-left: 15px;
+      }
+    }
+  }
+
+  .bottomButtons {
+    button {
+      @include respond-to(tablet) {
+        float: right;
+        width: 180px;
+      }
+    }
+
+    button.submit {
+      margin-bottom: 30px;
+
+      @include respond-to(tablet) {
+        float: left;
+        margin-bottom: 0px;
+      }
+    }
+
+    button.back {
+      margin-bottom: 10px;
+      margin-right: 10px;
+
+      @include respond-to(tablet) {
+        margin-bottom: 0px;
+      }
+    }
+  }
+}

@@ -18,6 +18,10 @@
   @extend %button-border-slate-grey;
 }
 
+:global .button-border-steel-grey :local {
+  @extend %button-border-steel-grey;
+}
+
 :global .button-border-dark-gray :local {
   @extend %button-border-dark-gray;
 }

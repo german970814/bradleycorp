@@ -150,3 +150,62 @@ h5.title {
     right: 5px;
   }
 }
+
+.input {
+  width: 100%;
+
+  input,
+  textarea {
+    @extend %body;
+    border: 1px solid $silver;
+    padding: 0 10px;
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+
+    &::placeholder {
+      color: $steel-grey;
+    }
+  }
+}
+
+.checkbox {
+  .checkboxOption {
+    position: relative;
+
+    input {
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      border: 1px $silver solid;
+      border-radius: 4px;
+      width: 12px;
+      height: 12px;
+      margin: 0;
+      margin-right: 9px;
+
+      &:checked:before {
+        content: '';
+        background: black;
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        left: 3px;
+        top: 5px;
+        border-radius: 2px;
+      }
+    }
+  }
+
+  .other {
+    .checkboxOption {
+      margin-bottom: 18px;
+    }
+
+    .fill {
+      input {
+        background-color: $light-gray;
+        border: solid 1px $silver;
+      }
+    }
+  }
+}

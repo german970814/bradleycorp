@@ -2,7 +2,8 @@
 import * as React from 'react'
 import { renderTitle } from '../DefaultTemplate/DefaultTemplate'
 import style from './RightSidebarTemplate.scss'
-import defaultStyle from '../Templates.scss'
+import defaultStyle, { titlemarginbottom } from '../Templates.scss'
+import { TABLETMAXWIDTH } from '../../../../globals'
 
 type Props = {
   /**
@@ -18,11 +19,64 @@ type Props = {
   /**
    * A render function for the widgets
    */
-  renderRightSidebarWidgets: () => React.Node
-};
+  renderRightSidebarWidgets: () => React.Node,
+  widgetsMoveWithScroll?: boolean
+}
 
-class RightSidebarTemplate extends React.Component<Props> {
+type State = {
+  isSidebarFixed?: boolean,
+  width?: number,
+  top?: number,
+  bottom?: number
+}
+
+class RightSidebarTemplate extends React.Component<Props, State> {
+  sidebarNode: ?HTMLDivElement
+  contentNode: ?HTMLDivElement
+  titleMarginBottom: number
+  snappedAtY: ?number
+
+  constructor (props: Props) {
+    super(props)
+
+    this.state = {
+      isSidebarFixed: false
+    }
+
+    // get the offset from the top from the scss where we want to snap to fixed
+    if (this.props.widgetsMoveWithScroll) {
+      this.titleMarginBottom = parseInt(titlemarginbottom.replace('px', ''))
+    }
+  }
+
+  componentDidMount () {
+    if (this.props.widgetsMoveWithScroll) {
+      // find function at the bottom, just to keep it out the way
+      window.addEventListener('scroll', this.onScroll.bind(this))
+    }
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('scroll', this.onScroll.bind(this))
+  }
+
+  componentWillReceiveProps (nextProps: Props) {
+    if (!nextProps.widgetsMoveWithScroll) {
+      window.removeEventListener('scroll', this.onScroll.bind(this))
+    } else {
+      // will not add a duplicate
+      window.addEventListener('scroll', this.onScroll.bind(this))
+      // calling this will work out if we need to set the state back to false or not
+      this.onScroll()
+    }
+  }
+
   render () {
+    const sidebarFixed =
+      this.props.widgetsMoveWithScroll && this.state.isSidebarFixed
+        ? style.sidebarFixed
+        : ''
+
     return (
       <div
         className={`row ${defaultStyle.defaultTemplate} ${
@@ -30,15 +84,107 @@ class RightSidebarTemplate extends React.Component<Props> {
         }`}>
         {renderTitle(this.props.data.page_title, 'col1')}
 
-        <div className={`col1 col3x2-desktop ${style.content}`}>
+        <div
+          ref={node => {
+            // only applied when widgets move with scroll
+            if (this.props.widgetsMoveWithScroll) {
+              this.contentNode = node
+            }
+          }}
+          className={`col1 col3x2-desktop ${style.content}`}>
           {this.props.renderModules()}
         </div>
 
-        <div className={`col1 col3-desktop ${style.sidebar}`}>
+        <div
+          ref={node => {
+            // only applied when widgets move with scroll
+            if (this.props.widgetsMoveWithScroll) {
+              this.sidebarNode = node
+            }
+          }}
+          className={`col1 col3-desktop ${style.sidebar} ${sidebarFixed}`}>
           {this.props.renderRightSidebarWidgets()}
         </div>
       </div>
     )
+  }
+
+  onScroll () {
+    if (!this.sidebarNode || !this.contentNode || !this.titleMarginBottom) {
+      // if we dont have necessary DOM nodes then we cant move with scroll
+      return this.setState({ isSidebarFixed: false })
+    }
+    // set these as constants in this scope so flow knows they havent changed
+    // since we checked their existence
+    const sidebarNode = this.sidebarNode
+    const contentNode = this.contentNode
+    const titleMarginBottomNumber = this.titleMarginBottom
+
+    if (window.innerWidth <= TABLETMAXWIDTH) {
+      sidebarNode.style.width = '100%'
+      return this.setState({ isSidebarFixed: false })
+    }
+
+    const boundingClientRect = sidebarNode.getBoundingClientRect()
+    const contentBoundingClientRect = contentNode.getBoundingClientRect()
+
+    if (contentBoundingClientRect.height < boundingClientRect.height) {
+      // if the sidebar is longer than the content next to it
+      // then we dont need to move it on scroll
+      sidebarNode.style.height = 'auto'
+      return this.setState({ isSidebarFixed: false })
+    }
+
+    if (
+      boundingClientRect.top < titleMarginBottomNumber &&
+      this.state.isSidebarFixed === false
+    ) {
+      // if the title underline is right at the top of the window,
+      // we snap the sidebar to the screen by
+      // setting position fixed and setting its position values
+      // from values we get with its position WRT the screen at the time of snapping
+      //
+      // note: we save the scroll position at which we snapped
+      //       to make it easier to snap back.
+      const right =
+        window.innerWidth - (sidebarNode.offsetLeft + boundingClientRect.width)
+      const height = window.innerHeight - 2 * titleMarginBottomNumber
+
+      this.snappedAtY = window.scrollY
+      sidebarNode.style.right = `${right}px`
+      sidebarNode.style.top = titlemarginbottom
+      sidebarNode.style.width = `${boundingClientRect.width}px`
+      sidebarNode.style.height = `${height}px`
+      return this.setState({ isSidebarFixed: true })
+    }
+
+    if (
+      this.snappedAtY &&
+      window.scrollY < this.snappedAtY &&
+      this.state.isSidebarFixed === true
+    ) {
+      // using the saved scroll position at which we snapped
+      // if we cross back above that, we want to snap back
+      // and return the sidebar to having position static
+      //
+      // note: we also return the element's scrollTop to 0
+      //       so it can start again when we next scroll down
+      sidebarNode.scrollTop = 0
+      return this.setState({ isSidebarFixed: false })
+    }
+
+    if (window.innerHeight - window.scrollY - 3 * titleMarginBottomNumber < 0) {
+      // if the sidebar comes close to the footer
+      // we take over the positioning and set it from the bottom
+      // so that we can move it up as we scroll further down
+      // thus preventing it from colliding with the footer
+      sidebarNode.style.top = 'unset'
+      sidebarNode.style.bottom = `${-(
+        window.innerHeight -
+        window.scrollY -
+        3 * titleMarginBottomNumber
+      )}px`
+    }
   }
 }
 

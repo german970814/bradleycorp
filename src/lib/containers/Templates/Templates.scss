@@ -1,9 +1,10 @@
-@import "../../../scss/partials/mixins";
-@import "../../../scss/partials/layout";
-@import "../../../scss/partials/variables";
+@import '../../../scss/partials/mixins';
+@import '../../../scss/partials/layout';
+@import '../../../scss/partials/variables';
 
 $titleMarginBottomMobile: 20px;
 $titleMarginTopMobile: 40px;
+$titleMarginBottomDesktop: $titleMarginBottomMobile + 20;
 
 .defaultTemplate {
   @extend %BodyPaddingWithMediaQueries;
@@ -20,25 +21,29 @@ $titleMarginTopMobile: 40px;
 
   margin-top: $titleMarginTopMobile;
   margin-bottom: $titleMarginBottomMobile;
-  @include respond-to( tablet ) {
-    margin-bottom: ($titleMarginBottomMobile + 10)
+  @include respond-to(tablet) {
+    margin-bottom: ($titleMarginBottomMobile + 10);
   }
 
-  @include respond-to( desktop ) {
+  @include respond-to(desktop) {
     margin-top: ($titleMarginTopMobile + 10);
-    margin-bottom: ($titleMarginBottomMobile + 20)
+    margin-bottom: ($titleMarginBottomMobile + 20);
   }
 
   h1 {
     color: $navy;
     margin-bottom: $titleMarginBottomMobile;
 
-    @include respond-to( tablet ) {
-      margin-bottom: ($titleMarginBottomMobile + 10)
+    @include respond-to(tablet) {
+      margin-bottom: ($titleMarginBottomMobile + 10);
     }
 
-    @include respond-to( desktop ) {
-      margin-bottom: ($titleMarginBottomMobile + 20)
+    @include respond-to(desktop) {
+      margin-bottom: ($titleMarginBottomDesktop);
     }
   }
+}
+
+:export {
+  titlemarginbottom: $titleMarginBottomDesktop;
 }

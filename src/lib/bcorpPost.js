@@ -31,7 +31,8 @@ export function getExcerpt (
 export function filterPostsByTerm (
   posts: Array<BCorpPost>,
   termName: string,
-  termId: number | string
+  termId: number | string,
+  leaveChildren?: boolean
 ): Array<BCorpPost> {
   const termIdNumber = parseInt(termId)
 
@@ -45,7 +46,14 @@ export function filterPostsByTerm (
       return false
     } else {
       return post.terms[termName].some(postTerm => {
-        return postTerm.term_id === termIdNumber
+        if (leaveChildren) {
+          return (
+            postTerm.term_id === termIdNumber ||
+            postTerm.parent === termIdNumber
+          )
+        } else {
+          return postTerm.term_id === termIdNumber
+        }
       })
     }
   })

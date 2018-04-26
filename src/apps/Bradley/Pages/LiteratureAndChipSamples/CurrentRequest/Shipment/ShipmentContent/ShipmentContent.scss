@@ -1,5 +1,5 @@
-@import '../../../../../../scss/partials/variables';
-@import '../../../../../../scss/partials/mixins';
+@import '../../../../../../../scss/partials/variables';
+@import '../../../../../../../scss/partials/mixins';
 
 .literatureWrapper {
   margin-bottom: 20px;
@@ -14,23 +14,6 @@
 
   @include respond-to(tablet) {
     margin-bottom: 40px;
-  }
-}
-
-.buttonWrapper {
-  margin-bottom: 30px;
-  text-align: center;
-
-  @include respond-to(tablet) {
-    margin-bottom: 40px;
-  }
-
-  button.button {
-    @include respond-to(tablet) {
-      padding-left: 20px;
-      padding-right: 20px;
-      width: auto;
-    }
   }
 }
 

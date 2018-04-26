@@ -4,6 +4,8 @@ import type {
   LiteraturePost,
   ChipSamplePost
 } from '../../../../lib/types/cpt_types'
+import type { WPMaterialTypeTerm } from '../../../../lib/types/term_types'
+import type { CheckboxObject } from '../../../../lib/components/BCorpFilterField/BCorpCheckboxField'
 import Media from 'react-media'
 import { MOBILEMAXWIDTH } from '../../../../globals'
 import CPTApiClient from '../../../../api/cpt_client'
@@ -18,6 +20,12 @@ import Filters from './Filters/Filters'
 
 type PostTypeOptions = 'literature' | 'chip'
 
+type MaterialTypes = {
+  [number | string]: ?string
+}
+
+/* Filter Types */
+
 type LiteratureFilters = {
   productLine: string,
   language: string,
@@ -25,7 +33,7 @@ type LiteratureFilters = {
 }
 
 type ChipSampleFilters = {
-  materialType: string
+  materialType: number
 }
 
 type FiltersTypes = {
@@ -33,10 +41,14 @@ type FiltersTypes = {
   chipSamples: ChipSampleFilters
 }
 
+/* Option Types */
+
 type OptionsTypes = {
   literature?: Array<LiteraturePost>,
   chipSamples?: Array<ChipSamplePost>
 }
+
+/* Shipment Types */
 
 type ShipmentLiteratureObject = {
   num: number,
@@ -55,7 +67,44 @@ type ShipmentTypes = {
   chip?: Array<ShipmentChipSampleObject>
 }
 
+/* Download Types */
+
 type DownloadTypes = Array<LiteraturePost>
+
+/* Shipping Info */
+
+type ShippingInfoField =
+  | 'fullName'
+  | 'title'
+  | 'companyName'
+  | 'mailingAddress'
+  | 'city'
+  | 'stateProvince'
+  | 'postCode'
+  | 'country'
+  | 'email'
+  | 'phone'
+  | 'userArea'
+
+type ShippingInfoUserAreaField =
+  | 'normallyPurchaseFrom'
+  | 'overnight'
+  | 'carrier'
+  | 'account'
+  | 'rep'
+  | 'requestEmail'
+  | 'notes'
+
+type ShippingInfoUserAreaType = {
+  [ShippingInfoUserAreaField]: ?string,
+  normallyPurchaseFrom?: CheckboxObject,
+  overnight?: CheckboxObject
+}
+
+type ShippingInfoType = {
+  [ShippingInfoField]: ?string,
+  userArea: ShippingInfoUserAreaType
+}
 
 type Props = {}
 
@@ -64,13 +113,16 @@ type State = {
   filters: FiltersTypes,
   shipment?: ShipmentTypes,
   downloads?: DownloadTypes,
+  shippingInfo: ShippingInfoType,
   selected: PostTypeOptions,
+  materialTypes: MaterialTypes,
   showCurrentRequestMobile: boolean
 }
 
 const productLineFilterDefault: string = 'product-line'
 const languageFilterDefault: string = 'language'
-const materialTypeFilterDefault: string = 'material-type'
+const materialTypeFilterDefault: number = 0
+const shippingInfoDefault: ShippingInfoType = { userArea: {} }
 
 class LiteratureAndChipSamples extends React.Component<Props, State> {
   constructor (props: Props) {
@@ -88,13 +140,19 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
           materialType: materialTypeFilterDefault
         }
       },
+      shippingInfo: shippingInfoDefault,
       selected: 'literature',
+      materialTypes: {},
       showCurrentRequestMobile: false
     }
   }
 
   componentDidMount () {
     this.getOptions('literature')
+  }
+
+  updateShippingInfo (newShippingInfo: ShippingInfoType): void {
+    this.setState({ shippingInfo: newShippingInfo })
   }
 
   updateShipment (newShipment: ShipmentTypes): void {
@@ -226,6 +284,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
         !this.state.options.chipSamples.length)
     ) {
       this.getOptions('chip')
+      this.getMaterialTypes()
     }
   }
 
@@ -238,6 +297,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
         />
         <Filters
           options={this.state.options}
+          materialTypes={this.state.materialTypes}
           filters={this.state.filters}
           selected={this.state.selected}
           updateFilters={this.updateFilters.bind(this)}
@@ -275,8 +335,11 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
         ) : null}
         <Shipment
           shipment={this.state.shipment}
+          shippingInfo={this.state.shippingInfo}
+          updateShippingInfo={this.updateShippingInfo.bind(this)}
           removeFromShipment={this.removeFromShipment.bind(this)}
           incrementPostInShipment={this.incrementPostInShipment.bind(this)}
+          isMobile={isMobile}
         />
         <Downloads
           downloads={this.state.downloads}
@@ -287,9 +350,13 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
   }
 
   renderContent (isMobile: boolean) {
-    return this.state.showCurrentRequestMobile
-      ? this.renderCurrentRequest(isMobile)
-      : this.renderOptions(isMobile)
+    if (isMobile) {
+      return this.state.showCurrentRequestMobile
+        ? this.renderCurrentRequest(isMobile)
+        : this.renderOptions(isMobile)
+    } else {
+      return this.renderOptions(isMobile)
+    }
   }
 
   renderRightSidebarWidgets (isMobile: boolean) {
@@ -307,6 +374,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
             renderRightSidebarWidgets={() =>
               this.renderRightSidebarWidgets(match)
             }
+            widgetsMoveWithScroll
           />
         )}
       </Media>
@@ -335,6 +403,50 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
     } catch (err) {
       console.log(err)
     }
+  }
+
+  async getMaterialTypes () {
+    try {
+      const client = new CPTApiClient('chip')
+      const response = await client.getTermsByTax('material_type')
+
+      if (!response.data.material_type) {
+        console.warn(
+          'couldnt find material_type tax in chip-terms GET response'
+        )
+        return
+      }
+
+      const materialTypesData: Array<WPMaterialTypeTerm> =
+        response.data.material_type
+
+      return this.setState({
+        materialTypes: this.createMaterialTypesObject(materialTypesData)
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  createMaterialTypesObject (
+    materialTypes: Array<WPMaterialTypeTerm>
+  ): MaterialTypes {
+    const materialTypesObject = {}
+
+    if (!materialTypes) {
+      return materialTypesObject
+    }
+
+    materialTypes.forEach(materialType => {
+      if (
+        !Object.keys(materialTypesObject).includes(materialType.term_id) &&
+        materialType.parent === 0
+      ) {
+        materialTypesObject[materialType.term_id] = materialType.name
+      }
+    })
+
+    return materialTypesObject
   }
 
   createNewShipmentWithPost (post: LiteraturePost | ChipSamplePost): void {
@@ -410,6 +522,7 @@ export {
   productLineFilterDefault,
   languageFilterDefault,
   materialTypeFilterDefault,
+  shippingInfoDefault,
   download
 }
 export type {
@@ -417,7 +530,12 @@ export type {
   OptionsTypes,
   FiltersTypes,
   ShipmentTypes,
+  ShippingInfoType,
+  ShippingInfoField,
+  ShippingInfoUserAreaField,
+  ShippingInfoUserAreaType,
   DownloadTypes,
   ShipmentChipSampleObject,
-  ShipmentLiteratureObject
+  ShipmentLiteratureObject,
+  MaterialTypes
 }
