@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import CPTApiClient from '../../../../api/cpt_client'
 import FillColumns from '../../../../lib/components/FillColumns/FillColumns'
+import Filters from './Filters/Filters'
+import ImageFrame from '../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import { filterPostsByTerm } from '../../../../lib/bcorpPost'
 
 const PostType = 'application-gallery';
@@ -29,6 +31,10 @@ export default class ApplicationGallery extends Component<Props, State> {
         this.renderContent = this.renderContent.bind(this)
     }
 
+    updateFilters(newFilters: any): void {
+        this.setState({ filters: newFilters })
+    }
+
     renderContent() {
         return (
             <div>
@@ -45,9 +51,16 @@ export default class ApplicationGallery extends Component<Props, State> {
                         })}
                     </ul>
                 </section>
+                <Filters filters={{}} updateFilters={this.updateFilters.bind(this)} />
                 <FillColumns colClasses={['col4', 'col4', 'col4']}>
                     {this.state.gallery.length && this.state.gallery.map((el, idx) => {
-                        return <img src={el.meta.app_gallery_img} key={idx} width="400" height="300" />
+                        return <ImageFrame
+                            src={el.meta.app_gallery_img}
+                            key={idx}
+                            aspectRatio={123 / 270}
+                            aspectRatioTablet={152 / 332}
+                            aspectRatioDesktop={169 / 370}
+                        />
                     })}
                 </FillColumns>
             </div>
@@ -74,7 +87,6 @@ export default class ApplicationGallery extends Component<Props, State> {
 
     componentDidMount() {
         this.getApplicationGallery()
-        this.getApplicationGalleryFilters()
     }
 
     async getApplicationGallery() {
@@ -88,15 +100,6 @@ export default class ApplicationGallery extends Component<Props, State> {
         })
     }
 
-    async getApplicationGalleryFilters() {
-        const client = new CPTApiClient(PostType)
-        const response = await client.getTerms()
-        console.log(response.data)
-        this.setState({
-            filters: response.data
-        })
-    }
-
     render() {
         return <DefaultTemplate
             data={{ page_title: 'Application Gallery' }}
@@ -104,4 +107,8 @@ export default class ApplicationGallery extends Component<Props, State> {
             widgetsMoveWithScroll
         />
     }
+}
+
+export {
+    PostType
 }
