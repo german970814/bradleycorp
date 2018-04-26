@@ -37,13 +37,6 @@ class Videos extends React.Component<Props, State> {
   }
 
   async getFilteredVideos () {
-    /*
-    const testObject = {
-      video_gallery_product_tag: ['product-group-a'],
-      video_gallery_type_cat: ['installation']
-    }
-    */
-
     const filters = this.getFiltersFormattedForRequest()
 
     try {
