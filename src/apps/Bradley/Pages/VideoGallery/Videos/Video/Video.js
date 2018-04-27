@@ -10,13 +10,12 @@ type Props = {
 }
 
 const Video = (props: Props) => {
+  const url = props.video.meta.video_gallery_video
+
   return (
     <div className={`col1 col2-tablet ${style.videoWrapper}`}>
       <FixedAspectRatioBox>
-        <BCorpVideo
-          className={style.video}
-          url={props.video.meta.video_gallery_video}
-        />
+        <BCorpVideo className={style.video} url={url} noVimeo />
       </FixedAspectRatioBox>
       <h5 className={style.title}>{props.video.post.post_title}</h5>
     </div>

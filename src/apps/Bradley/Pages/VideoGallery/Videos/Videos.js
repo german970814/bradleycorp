@@ -3,6 +3,7 @@ import * as React from 'react'
 import type { FiltersType } from '../VideoGallery'
 import type { VideoGalleryPost } from '../../../../../lib/types/cpt_types'
 import type { BCorpPost } from '../../../../../lib/types/post_types'
+import { vimeoParser } from '../../../../../lib/components/BCorpVideo/BCorpVideo'
 import { filterDefault } from '../VideoGallery'
 import { sortIntoRows } from '../../../../../lib/bcorpJSX'
 import Video from './Video/Video'
@@ -45,7 +46,14 @@ class Videos extends React.Component<Props, State> {
 
     let videos = []
     this.state.videos.forEach((video, index) => {
-      videos = [...videos, <Video key={index} video={video} />]
+      const url = video.meta.video_gallery_video
+        ? video.meta.video_gallery_video
+        : ''
+
+      // skip vimeo videos and videos without url
+      if (!vimeoParser(url) && url !== '') {
+        videos = [...videos, <Video key={index} video={video} />]
+      }
     })
 
     return sortIntoRows(videos, 2)
@@ -58,7 +66,6 @@ class Videos extends React.Component<Props, State> {
 
   async getFilteredVideos (props: Props) {
     const filters = this.getFiltersFormattedForRequest(props)
-    console.log('requesting', filters)
 
     try {
       const client = new CPTApiClient('video-gallery')

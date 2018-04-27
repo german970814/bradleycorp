@@ -113,32 +113,32 @@ const BCorpVideo = props => {
       }
     }
   }
+}
 
-  /**
-   * Regex matcher for YouTube URL to retrieve video ID
-   *
-   * @param  {string} url
-   * @return {string|bool} false if no video ID matched
-   * @public
-   */
-  function youtubeParser (url) {
-    const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/
-    const match = url.match(regExp)
-    return match && match[7].length === 11 ? match[7] : false
-  }
+/**
+ * Regex matcher for YouTube URL to retrieve video ID
+ *
+ * @param  {string} url
+ * @return {string|bool} false if no video ID matched
+ * @public
+ */
+function youtubeParser (url) {
+  const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/
+  const match = url.match(regExp)
+  return match && match[7].length === 11 ? match[7] : false
+}
 
-  /**
-   * Regex matcher for Vimeo URL to retrieve video ID
-   *
-   * @param  {string} url
-   * @return {string|bool} false if no video ID matched
-   * @public
-   */
-  function vimeoParser (url) {
-    const regExp = /^.*vimeo.*\/([\d]+)/
-    const match = url.match(regExp)
-    return match && stringIsNumeric(match[1]) ? match[1] : false
-  }
+/**
+ * Regex matcher for Vimeo URL to retrieve video ID
+ *
+ * @param  {string} url
+ * @return {string|bool} false if no video ID matched
+ * @public
+ */
+function vimeoParser (url) {
+  const regExp = /^.*vimeo.*\/([\d]+)/
+  const match = url.match(regExp)
+  return match && stringIsNumeric(match[1]) ? match[1] : false
 }
 
 BCorpVideo.propTypes = {
@@ -184,3 +184,5 @@ BCorpVideo.propTypes = {
 }
 
 export default BCorpVideo
+
+export { vimeoParser, youtubeParser }

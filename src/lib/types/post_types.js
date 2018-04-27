@@ -30,7 +30,9 @@ type WPFeaturedImageArrayTypes = string | number | boolean
 
 type BCorpPost = {
   post: WPPost,
-  meta: {},
+  meta: {
+    video_gallery_video?: string
+  },
   terms: {
     [string]: ?Array<WPTerm>,
     post_tag?: Array<WPPostTagTerm>,
