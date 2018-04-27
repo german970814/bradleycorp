@@ -1,35 +1,63 @@
 // @flow
 import * as React from 'react'
-import CPTApiClient from '../../../../api/cpt_client'
+import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
+import Videos from './Videos/Videos'
+import Filters from './Filters/Filters'
+import style from './VideoGallery.scss'
+
+const videoTypeDefault: 'videoType' = 'videoType'
+const productTypeDefault: 'productType' = 'productType'
+
+type FiltersType = {
+  video_gallery_type_cat: string,
+  video_gallery_product_tag: string,
+  search?: string
+}
 
 type Props = {}
 
-class VideoGallery extends React.Component<Props> {
-  render () {
-    console.log(this.getFilteredVideos())
-    return null
+type State = {
+  filters: FiltersType
+}
+
+class VideoGallery extends React.Component<Props, State> {
+  constructor (props: Props) {
+    super(props)
+
+    this.state = {
+      filters: {
+        video_gallery_type_cat: videoTypeDefault,
+        video_gallery_product_tag: productTypeDefault,
+        search: ''
+      }
+    }
   }
 
-  async getFilteredVideos () {
-    const testObject = {
-      video_gallery_product_tag: ['product-group-a'],
-      video_gallery_type_cat: ['installation']
-    }
+  updateFilters (filters: FiltersType) {
+    this.setState({ filters })
+  }
 
-    try {
-      const client = new CPTApiClient('video-gallery')
-      const response = await client.getByTaxNameAndTermSlugObject(
-        testObject,
-        'OR'
-      )
-
-      const data = response.data
-      console.log(data)
-      return data
-    } catch (err) {
-      console.log(err)
-    }
+  render () {
+    return (
+      <DefaultTemplate
+        data={{ page_title: 'Video Gallery' }}
+        renderModules={() => {
+          return (
+            <div className={style.VideoGallery}>
+              <Filters
+                filters={this.state.filters}
+                updateFilters={this.updateFilters.bind(this)}
+              />
+              <Videos filters={this.state.filters} />
+            </div>
+          )
+        }}
+      />
+    )
   }
 }
 
 export default VideoGallery
+
+export { videoTypeDefault, productTypeDefault }
+export type { FiltersType }
