@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react'
+import debounce from 'debounce'
 import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import CPTApiClient from '../../../../api/cpt_client'
 import FillColumns from '../../../../lib/components/FillColumns/FillColumns'
@@ -20,6 +21,8 @@ type TermsType = {
   tax_names: Array<string>
 }
 
+type FiltersType = Array<string>
+
 type GalleryType = {
   meta: MetaType,
   post: ApplicationGalleryPost,
@@ -28,46 +31,45 @@ type GalleryType = {
 
 type State = {
   gallery: Array<GalleryType>,
-  filters: Object,
-  activeFilters: Array<string>
+  activeFilters: Object,
+  loading: boolean
 }
 
 export default class ApplicationGallery extends Component<Props, State> {
+  getApplicationGalleryDebounced: (props: Props) => void
+
   constructor (props: Props) {
     super(props)
 
     this.state = {
       gallery: [],
-      filters: {},
-      activeFilters: []
+      activeFilters: {},
+      loading: true
     }
+    this.getApplicationGalleryDebounced = debounce(this.getApplicationGallery, 2000)
   }
 
   componentDidMount () {
-    this.getApplicationGallery()
+    this.getApplicationGallery({})
   }
 
-  updateFilters (newFilters: any): void {
-    this.setState({ filters: newFilters })
+  updateFilters (tax: string, newFilters: FiltersType): void {
+    let activeFilters = this.state.activeFilters
+    if (!newFilters.length) {
+      delete this.state.activeFilters[tax]
+    } else {
+      activeFilters = Object.assign(
+        {}, activeFilters, { [tax]: newFilters }
+      )
+    }
+    this.setState({ activeFilters, loading: true })
+    this.getApplicationGalleryDebounced(activeFilters)
   }
 
   renderContent () {
     return (
       <div>
-        <section id="sidebar">
-          <ul>
-            {'tax_names' in this.state.filters && this.state.filters.tax_names.map((el, idx) => {
-              return (
-                <ul key={idx}>
-                  {this.state.filters[el].map((ele, ind) => {
-                    return <li key={ind}><a onClick={() => this.toggleFilter(ele.slug)}>{ele.name}</a></li>
-                  })}
-                </ul>
-              )
-            })}
-          </ul>
-        </section>
-        <Filters filters={{}} updateFilters={this.updateFilters.bind(this)} />
+        <Filters updateFilters={this.updateFilters.bind(this)} />
         <FillColumns colClasses={['col4', 'col4', 'col4']}>
           {this.state.gallery.map((el, idx) => {
             return <ImageFrame
@@ -83,24 +85,14 @@ export default class ApplicationGallery extends Component<Props, State> {
     )
   }
 
-  toggleFilter (filter: string) {
-    const indexOf = this.state.activeFilters.indexOf(filter)
-    if (indexOf + 1) {
-      const activeFilters = this.state.activeFilters
-      activeFilters.splice(indexOf, 1)
-      this.setState({ activeFilters })
-    } else {
-      this.setState({ activeFilters: [filter, ...this.state.activeFilters] })
-    }
-  }
-
-  async getApplicationGallery () {
+  async getApplicationGallery (filters: Props) {
     const client = new CPTApiClient(PostType)
-    const response = await client.getLatest(20)
+    const response = await client.getByTaxNameAndTermSlugObject(filters, 'OR')
     this.setState({
       gallery: response.data.map(post => {
         return post
-      })
+      }),
+      loading: false
     })
   }
 
@@ -115,4 +107,8 @@ export default class ApplicationGallery extends Component<Props, State> {
 
 export {
   PostType
+}
+
+export type {
+  FiltersType
 }

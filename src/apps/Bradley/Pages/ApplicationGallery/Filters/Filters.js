@@ -3,10 +3,10 @@ import * as React from 'react'
 import ProductCheck from './ProductCheck'
 import CPTApiClient from '../../../../../api/cpt_client'
 import { PostType } from '../ApplicationGallery'
+import type { FiltersType } from '../ApplicationGallery'
 
 type Props = {
-  filters: Object,
-  updateFilters: (newFilters: Object) => void
+  updateFilters: (tax: string, newFilters: FiltersType) => void
 }
 
 type State = {
@@ -23,8 +23,13 @@ class Filters extends React.Component<Props, State> {
       filters: {}
     }
   }
+
   componentDidMount () {
     this.getApplicationGalleryFilters()
+  }
+
+  updateFilters (tax: string, value: FiltersType) {
+    this.props.updateFilters(tax, value)
   }
 
   renderFilters () {
@@ -35,8 +40,7 @@ class Filters extends React.Component<Props, State> {
             key={ind}
             options={this.getOptions(this.state.filters[el])}
             title={el}
-            filters={this.props.filters}
-            updateFilters={this.props.updateFilters} />
+            updateFilters={(v: FiltersType) => this.updateFilters(el, v)} />
         })}
       </React.Fragment>
     )
@@ -45,15 +49,7 @@ class Filters extends React.Component<Props, State> {
   getOptions (filters: Object) {
     const object = {}
     filters.forEach(el => {
-      object[el.term_id.toString()] = el.name
-    })
-    return object
-  }
-
-  get options () {
-    const object = {}
-    Object.keys(this.state.filters).forEach((el, ind) => {
-
+      object[el.slug.toString()] = el.name
     })
     return object
   }
@@ -69,14 +65,11 @@ class Filters extends React.Component<Props, State> {
   async getApplicationGalleryFilters () {
     const client = new CPTApiClient(PostType)
     const response = await client.getTerms()
-    console.log(response.data)
     const filters = {}
     'tax_names' in response.data && response.data.tax_names.forEach(data => {
       filters[data] = response.data[data]
     })
-    this.setState({
-      filters
-    })
+    this.setState({ filters })
   }
 }
 
