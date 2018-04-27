@@ -12,7 +12,8 @@ type Props = {
    */
   data: {
     page_id: number,
-    page_title: string
+    page_title: string,
+    metaboxes: Array<string>,
   }
 };
 
