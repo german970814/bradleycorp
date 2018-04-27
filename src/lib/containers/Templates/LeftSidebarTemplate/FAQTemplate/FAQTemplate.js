@@ -13,7 +13,7 @@ type Props = {
   data: {
     page_id: number,
     page_title: string,
-    metaboxes: Array<string>,
+    metaboxes: { faq_category: string },
   }
 };
 
