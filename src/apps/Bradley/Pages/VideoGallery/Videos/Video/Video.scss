@@ -1,0 +1,26 @@
+@import '../../../../../../scss/partials/mixins';
+
+.videoWrapper {
+  margin-bottom: 20px;
+  width: 100%;
+
+  @include respond-to(tablet) {
+    &:nth-child(2n + 1) {
+      padding-right: 8px;
+    }
+
+    &:nth-child(2n) {
+      padding-left: 8px;
+    }
+  }
+
+  .video {
+    width: 100%;
+    height: 100%;
+  }
+
+  h5 {
+    margin-top: 20px;
+    text-align: center;
+  }
+}

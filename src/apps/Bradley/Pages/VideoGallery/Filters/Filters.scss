@@ -4,6 +4,8 @@ $paddingBetweenFilters: 20px;
 $paddingBetweenFiltersTablet: 16px;
 
 .filters {
+  margin-bottom: 30px;
+
   @include respond-to(tablet) {
     margin-right: -12px;
     margin-left: -12px;

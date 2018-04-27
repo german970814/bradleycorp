@@ -4,6 +4,7 @@ import type { FiltersType } from '../VideoGallery'
 import type { VideoGalleryPost } from '../../../../../lib/types/cpt_types'
 import type { BCorpPost } from '../../../../../lib/types/post_types'
 import { filterDefault } from '../VideoGallery'
+import { sortIntoRows } from '../../../../../lib/bcorpJSX'
 import Video from './Video/Video'
 import CPTApiClient from '../../../../../api/cpt_client'
 import style from './Videos.scss'
@@ -37,17 +38,22 @@ class Videos extends React.Component<Props, State> {
     }
   }
 
+  renderVideos () {
+    if (!this.state.videos || !this.state.videos.length) {
+      return null
+    }
+
+    let videos = []
+    this.state.videos.forEach((video, index) => {
+      videos = [...videos, <Video key={index} video={video} />]
+    })
+
+    return sortIntoRows(videos, 2)
+  }
+
   render () {
     console.log(this.state)
-    return (
-      <div className={style.videos}>
-        {this.state.videos && this.state.videos.length
-          ? this.state.videos.map((video, index) => {
-            return <Video key={index} video={video} />
-          })
-          : null}
-      </div>
-    )
+    return <div className={`row ${style.videos}`}>{this.renderVideos()}</div>
   }
 
   async getFilteredVideos (props: Props) {
