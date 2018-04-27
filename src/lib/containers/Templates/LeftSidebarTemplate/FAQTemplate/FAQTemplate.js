@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react'
 import type { BCorpPost, WPPost } from '../../../../types/post_types'
+import type { BCorpMetaboxes } from '../../../../types/customPage_types'
 import CPTApiClient from '../../../../../api/cpt_client'
 import LeftSidebarTemplate from '../LeftSidebarTemplate'
 import DropDownTab from '../../../DropDownTab/DropDownTab'
@@ -13,14 +14,14 @@ type Props = {
   data: {
     page_id: number,
     page_title: string,
-    metaboxes: { faq_category: string },
+    metaboxes: false | BCorpMetaboxes
   }
-};
+}
 
 type State = {
   faqs: Array<WPPost>,
-  processing: Boolean
-};
+  processing: boolean
+}
 
 class FAQTemplate extends React.Component<Props, State> {
   constructor (props: Props) {
@@ -28,7 +29,7 @@ class FAQTemplate extends React.Component<Props, State> {
 
     this.state = {
       faqs: [{ ID: 0 }],
-      processing: false,
+      processing: false
     }
   }
 
@@ -36,15 +37,15 @@ class FAQTemplate extends React.Component<Props, State> {
     this.getFAQs()
   }
 
-  componentDidUpdate(prevtProps) {
-    if ( this.props.data.page_id !== prevtProps.data.page_id ) {
-      this.getFAQs();
+  componentDidUpdate (prevProps: Props) {
+    if (this.props.data.page_id !== prevProps.data.page_id) {
+      this.getFAQs()
     }
   }
 
   renderFAQ () {
-    if ( 0 === this.state.faqs.length ) {
-      return <Loading />;
+    if (this.state.faqs.length === 0) {
+      return <Loading />
     }
     return this.state.faqs.map((faq, index) => {
       if (!faq['post_title'] || !faq['post_content']) {
@@ -71,17 +72,19 @@ class FAQTemplate extends React.Component<Props, State> {
   }
 
   async getFAQs () {
-    if ( this.state.processing ) {
-      return;
+    if (this.state.processing || !this.props.data.metaboxes) {
+      return
     }
+    const { metaboxes } = this.props.data
 
     this.setState({ faqs: [], processing: true })
 
     try {
       const client = new CPTApiClient('faq')
-      const faqResponse = 0 < this.props.data.metaboxes.faq_category.length
-        ? await client.getByTax('faq_category', this.props.data.metaboxes.faq_category)
-        : await client.getLatest(-1)
+      const faqResponse =
+        metaboxes.faq_category && metaboxes.faq_category.length > 0
+          ? await client.getByTax('faq_category', metaboxes.faq_category)
+          : await client.getLatest(-1)
       const faqData: Array<BCorpPost> = faqResponse.data
 
       const faqs = faqData.map(faq => {
