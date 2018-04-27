@@ -23,9 +23,14 @@
       position: absolute;
       top: 50%;
       right: 50%;
+      border-radius: 50%;
       width: 70px;
       height: 70px;
       transform: translate(35px, -35px);
+
+      &:hover {
+        box-shadow: 3.5px 8.3px 15.5px 0.5px rgba(0, 0, 0, 0.5);
+      }
     }
   }
 
