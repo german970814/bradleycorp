@@ -4,6 +4,7 @@ import type { BCorpPost, WPPost } from '../../../../types/post_types'
 import CPTApiClient from '../../../../../api/cpt_client'
 import LeftSidebarTemplate from '../LeftSidebarTemplate'
 import DropDownTab from '../../../DropDownTab/DropDownTab'
+import Loading from '../../../../components/Loading/Loading'
 
 type Props = {
   /**
@@ -11,12 +12,14 @@ type Props = {
    */
   data: {
     page_id: number,
-    page_title: string
+    page_title: string,
+    metaboxes: { faq_category: string },
   }
 };
 
 type State = {
-  faqs: Array<WPPost>
+  faqs: Array<WPPost>,
+  processing: Boolean
 };
 
 class FAQTemplate extends React.Component<Props, State> {
@@ -24,7 +27,8 @@ class FAQTemplate extends React.Component<Props, State> {
     super(props)
 
     this.state = {
-      faqs: [{ ID: 0 }]
+      faqs: [{ ID: 0 }],
+      processing: false,
     }
   }
 
@@ -32,7 +36,16 @@ class FAQTemplate extends React.Component<Props, State> {
     this.getFAQs()
   }
 
+  componentDidUpdate(prevtProps) {
+    if ( this.props.data.page_id !== prevtProps.data.page_id ) {
+      this.getFAQs();
+    }
+  }
+
   renderFAQ () {
+    if ( 0 === this.state.faqs.length ) {
+      return <Loading />;
+    }
     return this.state.faqs.map((faq, index) => {
       if (!faq['post_title'] || !faq['post_content']) {
         return null
@@ -58,16 +71,24 @@ class FAQTemplate extends React.Component<Props, State> {
   }
 
   async getFAQs () {
+    if ( this.state.processing ) {
+      return;
+    }
+
+    this.setState({ faqs: [], processing: true })
+
     try {
       const client = new CPTApiClient('faq')
-      const faqResponse = await client.getLatest(-1)
+      const faqResponse = 0 < this.props.data.metaboxes.faq_category.length
+        ? await client.getByTax('faq_category', this.props.data.metaboxes.faq_category)
+        : await client.getLatest(-1)
       const faqData: Array<BCorpPost> = faqResponse.data
 
       const faqs = faqData.map(faq => {
         return faq.post
       })
 
-      this.setState({ faqs })
+      this.setState({ faqs, processing: false })
     } catch (err) {
       console.log(err)
     }
