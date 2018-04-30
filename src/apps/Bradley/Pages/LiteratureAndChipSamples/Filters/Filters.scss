@@ -42,4 +42,12 @@ $tabletGapBetweenFilters: 24px;
 
 .materialType {
   padding-bottom: 0px;
+
+  &::before {
+    bottom: 16px;
+  }
+
+  &::after {
+    bottom: 16px;
+  }
 }
