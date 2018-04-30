@@ -73,8 +73,6 @@ h5.title {
 .select {
   position: relative;
   padding-bottom: 20px;
-  -moz-appearance: none;
-  -webkit-appearance: none;
 
   @include respond-to(tablet) {
     padding-left: ($tabletGapBetweenFilters / 2);
@@ -84,6 +82,16 @@ h5.title {
 
   select {
     @extend %inputStyle;
+
+    // remove browser defaults
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    // remove dropdown arrow on IE
+    &::-ms-expand {
+      display: none;
+    }
   }
 
   &::after {
