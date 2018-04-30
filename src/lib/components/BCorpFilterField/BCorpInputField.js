@@ -10,7 +10,7 @@ type Props = {
   className?: string,
   disabled?: boolean,
   required?: boolean,
-  shortenRequired?: boolean
+  lengthenRequired?: boolean
 }
 
 /**
@@ -28,13 +28,15 @@ class BCorpInputField extends React.Component<Props> {
         ? style.required
         : ''
 
-    const shortenRequired = this.props.shortenRequired ? style.shorten : ''
+    const lengthenRequired: string = this.props.lengthenRequired
+      ? style.lengthen
+      : ''
 
     return (
       <div
         className={`${this.props.className || ''} ${
           style.input
-        } ${requiredClassName} ${shortenRequired}`}>
+        } ${requiredClassName} ${lengthenRequired}`}>
         {this.props.title ? (
           <h5 className={style.title}>{this.props.title}</h5>
         ) : null}

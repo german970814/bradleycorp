@@ -52,15 +52,15 @@ $tabletGapBetweenFilters: 24px;
   &::after {
     @extend %post-meta-data;
     position: absolute;
-    content: '*Required';
+    content: '*';
     right: 10px;
     bottom: 13px;
     color: $red;
   }
 
-  &.shorten {
+  &.lengthen {
     &::after {
-      content: '*';
+      content: '*Required';
     }
   }
 }

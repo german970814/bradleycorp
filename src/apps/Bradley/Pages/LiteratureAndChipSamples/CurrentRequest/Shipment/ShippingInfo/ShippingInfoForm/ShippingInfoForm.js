@@ -185,7 +185,6 @@ class ShippingInfoForm extends React.Component<Props> {
                 }}
                 placeholder={'Postal Code'}
                 required={this.isRequired('postCode')}
-                shortenRequired
               />
               <BCorpSelectField
                 className={`col2 ${style.selectField} ${
