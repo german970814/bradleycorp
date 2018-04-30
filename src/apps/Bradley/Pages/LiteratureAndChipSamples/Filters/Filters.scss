@@ -35,8 +35,18 @@ $tabletGapBetweenFilters: 24px;
 .language {
   padding-left: 10px;
 
+  &::after,
+  &::before {
+    right: 10px;
+  }
+
   @include respond-to(tablet) {
     padding-left: ($tabletGapBetweenFilters / 2);
+
+    &::after,
+    &::before {
+      right: 20px;
+    }
   }
 }
 
