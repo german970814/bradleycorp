@@ -1,6 +1,16 @@
 @import '../../../../../scss/partials/variables';
 @import '../../../../../scss/partials/mixins';
 
+.widget {
+  :global(.widget-content-box) {
+    padding: 20px;
+  }
+
+  :global(.widget-title) {
+    margin-bottom: 16px;
+  }
+}
+
 .title {
   margin-bottom: 13px;
   color: $black;

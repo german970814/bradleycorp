@@ -31,7 +31,7 @@ class BCorpWidget extends React.Component<Props> {
       return
     }
 
-    return <h4 className={style.title}>{title}</h4>
+    return <h4 className={`${style.title} widget-title`}>{title}</h4>
   }
 
   render () {
@@ -44,7 +44,9 @@ class BCorpWidget extends React.Component<Props> {
           ''}`}>
         {this.renderTitle()}
 
-        <div className={`${style.contentBox}`}>{this.props.children}</div>
+        <div className={`${style.contentBox} widget-content-box`}>
+          {this.props.children}
+        </div>
       </div>
     )
   }

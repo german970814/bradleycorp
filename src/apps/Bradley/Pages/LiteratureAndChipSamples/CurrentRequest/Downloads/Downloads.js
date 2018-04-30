@@ -72,7 +72,7 @@ class Downloads extends React.Component<Props> {
     return (
       <BCorpWidget
         title={'Your Downloads'}
-        className={'col1 col2-tablet col1-desktop'}
+        className={`col1 col2-tablet col1-desktop ${sharedStyle.widget}`}
         twoColsOnTablet>
         {this.renderContent()}
       </BCorpWidget>
