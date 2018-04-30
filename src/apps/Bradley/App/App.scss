@@ -9,13 +9,9 @@ $blurPX: 10px;
 
 .blurIn {
   filter: blur($blurPX);
-  position: relative;
-  overflow: hidden;
 }
 
 .blurOut {
   filter: blur(0px);
   transition: filter 0.5s;
-  position: static;
-  overflow: auto;
 }
