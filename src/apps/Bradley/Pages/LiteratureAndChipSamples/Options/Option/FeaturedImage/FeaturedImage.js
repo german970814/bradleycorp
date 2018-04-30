@@ -67,15 +67,14 @@ class FeaturedImage extends React.Component<Props, State> {
           return (
             <FixedAspectRatioBox aspectRatio={0.99999} verticalAlign={'bottom'}>
               <div
-                style={{
-                  backgroundImage: `url(${
-                    this.props.post.media.featured_image[0]
-                  })`
-                }}
-                className={style.featuredImage}
+                className={`${style.featuredImage} ${style.chip}`}
                 onClick={openLightbox}
                 onMouseEnter={this.onMouseEnter.bind(this)}
                 onMouseLeave={this.onMouseLeave.bind(this)}>
+                <img
+                  className={`${style.chipImage}`}
+                  src={this.props.post.media.featured_image[0]}
+                />
                 {this.renderOverlay()}
               </div>
             </FixedAspectRatioBox>

@@ -43,6 +43,19 @@
     color: #fff;
     transform: translateY(4px);
   }
+
+  &.chip {
+    img.chipImage {
+      border: 1px solid #cecece;
+    }
+
+    .overlay {
+      top: -1px;
+      right: -1px;
+      bottom: -1px;
+      left: -1px;
+    }
+  }
 }
 
 .lightboxBackground {
