@@ -2,8 +2,6 @@
 import type { BlogName, BlogPrettyName } from '../lib/types/blog_types'
 import axios from 'axios'
 
-const dev: boolean = false
-
 type HostType =
   | 'http://bradley.test'
   | 'http://bradleydev.twoxfour.com'
@@ -45,6 +43,8 @@ type API = {
   queryRoute: string,
   query: ({ args?: {} }) => {}
 }
+
+const dev: boolean = false
 
 let site: SiteType = 'bcorp'
 
