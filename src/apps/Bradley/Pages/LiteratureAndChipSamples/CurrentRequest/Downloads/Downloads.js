@@ -28,7 +28,7 @@ class Downloads extends React.Component<Props> {
       !this.props.downloads.constructor === Array ||
       !this.props.downloads.length
     ) {
-      return "You haven't added any Literature to downloads yet"
+      return 'You haven’t added any Literature yet.'
     }
 
     return this.props.downloads.map((download, index) => {

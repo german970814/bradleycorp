@@ -48,6 +48,8 @@ $addButtonMobileWidth: 30px;
   @include respond-to(desktop) {
     // extend button-border-dark-gray
     border: solid 1px $dark-gray;
+    padding-top: 0;
+    padding-bottom: 0;
     background-color: transparent;
     color: $dark-gray;
 
