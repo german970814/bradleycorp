@@ -130,4 +130,4 @@ export default class ApplicationGallery extends Component<Props, State> {
 
 export { PostType }
 
-export type { FiltersType }
+export type { FiltersType, GalleryType }
