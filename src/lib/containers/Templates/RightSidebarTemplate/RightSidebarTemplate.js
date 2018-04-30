@@ -21,14 +21,14 @@ type Props = {
    */
   renderRightSidebarWidgets: () => React.Node,
   widgetsMoveWithScroll?: boolean
-}
+};
 
 type State = {
   isSidebarFixed?: boolean,
   width?: number,
   top?: number,
   bottom?: number
-}
+};
 
 class RightSidebarTemplate extends React.Component<Props, State> {
   sidebarNode: ?HTMLDivElement
