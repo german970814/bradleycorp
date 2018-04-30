@@ -28,7 +28,7 @@ class Downloads extends React.Component<Props> {
       !this.props.downloads.constructor === Array ||
       !this.props.downloads.length
     ) {
-      return "You haven't added any Literature to downloads yet"
+      return 'You haven’t added any Literature yet.'
     }
 
     return this.props.downloads.map((download, index) => {
@@ -72,7 +72,7 @@ class Downloads extends React.Component<Props> {
     return (
       <BCorpWidget
         title={'Your Downloads'}
-        className={'col1 col2-tablet col1-desktop'}
+        className={`col1 col2-tablet col1-desktop ${sharedStyle.widget}`}
         twoColsOnTablet>
         {this.renderContent()}
       </BCorpWidget>

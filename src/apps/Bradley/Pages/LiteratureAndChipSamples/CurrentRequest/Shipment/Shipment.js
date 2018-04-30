@@ -11,6 +11,7 @@ import type {
 } from '../../LiteratureAndChipSamples'
 import BCorpWidget from '../../../../../../lib/containers/Widgets/BCorpWidget'
 import ShipmentContent from './ShipmentContent/ShipmentContent'
+import style from '../CurrentRequest.scss'
 
 type Props = {
   shipment?: ShipmentTypes,
@@ -30,7 +31,7 @@ class Shipment extends React.Component<Props> {
     return (
       <BCorpWidget
         title={'Your Shipment'}
-        className={'col1 col2-tablet col1-desktop'}
+        className={`col1 col2-tablet col1-desktop ${style.widget}`}
         twoColsOnTablet>
         <ShipmentContent
           shipment={this.props.shipment}

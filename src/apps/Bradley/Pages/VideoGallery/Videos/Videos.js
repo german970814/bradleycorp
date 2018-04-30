@@ -12,6 +12,8 @@ import Video from './Video/Video'
 import CPTApiClient from '../../../../../api/cpt_client'
 import style from './Videos.scss'
 
+const postsPerPage: number = 20
+
 type Props = {
   filters: FiltersType
 }
@@ -22,28 +24,47 @@ type VideoStateType = Array<VideoType>
 
 type State = {
   videos?: VideoStateType,
-  loading: boolean
+  loading: boolean,
+  paged: number
 }
 
 class Videos extends React.Component<Props, State> {
-  getFilteredVideosDebounced: (props: Props) => void
+  getFilteredVideosDebounced: (props: Props, paged: number) => void
+  getFilteredVideosDebouncedNext: (props: Props, paged: number) => void
 
   constructor (props: Props) {
     super(props)
 
-    this.state = { loading: true }
+    this.state = { loading: true, paged: 1 }
 
+    // we need this function twice
+    // otherwise when fetching the new videos after changing filters
+    // it would only send the request for the second page
+    // since the request for the second page would debounce the first
     this.getFilteredVideosDebounced = debounce(this.getFilteredVideos, 1500)
+    this.getFilteredVideosDebouncedNext = debounce(this.getFilteredVideos, 2000)
   }
 
   componentDidMount () {
-    this.getFilteredVideos(this.props)
+    this.getFilteredVideos(this.props, 1)
+    this.getFilteredVideosDebounced(this.props, 2)
   }
 
   componentWillReceiveProps (nextProps: Props) {
     if (this.shouldResendRequest(nextProps)) {
-      this.setState({ loading: true })
-      this.getFilteredVideosDebounced(nextProps)
+      //
+      // always get the first page when we get new filters
+      //
+      this.setState({ loading: true, paged: 1, videos: undefined })
+      this.getFilteredVideosDebounced(nextProps, 1)
+      this.getFilteredVideosDebouncedNext(nextProps, 2)
+    }
+  }
+
+  componentDidUpdate (prevProps: Props, prevState: State) {
+    // if we 'load more' we need to request the next page
+    if (prevState.paged !== this.state.paged) {
+      this.getFilteredVideos(this.props, this.state.paged + 1)
     }
   }
 
@@ -54,6 +75,15 @@ class Videos extends React.Component<Props, State> {
 
     let videos = []
     this.state.videos.forEach((video, index) => {
+      //
+      // although we may have more videos,
+      // we only show the ones for the current page
+      //
+      if (index >= postsPerPage * this.state.paged) {
+        return
+      }
+      //
+
       const url = video.meta.video_gallery_video
         ? video.meta.video_gallery_video
         : ''
@@ -67,24 +97,55 @@ class Videos extends React.Component<Props, State> {
     return sortIntoRows(videos, 2)
   }
 
+  renderLoadMoreButton () {
+    if (
+      !this.state.loading &&
+      this.state.videos &&
+      this.state.videos.length > postsPerPage * this.state.paged
+    ) {
+      const paged: number = this.state.paged + 1
+      return (
+        <button
+          className={style.loadMore}
+          onClick={() => this.setState({ paged })}>
+          {'LOAD MORE'}
+        </button>
+      )
+    }
+  }
+
   render () {
     console.log(this.state)
     return (
-      <div className={`row ${style.videos}`}>
-        {this.state.loading ? <Loading /> : this.renderVideos()}
+      <div className={style.wrapper}>
+        <div className={`row ${style.videos}`}>
+          {this.state.loading ? <Loading /> : this.renderVideos()}
+        </div>
+        {this.renderLoadMoreButton()}
       </div>
     )
   }
 
-  async getFilteredVideos (props: Props) {
+  async getFilteredVideos (props: Props, paged: number) {
     const filters = this.getFiltersFormattedForRequest(props)
 
     try {
-      console.log('sending', filters)
+      console.log('sending', filters, paged)
       const client = new CPTApiClient('video-gallery')
-      const response = await client.getByTaxNameAndTermSlugObject(filters, 'OR')
+      const response = await client.getByTaxNameAndTermSlugObject(
+        filters,
+        'OR',
+        postsPerPage,
+        paged
+      )
 
-      const videos: Array<VideoType> = response.data
+      let videos: Array<VideoType> = response.data
+
+      console.log(`got ${videos.length} videos`, paged)
+
+      const prevVideos = this.state.videos || []
+      videos = [...prevVideos, ...videos]
+
       return this.setState({ videos, loading: false })
     } catch (err) {
       console.log(err)

@@ -27,7 +27,7 @@ class ShipmentLiterature extends React.Component<Props> {
       !this.props.shipment.literature ||
       !this.props.shipment.literature.length
     ) {
-      return "You haven't added any Literature yet"
+      return 'You haven’t added any Literature yet.'
     }
 
     return this.props.shipment.literature.map((literature, index) => {

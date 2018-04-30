@@ -1,118 +1,133 @@
 // @flow
 import React, { Component } from 'react'
+import type { BCorpPost } from '../../../../lib/types/post_types'
+import type {
+  ApplicationGalleryPost,
+  CPTName
+} from '../../../../lib/types/cpt_types'
+import debounce from 'debounce'
 import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import CPTApiClient from '../../../../api/cpt_client'
 import FillColumns from '../../../../lib/components/FillColumns/FillColumns'
 import Filters from './Filters/Filters'
 import ImageFrame from '../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
-import type { ApplicationGalleryPost } from '../../../../lib/types/cpt_types'
 
-const PostType = 'application-gallery'
+const PostType: CPTName = 'application-gallery'
 
 type Props = {}
 
+/**
+ * This is the object shape that our function getByTaxNameAndTermSlugObject requires.
+ *
+ * Note, it will always have a tax name (string) as key,
+ * and an array of tax slugs (Array<string>) as values.
+ * BUT, we've allowed the object to be empty for getting all posts.
+ */
+type TaxAndTermSlugObject = {
+  [string]: ?Array<string>
+}
+
 type MetaType = {
   app_gallery_img: string,
-  app_gallery_img_filters: Object
+  app_gallery_img_filters: {
+    color: string,
+    market: string,
+    shape: string
+  }
 }
 
-type TermsType = {
-  tax_names: Array<string>
-}
+type FiltersType = Array<string>
 
 type GalleryType = {
-  meta: MetaType,
   post: ApplicationGalleryPost,
-  terms: TermsType
-}
+  meta: MetaType
+} & BCorpPost
 
 type State = {
   gallery: Array<GalleryType>,
-  filters: Object,
-  activeFilters: Array<string>
+  activeFilters: TaxAndTermSlugObject,
+  loading: boolean
 }
 
 export default class ApplicationGallery extends Component<Props, State> {
+  getApplicationGalleryDebounced: (filters: TaxAndTermSlugObject) => void
+
   constructor (props: Props) {
     super(props)
 
     this.state = {
       gallery: [],
-      filters: {},
-      activeFilters: []
+      activeFilters: {},
+      loading: true
     }
+    this.getApplicationGalleryDebounced = debounce(
+      this.getApplicationGallery,
+      2000
+    )
   }
 
   componentDidMount () {
-    this.getApplicationGallery()
+    this.getApplicationGallery({})
   }
 
-  updateFilters (newFilters: any): void {
-    this.setState({ filters: newFilters })
+  updateFilters (tax: string, newFilters: FiltersType): void {
+    let activeFilters: TaxAndTermSlugObject = this.state.activeFilters
+    if (!newFilters.length) {
+      delete activeFilters[tax]
+    } else {
+      activeFilters = Object.assign({}, activeFilters, {
+        [tax]: newFilters
+      })
+    }
+    this.setState({ activeFilters, loading: true })
+    this.getApplicationGalleryDebounced(activeFilters)
   }
 
   renderContent () {
     return (
       <div>
-        <section id="sidebar">
-          <ul>
-            {'tax_names' in this.state.filters && this.state.filters.tax_names.map((el, idx) => {
-              return (
-                <ul key={idx}>
-                  {this.state.filters[el].map((ele, ind) => {
-                    return <li key={ind}><a onClick={() => this.toggleFilter(ele.slug)}>{ele.name}</a></li>
-                  })}
-                </ul>
-              )
-            })}
-          </ul>
-        </section>
-        <Filters filters={{}} updateFilters={this.updateFilters.bind(this)} />
+        <Filters updateFilters={this.updateFilters.bind(this)} />
         <FillColumns colClasses={['col4', 'col4', 'col4']}>
           {this.state.gallery.map((el, idx) => {
-            return <ImageFrame
-              src={el.meta.app_gallery_img}
-              key={idx}
-              aspectRatio={123 / 270}
-              aspectRatioTablet={152 / 332}
-              aspectRatioDesktop={169 / 370}
-            />
+            return (
+              <ImageFrame
+                src={el.meta.app_gallery_img}
+                key={idx}
+                aspectRatio={123 / 270}
+                aspectRatioTablet={152 / 332}
+                aspectRatioDesktop={169 / 370}
+              />
+            )
           })}
         </FillColumns>
       </div>
     )
   }
 
-  toggleFilter (filter: string) {
-    const indexOf = this.state.activeFilters.indexOf(filter)
-    if (indexOf + 1) {
-      const activeFilters = this.state.activeFilters
-      activeFilters.splice(indexOf, 1)
-      this.setState({ activeFilters })
-    } else {
-      this.setState({ activeFilters: [filter, ...this.state.activeFilters] })
-    }
-  }
-
-  async getApplicationGallery () {
+  async getApplicationGallery (filters: TaxAndTermSlugObject) {
     const client = new CPTApiClient(PostType)
-    const response = await client.getLatest(20)
+    const response = await client.getByTaxNameAndTermSlugObject(filters, 'OR')
+
+    const gallery: Array<GalleryType> = response.data
+
     this.setState({
-      gallery: response.data.map(post => {
-        return post
-      })
+      gallery,
+      loading: false
     })
   }
 
   render () {
-    return <DefaultTemplate
-      data={{ page_title: 'Application Gallery' }}
-      renderModules={() => this.renderContent()}
-      widgetsMoveWithScroll
-    />
+    console.log(this.state)
+    return (
+      <DefaultTemplate
+        data={{ page_title: 'Application Gallery' }}
+        renderModules={() => this.renderContent()}
+        widgetsMoveWithScroll
+      />
+    )
   }
 }
 
-export {
-  PostType
-}
+export { PostType }
+
+export type { FiltersType }
