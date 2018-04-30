@@ -3,7 +3,6 @@ import * as React from 'react'
 import { renderTitle } from '../DefaultTemplate/DefaultTemplate'
 import style from './RightSidebarTemplate.scss'
 import defaultStyle, { titlemarginbottom } from '../Templates.scss'
-import { TABLETMAXWIDTH } from '../../../../globals'
 
 type Props = {
   /**
@@ -21,14 +20,14 @@ type Props = {
    */
   renderRightSidebarWidgets: () => React.Node,
   widgetsMoveWithScroll?: boolean
-};
+}
 
 type State = {
   isSidebarFixed?: boolean,
   width?: number,
   top?: number,
   bottom?: number
-};
+}
 
 class RightSidebarTemplate extends React.Component<Props, State> {
   sidebarNode: ?HTMLDivElement
@@ -110,7 +109,6 @@ class RightSidebarTemplate extends React.Component<Props, State> {
   }
 
   onScroll () {
-
     if (!this.sidebarNode || !this.contentNode || !this.titleMarginBottom) {
       // if we dont have necessary DOM nodes then we cant move with scroll
       return this.setState({ isSidebarFixed: false })
@@ -124,16 +122,18 @@ class RightSidebarTemplate extends React.Component<Props, State> {
     const boundingClientRect = sidebarNode.getBoundingClientRect()
     const contentBoundingClientRect = contentNode.getBoundingClientRect()
 
-    if ( '' == sidebarNode.style.left ) {
-      sidebarNode.style.left = boundingClientRect.left+'px'
+    if (sidebarNode.style.left === '') {
+      sidebarNode.style.left = boundingClientRect.left + 'px'
     }
     sidebarNode.style.width = `${boundingClientRect.width}px`
     // sidebarNode.style.height = `${height}px`
 
-    this.setState({ isSidebarFixed: ( titleMarginBottomNumber > contentBoundingClientRect.top ) })
+    this.setState({
+      isSidebarFixed: titleMarginBottomNumber > contentBoundingClientRect.top
+    })
 
-    if ( this.state.isSidebarFixed ) {
-      if ( '' == sidebarNode.style.top ) {
+    if (this.state.isSidebarFixed) {
+      if (sidebarNode.style.top === '') {
         sidebarNode.style.top = `${titleMarginBottomNumber}px`
       }
     } else {
