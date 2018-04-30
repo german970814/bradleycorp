@@ -7,6 +7,9 @@ import FillColumns from '../../../../lib/components/FillColumns/FillColumns'
 import Filters from './Filters/Filters'
 import ImageFrame from '../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import type { ApplicationGalleryPost } from '../../../../lib/types/cpt_types'
+import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
+import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
+import style from './ApplicationGallery.scss'
 
 const PostType = 'application-gallery'
 
@@ -66,25 +69,6 @@ export default class ApplicationGallery extends Component<Props, State> {
     this.getApplicationGalleryDebounced(activeFilters)
   }
 
-  renderContent () {
-    return (
-      <div>
-        <Filters updateFilters={this.updateFilters.bind(this)} />
-        <FillColumns colClasses={['col4', 'col4', 'col4']}>
-          {this.state.gallery.map((el, idx) => {
-            return <ImageFrame
-              src={el.meta.app_gallery_img}
-              key={idx}
-              aspectRatio={123 / 270}
-              aspectRatioTablet={152 / 332}
-              aspectRatioDesktop={169 / 370}
-            />
-          })}
-        </FillColumns>
-      </div>
-    )
-  }
-
   async getApplicationGallery (filters: Props) {
     const client = new CPTApiClient(PostType)
     const response = await client.getByTaxNameAndTermSlugObject(filters, 'OR')
@@ -97,11 +81,28 @@ export default class ApplicationGallery extends Component<Props, State> {
   }
 
   render () {
-    return <DefaultTemplate
-      data={{ page_title: 'Application Gallery' }}
-      renderModules={() => this.renderContent()}
-      widgetsMoveWithScroll
-    />
+    return (
+      <div
+        className={`row ${defaultStyle.defaultTemplate}`}>
+        {renderTitle('Application Gallery', 'col1')}
+        <div className={`col1 col4-tablet sidebar app-gallery-sidebar`}>
+          <Filters updateFilters={this.updateFilters.bind(this)} />
+        </div>
+        <div className={`col1 col4x3-tablet`}>
+          <FillColumns colClasses={['col2-tablet','col2-tablet']}>
+            {this.state.gallery.map((el, idx) => {
+              return <ImageFrame
+                src={el.meta.app_gallery_img}
+                key={idx}
+                aspectRatio={123 / 270}
+                aspectRatioTablet={152 / 332}
+                aspectRatioDesktop={169 / 370}
+              />
+            })}
+          </FillColumns>
+        </div>
+      </div>
+    )
   }
 }
 
