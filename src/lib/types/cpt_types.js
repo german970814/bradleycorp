@@ -13,9 +13,9 @@ type CPTName =
   | 'warranty'
   | 'nav_menu_item'
 
-type LiteraturePost = WPPost & { post_type: 'literature' }
+type LiteraturePost = { post_type: 'literature' } & WPPost
 
-type ChipSamplePost = WPPost & { post_type: 'chip_sample' }
+type ChipSamplePost = { post_type: 'chip_sample' } & WPPost
 
 type VideoGalleryPost = WPPost & { post_type: 'video-gallery' }
 

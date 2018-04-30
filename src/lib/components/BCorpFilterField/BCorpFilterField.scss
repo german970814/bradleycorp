@@ -57,6 +57,12 @@ $tabletGapBetweenFilters: 24px;
     bottom: 13px;
     color: $red;
   }
+
+  &.shorten {
+    &::after {
+      content: '*';
+    }
+  }
 }
 
 h5.title {

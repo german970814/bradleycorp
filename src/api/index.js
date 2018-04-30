@@ -2,7 +2,7 @@
 import type { BlogName, BlogPrettyName } from '../lib/types/blog_types'
 import axios from 'axios'
 
-const dev: boolean = true
+const dev: boolean = false
 
 type HostType =
   | 'http://bradley.test'
