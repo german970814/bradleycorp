@@ -44,7 +44,7 @@ type API = {
   query: ({ args?: {} }) => {}
 }
 
-const dev: boolean = false
+const dev: boolean = true
 
 let site: SiteType = 'bcorp'
 
@@ -70,12 +70,6 @@ const urlBIMRevit: URLBIMRevitType = dev
   ? 'http://localhost:8082'
   : 'http://bimrevit.site.bradleydev.twoxfour.com'
 
-const namespace = 'bcorp/v1/'
-
-const queryRoute = 'wp-query'
-
-const baseURL = `${host}/index.php/wp-json/${namespace}`
-
 /**
  * set the api host depending on the location.href we're currently on
  *
@@ -94,6 +88,12 @@ if (location.href.includes(urlTheWashfountain)) {
   sitePrettyName = 'BIM-Revit'
   host = hostBIMRevit
 }
+
+const namespace = 'bcorp/v1/'
+
+const queryRoute = 'wp-query'
+
+const baseURL = `${host}/index.php/wp-json/${namespace}`
 
 /* Define the API object */
 
@@ -128,6 +128,8 @@ const api: API = {
     return axios.post(url, args)
   }
 }
+
+console.log(api.baseURL)
 
 module.exports = api
 export type { SiteType }
