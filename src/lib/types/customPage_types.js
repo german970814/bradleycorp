@@ -41,7 +41,8 @@ type BCorpCareersTemplateData = {
 type BCorpMetaboxes = {
   page_hero?: BCorpPageHeroData,
   sidebar_select?: string,
-  careers_template?: BCorpCareersTemplateData
+  careers_template?: BCorpCareersTemplateData,
+  faq_category?: string
 }
 
 type BCorpPageTemplateData = {
@@ -65,4 +66,4 @@ type BCorpCustomPage = {
   page_template_data: BCorpPageTemplateData
 }
 
-export type { BCorpPageTemplateData, BCorpCustomPage }
+export type { BCorpPageTemplateData, BCorpCustomPage, BCorpMetaboxes }

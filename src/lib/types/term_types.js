@@ -13,10 +13,21 @@ type WPTerm = {
   term_taxonomy_id: number
 }
 
+type BCorpTermsResponse = {
+  string: Array<WPTerm>,
+  tax_names: Array<string>
+}
+
 type WPPostTagTerm = WPTerm & { taxonomy: 'post_tag' }
 
 type WPCategoryTerm = WPTerm & { taxonomy: 'category' }
 
 type WPMaterialTypeTerm = WPTerm & { taxonomy: 'material_type' }
 
-export type { WPTerm, WPPostTagTerm, WPCategoryTerm, WPMaterialTypeTerm }
+export type {
+  WPTerm,
+  BCorpTermsResponse,
+  WPPostTagTerm,
+  WPCategoryTerm,
+  WPMaterialTypeTerm
+}

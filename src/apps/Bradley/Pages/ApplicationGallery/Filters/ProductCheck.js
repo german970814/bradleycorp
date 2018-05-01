@@ -1,11 +1,12 @@
 // @flow
 import * as React from 'react'
 import BCorpCheckboxField from '../../../../../lib/components/BCorpFilterField/BCorpCheckboxField'
+import type { Options } from './Filters'
 import type { CheckboxObject } from '../../../../../lib/components/BCorpFilterField/BCorpCheckboxField'
 import type { FiltersType } from '../ApplicationGallery'
 
 type Props = {
-  options: Object,
+  options: Options,
   title: string,
   updateFilters: (newFilters: FiltersType) => void
 }

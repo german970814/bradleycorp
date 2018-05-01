@@ -1,0 +1,35 @@
+@import '../../../../../scss/partials/mixins';
+
+$paddingBetweenFilters: 20px;
+$paddingBetweenFiltersTablet: 16px;
+
+.filters {
+  margin-bottom: 30px;
+
+  @include respond-to(tablet) {
+    margin-right: -12px;
+    margin-left: -12px;
+  }
+
+  .videoType {
+    padding-right: $paddingBetweenFilters / 2;
+
+    @include respond-to(tablet) {
+      padding-right: 0;
+    }
+  }
+
+  .productType {
+    padding-left: $paddingBetweenFilters / 2;
+
+    @include respond-to(tablet) {
+      padding-left: 0;
+    }
+  }
+
+  .search {
+    @include respond-to(desktop) {
+      max-width: 370px;
+    }
+  }
+}

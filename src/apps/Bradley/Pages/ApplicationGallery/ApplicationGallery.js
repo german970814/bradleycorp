@@ -1,46 +1,57 @@
 // @flow
 import React, { Component } from 'react'
+import type { BCorpPost } from '../../../../lib/types/post_types'
+import type {ApplicationGalleryPost, CPTName} from '../../../../lib/types/cpt_types'
 import debounce from 'debounce'
 import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import CPTApiClient from '../../../../api/cpt_client'
 import FillColumns from '../../../../lib/components/FillColumns/FillColumns'
 import Filters from './Filters/Filters'
 import ImageFrame from '../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
-import type { ApplicationGalleryPost } from '../../../../lib/types/cpt_types'
 import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
 import style from './ApplicationGallery.scss'
 import Media from 'react-media'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../globals'
 
-const PostType = 'application-gallery'
+const PostType: CPTName = 'application-gallery'
 
 type Props = {}
 
-type MetaType = {
-  app_gallery_img: string,
-  app_gallery_img_filters: Object
+/**
+ * This is the object shape that our function getByTaxNameAndTermSlugObject requires.
+ *
+ * Note, it will always have a tax name (string) as key,
+ * and an array of tax slugs (Array<string>) as values.
+ * BUT, we've allowed the object to be empty for getting all posts.
+ */
+type TaxAndTermSlugObject = {
+  [string]: ?Array<string>
 }
 
-type TermsType = {
-  tax_names: Array<string>
+type MetaType = {
+  app_gallery_img: string,
+  app_gallery_img_filters: {
+    color: string,
+    market: string,
+    shape: string
+  }
 }
 
 type FiltersType = Array<string>
 
 type GalleryType = {
-  meta: MetaType,
   post: ApplicationGalleryPost,
-  terms: TermsType
-}
+  meta: MetaType
+} & BCorpPost
 
 type State = {
   gallery: Array<GalleryType>,
-  activeFilters: Object,
+  activeFilters: TaxAndTermSlugObject,
   loading: boolean
 }
 
 export default class ApplicationGallery extends Component<Props, State> {
-  getApplicationGalleryDebounced: (props: Props) => void
+  getApplicationGalleryDebounced: (filters: TaxAndTermSlugObject) => void
 
   constructor (props: Props) {
     super(props)
@@ -50,7 +61,10 @@ export default class ApplicationGallery extends Component<Props, State> {
       activeFilters: {},
       loading: true
     }
-    this.getApplicationGalleryDebounced = debounce(this.getApplicationGallery, 2000)
+    this.getApplicationGalleryDebounced = debounce(
+      this.getApplicationGallery,
+      2000
+    )
   }
 
   componentDidMount () {
@@ -58,13 +72,13 @@ export default class ApplicationGallery extends Component<Props, State> {
   }
 
   updateFilters (tax: string, newFilters: FiltersType): void {
-    let activeFilters = this.state.activeFilters
+    let activeFilters: TaxAndTermSlugObject = this.state.activeFilters
     if (!newFilters.length) {
-      delete this.state.activeFilters[tax]
+      delete activeFilters[tax]
     } else {
-      activeFilters = Object.assign(
-        {}, activeFilters, { [tax]: newFilters }
-      )
+      activeFilters = Object.assign({}, activeFilters, {
+        [tax]: newFilters
+      })
     }
     this.setState({ activeFilters, loading: true })
     this.getApplicationGalleryDebounced(activeFilters)
@@ -73,10 +87,11 @@ export default class ApplicationGallery extends Component<Props, State> {
   async getApplicationGallery (filters: Props) {
     const client = new CPTApiClient(PostType)
     const response = await client.getByTaxNameAndTermSlugObject(filters, 'OR')
+
+    const gallery: Array<GalleryType> = response.data
+
     this.setState({
-      gallery: response.data.map(post => {
-        return post
-      }),
+      gallery,
       loading: false
     })
   }
@@ -134,10 +149,6 @@ export default class ApplicationGallery extends Component<Props, State> {
   }
 }
 
-export {
-  PostType
-}
+export { PostType }
 
-export type {
-  FiltersType
-}
+export type { FiltersType, GalleryType }
