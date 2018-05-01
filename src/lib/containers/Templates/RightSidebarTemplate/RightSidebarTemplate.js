@@ -3,7 +3,7 @@ import * as React from 'react'
 import { renderTitle } from '../DefaultTemplate/DefaultTemplate'
 import style from './RightSidebarTemplate.scss'
 import defaultStyle, { titlemarginbottom } from '../Templates.scss'
-import { TABLETMAXWIDTH } from '../../../../globals'
+// import { TABLETMAXWIDTH } from '../../../../globals'
 
 type Props = {
   /**
@@ -104,7 +104,7 @@ class RightSidebarTemplate extends React.Component<Props, State> {
           }}
           className={`col1 col3-desktop ${style.sidebar} ${sidebarFixed}`}>
           <div className={style.innerSidebar}>
-          {this.props.renderRightSidebarWidgets()}
+            {this.props.renderRightSidebarWidgets()}
           </div>
         </div>
       </div>
@@ -112,7 +112,6 @@ class RightSidebarTemplate extends React.Component<Props, State> {
   }
 
   onScroll () {
-
     if (!this.sidebarNode || !this.contentNode || !this.titleMarginBottom) {
       // if we dont have necessary DOM nodes then we cant move with scroll
       return this.setState({ isSidebarFixed: false })
@@ -126,16 +125,16 @@ class RightSidebarTemplate extends React.Component<Props, State> {
     const boundingClientRect = sidebarNode.getBoundingClientRect()
     const contentBoundingClientRect = contentNode.getBoundingClientRect()
 
-    if ( '' == sidebarNode.style.left ) {
-      sidebarNode.style.left = boundingClientRect.left+'px'
+    if (sidebarNode.style.left === '') {
+      sidebarNode.style.left = boundingClientRect.left + 'px'
     }
     sidebarNode.style.width = `${boundingClientRect.width}px`
     // sidebarNode.style.height = `${height}px`
 
-    this.setState({ isSidebarFixed: ( titleMarginBottomNumber > contentBoundingClientRect.top ) })
+    this.setState({ isSidebarFixed: (titleMarginBottomNumber > contentBoundingClientRect.top) })
 
-    if ( this.state.isSidebarFixed ) {
-      if ( '' == sidebarNode.style.top ) {
+    if (this.state.isSidebarFixed) {
+      if (sidebarNode.style.top === '') {
         sidebarNode.style.top = `${titleMarginBottomNumber}px`
       }
     } else {
