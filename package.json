@@ -13,7 +13,7 @@
     "dev-server-washfountain": "webpack-dev-server --inline --port 8081",
     "dev-server-bimrevit": "webpack-dev-server --inline --port 8082",
     "precommit": "npm-run-all lint flow",
-    "start:dev": "npm-run-all precommit dev-server",
+    "start:dev": "npm-run-all lint dev-server",
     "start:dev:washfountain": "npm-run-all precommit dev-server-washfountain",
     "start:dev:bimrevit": "npm-run-all precommit dev-server-bimrevit",
     "build": "webpack -p"
