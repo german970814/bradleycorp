@@ -1,4 +1,6 @@
 // @flow
+import type { AxiosPromise } from 'axios'
+import type { BCorpPost } from '../lib/types/post_types'
 import axios from 'axios'
 import api from './index'
 
@@ -9,7 +11,7 @@ import api from './index'
  * @type {Object}
  */
 const BIMRevitClient = {
-  getRecentPosts (numberposts: number) {
+  getRecentPosts (numberposts: number): AxiosPromise<Array<BCorpPost>> {
     const url = `${api.baseURLBIMRevit}posts`
     const params = { numberposts }
 
