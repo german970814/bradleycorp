@@ -34,7 +34,7 @@ class ProductCheck extends React.Component<Props, State> {
 
   render () {
     return <BCorpCheckboxField
-      title={this.props.title}
+      title={this.props.title.replace(/_/g, ' ')}
       filterState={{ checkboxes: this.state.checkboxes }}
       handleChange={this.handleChange.bind(this)}
       options={this.props.options}

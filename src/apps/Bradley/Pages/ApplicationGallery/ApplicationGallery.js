@@ -1,15 +1,16 @@
 // @flow
 import React, { Component } from 'react'
 import debounce from 'debounce'
-import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
+import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import CPTApiClient from '../../../../api/cpt_client'
 import FillColumns from '../../../../lib/components/FillColumns/FillColumns'
 import Filters from './Filters/Filters'
 import ImageFrame from '../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import type { ApplicationGalleryPost } from '../../../../lib/types/cpt_types'
 import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
-import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import style from './ApplicationGallery.scss'
+import Media from 'react-media'
+import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../globals'
 
 const PostType = 'application-gallery'
 
@@ -80,26 +81,53 @@ export default class ApplicationGallery extends Component<Props, State> {
     })
   }
 
+  renderGallery () {
+    return this.state.gallery.map((el, idx) => {
+      return <ImageFrame
+        src={el.meta.app_gallery_img}
+        key={idx}
+        aspectRatio={123 / 270}
+        aspectRatioTablet={152 / 332}
+        aspectRatioDesktop={169 / 370}
+      />
+    })
+  }
+
   render () {
     return (
       <div
         className={`row ${defaultStyle.defaultTemplate}`}>
         {renderTitle('Application Gallery', 'col1')}
-        <div className={`col1 col4-tablet sidebar app-gallery-sidebar`}>
+        <div className={`col1 col4-tablet sidebar ${style.appGallerySidebar}`}>
           <Filters updateFilters={this.updateFilters.bind(this)} />
         </div>
-        <div className={`col1 col4x3-tablet`}>
-          <FillColumns colClasses={['col2-tablet','col2-tablet']}>
-            {this.state.gallery.map((el, idx) => {
-              return <ImageFrame
-                src={el.meta.app_gallery_img}
-                key={idx}
-                aspectRatio={123 / 270}
-                aspectRatioTablet={152 / 332}
-                aspectRatioDesktop={169 / 370}
-              />
-            })}
-          </FillColumns>
+        <div className={`col1 col4x3-tablet ${style.appGalleryContent}`}>
+          <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
+            {match =>
+              match ? (
+              // mobile
+                <FillColumns colClasses={[`col2 ${style.horizontalRightItemSpace} ${style.appGalleryItem}`, `${style.horizontalLeftItemSpace} col2 ${style.appGalleryItem}`]}>
+                  {this.renderGallery()}
+                </FillColumns>
+              ) : (
+                <Media query={{ maxWidth: TABLETMAXWIDTH }}>
+                  {match =>
+                    match ? (
+                    // tablet
+                      <FillColumns colClasses={[`col2-tablet ${style.horizontalRightItemSpace} ${style.appGalleryItem}`, `${style.horizontalLeftItemSpace}  col2-tablet ${style.appGalleryItem}`]}>
+                        {this.renderGallery()}
+                      </FillColumns>
+                    ) : (
+                    // desktop
+                      <FillColumns colClasses={[`col3 ${style.horizontalRightItemSpace} ${style.appGalleryItem}`, `${style.horizontalLeftItemSpace} col3`, `${style.lastHorizontalLeftItemSpace} col3`]}>
+                        {this.renderGallery()}
+                      </FillColumns>
+                    )
+                  }
+                </Media>
+              )
+            }
+          </Media>
         </div>
       </div>
     )

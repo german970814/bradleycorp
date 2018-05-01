@@ -1,6 +1,49 @@
-.app-gallery-sidebar {
-    label {
-        font-size: 14px;
-        color: #2f3d6f
+@import "../../../../scss/partials/layout";
+@import "../../../../scss/partials/variables";
+@import "../../../../scss/partials/mixins";
+
+.appGallerySidebar {
+    margin-bottom: 35px;
+    h5 {
+        font-family: 'CentraleSansProBold';
+        font-size: 13px;
+        color: #a7a9ac;
+        text-align: left;
+        line-height: normal;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-top: 35px;
+        padding-right: 15px;
     }
+    
+    label {
+        font-family: Helvetica;
+        font-size: 14px;
+        font-weight: 300;
+        color: #2f3d6f;
+        text-align: left;
+        line-height: normal;
+    }
+}
+
+.appGalleryContent {
+    margin-bottom: 60px;
+}
+
+.appGalleryItem {
+    & > div {
+        margin-bottom: 20px;
+    }
+}
+
+.horizontalRightItemSpace {
+    padding-right: 10px;
+}
+
+.horizontalLeftItemSpace {
+    padding-left: 10px;
+}
+
+.lastHorizontalLeftItemSpace {
+    padding-left: 20px;
 }
