@@ -17,23 +17,53 @@
     }
   }
 
+  .imgContainer {
+    height: 100%;
+    .featuredImage {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  // mobile content container
+  .contentContainer {
+    display: inline-block;
+    vertical-align: middle;
+
+    h5.title {
+      margin-left: 10px;
+      padding-right: 90px;
+      color: $black;
+
+      @include respond-to-max(tablet) {
+        font-size: 12px;
+      }
+    }
+
+    .addButton {
+      position: absolute;
+      top: 50%;
+      right: 40px;
+      transform: translateY(-15px);
+    }
+
+    .downloadIcon {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: 19px;
+      height: 30px;
+      transform: translateY(-15px);
+    }
+  }
+
+  // tablet content container
   .optionRow {
     @include respond-to(tablet) {
       height: 100%;
     }
 
-    .imgContainer {
-      height: 100%;
-      .featuredImage {
-        width: 100%;
-        height: 100%;
-      }
-    }
-
     .contentContainer {
-      display: inline-block;
-      vertical-align: middle;
-
       @include respond-to(tablet) {
         display: block;
         padding-top: 12px;
@@ -43,18 +73,12 @@
       }
 
       .overflow {
-        overflow-y: hidden;
-        height: 100%;
+        @include respond-to(tablet) {
+          overflow-y: hidden;
+          height: 100%;
+        }
 
         h5.title {
-          margin-left: 10px;
-          padding-right: 90px;
-          color: $black;
-
-          @include respond-to-max(tablet) {
-            font-size: 12px;
-          }
-
           @include respond-to(tablet) {
             display: inline-block;
             vertical-align: middle;
@@ -66,6 +90,7 @@
         }
       }
 
+      // groups buttons together for placing at bottom of option on tablet/desktop
       .buttons {
         @include respond-to(tablet) {
           position: absolute;
@@ -73,21 +98,7 @@
           width: 100%;
         }
 
-        .addButton {
-          position: absolute;
-          top: 50%;
-          right: 40px;
-          transform: translateY(-15px);
-        }
-
         .downloadIcon {
-          position: absolute;
-          top: 50%;
-          right: 0;
-          width: 19px;
-          height: 30px;
-          transform: translateY(-15px);
-
           @include respond-to(tablet) {
             position: static;
             float: left;

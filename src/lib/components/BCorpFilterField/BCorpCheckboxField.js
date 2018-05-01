@@ -1,6 +1,8 @@
 // @flow
 import * as React from 'react'
 import BCorpInputField from './BCorpInputField'
+import Media from 'react-media'
+import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../globals'
 import style from './BCorpFilterField.scss'
 
 type Options = {
@@ -153,9 +155,47 @@ class BCorpCheckboxField extends React.Component<Props> {
     })
   }
 
-  render () {
+  handleClick(){
+    if(this.state.open) {
+      this.setState({
+        open: false,
+        class: 'accordion'
+      });
+    }else{
+      this.setState({
+        open: true,
+        class: 'accordion open'
+      });
+    }
+  }
+
+  getInitialState(){
+     return {
+       open: false,
+       class: 'accordion'
+     }
+  }
+
+  renderCheckBoxesForMobile() {
+
     return (
-      <div className={`${style.checkbox} ${this.props.className || ''}`}>
+      <div className={`${style.checkbox} ${this.props.className || ''} ${style.checkBoxesContainer}`}>
+        {this.props.title ? (
+          <button className={`checkbox-title ${style.title} accordion`}>
+            {this.props.title}
+          </button>
+        ) : null}
+        <div className={`${style.panel}`}>
+          {this.renderOptions()}
+          {this.renderOtherField()}
+        </div>
+      </div>
+    )
+  }
+
+  renderCheckBoxesForDesktop() {
+    return (
+      <div className={`${style.checkbox} ${this.props.className || ''} ${style.checkBoxesContainer}`}>
         {this.props.title ? (
           <h5 className={`checkbox-title ${style.title}`}>
             {this.props.title}
@@ -164,6 +204,31 @@ class BCorpCheckboxField extends React.Component<Props> {
         {this.renderOptions()}
         {this.renderOtherField()}
       </div>
+    )
+  }
+
+  render () {
+    return (
+      <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
+        {match =>
+          match ? (
+          // mobile
+            this.renderCheckBoxesForMobile()
+          ) : (
+            <Media query={{ maxWidth: TABLETMAXWIDTH }}>
+              {match =>
+                match ? (
+                // tablet
+                  this.renderCheckBoxesForDesktop()
+                ) : (
+                // desktop
+                  this.renderCheckBoxesForDesktop()
+                )
+              }
+            </Media>
+          )
+        }
+      </Media>
     )
   }
 }

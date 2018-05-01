@@ -52,10 +52,16 @@ $tabletGapBetweenFilters: 24px;
   &::after {
     @extend %post-meta-data;
     position: absolute;
-    content: '*Required';
+    content: '*';
     right: 10px;
     bottom: 13px;
     color: $red;
+  }
+
+  &.lengthen {
+    &::after {
+      content: '*Required';
+    }
   }
 }
 
@@ -67,8 +73,6 @@ h5.title {
 .select {
   position: relative;
   padding-bottom: 20px;
-  -moz-appearance: none;
-  -webkit-appearance: none;
 
   @include respond-to(tablet) {
     padding-left: ($tabletGapBetweenFilters / 2);
@@ -78,6 +82,16 @@ h5.title {
 
   select {
     @extend %inputStyle;
+
+    // remove browser defaults
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    // remove dropdown arrow on IE
+    &::-ms-expand {
+      display: none;
+    }
   }
 
   &::after {
@@ -210,7 +224,7 @@ h5.title {
 
       &:checked:before {
         content: '';
-        background: black;
+        background: $navy;
         position: absolute;
         width: 6px;
         height: 6px;
@@ -233,4 +247,39 @@ h5.title {
       }
     }
   }
+}
+
+.checkBoxesContainer {
+  button {
+    background: #fff;
+    color: #a7a9ac;
+    font-size: 13px;
+    font-weight: 300;
+    color: #a7a9ac;
+    text-align: left;
+    line-height: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    &:after {
+      content: '\02795';
+      font-size: 13px;
+      color: #777;
+      float: right;
+      margin-left: 5px;
+    }
+    &.active {
+      &:after {
+        content: "\2796";
+      }
+    }
+  }
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
 }

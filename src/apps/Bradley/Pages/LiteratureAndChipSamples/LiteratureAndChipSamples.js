@@ -22,7 +22,7 @@ type PostTypeOptions = 'literature' | 'chip'
 
 type MaterialTypes = {
   [number | string]: ?string
-}
+};
 
 /* Filter Types */
 
@@ -30,23 +30,23 @@ type LiteratureFilters = {
   productLine: string,
   language: string,
   search?: string
-}
+};
 
 type ChipSampleFilters = {
   materialType: number
-}
+};
 
 type FiltersTypes = {
   literature: LiteratureFilters,
   chipSamples: ChipSampleFilters
-}
+};
 
 /* Option Types */
 
 type OptionsTypes = {
   literature?: Array<LiteraturePost>,
   chipSamples?: Array<ChipSamplePost>
-}
+};
 
 /* Shipment Types */
 
@@ -54,22 +54,22 @@ type ShipmentLiteratureObject = {
   num: number,
   postID: number,
   post: LiteraturePost
-}
+};
 
 type ShipmentChipSampleObject = {
   num: number,
   postID: number,
   post: ChipSamplePost
-}
+};
 
 type ShipmentTypes = {
   literature?: Array<ShipmentLiteratureObject>,
   chip?: Array<ShipmentChipSampleObject>
-}
+};
 
 /* Download Types */
 
-type DownloadTypes = Array<LiteraturePost>
+type DownloadTypes = Array<LiteraturePost>;
 
 /* Shipping Info */
 
@@ -84,7 +84,7 @@ type ShippingInfoField =
   | 'country'
   | 'email'
   | 'phone'
-  | 'userArea'
+  | 'userArea';
 
 type ShippingInfoUserAreaField =
   | 'normallyPurchaseFrom'
@@ -93,20 +93,20 @@ type ShippingInfoUserAreaField =
   | 'account'
   | 'rep'
   | 'requestEmail'
-  | 'notes'
+  | 'notes';
 
 type ShippingInfoUserAreaType = {
   [ShippingInfoUserAreaField]: ?string,
   normallyPurchaseFrom?: CheckboxObject,
   overnight?: CheckboxObject
-}
+};
 
 type ShippingInfoType = {
   [ShippingInfoField]: ?string,
   userArea: ShippingInfoUserAreaType
-}
+};
 
-type Props = {}
+type Props = {};
 
 type State = {
   options: OptionsTypes,
@@ -117,7 +117,7 @@ type State = {
   selected: PostTypeOptions,
   materialTypes: MaterialTypes,
   showCurrentRequestMobile: boolean
-}
+};
 
 const productLineFilterDefault: string = 'product-line'
 const languageFilterDefault: string = 'language'
@@ -514,7 +514,19 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
 }
 
 function download (literature: LiteraturePost) {
-  console.log(`download ${literature.meta.literature_pdf}`)
+  if (!literature.meta.literature_pdf.includes('/view/')) {
+    console.log(
+      `couldnt download file with url ${literature.meta.literature_pdf}`
+    )
+    return
+  }
+
+  const downloadLink = literature.meta.literature_pdf.replace(
+    '/view/',
+    '/download/'
+  )
+
+  window.open(downloadLink)
 }
 
 export default LiteratureAndChipSamples

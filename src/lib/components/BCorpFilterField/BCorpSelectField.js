@@ -51,7 +51,7 @@ class BCorpSelectField extends React.Component<Props> {
       (!this.props.filterState ||
         this.props.filterState === '' ||
         this.props.filterState === 0)
-        ? style.required
+        ? `${style.required} required`
         : ''
 
     return (

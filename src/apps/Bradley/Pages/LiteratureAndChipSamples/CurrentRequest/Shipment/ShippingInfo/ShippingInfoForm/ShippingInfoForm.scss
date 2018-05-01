@@ -42,9 +42,14 @@
       background-color: $light-gray;
     }
 
-    &:before,
-    &:after {
+    &::before,
+    &::after {
       bottom: 21px;
+      right: 10px;
+    }
+
+    :global(.required) {
+      right: 20px;
     }
 
     &.country {

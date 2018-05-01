@@ -66,6 +66,9 @@ class App extends React.Component<Props, State> {
   render () {
     const { user, updateUser, isBlurred, updateBlur } = this.state
     const blurClass = !isBlurred ? style.blurOut : style.blurIn // the order here is reversed to make sure we start of un blurred
+
+    this.addBodyBlur()
+
     return (
       <BlurProvider value={{ isBlurred, updateBlur }}>
         <UserProvider value={{ user, updateUser }}>
@@ -79,6 +82,22 @@ class App extends React.Component<Props, State> {
         </UserProvider>
       </BlurProvider>
     )
+  }
+
+  addBodyBlur () {
+    const body = document.querySelector('body')
+    if (!body) {
+      console.warn('couldnt find body node in App.js')
+      return
+    }
+
+    if (this.state.isBlurred) {
+      body.style.position = 'relative'
+      body.style.overflow = 'hidden'
+    } else {
+      body.style.position = ''
+      body.style.overflow = ''
+    }
   }
 }
 

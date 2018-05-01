@@ -14,6 +14,7 @@ import {
   languageFilterDefault,
   materialTypeFilterDefault
 } from '../LiteratureAndChipSamples'
+import { sortIntoRows } from '../../../../../lib/bcorpJSX'
 import { filterPostsByTerm } from '../../../../../lib/bcorpPost'
 import Option from './Option/Option'
 import style from './Options.scss'
@@ -61,17 +62,20 @@ class Options extends React.Component<Props> {
     }
 
     return literature && literature.length
-      ? literature.map((literature, index) => {
-        return (
-          <Option
-            key={index}
-            post={literature}
-            addToShipment={this.props.addToShipment}
-            addToDownloads={this.props.addToDownloads}
-            isMobile={this.props.isMobile}
-          />
-        )
-      })
+      ? sortIntoRows(
+        literature.map((literature, index) => {
+          return (
+            <Option
+              key={index}
+              post={literature}
+              addToShipment={this.props.addToShipment}
+              addToDownloads={this.props.addToDownloads}
+              isMobile={this.props.isMobile}
+            />
+          )
+        }),
+        2
+      )
       : null
   }
 
@@ -110,17 +114,20 @@ class Options extends React.Component<Props> {
     return (
       <React.Fragment>
         <div className={`row ${style.group}`}>
-          {chipSamplesGrouped.noChild.map((chipSample, index) => {
-            return (
-              <Option
-                key={index}
-                post={chipSample}
-                addToShipment={this.props.addToShipment}
-                addToDownloads={this.props.addToDownloads}
-                isMobile={this.props.isMobile}
-              />
-            )
-          })}
+          {sortIntoRows(
+            chipSamplesGrouped.noChild.map((chipSample, index) => {
+              return (
+                <Option
+                  key={index}
+                  post={chipSample}
+                  addToShipment={this.props.addToShipment}
+                  addToDownloads={this.props.addToDownloads}
+                  isMobile={this.props.isMobile}
+                />
+              )
+            }),
+            2
+          )}
         </div>
         {Object.keys(chipSamplesGrouped).map((chipSampleGroupName, index) => {
           if (chipSampleGroupName === 'noChild') {
@@ -134,18 +141,21 @@ class Options extends React.Component<Props> {
             return (
               <div key={index} className={`row ${style.group}`}>
                 <h5 className={style.groupTitle}>{chipSampleGroupName}</h5>
-                {chipSamplesGrouped[chipSampleGroupName].map(
-                  (chipSample, index) => {
-                    return (
-                      <Option
-                        key={index}
-                        post={chipSample}
-                        addToShipment={this.props.addToShipment}
-                        addToDownloads={this.props.addToDownloads}
-                        isMobile={this.props.isMobile}
-                      />
-                    )
-                  }
+                {sortIntoRows(
+                  chipSamplesGrouped[chipSampleGroupName].map(
+                    (chipSample, index) => {
+                      return (
+                        <Option
+                          key={index}
+                          post={chipSample}
+                          addToShipment={this.props.addToShipment}
+                          addToDownloads={this.props.addToDownloads}
+                          isMobile={this.props.isMobile}
+                        />
+                      )
+                    }
+                  ),
+                  2
                 )}
               </div>
             )

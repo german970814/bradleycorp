@@ -37,8 +37,8 @@ class DownloadIcon extends React.Component<Props, State> {
   render () {
     return (
       <div
-        className={style.downloadIconWrapper}
         onClick={this.onClick.bind(this)}
+        className={style.downloadIconWrapper}
         onMouseEnter={this.onMouseEnter.bind(this)}
         onMouseLeave={this.onMouseLeave.bind(this)}>
         {this.state.isHovered && !this.props.isMobile ? (

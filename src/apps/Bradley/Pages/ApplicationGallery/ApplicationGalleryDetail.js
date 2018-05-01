@@ -18,7 +18,7 @@ type State = {
   applicationGallery: ?GalleryType,
   loading: boolean,
   products?: Array<BCorpPost>,
-  literatures?: Array<BcorpPost>
+  literatures?: Array<BCorpPost>
 }
 
 export default class ApplicationGallery extends Component<Props, State> {
@@ -36,29 +36,42 @@ export default class ApplicationGallery extends Component<Props, State> {
   }
 
   renderContent () {
-    return <div>
-      {this.state.applicationGallery && <ImageFrame
-        src={this.state.applicationGallery.meta.app_gallery_img}
-        aspectRatio={123 / 270}
-        aspectRatioTablet={152 / 332}
-        aspectRatioDesktop={169 / 370}
-      />}
-      <p>{this.state.applicationGallery && this.state.applicationGallery.post.post_content}</p>
-      <h2>Featured Product Information</h2>
-      <hr />
-      <h3>Document Downloads</h3>
-      <div className="row">
-        <div className="col6"></div>
-        <div className="col5">
-          <h4>Product List</h4>
-          <ul>
-            {this.state.products && this.state.products.map((product, ind) => {
-              return <li key={ind}><a>{product.post.post_title} </a><span>{product.meta.product_sku}</span></li>
-            })}
-          </ul>
+    return (
+      <div>
+        {this.state.applicationGallery && (
+          <ImageFrame
+            src={this.state.applicationGallery.meta.app_gallery_img}
+            aspectRatio={123 / 270}
+            aspectRatioTablet={152 / 332}
+            aspectRatioDesktop={169 / 370}
+          />
+        )}
+        <p>
+          {this.state.applicationGallery &&
+            this.state.applicationGallery.post.post_content}
+        </p>
+        <h2>Featured Product Information</h2>
+        <hr />
+        <h3>Document Downloads</h3>
+        <div className="row">
+          <div className="col6" />
+          <div className="col5">
+            <h4>Product List</h4>
+            <ul>
+              {this.state.products &&
+                this.state.products.map((product, ind) => {
+                  return (
+                    <li key={ind}>
+                      <a>{product.post.post_title} </a>
+                      <span>{product.meta.product_sku || ''}</span>
+                    </li>
+                  )
+                })}
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
+    )
   }
 
   async getApplicationGallery () {
@@ -67,36 +80,64 @@ export default class ApplicationGallery extends Component<Props, State> {
       applicationGallery = this.props.location.state.post
     } else {
       const client = new CPTApiClient(PostType)
-      const response = await client.getBySlug(this.props.match.params.slug || '')
+      const response = await client.getBySlug(
+        this.props.match.params.slug || ''
+      )
       applicationGallery = response.data
       console.log(response.data)
     }
     this.setState({ applicationGallery }, () => {
       if (this.state.applicationGallery) {
         const productTerms = applicationGallery.terms['app_gallery_product_tag']
-          ? applicationGallery.terms['app_gallery_product_tag'].map(term => term.slug) : []
+          ? applicationGallery.terms['app_gallery_product_tag'].map(
+            term => term.slug
+          )
+          : []
 
         this.getDocumentsDownloads(
-          'product', 'application_gallery', productTerms, products => {
+          'product',
+          'application_gallery',
+          productTerms,
+          products => {
             this.setState({ products }, () => {
-              const terms = this.state.products.map(product => {
-                return product.terms.literature.map(literature => {
-                  return literature.slug
-                })
-              }).reduce((previous, current) => {
-                return [...previous, ...current]
-              })
+              const terms =
+                this.state.products && this.state.products.length
+                  ? this.state.products
+                    .map(product => {
+                      return product.terms.literature &&
+                          product.terms.literature.length
+                        ? product.terms.literature.map(literature => {
+                          return literature.slug
+                        })
+                        : []
+                    })
+                    .reduce((previous, current) => {
+                      return [...previous, ...current]
+                    })
+                  : []
               console.log(terms)
-              this.getDocumentsDownloads('literature', 'product_tag', terms, literatures => {
-                this.setState({ literatures })
-              })
+              this.getDocumentsDownloads(
+                'literature',
+                'product_tag',
+                terms,
+                literatures => {
+                  this.setState({ literatures })
+                }
+              )
             })
-          })
+          }
+        )
       }
     })
   }
 
-  async getDocumentsDownloads (cpt: CPTName, taxonomy: string, terms: Array<string>, callback?: (param: any) => void) { // app_gallery_tech_info_tag
+  async getDocumentsDownloads (
+    cpt: CPTName,
+    taxonomy: string,
+    terms: Array<string>,
+    callback?: (param: any) => void
+  ) {
+    // app_gallery_tech_info_tag
     const client = new CPTApiClient(cpt)
     const response = await client.getByTaxAndTermArray(taxonomy, terms)
     callback && callback(response.data)
