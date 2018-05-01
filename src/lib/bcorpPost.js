@@ -58,3 +58,23 @@ export function filterPostsByTerm (
     }
   })
 }
+
+export function filterPostsByMeta (
+  posts: Array<BCorpPost>,
+  metaName: string,
+  metaValue: number | string,
+  matchType: 'EQUAL' | 'NOTEQUAL'
+): Array<BCorpPost> {
+  return posts.filter(post => {
+    if (matchType === 'EQUAL') {
+      return (
+        post.meta && post.meta[metaName] && post.meta[metaName] === metaValue
+      )
+    }
+    if (matchType === 'NOTEQUAL') {
+      return (
+        !post.meta || !post.meta[metaName] || post.meta[metaName] !== metaValue
+      )
+    }
+  })
+}
