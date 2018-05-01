@@ -54,12 +54,10 @@ class FeaturedImage extends React.Component<Props, State> {
     return this.props.post.post.post_type === 'literature' ? (
       <a href={this.props.post.meta.literature_pdf} target="_blank">
         <div
-          style={{
-            backgroundImage: `url(${this.props.post.media.featured_image[0]})`
-          }}
           className={style.featuredImage}
           onMouseEnter={this.onMouseEnter.bind(this)}
           onMouseLeave={this.onMouseLeave.bind(this)}>
+          <img src={this.props.post.media.featured_image[0]} />
           {this.renderOverlay()}
         </div>
       </a>
@@ -69,15 +67,14 @@ class FeaturedImage extends React.Component<Props, State> {
           return (
             <FixedAspectRatioBox aspectRatio={0.99999} verticalAlign={'bottom'}>
               <div
-                style={{
-                  backgroundImage: `url(${
-                    this.props.post.media.featured_image[0]
-                  })`
-                }}
-                className={style.featuredImage}
+                className={`${style.featuredImage} ${style.chip}`}
                 onClick={openLightbox}
                 onMouseEnter={this.onMouseEnter.bind(this)}
                 onMouseLeave={this.onMouseLeave.bind(this)}>
+                <img
+                  className={`${style.chipImage}`}
+                  src={this.props.post.media.featured_image[0]}
+                />
                 {this.renderOverlay()}
               </div>
             </FixedAspectRatioBox>
@@ -85,12 +82,24 @@ class FeaturedImage extends React.Component<Props, State> {
         }}
         renderLightboxContents={() => {
           return (
-            <img
-              src={this.props.post.media.featured_image[0]}
-              className={`row ${style.lightboxImage}`}
-            />
+            <FixedAspectRatioBox
+              aspectRatio={0.99999}
+              verticalAlign={'middle'}
+              maxHeight={'73vh'}>
+              <div
+                style={{
+                  backgroundImage: `url(${
+                    this.props.post.media.featured_image[0]
+                  })`
+                }}
+                className={style.lightboxImage}
+              />
+            </FixedAspectRatioBox>
           )
         }}
+        backgroundClass={style.lightboxBackground}
+        fitLightboxToContent
+        fullWidth
       />
     )
   }

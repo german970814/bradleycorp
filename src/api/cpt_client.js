@@ -78,7 +78,7 @@ class CPTApiClient {
 
   getByTaxNameAndTermSlugObject (
     taxNameAndTermSlugObject: {
-      [string]: Array<string>
+      [string]: ?Array<string>
     },
     relation: 'AND' | 'OR',
     postsPerPage?: number,

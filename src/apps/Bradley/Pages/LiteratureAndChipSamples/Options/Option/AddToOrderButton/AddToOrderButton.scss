@@ -31,6 +31,10 @@ $addButtonMobileWidth: 30px;
       background-color: #fff;
     }
   }
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .addButtonDesktop {
@@ -44,6 +48,8 @@ $addButtonMobileWidth: 30px;
   @include respond-to(desktop) {
     // extend button-border-dark-gray
     border: solid 1px $dark-gray;
+    padding-top: 0;
+    padding-bottom: 0;
     background-color: transparent;
     color: $dark-gray;
 
@@ -58,6 +64,10 @@ $addButtonMobileWidth: 30px;
         right: 17px;
       }
     }
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 }
 
@@ -115,6 +125,10 @@ $addButtonMobileWidth: 30px;
   img {
     width: 100%;
     height: auto;
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 }
 

@@ -1,0 +1,23 @@
+@import '../../../../../scss/partials/mixins';
+
+.wrapper {
+  text-align: center;
+  .videos {
+    margin-bottom: 10px;
+
+    @include respond-to(tablet) {
+      margin-bottom: 20px;
+    }
+
+    @include respond-to(desktop) {
+      margin-bottom: 40px;
+    }
+  }
+
+  button.loadMore {
+    @include respond-to(tablet) {
+      padding: 2px 30px;
+      width: auto;
+    }
+  }
+}

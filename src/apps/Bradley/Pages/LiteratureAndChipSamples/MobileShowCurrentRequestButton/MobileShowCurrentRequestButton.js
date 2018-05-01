@@ -14,11 +14,11 @@ const MobileShowCurrentRequestButton = (props: Props) => {
         props.updateMobileShowCurrentRequest(!props.mobileShowCurrentRequest)
       }
       className={`row ${style.mobileShowCurrentRequestButton}`}>
-      <h6 className={`col1 ${style.title}`}>
+      <h4 className={`col1 ${style.title}`}>
         {props.mobileShowCurrentRequest
           ? 'BACK TO OPTIONS'
           : 'VIEW CURRENT REQUEST'}
-      </h6>
+      </h4>
       {props.mobileShowCurrentRequest ? (
         <img
           className={`${style.arrowLeft} ${style.arrow}`}

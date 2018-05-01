@@ -21,14 +21,14 @@ type Props = {
    */
   renderRightSidebarWidgets: () => React.Node,
   widgetsMoveWithScroll?: boolean
-}
+};
 
 type State = {
   isSidebarFixed?: boolean,
   width?: number,
   top?: number,
   bottom?: number
-}
+};
 
 class RightSidebarTemplate extends React.Component<Props, State> {
   sidebarNode: ?HTMLDivElement
@@ -103,13 +103,16 @@ class RightSidebarTemplate extends React.Component<Props, State> {
             }
           }}
           className={`col1 col3-desktop ${style.sidebar} ${sidebarFixed}`}>
+          <div className={style.innerSidebar}>
           {this.props.renderRightSidebarWidgets()}
+          </div>
         </div>
       </div>
     )
   }
 
   onScroll () {
+
     if (!this.sidebarNode || !this.contentNode || !this.titleMarginBottom) {
       // if we dont have necessary DOM nodes then we cant move with scroll
       return this.setState({ isSidebarFixed: false })
@@ -120,71 +123,95 @@ class RightSidebarTemplate extends React.Component<Props, State> {
     const contentNode = this.contentNode
     const titleMarginBottomNumber = this.titleMarginBottom
 
-    if (window.innerWidth <= TABLETMAXWIDTH) {
-      sidebarNode.style.width = '100%'
-      return this.setState({ isSidebarFixed: false })
-    }
-
     const boundingClientRect = sidebarNode.getBoundingClientRect()
     const contentBoundingClientRect = contentNode.getBoundingClientRect()
 
-    if (contentBoundingClientRect.height < boundingClientRect.height) {
-      // if the sidebar is longer than the content next to it
-      // then we dont need to move it on scroll
-      sidebarNode.style.height = 'auto'
-      return this.setState({ isSidebarFixed: false })
+    if ( '' == sidebarNode.style.left ) {
+      sidebarNode.style.left = boundingClientRect.left+'px'
+    }
+    sidebarNode.style.width = `${boundingClientRect.width}px`
+    // sidebarNode.style.height = `${height}px`
+
+    this.setState({ isSidebarFixed: ( titleMarginBottomNumber > contentBoundingClientRect.top ) })
+
+    if ( this.state.isSidebarFixed ) {
+      if ( '' == sidebarNode.style.top ) {
+        sidebarNode.style.top = `${titleMarginBottomNumber}px`
+      }
+    } else {
+      sidebarNode.style.top = ''
     }
 
-    if (
-      boundingClientRect.top < titleMarginBottomNumber &&
-      this.state.isSidebarFixed === false
-    ) {
-      // if the title underline is right at the top of the window,
-      // we snap the sidebar to the screen by
-      // setting position fixed and setting its position values
-      // from values we get with its position WRT the screen at the time of snapping
-      //
-      // note: we save the scroll position at which we snapped
-      //       to make it easier to snap back.
-      const right =
-        window.innerWidth - (sidebarNode.offsetLeft + boundingClientRect.width)
-      const height = window.innerHeight - 2 * titleMarginBottomNumber
+    // if (window.innerWidth <= TABLETMAXWIDTH) {
+    //   sidebarNode.style.width = '100%'
+    //   return this.setState({ isSidebarFixed: false })
+    // }
 
-      this.snappedAtY = window.scrollY
-      sidebarNode.style.right = `${right}px`
-      sidebarNode.style.top = titlemarginbottom
-      sidebarNode.style.width = `${boundingClientRect.width}px`
-      sidebarNode.style.height = `${height}px`
-      return this.setState({ isSidebarFixed: true })
-    }
+    // if ( top >= boundingClientRect.top ) {
+    //   console.log( 'should be fixed' )
+    //   // return this.setState({ isSidebarFixed: true })
+    // } else {
+    //   console.log( 'should not be fixed' )
+    // }
+    //
 
-    if (
-      this.snappedAtY &&
-      window.scrollY < this.snappedAtY &&
-      this.state.isSidebarFixed === true
-    ) {
-      // using the saved scroll position at which we snapped
-      // if we cross back above that, we want to snap back
-      // and return the sidebar to having position static
-      //
-      // note: we also return the element's scrollTop to 0
-      //       so it can start again when we next scroll down
-      sidebarNode.scrollTop = 0
-      return this.setState({ isSidebarFixed: false })
-    }
+    // if (contentBoundingClientRect.height < boundingClientRect.height) {
+    //   // if the sidebar is longer than the content next to it
+    //   // then we dont need to move it on scroll
+    //   // sidebarNode.style.height = 'auto'
+    //   return this.setState({ isSidebarFixed: false })
+    // }
 
-    if (window.innerHeight - window.scrollY - 3 * titleMarginBottomNumber < 0) {
-      // if the sidebar comes close to the footer
-      // we take over the positioning and set it from the bottom
-      // so that we can move it up as we scroll further down
-      // thus preventing it from colliding with the footer
-      sidebarNode.style.top = 'unset'
-      sidebarNode.style.bottom = `${-(
-        window.innerHeight -
-        window.scrollY -
-        3 * titleMarginBottomNumber
-      )}px`
-    }
+    // if (
+    //   boundingClientRect.top < titleMarginBottomNumber &&
+    //   this.state.isSidebarFixed === false
+    // ) {
+    //   // if the title underline is right at the top of the window,
+    //   // we snap the sidebar to the screen by
+    //   // setting position fixed and setting its position values
+    //   // from values we get with its position WRT the screen at the time of snapping
+    //   //
+    //   // note: we save the scroll position at which we snapped
+    //   //       to make it easier to snap back.
+    //   const right =
+    //     window.innerWidth - (sidebarNode.offsetLeft + boundingClientRect.width)
+    //   const height = window.innerHeight - 2 * titleMarginBottomNumber
+
+    //   this.snappedAtY = window.scrollY
+    //   sidebarNode.style.right = `${right}px`
+    //   sidebarNode.style.top = titlemarginbottom
+    //   sidebarNode.style.width = `${boundingClientRect.width}px`
+    //   sidebarNode.style.height = `${height}px`
+    //   return this.setState({ isSidebarFixed: true })
+    // }
+
+    // if (
+    //   this.snappedAtY &&
+    //   window.scrollY < this.snappedAtY &&
+    //   this.state.isSidebarFixed === true
+    // ) {
+    //   // using the saved scroll position at which we snapped
+    //   // if we cross back above that, we want to snap back
+    //   // and return the sidebar to having position static
+    //   //
+    //   // note: we also return the element's scrollTop to 0
+    //   //       so it can start again when we next scroll down
+    //   sidebarNode.scrollTop = 0
+    //   return this.setState({ isSidebarFixed: false })
+    // }
+
+    // if (window.innerHeight - window.scrollY - 3 * titleMarginBottomNumber < 0) {
+    //   // if the sidebar comes close to the footer
+    //   // we take over the positioning and set it from the bottom
+    //   // so that we can move it up as we scroll further down
+    //   // thus preventing it from colliding with the footer
+    //   sidebarNode.style.top = 'unset'
+    //   sidebarNode.style.bottom = `${-(
+    //     window.innerHeight -
+    //     window.scrollY -
+    //     3 * titleMarginBottomNumber
+    //   )}px`
+    // }
   }
 }
 

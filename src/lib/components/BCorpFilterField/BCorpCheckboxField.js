@@ -144,6 +144,7 @@ class BCorpCheckboxField extends React.Component<Props> {
             onChange={this.handleChange.bind(this)}
             type="checkbox"
             value={optionName}
+            id={optionName}
             checked={checked || false}
           />
           <label htmlFor={optionName}>{label}</label>

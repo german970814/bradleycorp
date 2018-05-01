@@ -27,7 +27,7 @@ class ShipmentChipSamples extends React.Component<Props> {
       !this.props.shipment.chip ||
       !this.props.shipment.chip.length
     ) {
-      return "You haven't added any Chip Samples yet"
+      return 'You haven’t added any Chip Samples yet.'
     }
 
     return this.props.shipment.chip.map((chipSample, index) => {
