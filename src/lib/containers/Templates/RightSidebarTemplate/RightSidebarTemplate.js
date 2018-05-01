@@ -103,7 +103,9 @@ class RightSidebarTemplate extends React.Component<Props, State> {
             }
           }}
           className={`col1 col3-desktop ${style.sidebar} ${sidebarFixed}`}>
+          <div className={style.innerSidebar}>
           {this.props.renderRightSidebarWidgets()}
+          </div>
         </div>
       </div>
     )
