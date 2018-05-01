@@ -87,10 +87,10 @@ class Video extends React.Component<Props, State> {
                 youtubeProps={{
                   opts: this.opts,
                   onReady: event => {
-                    if (this.youtubeAPIOpen) {
-                      this.youtubeAPIOpen = event.target
-                      this.youtubeAPIOpen.seekTo(this.state.time)
-                    }
+                    this.youtubeAPIOpen = event.target
+                    const youtubeAPIOpen = this.youtubeAPIOpen
+                    youtubeAPIOpen.playVideo()
+                    youtubeAPIOpen.seekTo(this.state.time)
                   }
                 }}
                 noVimeo
