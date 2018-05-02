@@ -61,7 +61,10 @@ class Option extends React.Component<Props> {
       <div className={`col1 ${style.option} ${postTypeClassName}`}>
         <div className={'row'}>
           <div className={`inline-col4-middle ${style.imgContainer}`}>
-            <FeaturedImage post={this.props.post} />
+            <FeaturedImage
+              post={this.props.post}
+              isMobile={this.props.isMobile}
+            />
           </div>
           <div className={`inline-col4x3-middle ${style.contentContainer}`}>
             {this.renderTitle()}
@@ -74,7 +77,10 @@ class Option extends React.Component<Props> {
       <div className={`col2 ${style.option} ${postTypeClassName}`}>
         <div className={`row ${style.optionRow}`}>
           <div className={`col4 ${style.imgContainer}`}>
-            <FeaturedImage post={this.props.post} />
+            <FeaturedImage
+              post={this.props.post}
+              isMobile={this.props.isMobile}
+            />
           </div>
           <div className={`col4x3 ${style.contentContainer}`}>
             <div className={style.overflow}>

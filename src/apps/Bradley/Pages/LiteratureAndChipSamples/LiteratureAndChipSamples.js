@@ -514,7 +514,19 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
 }
 
 function download (literature: LiteraturePost) {
-  console.log(`download ${literature.meta.literature_pdf}`)
+  if (!literature.meta.literature_pdf.includes('/view/')) {
+    console.log(
+      `couldnt download file with url ${literature.meta.literature_pdf}`
+    )
+    return
+  }
+
+  const downloadLink = literature.meta.literature_pdf.replace(
+    '/view/',
+    '/download/'
+  )
+
+  window.open(downloadLink)
 }
 
 export default LiteratureAndChipSamples

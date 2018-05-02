@@ -28,11 +28,20 @@ type BCorpPostTreeResponse = Array<BCorpPostHeirarchyResponse>
 
 type WPFeaturedImageArrayTypes = string | number | boolean
 
+type BCorpMeta = {
+  video_gallery_video?: string,
+  product_sku?: string,
+  app_gallery_img?: string,
+  app_gallery_img_filters?: {
+    color: string,
+    market: string,
+    shape: string
+  }
+}
+
 type BCorpPost = {
   post: WPPost,
-  meta: {
-    video_gallery_video?: string
-  },
+  meta: BCorpMeta,
   terms: {
     [string]: ?Array<WPTerm>,
     post_tag?: Array<WPPostTagTerm>,
@@ -45,6 +54,7 @@ type BCorpPost = {
 
 export type {
   BCorpPost,
+  BCorpMeta,
   WPPost,
   WPFeaturedImageArrayTypes,
   BCorpPostHeirarchyResponse,

@@ -9,7 +9,8 @@ import FixedAspectRatioBox from '../../../../../../../lib/components/FixedAspect
 import style from './FeaturedImage.scss'
 
 type Props = {
-  post: LiteraturePost | ChipSamplePost
+  post: LiteraturePost | ChipSamplePost,
+  isMobile: boolean
 }
 
 type State = {
@@ -53,13 +54,33 @@ class FeaturedImage extends React.Component<Props, State> {
 
     return this.props.post.post.post_type === 'literature' ? (
       <a href={this.props.post.meta.literature_pdf} target="_blank">
-        <div
-          className={style.featuredImage}
-          onMouseEnter={this.onMouseEnter.bind(this)}
-          onMouseLeave={this.onMouseLeave.bind(this)}>
-          <img src={this.props.post.media.featured_image[0]} />
-          {this.renderOverlay()}
-        </div>
+        {this.props.isMobile ? (
+          <FixedAspectRatioBox
+            aspectRatio={88 / 68 * 100}
+            verticalAlign={'middle'}>
+            <div
+              style={{
+                backgroundImage: `url(${
+                  this.props.post.media.featured_image[0]
+                })`
+              }}
+              className={`${style.featuredImage} ${style.lit}`}
+              onMouseEnter={this.onMouseEnter.bind(this)}
+              onMouseLeave={this.onMouseLeave.bind(this)}>
+              {this.renderOverlay()}
+            </div>
+          </FixedAspectRatioBox>
+        ) : (
+          <div
+            style={{
+              backgroundImage: `url(${this.props.post.media.featured_image[0]})`
+            }}
+            className={`${style.featuredImage} ${style.lit}`}
+            onMouseEnter={this.onMouseEnter.bind(this)}
+            onMouseLeave={this.onMouseLeave.bind(this)}>
+            {this.renderOverlay()}
+          </div>
+        )}
       </a>
     ) : (
       <LightboxV2

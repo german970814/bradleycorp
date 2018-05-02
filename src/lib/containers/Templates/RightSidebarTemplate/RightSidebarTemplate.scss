@@ -7,10 +7,9 @@
     top: 0px;
     // position: relative;
 
-
     &.sidebarFixed {
       position: fixed;
-      // overflow: auto;
+      /* overflow: auto; */
     }
 
     .innerSidebar {
@@ -20,8 +19,6 @@
 
   .content {
     margin-bottom: 40px;
-    height: 2000px;
-
 
     @include respond-to(desktop) {
       padding-right: 2.5%;

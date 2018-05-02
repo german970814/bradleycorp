@@ -37,6 +37,7 @@ class Filters extends React.Component<Props> {
         <div className={`col2 col4-tablet ${style.videoType}`}>
           <BCorpSelectField
             title={'Video Type'}
+            className={style.select}
             defaultOptionId={filterDefault}
             defaultOptionName={filterDefaultName}
             options={this.props.filterOptions.video_gallery_type_cat}
@@ -47,6 +48,7 @@ class Filters extends React.Component<Props> {
         <div className={`col2 col4-tablet ${style.productType}`}>
           <BCorpSelectField
             title={'Product Type'}
+            className={style.select}
             defaultOptionId={filterDefault}
             defaultOptionName={filterDefaultName}
             options={this.props.filterOptions.video_gallery_product_tag}

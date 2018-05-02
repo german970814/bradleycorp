@@ -41,7 +41,7 @@ class BCorpInputField extends React.Component<Props> {
           <h5 className={style.title}>{this.props.title}</h5>
         ) : null}
         <input
-          value={this.props.filterState}
+          value={this.props.filterState || ''}
           onChange={this.handleChange.bind(this)}
           placeholder={this.props.placeholder || ''}
           type={'text'}

@@ -15,7 +15,10 @@ import {
   materialTypeFilterDefault
 } from '../LiteratureAndChipSamples'
 import { sortIntoRows } from '../../../../../lib/bcorpJSX'
-import { filterPostsByTerm } from '../../../../../lib/bcorpPost'
+import {
+  filterPostsByTerm,
+  filterPostsByMeta
+} from '../../../../../lib/bcorpPost'
 import Option from './Option/Option'
 import style from './Options.scss'
 
@@ -96,6 +99,17 @@ class Options extends React.Component<Props> {
         true
       )
     }
+
+    if (!chipSamples || !chipSamples.length) {
+      return false
+    }
+
+    chipSamples = filterPostsByMeta(
+      chipSamples,
+      'chip_cant_send_by_mail',
+      '1',
+      'NOTEQUAL'
+    )
 
     if (!chipSamples || !chipSamples.length) {
       return false

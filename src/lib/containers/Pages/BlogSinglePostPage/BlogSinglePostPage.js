@@ -4,20 +4,20 @@ import type { Match } from 'react-router-dom'
 import type { BCorpPost } from '../../../types/post_types'
 import CPTApiClient from '../../../../api/cpt_client'
 import BlogPageTemplate from '../../Templates/BlogPageTemplate/BlogPageTemplate'
-import Posts from './Posts/Posts'
+import Divider from '../../../components/Divider/Divider'
+import PostComments from '../../PostComments/PostComments'
+import Post from './Post/Post'
+import style from './BlogSinglePostPage.scss'
 
 type Props = {
   match: Match
 }
 
 type State = {
-  posts?: Array<BCorpPost>
+  post?: BCorpPost
 }
 
-class BlogLandingPage extends Component<Props, State> {
-  defaultPostState: BCorpPost
-  defaultState: State
-
+class BlogSinglePostPage extends Component<Props, State> {
   constructor (props: Props) {
     super(props)
 
@@ -25,11 +25,13 @@ class BlogLandingPage extends Component<Props, State> {
   }
 
   componentDidMount () {
-    this.getPosts()
+    if (this.props.match.params.slug) {
+      this.getPost(this.props.match.params.slug)
+    }
   }
 
   /**
-   * If we go between urls that both render a blog landing page, we need to make sure we're making a new network request
+   * If we go between urls that both render a blog post, we need to make sure we're making a new network request
    *
    * @param  {[object]} nextProps
    * @return {[void]}
@@ -40,7 +42,7 @@ class BlogLandingPage extends Component<Props, State> {
     }
 
     if (nextProps.match.params.slug !== this.props.match.params.slug) {
-      this.getPosts()
+      this.getPost(nextProps.match.params.slug)
     }
   }
 
@@ -49,12 +51,18 @@ class BlogLandingPage extends Component<Props, State> {
       <div className={`Blog-Landing-Page`}>
         <BlogPageTemplate
           renderContent={() => {
-            if (!this.state.posts) {
+            if (!this.state.post) {
               return null
             }
+
             return (
               <div className={'row'}>
-                <Posts data={this.state.posts} />
+                <Post post={this.state.post} />
+                <Divider className={style.divider} fullWidth />
+                <PostComments
+                  post={this.state.post.post}
+                  postSlug={this.props.match.params.slug || ''}
+                />
               </div>
             )
           }}
@@ -63,26 +71,17 @@ class BlogLandingPage extends Component<Props, State> {
     )
   }
 
-  /**
-   * Gets the post objects and merges them with state,
-   * keeping any required defaults that aren't included in the data
-   */
-  async getPosts () {
+  async getPost (slug: string) {
     try {
       const client = new CPTApiClient('post')
+      const response = await client.getBySlug(slug)
+      const post: BCorpPost = response.data
 
-      const response = await client.getLatest()
-      const postsData: Array<BCorpPost> = response.data
-
-      const posts = postsData.map(postData => {
-        return Object.assign({}, this.defaultPostState, postData)
-      })
-
-      return this.setState({ posts })
+      return this.setState({ post })
     } catch (err) {
       console.log(err)
     }
   }
 }
 
-export default BlogLandingPage
+export default BlogSinglePostPage

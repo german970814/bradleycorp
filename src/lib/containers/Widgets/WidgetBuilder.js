@@ -10,9 +10,9 @@ type Props = {
    */
   widgetData: Array<Widget>,
   /**
-   * The page path, so we know when to re run the whole build sequence
+   * The page path, pass this if you want to re render the widgets on path change
    */
-  pagePath: string,
+  pagePath?: string,
   /**
    * Set true if you're using a right sidebar template to render the widget
    * and you want it to split into two columns for a tablet sized screen

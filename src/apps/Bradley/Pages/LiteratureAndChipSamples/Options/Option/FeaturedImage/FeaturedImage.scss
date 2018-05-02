@@ -13,6 +13,23 @@
     width: 100%;
   }
 
+  &.lit {
+    border: 1px solid #cecece;
+  }
+
+  &.chip {
+    img.chipImage {
+      border: 1px solid #cecece;
+    }
+
+    .overlay {
+      top: -1px;
+      right: -1px;
+      bottom: -1px;
+      left: -1px;
+    }
+  }
+
   .overlay {
     position: absolute;
     z-index: 1;
@@ -42,19 +59,6 @@
     text-align: center;
     color: #fff;
     transform: translateY(4px);
-  }
-
-  &.chip {
-    img.chipImage {
-      border: 1px solid #cecece;
-    }
-
-    .overlay {
-      top: -1px;
-      right: -1px;
-      bottom: -1px;
-      left: -1px;
-    }
   }
 }
 

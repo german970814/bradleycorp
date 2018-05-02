@@ -21,14 +21,14 @@ type Props = {
    */
   renderRightSidebarWidgets: () => React.Node,
   widgetsMoveWithScroll?: boolean
-};
+}
 
 type State = {
   isSidebarFixed?: boolean,
   width?: number,
   top?: number,
   bottom?: number
-};
+}
 
 class RightSidebarTemplate extends React.Component<Props, State> {
   sidebarNode: ?HTMLDivElement
@@ -131,7 +131,13 @@ class RightSidebarTemplate extends React.Component<Props, State> {
     sidebarNode.style.width = `${boundingClientRect.width}px`
     // sidebarNode.style.height = `${height}px`
 
+<<<<<<< HEAD
     this.setState({ isSidebarFixed: (titleMarginBottomNumber > contentBoundingClientRect.top) })
+=======
+    this.setState({
+      isSidebarFixed: titleMarginBottomNumber > contentBoundingClientRect.top
+    })
+>>>>>>> 18bf0c77a4f5267bb01708953c222231efedcd05
 
     if (this.state.isSidebarFixed) {
       if (sidebarNode.style.top === '') {

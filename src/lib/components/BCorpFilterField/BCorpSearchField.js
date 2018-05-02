@@ -58,7 +58,7 @@ class BCorpSearchField extends React.Component<Props, State> {
             <h5 className={style.title}>{this.props.title}</h5>
           ) : null}
           <input
-            value={this.state.value}
+            value={this.state.value || ''}
             onChange={this.handleChange.bind(this)}
             type={'text'}
           />

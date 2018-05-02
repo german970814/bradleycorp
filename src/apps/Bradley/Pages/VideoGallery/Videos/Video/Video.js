@@ -70,18 +70,6 @@ class Video extends React.Component<Props, State> {
                     }}
                     noVimeo
                   />
-                  <img
-                    onClick={event => {
-                      if (
-                        this.youtubeAPIClosed &&
-                        this.youtubeAPIClosed.ready
-                      ) {
-                        this.youtubeAPIClosed.playVideo()
-                      }
-                    }}
-                    className={style.playButton}
-                    src={require('../../../../../../images/play-button/play@2x.png')}
-                  />
                 </div>
               </FixedAspectRatioBox>
               <h5 className={style.title}>
@@ -99,10 +87,10 @@ class Video extends React.Component<Props, State> {
                 youtubeProps={{
                   opts: this.opts,
                   onReady: event => {
-                    if (this.youtubeAPIOpen) {
-                      this.youtubeAPIOpen = event.target
-                      this.youtubeAPIOpen.seekTo(this.state.time)
-                    }
+                    this.youtubeAPIOpen = event.target
+                    const youtubeAPIOpen = this.youtubeAPIOpen
+                    youtubeAPIOpen.playVideo()
+                    youtubeAPIOpen.seekTo(this.state.time)
                   }
                 }}
                 noVimeo

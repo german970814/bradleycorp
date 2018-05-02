@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react'
-import type { BCorpPost } from '../../../../lib/types/post_types'
+import type { BCorpPost, BCorpMeta } from '../../../../lib/types/post_types'
 import type {
   ApplicationGalleryPost,
   CPTName
@@ -27,9 +27,9 @@ type TaxAndTermSlugObject = {
   [string]: ?Array<string>
 }
 
-type MetaType = {
-  app_gallery_img: string,
-  app_gallery_img_filters: {
+type MetaType = BCorpMeta & {
+  app_gallery_img?: string,
+  app_gallery_img_filters?: {
     color: string,
     market: string,
     shape: string
@@ -38,10 +38,10 @@ type MetaType = {
 
 type FiltersType = Array<string>
 
-type GalleryType = {
+type GalleryType = BCorpPost & {
   post: ApplicationGalleryPost,
   meta: MetaType
-} & BCorpPost
+}
 
 type State = {
   gallery: Array<GalleryType>,
@@ -130,4 +130,4 @@ export default class ApplicationGallery extends Component<Props, State> {
 
 export { PostType }
 
-export type { FiltersType }
+export type { FiltersType, GalleryType }
