@@ -1,5 +1,7 @@
 // @flow
 import type { CPTName } from '../lib/types/cpt_types'
+import type { AxiosPromise } from 'axios'
+import type { BCorpPost } from '../lib/types/post_types'
 import axios from 'axios'
 import api from './index'
 
@@ -12,7 +14,10 @@ class CPTApiClient {
 
   /* GET posts */
 
-  getLatest (numberPosts: number = 0, paged?: number) {
+  getLatest (
+    numberPosts: number = 0,
+    paged?: number
+  ): AxiosPromise<Array<BCorpPost>> {
     const url = `${api.baseURL}${this.cptName}`
     const params = { posts_per_page: numberPosts, paged }
 
@@ -26,7 +31,7 @@ class CPTApiClient {
     return axios.get(url, { params })
   }
 
-  getBySlug (slug: string) {
+  getBySlug (slug: string): AxiosPromise<BCorpPost> {
     const url = `${api.baseURL}${this.cptName}`
     const params = { slug }
 
