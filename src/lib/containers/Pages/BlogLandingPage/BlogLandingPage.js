@@ -5,8 +5,7 @@ import type { Match } from 'react-router-dom'
 import type { BCorpPost } from '../../../types/post_types'
 import { validChain } from '../../../bcorpObject'
 import { site } from '../../../../api'
-import BIMRevitClient from '../../../../api/bimRevit_client'
-import TheWashfountainClient from '../../../../api/theWashfountain_client'
+import CPTApiClient from '../../../../api/cpt_client'
 import BlogPageTemplate from '../../Templates/BlogPageTemplate/BlogPageTemplate'
 import Posts from './Posts/Posts'
 
@@ -15,7 +14,7 @@ type Props = {
 }
 
 type State = {
-  posts: Array<BCorpPost>
+  posts?: Array<BCorpPost>
 }
 
 class BlogLandingPage extends Component<Props, State> {
@@ -25,31 +24,7 @@ class BlogLandingPage extends Component<Props, State> {
   constructor (props: Props) {
     super(props)
 
-    /**
-     * Default state, post object response is merged shallowly with this
-     * so we can be sure of what state we definitely have
-     */
-    this.defaultPostState = {
-      post: {
-        ID: 1,
-        post_title: '',
-        post_content: '',
-        post_excerpt: '',
-        author_display_name: '',
-        post_date: ''
-      },
-      meta: {},
-      terms: {},
-      media: {
-        featured_image: ''
-      }
-    }
-
-    this.defaultState = {
-      posts: [this.defaultPostState]
-    }
-
-    this.state = this.defaultState
+    this.state = {}
   }
 
   componentDidMount () {
@@ -63,10 +38,7 @@ class BlogLandingPage extends Component<Props, State> {
    * @return {[void]}
    */
   componentWillReceiveProps (nextProps: Props) {
-    if (
-      !validChain(this.props, 'match', 'params', 'slug') ||
-      !validChain(nextProps, 'match', 'params', 'slug')
-    ) {
+    if (!this.props.match.params.slug || !nextProps.match.params.slug) {
       return
     }
 
@@ -80,6 +52,9 @@ class BlogLandingPage extends Component<Props, State> {
       <div className={`Blog-Landing-Page`}>
         <BlogPageTemplate
           renderContent={() => {
+            if (!this.state.posts) {
+              return null
+            }
             return (
               <div className={'row'}>
                 <Posts data={this.state.posts} />
@@ -98,17 +73,9 @@ class BlogLandingPage extends Component<Props, State> {
   async getPosts () {
     const currentSite: SiteType = site
     try {
-      let client = {}
-      if (currentSite === 'bim-revit') {
-        client = BIMRevitClient
-      } else if (currentSite === 'thewashfountain') {
-        client = TheWashfountainClient
-      } else {
-        return
-      }
+      const client = new CPTApiClient('post')
 
-      // passing 0 means we use WP get_posts default number of posts (currently 5)
-      const response = await client.getRecentPosts(0)
+      const response = await client.getLatest()
       const postsData: Array<BCorpPost> = response.data
 
       const posts = postsData.map(postData => {
