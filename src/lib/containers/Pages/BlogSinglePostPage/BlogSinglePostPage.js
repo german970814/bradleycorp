@@ -5,7 +5,9 @@ import type { BCorpPost } from '../../../types/post_types'
 import CPTApiClient from '../../../../api/cpt_client'
 import BlogPageTemplate from '../../Templates/BlogPageTemplate/BlogPageTemplate'
 import Divider from '../../../components/Divider/Divider'
+import PostComments from '../../PostComments/PostComments'
 import Post from './Post/Post'
+import style from './BlogSinglePostPage.scss'
 
 type Props = {
   match: Match
@@ -56,7 +58,8 @@ class BlogSinglePostPage extends Component<Props, State> {
             return (
               <div className={'row'}>
                 <Post post={this.state.post} />
-                <Divider fullWidth />
+                <Divider className={style.divider} fullWidth />
+                <PostComments post={this.state.post.post} />
               </div>
             )
           }}
