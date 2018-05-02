@@ -247,12 +247,44 @@ h5.title {
       }
     }
   }
+
+  label {
+    font-family: Helvetica;
+    font-size: 14px;
+    font-weight: 300;
+    color: #2f3d6f;
+    text-align: left;
+    line-height: normal;
+    text-transform: capitalize;
+  }
 }
 
-.checkBoxesContainer {
+.checkBoxContainer {
+  padding-bottom: 35px;
+  
+  @include respond-to(mobile) {
+    padding-bottom: 0;
+  }
+
+  @include respond-to(tablet) {
+    padding-bottom: 35px;
+  }
+}
+
+.checkBoxTitle {
+  padding-bottom: 5px;
+  font-family: 'CentraleSansPro';
+  font-size: 14px;
+  font-weight: 600;
+  color: #a7a9ac;
+  text-align: left;
+  line-height: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding-right: 15px;
   button {
     background: #fff;
-    color: #a7a9ac;
+    color: hsl(216, 3%, 66%);
     font-size: 13px;
     font-weight: 300;
     color: #a7a9ac;
@@ -260,18 +292,18 @@ h5.title {
     line-height: normal;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    height: 27px;
     cursor: pointer;
+    padding-left: 0;
     &:after {
-      content: '\02795';
-      font-size: 13px;
-      color: #777;
+      content: '+';
+      font-size: 23px;
+      color: #fff;
+      background: #a8abad;
       float: right;
       margin-left: 5px;
-    }
-    &.active {
-      &:after {
-        content: "\2796";
-      }
+      line-height: 16px;
+      padding: 2px 1px 1px;
     }
   }
 }
@@ -279,7 +311,6 @@ h5.title {
 .panel {
   padding: 0 18px;
   background-color: white;
-  max-height: 0;
   overflow: hidden;
-  transition: max-height 0.2s ease-out;
+  display: none;
 }

@@ -3,27 +3,7 @@
 @import "../../../../scss/partials/mixins";
 
 .appGallerySidebar {
-    margin-bottom: 35px;
-    h5 {
-        font-family: 'CentraleSansProBold';
-        font-size: 13px;
-        color: #a7a9ac;
-        text-align: left;
-        line-height: normal;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-top: 35px;
-        padding-right: 15px;
-    }
-    
-    label {
-        font-family: Helvetica;
-        font-size: 14px;
-        font-weight: 300;
-        color: #2f3d6f;
-        text-align: left;
-        line-height: normal;
-    }
+    margin-bottom: 60px;
 }
 
 .appGalleryContent {
@@ -46,4 +26,13 @@
 
 .lastHorizontalLeftItemSpace {
     padding-left: 20px;
+}
+
+.imageContainer {
+    position: relative;
+    .arrowButton {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+    }
 }

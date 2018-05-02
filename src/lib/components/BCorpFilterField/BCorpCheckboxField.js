@@ -2,8 +2,10 @@
 import * as React from 'react'
 import BCorpInputField from './BCorpInputField'
 import Media from 'react-media'
+import Collapsible from 'react-collapsible'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../globals'
 import style from './BCorpFilterField.scss'
+import './BCorpFilterField.scss'
 
 type Options = {
   [string]: ?string
@@ -155,49 +157,24 @@ class BCorpCheckboxField extends React.Component<Props> {
     })
   }
 
-  handleClick(){
-    if(this.state.open) {
-      this.setState({
-        open: false,
-        class: 'accordion'
-      });
-    }else{
-      this.setState({
-        open: true,
-        class: 'accordion open'
-      });
-    }
-  }
-
-  getInitialState(){
-     return {
-       open: false,
-       class: 'accordion'
-     }
-  }
-
   renderCheckBoxesForMobile() {
-
     return (
-      <div className={`${style.checkbox} ${this.props.className || ''} ${style.checkBoxesContainer}`}>
+      <div className={`${style.checkbox} ${this.props.className || ''} ${style.checkBoxContainer}`}>
         {this.props.title ? (
-          <button className={`checkbox-title ${style.title} accordion`}>
-            {this.props.title}
-          </button>
+          <Collapsible trigger={this.props.title} triggerTagName={'button'} classParentString={`Collapsible ${style.checkBoxTitle}`} triggerStyle={{ color: '#a7a9ac', fontSize: '13px', fontWeight: '300', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+            {this.renderOptions()}
+            {this.renderOtherField()}
+          </Collapsible>
         ) : null}
-        <div className={`${style.panel}`}>
-          {this.renderOptions()}
-          {this.renderOtherField()}
-        </div>
       </div>
     )
   }
 
   renderCheckBoxesForDesktop() {
     return (
-      <div className={`${style.checkbox} ${this.props.className || ''} ${style.checkBoxesContainer}`}>
+      <div className={`${style.checkbox} ${this.props.className || ''} ${style.checkBoxContainer}`}>
         {this.props.title ? (
-          <h5 className={`checkbox-title ${style.title}`}>
+          <h5 className={`checkbox-title ${style.checkBoxTitle}`}>
             {this.props.title}
           </h5>
         ) : null}

@@ -12,6 +12,7 @@ import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
 import style from './ApplicationGallery.scss'
 import Media from 'react-media'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../globals'
+import ArrowButton from '../../../../lib/components/ArrowButton/ArrowButton'
 
 const PostType: CPTName = 'application-gallery'
 
@@ -98,13 +99,15 @@ export default class ApplicationGallery extends Component<Props, State> {
 
   renderGallery () {
     return this.state.gallery.map((el, idx) => {
-      return <ImageFrame
-        src={el.meta.app_gallery_img}
-        key={idx}
-        aspectRatio={123 / 270}
-        aspectRatioTablet={152 / 332}
-        aspectRatioDesktop={169 / 370}
-      />
+      return <div key={idx} className={`${style.imageContainer}`}>
+        <ImageFrame
+          src={el.meta.app_gallery_img}
+          aspectRatio={180 / 301}
+          aspectRatioTablet={180 / 301}
+          aspectRatioDesktop={180 / 301}
+        />
+        <ArrowButton text={''} link={''} color={'white'}/>
+        </div>
     })
   }
 
@@ -113,7 +116,7 @@ export default class ApplicationGallery extends Component<Props, State> {
       <div
         className={`row ${defaultStyle.defaultTemplate}`}>
         {renderTitle('Application Gallery', 'col1')}
-        <div className={`col1 col4-tablet sidebar ${style.appGallerySidebar}`}>
+        <div className={`col1 col4-tablet ${style.appGallerySidebar}`}>
           <Filters updateFilters={this.updateFilters.bind(this)} />
         </div>
         <div className={`col1 col4x3-tablet ${style.appGalleryContent}`}>
