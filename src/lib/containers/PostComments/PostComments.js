@@ -29,12 +29,17 @@ class PostComments extends React.Component<Props, State> {
     this.setState({ newComment })
   }
 
+  handleSubmitNewComment (newComment: NewComment): void {
+    console.log(newComment)
+  }
+
   render () {
     return (
       <div className={style.PostCommentsForm}>
         <LeaveACommentForm
           newComment={this.state.newComment || {}}
-          updateNewComment={this.updateNewComment}
+          updateNewComment={this.updateNewComment.bind(this)}
+          onSubmit={this.handleSubmitNewComment.bind(this)}
         />
       </div>
     )

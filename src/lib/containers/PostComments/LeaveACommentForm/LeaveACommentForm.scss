@@ -1,6 +1,15 @@
 @import '../../../../scss/partials/mixins';
 @import '../../../../scss/partials/variables';
 
+.input {
+  &.highlight {
+    input,
+    textarea {
+      border: 1px solid $red;
+    }
+  }
+}
+
 .title {
   margin-bottom: 10px;
   color: $black;
