@@ -12,6 +12,7 @@ import LightboxTitleBannerContentBox from '../../../../lib/containers/Lightbox/L
 import Lightbox from '../../../../lib/containers/Lightbox/Lightbox'
 import LightboxV2 from '../../../../lib/containers/Lightbox/LightboxV2/LightboxV2'
 import Downloadables from './Downloadables'
+import ProductList from './ProductList'
 
 type Props = {
   location: Location,
@@ -74,39 +75,9 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
           <Downloadables techs={this.state.techs || null} bim={null} />
         </div>
         <div className="col5">
-          {this.renderProductList()}
+          <ProductList products={this.state.products} literatures={this.state.literatures} />
         </div>
       </div>
-    </div>
-  }
-
-  getLightboxConfirmDownload() {
-    return <LightboxV2
-      renderChildren={openLightbox => {
-        return <div onClick={openLightbox}>Hola</div>
-      }}
-      renderLightboxContents={() => {
-        return <div>{this.renderProductList()}</div>
-      }}
-      onLightboxClose={() => {
-        console.log('closed')
-        return undefined
-      }}
-      fitLightboxToContent
-      fullWidth={true}
-      maxWidth={'500'}
-    />
-  }
-
-  renderProductList() {
-    return <div>
-      <h4>Product List</h4>
-      <ul>
-        {this.state.products && this.state.products.map((product, ind) => {
-          return <li key={ind}><a><h6>{product.post.post_title} </h6></a><span>{product.meta.product_sku}</span></li>
-        })}
-      </ul>
-      {this.state.literatures && <a href={this.state.literatures[0].meta.literature_pdf}>Product Literature</a>}
     </div>
   }
 
