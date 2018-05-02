@@ -60,6 +60,7 @@ class ModuleBuilder extends Component {
    */
   renderRows () {
     return this.props.moduleData.rows.map(row => {
+      const centerVertically = new Boolean(row.atts.centered)
       const rowNode = document.querySelector(
         `[data-row-id="${row.atts['row_id']}"]`
       )
@@ -69,6 +70,10 @@ class ModuleBuilder extends Component {
       // rows without disrupting the layout
       rowNode.parentNode.style.marginBottom = 0
       rowNode.parentNode.style.marginTop = 0
+
+      rowNode.className += centerVertically
+        ? ' align-vertically'
+        : ''
 
       return this.renderColumns(columnNodes, row, rowNode)
     })
