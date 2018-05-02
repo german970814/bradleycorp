@@ -59,7 +59,10 @@ class BlogSinglePostPage extends Component<Props, State> {
               <div className={'row'}>
                 <Post post={this.state.post} />
                 <Divider className={style.divider} fullWidth />
-                <PostComments post={this.state.post.post} />
+                <PostComments
+                  post={this.state.post.post}
+                  postSlug={this.props.match.params.slug || ''}
+                />
               </div>
             )
           }}

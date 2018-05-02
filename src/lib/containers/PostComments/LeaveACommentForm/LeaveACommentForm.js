@@ -62,7 +62,9 @@ class LeaveACommentForm extends React.Component<Props, State> {
         : ''
 
     return (
-      <form className={`row`} onSubmit={this.handleSubmit.bind(this)}>
+      <form
+        className={`row ${style.LeaveACommentForm}`}
+        onSubmit={this.handleSubmit.bind(this)}>
         <h5 className={style.title}>{'Leave a Comment'}</h5>
         <div className={style.disclaimer}>
           {'Your email address will not be published.'}

@@ -41,6 +41,7 @@ type API = {
   baseURLTheWashfountain: string,
   baseURLBIMRevit: string,
   queryRoute: string,
+  baseURLWPDefaultAPI: string,
   query: ({ args?: {} }) => {}
 }
 
@@ -95,6 +96,8 @@ const queryRoute = 'wp-query'
 
 const baseURL = `${host}/index.php/wp-json/${namespace}`
 
+const baseURLWPDefaultAPI = `${host}/index.php/wp-json/wp/v2/`
+
 /* Define the API object */
 
 const api: API = {
@@ -120,6 +123,8 @@ const api: API = {
 
   baseURLBIMRevit: `${hostBIMRevit}/index.php/wp-json/${namespace}`,
 
+  baseURLWPDefaultAPI,
+
   queryRoute,
 
   query: ({ args }) => {
@@ -128,8 +133,6 @@ const api: API = {
     return axios.post(url, args)
   }
 }
-
-console.log(api.baseURL)
 
 module.exports = api
 export type { SiteType }

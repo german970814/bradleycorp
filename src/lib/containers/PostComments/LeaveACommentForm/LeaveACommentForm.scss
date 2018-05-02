@@ -1,68 +1,80 @@
 @import '../../../../scss/partials/mixins';
 @import '../../../../scss/partials/variables';
 
-.input {
-  &.highlight {
-    input,
-    textarea {
-      border: 1px solid $red;
-    }
-  }
-}
-
-.title {
-  margin-bottom: 10px;
-  color: $black;
-
-  @include respond-to(tablet) {
-    margin-bottom: 12px;
-  }
-}
-
-.disclaimer {
-  margin-bottom: 17px;
-
-  @include respond-to(tablet) {
-    margin-bottom: 25px;
-  }
-}
-
-.comment {
-  margin-bottom: 10px;
-
-  @include respond-to(tablet) {
-    margin-bottom: 25px;
-  }
-
-  textarea {
-    padding: 10px;
-    height: 68px;
-
-    @include respond-to(tablet) {
-      height: 163px;
-    }
-  }
-}
-
-.name {
-  margin-bottom: 10px;
-
-  @include respond-to(tablet) {
-    margin-bottom: 30px;
-    padding-right: 11px;
-  }
-}
-
-.email {
+.LeaveACommentForm {
   margin-bottom: 30px;
 
   @include respond-to(tablet) {
-    padding-left: 11px;
+    margin-bottom: 50px;
   }
-}
 
-button.button {
-  width: auto;
-  padding-left: 40px;
-  padding-right: 40px;
+  @include respond-to(desktop) {
+    margin-bottom: 40px;
+  }
+
+  .input {
+    &.highlight {
+      input,
+      textarea {
+        border: 1px solid $red;
+      }
+    }
+  }
+
+  .title {
+    margin-bottom: 10px;
+    color: $black;
+
+    @include respond-to(tablet) {
+      margin-bottom: 12px;
+    }
+  }
+
+  .disclaimer {
+    margin-bottom: 17px;
+
+    @include respond-to(tablet) {
+      margin-bottom: 25px;
+    }
+  }
+
+  .comment {
+    margin-bottom: 10px;
+
+    @include respond-to(tablet) {
+      margin-bottom: 25px;
+    }
+
+    textarea {
+      padding: 10px;
+      height: 68px;
+
+      @include respond-to(tablet) {
+        height: 163px;
+      }
+    }
+  }
+
+  .name {
+    margin-bottom: 10px;
+
+    @include respond-to(tablet) {
+      margin-bottom: 30px;
+      padding-right: 11px;
+    }
+  }
+
+  .email {
+    margin-bottom: 30px;
+
+    @include respond-to(tablet) {
+      padding-left: 11px;
+    }
+  }
+
+  button.button {
+    width: auto;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
 }
