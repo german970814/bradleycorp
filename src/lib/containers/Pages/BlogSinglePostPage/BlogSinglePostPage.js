@@ -1,6 +1,5 @@
 // @flow
 import React, { Component } from 'react'
-import type { SiteType } from '../../../../api'
 import type { Match } from 'react-router-dom'
 import type { BCorpPost } from '../../../types/post_types'
 import CPTApiClient from '../../../../api/cpt_client'

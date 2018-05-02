@@ -1,10 +1,7 @@
 // @flow
 import React, { Component } from 'react'
-import type { SiteType } from '../../../../api'
 import type { Match } from 'react-router-dom'
 import type { BCorpPost } from '../../../types/post_types'
-import { validChain } from '../../../bcorpObject'
-import { site } from '../../../../api'
 import CPTApiClient from '../../../../api/cpt_client'
 import BlogPageTemplate from '../../Templates/BlogPageTemplate/BlogPageTemplate'
 import Posts from './Posts/Posts'
@@ -71,7 +68,6 @@ class BlogLandingPage extends Component<Props, State> {
    * keeping any required defaults that aren't included in the data
    */
   async getPosts () {
-    const currentSite: SiteType = site
     try {
       const client = new CPTApiClient('post')
 
