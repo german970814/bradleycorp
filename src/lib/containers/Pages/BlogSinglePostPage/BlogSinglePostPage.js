@@ -4,6 +4,7 @@ import type { Match } from 'react-router-dom'
 import type { BCorpPost } from '../../../types/post_types'
 import CPTApiClient from '../../../../api/cpt_client'
 import BlogPageTemplate from '../../Templates/BlogPageTemplate/BlogPageTemplate'
+import Divider from '../../../components/Divider/Divider'
 import Post from './Post/Post'
 
 type Props = {
@@ -55,6 +56,7 @@ class BlogSinglePostPage extends Component<Props, State> {
             return (
               <div className={'row'}>
                 <Post post={this.state.post} />
+                <Divider fullWidth />
               </div>
             )
           }}

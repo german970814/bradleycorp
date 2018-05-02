@@ -1,0 +1,39 @@
+@import '../../../../../scss/partials/mixins';
+
+.post {
+  margin-bottom: 30px;
+
+  @include respond-to(desktop) {
+    margin-bottom: 40px;
+  }
+
+  .title {
+    margin-bottom: 13px;
+  }
+
+  .image {
+    float: left;
+    margin-bottom: 20px;
+    width: 100%;
+
+    @include respond-to(tablet) {
+      margin-right: 24px;
+      margin-bottom: 30px;
+      width: 50%;
+    }
+
+    @include respond-to(desktop) {
+      margin-right: 30px;
+      margin-bottom: 30px;
+      width: 50%;
+    }
+  }
+
+  .content {
+    margin-bottom: 25px;
+
+    @include respond-to(desktop) {
+      margin-bottom: 35px;
+    }
+  }
+}
