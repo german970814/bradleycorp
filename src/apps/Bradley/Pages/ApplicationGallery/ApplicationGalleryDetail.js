@@ -5,11 +5,9 @@ import type { Location, Match } from 'react-router-dom'
 import type { BCorpPost } from '../../../../lib/types/post_types'
 import { PostType } from './ApplicationGallery'
 import type { CPTName } from '../../../../lib/types/cpt_types'
-import debounce from 'debounce'
 import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import CPTApiClient from '../../../../api/cpt_client'
 import ImageFrame from '../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
-
 
 type Props = {
   location: Location,
@@ -20,11 +18,12 @@ type State = {
   applicationGallery: ?GalleryType,
   loading: boolean,
   products?: Array<BCorpPost>,
-  literatures?: Array<BcorpPost>
+  literatures?: Array<BCorpPost>,
+  techs?: Array<BCorpPost>
 }
 
-export default class ApplicationGallery extends Component<Props, State> {
-  constructor(props: Props) {
+export default class ApplicationGalleryDetail extends Component<Props, State> {
+  constructor (props: Props) {
     super(props)
 
     this.state = {
@@ -33,11 +32,11 @@ export default class ApplicationGallery extends Component<Props, State> {
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.getApplicationGallery()
   }
 
-  renderContent() {
+  renderContent () {
     return <div>
       {this.state.applicationGallery && <ImageFrame
         src={this.state.applicationGallery.meta.app_gallery_img}
@@ -63,8 +62,43 @@ export default class ApplicationGallery extends Component<Props, State> {
     </div>
   }
 
-  async getApplicationGallery() {
+  getTermsByTaxonomy (taxonomy: string): Array<string> {
+    return this.state.products.map(product => {
+      return product.terms[taxonomy].map(term => {
+        return term.slug
+      })
+    }).reduce((previous, current) => {
+      return [...previous, ...current]
+    })
+  }
+
+  getLiteratures () {
+    const terms = this.getTermsByTaxonomy('literature')
+
+    this.getDocumentsDownloads('literature', 'product_tag', terms, (literatures: Array<BCorpPost>) => {
+      console.log(literatures)
+      this.setState({ literatures })
+    })
+  }
+
+  getTechInfo () {
+    const terms = this.getTermsByTaxonomy('technical_info')
+
+    this.getDocumentsDownloads('technical_info', 'technical_info_product_tag', terms, (techs: Array<BCorpPost>) => {
+      console.log(techs)
+      this.setState({ techs })
+    })
+  }
+
+  getBimRevit () {
+    // const terms = this.getTermsByTaxonomy('bim_revit')
+
+    // this.getDocumentsDownloads('')
+  }
+
+  async getApplicationGallery () {
     let applicationGallery: GalleryType
+
     if (this.props.location.state && this.props.location.state.post) {
       applicationGallery = this.props.location.state.post
     } else {
@@ -73,38 +107,32 @@ export default class ApplicationGallery extends Component<Props, State> {
       applicationGallery = response.data
       console.log(response.data)
     }
+
     this.setState({ applicationGallery }, () => {
-      if (this.state.applicationGallery){
-        const productTerms = applicationGallery.terms['app_gallery_product_tag'] ?
-          applicationGallery.terms['app_gallery_product_tag'].map(term => term.slug) : []
+      if (this.state.applicationGallery) {
+        const productTerms = applicationGallery.terms['app_gallery_product_tag']
+          ? applicationGallery.terms['app_gallery_product_tag'].map(term => term.slug) : []
 
         this.getDocumentsDownloads(
-          'product', 'application_gallery', productTerms, products => {
+          'product', 'application_gallery',
+          productTerms, (products: Array<BCorpPost>) => {
+            console.log(products)
             this.setState({ products }, () => {
-              let terms = this.state.products.map(product => {
-                return product.terms.literature.map(literature => {
-                  return literature.slug
-                })
-              }).reduce((previous, current) => {
-                return [...previous, ...current]
-              })
-              console.log(terms)
-              this.getDocumentsDownloads('literature', 'product_tag', terms, literatures => {
-                this.setState({ literatures })
-              })
+              this.getLiteratures()
+              this.getTechInfo()
             })
           })
       }
     })
   }
 
-  async getDocumentsDownloads(cpt: CPTName, taxonomy: string, terms: Array<string>, callback?: (param: any) => void) {  // app_gallery_tech_info_tag
+  async getDocumentsDownloads (cpt: CPTName, taxonomy: string, terms: Array<string>, callback?: (param: any) => void) { // app_gallery_tech_info_tag
     const client = new CPTApiClient(cpt)
     const response = await client.getByTaxAndTermArray(taxonomy, terms)
     callback && callback(response.data)
   }
 
-  render() {
+  render () {
     return (
       <DefaultTemplate
         data={{ page_title: 'Application Gallery' }}
