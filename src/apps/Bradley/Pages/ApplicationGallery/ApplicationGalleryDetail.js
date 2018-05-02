@@ -8,6 +8,10 @@ import type { CPTName } from '../../../../lib/types/cpt_types'
 import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import CPTApiClient from '../../../../api/cpt_client'
 import ImageFrame from '../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
+import LightboxTitleBannerContentBox from '../../../../lib/containers/Lightbox/LightboxTitleBannerContentBox/LightboxTitleBannerContentBox'
+import Lightbox from '../../../../lib/containers/Lightbox/Lightbox'
+import LightboxV2 from '../../../../lib/containers/Lightbox/LightboxV2/LightboxV2'
+import Downloadables from './Downloadables'
 
 type Props = {
   location: Location,
@@ -23,6 +27,12 @@ type State = {
 }
 
 export default class ApplicationGalleryDetail extends Component<Props, State> {
+  CPT_TAXONOMY = {
+    literature: 'product_tag',
+    product: 'application_gallery',
+    'technical-info': 'technical_info_product_tag'
+  }
+
   constructor (props: Props) {
     super(props)
 
@@ -36,6 +46,16 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
     this.getApplicationGallery()
   }
 
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.match.params.slug !== this.props.match.params.slug) {
+      this.getApplicationGallery()
+    }
+  }
+
+  get_taxonomy_by_cpt(type: CPTName): string {
+    return this.CPT_TAXONOMY[type]
+  }
+
   renderContent () {
     return <div>
       {this.state.applicationGallery && <ImageFrame
@@ -46,19 +66,47 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
       />}
       <p>{this.state.applicationGallery && this.state.applicationGallery.post.post_content}</p>
       <h2>Featured Product Information</h2>
+      {/* {this.getLightbox()} */}
       <hr />
       <h3>Document Downloads</h3>
       <div className="row">
-        <div className="col6"></div>
+        <div className="col6">
+          <Downloadables techs={this.state.techs || null} bim={null} />
+        </div>
         <div className="col5">
-          <h4>Product List</h4>
-          <ul>
-            {this.state.products && this.state.products.map((product, ind) => {
-              return <li key={ind}><a>{product.post.post_title} </a><span>{product.meta.product_sku}</span></li>
-            })}
-          </ul>
+          {this.renderProductList()}
         </div>
       </div>
+    </div>
+  }
+
+  getLightboxConfirmDownload() {
+    return <LightboxV2
+      renderChildren={openLightbox => {
+        return <div onClick={openLightbox}>Hola</div>
+      }}
+      renderLightboxContents={() => {
+        return <div>{this.renderProductList()}</div>
+      }}
+      onLightboxClose={() => {
+        console.log('closed')
+        return undefined
+      }}
+      fitLightboxToContent
+      fullWidth={true}
+      maxWidth={'500'}
+    />
+  }
+
+  renderProductList() {
+    return <div>
+      <h4>Product List</h4>
+      <ul>
+        {this.state.products && this.state.products.map((product, ind) => {
+          return <li key={ind}><a><h6>{product.post.post_title} </h6></a><span>{product.meta.product_sku}</span></li>
+        })}
+      </ul>
+      {this.state.literatures && <a href={this.state.literatures[0].meta.literature_pdf}>Product Literature</a>}
     </div>
   }
 
@@ -73,18 +121,20 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
   }
 
   getLiteratures () {
-    const terms = this.getTermsByTaxonomy('literature')
+    const cpt = 'literature'
+    const terms = this.getTermsByTaxonomy(cpt)
 
-    this.getDocumentsDownloads('literature', 'product_tag', terms, (literatures: Array<BCorpPost>) => {
+    this.getDocumentsDownloads(cpt, this.get_taxonomy_by_cpt(cpt), terms, (literatures: Array<BCorpPost>) => {
       console.log(literatures)
       this.setState({ literatures })
     })
   }
 
   getTechInfo () {
+    const cpt = 'technical-info'
     const terms = this.getTermsByTaxonomy('technical_info')
 
-    this.getDocumentsDownloads('technical_info', 'technical_info_product_tag', terms, (techs: Array<BCorpPost>) => {
+    this.getDocumentsDownloads(cpt, this.get_taxonomy_by_cpt(cpt), terms, (techs: Array<BCorpPost>) => {
       console.log(techs)
       this.setState({ techs })
     })
@@ -96,7 +146,17 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
     // this.getDocumentsDownloads('')
   }
 
-  async getApplicationGallery () {
+  render () {
+    return (
+      <DefaultTemplate
+        data={{ page_title: 'Application Gallery' }}
+        renderModules={() => this.renderContent()}
+        widgetsMoveWithScroll
+      />
+    )
+  }
+
+  async getApplicationGallery() {
     let applicationGallery: GalleryType
 
     if (this.props.location.state && this.props.location.state.post) {
@@ -114,7 +174,7 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
           ? applicationGallery.terms['app_gallery_product_tag'].map(term => term.slug) : []
 
         this.getDocumentsDownloads(
-          'product', 'application_gallery',
+          'product', this.get_taxonomy_by_cpt('product'),
           productTerms, (products: Array<BCorpPost>) => {
             console.log(products)
             this.setState({ products }, () => {
@@ -126,19 +186,9 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
     })
   }
 
-  async getDocumentsDownloads (cpt: CPTName, taxonomy: string, terms: Array<string>, callback?: (param: any) => void) { // app_gallery_tech_info_tag
+  async getDocumentsDownloads(cpt: CPTName, taxonomy: string, terms: Array<string>, callback?: (param: any) => void) { // app_gallery_tech_info_tag
     const client = new CPTApiClient(cpt)
     const response = await client.getByTaxAndTermArray(taxonomy, terms)
     callback && callback(response.data)
-  }
-
-  render () {
-    return (
-      <DefaultTemplate
-        data={{ page_title: 'Application Gallery' }}
-        renderModules={() => this.renderContent()}
-        widgetsMoveWithScroll
-      />
-    )
   }
 }
