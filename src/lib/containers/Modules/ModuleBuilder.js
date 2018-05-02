@@ -60,7 +60,7 @@ class ModuleBuilder extends Component {
    */
   renderRows () {
     return this.props.moduleData.rows.map(row => {
-      const centerVertically = new Boolean(row.atts.centered)
+      // const centerVertically = Boolean(Number(row.atts.centered))
       const rowNode = document.querySelector(
         `[data-row-id="${row.atts['row_id']}"]`
       )
@@ -71,20 +71,21 @@ class ModuleBuilder extends Component {
       rowNode.parentNode.style.marginBottom = 0
       rowNode.parentNode.style.marginTop = 0
 
-      rowNode.className += centerVertically
-        ? ' align-vertically'
-        : ''
+      // rowNode.className += centerVertically ? ' align-vertically' : ''
 
       return this.renderColumns(columnNodes, row, rowNode)
     })
   }
 
   renderColumns (columnNodes, row, rowNode) {
+    // const centerVertically = Boolean(Number(row.atts.centered))
     return columnNodes.map((columnNode, index) => {
       const colData = row.columns[index]
       const moduleNodes = Array.from(
         columnNode.getElementsByClassName(`bcorp-module`)
       )
+
+      // columnNode.className += centerVertically ? ' align-vertically' : ''
 
       return this.renderModules(moduleNodes, colData, rowNode)
     })
