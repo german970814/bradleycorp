@@ -38,7 +38,7 @@ class BCorpTextareaField extends React.Component<Props> {
           cols={this.props.cols}
           rows={this.props.rows}
           maxLength={this.props.maxlength}
-          value={this.props.filterState}
+          value={this.props.filterState || ''}
           onChange={this.handleChange.bind(this)}
           placeholder={this.props.placeholder || ''}
           disabled={this.props.disabled}
