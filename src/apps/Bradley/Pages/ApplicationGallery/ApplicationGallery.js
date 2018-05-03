@@ -13,6 +13,7 @@ import style from './ApplicationGallery.scss'
 import Media from 'react-media'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../globals'
 import ArrowButton from '../../../../lib/components/ArrowButton/ArrowButton'
+import { Link } from 'react-router-dom'
 
 const PostType: CPTName = 'application-gallery'
 
@@ -100,14 +101,16 @@ export default class ApplicationGallery extends Component<Props, State> {
   renderGallery () {
     return this.state.gallery.map((el, idx) => {
       return <div key={idx} className={`${style.imageContainer}`}>
-        <ImageFrame
-          src={el.meta.app_gallery_img}
-          aspectRatio={180 / 301}
-          aspectRatioTablet={180 / 301}
-          aspectRatioDesktop={180 / 301}
-        />
-        <ArrowButton text={''} link={''} color={'white'}/>
-        </div>
+        <Link to={`/application-gallery/${el.post.post_name}`}>
+          <ImageFrame
+            src={el.meta.app_gallery_img}
+            aspectRatio={180 / 301}
+            aspectRatioTablet={180 / 301}
+            aspectRatioDesktop={180 / 301}
+          />
+          <ArrowButton text={''} link={''} color={'white'}/>
+        </Link>
+      </div>
     })
   }
 

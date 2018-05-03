@@ -4,8 +4,17 @@
 
 
 .appGalleryDetailWrapper {
-    width: 83%;
-    margin: 0 auto;
+    
+    @include respond-to(mobile) {
+        width: 100%;
+        margin: 0;
+      }
+    
+      @include respond-to(tablet) {
+        width: 83%;
+        margin: 0 auto;
+      }
+      
 }
 
 .appGalleryDetailText {
@@ -30,5 +39,14 @@
         font-weight: 300;
         text-transform: capitalize;
         margin-bottom: 40px;
+    }
+}
+
+.featureProductInformation {
+    h3 {
+        font-family: 'CentraleSansPro';
+        font-size: 24px;
+        font-weight: bold;
+        color: #000;
     }
 }
