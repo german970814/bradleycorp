@@ -5,7 +5,6 @@ import Media from 'react-media'
 import Collapsible from 'react-collapsible'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../globals'
 import style from './BCorpFilterField.scss'
-import './BCorpFilterField.scss'
 
 type Options = {
   [string]: ?string
@@ -157,7 +156,7 @@ class BCorpCheckboxField extends React.Component<Props> {
     })
   }
 
-  renderCheckBoxesForMobile() {
+  renderCheckBoxesForMobile () {
     return (
       <div className={`${style.checkbox} ${this.props.className || ''} ${style.checkBoxContainer}`}>
         {this.props.title ? (
@@ -170,7 +169,7 @@ class BCorpCheckboxField extends React.Component<Props> {
     )
   }
 
-  renderCheckBoxesForDesktop() {
+  renderCheckBoxesForDesktop () {
     return (
       <div className={`${style.checkbox} ${this.props.className || ''} ${style.checkBoxContainer}`}>
         {this.props.title ? (

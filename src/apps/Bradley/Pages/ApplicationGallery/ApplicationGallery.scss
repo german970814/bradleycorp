@@ -35,10 +35,52 @@
         right: 10px;
         bottom: 10px;
     }
+    img {
+        
+    }
 }
 
 .arrowContainer {
+    
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: 0;
+    right: 0;
+    width: 37%;
+    height: 62%;
+    
+    img {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+
+        @include respond-to(mobile) {
+            width: 160%;
+        }
+    
+        @include respond-to(tablet) {
+            width: auto;
+        }
+    }
+}
+
+.arrowWrapper {
+    position: absolute;
+    @include respond-to(mobile) {
+        bottom: 10px;
+        right: 10px;
+    }
+
+    @include respond-to(tablet) {
+        bottom: 18px;
+        right: 18px;
+    }
+    
+}
+
+.showArrow {
+    visibility: visible;
+}
+
+.hideArrow {
+    visibility: hidden;
 }

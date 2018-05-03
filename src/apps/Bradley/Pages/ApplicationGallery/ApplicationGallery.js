@@ -7,13 +7,11 @@ import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplat
 import CPTApiClient from '../../../../api/cpt_client'
 import FillColumns from '../../../../lib/components/FillColumns/FillColumns'
 import Filters from './Filters/Filters'
-import ImageFrame from '../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
 import style from './ApplicationGallery.scss'
 import Media from 'react-media'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../globals'
-import ArrowButton from '../../../../lib/components/ArrowButton/ArrowButton'
-import { Link } from 'react-router-dom'
+import GalleryItem from './GalleryItem'
 
 const PostType: CPTName = 'application-gallery'
 
@@ -61,7 +59,8 @@ export default class ApplicationGallery extends Component<Props, State> {
     this.state = {
       gallery: [],
       activeFilters: {},
-      loading: true
+      loading: true,
+      hover: false
     }
     this.getApplicationGalleryDebounced = debounce(
       this.getApplicationGallery,
@@ -86,6 +85,14 @@ export default class ApplicationGallery extends Component<Props, State> {
     this.getApplicationGalleryDebounced(activeFilters)
   }
 
+  hoverOn () {
+    this.setState({ hover: true })
+  }
+
+  hoverOff () {
+    this.setState({ hover: false })
+  }
+
   async getApplicationGallery (filters: Props) {
     const client = new CPTApiClient(PostType)
     const response = await client.getByTaxNameAndTermSlugObject(filters, 'OR')
@@ -99,20 +106,8 @@ export default class ApplicationGallery extends Component<Props, State> {
   }
 
   renderGallery () {
-    return this.state.gallery.map((el, idx) => {
-      return <div key={idx} className={`${style.imageContainer}`}>
-        <Link to={`/application-gallery/${el.post.post_name}`}>
-          <ImageFrame
-            src={el.meta.app_gallery_img}
-            aspectRatio={180 / 301}
-            aspectRatioTablet={180 / 301}
-            aspectRatioDesktop={180 / 301}
-          />
-          <div className={`${style.arrowContainer}`}>
-            <ArrowButton text={''} link={''} color={'white'}/>
-          </div>
-        </Link>
-      </div>
+    return this.state.gallery.map((appGallery, idx) => {
+      return <GalleryItem key={idx} applicationGallery={appGallery} />
     })
   }
 

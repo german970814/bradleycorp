@@ -281,7 +281,14 @@ h5.title {
   line-height: normal;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  padding-right: 15px;
+  @include respond-to(mobile) {
+    padding-right: 0;
+  }
+
+  @include respond-to(tablet) {
+    padding-right: 15px;
+  }
+  
   button {
     background: #fff;
     color: hsl(216, 3%, 66%);
@@ -295,6 +302,7 @@ h5.title {
     height: 27px;
     cursor: pointer;
     padding-left: 0;
+    padding-right: 0;
     &:after {
       content: '+';
       font-size: 23px;

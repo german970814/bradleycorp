@@ -13,7 +13,10 @@ type CPTName =
   | 'warranty'
   | 'nav_menu_item'
 
-type LiteraturePost = { post_type: 'literature' } & WPPost
+// Literature
+type MetaLiterature = { literature_pdf: string }
+
+type LiteraturePost = { post_type: 'literature', meta: MetaLiterature } & WPPost
 
 type ChipSamplePost = { post_type: 'chip_sample' } & WPPost
 
@@ -23,11 +26,23 @@ type ApplicationGalleryPost = WPPost & { post_type: 'application-gallery' }
 
 type NavMenuItem = WPPost & { post_type: 'nav_menu_item' }
 
+// Technical Info
+type MetaTechnicalInfo = { technical_info_pdf: string }
+
+type TechnicalInfo = WPPost & { post_type: 'technical-info', meta: MetaTechnicalInfo }
+
+// Product
+type MetaProduct = { product_sku: string }
+
+type ProductPost = WPPost & { post_type: 'product', meta: MetaProduct }
+
 export type {
   CPTName,
   LiteraturePost,
   ChipSamplePost,
   VideoGalleryPost,
   ApplicationGalleryPost,
-  NavMenuItem
+  NavMenuItem,
+  ProductPost,
+  TechnicalInfo
 }
