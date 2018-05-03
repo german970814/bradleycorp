@@ -4,8 +4,26 @@ import Loadable from 'react-loadable'
 import Loading from '../../../lib/components/Loading/Loading'
 import Home from '../Pages/Home/Home'
 
+const CustomizableLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/Customizable/Customizable'),
+  loading: Loading
+})
+
+const BlogSinglePostPageLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/BlogSinglePostPage/BlogSinglePostPage'),
+  loading: Loading
+})
+
 const ProductDetailLoadable = Loadable({
   loader: () => import('../Pages/ProductDetail/ProductDetail'),
+  loading: Loading
+})
+
+const DefaultCPTLandingPageLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/DefaultCPTLandingPage/DefaultCPTLandingPage'),
   loading: Loading
 })
 
@@ -17,12 +35,6 @@ const LiteratureAndChipSamplesLoadable = Loadable({
 
 const VideoGalleryLoadable = Loadable({
   loader: () => import('../Pages/VideoGallery/VideoGallery'),
-  loading: Loading
-})
-
-const CustomizableLoadable = Loadable({
-  loader: () =>
-    import('../../../lib/containers/Pages/Customizable/Customizable'),
   loading: Loading
 })
 
@@ -43,7 +55,19 @@ const Main = props => {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
+
+      {/* Post Types With Custom Templates */}
+      <Route exact path="/post/:slug" component={BlogSinglePostPageLoadable} />
       <Route exact path="/product/:slug" component={ProductDetailLoadable} />
+
+      {/* Other Post Types */}
+      <Route
+        exact
+        path="/:postType/:slug"
+        component={DefaultCPTLandingPageLoadable}
+      />
+
+      {/* Specific Custom Pages */}
       <Route
         exact
         path="/literature-and-chip-samples"
@@ -60,6 +84,8 @@ const Main = props => {
         path="/application-gallery/:slug"
         component={ApplicationGalleryDetailLoadable}
       />
+
+      {/* Any other route is sent to the Customizable Page */}
       <Route exact path="/*/:slug" component={CustomizableLoadable} />
       <Route exact path="/:slug" component={CustomizableLoadable} />
     </Switch>

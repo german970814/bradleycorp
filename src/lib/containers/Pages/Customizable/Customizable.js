@@ -17,7 +17,7 @@ type Props = {
 type State = BCorpCustomPage & {
   requesting: boolean,
   ready: boolean
-}
+};
 
 /**
  *

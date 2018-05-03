@@ -1,8 +1,7 @@
 // @flow
 import * as React from 'react'
 import ReactDOM from 'react-dom'
-import type { UpdateBlurType } from '../../../contexts/BlurContext'
-import { BlurConsumer } from '../../../contexts/BlurContext'
+import { updateBlur } from '../../../../apps/Bradley/App/updateBlur'
 import style from './LightboxV2.scss'
 
 type Props = {
@@ -48,10 +47,6 @@ type Props = {
   maxWidth?: string
 }
 
-type InnerLightboxProps = Props & {
-  updateBlur: UpdateBlurType
-}
-
 type State = {
   isOpen: boolean
 }
@@ -73,21 +68,8 @@ type State = {
  * than the designated space and we wanted to close button to stay the same distance below.
  * With these options all combinations should be possible.
  */
-
-class LightboxV2 extends React.Component<Props> {
-  render () {
-    return (
-      <BlurConsumer>
-        {({ isBlurred, updateBlur }) => {
-          return <LightboxV2Inner updateBlur={updateBlur} {...this.props} />
-        }}
-      </BlurConsumer>
-    )
-  }
-}
-
-class LightboxV2Inner extends React.Component<InnerLightboxProps, State> {
-  constructor (props: InnerLightboxProps) {
+class LightboxV2 extends React.Component<Props, State> {
+  constructor (props: Props) {
     super(props)
 
     this.state = {
@@ -96,7 +78,7 @@ class LightboxV2Inner extends React.Component<InnerLightboxProps, State> {
   }
 
   componentWillUnmount () {
-    this.props.updateBlur(false)
+    updateBlur(false)
   }
 
   toggleOpen () {
@@ -110,7 +92,7 @@ class LightboxV2Inner extends React.Component<InnerLightboxProps, State> {
     if (this.props.onLightboxOpen) {
       this.props.onLightboxOpen()
     }
-    this.props.updateBlur(true)
+    updateBlur(true)
 
     this.setState({
       isOpen: true
@@ -121,7 +103,7 @@ class LightboxV2Inner extends React.Component<InnerLightboxProps, State> {
     if (this.props.onLightboxClose) {
       this.props.onLightboxClose()
     }
-    this.props.updateBlur(false)
+    updateBlur(false)
 
     this.setState({
       isOpen: false
@@ -164,6 +146,7 @@ class LightboxV2Inner extends React.Component<InnerLightboxProps, State> {
           <div className={`lightbox-wrapper ${style.lightboxWrapper}`}>
             <div
               onClick={e => {
+                // make sure clicking inside the lightbox doesnt close it
                 e.stopPropagation()
               }}
               style={{

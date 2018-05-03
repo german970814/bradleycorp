@@ -41,10 +41,11 @@ type API = {
   baseURLTheWashfountain: string,
   baseURLBIMRevit: string,
   queryRoute: string,
+  baseURLWPDefaultAPI: string,
   query: ({ args?: {} }) => {}
 }
 
-const dev: boolean = true
+const dev: boolean = false
 
 let site: SiteType = 'bcorp'
 
@@ -70,12 +71,6 @@ const urlBIMRevit: URLBIMRevitType = dev
   ? 'http://localhost:8082'
   : 'http://bimrevit.site.bradleydev.twoxfour.com'
 
-const namespace = 'bcorp/v1/'
-
-const queryRoute = 'wp-query'
-
-const baseURL = `${host}/index.php/wp-json/${namespace}`
-
 /**
  * set the api host depending on the location.href we're currently on
  *
@@ -94,6 +89,14 @@ if (location.href.includes(urlTheWashfountain)) {
   sitePrettyName = 'BIM-Revit'
   host = hostBIMRevit
 }
+
+const namespace = 'bcorp/v1/'
+
+const queryRoute = 'wp-query'
+
+const baseURL = `${host}/index.php/wp-json/${namespace}`
+
+const baseURLWPDefaultAPI = `${host}/index.php/wp-json/wp/v2/`
 
 /* Define the API object */
 
@@ -119,6 +122,8 @@ const api: API = {
   baseURLTheWashfountain: `${hostTheWashfountain}/index.php/wp-json/${namespace}`,
 
   baseURLBIMRevit: `${hostBIMRevit}/index.php/wp-json/${namespace}`,
+
+  baseURLWPDefaultAPI,
 
   queryRoute,
 

@@ -3,6 +3,7 @@ import * as React from 'react'
 import { renderTitle } from '../DefaultTemplate/DefaultTemplate'
 import style from './RightSidebarTemplate.scss'
 import defaultStyle, { titlemarginbottom } from '../Templates.scss'
+// import { TABLETMAXWIDTH } from '../../../../globals'
 
 type Props = {
   /**
@@ -102,7 +103,9 @@ class RightSidebarTemplate extends React.Component<Props, State> {
             }
           }}
           className={`col1 col3-desktop ${style.sidebar} ${sidebarFixed}`}>
-          {this.props.renderRightSidebarWidgets()}
+          <div className={style.innerSidebar}>
+            {this.props.renderRightSidebarWidgets()}
+          </div>
         </div>
       </div>
     )

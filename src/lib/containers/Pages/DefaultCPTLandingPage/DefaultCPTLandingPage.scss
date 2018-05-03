@@ -1,0 +1,9 @@
+@import '../../../../scss/partials/mixins';
+
+.content {
+  margin-bottom: 60px;
+
+  @include respond-to(desktop) {
+    margin-bottom: 80px;
+  }
+}

@@ -77,7 +77,7 @@ BCorpBackground.propTypes = {
 
 BCorpBackground.defaultProps = {
   skin: 'light',
-  imageOpacity: 0.2
+  imageOpacity: 0.4
 }
 
 export default BCorpBackground
