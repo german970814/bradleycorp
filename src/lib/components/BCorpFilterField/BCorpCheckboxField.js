@@ -1,6 +1,9 @@
 // @flow
 import * as React from 'react'
 import BCorpInputField from './BCorpInputField'
+import Media from 'react-media'
+import Collapsible from 'react-collapsible'
+import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../globals'
 import style from './BCorpFilterField.scss'
 
 type Options = {
@@ -153,17 +156,55 @@ class BCorpCheckboxField extends React.Component<Props> {
     })
   }
 
-  render () {
+  renderCheckBoxesForMobile () {
     return (
-      <div className={`${style.checkbox} ${this.props.className || ''}`}>
+      <div className={`${style.checkbox} ${this.props.className || ''} ${style.checkBoxContainer}`}>
         {this.props.title ? (
-          <h5 className={`checkbox-title ${style.title}`}>
+          <Collapsible trigger={this.props.title} triggerTagName={'button'} classParentString={`Collapsible ${style.checkBoxTitle}`} triggerStyle={{ color: '#a7a9ac', fontSize: '13px', fontWeight: '300', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+            {this.renderOptions()}
+            {this.renderOtherField()}
+          </Collapsible>
+        ) : null}
+      </div>
+    )
+  }
+
+  renderCheckBoxesForDesktop () {
+    return (
+      <div className={`${style.checkbox} ${this.props.className || ''} ${style.checkBoxContainer}`}>
+        {this.props.title ? (
+          <h5 className={`checkbox-title ${style.checkBoxTitle}`}>
             {this.props.title}
           </h5>
         ) : null}
         {this.renderOptions()}
         {this.renderOtherField()}
       </div>
+    )
+  }
+
+  render () {
+    return (
+      <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
+        {match =>
+          match ? (
+          // mobile
+            this.renderCheckBoxesForMobile()
+          ) : (
+            <Media query={{ maxWidth: TABLETMAXWIDTH }}>
+              {match =>
+                match ? (
+                // tablet
+                  this.renderCheckBoxesForDesktop()
+                ) : (
+                // desktop
+                  this.renderCheckBoxesForDesktop()
+                )
+              }
+            </Media>
+          )
+        }
+      </Media>
     )
   }
 }

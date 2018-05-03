@@ -1,0 +1,38 @@
+@import "../../../../scss/partials/layout";
+@import "../../../../scss/partials/variables";
+@import "../../../../scss/partials/mixins";
+
+.appGallerySidebar {
+    margin-bottom: 60px;
+}
+
+.appGalleryContent {
+    margin-bottom: 60px;
+}
+
+.appGalleryItem {
+    & > div {
+        margin-bottom: 20px;
+    }
+}
+
+.horizontalRightItemSpace {
+    padding-right: 10px;
+}
+
+.horizontalLeftItemSpace {
+    padding-left: 10px;
+}
+
+.lastHorizontalLeftItemSpace {
+    padding-left: 20px;
+}
+
+.imageContainer {
+    position: relative;
+    .arrowButton {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+    }
+}
