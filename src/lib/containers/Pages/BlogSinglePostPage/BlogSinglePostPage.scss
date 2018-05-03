@@ -1,0 +1,9 @@
+@import '../../../../scss/partials/mixins';
+
+.divider {
+  margin-bottom: 30px;
+
+  @include respond-to(tablet) {
+    margin-bottom: 40px;
+  }
+}

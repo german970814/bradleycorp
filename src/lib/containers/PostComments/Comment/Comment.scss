@@ -1,0 +1,79 @@
+@import '../../../../scss/partials/mixins';
+@import '../../../../scss/partials/variables';
+
+.comment {
+  margin-bottom: 15px;
+
+  @include respond-to(tablet) {
+    margin-bottom: 30px;
+  }
+
+  @include respond-to(desktop) {
+    margin-bottom: 40px;
+  }
+
+  .divider {
+    margin-bottom: 30px;
+
+    @include respond-to(tablet) {
+      margin-bottom: 40px;
+    }
+  }
+
+  .userInfo {
+    @include respond-to(tablet) {
+      width: 70px;
+    }
+
+    .avatar {
+      width: 70px;
+      height: 70px;
+
+      img {
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .details {
+      margin-top: 10px;
+      padding-left: 20px;
+
+      @include respond-to-max(tablet) {
+        width: calc(100% - 71px);
+      }
+
+      @include respond-to(tablet) {
+        margin-bottom: 0px;
+        padding-left: 0px;
+      }
+
+      .name {
+        margin-bottom: 2px;
+      }
+
+      .date {
+        margin-bottom: 8px;
+        color: $slate-grey;
+        font-style: oblique;
+      }
+
+      .smallBody {
+        font-weight: bold;
+        color: $slate-grey;
+      }
+    }
+  }
+
+  .content {
+    @include respond-to(tablet) {
+      width: calc(100% - 71px);
+      padding-left: 20px;
+    }
+
+    @include respond-to(desktop) {
+      padding-left: 30px;
+    }
+  }
+}

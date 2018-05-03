@@ -240,7 +240,7 @@ class ScrollableList extends Component {
     const className = this.props.vertical
       ? `${style.trackItemVertical} track-item-vertical`
       : `${style.trackItem} track-item`
-
+// console.log( this.props.children )
     return this.props.children.map((child, index) => {
       const inlineStyle = this.props.vertical
         ? { height: dimensions }
@@ -269,9 +269,11 @@ class ScrollableList extends Component {
   }
 
   renderScroller () {
+    // console.log( this.props )
     return (
       <div className={this.props.wrapperClassName}>
-        {this.renderButtonUp()}
+        {(this.props.numberToDisplay < this.props.numberOfPosts)
+          && this.renderButtonUp()}
 
         <ScrollableListTrack
           moveList={this.moveList.bind(this)}
@@ -287,12 +289,18 @@ class ScrollableList extends Component {
             this.renderChildren(elementDimension, opacity)
           }
         </ScrollableListTrack>
-
-        {this.renderButtonDown()}
-        {this.renderButtonsBelow()}
-        {this.renderPositionCircles()}
+        {(this.props.numberToDisplay < this.props.numberOfPosts)
+          && this.renderSliderNavigation()}
       </div>
     )
+  }
+
+  renderSliderNavigation() {
+    return (<React.Fragment>
+      {this.renderButtonDown()}
+      {this.renderButtonsBelow()}
+      {this.renderPositionCircles()}
+    </React.Fragment>)
   }
 
   render () {

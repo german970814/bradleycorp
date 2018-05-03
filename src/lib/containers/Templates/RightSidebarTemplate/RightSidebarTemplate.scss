@@ -2,27 +2,23 @@
 @import '../../../../scss/partials/variables';
 
 .RightSidebarTemplate {
-  position: relative;
 
   .sidebar {
     top: 0px;
-    /* transition: top .1s ease-in-out;
-    // -webkit-transition: top .1s ease-in-out;
-
-    // @include respond-to(desktop) {
-      // padding-left: 2.5%;
-    // }
-    */
+    // position: relative;
 
     &.sidebarFixed {
       position: fixed;
       /* overflow: auto; */
     }
+
+    .innerSidebar {
+      // position: absolute;
+    }
   }
 
   .content {
     margin-bottom: 40px;
-    /* height: 1000px; */
 
     @include respond-to(desktop) {
       padding-right: 2.5%;

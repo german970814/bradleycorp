@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import { BlurConsumer } from '../../contexts/BlurContext'
+import { updateBlur } from '../../../apps/Bradley/App/updateBlur'
 import VerticalAlignHelper from '../../components/VerticalAlignHelper/VerticalAlignHelper'
 import LightboxCloseButton from './LightboxCloseButton'
 import style from './Lightbox.scss'
@@ -45,7 +45,7 @@ class Lightbox extends Component {
     })
   }
 
-  renderChildrenWithLightboxAPI (updateBlur) {
+  renderChildrenWithLightboxAPI () {
     const lightboxChildStyle = { cursor: 'zoom-in' }
     const childrenWithAPI = React.Children.map(this.props.children, child => {
       return React.cloneElement(child, {
@@ -72,7 +72,7 @@ class Lightbox extends Component {
     return children[children.length - 1]
   }
 
-  renderLightbox (updateBlur) {
+  renderLightbox () {
     if (this.state.isOpen) {
       return ReactDOM.createPortal(
         <div
@@ -101,16 +101,10 @@ class Lightbox extends Component {
 
   render () {
     return (
-      <BlurConsumer>
-        {({ isBlurred, updateBlur }) => {
-          return (
-            <div className={style.childWrapper}>
-              {this.renderChildrenWithLightboxAPI(updateBlur)}
-              {this.renderLightbox(updateBlur)}
-            </div>
-          )
-        }}
-      </BlurConsumer>
+      <div className={style.childWrapper}>
+        {this.renderChildrenWithLightboxAPI()}
+        {this.renderLightbox()}
+      </div>
     )
   }
 }

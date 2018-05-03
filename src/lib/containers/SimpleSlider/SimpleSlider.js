@@ -44,6 +44,7 @@ class SimpleSlider extends Component {
     return (
       <ScrollableList
         numberToDisplay={this.props.numberMobile}
+        numberOfPosts={this.props.numberOfPosts}
         touchMoveSensitivity={1.5}
         buttonUp={this.renderButtonUpMobile()}
         buttonDown={this.renderButtonDownMobile()}
@@ -62,6 +63,7 @@ class SimpleSlider extends Component {
     return (
       <ScrollableList
         numberToDisplay={this.props.numberTablet}
+        numberOfPosts={this.props.numberOfPosts}
         touchMoveSensitivity={2}
         buttonUp={<ButtonLeft />}
         buttonDown={<ButtonRight />}
@@ -79,6 +81,7 @@ class SimpleSlider extends Component {
     return (
       <ScrollableList
         numberToDisplay={this.props.numberDesktop}
+        numberOfPosts={this.props.numberOfPosts}
         touchMoveSensitivity={2.5}
         buttonUp={<ButtonLeft />}
         buttonDown={<ButtonRight />}

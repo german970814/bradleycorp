@@ -2,6 +2,7 @@
 @import "./globals/text-styles-globals";
 @import "./globals/buttons-globals";
 @import "./globals/hamburgers/hamburgers";
+@import "./partials/mixins";
 
 html {
   -webkit-text-size-adjust: 100%;
@@ -41,9 +42,16 @@ img[class*="wp-image-"] {
   height: auto;
 
   :global &.aligncenter {
-    display: block;
     margin-left: auto;
     margin-right: auto;
+    display: block;
+
+    &.hide-on-mobile {
+      display: none;
+      @include respond-to(tablet) {
+        display: block;
+      }
+    }
   }
 
   :global &.alignleft {
@@ -54,5 +62,14 @@ img[class*="wp-image-"] {
   :global &.alignright {
     float:right;
     margin:0 0 1em 1em;
+  }
+}
+
+// Misc classes
+// as per brad: add a class to hide things on mobile.
+:global .hide-on-mobile {
+  display: none;
+  @include respond-to(tablet) {
+    display: inline-block;
   }
 }

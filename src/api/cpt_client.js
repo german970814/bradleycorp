@@ -1,5 +1,7 @@
 // @flow
 import type { CPTName } from '../lib/types/cpt_types'
+import type { AxiosPromise } from 'axios'
+import type { BCorpPost } from '../lib/types/post_types'
 import axios from 'axios'
 import api from './index'
 
@@ -12,28 +14,31 @@ class CPTApiClient {
 
   /* GET posts */
 
-  getLatest (numberPosts: number = 0, paged?: number) {
+  getLatest (
+    numberPosts: number = 0,
+    paged?: number
+  ): AxiosPromise<Array<BCorpPost>> {
     const url = `${api.baseURL}${this.cptName}`
     const params = { posts_per_page: numberPosts, paged }
 
     return axios.get(url, { params })
   }
 
-  getById (id: number) {
+  getById (id: number): AxiosPromise<BCorpPost> {
     const url = `${api.baseURL}${this.cptName}`
     const params = { id }
 
     return axios.get(url, { params })
   }
 
-  getBySlug (slug: string) {
+  getBySlug (slug: string): AxiosPromise<BCorpPost> {
     const url = `${api.baseURL}${this.cptName}`
     const params = { slug }
 
     return axios.get(url, { params })
   }
 
-  getByIdArray (idArray: Array<number>) {
+  getByIdArray (idArray: Array<number>): AxiosPromise<Array<BCorpPost>> {
     const url = `${api.baseURL}${this.cptName}`
     const params = {
       id_array: JSON.stringify(idArray)
@@ -47,7 +52,7 @@ class CPTApiClient {
     termSlug: string,
     postsPerPage?: number,
     paged?: number
-  ) {
+  ): AxiosPromise<Array<BCorpPost>> {
     const url = `${api.baseURL}${this.cptName}`
     const params = {
       tax_name: taxName,
@@ -64,7 +69,7 @@ class CPTApiClient {
     termSlugArray: Array<string>,
     postsPerPage?: number,
     paged?: number
-  ) {
+  ): AxiosPromise<Array<BCorpPost>> {
     const url = `${api.baseURL}${this.cptName}`
     const params = {
       tax_name: taxName,
@@ -83,7 +88,7 @@ class CPTApiClient {
     relation: 'AND' | 'OR',
     postsPerPage?: number,
     paged?: number
-  ) {
+  ): AxiosPromise<Array<BCorpPost>> {
     const url = `${api.baseURL}${this.cptName}`
     const params = {
       tax_name_term_slug_array: encodeURIComponent(

@@ -9,13 +9,17 @@ const BlogLandingPageLoadable = Loadable({
   loading: Loading
 })
 
-// Note: <Route exact path="/post/:slug" component={...} /> ie Blog post route
-// will use right sidebar template and get blog_sidebar
+const BlogSinglePostPageLoadable = Loadable({
+  loader: () =>
+    import('../../../../lib/containers/Pages/BlogSinglePostPage/BlogSinglePostPage'),
+  loading: Loading
+})
 
 const Main = props => {
   return (
     <Switch>
       <Route exact path="/" component={BlogLandingPageLoadable} />
+      <Route exact path="/post/:slug" component={BlogSinglePostPageLoadable} />
     </Switch>
   )
 }

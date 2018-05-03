@@ -32,13 +32,15 @@ export default class GalleryItem extends Component<Props, State> {
   }
   
   render() {
+    const pathname = this.props.applicationGallery.post.post_name
+      ? `/application-gallery/${this.props.applicationGallery.post.post_name}`
+      : '#'
     return <div 
       className={`${style.imageContainer}`}
       onMouseEnter={this.hoverOn.bind(this)}
       onMouseLeave={this.hoverOff.bind(this)}>
       <Link to={
-        { pathname: `/application-gallery/${this.props.applicationGallery.post.post_name}`,
-          state: { post: this.props.applicationGallery }
+        { pathname, state: { post: this.props.applicationGallery }
         }}>
         <ImageFrame
           src={this.props.applicationGallery.meta.app_gallery_img}

@@ -1,17 +1,1 @@
 @import '../../../scss/main';
-
-$blurPX: 10px;
-
-.app {
-  filter: blur(0px);
-  transition: filter 2s;
-}
-
-.blurIn {
-  filter: blur($blurPX);
-}
-
-.blurOut {
-  filter: blur(0px);
-  transition: filter 0.5s;
-}
