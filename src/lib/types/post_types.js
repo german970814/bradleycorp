@@ -7,9 +7,9 @@ type WPPost = {
   post_title?: string,
   post_content?: string,
   post_excerpt?: string,
-  post_date?: '',
-  post_type?: '',
-  post_name?: '',
+  post_date?: string,
+  post_type?: string,
+  post_name?: string,
   /**
    * Added manually in the back end to the WP_Post object for some responses
    */
@@ -31,7 +31,8 @@ type WPFeaturedImageArrayTypes = string | number | boolean
 type BCorpPost = {
   post: WPPost,
   meta: {
-    video_gallery_video?: string
+    video_gallery_video?: string,
+    product_sku?: string
   },
   terms: {
     [string]: ?Array<WPTerm>,

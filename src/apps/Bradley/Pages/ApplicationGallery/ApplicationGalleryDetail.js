@@ -134,7 +134,9 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
       applicationGallery = this.props.location.state.post
     } else {
       const client = new CPTApiClient(PostType)
-      const response = await client.getBySlug(this.props.match.params.slug || '')
+      const response = await client.getBySlug(
+        this.props.match.params.slug || ''
+      )
       applicationGallery = response.data
       console.log(response.data)
     }
@@ -152,12 +154,18 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
               this.getLiteratures()
               this.getTechInfo()
             })
-          })
+          }
+        )
       }
     })
   }
 
-  async getDocumentsDownloads(cpt: CPTName, taxonomy: string, terms: Array<string>, callback?: (param: any) => void) { // app_gallery_tech_info_tag
+  async getDocumentsDownloads (
+    cpt: CPTName,
+    taxonomy: string,
+    terms: Array<string>,
+    callback?: (param: any) => void
+  ) {
     const client = new CPTApiClient(cpt)
     const response = await client.getByTaxAndTermArray(taxonomy, terms)
     callback && callback(response.data)

@@ -19,13 +19,15 @@
 
   button.button {
     margin-top: 25px;
+    margin-bottom: 10px;
 
     @include respond-to(tablet) {
-      width: auto;
+      margin-bottom: 20px;
       padding: {
         left: 20px;
         right: 20px;
       }
+      width: auto;
     }
   }
 }

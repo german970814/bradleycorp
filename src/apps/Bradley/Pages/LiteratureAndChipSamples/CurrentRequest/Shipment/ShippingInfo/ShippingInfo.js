@@ -77,7 +77,7 @@ class ShippingInfo extends React.Component<Props, State> {
   getContent () {
     if (this.state.stage === 1) {
       return (
-        <LightboxTitleBannerContentBox title={'Please confirm your order'}>
+        <LightboxTitleBannerContentBox title={'Please confirm your order.'}>
           <ShipmentContent
             shipment={this.props.shipment}
             removeFromShipment={this.props.removeFromShipment}
