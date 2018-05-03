@@ -29,7 +29,7 @@ const ArrowButton = props => {
         <SVGIcon
           className={style.arrow}
           icon={'arrow'}
-          color={'silver'}
+          color={props.color}
           redrawOnHover
         />
       </div>
@@ -65,7 +65,15 @@ ArrowButton.propTypes = {
   /**
     The target link on click. This can be internal or external
    */
-  link: PropTypes.string
+  link: PropTypes.string,
+  /**
+    The icon color
+   */
+  color: PropTypes.string
+}
+
+ArrowButton.defaultProps = {
+  color: 'silver'
 }
 
 export default ArrowButton

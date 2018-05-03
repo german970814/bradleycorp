@@ -24,7 +24,7 @@ class CPTApiClient {
     return axios.get(url, { params })
   }
 
-  getById (id: number) {
+  getById (id: number): AxiosPromise<BCorpPost> {
     const url = `${api.baseURL}${this.cptName}`
     const params = { id }
 
@@ -38,7 +38,7 @@ class CPTApiClient {
     return axios.get(url, { params })
   }
 
-  getByIdArray (idArray: Array<number>) {
+  getByIdArray (idArray: Array<number>): AxiosPromise<Array<BCorpPost>> {
     const url = `${api.baseURL}${this.cptName}`
     const params = {
       id_array: JSON.stringify(idArray)
@@ -52,7 +52,7 @@ class CPTApiClient {
     termSlug: string,
     postsPerPage?: number,
     paged?: number
-  ) {
+  ): AxiosPromise<Array<BCorpPost>> {
     const url = `${api.baseURL}${this.cptName}`
     const params = {
       tax_name: taxName,
@@ -69,7 +69,7 @@ class CPTApiClient {
     termSlugArray: Array<string>,
     postsPerPage?: number,
     paged?: number
-  ) {
+  ): AxiosPromise<Array<BCorpPost>> {
     const url = `${api.baseURL}${this.cptName}`
     const params = {
       tax_name: taxName,
@@ -88,7 +88,7 @@ class CPTApiClient {
     relation: 'AND' | 'OR',
     postsPerPage?: number,
     paged?: number
-  ) {
+  ): AxiosPromise<Array<BCorpPost>> {
     const url = `${api.baseURL}${this.cptName}`
     const params = {
       tax_name_term_slug_array: encodeURIComponent(
