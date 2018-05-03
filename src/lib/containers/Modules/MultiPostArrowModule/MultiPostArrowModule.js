@@ -56,6 +56,7 @@ class MultiPostArrowModule extends PostGettingModule {
         numberMobile={2}
         numberTablet={3}
         numberDesktop={4}
+        numberOfPosts={this.state.posts.length}
         wrapperClassName={style.slider}
         desktopWrapperClassName={style.slider}
         containerNode={this.state.node}
