@@ -240,7 +240,7 @@ class ScrollableList extends Component {
     const className = this.props.vertical
       ? `${style.trackItemVertical} track-item-vertical`
       : `${style.trackItem} track-item`
-// console.log( this.props.children )
+
     return this.props.children.map((child, index) => {
       const inlineStyle = this.props.vertical
         ? { height: dimensions }
@@ -269,11 +269,11 @@ class ScrollableList extends Component {
   }
 
   renderScroller () {
-    // console.log( this.props )
+
     return (
       <div className={this.props.wrapperClassName}>
-        {(this.props.numberToDisplay < this.props.numberOfPosts)
-          && this.renderButtonUp()}
+        {(this.props.numberToDisplay < this.props.numberOfPosts) &&
+          this.renderButtonUp()}
 
         <ScrollableListTrack
           moveList={this.moveList.bind(this)}
@@ -289,13 +289,13 @@ class ScrollableList extends Component {
             this.renderChildren(elementDimension, opacity)
           }
         </ScrollableListTrack>
-        {(this.props.numberToDisplay < this.props.numberOfPosts)
-          && this.renderSliderNavigation()}
+        {(this.props.numberToDisplay < this.props.numberOfPosts) &&
+          this.renderSliderNavigation()}
       </div>
     )
   }
 
-  renderSliderNavigation() {
+  renderSliderNavigation () {
     return (<React.Fragment>
       {this.renderButtonDown()}
       {this.renderButtonsBelow()}
@@ -358,6 +358,8 @@ ScrollableList.propTypes = {
     The number of elements to display at a time in the scroller
    */
   numberToDisplay: PropTypes.number,
+
+  numberOfPosts: PropTypes.number,
   /*
     Value of 1 means you have to swipe the distance of the width of 1 element to move the scroller by 1
    */
