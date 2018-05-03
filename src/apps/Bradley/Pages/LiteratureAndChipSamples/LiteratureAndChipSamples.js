@@ -364,7 +364,6 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
   }
 
   render () {
-    console.log(this.state)
     return (
       <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
         {match => (
