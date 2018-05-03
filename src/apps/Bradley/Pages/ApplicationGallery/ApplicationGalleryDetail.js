@@ -5,9 +5,11 @@ import type { Location, Match } from 'react-router-dom'
 import type { BCorpPost } from '../../../../lib/types/post_types'
 import { PostType } from './ApplicationGallery'
 import type { CPTName } from '../../../../lib/types/cpt_types'
-import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
+import {renderTitle} from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
+import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
 import CPTApiClient from '../../../../api/cpt_client'
 import ImageFrame from '../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
+import style from './ApplicationGalleryDetail.scss'
 
 type Props = {
   location: Location,
@@ -37,7 +39,7 @@ export default class ApplicationGallery extends Component<Props, State> {
 
   renderContent () {
     return (
-      <div>
+      <div className={`${style.appGalleryDetailWrapper}`}>
         {this.state.applicationGallery && (
           <ImageFrame
             src={this.state.applicationGallery.meta.app_gallery_img}
@@ -46,16 +48,18 @@ export default class ApplicationGallery extends Component<Props, State> {
             aspectRatioDesktop={169 / 370}
           />
         )}
-        <p>
+        <p className={`${style.appGalleryDetailText}`}>
           {this.state.applicationGallery &&
             this.state.applicationGallery.post.post_content}
         </p>
-        <h2>Featured Product Information</h2>
-        <hr />
-        <h3>Document Downloads</h3>
+        <div className={`col1 ${style.appGalleryDetailTitle}`}>
+          <h2>Featured Product Information</h2>
+        </div>
         <div className="row">
-          <div className="col6" />
-          <div className="col5">
+          <div className="col6">
+            <h3>Document Downloads</h3>
+          </div>
+          <div className="col6">
             <h4>Product List</h4>
             <ul>
               {this.state.products &&
@@ -145,11 +149,10 @@ export default class ApplicationGallery extends Component<Props, State> {
 
   render () {
     return (
-      <DefaultTemplate
-        data={{ page_title: 'Application Gallery' }}
-        renderModules={() => this.renderContent()}
-        widgetsMoveWithScroll
-      />
+      <div className={`row ${defaultStyle.defaultTemplate}`}>
+          {renderTitle('Application Gallery', 'col1')}
+          {this.renderContent()}
+      </div>
     )
   }
 }

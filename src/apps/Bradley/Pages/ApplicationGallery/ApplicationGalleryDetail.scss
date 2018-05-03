@@ -1,0 +1,34 @@
+@import "../../../../scss/partials/layout";
+@import "../../../../scss/partials/variables";
+@import "../../../../scss/partials/mixins";
+
+
+.appGalleryDetailWrapper {
+    width: 83%;
+    margin: 0 auto;
+}
+
+.appGalleryDetailText {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    font-family: Helvetica;
+    font-size: 14px;
+    color: #58595b;
+}
+
+.appGalleryDetailTitle {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #d1d3d4;
+    margin-bottom: 40px;
+    h2 {
+        font-family: 'CentraleSansPro';
+        font-size: 34px;
+        color: #2f3d6f;
+        letter-spacing: -1.4px;
+        line-height: 1.06;
+        font-weight: 300;
+        text-transform: capitalize;
+        margin-bottom: 40px;
+    }
+}
