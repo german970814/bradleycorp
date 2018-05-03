@@ -11,7 +11,6 @@ type Props = {
 
 const ProductList = (props: Props) => (
   <div>
-    <h4>Product List</h4>
     <ul>
       {props.products.map((product, ind) => {
         return <li key={ind}>

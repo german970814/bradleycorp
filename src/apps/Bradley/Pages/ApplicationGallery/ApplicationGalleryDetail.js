@@ -5,7 +5,10 @@ import Downloadables from './Downloadables'
 import { PostType } from './ApplicationGallery'
 import CPTApiClient from '../../../../api/cpt_client'
 import ImageFrame from '../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
-import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
+import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
+
+import style from './ApplicationGalleryDetail.scss'
+import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
 
 import type { GalleryType } from './ApplicationGallery'
 import type { Location, Match } from 'react-router-dom'
@@ -63,22 +66,24 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
   }
 
   renderContent () {
-    return <div>
+    return <div className={`${style.appGalleryDetailWrapper}`}>
       {this.state.applicationGallery && <ImageFrame
         src={this.state.applicationGallery.meta.app_gallery_img}
         aspectRatio={123 / 270}
         aspectRatioTablet={152 / 332}
         aspectRatioDesktop={169 / 370}
       />}
-      <p>{this.state.applicationGallery && this.state.applicationGallery.post.post_content}</p>
-      <h2>Featured Product Information</h2>
-      <hr />
-      <h3>Document Downloads</h3>
+      <p className={`${style.appGalleryDetailText}`}>{this.state.applicationGallery && this.state.applicationGallery.post.post_content}</p>
+      <div className={`col1 ${style.appGalleryDetailTitle}`}>
+        <h2>Featured Product Information</h2>
+      </div>
       <div className="row">
-        <div className="col6">
+        <div className={`col1 col2-tablet ${style.featureProductInformation}`}>
+          <h3>Document Downloads</h3>
           <Downloadables techs={this.state.techs} bim={[]} />
         </div>
-        <div className="col5">
+        <div className={`col1 col2-tablet ${style.featureProductInformation}`}>
+          <h3>Product List</h3>
           <ProductList products={this.state.products} literatures={this.state.literatures} />
         </div>
       </div>
@@ -133,16 +138,6 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
    */
   getBimRevit () {
     // soon
-  }
-
-  render () {
-    return (
-      <DefaultTemplate
-        data={{ page_title: 'Application Gallery' }}
-        renderModules={() => this.renderContent()}
-        widgetsMoveWithScroll
-      />
-    )
   }
 
   /**
@@ -209,5 +204,14 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
     const client = new CPTApiClient(cpt)
     const response = await client.getByTaxAndTermArray(taxonomy, terms)
     callback(response.data)
+  }
+
+  render () {
+    return (
+      <div className={`row ${defaultStyle.defaultTemplate}`}>
+        {renderTitle('Application Gallery', 'col1')}
+        {this.renderContent()}
+      </div>
+    )
   }
 }
