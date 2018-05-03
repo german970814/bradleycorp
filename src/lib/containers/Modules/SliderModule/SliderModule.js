@@ -100,6 +100,7 @@ class SliderModule extends PostGettingModule {
     return (
       <ScrollableList
         numberToDisplay={1}
+        numberOfPosts={this.state.posts.length}
         touchMoveSensitivity={2}
         wrapperClassName={args.wrapperClassName}
         animation={args.animation}
