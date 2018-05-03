@@ -101,7 +101,7 @@ export default class ApplicationGallery extends Component<Props, State> {
   renderGallery () {
     return this.state.gallery.map((el, idx) => {
       return <div key={idx} className={`${style.imageContainer}`}>
-        <Link to={`/application-gallery/${el.post.post_name}`}>
+        <Link to={{ pathname: `/application-gallery/${el.post.post_name}`, state: { post: el } }}>
           <ImageFrame
             src={el.meta.app_gallery_img}
             aspectRatio={180 / 301}
