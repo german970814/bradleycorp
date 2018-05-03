@@ -1,0 +1,7 @@
+@import "../../../../scss/partials/text-styles";
+
+.content {
+	a {
+		@extend %link-navy;
+	}
+}
