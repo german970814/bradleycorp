@@ -3,7 +3,7 @@ import * as React from 'react'
 import { renderTitle } from '../DefaultTemplate/DefaultTemplate'
 import style from './RightSidebarTemplate.scss'
 import defaultStyle, { titlemarginbottom } from '../Templates.scss'
-// import { TABLETMAXWIDTH } from '../../../../globals'
+import { TABLETMAXWIDTH } from '../../../../globals'
 
 type Props = {
   /**
@@ -25,10 +25,11 @@ type Props = {
 
 type State = {
   isSidebarFixed?: boolean,
+  sidebarScrollClass?: string,
   width?: number,
   top?: number,
   bottom?: number
-}
+};
 
 class RightSidebarTemplate extends React.Component<Props, State> {
   sidebarNode: ?HTMLDivElement
@@ -47,28 +48,39 @@ class RightSidebarTemplate extends React.Component<Props, State> {
     if (this.props.widgetsMoveWithScroll) {
       this.titleMarginBottom = parseInt(titlemarginbottom.replace('px', ''))
     }
+
+    this.maxScroll = 0;
   }
 
   componentDidMount () {
     if (this.props.widgetsMoveWithScroll) {
       // find function at the bottom, just to keep it out the way
-      window.addEventListener('scroll', this.onScroll.bind(this))
+      this._bindSidebarScroll()
     }
   }
 
   componentWillUnmount () {
-    window.removeEventListener('scroll', this.onScroll.bind(this))
+    this._removeSidebarScroll()
   }
 
   componentWillReceiveProps (nextProps: Props) {
     if (!nextProps.widgetsMoveWithScroll) {
-      window.removeEventListener('scroll', this.onScroll.bind(this))
+      this._removeSidebarScroll()
     } else {
       // will not add a duplicate
-      window.addEventListener('scroll', this.onScroll.bind(this))
+      this._bindSidebarScroll()
       // calling this will work out if we need to set the state back to false or not
       this.onScroll()
     }
+  }
+
+  _bindSidebarScroll() {
+    ( window.innerWidth > TABLETMAXWIDTH )
+      && window.addEventListener('scroll', this.onScroll.bind(this))
+  }
+
+  _removeSidebarScroll() {
+    window.removeEventListener('scroll', this.onScroll.bind(this))
   }
 
   render () {
@@ -102,7 +114,7 @@ class RightSidebarTemplate extends React.Component<Props, State> {
               this.sidebarNode = node
             }
           }}
-          className={`col1 col3-desktop ${style.sidebar} ${sidebarFixed}`}>
+          className={`col1 col3-desktop ${style.sidebar} ${this.state.sidebarScrollClass}`}>
           <div className={style.innerSidebar}>
             {this.props.renderRightSidebarWidgets()}
           </div>
@@ -111,42 +123,81 @@ class RightSidebarTemplate extends React.Component<Props, State> {
     )
   }
 
+  _setupSidebarForScroll() {
+    // if no sidebar node, why continue?
+    if ( ! this.sidebarNode ) {
+      return;
+    }
+
+    // reference our nodes
+    const sidebarNode = this.sidebarNode
+    const innerSidebarNode = sidebarNode.children[0]
+    const contentNode = this.contentNode
+
+    // get our elements boundaries
+    const boundingClientRect = sidebarNode.getBoundingClientRect()
+    const contentBoundingClientRect = contentNode.getBoundingClientRect()
+
+    // set the max scroll during which the sidebar should be fixed
+    this.maxScroll = (contentBoundingClientRect.height + contentNode.offsetTop) - window.innerHeight
+console.log( boundingClientRect.height )
+console.log( contentBoundingClientRect.height )
+
+    if ( boundingClientRect.height > contentBoundingClientRect.height ) {
+      contentNode.style.minHeight = `${boundingClientRect.height}px`
+      sidebarNode.style.minHeight = `${boundingClientRect.height}px`
+    } else {
+      sidebarNode.style.minHeight = `${contentBoundingClientRect.height}px'`
+    }
+
+    // set the inner sidebar size and fixed position to the left of the window
+    if ( window.innerWidth > TABLETMAXWIDTH ) {
+
+      innerSidebarNode.style.width = `${boundingClientRect.width}px`
+      innerSidebarNode.style.left = boundingClientRect.left + 'px'
+    } else {
+      sidebarNode.style.height = ''
+      innerSidebarNode.style.width = ''
+      innerSidebarNode.style.left = ''
+    }
+  }
+
   onScroll () {
+    // move this out of here
+    this._setupSidebarForScroll()
+
+    var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+    // console.log( scrollTop )
     if (!this.sidebarNode || !this.contentNode || !this.titleMarginBottom) {
       // if we dont have necessary DOM nodes then we cant move with scroll
       return this.setState({ isSidebarFixed: false })
     }
+
     // set these as constants in this scope so flow knows they havent changed
     // since we checked their existence
     const sidebarNode = this.sidebarNode
+    const innerSidebarNode = sidebarNode.children[0]
     const contentNode = this.contentNode
     const titleMarginBottomNumber = this.titleMarginBottom
 
     const boundingClientRect = sidebarNode.getBoundingClientRect()
     const contentBoundingClientRect = contentNode.getBoundingClientRect()
 
-    if (sidebarNode.style.left === '') {
-      sidebarNode.style.left = boundingClientRect.left + 'px'
-    }
-    sidebarNode.style.width = `${boundingClientRect.width}px`
-    // sidebarNode.style.height = `${height}px`
-
     this.setState({
-      isSidebarFixed: titleMarginBottomNumber > contentBoundingClientRect.top
+      isSidebarFixed: titleMarginBottomNumber > contentBoundingClientRect.top,
+      sidebarScrollClass: ( scrollTop > this.maxScroll )
+        ? style.attachToBottom
+        : (titleMarginBottomNumber > contentBoundingClientRect.top)
+          ? style.sidebarFixed : '',
     })
 
-    if (this.state.isSidebarFixed) {
-      if (sidebarNode.style.top === '') {
-        sidebarNode.style.top = `${titleMarginBottomNumber}px`
-      }
+    if (this.state.isSidebarFixed
+      && contentBoundingClientRect.height > window.innerHeight) {
+      innerSidebarNode.style.height = ( window.innerHeight - 60 ) + 'px'
     } else {
-      sidebarNode.style.top = ''
+      innerSidebarNode.style.height = 'auto'
     }
 
-    // if (window.innerWidth <= TABLETMAXWIDTH) {
-    //   sidebarNode.style.width = '100%'
-    //   return this.setState({ isSidebarFixed: false })
-    // }
 
     // if ( top >= boundingClientRect.top ) {
     //   console.log( 'should be fixed' )

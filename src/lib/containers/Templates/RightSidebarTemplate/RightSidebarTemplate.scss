@@ -5,20 +5,46 @@
 
   .sidebar {
     top: 0px;
-    // position: relative;
-
-    &.sidebarFixed {
-      position: fixed;
-      /* overflow: auto; */
-    }
+    position: relative;
+    overflow: auto;
 
     .innerSidebar {
       // position: absolute;
+      // width: 100%;
+      top: 40px;
+      display: block;
+      overflow: auto;
     }
+
+    // min-height: 1500px;
+    &.sidebarFixed {
+      /* overflow: auto; */
+      transition: opacity .4s ease;
+      // height: (90vh) !important;
+
+      .innerSidebar {
+        position: fixed;
+
+        // position: absolute;
+      }
+    }
+
+    &.attachToBottom {
+      position: relative;
+     .innerSidebar {
+        position: absolute;
+        bottom: 0 !important;
+        left: 0 !important;
+        top: initial;
+        // position: absolute;
+      }
+    }
+
   }
 
   .content {
     margin-bottom: 40px;
+    // min-height: 1000px;
 
     @include respond-to(desktop) {
       padding-right: 2.5%;
