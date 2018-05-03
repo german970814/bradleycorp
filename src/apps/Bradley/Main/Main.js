@@ -59,6 +59,11 @@ const Main = props => {
       {/* Post Types With Custom Templates */}
       <Route exact path="/post/:slug" component={BlogSinglePostPageLoadable} />
       <Route exact path="/product/:slug" component={ProductDetailLoadable} />
+      <Route
+        exact
+        path="/application-gallery/:slug"
+        component={ApplicationGalleryDetailLoadable}
+      />
 
       {/* Other Post Types */}
       <Route
@@ -78,11 +83,6 @@ const Main = props => {
         exact
         path="/application-gallery"
         component={ApplicationGalleryLoadable}
-      />
-      <Route
-        exact
-        path="/application-gallery/:slug"
-        component={ApplicationGalleryDetailLoadable}
       />
 
       {/* Any other route is sent to the Customizable Page */}
