@@ -117,18 +117,7 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
 
   getBimRevit () {
     // const terms = this.getTermsByTaxonomy('bim_revit')
-
     // this.getDocumentsDownloads('')
-  }
-
-  render () {
-    return (
-      <DefaultTemplate
-        data={{ page_title: 'Application Gallery' }}
-        renderModules={() => this.renderContent()}
-        widgetsMoveWithScroll
-      />
-    )
   }
 
   async getApplicationGallery() {

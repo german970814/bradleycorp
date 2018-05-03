@@ -108,7 +108,9 @@ export default class ApplicationGallery extends Component<Props, State> {
             aspectRatioTablet={180 / 301}
             aspectRatioDesktop={180 / 301}
           />
-          <ArrowButton text={''} link={''} color={'white'}/>
+          <div className={`${style.arrowContainer}`}>
+            <ArrowButton text={''} link={''} color={'white'}/>
+          </div>
         </Link>
       </div>
     })
