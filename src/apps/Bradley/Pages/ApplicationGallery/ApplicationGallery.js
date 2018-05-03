@@ -102,9 +102,12 @@ export default class ApplicationGallery extends Component<Props, State> {
   }
 
   renderGallery () {
-    return this.state.gallery.map((appGallery, idx) => {
+    return Boolean(this.state.gallery.length) ? this.state.gallery.map((appGallery, idx) => {
       return <GalleryItem key={idx} applicationGallery={appGallery} />
-    })
+    }) : <div>
+      <h3>No images match your filter selections</h3>
+      <span>PLEASE TRY AGAIN</span>
+    </div>
   }
 
   render () {
