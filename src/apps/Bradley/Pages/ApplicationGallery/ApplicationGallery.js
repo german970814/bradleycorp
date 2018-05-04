@@ -88,28 +88,17 @@ export default class ApplicationGallery extends Component<Props, State> {
     this.setState({ activeFilters, loading: true })
     this.getApplicationGalleryDebounced(activeFilters)
   }
-  
-  async getApplicationGallery (filters: Props) {
-    const client = new CPTApiClient(PostType)
-    const response = await client.getByTaxNameAndTermSlugObject(filters, 'OR')
-
-    const gallery: Array<GalleryType> = response.data
-
-    this.setState({
-      gallery,
-      loading: false
-    })
-  }
 
   renderGallery () {
     return Boolean(this.state.gallery.length) ? this.state.gallery.map((appGallery, idx) => {
       return <GalleryItem key={idx} applicationGallery={appGallery} />
-    }) : <div>
-      <h3>No images match your filter selections</h3>
+    }) : <div className={`${style.noResultsWrapper}`}>
+      <img src={require('../../../../images/warning-icon/warning-icon.png')}/>
+      <h1>No images match your filter selections</h1>
       <span>PLEASE TRY AGAIN</span>
     </div>
   }
-
+  
   render () {
     return (
       <div className={`row ${defaultStyle.defaultTemplate}`}>
@@ -126,7 +115,7 @@ export default class ApplicationGallery extends Component<Props, State> {
                   colClasses={[
                     `col2 ${style.horizontalRightItemSpace} ${
                       style.appGalleryItem
-                    }`,
+                    } ${style.appMinHeightGalleryItem}`,
                     `${style.horizontalLeftItemSpace} col2 ${
                       style.appGalleryItem
                     }`

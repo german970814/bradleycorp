@@ -8,6 +8,7 @@
 
 .appGalleryContent {
     margin-bottom: 60px;
+    position: relative;
 }
 
 .appGalleryItem {
@@ -83,4 +84,38 @@
 
 .hideArrow {
     visibility: hidden;
+}
+
+.noResultsWrapper {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    padding-top: 70px;
+
+    @include respond-to(mobile) {
+        padding-top: 30px;
+    }
+
+    @include respond-to(tablet) {
+        padding-top: 70px;
+    }
+
+    
+    
+    h1 {
+        position: relative;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    span {
+        color: #a7a9ac;
+        font-size: 13px;
+        font-family: 'CentraleSansPro';
+        text-transform: uppercase;
+    }
+}
+
+.appMinHeightGalleryItem {
+    min-height: 300px!important;
 }
