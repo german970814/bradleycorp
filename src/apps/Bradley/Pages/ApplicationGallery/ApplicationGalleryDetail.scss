@@ -122,4 +122,85 @@
         }
     }
 }
-  
+
+.productListButton {
+    
+    @include respond-to(mobile) {
+        width: 100%;
+    }
+
+    @include respond-to(tablet) {
+        width: 208px;
+    }
+}
+
+.productListLightBoxButton {
+    
+    @include respond-to(mobile) {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    @include respond-to(tablet) {
+        width: 48.7%;
+        float: left;
+        margin-bottom: 35px;
+    }
+}
+
+.productListLightBoxButtonRedBorder {
+    background: #fff;
+    border: 1px solid #e23f2f;
+    color: #e23f2f;
+    float: right;
+
+    @include respond-to(mobile) {
+        margin-bottom: 35px;
+    }
+}
+
+.lightBoxListWrapper {
+
+    ul {
+        margin: 0;
+        padding: 0;
+
+        li {
+            list-style-type: none;
+            color: #808285;
+            font-size: 14px;
+            font-family: 'Helvetica';
+            font-weight: normal;
+        }
+    }
+     
+    p {
+        color: #808285;
+        font-size: 14px;
+        font-family: 'Helvetica';
+        font-weight: normal;
+        margin: 25px 0 30px;
+        
+        &.lightBoxListWeight {
+            color: #000;
+            font-size: 13px;
+            font-family: 'CentraleSansPro';
+            font-weight: bold;
+            margin: 0px 0 20px 0;
+            text-transform: uppercase;
+        }
+    }
+    
+}
+
+.lightBoxWrapper {
+    width: 55%;
+    margin: 0 auto;
+    height: auto;
+}
+
+.lightBoxDownloadWrapper {
+    width: 37%;
+    margin: 0 auto;
+    height: auto;
+}

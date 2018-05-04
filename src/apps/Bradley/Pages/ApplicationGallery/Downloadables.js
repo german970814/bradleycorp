@@ -53,9 +53,9 @@ export default class Downloadables extends Component<Props, State> {
   }
 
   renderFileList () {
-    return this.state.selected ? this.state.selected.files.map((el, ind) => {
-      return <p key={ind}>{el}</p>
-    }) : null
+    return this.state.selected ? <ul>{this.state.selected.files.map((el, ind) => {
+      return <li key={ind}>{el}</li>
+    })}</ul> : null
   }
 
   wrapperFunction (func: () => void, selected: DownloadabeType) {
@@ -76,11 +76,15 @@ export default class Downloadables extends Component<Props, State> {
       }}
       renderLightboxContents={() => {
         return <div>
-          <LightboxTitleBannerContentBox title={'Please confirm your order'}>
-            <div>
-              {this.renderFileList()}
-            </div>
-          </LightboxTitleBannerContentBox>
+          <div className={`${style.lightBoxListWrapper}`}>
+            <LightboxTitleBannerContentBox title={'Confirm Download'}>
+                <p className={`${style.lightBoxListWeight}`}>INCLUDED FILES</p>
+                {this.renderFileList()}
+                <p>Do you wish to continue?</p>
+                <button className={`${style.productListLightBoxButton}`}>Confirm</button>
+                <button className={`${style.productListLightBoxButton} ${style.productListLightBoxButtonRedBorder}`}>Cancel</button>
+            </LightboxTitleBannerContentBox>
+          </div>
         </div>
       }}
       onLightboxClose={() => {
@@ -88,8 +92,7 @@ export default class Downloadables extends Component<Props, State> {
         return undefined
       }}
       fitLightboxToContent
-      fullWidth={true}
-      maxWidth={'500'}
+      maxWidth={'370px'}
     />
   }
 }
