@@ -78,11 +78,11 @@ export default class Downloadables extends Component<Props, State> {
         return <div>
           <div className={`${style.lightBoxListWrapper}`}>
             <LightboxTitleBannerContentBox title={'Confirm Download'}>
-                <p className={`${style.lightBoxListWeight}`}>INCLUDED FILES</p>
-                {this.renderFileList()}
-                <p>Do you wish to continue?</p>
-                <button className={`${style.productListLightBoxButton}`}>Confirm</button>
-                <button className={`${style.productListLightBoxButton} ${style.productListLightBoxButtonRedBorder}`}>Cancel</button>
+              <p className={`${style.lightBoxListWeight}`}>INCLUDED FILES</p>
+              {this.renderFileList()}
+              <p>Do you wish to continue?</p>
+              <button className={`${style.productListLightBoxButton}`}>Confirm</button>
+              <button className={`${style.productListLightBoxButton} ${style.productListLightBoxButtonRedBorder}`}>Cancel</button>
             </LightboxTitleBannerContentBox>
           </div>
         </div>

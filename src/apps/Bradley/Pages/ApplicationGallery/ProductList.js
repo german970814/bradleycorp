@@ -9,15 +9,15 @@ import type { ProductPost, LiteraturePost } from '../../../../lib/types/cpt_type
 type Props = {
   products: Array<ProductPost>,
   literatures: Array<LiteraturePost>
-}   
+}
 
 /**
  * Get url of product detail for specific ProductPost object
  * if product has not name, '#' is returned
- * 
- * @param {Object} product 
+ *
+ * @param {Object} product
  */
-function getProductUrlByProduct(product: ProductPost): string {
+function getProductUrlByProduct (product: ProductPost): string {
   if (product.post.post_name) {
     return `/product/${product.post.post_name}`
   }

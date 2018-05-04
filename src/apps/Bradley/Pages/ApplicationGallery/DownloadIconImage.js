@@ -1,11 +1,8 @@
 // @flow
 import * as React from 'react'
-import type { GalleryType } from './ApplicationGallery'
 import style from './ApplicationGalleryDetail.scss'
 
-type Props = {
-  
-}
+type Props = {}
 
 type State = {
   isHovered: boolean

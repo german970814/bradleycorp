@@ -15,7 +15,7 @@ type State = {
 }
 
 export default class GalleryItem extends Component<Props, State> {
-  constructor(props: Props) {
+  constructor (props: Props) {
     super(props)
 
     this.state = {
@@ -23,19 +23,19 @@ export default class GalleryItem extends Component<Props, State> {
     }
   }
 
-  hoverOn() {
+  hoverOn () {
     this.setState({ onHover: true })
   }
 
-  hoverOff() {
+  hoverOff () {
     this.setState({ onHover: false })
   }
-  
-  render() {
+
+  render () {
     const pathname = this.props.applicationGallery.post.post_name
       ? `/application-gallery/${this.props.applicationGallery.post.post_name}`
       : '#'
-    return <div 
+    return <div
       className={`${style.imageContainer}`}
       onMouseEnter={this.hoverOn.bind(this)}
       onMouseLeave={this.hoverOff.bind(this)}>

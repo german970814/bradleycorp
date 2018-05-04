@@ -5,7 +5,6 @@ import type {
   ApplicationGalleryPost,
   CPTName
 } from '../../../../lib/types/cpt_types'
-import { Link } from 'react-router-dom'
 import debounce from 'debounce'
 import Media from 'react-media'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../globals'
@@ -88,26 +87,18 @@ export default class ApplicationGallery extends Component<Props, State> {
     this.setState({ activeFilters, loading: true })
     this.getApplicationGalleryDebounced(activeFilters)
   }
-  
-  async getApplicationGallery (filters: Props) {
-    const client = new CPTApiClient(PostType)
-    const response = await client.getByTaxNameAndTermSlugObject(filters, 'OR')
-
-    const gallery: Array<GalleryType> = response.data
-
-    this.setState({
-      gallery,
-      loading: false
-    })
-  }
 
   renderGallery () {
-    return Boolean(this.state.gallery.length) ? this.state.gallery.map((appGallery, idx) => {
-      return <GalleryItem key={idx} applicationGallery={appGallery} />
-    }) : <div>
-      <h3>No images match your filter selections</h3>
-      <span>PLEASE TRY AGAIN</span>
-    </div>
+    return this.state.gallery.length ? (
+      this.state.gallery.map((appGallery, idx) => {
+        return <GalleryItem key={idx} applicationGallery={appGallery} />
+      })
+    ) : (
+      <div>
+        <h3>No images match your filter selections</h3>
+        <span>PLEASE TRY AGAIN</span>
+      </div>
+    )
   }
 
   render () {

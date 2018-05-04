@@ -190,7 +190,6 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
    * application gallery
    */
   async getApplicationGallery () {
-
     let applicationGallery: GalleryType
 
     if (this.props.location.state && this.props.location.state.post) {

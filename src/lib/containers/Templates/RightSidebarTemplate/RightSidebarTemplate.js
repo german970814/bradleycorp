@@ -29,13 +29,14 @@ type State = {
   width?: number,
   top?: number,
   bottom?: number
-};
+}
 
 class RightSidebarTemplate extends React.Component<Props, State> {
   sidebarNode: ?HTMLDivElement
   contentNode: ?HTMLDivElement
   titleMarginBottom: number
   snappedAtY: ?number
+  maxScroll: number
 
   constructor (props: Props) {
     super(props)
@@ -49,7 +50,7 @@ class RightSidebarTemplate extends React.Component<Props, State> {
       this.titleMarginBottom = parseInt(titlemarginbottom.replace('px', ''))
     }
 
-    this.maxScroll = 0;
+    this.maxScroll = 0
   }
 
   componentDidMount () {
@@ -74,21 +75,16 @@ class RightSidebarTemplate extends React.Component<Props, State> {
     }
   }
 
-  _bindSidebarScroll() {
-    ( window.innerWidth > TABLETMAXWIDTH )
-      && window.addEventListener('scroll', this.onScroll.bind(this))
+  _bindSidebarScroll () {
+    window.innerWidth > TABLETMAXWIDTH &&
+      window.addEventListener('scroll', this.onScroll.bind(this))
   }
 
-  _removeSidebarScroll() {
+  _removeSidebarScroll () {
     window.removeEventListener('scroll', this.onScroll.bind(this))
   }
 
   render () {
-    const sidebarFixed =
-      this.props.widgetsMoveWithScroll && this.state.isSidebarFixed
-        ? style.sidebarFixed
-        : ''
-
     return (
       <div
         className={`row ${defaultStyle.defaultTemplate} ${
@@ -114,7 +110,8 @@ class RightSidebarTemplate extends React.Component<Props, State> {
               this.sidebarNode = node
             }
           }}
-          className={`col1 col3-desktop ${style.sidebar} ${this.state.sidebarScrollClass}`}>
+          className={`col1 col3-desktop ${style.sidebar} ${this.state
+            .sidebarScrollClass || ''}`}>
           <div className={style.innerSidebar}>
             {this.props.renderRightSidebarWidgets()}
           </div>
@@ -123,10 +120,10 @@ class RightSidebarTemplate extends React.Component<Props, State> {
     )
   }
 
-  _setupSidebarForScroll() {
-    // if no sidebar node, why continue?
-    if ( ! this.sidebarNode ) {
-      return;
+  _setupSidebarForScroll () {
+    // if no sidebar node (or content node), why continue?
+    if (!this.sidebarNode || !this.contentNode) {
+      return
     }
 
     // reference our nodes
@@ -139,9 +136,12 @@ class RightSidebarTemplate extends React.Component<Props, State> {
     const contentBoundingClientRect = contentNode.getBoundingClientRect()
 
     // set the max scroll during which the sidebar should be fixed
-    this.maxScroll = (contentBoundingClientRect.height + contentNode.offsetTop) - window.innerHeight
+    this.maxScroll =
+      contentBoundingClientRect.height +
+      contentNode.offsetTop -
+      window.innerHeight
 
-    if ( boundingClientRect.height > contentBoundingClientRect.height ) {
+    if (boundingClientRect.height > contentBoundingClientRect.height) {
       contentNode.style.minHeight = `${boundingClientRect.height}px`
       sidebarNode.style.minHeight = `${boundingClientRect.height}px`
     } else {
@@ -149,8 +149,7 @@ class RightSidebarTemplate extends React.Component<Props, State> {
     }
 
     // set the inner sidebar size and fixed position to the left of the window
-    if ( window.innerWidth > TABLETMAXWIDTH ) {
-
+    if (window.innerWidth > TABLETMAXWIDTH) {
       innerSidebarNode.style.width = `${boundingClientRect.width}px`
       innerSidebarNode.style.left = boundingClientRect.left + 'px'
     } else {
@@ -164,7 +163,19 @@ class RightSidebarTemplate extends React.Component<Props, State> {
     // move this out of here
     this._setupSidebarForScroll()
 
-    var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+    let scrollTop = 0
+    if (window.pageYOffset !== undefined) {
+      scrollTop = window.pageYOffset
+    } else {
+      const scrollTopOfThis =
+        document.documentElement ||
+        (document.body && document.body.parentNode) ||
+        document.body
+      scrollTop =
+        scrollTopOfThis && scrollTopOfThis !== null
+          ? scrollTopOfThis.scrollTop
+          : 0
+    }
     // console.log( scrollTop )
     if (!this.sidebarNode || !this.contentNode || !this.titleMarginBottom) {
       // if we dont have necessary DOM nodes then we cant move with scroll
@@ -178,24 +189,28 @@ class RightSidebarTemplate extends React.Component<Props, State> {
     const contentNode = this.contentNode
     const titleMarginBottomNumber = this.titleMarginBottom
 
-    const boundingClientRect = sidebarNode.getBoundingClientRect()
+    // const boundingClientRect = sidebarNode.getBoundingClientRect()
     const contentBoundingClientRect = contentNode.getBoundingClientRect()
 
     this.setState({
       isSidebarFixed: titleMarginBottomNumber > contentBoundingClientRect.top,
-      sidebarScrollClass: ( scrollTop > this.maxScroll )
-        ? style.attachToBottom
-        : (titleMarginBottomNumber > contentBoundingClientRect.top)
-          ? style.sidebarFixed : '',
+      sidebarScrollClass:
+        scrollTop > this.maxScroll
+          ? style.attachToBottom
+          : titleMarginBottomNumber > contentBoundingClientRect.top
+            ? style.sidebarFixed
+            : ''
     })
 
     // if sidebar is fixed and content height is larger than
     // window height force the sidebar to a height that does not
     // exceed that of the window. This way the user can see all of
     // the sidebar's content.
-    if (this.state.isSidebarFixed
-      && contentBoundingClientRect.height > window.innerHeight) {
-      innerSidebarNode.style.height = ( window.innerHeight - 60 ) + 'px'
+    if (
+      this.state.isSidebarFixed &&
+      contentBoundingClientRect.height > window.innerHeight
+    ) {
+      innerSidebarNode.style.height = window.innerHeight - 60 + 'px'
     } else {
       innerSidebarNode.style.height = 'auto'
     }
