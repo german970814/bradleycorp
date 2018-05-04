@@ -48,7 +48,7 @@ type GalleryType = BCorpPost & {
 }
 
 type State = {
-  gallery: Array<GalleryType>,
+  gallery: ?Array<GalleryType>,
   activeFilters: TaxAndTermSlugObject,
   loading: boolean
 }
@@ -89,15 +89,31 @@ export default class ApplicationGallery extends Component<Props, State> {
   }
 
   renderGallery () {
-    return this.state.gallery.length ? this.state.gallery.map((appGallery, idx) => {
+    return this.state.gallery ? this.state.gallery.map((appGallery, idx) => {
       return <GalleryItem key={idx} applicationGallery={appGallery} />
-    }) : <div className={`${style.noResultsWrapper}`}>
-      <img src={require('../../../../images/warning-icon/warning-icon.png')}/>
+    }) : <div></div>
+  }
+
+  renderNoResults () {
+    return <div className={`${style.noResultsWrapper}`}>
+      <img src={require('../../../../images/warning-icon/warning-icon.png')} />
       <h1>No images match your filter selections</h1>
       <span>PLEASE TRY AGAIN</span>
     </div>
   }
-  
+
+  renderColumns (classes: string) {
+    return this.state.gallery === null ? this.renderNoResults() : <FillColumns
+      colClasses={[
+        `${classes} ${style.horizontalRightItemSpace} ${style.appGalleryItem} ${
+          style.appMinHeightGalleryItem}`, `${style.horizontalLeftItemSpace} ${classes} ${
+          style.appGalleryItem
+        }`
+      ]}>
+      {this.renderGallery()}
+    </FillColumns>
+  }
+
   render () {
     return (
       <div className={`row ${defaultStyle.defaultTemplate}`}>
@@ -110,45 +126,16 @@ export default class ApplicationGallery extends Component<Props, State> {
             {match =>
               match ? (
                 // mobile
-                <FillColumns
-                  colClasses={[
-                    `col2 ${style.horizontalRightItemSpace} ${
-                      style.appGalleryItem
-                    } ${style.appMinHeightGalleryItem}`,
-                    `${style.horizontalLeftItemSpace} col2 ${
-                      style.appGalleryItem
-                    }`
-                  ]}>
-                  {this.renderGallery()}
-                </FillColumns>
+                this.renderColumns('col2')
               ) : (
                 <Media query={{ maxWidth: TABLETMAXWIDTH }}>
                   {match =>
                     match ? (
                       // tablet
-                      <FillColumns
-                        colClasses={[
-                          `col2-tablet ${style.horizontalRightItemSpace} ${
-                            style.appGalleryItem
-                          }`,
-                          `${style.horizontalLeftItemSpace}  col2-tablet ${
-                            style.appGalleryItem
-                          }`
-                        ]}>
-                        {this.renderGallery()}
-                      </FillColumns>
+                      this.renderColumns('col2-tablet')
                     ) : (
                       // desktop
-                      <FillColumns
-                        colClasses={[
-                          `col3 ${style.horizontalRightItemSpace} ${
-                            style.appGalleryItem
-                          }`,
-                          `${style.horizontalLeftItemSpace} col3`,
-                          `${style.lastHorizontalLeftItemSpace} col3`
-                        ]}>
-                        {this.renderGallery()}
-                      </FillColumns>
+                      this.renderColumns('col3')
                     )
                   }
                 </Media>
@@ -162,9 +149,15 @@ export default class ApplicationGallery extends Component<Props, State> {
 
   async getApplicationGallery (filters: TaxAndTermSlugObject) {
     const client = new CPTApiClient(PostType)
-    const response = await client.getByTaxNameAndTermSlugObject(filters, 'OR')
+    let gallery: ?Array<GalleryType>
+    try {
+      const response = await client.getByTaxNameAndTermSlugObject(filters, 'OR')
 
-    const gallery: Array<GalleryType> = response.data
+      gallery = response.data.length ? response.data : null
+    } catch (e) {
+      console.log(e)
+      gallery = null
+    }
 
     this.setState({
       gallery,

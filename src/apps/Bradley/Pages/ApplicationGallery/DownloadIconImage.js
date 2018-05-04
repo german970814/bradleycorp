@@ -2,7 +2,6 @@
 import * as React from 'react'
 import style from './ApplicationGalleryDetail.scss'
 
-
 type Props = {}
 
 type State = {
