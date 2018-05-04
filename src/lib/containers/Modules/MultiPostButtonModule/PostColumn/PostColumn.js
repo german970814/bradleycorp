@@ -26,7 +26,7 @@ class PostColumn extends Component<Props> {
   constructor (props: Props) {
     super(props)
 
-    this.postLink = '#'
+    this.postLink = createCPTUrl(props.post.post) || '#'
   }
 
   componentWillReceiveProps (nextProps: Props) {
@@ -70,7 +70,7 @@ class PostColumn extends Component<Props> {
     }
 
     return (
-      <Link to={`${this.postLink}`} replace>
+      <Link to={`${this.postLink}`}>
         <h4 className={`${style.title} ${this.props.skinClass || ''}`}>
           {post.post['post_title']}
         </h4>
@@ -101,7 +101,7 @@ class PostColumn extends Component<Props> {
   renderButton () {
     return (
       <div className={style.buttonWrapper}>
-        <Link to={`${this.postLink}`} replace>
+        <Link to={`${this.postLink}`}>
           <button
             className={`button-brown ${style.button} ${this.props
               .accentColorClass || ''}`}>

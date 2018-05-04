@@ -27,7 +27,7 @@ class PostColumn extends Component<Props> {
   constructor (props: Props) {
     super(props)
 
-    this.postLink = '#'
+    this.postLink = createCPTUrl(props.post.post) || '#'
   }
 
   componentWillReceiveProps (nextProps: Props) {
@@ -71,7 +71,7 @@ class PostColumn extends Component<Props> {
     }
 
     return (
-      <Link to={`${this.postLink}`} replace>
+      <Link to={`${this.postLink}`}>
         <h4 className={`${style.title} ${this.props.skinClass || ''}`}>
           {post.post['post_title']}
         </h4>
@@ -104,7 +104,7 @@ class PostColumn extends Component<Props> {
 
     if (arrow) {
       return (
-        <Link to={`${this.postLink}`} replace>
+        <Link to={`${this.postLink}`}>
           <div className={style.arrowWrapper}>
             <SVGIcon
               className={style.arrow}

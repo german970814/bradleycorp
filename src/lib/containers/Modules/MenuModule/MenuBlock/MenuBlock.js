@@ -12,11 +12,11 @@ type Props = {
    * Allow child link to collapse under parent
    */
   collapsible?: boolean
-};
+}
 
 type State = {
   collapsed: boolean
-};
+}
 
 class MenuBlock extends React.Component<Props, State> {
   constructor (props: Props) {
@@ -55,7 +55,7 @@ class MenuBlock extends React.Component<Props, State> {
             url={childLink.url}
             renderInternal={url => {
               return (
-                <Link to={url} replace>
+                <Link to={url}>
                   <div className={`${style.childLink} link-navy`}>
                     {childLink.title}
                   </div>
@@ -129,7 +129,7 @@ class MenuBlock extends React.Component<Props, State> {
           url={blockData.url}
           renderInternal={url => {
             return (
-              <Link className={style.blockDataTitle} to={url} replace>
+              <Link className={style.blockDataTitle} to={url}>
                 <h6 className={`${style.blockTitle} ${collapsibleClass}`}>
                   {blockData.title}
                 </h6>

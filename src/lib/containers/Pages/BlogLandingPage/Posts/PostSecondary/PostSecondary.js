@@ -20,7 +20,7 @@ class PostSecondary extends Component<Props> {
     }
 
     return (
-      <Link to={createCPTUrl(this.props.post.post) || '#'} replace>
+      <Link to={createCPTUrl(this.props.post.post) || '#'}>
         <h5 className={style.title}>{this.props.post.post.post_title}</h5>
       </Link>
     )
@@ -45,7 +45,7 @@ class PostSecondary extends Component<Props> {
     }
 
     return (
-      <Link to={createCPTUrl(this.props.post.post) || '#'} replace>
+      <Link to={createCPTUrl(this.props.post.post) || '#'}>
         <div className={style.image}>
           <ImageFrame
             src={featuredImage[0]}
@@ -80,7 +80,7 @@ class PostSecondary extends Component<Props> {
 
   renderReadMore () {
     return (
-      <Link to={createCPTUrl(this.props.post.post) || '#'} replace>
+      <Link to={createCPTUrl(this.props.post.post) || '#'}>
         <button className={style.button}>{'READ MORE'}</button>
       </Link>
     )
