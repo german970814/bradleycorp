@@ -186,6 +186,8 @@ SimpleSlider.propTypes = {
    * Number of elements to display in the scroller on desktop sized devices
    */
   numberDesktop: PropTypes.number,
+
+  numberOfPosts: PropTypes.number,
   /**
    * Display <Prev / Next> buttons underneath the slider on mobile
    * rather than buttons at the side

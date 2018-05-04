@@ -1,13 +1,18 @@
 // @flow
 import React, { Component } from 'react'
-import type { GalleryType } from './ApplicationGallery'
-import type { Location, Match } from 'react-router-dom'
-import type { BCorpPost } from '../../../../lib/types/post_types'
+import ProductList from './ProductList'
+import Downloadables from './Downloadables'
 import { PostType } from './ApplicationGallery'
-import type { CPTName } from '../../../../lib/types/cpt_types'
-import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import CPTApiClient from '../../../../api/cpt_client'
 import ImageFrame from '../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
+import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
+
+import style from './ApplicationGalleryDetail.scss'
+import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
+
+import type { GalleryType } from './ApplicationGallery'
+import type { Location, Match } from 'react-router-dom'
+import type { CPTName, ProductPost, LiteraturePost, TechnicalInfo } from '../../../../lib/types/cpt_types'
 
 type Props = {
   location: Location,
@@ -15,19 +20,30 @@ type Props = {
 }
 
 type State = {
-  applicationGallery: ?GalleryType,
   loading: boolean,
-  products?: Array<BCorpPost>,
-  literatures?: Array<BCorpPost>
+  applicationGallery: ?GalleryType,
+  products: Array<ProductPost>,
+  literatures: Array<LiteraturePost>,
+  techs: Array<TechnicalInfo>
 }
 
-export default class ApplicationGallery extends Component<Props, State> {
+export default class ApplicationGalleryDetail extends Component<Props, State> {
+  // Dictionary to match CPT names with Taxonomies
+  CPT_TAXONOMY = {
+    literature: 'product_tag',
+    product: 'application_gallery',
+    'technical-info': 'technical_info_product_tag'
+  }
+
   constructor (props: Props) {
     super(props)
 
     this.state = {
       loading: true,
-      applicationGallery: null
+      applicationGallery: null,
+      products: [],
+      literatures: [],
+      techs: []
     }
   }
 
@@ -35,121 +51,167 @@ export default class ApplicationGallery extends Component<Props, State> {
     this.getApplicationGallery()
   }
 
-  renderContent () {
-    return (
-      <div>
-        {this.state.applicationGallery && (
-          <ImageFrame
-            src={this.state.applicationGallery.meta.app_gallery_img}
-            aspectRatio={123 / 270}
-            aspectRatioTablet={152 / 332}
-            aspectRatioDesktop={169 / 370}
-          />
-        )}
-        <p>
-          {this.state.applicationGallery &&
-            this.state.applicationGallery.post.post_content}
-        </p>
-        <h2>Featured Product Information</h2>
-        <hr />
-        <h3>Document Downloads</h3>
-        <div className="row">
-          <div className="col6" />
-          <div className="col5">
-            <h4>Product List</h4>
-            <ul>
-              {this.state.products &&
-                this.state.products.map((product, ind) => {
-                  return (
-                    <li key={ind}>
-                      <a>{product.post.post_title} </a>
-                      <span>{product.meta.product_sku || ''}</span>
-                    </li>
-                  )
-                })}
-            </ul>
-          </div>
-        </div>
-      </div>
-    )
+  componentWillReceiveProps (nextProps: Props) {
+    if (nextProps.match.params.slug !== this.props.match.params.slug) {
+      this.getApplicationGallery()
+    }
   }
 
-  async getApplicationGallery () {
-    let applicationGallery: GalleryType
-    if (this.props.location.state && this.props.location.state.post) {
-      applicationGallery = this.props.location.state.post
-    } else {
-      const client = new CPTApiClient(PostType)
-      const response = await client.getBySlug(
-        this.props.match.params.slug || ''
-      )
-      applicationGallery = response.data
-      console.log(response.data)
-    }
-    this.setState({ applicationGallery }, () => {
-      if (this.state.applicationGallery) {
-        const productTerms = applicationGallery.terms['app_gallery_product_tag']
-          ? applicationGallery.terms['app_gallery_product_tag'].map(
-            term => term.slug
-          )
-          : []
+  /**
+   * Return taxonomy given a CPTName
+   * Taxonomies are consulting on CPT_TAXONOMY
+  */
+  getTaxonomyByCPT (type: CPTName): string {
+    return this.CPT_TAXONOMY[type]
+  }
 
-        this.getDocumentsDownloads(
-          'product',
-          'application_gallery',
-          productTerms,
-          products => {
-            this.setState({ products }, () => {
-              const terms =
-                this.state.products && this.state.products.length
-                  ? this.state.products
-                    .map(product => {
-                      return product.terms.literature &&
-                          product.terms.literature.length
-                        ? product.terms.literature.map(literature => {
-                          return literature.slug
-                        })
-                        : []
-                    })
-                    .reduce((previous, current) => {
-                      return [...previous, ...current]
-                    })
-                  : []
-              console.log(terms)
-              this.getDocumentsDownloads(
-                'literature',
-                'product_tag',
-                terms,
-                literatures => {
-                  this.setState({ literatures })
-                }
-              )
-            })
-          }
-        )
-      }
+  renderContent () {
+    return <div className={`${style.appGalleryDetailWrapper}`}>
+      {this.state.applicationGallery && <ImageFrame
+        src={this.state.applicationGallery.meta.app_gallery_img}
+        aspectRatio={123 / 270}
+        aspectRatioTablet={152 / 332}
+        aspectRatioDesktop={169 / 370}
+      />}
+      <p className={`${style.appGalleryDetailText}`}>{this.state.applicationGallery && this.state.applicationGallery.post.post_content}</p>
+      <div className={`col1 ${style.appGalleryDetailTitle}`}>
+        <h2>Featured Product Information</h2>
+      </div>
+      <div className="row">
+        <div className={`col1 col2-tablet ${style.featureProductInformation}`}>
+          <h3>Document Downloads</h3>
+          <Downloadables techs={this.state.techs} bim={[]} />
+        </div>
+        <div className={`col1 col2-tablet ${style.featureProductInformation}`}>
+          <h3>Product List</h3>
+          <ProductList products={this.state.products} literatures={this.state.literatures} />
+        </div>
+      </div>
+    </div>
+  }
+
+  /**
+   * Return product terms slugs given a taxonomy,
+   * data comes from products in state
+   *
+   * Note: Products should be type Array<ProductPost>
+   * @param {String} taxonomy
+   * @return {Array<String>}
+   */
+  getProductTermsByTaxonomy (taxonomy: string): Array<string> {
+    const products = 'products' in this.state ? this.state.products : []
+    return products.map(product => {
+      return product.terms[taxonomy].map(term => {
+        return term.slug
+      })
+    }).reduce((previous, current) => {
+      return [...previous, ...current]
     })
   }
 
+  /**
+   * Get literatures cpt and set it on state
+   */
+  getLiteratures () {
+    const cpt = 'literature'
+    const terms = this.getProductTermsByTaxonomy(cpt)
+
+    this.getDocumentsDownloads(cpt, this.getTaxonomyByCPT(cpt), terms, (literatures: Array<LiteraturePost>) => {
+      this.setState({ literatures })
+    })
+  }
+
+  /**
+   * Get technical information cpt and set it on state
+   */
+  getTechInfo () {
+    const cpt = 'technical-info'
+    const terms = this.getProductTermsByTaxonomy('technical_info')
+
+    this.getDocumentsDownloads(cpt, this.getTaxonomyByCPT(cpt), terms, (techs: Array<TechnicalInfo>) => {
+      this.setState({ techs })
+    })
+  }
+
+  /**
+   * Get BIM/Revit cpt and set it on state
+   */
+  getBimRevit () {
+    // soon
+  }
+
+  /**
+   * Get the application gallery details to show in front,
+   * Can get this info from two ways:
+   *
+   * 1. Location state: is the most fast way, when user
+   * comes from application-gallery and select show details.
+   * Data is charged from application-gallery, so, no need
+   * request to server to get again
+   *
+   * 2. By url param slug: Get slug from url, given a beautiful
+   * url, and request server with that slug to get info about
+   * application gallery
+   */
+  async getApplicationGallery () {
+    let applicationGallery: GalleryType
+
+    if (this.props.location.state && this.props.location.state.post) {
+      applicationGallery = this.props.location.state.post
+    } else {
+      try {
+        const client = new CPTApiClient(PostType)
+        const response = await client.getBySlug(
+          this.props.match.params.slug || ''
+        )
+        applicationGallery = response.data
+      } catch (exception) {
+        console.log(exception)
+        return
+      }
+    }
+
+    this.setState({ applicationGallery }, () => {
+      const productTerms = applicationGallery.terms['app_gallery_product_tag']
+        ? applicationGallery.terms['app_gallery_product_tag'].map(term => term.slug) : []
+      const cpt: CPTName = 'product'
+      this.getDocumentsDownloads(
+        cpt, this.getTaxonomyByCPT(cpt), productTerms,
+        (products: Array<ProductPost>) => {
+          this.setState({ products }, () => {
+            this.getLiteratures()
+            this.getTechInfo()
+            this.getBimRevit()
+          })
+        }
+      )
+    })
+  }
+
+  /**
+   * Method to request documents given a cpt, terms and taxonomy,
+   * this method calls a callback with server response as parameter
+   *
+   * @param {String} cpt
+   * @param {String} taxonomy
+   * @param {Array<string>} terms
+   * @param {Function} callback
+   */
   async getDocumentsDownloads (
-    cpt: CPTName,
-    taxonomy: string,
-    terms: Array<string>,
-    callback?: (param: any) => void
+    cpt: CPTName, taxonomy: string,
+    terms: Array<string>, callback: (param: any) => void
   ) {
-    // app_gallery_tech_info_tag
     const client = new CPTApiClient(cpt)
     const response = await client.getByTaxAndTermArray(taxonomy, terms)
-    callback && callback(response.data)
+    callback(response.data)
   }
 
   render () {
     return (
-      <DefaultTemplate
-        data={{ page_title: 'Application Gallery' }}
-        renderModules={() => this.renderContent()}
-        widgetsMoveWithScroll
-      />
+      <div className={`row ${defaultStyle.defaultTemplate}`}>
+        {renderTitle('Application Gallery', 'col1')}
+        {this.renderContent()}
+      </div>
     )
   }
 }

@@ -5,12 +5,18 @@ import type {
   ApplicationGalleryPost,
   CPTName
 } from '../../../../lib/types/cpt_types'
+import { Link } from 'react-router-dom'
 import debounce from 'debounce'
-import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
+import Media from 'react-media'
+import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../globals'
+import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import CPTApiClient from '../../../../api/cpt_client'
 import FillColumns from '../../../../lib/components/FillColumns/FillColumns'
 import Filters from './Filters/Filters'
 import ImageFrame from '../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
+import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
+import ArrowButton from '../../../../lib/components/ArrowButton/ArrowButton'
+import style from './ApplicationGallery.scss'
 
 const PostType: CPTName = 'application-gallery'
 
@@ -83,23 +89,89 @@ export default class ApplicationGallery extends Component<Props, State> {
     this.getApplicationGalleryDebounced(activeFilters)
   }
 
-  renderContent () {
+  renderGallery () {
+    return this.state.gallery.map((el, idx) => {
+      const pathname = el.post.post_name
+        ? `/application-gallery/${el.post.post_name}`
+        : '#'
+      return (
+        <div key={idx} className={`${style.imageContainer}`}>
+          <Link
+            to={{
+              pathname,
+              state: { post: el }
+            }}>
+            <ImageFrame
+              src={el.meta.app_gallery_img}
+              aspectRatio={180 / 301}
+              aspectRatioTablet={180 / 301}
+              aspectRatioDesktop={180 / 301}
+            />
+            <ArrowButton text={''} link={''} color={'white'} />
+          </Link>
+        </div>
+      )
+    })
+  }
+
+  render () {
     return (
-      <div>
-        <Filters updateFilters={this.updateFilters.bind(this)} />
-        <FillColumns colClasses={['col4', 'col4', 'col4']}>
-          {this.state.gallery.map((el, idx) => {
-            return (
-              <ImageFrame
-                src={el.meta.app_gallery_img}
-                key={idx}
-                aspectRatio={123 / 270}
-                aspectRatioTablet={152 / 332}
-                aspectRatioDesktop={169 / 370}
-              />
-            )
-          })}
-        </FillColumns>
+      <div className={`row ${defaultStyle.defaultTemplate}`}>
+        {renderTitle('Application Gallery', 'col1')}
+        <div className={`col1 col4-tablet ${style.appGallerySidebar}`}>
+          <Filters updateFilters={this.updateFilters.bind(this)} />
+        </div>
+        <div className={`col1 col4x3-tablet ${style.appGalleryContent}`}>
+          <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
+            {match =>
+              match ? (
+                // mobile
+                <FillColumns
+                  colClasses={[
+                    `col2 ${style.horizontalRightItemSpace} ${
+                      style.appGalleryItem
+                    }`,
+                    `${style.horizontalLeftItemSpace} col2 ${
+                      style.appGalleryItem
+                    }`
+                  ]}>
+                  {this.renderGallery()}
+                </FillColumns>
+              ) : (
+                <Media query={{ maxWidth: TABLETMAXWIDTH }}>
+                  {match =>
+                    match ? (
+                      // tablet
+                      <FillColumns
+                        colClasses={[
+                          `col2-tablet ${style.horizontalRightItemSpace} ${
+                            style.appGalleryItem
+                          }`,
+                          `${style.horizontalLeftItemSpace}  col2-tablet ${
+                            style.appGalleryItem
+                          }`
+                        ]}>
+                        {this.renderGallery()}
+                      </FillColumns>
+                    ) : (
+                      // desktop
+                      <FillColumns
+                        colClasses={[
+                          `col3 ${style.horizontalRightItemSpace} ${
+                            style.appGalleryItem
+                          }`,
+                          `${style.horizontalLeftItemSpace} col3`,
+                          `${style.lastHorizontalLeftItemSpace} col3`
+                        ]}>
+                        {this.renderGallery()}
+                      </FillColumns>
+                    )
+                  }
+                </Media>
+              )
+            }
+          </Media>
+        </div>
       </div>
     )
   }
@@ -114,17 +186,6 @@ export default class ApplicationGallery extends Component<Props, State> {
       gallery,
       loading: false
     })
-  }
-
-  render () {
-    console.log(this.state)
-    return (
-      <DefaultTemplate
-        data={{ page_title: 'Application Gallery' }}
-        renderModules={() => this.renderContent()}
-        widgetsMoveWithScroll
-      />
-    )
   }
 }
 
