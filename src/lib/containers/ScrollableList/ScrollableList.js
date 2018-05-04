@@ -269,7 +269,6 @@ class ScrollableList extends Component {
   }
 
   renderScroller () {
-
     return (
       <div className={this.props.wrapperClassName}>
         {(this.props.numberToDisplay < this.props.numberOfPosts) &&
