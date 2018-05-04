@@ -9,7 +9,7 @@ class PostGridItem extends Component {
   constructor (props) {
     super(props)
 
-    this.postLink = '#'
+    this.postLink = createCPTUrl(props.post.post)
   }
 
   componentWillReceiveProps (nextProps) {
@@ -21,9 +21,12 @@ class PostGridItem extends Component {
   renderImage () {
     const { post } = this.props
 
-    if (!post.media['featured_image'] || post.media['featured_image'].length === 0) {
+    if (
+      !post.media['featured_image'] ||
+      post.media['featured_image'].length === 0
+    ) {
       return (
-        <div className={style.image} >
+        <div className={style.image}>
           <div className={style.imageGradient} />
         </div>
       )
@@ -36,10 +39,8 @@ class PostGridItem extends Component {
         style={{
           backgroundImage: `url(${imgSrc})`
         }}
-        className={style.image} >
-
+        className={style.image}>
         <div className={style.imageGradient} />
-
       </div>
     )
   }
@@ -52,43 +53,35 @@ class PostGridItem extends Component {
     }
 
     return (
-      <Link
-        to={`${this.postLink}`}
-        replace >
-
-        <h5 className={style.title} >{post.post['post_title']}</h5>
-
+      <Link to={`${this.postLink}`}>
+        <h5 className={style.title}>{post.post['post_title']}</h5>
       </Link>
     )
   }
 
   renderArrow () {
     return (
-      <Link
-        to={`${this.postLink}`}
-        replace >
-
-        <div className={style.arrowWrapper} >
+      <Link to={`${this.postLink}`}>
+        <div className={style.arrowWrapper}>
           <SVGIcon
             className={style.arrow}
             icon={'arrow'}
             color={'white'}
-            redrawOnHover />
+            redrawOnHover
+          />
         </div>
-
       </Link>
     )
   }
 
   render () {
+    console.log(this.postLink)
     return (
-      <div className={`${style.postGridItem} ${this.props.containerClassName}`} >
-
+      <div className={`${style.postGridItem} ${this.props.containerClassName}`}>
         {this.renderImage()}
 
         {this.renderTitle()}
         {this.renderArrow()}
-
       </div>
     )
   }

@@ -14,7 +14,7 @@ const bcorpUrl = {}
  */
 bcorpUrl.createCPTUrl = (post: WPPost): false | string => {
   if (post.path) {
-    return bcorpUrl.removeHostFromUrl(post.path)
+    return bcorpUrl.removeHostFromUrl(post.path) || post.path
   }
 
   if (post['post_type'] && post['post_name']) {
