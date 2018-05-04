@@ -75,7 +75,6 @@ class PostGridItem extends Component {
   }
 
   render () {
-    console.log(this.postLink)
     return (
       <div className={`${style.postGridItem} ${this.props.containerClassName}`}>
         {this.renderImage()}
