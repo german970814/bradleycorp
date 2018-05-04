@@ -5,7 +5,6 @@ import type {
   ApplicationGalleryPost,
   CPTName
 } from '../../../../lib/types/cpt_types'
-import { Link } from 'react-router-dom'
 import debounce from 'debounce'
 import Media from 'react-media'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../globals'
@@ -90,7 +89,7 @@ export default class ApplicationGallery extends Component<Props, State> {
   }
 
   renderGallery () {
-    return Boolean(this.state.gallery.length) ? this.state.gallery.map((appGallery, idx) => {
+    return this.state.gallery.length ? this.state.gallery.map((appGallery, idx) => {
       return <GalleryItem key={idx} applicationGallery={appGallery} />
     }) : <div className={`${style.noResultsWrapper}`}>
       <img src={require('../../../../images/warning-icon/warning-icon.png')}/>
