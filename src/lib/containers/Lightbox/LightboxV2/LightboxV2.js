@@ -14,7 +14,7 @@ type Props = {
   /**
    * What to render inside the lightbox when it's open
    */
-  renderLightboxContents: () => React.Node,
+  renderLightboxContents: (?() => void) => React.Node,
   /**
    * Custom css class for the lightbox background
    */
@@ -153,7 +153,7 @@ class LightboxV2 extends React.Component<Props, State> {
                 maxWidth: this.props.maxWidth
               }}
               className={`lightbox ${style.lightbox}`}>
-              {this.props.renderLightboxContents()}
+              {this.props.renderLightboxContents(this.closeLightbox.bind(this))}
               {this.renderCloseButton()}
             </div>
           </div>

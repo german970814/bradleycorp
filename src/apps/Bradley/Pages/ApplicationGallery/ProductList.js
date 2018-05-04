@@ -9,15 +9,15 @@ import type { ProductPost, LiteraturePost } from '../../../../lib/types/cpt_type
 type Props = {
   products: Array<ProductPost>,
   literatures: Array<LiteraturePost>
-}   
+}
 
 /**
  * Get url of product detail for specific ProductPost object
  * if product has not name, '#' is returned
- * 
- * @param {Object} product 
+ *
+ * @param {Object} product
  */
-function getProductUrlByProduct(product: ProductPost): string {
+function getProductUrlByProduct (product: ProductPost): string {
   if (product.post.post_name) {
     return `/product/${product.post.post_name}`
   }
@@ -38,25 +38,26 @@ const ProductList = (props: Props) => (
       renderChildren={openLightbox => {
         return <button onClick={openLightbox} className={`${style.productListButton}`}>Product Literature</button>
       }}
-      renderLightboxContents={() => {
+      renderLightboxContents={(closeLightBox) => {
         return <div>
           <div className={`${style.lightBoxListWrapper}`}>
             <LightboxTitleBannerContentBox title={'Confirm Download'}>
               <div className={`${style.lightBoxListWrapper}`}>
                 <p className={`${style.lightBoxListWeight}`}>FILE SIZE: 4MB</p>
                 <ul>
-                  <li>Test Literature</li>
+                  {props.literatures.map((literature, index) => {
+                    return <li key={index}>{literature.post.post_title}</li>
+                  })}
                 </ul>
                 <p>Do you wish to continue?</p>
-                <button className={`${style.productListLightBoxButton}`}>Confirm</button>
-                <button className={`${style.productListLightBoxButton} ${style.productListLightBoxButtonRedBorder}`}>Cancel</button>
+                <button onClick={() => { window.location.href = props.literatures[0].meta.literature_pdf }} className={`${style.productListLightBoxButton}`}>Confirm</button>
+                <button onClick={ closeLightBox } className={`${style.productListLightBoxButton} ${style.productListLightBoxButtonRedBorder}`}>Cancel</button>
               </div>
             </LightboxTitleBannerContentBox>
           </div>
         </div>
       }}
       onLightboxClose={() => {
-        console.log('closed')
         return undefined
       }}
       fullWidth
