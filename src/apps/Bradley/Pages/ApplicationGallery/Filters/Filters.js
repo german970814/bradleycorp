@@ -67,7 +67,6 @@ class Filters extends React.Component<Props, State> {
   }
 
   render () {
-    console.log(this.state)
     return <div className={`row`}>{this.renderFilters()}</div>
   }
 

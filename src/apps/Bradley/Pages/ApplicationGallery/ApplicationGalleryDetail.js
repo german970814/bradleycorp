@@ -4,6 +4,7 @@ import ProductList from './ProductList'
 import Downloadables from './Downloadables'
 import { PostType } from './ApplicationGallery'
 import CPTApiClient from '../../../../api/cpt_client'
+import Loading from '../../../../lib/components/Loading/Loading'
 import ImageFrame from '../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 
@@ -23,8 +24,8 @@ type State = {
   loading: boolean,
   applicationGallery: ?GalleryType,
   products: Array<ProductPost>,
-  literatures: Array<LiteraturePost>,
-  techs: Array<TechnicalInfo>
+  literatures: ?Array<LiteraturePost>,
+  techs: ?Array<TechnicalInfo>
 }
 
 export default class ApplicationGalleryDetail extends Component<Props, State> {
@@ -80,14 +81,38 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
       <div className="row">
         <div className={`col1 col2-tablet ${style.featureProductInformation}`}>
           <h3>Document Downloads</h3>
-          <Downloadables techs={this.state.techs} bim={[]} />
+          {this.downloadableContainer}
         </div>
         <div className={`col1 col2-tablet ${style.featureProductInformation}`}>
           <h3>Product List</h3>
-          <ProductList products={this.state.products} literatures={this.state.literatures} />
+          {this.productListContainer}
         </div>
       </div>
     </div>
+  }
+
+  /**
+   * Wrapper of downloadables with loading
+   */
+  get downloadableContainer () {
+    const { techs } = this.state
+    if (techs) {
+      return techs.length ? <Downloadables techs={ techs } bim={[]} /> : <Loading />
+    }
+    return null
+  }
+
+  /**
+   * Wrapper of product list with loading
+   */
+  get productListContainer () {
+    const { products, literatures } = this.state
+    if (products && literatures) {
+      return products.length || literatures.length
+        ? <ProductList products={products} literatures={literatures} />
+        : <Loading />
+    }
+    return null
   }
 
   /**
@@ -116,9 +141,14 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
     const cpt = 'literature'
     const terms = this.getProductTermsByTaxonomy(cpt)
 
-    this.getDocumentsDownloads(cpt, this.getTaxonomyByCPT(cpt), terms, (literatures: Array<LiteraturePost>) => {
-      this.setState({ literatures })
-    })
+    try {
+      this.getDocumentsDownloads(cpt, this.getTaxonomyByCPT(cpt), terms, (literatures: Array<LiteraturePost>) => {
+        this.setState({ literatures })
+      })
+    } catch (e) {
+      console.log(e)
+      this.setState({ literatures: null })
+    }
   }
 
   /**
@@ -128,15 +158,21 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
     const cpt = 'technical-info'
     const terms = this.getProductTermsByTaxonomy('technical_info')
 
-    this.getDocumentsDownloads(cpt, this.getTaxonomyByCPT(cpt), terms, (techs: Array<TechnicalInfo>) => {
-      this.setState({ techs })
-    })
+    try {
+      this.getDocumentsDownloads(cpt, this.getTaxonomyByCPT(cpt), terms, (techs: Array<TechnicalInfo>) => {
+        this.setState({ techs })
+      })
+    } catch (e) {
+      console.log(e)
+      this.setState({ techs: null })
+    }
   }
 
   /**
    * Get BIM/Revit cpt and set it on state
    */
   getBimRevit () {
+
     // soon
   }
 
@@ -154,6 +190,7 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
    * application gallery
    */
   async getApplicationGallery () {
+
     let applicationGallery: GalleryType
 
     if (this.props.location.state && this.props.location.state.post) {
