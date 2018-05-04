@@ -41,11 +41,7 @@ const ArrowButton = props => {
       <BCorpLink
         url={props.link}
         renderInternal={url => {
-          return (
-            <Link to={url} replace>
-              {button}
-            </Link>
-          )
+          return <Link to={url}>{button}</Link>
         }}
         renderExternal={url => {
           return <a href={url}>{button}</a>

@@ -47,7 +47,7 @@ class Footer extends React.Component<Props, State> {
   renderLogo () {
     return (
       <div className={style.logoWrapper}>
-        <Link to={'/'} replace>
+        <Link to={'/'}>
           <img
             src={require('../../../images/logo-white/logo@2x.png')}
             className={style.logo}
@@ -69,7 +69,7 @@ class Footer extends React.Component<Props, State> {
         return (
           <div key={index} className={'col1'}>
             <div className={style.menuItem}>
-              <Link to={removeHostFromUrl(menuItem['url']) || '#'} replace>
+              <Link to={removeHostFromUrl(menuItem['url']) || '#'}>
                 <div className={`small-link-gray ${style.menuItemLink}`}>
                   {menuItem['title']}
                 </div>
@@ -93,7 +93,7 @@ class Footer extends React.Component<Props, State> {
         return (
           <div key={index} className={'col2 col1-tablet'}>
             <div className={style.menuItem}>
-              <Link to={removeHostFromUrl(menuItem['url']) || '#'} replace>
+              <Link to={removeHostFromUrl(menuItem['url']) || '#'}>
                 <div className={`small-link-gray ${style.menuItemLink}`}>
                   {menuItem['title']}
                 </div>

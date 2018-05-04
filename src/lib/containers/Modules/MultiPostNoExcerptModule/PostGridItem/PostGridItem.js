@@ -9,12 +9,12 @@ class PostGridItem extends Component {
   constructor (props) {
     super(props)
 
-    this.postLink = createCPTUrl(props.post.post)
+    this.postLink = createCPTUrl(props.post.post) || '#'
   }
 
   componentWillReceiveProps (nextProps) {
     if (nextProps.post) {
-      this.postLink = createCPTUrl(nextProps.post.post)
+      this.postLink = createCPTUrl(nextProps.post.post) || '#'
     }
   }
 
