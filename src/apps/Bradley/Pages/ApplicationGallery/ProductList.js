@@ -3,6 +3,7 @@ import React from 'react'
 import Lightbox from '../../../../lib/containers/Lightbox/Lightbox'
 import LightboxTitleBannerContentBox from '../../../../lib/containers/Lightbox/LightboxTitleBannerContentBox/LightboxTitleBannerContentBox'
 import type { ProductPost, LiteraturePost } from '../../../../lib/types/cpt_types'
+import style from './ApplicationGalleryDetail.scss'
 
 type Props = {
   products: Array<ProductPost>,
@@ -10,11 +11,11 @@ type Props = {
 }
 
 const ProductList = (props: Props) => (
-  <div>
+  <div className={`${style.productListWrapper}`}>
     <ul>
       {props.products.map((product, ind) => {
         return <li key={ind}>
-          <a><h6>{product.post.post_title} </h6></a>
+          <a>{product.post.post_title}</a>
           <span>{product.meta.product_sku}</span>
         </li>
       })}

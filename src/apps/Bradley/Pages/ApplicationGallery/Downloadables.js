@@ -2,6 +2,8 @@
 import React, { Component } from 'react'
 import LightboxV2 from '../../../../lib/containers/Lightbox/LightboxV2/LightboxV2'
 import LightboxTitleBannerContentBox from '../../../../lib/containers/Lightbox/LightboxTitleBannerContentBox/LightboxTitleBannerContentBox'
+import DownloadIconImage from './DownloadIconImage'
+import style from './ApplicationGalleryDetail.scss'
 
 import type { TechnicalInfo } from '../../../../lib/types/cpt_types'
 
@@ -66,9 +68,9 @@ export default class Downloadables extends Component<Props, State> {
       renderChildren={openLightbox => {
         return Object.keys(this.downloadables).map((downloadable, index) => {
           return 0 in this.downloadables[downloadable].files ? <div key={index} onClick={
-            e => this.wrapperFunction(openLightbox, this.downloadables[downloadable])}>
-            <img src={require('../../../../images/download-arrow-icon/download@2x.png')} />
-            <p>{this.downloadables[downloadable].title}</p>
+            e => this.wrapperFunction(openLightbox, this.downloadables[downloadable])} className={`${style.downloadLinkWrapper}`}>
+            <DownloadIconImage/>
+            <p className={`${style.downloableText}`}>{this.downloadables[downloadable].title}</p>
           </div> : null
         })
       }}
