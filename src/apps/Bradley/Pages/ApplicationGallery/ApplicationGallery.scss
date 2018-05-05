@@ -3,7 +3,18 @@
 @import "../../../../scss/partials/mixins";
 
 .appGallerySidebar {
-    margin-bottom: 60px;
+    
+    @include respond-to(mobile) {
+
+        margin-bottom: 15px;
+        
+    }
+
+    @include respond-to(tablet) {
+        
+        margin-bottom: 60px;
+
+    }
 }
 
 .appGalleryContent {
@@ -13,11 +24,11 @@
 
 .appGalleryItem {
     
-    & > div {
-        margin-bottom: 16px;
-    }
-
     @include respond-to(mobile) {
+
+        & > div {
+            margin-bottom: 16px;
+        }
 
         &:nth-child(2n + 1) {
             padding-right: 8px;
@@ -28,11 +39,11 @@
           }
     }
 
-    @include respond-to(tablet) {
-        
-    }
-
     @include respond-to(desktop) {
+
+        & > div {
+            margin-bottom: 7%;
+        }
 
         width: 32%!important;
 
@@ -137,8 +148,6 @@
         padding-top: 70px;
     }
 
-    
-    
     h1 {
         position: relative;
         margin-top: 30px;

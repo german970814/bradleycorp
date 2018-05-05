@@ -211,6 +211,7 @@ h5.title {
 .checkbox {
   .checkboxOption {
     position: relative;
+    margin-bottom: 6px;
 
     input {
       -moz-appearance: none;
@@ -260,21 +261,20 @@ h5.title {
 }
 
 .checkBoxContainer {
-  padding-bottom: 35px;
   
   @include respond-to(mobile) {
     padding-bottom: 0;
   }
 
   @include respond-to(tablet) {
-    padding-bottom: 35px;
+    padding-bottom: 30px;
   }
 }
 
 .checkBoxTitle {
   padding-bottom: 5px;
   font-family: 'CentraleSansPro';
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   color: #a7a9ac;
   text-align: left;
@@ -313,6 +313,7 @@ h5.title {
       margin-left: 5px;
       line-height: 16px;
       padding: 2px 1px 1px;
+      margin-top: -3px;
     }
   }
 }
