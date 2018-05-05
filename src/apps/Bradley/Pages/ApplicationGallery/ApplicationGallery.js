@@ -105,10 +105,10 @@ export default class ApplicationGallery extends Component<Props, State> {
   renderColumns (classes: string) {
     return this.state.gallery === null ? this.renderNoResults() : <FillColumns
       colClasses={[
-        `${classes} ${style.horizontalRightItemSpace} ${style.appGalleryItem} ${
-          style.appMinHeightGalleryItem}`, `${style.horizontalLeftItemSpace} ${classes} ${
+        `${classes} ${style.appGalleryItem} ${
+          style.appMinHeightGalleryItem}`, `${classes} ${
           style.appGalleryItem
-        }`
+        }`, `${classes} ${style.appGalleryItem}`
       ]}>
       {this.renderGallery()}
     </FillColumns>

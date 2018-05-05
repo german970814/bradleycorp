@@ -12,21 +12,58 @@
 }
 
 .appGalleryItem {
+    
     & > div {
-        margin-bottom: 20px;
+        margin-bottom: 16px;
     }
+
+    @include respond-to(mobile) {
+
+        &:nth-child(2n + 1) {
+            padding-right: 8px;
+          }
+      
+          &:nth-child(2n) {
+            padding-left: 8px;
+          }
+    }
+
+    @include respond-to(tablet) {
+        
+    }
+
+    @include respond-to(desktop) {
+
+        width: 32%!important;
+
+        &:nth-child(2n + 1) {
+            padding-right: 0;
+        }
+
+        &:nth-child(3n + 1) {
+            margin-right: 2%;
+        }
+    
+        &:nth-child(2n) {
+            padding-left: 0;
+            margin-right: 2%;
+        }
+
+    }
+
+    
 }
 
 .horizontalRightItemSpace {
-    padding-right: 10px;
+    padding-right: 8px;
 }
 
 .horizontalLeftItemSpace {
-    padding-left: 10px;
+    padding-left: 8px;
 }
 
 .lastHorizontalLeftItemSpace {
-    padding-left: 20px;
+    padding-left: 16px;
 }
 
 .imageContainer {
