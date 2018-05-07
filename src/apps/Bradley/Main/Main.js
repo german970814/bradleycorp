@@ -58,6 +58,7 @@ const Main = props => {
       {/* Post Types With Custom Templates */}
       <Route exact path="/post/:slug" component={BlogSinglePostPageLoadable} />
       <Route exact path="/product/:slug" component={ProductDetailLoadable} />
+
       {/* Specific Custom Pages */}
       <Route
         exact

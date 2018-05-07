@@ -3,29 +3,78 @@
 @import "../../../../scss/partials/mixins";
 
 .appGallerySidebar {
-    margin-bottom: 60px;
+    
+    @include respond-to(mobile) {
+
+        margin-bottom: 15px;
+        
+    }
+
+    @include respond-to(tablet) {
+        
+        margin-bottom: 60px;
+
+    }
 }
 
 .appGalleryContent {
     margin-bottom: 60px;
+    position: relative;
 }
 
 .appGalleryItem {
-    & > div {
-        margin-bottom: 20px;
+    
+    @include respond-to(mobile) {
+
+        & > div {
+            margin-bottom: 16px;
+        }
+
+        &:nth-child(2n + 1) {
+            padding-right: 8px;
+          }
+      
+          &:nth-child(2n) {
+            padding-left: 8px;
+          }
     }
+
+    @include respond-to(desktop) {
+
+        & > div {
+            margin-bottom: 7%;
+        }
+
+        width: 32%!important;
+
+        &:nth-child(2n + 1) {
+            padding-right: 0;
+        }
+
+        &:nth-child(3n + 1) {
+            margin-right: 2%;
+        }
+    
+        &:nth-child(2n) {
+            padding-left: 0;
+            margin-right: 2%;
+        }
+
+    }
+
+    
 }
 
 .horizontalRightItemSpace {
-    padding-right: 10px;
+    padding-right: 8px;
 }
 
 .horizontalLeftItemSpace {
-    padding-left: 10px;
+    padding-left: 8px;
 }
 
 .lastHorizontalLeftItemSpace {
-    padding-left: 20px;
+    padding-left: 16px;
 }
 
 .imageContainer {
@@ -83,4 +132,36 @@
 
 .hideArrow {
     visibility: hidden;
+}
+
+.noResultsWrapper {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    padding-top: 70px;
+
+    @include respond-to(mobile) {
+        padding-top: 30px;
+    }
+
+    @include respond-to(tablet) {
+        padding-top: 70px;
+    }
+
+    h1 {
+        position: relative;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    span {
+        color: #a7a9ac;
+        font-size: 13px;
+        font-family: 'CentraleSansPro';
+        text-transform: uppercase;
+    }
+}
+
+.appMinHeightGalleryItem {
+    min-height: 300px!important;
 }

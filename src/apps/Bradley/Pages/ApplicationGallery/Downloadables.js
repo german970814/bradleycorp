@@ -63,6 +63,12 @@ export default class Downloadables extends Component<Props, State> {
     func()
   }
 
+  downloadFiles () {
+    if (this.state.selected) {
+      window.location.href = this.state.selected.files[0]
+    }
+  }
+
   render () {
     return <LightboxV2
       renderChildren={openLightbox => {
@@ -74,21 +80,20 @@ export default class Downloadables extends Component<Props, State> {
           </div> : null
         })
       }}
-      renderLightboxContents={() => {
+      renderLightboxContents={(closeLightBox) => {
         return <div>
           <div className={`${style.lightBoxListWrapper}`}>
             <LightboxTitleBannerContentBox title={'Confirm Download'}>
               <p className={`${style.lightBoxListWeight}`}>INCLUDED FILES</p>
               {this.renderFileList()}
               <p>Do you wish to continue?</p>
-              <button className={`${style.productListLightBoxButton}`}>Confirm</button>
-              <button className={`${style.productListLightBoxButton} ${style.productListLightBoxButtonRedBorder}`}>Cancel</button>
+              <button onClick={this.downloadFiles.bind(this)} className={`${style.productListLightBoxButton}`}>Confirm</button>
+              <button onClick={closeLightBox} className={`${style.productListLightBoxButton} ${style.productListLightBoxButtonRedBorder}`}>Cancel</button>
             </LightboxTitleBannerContentBox>
           </div>
         </div>
       }}
       onLightboxClose={() => {
-        console.log('closed')
         return undefined
       }}
       fitLightboxToContent

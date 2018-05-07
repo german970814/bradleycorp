@@ -240,7 +240,6 @@ class ScrollableList extends Component {
     const className = this.props.vertical
       ? `${style.trackItemVertical} track-item-vertical`
       : `${style.trackItem} track-item`
-
     return this.props.children.map((child, index) => {
       const inlineStyle = this.props.vertical
         ? { height: dimensions }
