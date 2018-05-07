@@ -52,11 +52,7 @@ class CTAModule extends BCorpModule {
       <BCorpLink
         url={link}
         renderInternal={url => {
-          return (
-            <Link to={url} replace>
-              {button}
-            </Link>
-          )
+          return <Link to={url}>{button}</Link>
         }}
         renderExternal={url => {
           return <a href={url}>{button}</a>

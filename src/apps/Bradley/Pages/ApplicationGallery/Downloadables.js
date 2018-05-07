@@ -2,6 +2,8 @@
 import React, { Component } from 'react'
 import LightboxV2 from '../../../../lib/containers/Lightbox/LightboxV2/LightboxV2'
 import LightboxTitleBannerContentBox from '../../../../lib/containers/Lightbox/LightboxTitleBannerContentBox/LightboxTitleBannerContentBox'
+import DownloadIconImage from './DownloadIconImage'
+import style from './ApplicationGalleryDetail.scss'
 
 import type { TechnicalInfo } from '../../../../lib/types/cpt_types'
 
@@ -51,9 +53,9 @@ export default class Downloadables extends Component<Props, State> {
   }
 
   renderFileList () {
-    return this.state.selected ? this.state.selected.files.map((el, ind) => {
-      return <p key={ind}>{el}</p>
-    }) : null
+    return this.state.selected ? <ul>{this.state.selected.files.map((el, ind) => {
+      return <li key={ind}>{el}</li>
+    })}</ul> : null
   }
 
   wrapperFunction (func: () => void, selected: DownloadabeType) {
@@ -66,19 +68,23 @@ export default class Downloadables extends Component<Props, State> {
       renderChildren={openLightbox => {
         return Object.keys(this.downloadables).map((downloadable, index) => {
           return 0 in this.downloadables[downloadable].files ? <div key={index} onClick={
-            e => this.wrapperFunction(openLightbox, this.downloadables[downloadable])}>
-            <img src={require('../../../../images/download-arrow-icon/download@2x.png')} />
-            <p>{this.downloadables[downloadable].title}</p>
+            e => this.wrapperFunction(openLightbox, this.downloadables[downloadable])} className={`${style.downloadLinkWrapper}`}>
+            <DownloadIconImage/>
+            <p className={`${style.downloableText}`}>{this.downloadables[downloadable].title}</p>
           </div> : null
         })
       }}
       renderLightboxContents={() => {
         return <div>
-          <LightboxTitleBannerContentBox title={'Please confirm your order'}>
-            <div>
+          <div className={`${style.lightBoxListWrapper}`}>
+            <LightboxTitleBannerContentBox title={'Confirm Download'}>
+              <p className={`${style.lightBoxListWeight}`}>INCLUDED FILES</p>
               {this.renderFileList()}
-            </div>
-          </LightboxTitleBannerContentBox>
+              <p>Do you wish to continue?</p>
+              <button className={`${style.productListLightBoxButton}`}>Confirm</button>
+              <button className={`${style.productListLightBoxButton} ${style.productListLightBoxButtonRedBorder}`}>Cancel</button>
+            </LightboxTitleBannerContentBox>
+          </div>
         </div>
       }}
       onLightboxClose={() => {
@@ -86,8 +92,7 @@ export default class Downloadables extends Component<Props, State> {
         return undefined
       }}
       fitLightboxToContent
-      fullWidth={true}
-      maxWidth={'500'}
+      maxWidth={'370px'}
     />
   }
 }

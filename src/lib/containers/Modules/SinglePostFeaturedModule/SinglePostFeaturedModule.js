@@ -30,7 +30,7 @@ class SinglePostFeaturedModule extends PostGettingModule {
     if (
       this.state.posts[0]['post_title'] !== prevState.posts[0]['post_title']
     ) {
-      this.postLink = createCPTUrl(this.state.posts[0])
+      this.postLink = createCPTUrl(this.state.posts[0]) || '#'
     }
   }
 
@@ -40,7 +40,7 @@ class SinglePostFeaturedModule extends PostGettingModule {
     }
 
     return (
-      <Link to={this.postLink} replace>
+      <Link to={this.postLink}>
         <div className={`hero-headline ${style.headline}`}>
           {this.props.headline}
         </div>
@@ -56,7 +56,7 @@ class SinglePostFeaturedModule extends PostGettingModule {
     }
 
     return (
-      <Link to={this.postLink} replace>
+      <Link to={this.postLink}>
         <h4 className={style.title}>{post['post_title']}</h4>
       </Link>
     )
@@ -78,7 +78,7 @@ class SinglePostFeaturedModule extends PostGettingModule {
 
   renderArrow () {
     return (
-      <Link to={this.postLink} replace>
+      <Link to={this.postLink}>
         <div className={style.arrowWrapper}>
           <SVGIcon
             className={style.arrow}

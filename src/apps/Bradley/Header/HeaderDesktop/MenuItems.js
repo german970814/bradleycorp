@@ -13,7 +13,7 @@ class MenuItems extends Component {
 
       return (
         <div key={index} className={style.menuItem}>
-          <Link to={removeHostFromUrl(menuItem['url']) || '#'} replace>
+          <Link to={removeHostFromUrl(menuItem['url']) || '#'}>
             <h6 className={style.menuItemLink}>{menuItem['title']}</h6>
           </Link>
         </div>

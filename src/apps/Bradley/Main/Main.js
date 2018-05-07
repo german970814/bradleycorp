@@ -21,11 +21,11 @@ const ProductDetailLoadable = Loadable({
   loading: Loading
 })
 
-const DefaultCPTLandingPageLoadable = Loadable({
+/* const DefaultCPTLandingPageLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/DefaultCPTLandingPage/DefaultCPTLandingPage'),
   loading: Loading
-})
+}) */
 
 const LiteratureAndChipSamplesLoadable = Loadable({
   loader: () =>
@@ -55,17 +55,9 @@ const Main = props => {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
-
       {/* Post Types With Custom Templates */}
       <Route exact path="/post/:slug" component={BlogSinglePostPageLoadable} />
       <Route exact path="/product/:slug" component={ProductDetailLoadable} />
-
-      {/* Other Post Types */}
-      {/* <Route
-              exact
-              path="/:postType/:slug"
-              component={DefaultCPTLandingPageLoadable}
-            /> */}
 
       {/* Specific Custom Pages */}
       <Route
@@ -91,5 +83,16 @@ const Main = props => {
     </Switch>
   )
 }
+
+{
+  /* Other Post Types */
+}
+/*
+<Route
+  exact
+  path="/:postType/:slug"
+  // component={DefaultCPTLandingPageLoadable}
+/>
+*/
 
 export default Main

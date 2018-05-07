@@ -5,7 +5,6 @@ import type {
   ApplicationGalleryPost,
   CPTName
 } from '../../../../lib/types/cpt_types'
-import { Link } from 'react-router-dom'
 import debounce from 'debounce'
 import Media from 'react-media'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../globals'
@@ -13,10 +12,9 @@ import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplat
 import CPTApiClient from '../../../../api/cpt_client'
 import FillColumns from '../../../../lib/components/FillColumns/FillColumns'
 import Filters from './Filters/Filters'
-import ImageFrame from '../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
-import ArrowButton from '../../../../lib/components/ArrowButton/ArrowButton'
 import style from './ApplicationGallery.scss'
+import GalleryItem from './GalleryItem'
 
 const PostType: CPTName = 'application-gallery'
 
@@ -64,7 +62,8 @@ export default class ApplicationGallery extends Component<Props, State> {
     this.state = {
       gallery: [],
       activeFilters: {},
-      loading: true
+      loading: true,
+      hover: false
     }
     this.getApplicationGalleryDebounced = debounce(
       this.getApplicationGallery,
@@ -90,28 +89,16 @@ export default class ApplicationGallery extends Component<Props, State> {
   }
 
   renderGallery () {
-    return this.state.gallery.map((el, idx) => {
-      const pathname = el.post.post_name
-        ? `/application-gallery/${el.post.post_name}`
-        : '#'
-      return (
-        <div key={idx} className={`${style.imageContainer}`}>
-          <Link
-            to={{
-              pathname,
-              state: { post: el }
-            }}>
-            <ImageFrame
-              src={el.meta.app_gallery_img}
-              aspectRatio={180 / 301}
-              aspectRatioTablet={180 / 301}
-              aspectRatioDesktop={180 / 301}
-            />
-            <ArrowButton text={''} link={''} color={'white'} />
-          </Link>
-        </div>
-      )
-    })
+    return this.state.gallery.length ? (
+      this.state.gallery.map((appGallery, idx) => {
+        return <GalleryItem key={idx} applicationGallery={appGallery} />
+      })
+    ) : (
+      <div>
+        <h3>No images match your filter selections</h3>
+        <span>PLEASE TRY AGAIN</span>
+      </div>
+    )
   }
 
   render () {

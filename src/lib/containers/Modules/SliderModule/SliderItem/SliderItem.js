@@ -70,7 +70,7 @@ class SliderItem extends Component {
     }
 
     return (
-      <Link to={`${this.postLink}`} replace>
+      <Link to={`${this.postLink}`}>
         <h2 className={`${style.title} ${this.props.skinClass}`}>
           {post.post['post_title']}
         </h2>
@@ -100,7 +100,7 @@ class SliderItem extends Component {
 
   renderArrow () {
     return (
-      <Link to={`${this.postLink}`} replace>
+      <Link to={`${this.postLink}`}>
         <div className={style.arrowWrapper}>
           <SVGIcon
             className={style.arrow}
