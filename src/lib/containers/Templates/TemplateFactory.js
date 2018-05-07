@@ -6,6 +6,7 @@ import RightSidebarTemplate from './RightSidebarTemplate/RightSidebarTemplate'
 import LeftSidebarTemplate from './LeftSidebarTemplate/LeftSidebarTemplate'
 import FAQTemplate from './LeftSidebarTemplate/FAQTemplate/FAQTemplate'
 import CareersTemplate from './CareersTemplate/CareersTemplate'
+import ProductLandingPageTemplate from './FullWidthTemplate/ProductLandingPageTemplate/ProductLandingPageTemplate'
 import DefaultTemplate from './DefaultTemplate/DefaultTemplate'
 
 type Props = {
@@ -71,6 +72,15 @@ const TemplateFactory = (props: Props): React.Node => {
     case 'careers':
       return (
         <CareersTemplate
+          data={props.data}
+          renderModules={props.renderModules}
+          pagePath={props.pagePath}
+        />
+      )
+
+    case 'product-landing-page':
+      return (
+        <ProductLandingPageTemplate
           data={props.data}
           renderModules={props.renderModules}
           pagePath={props.pagePath}

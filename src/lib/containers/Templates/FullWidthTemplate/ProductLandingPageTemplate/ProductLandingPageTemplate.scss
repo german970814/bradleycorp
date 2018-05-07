@@ -1,0 +1,49 @@
+@import '../../../../../scss/partials/mixins';
+@import '../../../../../scss/partials/layout';
+@import '../../../../../scss/partials/variables';
+
+.productLandingPage {
+  .titleWrapper {
+    @extend %BodyPaddingWithMediaQueries;
+    margin-bottom: 40px;
+    padding-top: 23px;
+    padding-bottom: 23px;
+    background-color: $light-gray;
+    text-align: center;
+
+    h4.title {
+      color: $steel-grey;
+    }
+  }
+
+  .productImageWrapper {
+    @extend %BodyPaddingWithMediaQueries;
+    margin-bottom: 40px;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .description {
+    @extend %BodyPaddingWithMediaQueries;
+    margin-bottom: 40px;
+  }
+
+  .logoWrapper {
+    padding: 60px 50px;
+    width: 100%;
+    height: auto;
+    background-color: $light-gray;
+    box-sizing: border-box;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}

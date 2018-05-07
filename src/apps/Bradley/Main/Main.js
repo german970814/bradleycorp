@@ -83,9 +83,6 @@ const Main = props => {
   )
 }
 
-{
-  /* Other Post Types */
-}
 /*
 <Route
   exact

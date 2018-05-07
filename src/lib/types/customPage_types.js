@@ -38,11 +38,19 @@ type BCorpCareersTemplateData = {
   media_4: string
 }
 
+type BCorpProductLandingPageTemplateData = {
+  title: string,
+  description: string,
+  product_image: string,
+  logo: string
+}
+
 type BCorpMetaboxes = {
   page_hero?: BCorpPageHeroData,
   sidebar_select?: string,
   careers_template?: BCorpCareersTemplateData,
-  faq_category?: string
+  faq_category?: string,
+  product_landing_page?: BCorpProductLandingPageTemplateData
 }
 
 type BCorpPageTemplateData = {
