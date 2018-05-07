@@ -163,17 +163,17 @@ class RightSidebarTemplate extends React.Component<Props, State> {
     // move this out of here
     this._setupSidebarForScroll()
 
-    let scrollTop = 0
+    let scrollTop: number = 0
     if (window.pageYOffset !== undefined) {
-      scrollTop = window.pageYOffset
+      scrollTop = parseInt(window.pageYOffset)
     } else {
       const scrollTopOfThis =
         document.documentElement ||
         (document.body && document.body.parentNode) ||
         document.body
       scrollTop =
-        scrollTopOfThis && scrollTopOfThis !== null
-          ? scrollTopOfThis.scrollTop
+        scrollTopOfThis && scrollTopOfThis !== null && scrollTopOfThis.scrollTop
+          ? parseInt(scrollTopOfThis.scrollTop)
           : 0
     }
     // console.log( scrollTop )
