@@ -3,47 +3,95 @@
 @import '../../../../../scss/partials/variables';
 
 .productLandingPage {
-  .titleWrapper {
-    @extend %BodyPaddingWithMediaQueries;
-    margin-bottom: 40px;
-    padding-top: 23px;
-    padding-bottom: 23px;
-    background-color: $light-gray;
-    text-align: center;
+  .titleImageWrapper {
+    position: relative;
 
-    h4.title {
-      color: $steel-grey;
+    .titleWrapper {
+      @extend %BodyPaddingWithMediaQueries;
+      margin-bottom: 40px;
+      padding-top: 23px;
+      padding-bottom: 23px;
+      background-color: $light-gray;
+      text-align: center;
+
+      @include respond-to(tablet) {
+        margin-bottom: 0;
+        padding-right: calc(33% + 180px);
+        text-align: left;
+      }
+
+      @include respond-to(desktop) {
+        padding-top: 28px;
+        padding-bottom: 28px;
+        padding-right: calc(33% + 250px);
+      }
+
+      h4.title {
+        color: $steel-grey;
+      }
+    }
+
+    .productImageWrapper {
+      @extend %BodyPaddingWithMediaQueries;
+      margin-bottom: 40px;
+      width: 100%;
+      height: auto;
+      box-sizing: border-box;
+
+      @include respond-to(tablet) {
+        position: absolute;
+        left: 66%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        padding: 0;
+        margin: 0;
+        width: auto;
+        max-width: 360px;
+        height: auto;
+      }
+
+      @include respond-to(desktop) {
+        max-width: 500px;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+      }
     }
   }
 
-  .productImageWrapper {
-    @extend %BodyPaddingWithMediaQueries;
-    margin-bottom: 40px;
-    width: 100%;
-    height: auto;
-    box-sizing: border-box;
-
-    img {
-      width: 100%;
-      height: auto;
-    }
-  }
-
-  .description {
-    @extend %BodyPaddingWithMediaQueries;
-    margin-bottom: 40px;
-  }
-
-  .logoWrapper {
-    padding: 60px 50px;
-    width: 100%;
-    height: auto;
+  .descriptionLogoWrapper {
     background-color: $light-gray;
-    box-sizing: border-box;
 
-    img {
-      width: 100%;
+    .description {
+      @extend %BodyPaddingWithMediaQueries;
+      margin-bottom: 40px;
+      background-color: white;
+
+      @include respond-to(tablet) {
+        padding-top: 75px;
+        padding-bottom: 75px;
+      }
+    }
+
+    .logoWrapper {
+      padding: 60px 50px;
       height: auto;
+      box-sizing: border-box;
+
+      @include respond-to(tablet) {
+        padding: 90px 40px;
+      }
+
+      @include respond-to(desktop) {
+        padding: 120px 75px;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+      }
     }
   }
 }

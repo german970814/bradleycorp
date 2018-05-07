@@ -2,6 +2,7 @@
 import * as React from 'react'
 import type { BCorpPageTemplateData } from '../../../../types/customPage_types'
 import FullWidthTemplate from '../FullWidthTemplate'
+import VerticalAlignHelper from '../../../../components/VerticalAlignHelper/VerticalAlignHelper'
 import style from './ProductLandingPageTemplate.scss'
 
 type Props = {
@@ -19,7 +20,7 @@ class ProductLandingPageTemplate extends React.Component<Props> {
 
     return (
       logo && (
-        <div className={style.logoWrapper}>
+        <div className={`col1 col3-tablet ${style.logoWrapper}`}>
           <img src={logo} />
         </div>
       )
@@ -32,7 +33,13 @@ class ProductLandingPageTemplate extends React.Component<Props> {
       this.props.data.metaboxes.product_landing_page &&
       this.props.data.metaboxes.product_landing_page.description
 
-    return description && <div className={style.description}>{description}</div>
+    return (
+      description && (
+        <div className={`col1 col3x2-tablet ${style.description}`}>
+          {description}
+        </div>
+      )
+    )
   }
 
   renderProductImage () {
@@ -57,7 +64,7 @@ class ProductLandingPageTemplate extends React.Component<Props> {
       this.props.data.metaboxes.product_landing_page.title
 
     return (
-      <div className={style.titleWrapper}>
+      <div className={`col1 ${style.titleWrapper}`}>
         <h4 className={style.title}>{title}</h4>
       </div>
     )
@@ -65,11 +72,15 @@ class ProductLandingPageTemplate extends React.Component<Props> {
 
   renderProductLandingPageArea () {
     return (
-      <div className={style.productLandingPage}>
-        {this.renderTitle()}
-        {this.renderProductImage()}
-        {this.renderDescription()}
-        {this.renderLogo()}
+      <div className={`row ${style.productLandingPage}`}>
+        <div className={`col1 ${style.titleImageWrapper}`}>
+          {this.renderTitle()}
+          {this.renderProductImage()}
+        </div>
+        <div className={`col1 ${style.descriptionLogoWrapper}`}>
+          {this.renderDescription()}
+          {this.renderLogo()}
+        </div>
       </div>
     )
   }

@@ -74,6 +74,12 @@
     }
   }
 
+  .col3x2-tablet {
+    @include respond-to(tablet) {
+      @include col(3 / 2);
+    }
+  }
+
   .col4-tablet {
     @include respond-to(tablet) {
       @include col(4);
