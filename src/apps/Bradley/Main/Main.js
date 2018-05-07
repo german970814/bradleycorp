@@ -61,11 +61,11 @@ const Main = props => {
       <Route exact path="/product/:slug" component={ProductDetailLoadable} />
 
       {/* Other Post Types */}
-      {/*<Route
+      {/* <Route
               exact
               path="/:postType/:slug"
               component={DefaultCPTLandingPageLoadable}
-            />*/}
+            /> */}
 
       {/* Specific Custom Pages */}
       <Route
