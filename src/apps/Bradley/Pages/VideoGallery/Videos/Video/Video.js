@@ -14,12 +14,28 @@ type State = {
   time: number
 }
 
+type YouTubeIframe = {
+  requestFullScreen: () => void,
+  mozRequestFullScreen: () => void,
+  webkitRequestFullScreen: () => void,
+  click: () => void,
+  addEventListener: (event: string, cb: () => void) => void
+}
+
 type YouTubeAPI = {
   playVideo: () => void,
   pauseVideo: () => void,
   getCurrentTime: () => number,
   seekTo: (time: number) => void,
+  getIframe: () => YouTubeIframe,
   ready: boolean
+}
+
+const opts = {
+  playerVars: {
+    modestbranding: 1,
+    showinfo: 0
+  }
 }
 
 class Video extends React.Component<Props, State> {
@@ -36,12 +52,7 @@ class Video extends React.Component<Props, State> {
     }
 
     this.url = this.props.video.meta.video_gallery_video
-    this.opts = {
-      playerVars: {
-        modestbranding: 1,
-        showinfo: 0
-      }
-    }
+    this.opts = opts
   }
 
   render () {
@@ -51,26 +62,24 @@ class Video extends React.Component<Props, State> {
           return (
             <div className={`col1 col2-tablet ${style.videoWrapper}`}>
               <FixedAspectRatioBox>
-                <div className={style.videoOverlayWrapper}>
-                  <BCorpVideo
-                    className={style.video}
-                    url={this.url}
-                    youtubeProps={{
-                      onReady: event => {
-                        this.youtubeAPIClosed = event.target
-                        this.youtubeAPIClosed.ready = true
-                      },
-                      onPlay: event => {
-                        if (this.youtubeAPIClosed) {
-                          this.youtubeAPIClosed.pauseVideo()
-                          openLightbox()
-                        }
-                      },
-                      opts: this.opts
-                    }}
-                    noVimeo
-                  />
-                </div>
+                <BCorpVideo
+                  className={style.video}
+                  url={this.url}
+                  youtubeProps={{
+                    onReady: event => {
+                      this.youtubeAPIClosed = event.target
+                      this.youtubeAPIClosed.ready = true
+                    },
+                    onPlay: event => {
+                      if (this.youtubeAPIClosed) {
+                        this.youtubeAPIClosed.pauseVideo()
+                        openLightbox()
+                      }
+                    },
+                    opts: this.opts
+                  }}
+                  noVimeo
+                />
               </FixedAspectRatioBox>
               <h5 className={style.title}>
                 {this.props.video.post.post_title}
@@ -115,4 +124,6 @@ class Video extends React.Component<Props, State> {
   }
 }
 
+export type { YouTubeAPI, YouTubeIframe }
+export { opts }
 export default Video
