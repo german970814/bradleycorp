@@ -37,7 +37,7 @@ type HTMLParser2Node = {
    * The text content, if the type is text
    */
   data: string
-}
+};
 
 class ContentTransformer {
   node: HTMLParser2Node
@@ -54,7 +54,10 @@ class ContentTransformer {
     } else if (this.node.type === 'text') {
       return this.transformText()
     } else {
-      return this.node
+      // return the node if it is a valid react element
+      return React.isValidElement(this.node)
+        ? this.node
+        : null
     }
   }
 
