@@ -2,7 +2,6 @@
 import * as React from 'react'
 import type { BCorpPageTemplateData } from '../../../../types/customPage_types'
 import FullWidthTemplate from '../FullWidthTemplate'
-import VerticalAlignHelper from '../../../../components/VerticalAlignHelper/VerticalAlignHelper'
 import style from './ProductLandingPageTemplate.scss'
 
 type Props = {
@@ -20,7 +19,7 @@ class ProductLandingPageTemplate extends React.Component<Props> {
 
     return (
       logo && (
-        <div className={`col1 col3-tablet ${style.logoWrapper}`}>
+        <div className={`col1 ${style.logoWrapper}`}>
           <img src={logo} />
         </div>
       )
@@ -35,9 +34,7 @@ class ProductLandingPageTemplate extends React.Component<Props> {
 
     return (
       description && (
-        <div className={`col1 col3x2-tablet ${style.description}`}>
-          {description}
-        </div>
+        <div className={`col1 ${style.description}`}>{description}</div>
       )
     )
   }

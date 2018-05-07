@@ -11,6 +11,7 @@
       margin-bottom: 40px;
       padding-top: 23px;
       padding-bottom: 23px;
+      max-width: none;
       background-color: $light-gray;
       text-align: center;
 
@@ -43,6 +44,7 @@
         left: 66%;
         top: 50%;
         transform: translate(-50%, -50%);
+        z-index: 10;
         padding: 0;
         margin: 0;
         width: auto;
@@ -62,16 +64,26 @@
   }
 
   .descriptionLogoWrapper {
-    background-color: $light-gray;
+    position: relative;
+
+    @include respond-to(tablet) {
+      padding-right: (100 / 3) + %;
+    }
 
     .description {
       @extend %BodyPaddingWithMediaQueries;
+      max-width: none;
       margin-bottom: 40px;
-      background-color: white;
 
       @include respond-to(tablet) {
+        margin-bottom: 0;
         padding-top: 75px;
         padding-bottom: 75px;
+      }
+
+      @include respond-to(desktop) {
+        padding-top: 130px;
+        padding-bottom: 130px;
       }
     }
 
@@ -79,18 +91,35 @@
       padding: 60px 50px;
       height: auto;
       box-sizing: border-box;
+      background-color: $light-gray;
 
       @include respond-to(tablet) {
-        padding: 90px 40px;
-      }
-
-      @include respond-to(desktop) {
-        padding: 120px 75px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: (100 / 3) + %;
       }
 
       img {
         width: 100%;
         height: auto;
+
+        @include respond-to(tablet) {
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 100%;
+          padding-left: 40px;
+          padding-right: 40px;
+          box-sizing: border-box;
+        }
+
+        @include respond-to(desktop) {
+          padding-left: 75px;
+          padding-right: 75px;
+        }
       }
     }
   }
