@@ -84,9 +84,7 @@ const Main = props => {
   )
 }
 
-{
-  /* Other Post Types */
-}
+/* Other Post Types */
 /*
 <Route
   exact
