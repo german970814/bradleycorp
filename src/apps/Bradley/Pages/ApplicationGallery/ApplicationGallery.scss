@@ -14,6 +14,30 @@
         
         margin-bottom: 60px;
 
+        h5 {
+            padding-bottom: 5px;
+            padding-right: 10px;
+            font-family: 'CentraleSansPro';
+            font-size: 12.5px;
+            font-weight: 500;
+            color: #a7a9ac;
+            text-align: left;
+            line-height: normal;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        & > div > div {
+            margin-bottom: 35px;
+        }
+
+        & > div > div label {
+            color: #2f3d6f;
+            font-family: 'Helvetica';
+            font-size: 14px;
+            font-weight: normal;
+        }
+
     }
 }
 
