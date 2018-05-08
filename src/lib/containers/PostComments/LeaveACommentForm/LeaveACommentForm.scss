@@ -61,6 +61,10 @@
     @include respond-to(tablet) {
       margin-bottom: 30px;
       padding-right: 11px;
+
+      &::after {
+        right: 20px;
+      }
     }
   }
 

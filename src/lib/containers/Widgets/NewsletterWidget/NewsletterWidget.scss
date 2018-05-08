@@ -1,5 +1,6 @@
-@import "../../../../scss/partials/variables";
-@import "../../../../scss/partials/mixins";
+@import '../../../../scss/partials/variables';
+@import '../../../../scss/partials/mixins';
+@import '../../../../scss/partials/helpers';
 
 .description {
   margin-bottom: 20px;
@@ -8,6 +9,7 @@
 }
 
 .input {
+  @extend %removeBrowserAppearance;
   display: block;
   box-sizing: border-box;
   margin-bottom: 20px !important;
