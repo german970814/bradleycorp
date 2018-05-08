@@ -270,7 +270,7 @@ class ScrollableList extends Component {
   renderScroller () {
     return (
       <div className={this.props.wrapperClassName}>
-        {(this.props.numberToDisplay < this.props.numberOfPosts) &&
+        {this.props.numberToDisplay < this.props.numberOfPosts &&
           this.renderButtonUp()}
 
         <ScrollableListTrack
@@ -287,18 +287,26 @@ class ScrollableList extends Component {
             this.renderChildren(elementDimension, opacity)
           }
         </ScrollableListTrack>
-        {(this.props.numberToDisplay < this.props.numberOfPosts) &&
-          this.renderSliderNavigation()}
+        {this.renderSliderNavigation()}
       </div>
     )
   }
 
   renderSliderNavigation () {
-    return (<React.Fragment>
-      {this.renderButtonDown()}
-      {this.renderButtonsBelow()}
-      {this.renderPositionCircles()}
-    </React.Fragment>)
+    if (
+      this.props.numberOfPosts &&
+      this.props.numberToDisplay > this.props.numberOfPosts
+    ) {
+      return
+    }
+
+    return (
+      <React.Fragment>
+        {this.renderButtonDown()}
+        {this.renderButtonsBelow()}
+        {this.renderPositionCircles()}
+      </React.Fragment>
+    )
   }
 
   render () {

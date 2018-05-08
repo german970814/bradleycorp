@@ -6,6 +6,8 @@ import { MOBILEMAXWIDTH } from '../../../../globals'
 import FullWidthTemplate from '../FullWidthTemplate/FullWidthTemplate'
 import LeftSidebarTemplate from '../LeftSidebarTemplate/LeftSidebarTemplate'
 import CTAModule from '../../Modules/CTAModule/CTAModule'
+import ImageFrame from '../../../components/FixedAspectRatioBox/ImageFrame/ImageFrame'
+import FixedAspectRatioBox from '../../../components/FixedAspectRatioBox/FixedAspectRatioBox'
 import ScrollableList from '../../ScrollableList/ScrollableList'
 import style from './CareersTemplate.scss'
 
@@ -62,13 +64,14 @@ class CareersTemplate extends React.Component<Props> {
               <div className={'row'}>
                 {media.map((media, index) => {
                   return (
-                    <div
-                      key={index}
-                      style={{
-                        backgroundImage: `url(${media})`
-                      }}
-                      className={`col2-tablet col4-desktop ${style.image}`}
-                    />
+                    <div key={index} className={`col2-tablet col4-desktop`}>
+                      <ImageFrame
+                        src={media}
+                        aspectRatio={200 / 385}
+                        aspectRatioTablet={200 / 385}
+                        aspectRatioDesktop={250 / 320}
+                      />
+                    </div>
                   )
                 })}
               </div>
@@ -88,13 +91,14 @@ class CareersTemplate extends React.Component<Props> {
         wrapperClassName={style.slider}>
         {media.map((media, index) => {
           return (
-            <div
-              key={index}
-              style={{
-                backgroundImage: `url(${media})`
-              }}
-              className={`${style.imageInSlider}`}
-            />
+            <FixedAspectRatioBox key={index} aspectRatio={180 / 320}>
+              <div
+                style={{
+                  backgroundImage: `url(${media})`
+                }}
+                className={`${style.imageInSlider}`}
+              />
+            </FixedAspectRatioBox>
           )
         })}
       </ScrollableList>

@@ -1,4 +1,5 @@
 @import '../../../scss/partials/variables';
+@import '../../../scss/partials/helpers';
 @import '../../../scss/partials/text-styles';
 @import '../../../scss/partials/mixins';
 
@@ -8,6 +9,7 @@ $tabletGapBetweenFilters: 24px;
 
 %inputStyle {
   @extend %body;
+  @extend %removeBrowserAppearance;
   width: 100%;
   border: solid $borderThickness $silver;
   border-radius: $borderRadius;
@@ -16,8 +18,6 @@ $tabletGapBetweenFilters: 24px;
   color: $steel-grey;
   box-sizing: border-box;
   cursor: pointer;
-  -moz-appearance: none;
-  -webkit-appearance: none;
 }
 
 %downArrow {
@@ -192,6 +192,7 @@ h5.title {
   input,
   textarea {
     @extend %body;
+    @extend %removeBrowserAppearance;
     border: 1px solid $silver;
     padding: 0 10px;
     width: 100%;
@@ -214,8 +215,7 @@ h5.title {
     margin-bottom: 6px;
 
     input {
-      -moz-appearance: none;
-      -webkit-appearance: none;
+      @extend %removeBrowserAppearance;
       border: 1px $silver solid;
       border-radius: 4px;
       width: 12px;

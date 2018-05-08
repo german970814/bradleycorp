@@ -1,12 +1,20 @@
 @import '../../../../scss/partials/mixins';
 @import '../../../../scss/partials/variables';
 
-.RightSidebarTemplate {
+$borderShadowSize: 25px;
 
+.RightSidebarTemplate {
   .sidebar {
     top: 0px;
     position: relative;
     overflow: auto;
+
+    // need this to make sure box shadows still show
+    padding-left: $borderShadowSize;
+    margin-left: -$borderShadowSize;
+    padding-right: $borderShadowSize;
+    margin-right: -$borderShadowSize;
+    box-sizing: content-box;
 
     .innerSidebar {
       // position: absolute;
@@ -14,12 +22,19 @@
       top: 40px;
       display: block;
       overflow: auto;
+
+      // need this to make sure box shadows still show
+      padding-left: $borderShadowSize;
+      margin-left: -$borderShadowSize;
+      padding-right: $borderShadowSize;
+      margin-right: -$borderShadowSize;
+      box-sizing: content-box;
     }
 
     // min-height: 1500px;
     &.sidebarFixed {
       /* overflow: auto; */
-      transition: opacity .4s ease;
+      transition: opacity 0.4s ease;
       // height: (90vh) !important;
 
       .innerSidebar {
@@ -31,15 +46,14 @@
 
     &.attachToBottom {
       position: relative;
-     .innerSidebar {
+      .innerSidebar {
         position: absolute;
         bottom: 0 !important;
-        left: 0 !important;
+        left: $borderShadowSize !important;
         top: initial;
         // position: absolute;
       }
     }
-
   }
 
   .content {

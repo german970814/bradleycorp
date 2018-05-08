@@ -9,13 +9,15 @@ import { filterDefault } from '../VideoGallery'
 import { sortIntoRows } from '../../../../../lib/bcorpJSX'
 import Loading from '../../../../../lib/components/Loading/Loading'
 import Video from './Video/Video'
+import VideoMobile from './Video/VideoMobile/VideoMobile'
 import CPTApiClient from '../../../../../api/cpt_client'
 import style from './Videos.scss'
 
 const postsPerPage: number = 20
 
 type Props = {
-  filters: FiltersType
+  filters: FiltersType,
+  isMobile: boolean
 }
 
 type VideoType = BCorpPost & { post: VideoGalleryPost }
@@ -90,7 +92,9 @@ class Videos extends React.Component<Props, State> {
 
       // skip vimeo videos and videos without url
       if (!vimeoParser(url) && url !== '') {
-        videos = [...videos, <Video key={index} video={video} />]
+        this.props.isMobile
+          ? (videos = [...videos, <VideoMobile key={index} video={video} />])
+          : (videos = [...videos, <Video key={index} video={video} />])
       }
     })
 
