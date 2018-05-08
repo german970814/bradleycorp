@@ -5,7 +5,7 @@ import type { Options } from './Filters'
 import type { CheckboxObject } from '../../../../../lib/components/BCorpFilterField/BCorpCheckboxField'
 import type { FiltersType } from '../ApplicationGallery'
 import Collapsible from 'react-collapsible'
-import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../../globals'
+import { MOBILEMAXWIDTH } from '../../../../../globals'
 import Media from 'react-media'
 import style from './Filters.scss'
 
@@ -65,7 +65,6 @@ class ProductCheck extends React.Component<Props, State> {
         ) : this.renderCheckbox()
       }
     </Media>
-    
   }
 }
 
