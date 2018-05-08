@@ -2,8 +2,6 @@
 import * as React from 'react'
 import type { BCorpTermsResponse } from '../../../../lib/types/term_types'
 import CPTApiClient from '../../../../api/cpt_client'
-import Media from 'react-media'
-import { MOBILEMAXWIDTH } from '../../../../globals'
 import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import Videos from './Videos/Videos'
 import Filters from './Filters/Filters'
@@ -73,11 +71,7 @@ class VideoGallery extends React.Component<Props, State> {
                 filterOptions={this.state.filterOptions}
                 updateFilters={this.updateFilters.bind(this)}
               />
-              <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
-                {match => (
-                  <Videos filters={this.state.filters} isMobile={match} />
-                )}
-              </Media>
+              <Videos filters={this.state.filters} />
             </div>
           )
         }}
