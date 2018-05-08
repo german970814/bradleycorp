@@ -45,10 +45,10 @@ class Filters extends React.Component<Props, State> {
     return (
       <React.Fragment>
         {Object.keys(this.state.filters).map((el, ind) => {
-          if ( 'app_gallery_product_tag' == el
-            || 'app_gallery_tech_info_tag' == el
-            || 'app_gallery_bim_revit_tag' == el ) {
-            return null;
+          if (el === 'app_gallery_product_tag' ||
+            el === 'app_gallery_tech_info_tag' ||
+            el === 'app_gallery_bim_revit_tag') {
+            return null
           }
 
           return (
