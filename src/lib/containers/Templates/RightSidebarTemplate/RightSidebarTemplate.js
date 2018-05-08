@@ -141,17 +141,19 @@ class RightSidebarTemplate extends React.Component<Props, State> {
       contentNode.offsetTop -
       window.innerHeight
 
-    if (boundingClientRect.height > contentBoundingClientRect.height) {
+    if (contentBoundingClientRect.height < boundingClientRect.height) {
       contentNode.style.minHeight = `${boundingClientRect.height}px`
       sidebarNode.style.minHeight = `${boundingClientRect.height}px`
     } else {
-      sidebarNode.style.minHeight = `${contentBoundingClientRect.height}px'`
+      sidebarNode.style.minHeight = `${contentBoundingClientRect.height}px`
     }
 
     // set the inner sidebar size and fixed position to the left of the window
     if (window.innerWidth > TABLETMAXWIDTH) {
-      innerSidebarNode.style.width = `${boundingClientRect.width}px`
-      innerSidebarNode.style.left = boundingClientRect.left + 'px'
+      // note the 50 to cancel out effects of adding extra padding
+      // to be able to still see the border shadow
+      innerSidebarNode.style.width = `${boundingClientRect.width - 50}px`
+      innerSidebarNode.style.left = boundingClientRect.left + 25 + 'px'
     } else {
       sidebarNode.style.height = ''
       innerSidebarNode.style.width = ''
@@ -163,17 +165,17 @@ class RightSidebarTemplate extends React.Component<Props, State> {
     // move this out of here
     this._setupSidebarForScroll()
 
-    let scrollTop = 0
+    let scrollTop: number = 0
     if (window.pageYOffset !== undefined) {
-      scrollTop = window.pageYOffset
+      scrollTop = parseInt(window.pageYOffset)
     } else {
       const scrollTopOfThis =
         document.documentElement ||
         (document.body && document.body.parentNode) ||
         document.body
       scrollTop =
-        scrollTopOfThis && scrollTopOfThis !== null
-          ? scrollTopOfThis.scrollTop
+        scrollTopOfThis && scrollTopOfThis !== null && scrollTopOfThis.scrollTop
+          ? parseInt(scrollTopOfThis.scrollTop)
           : 0
     }
     // console.log( scrollTop )
