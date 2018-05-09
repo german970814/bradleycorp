@@ -16,10 +16,11 @@ class CPTApiClient {
 
   getLatest (
     numberPosts: number = 0,
-    paged?: number
+    paged?: number,
+    offset?: number
   ): AxiosPromise<Array<BCorpPost>> {
     const url = `${api.baseURL}${this.cptName}`
-    const params = { posts_per_page: numberPosts, paged }
+    const params = { posts_per_page: numberPosts, paged, offset }
 
     return axios.get(url, { params })
   }
@@ -51,14 +52,16 @@ class CPTApiClient {
     taxName: string,
     termSlug: string,
     postsPerPage?: number,
-    paged?: number
+    paged?: number,
+    offset?: number
   ): AxiosPromise<Array<BCorpPost>> {
     const url = `${api.baseURL}${this.cptName}`
     const params = {
       tax_name: taxName,
       term_slug: termSlug,
       posts_per_page: postsPerPage,
-      paged
+      paged,
+      offset
     }
 
     return axios.get(url, { params })
@@ -68,14 +71,16 @@ class CPTApiClient {
     taxName: string,
     termSlugArray: Array<string>,
     postsPerPage?: number,
-    paged?: number
+    paged?: number,
+    offset?: number
   ): AxiosPromise<Array<BCorpPost>> {
     const url = `${api.baseURL}${this.cptName}`
     const params = {
       tax_name: taxName,
       term_slug_array: JSON.stringify(termSlugArray),
       posts_per_page: postsPerPage,
-      paged
+      paged,
+      offset
     }
 
     return axios.get(url, { params })
@@ -87,7 +92,8 @@ class CPTApiClient {
     },
     relation: 'AND' | 'OR',
     postsPerPage?: number,
-    paged?: number
+    paged?: number,
+    offset?: number
   ): AxiosPromise<Array<BCorpPost>> {
     const url = `${api.baseURL}${this.cptName}`
     const params = {
@@ -96,7 +102,8 @@ class CPTApiClient {
       ),
       relation,
       posts_per_page: postsPerPage,
-      paged
+      paged,
+      offset
     }
 
     return axios.get(url, { params })
