@@ -18,10 +18,14 @@ type Props = {
   filters: FiltersType
 }
 
+/**
+ * On the fly HOC just to set up the LoadMore pagination component
+ * and inject its' state and methods into our actual Videos component
+ */
 class Videos extends React.Component<Props> {
   getPosts: GetPostsFunctionType
 
-  getPosts ({ postsPerPage, paged }: GetPostsArgs) {
+  getPosts ({ postsPerPage, paged, offset }: GetPostsArgs) {
     const filters = this.getFiltersFormattedForRequest()
 
     const client = new CPTApiClient('video-gallery')
@@ -29,7 +33,8 @@ class Videos extends React.Component<Props> {
       filters,
       'OR',
       postsPerPage,
-      paged
+      paged,
+      offset
     )
   }
 
@@ -40,7 +45,9 @@ class Videos extends React.Component<Props> {
           posts,
           postsPerPage,
           paged,
+          offset,
           canLoadMore,
+          shouldDisplayPost,
           loadNextPage,
           reset
         }: ChildFunctionArgs) => {
@@ -50,7 +57,9 @@ class Videos extends React.Component<Props> {
               posts={posts}
               postsPerPage={postsPerPage}
               paged={paged}
+              offset={offset}
               canLoadMore={canLoadMore}
+              shouldDisplayPost={shouldDisplayPost}
               loadNextPage={loadNextPage}
               reset={reset}
             />
@@ -80,6 +89,10 @@ class Videos extends React.Component<Props> {
 
 type VideosInnerProps = ChildFunctionArgs & { filters: FiltersType }
 
+/**
+ * Our actual Videos component where we add the render logic and
+ * put the pagination methods to use
+ */
 class VideosInner extends React.Component<VideosInnerProps> {
   componentWillReceiveProps (nextProps: VideosInnerProps) {
     if (this.shouldResendRequest(nextProps)) {
@@ -98,10 +111,9 @@ class VideosInner extends React.Component<VideosInnerProps> {
       // although we may have more videos,
       // we only show the ones for the current page
       //
-      if (index >= this.props.postsPerPage * this.props.paged) {
+      if (!this.props.shouldDisplayPost(index)) {
         return
       }
-      //
 
       const url = video.meta.video_gallery_video
         ? video.meta.video_gallery_video
@@ -113,14 +125,19 @@ class VideosInner extends React.Component<VideosInnerProps> {
       }
     })
 
+    console.log('displaying', videos.length)
+
     return sortIntoRows(videos, 2)
   }
 
   renderLoadMoreButton () {
+    // only render it if we actually have more to load
     return (
-      <button className={style.loadMore} onClick={this.props.loadNextPage}>
-        {'LOAD MORE'}
-      </button>
+      this.props.canLoadMore && (
+        <button className={style.loadMore} onClick={this.props.loadNextPage}>
+          {'LOAD MORE'}
+        </button>
+      )
     )
   }
 
@@ -128,7 +145,7 @@ class VideosInner extends React.Component<VideosInnerProps> {
     return (
       <div className={style.wrapper}>
         <div className={`row ${style.videos}`}>{this.renderVideos()}</div>
-        {this.props.canLoadMore && this.renderLoadMoreButton()}
+        {this.renderLoadMoreButton()}
       </div>
     )
   }

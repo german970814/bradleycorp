@@ -68,6 +68,11 @@ const Main = props => {
       <Route exact path="/video-gallery" component={VideoGalleryLoadable} />
       <Route
         exact
+        path="/video-gallery/:page"
+        component={VideoGalleryLoadable}
+      />
+      <Route
+        exact
         path="/application-gallery"
         component={ApplicationGalleryLoadable}
       />
