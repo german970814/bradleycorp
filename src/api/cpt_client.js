@@ -2,6 +2,7 @@
 import type { CPTName } from '../lib/types/cpt_types'
 import type { AxiosPromise } from 'axios'
 import type { BCorpPost } from '../lib/types/post_types'
+import type { DateQuery } from '../lib/types/query_types'
 import axios from 'axios'
 import api from './index'
 
@@ -17,10 +18,16 @@ class CPTApiClient {
   getLatest (
     numberPosts: number = 0,
     paged?: number,
-    offset?: number
+    offset?: number,
+    dateQuery?: DateQuery
   ): AxiosPromise<Array<BCorpPost>> {
     const url = `${api.baseURL}${this.cptName}`
-    const params = { posts_per_page: numberPosts, paged, offset }
+    const params = {
+      posts_per_page: numberPosts,
+      paged,
+      offset,
+      date_query: dateQuery
+    }
 
     return axios.get(url, { params })
   }
@@ -53,7 +60,8 @@ class CPTApiClient {
     termSlug: string,
     postsPerPage?: number,
     paged?: number,
-    offset?: number
+    offset?: number,
+    dateQuery?: DateQuery
   ): AxiosPromise<Array<BCorpPost>> {
     const url = `${api.baseURL}${this.cptName}`
     const params = {
@@ -61,7 +69,8 @@ class CPTApiClient {
       term_slug: termSlug,
       posts_per_page: postsPerPage,
       paged,
-      offset
+      offset,
+      date_query: dateQuery
     }
 
     return axios.get(url, { params })
@@ -72,7 +81,8 @@ class CPTApiClient {
     termSlugArray: Array<string>,
     postsPerPage?: number,
     paged?: number,
-    offset?: number
+    offset?: number,
+    dateQuery?: DateQuery
   ): AxiosPromise<Array<BCorpPost>> {
     const url = `${api.baseURL}${this.cptName}`
     const params = {
@@ -80,7 +90,8 @@ class CPTApiClient {
       term_slug_array: JSON.stringify(termSlugArray),
       posts_per_page: postsPerPage,
       paged,
-      offset
+      offset,
+      date_query: dateQuery
     }
 
     return axios.get(url, { params })
@@ -93,7 +104,8 @@ class CPTApiClient {
     relation: 'AND' | 'OR',
     postsPerPage?: number,
     paged?: number,
-    offset?: number
+    offset?: number,
+    dateQuery?: DateQuery
   ): AxiosPromise<Array<BCorpPost>> {
     const url = `${api.baseURL}${this.cptName}`
     const params = {
@@ -103,7 +115,8 @@ class CPTApiClient {
       relation,
       posts_per_page: postsPerPage,
       paged,
-      offset
+      offset,
+      date_query: dateQuery
     }
 
     return axios.get(url, { params })
