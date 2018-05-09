@@ -5,6 +5,7 @@ import FullWidthTemplate from './FullWidthTemplate/FullWidthTemplate'
 import RightSidebarTemplate from './RightSidebarTemplate/RightSidebarTemplate'
 import LeftSidebarTemplate from './LeftSidebarTemplate/LeftSidebarTemplate'
 import FAQTemplate from './LeftSidebarTemplate/FAQTemplate/FAQTemplate'
+import NewsTemplate from './LeftSidebarTemplate/NewsTemplate/NewsTemplate'
 import CareersTemplate from './CareersTemplate/CareersTemplate'
 import ProductLandingPageTemplate from './FullWidthTemplate/ProductLandingPageTemplate/ProductLandingPageTemplate'
 import DefaultTemplate from './DefaultTemplate/DefaultTemplate'
@@ -68,6 +69,9 @@ const TemplateFactory = (props: Props): React.Node => {
 
     case 'faq':
       return <FAQTemplate data={props.data} />
+
+    case 'news':
+      return <NewsTemplate data={props.data} />
 
     case 'careers':
       return (

@@ -150,7 +150,7 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
       const page = this.props.match.params.page
         ? parseInt(this.props.match.params.page) + 1
         : this.state.paged
-      this.props.history.replace(`${root}/${page}`)
+      this.props.history.push(`${root}/${page}`)
     }
   }
 

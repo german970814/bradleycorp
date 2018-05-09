@@ -36,7 +36,8 @@ type BCorpMeta = {
     color: string,
     market: string,
     shape: string
-  }
+  },
+  news_category?: string
 }
 
 type BCorpPost = {

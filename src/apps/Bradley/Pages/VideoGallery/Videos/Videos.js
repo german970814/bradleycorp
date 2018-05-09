@@ -125,8 +125,6 @@ class VideosInner extends React.Component<VideosInnerProps> {
       }
     })
 
-    console.log('displaying', videos.length)
-
     return sortIntoRows(videos, 2)
   }
 
