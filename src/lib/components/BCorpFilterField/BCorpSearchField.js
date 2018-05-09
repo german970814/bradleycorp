@@ -10,7 +10,8 @@ type Props = {
    */
   handleSubmit: string => void,
   title?: string,
-  className?: string
+  className?: string,
+  placeholder?: string
 }
 
 type State = {
@@ -61,6 +62,7 @@ class BCorpSearchField extends React.Component<Props, State> {
             value={this.state.value || ''}
             onChange={this.handleChange.bind(this)}
             type={'text'}
+            placeholder={this.props.placeholder || ''}
           />
           <div
             className={style.iconContainer}

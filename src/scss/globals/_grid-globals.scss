@@ -120,6 +120,12 @@
     }
   }
 
+  .col2-desktop {
+    @include respond-to(desktop) {
+      @include col(2);
+    }
+  }
+
   .col3-desktop {
     @include respond-to(desktop) {
       @include col(3);

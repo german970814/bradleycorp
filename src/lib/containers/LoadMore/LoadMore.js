@@ -223,6 +223,7 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
       return this.setState({ posts, loading: false })
     } catch (error) {
       console.log(error)
+      this.setState({ loading: false })
     }
   }
 

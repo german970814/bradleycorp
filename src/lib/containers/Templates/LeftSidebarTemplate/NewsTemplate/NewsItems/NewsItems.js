@@ -73,7 +73,7 @@ class NewsItemsInner extends React.Component<InnerProps> {
 
     return this.props.posts.map((post, index) => {
       if (this.props.shouldDisplayPost(index)) {
-        return <NewsItem post={post} />
+        return <NewsItem key={index} post={post} />
       }
     })
   }

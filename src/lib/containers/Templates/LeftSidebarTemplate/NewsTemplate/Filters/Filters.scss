@@ -1,0 +1,34 @@
+@import '../../../../../../scss/partials/mixins';
+
+.filters {
+  .searchWrapper {
+    padding-right: 10px;
+
+    .search {
+      width: 100%;
+
+      @include respond-to(tablet) {
+        padding-left: 0;
+      }
+    }
+  }
+
+  .yearWrapper {
+    padding-left: 10px;
+
+    .year {
+      float: right;
+      width: 100%;
+      max-width: 70px;
+
+      &::after,
+      &::before {
+        right: 10px;
+      }
+
+      @include respond-to(tablet) {
+        padding-right: 0;
+      }
+    }
+  }
+}

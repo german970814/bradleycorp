@@ -6,6 +6,7 @@ import BCorpSelectField from '../../../../../components/BCorpFilterField/BCorpSe
 import style from './Filters.scss'
 
 type Props = {
+  title: string,
   filters: FiltersType,
   updateFilters: (filters: FiltersType) => void,
   yearOptions: {
@@ -30,30 +31,35 @@ class Filters extends React.Component<Props> {
 
   renderYear () {
     return (
-      <BCorpSelectField
-        defaultOptionId={0}
-        defaultOptionName={'All'}
-        options={this.props.yearOptions}
-        filterState={this.props.filters.year}
-        handleChange={this.updateYearFilter.bind(this)}
-        className={style.year}
-      />
+      <div className={`col4 col2-desktop ${style.yearWrapper}`}>
+        <BCorpSelectField
+          defaultOptionId={0}
+          defaultOptionName={'All'}
+          options={this.props.yearOptions}
+          filterState={this.props.filters.year}
+          handleChange={this.updateYearFilter.bind(this)}
+          className={style.year}
+        />
+      </div>
     )
   }
 
   renderSearch () {
     return (
-      <BCorpSearchField
-        filterState={this.props.filters.search}
-        handleSubmit={this.updateSearchFilter.bind(this)}
-        className={style.search}
-      />
+      <div className={`col4x3 col2-desktop ${style.searchWrapper}`}>
+        <BCorpSearchField
+          filterState={this.props.filters.search}
+          handleSubmit={this.updateSearchFilter.bind(this)}
+          className={style.search}
+          placeholder={`Search ${this.props.title}`}
+        />
+      </div>
     )
   }
 
   render () {
     return (
-      <div className={style.filters}>
+      <div className={`row ${style.filters}`}>
         {this.renderSearch()}
         {this.renderYear()}
       </div>

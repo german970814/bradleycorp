@@ -54,8 +54,9 @@ class NewsTemplate extends React.Component<Props, State> {
 
   renderContent () {
     return (
-      <div className={style.NewsTemplate}>
+      <div className={style.newsTemplateContent}>
         <Filters
+          title={this.props.data.page_title}
           filters={this.state.filters}
           updateFilters={this.updateFilters.bind(this)}
           yearOptions={this.yearOptions}
@@ -68,10 +69,12 @@ class NewsTemplate extends React.Component<Props, State> {
   render () {
     console.log(this.state)
     return (
-      <LeftSidebarTemplate
-        data={this.props.data}
-        renderModules={this.renderContent.bind(this)}
-      />
+      <div className={style.NewsTemplate}>
+        <LeftSidebarTemplate
+          data={this.props.data}
+          renderModules={this.renderContent.bind(this)}
+        />
+      </div>
     )
   }
 
