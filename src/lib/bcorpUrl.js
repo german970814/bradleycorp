@@ -1,4 +1,5 @@
 // @flow
+import type { Match } from 'react-router-dom'
 import type { WPPost } from './types/post_types'
 import type { WPTerm } from './types/term_types'
 import { host } from '../api'
@@ -70,6 +71,50 @@ bcorpUrl.youtubeParser = (url: string): false | string => {
   var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/
   var match = url.match(regExp)
   return match && match[7].length === 11 ? match[7] : false
+}
+
+/**
+ * NOTE: BIG NOTE. This wont work if the route match includes a *,
+ * you'll need to provide a special case
+ */
+bcorpUrl.replacePathWithMatchParams = (
+  match: Match,
+  replaceParams?: { [string]: string | number }
+): string => {
+  if (!match.params || Object.keys(match.params).length === 0) {
+    return match.url
+  }
+
+  if (match.path.includes('/*/')) {
+    return match.url
+  }
+
+  let newUrl = match.path
+
+  Object.keys(match.params).forEach(param => {
+    const replace = `:${param}`
+
+    let replaceWith = match.params[param] || ''
+    if (replaceParams && replaceParams[param]) {
+      replaceWith = replaceParams[param].toString()
+    }
+
+    newUrl = newUrl.replace(replace, replaceWith)
+  })
+
+  return newUrl
+}
+
+bcorpUrl.getUrlWithoutPageParam = (match: Match): string => {
+  let url = match.url
+
+  // remove any trailing /
+  if (url.slice(-1) === '/') {
+    url = url.slice(0, -1)
+  }
+
+  // remove page param
+  return url.replace(/\/page=\d*/g, '')
 }
 
 module.exports = bcorpUrl

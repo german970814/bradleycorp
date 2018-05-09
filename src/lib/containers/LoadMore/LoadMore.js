@@ -5,6 +5,7 @@ import type { BCorpPost } from '../../types/post_types'
 import type { Match, RouterHistory } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 import debounce from 'debounce'
+import { getUrlWithoutPageParam } from '../../../lib/bcorpUrl'
 import Loading from '../../components/Loading/Loading'
 
 // will need to pass LoadMore a function which deconstructs the
@@ -146,11 +147,16 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
 
       // we keep track of the page state in the url
       // in case they refresh teh page we can continue from the same point
-      const root = this.props.match.path.replace('/:page', '')
-      const page = this.props.match.params.page
-        ? parseInt(this.props.match.params.page) + 1
-        : this.state.paged
-      this.props.history.push(`${root}/${page}`)
+      const page =
+        this.state.offset !== 0
+          ? parseInt(this.props.match.params.page) + 1
+          : this.state.paged
+
+      // replace any old page parameters then re add them
+      let newUrl = getUrlWithoutPageParam(this.props.match)
+      newUrl = `${newUrl}/page=${page}`
+
+      this.props.history.push(newUrl)
     }
   }
 
@@ -158,7 +164,11 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
     // we can run this function to start everything again from 0
     //
     // ie if we change filters and need completely new posts
+    //
+    // we also reset the url and remove page=
     this.setState({ loading: true, paged: 1, posts: undefined, offset: 0 })
+    this.props.history.push(this.props.match.url.replace(/\/page=\d*/g, ''))
+
     this.getPage(this.props.postsPerPage, 1, this.state.offset)
     this.getPageDebouncedNext(this.props.postsPerPage, 2, this.state.offset)
   }

@@ -68,7 +68,7 @@ const Main = props => {
       <Route exact path="/video-gallery" component={VideoGalleryLoadable} />
       <Route
         exact
-        path="/video-gallery/:page"
+        path="/video-gallery/page=:page"
         component={VideoGalleryLoadable}
       />
       <Route
@@ -83,8 +83,8 @@ const Main = props => {
       />
 
       {/* Any other route is sent to the Customizable Page */}
-      <Route exact path="/*/:slug" component={CustomizableLoadable} />
-      <Route exact path="/:slug" component={CustomizableLoadable} />
+      <Route exact path="/*/page=:page" component={CustomizableLoadable} />
+      <Route exact path="/*" component={CustomizableLoadable} />
     </Switch>
   )
 }

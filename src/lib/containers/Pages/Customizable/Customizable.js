@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import type { Match } from 'react-router-dom'
 import type { BCorpCustomPage } from '../../../types/customPage_types'
 import CustomPageApiClient from '../../../../api/customPage_client'
+import { getUrlWithoutPageParam } from '../../../bcorpUrl'
 import { validChain } from '../../../bcorpObject'
 import Loading from '../../../components/Loading/Loading'
 import TemplateFactory from '../../Templates/TemplateFactory'
@@ -17,7 +18,7 @@ type Props = {
 type State = BCorpCustomPage & {
   requesting: boolean,
   ready: boolean
-};
+}
 
 /**
  *
@@ -83,7 +84,10 @@ class Customizable extends Component<Props, State> {
       return
     }
 
-    if (nextProps.match.url !== this.props.match.url) {
+    if (
+      getUrlWithoutPageParam(nextProps.match) !==
+      getUrlWithoutPageParam(this.props.match)
+    ) {
       this.getPage(nextProps.match)
     }
   }
@@ -154,12 +158,11 @@ class Customizable extends Component<Props, State> {
     try {
       this.setState({ requesting: true, ready: false })
       const customPageAPIClient = new CustomPageApiClient()
-      // only other alternative for custom page route is '/*/:slug'
-      // so we have to get by path
-      const page =
-        match.path === '/:slug'
-          ? await customPageAPIClient.getBySlug(match.params.slug || '')
-          : await customPageAPIClient.getByPath(match.url)
+
+      // remove page paramter from url
+      const url = getUrlWithoutPageParam(match)
+
+      const page = await customPageAPIClient.getByPath(url)
 
       const pageData: BCorpCustomPage = page.data
 
