@@ -51,7 +51,7 @@ type State = {
   gallery: ?Array<GalleryType>,
   activeFilters: TaxAndTermSlugObject,
   loading: boolean
-}
+};
 
 export default class ApplicationGallery extends Component<Props, State> {
   getApplicationGalleryDebounced: (filters: TaxAndTermSlugObject) => void
