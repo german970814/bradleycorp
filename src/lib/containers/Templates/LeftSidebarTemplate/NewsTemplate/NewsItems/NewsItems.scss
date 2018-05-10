@@ -1,0 +1,27 @@
+@import '../../../../../../scss/partials/mixins';
+
+.newsItems {
+  margin-bottom: 40px;
+}
+
+.buttonWrapper {
+  @include respond-to(tablet) {
+    margin-left: -27vw;
+    width: 100vw;
+    text-align: center;
+  }
+
+  @include respond-to(desktop) {
+    margin-left: -21vw;
+  }
+
+  button.loadMore {
+    margin-bottom: 20px;
+
+    @include respond-to(tablet) {
+      width: auto;
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+  }
+}

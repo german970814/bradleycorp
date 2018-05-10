@@ -81,7 +81,7 @@ class NewsTemplate extends React.Component<Props, State> {
   getYearOptions () {
     const filterOptions = {}
 
-    for (let year = this.yearStartDate; year <= this.yearEndDate; year++) {
+    for (let year = this.yearEndDate; year >= this.yearStartDate; year--) {
       filterOptions[year] = year.toString()
     }
 

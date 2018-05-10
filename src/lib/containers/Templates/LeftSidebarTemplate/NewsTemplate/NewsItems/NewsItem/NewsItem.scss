@@ -1,0 +1,38 @@
+@import '../../../../../../../scss/partials/variables';
+@import '../../../../../../../scss/partials/mixins';
+
+.newsItem {
+  padding: 30px $MobileBodyPadding;
+
+  &:nth-child(2n) {
+    background-color: $light-gray;
+  }
+
+  @include respond-to-max(tablet) {
+    margin-left: -$MobileBodyPadding;
+    margin-right: -$MobileBodyPadding;
+  }
+
+  @include respond-to(tablet) {
+    padding: 30px;
+  }
+
+  @include respond-to(desktop) {
+    padding: 40px;
+  }
+
+  h5.title {
+    margin-bottom: 5px;
+    color: $black;
+  }
+
+  .meta {
+    margin-bottom: 15px;
+  }
+
+  .content {
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

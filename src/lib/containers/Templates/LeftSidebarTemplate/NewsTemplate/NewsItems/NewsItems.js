@@ -81,17 +81,21 @@ class NewsItemsInner extends React.Component<InnerProps> {
   renderLoadMoreButton () {
     return (
       this.props.canLoadMore && (
-        <button onClick={this.props.loadNextPage}>{'LOAD MORE'}</button>
+        <div className={style.buttonWrapper}>
+          <button className={style.loadMore} onClick={this.props.loadNextPage}>
+            {'LOAD MORE'}
+          </button>
+        </div>
       )
     )
   }
 
   render () {
     return (
-      <div className={style.newsItems}>
-        {this.renderNewsItems()}
+      <React.Fragment>
+        <div className={style.newsItems}>{this.renderNewsItems()}</div>
         {this.renderLoadMoreButton()}
-      </div>
+      </React.Fragment>
     )
   }
 
