@@ -48,6 +48,11 @@ const ApplicationGalleryDetailLoadable = Loadable({
   loading: Loading
 })
 
+const ResultsLoadable = Loadable({
+  loader: () => import('../Pages/Results/Results'),
+  loading: Loading
+})
+
 // Note: <Route exact path="/post/:slug" component={...} /> ie Blog post route
 // will use right sidebar template and get blog_sidebar
 
@@ -80,6 +85,11 @@ const Main = props => {
         exact
         path="/application-gallery/:slug"
         component={ApplicationGalleryDetailLoadable}
+      />
+      <Route
+        exact
+        path="/results"
+        component={ResultsLoadable}
       />
 
       {/* Any other route is sent to the Customizable Page */}
