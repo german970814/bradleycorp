@@ -5,6 +5,11 @@ import Media from 'react-media'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../globals'
 import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
 import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
+import SearchDefault from './ContentTabs/Default'
+import SearchLiterature from './ContentTabs/Literature'
+import SearchNews from './ContentTabs/News'
+import SearchProducts from './ContentTabs/Products'
+import SearchTechnicalInfo from './ContentTabs/TechnicalInfo'
 import style from './Results.scss'
 
 export default class Results extends Component {
@@ -27,20 +32,14 @@ export default class Results extends Component {
 
     renderOptions() {
         return <div className={`row ${defaultStyle.defaultTemplate} ${style.resultsHeaderContainer}`}>
-            <ul>
-                <li><a href="">Products</a></li>
-                <li><a href="">Literature</a></li>
-                <li><a href="">Technical Info</a></li>
-                <li><a href="">In The News</a></li>
-                <li><a href="">Web Pages</a></li>
+            <ul className={`${style.resultsOptionsWrapper}`}>
+                <li><a href="">Products (100)</a></li>
+                <li><a href="">Literature (5)</a></li>
+                <li><a href="">Technical Info (20)</a></li>
+                <li><a href="">In The News (90)</a></li>
+                <li><a href="">Web Pages (10)</a></li>
             </ul>
         </div>
-    }
-
-    renderItems() {
-        return <ul>
-            <li></li>
-        </ul>
     }
 
     render() {
@@ -61,6 +60,9 @@ export default class Results extends Component {
                             )
                         }
                     </Media>
+                </div>
+                <div className={`row ${defaultStyle.defaultTemplate} ${style.contentWrapper}`}>
+                    <SearchTechnicalInfo/>
                 </div>
             </div>
         )
