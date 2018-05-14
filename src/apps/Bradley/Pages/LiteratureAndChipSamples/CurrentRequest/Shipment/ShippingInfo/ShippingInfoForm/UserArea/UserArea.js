@@ -24,7 +24,7 @@ class UserArea extends React.Component<Props> {
     propertyName: ShippingInfoUserAreaField,
     value: string
   ): void {
-    const newUserArea = this.props.shippingInfoUserArea
+    const newUserArea = { ...this.props.shippingInfoUserArea }
     if (
       propertyName !== 'normallyPurchaseFrom' &&
       propertyName !== 'overnight'
@@ -37,13 +37,13 @@ class UserArea extends React.Component<Props> {
   handleNormallyPurchaseFromChange (
     newNormallyPurchaseFrom: CheckboxObject
   ): void {
-    const userArea = this.props.shippingInfoUserArea
+    const userArea = { ...this.props.shippingInfoUserArea }
     userArea.normallyPurchaseFrom = newNormallyPurchaseFrom
     this.props.updateUserArea(userArea)
   }
 
   handleOvernightDeliveryChange (newOvernightDelivery: CheckboxObject): void {
-    const userArea = this.props.shippingInfoUserArea
+    const userArea = { ...this.props.shippingInfoUserArea }
     userArea.overnight = newOvernightDelivery
     this.props.updateUserArea(userArea)
   }

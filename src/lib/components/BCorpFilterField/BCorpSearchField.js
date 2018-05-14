@@ -3,7 +3,6 @@ import * as React from 'react'
 import style from './BCorpFilterField.scss'
 
 type Props = {
-  filterState?: string,
   /**
    * Takes the search string as it is when the form is submitted.
    * Should update some kind of higher level state or perform some network request.
@@ -34,7 +33,8 @@ class BCorpSearchField extends React.Component<Props, State> {
     event.preventDefault()
 
     if (this.state.value || this.state.value === '') {
-      this.props.handleSubmit(this.state.value)
+      console.log(this.state.value)
+      this.props.handleSubmit(this.state.value || '')
     }
   }
 

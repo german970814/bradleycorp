@@ -13,15 +13,18 @@ type Props = {
  */
 class LiteratureSearch extends React.Component<Props> {
   handleSubmit (searchString: string): void {
-    const newFilters = { ...this.props.filters }
-    newFilters.literature.search = searchString
-    this.props.updateFilters(newFilters)
+    this.props.updateFilters({
+      ...this.props.filters,
+      literature: {
+        ...this.props.filters.literature,
+        search: searchString
+      }
+    })
   }
 
   render () {
     return (
       <BCorpSearchField
-        filterState={this.props.filters.literature.search}
         handleSubmit={this.handleSubmit.bind(this)}
         title={'Search'}
         className={`col1 col2-tablet`}

@@ -55,7 +55,7 @@ class VideoGallery extends React.Component<Props, State> {
   }
 
   updateFilters (filters: FiltersType) {
-    this.setState({ filters })
+    this.setState({ ...this.state, filters })
   }
 
   render () {
@@ -87,7 +87,7 @@ class VideoGallery extends React.Component<Props, State> {
       const termsResponse: BCorpTermsResponse = response.data
       const filterOptions = this.processTermsForState(termsResponse)
 
-      return this.setState({ filterOptions })
+      return this.setState({ ...this.state, filterOptions })
     } catch (err) {
       console.log(err)
     }

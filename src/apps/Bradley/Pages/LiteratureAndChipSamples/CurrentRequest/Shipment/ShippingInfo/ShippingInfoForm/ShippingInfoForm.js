@@ -30,7 +30,7 @@ class ShippingInfoForm extends React.Component<Props> {
     propertyName: ShippingInfoField,
     value: string
   ): void {
-    const newShippingInfo = this.props.shippingInfo
+    const newShippingInfo = { ...this.props.shippingInfo }
     if (propertyName !== 'userArea') {
       newShippingInfo[propertyName] = value
       return this.props.updateShippingInfo(newShippingInfo)
@@ -38,9 +38,10 @@ class ShippingInfoForm extends React.Component<Props> {
   }
 
   updateShippingInfoUserArea (newUserArea: ShippingInfoUserAreaType): void {
-    const newShippingInfo = this.props.shippingInfo
-    newShippingInfo.userArea = newUserArea
-    return this.props.updateShippingInfo(newShippingInfo)
+    return this.props.updateShippingInfo({
+      ...this.props.shippingInfo,
+      userArea: newUserArea
+    })
   }
 
   isRequired (fieldName: ShippingInfoField) {
