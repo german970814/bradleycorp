@@ -49,7 +49,7 @@ class NewsTemplate extends React.Component<Props, State> {
   }
 
   updateFilters (filters: FiltersType) {
-    this.setState({ filters })
+    this.setState({ ...this.state, filters })
   }
 
   renderContent () {
