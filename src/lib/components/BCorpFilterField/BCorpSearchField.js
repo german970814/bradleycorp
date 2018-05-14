@@ -33,7 +33,7 @@ class BCorpSearchField extends React.Component<Props, State> {
   handleSubmit (event: SyntheticInputEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    if (this.state.value) {
+    if (this.state.value || this.state.value === '') {
       this.props.handleSubmit(this.state.value)
     }
   }
