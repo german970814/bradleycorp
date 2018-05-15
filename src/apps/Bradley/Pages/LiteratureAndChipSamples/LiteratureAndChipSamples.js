@@ -22,7 +22,7 @@ type PostTypeOptions = 'literature' | 'chip'
 
 type MaterialTypes = {
   [number | string]: ?string
-};
+}
 
 /* Filter Types */
 
@@ -30,23 +30,23 @@ type LiteratureFilters = {
   productLine: string,
   language: string,
   search?: string
-};
+}
 
 type ChipSampleFilters = {
   materialType: number
-};
+}
 
 type FiltersTypes = {
   literature: LiteratureFilters,
   chipSamples: ChipSampleFilters
-};
+}
 
 /* Option Types */
 
 type OptionsTypes = {
   literature?: Array<LiteraturePost>,
   chipSamples?: Array<ChipSamplePost>
-};
+}
 
 /* Shipment Types */
 
@@ -54,22 +54,22 @@ type ShipmentLiteratureObject = {
   num: number,
   postID: number,
   post: LiteraturePost
-};
+}
 
 type ShipmentChipSampleObject = {
   num: number,
   postID: number,
   post: ChipSamplePost
-};
+}
 
 type ShipmentTypes = {
   literature?: Array<ShipmentLiteratureObject>,
   chip?: Array<ShipmentChipSampleObject>
-};
+}
 
 /* Download Types */
 
-type DownloadTypes = Array<LiteraturePost>;
+type DownloadTypes = Array<LiteraturePost>
 
 /* Shipping Info */
 
@@ -84,7 +84,7 @@ type ShippingInfoField =
   | 'country'
   | 'email'
   | 'phone'
-  | 'userArea';
+  | 'userArea'
 
 type ShippingInfoUserAreaField =
   | 'normallyPurchaseFrom'
@@ -93,20 +93,20 @@ type ShippingInfoUserAreaField =
   | 'account'
   | 'rep'
   | 'requestEmail'
-  | 'notes';
+  | 'notes'
 
 type ShippingInfoUserAreaType = {
   [ShippingInfoUserAreaField]: ?string,
   normallyPurchaseFrom?: CheckboxObject,
   overnight?: CheckboxObject
-};
+}
 
 type ShippingInfoType = {
   [ShippingInfoField]: ?string,
   userArea: ShippingInfoUserAreaType
-};
+}
 
-type Props = {};
+type Props = {}
 
 type State = {
   options: OptionsTypes,
@@ -117,7 +117,7 @@ type State = {
   selected: PostTypeOptions,
   materialTypes: MaterialTypes,
   showCurrentRequestMobile: boolean
-};
+}
 
 const productLineFilterDefault: string = 'product-line'
 const languageFilterDefault: string = 'language'
@@ -151,12 +151,22 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
     this.getOptions('literature')
   }
 
+  componentDidUpdate (prevProps: Props, prevState: State) {
+    console.log(prevState, this.state)
+    if (
+      prevState.filters.literature.search !==
+      this.state.filters.literature.search
+    ) {
+      this.getOptions('literature')
+    }
+  }
+
   updateShippingInfo (newShippingInfo: ShippingInfoType): void {
-    this.setState({ shippingInfo: newShippingInfo })
+    this.setState({ ...this.state, shippingInfo: newShippingInfo })
   }
 
   updateShipment (newShipment: ShipmentTypes): void {
-    this.setState({ shipment: newShipment })
+    this.setState({ ...this.state, shipment: newShipment })
   }
 
   addToShipment (postToAdd: LiteraturePost | ChipSamplePost): void {
@@ -204,7 +214,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
       shipmentPostType[indexToIncrement].num = newNumber
       shipment[postType] = shipmentPostType
 
-      this.setState({ shipment })
+      this.updateShipment(shipment)
     }
   }
 
@@ -228,19 +238,19 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
       shipmentPostType.splice(indexToRemove, 1)
       shipment[postType] = shipmentPostType
 
-      this.setState({ shipment })
+      this.updateShipment(shipment)
     }
   }
 
   updateDownloads (newDownloads: DownloadTypes): void {
-    this.setState({ downloads: newDownloads })
+    this.setState({ ...this.state, downloads: newDownloads })
   }
 
   addToDownloads (postToAdd: LiteraturePost): void {
     const newDownloads = this.state.downloads
       ? [...this.state.downloads, postToAdd]
       : [postToAdd]
-    this.setState({ downloads: newDownloads })
+    this.updateDownloads(newDownloads)
   }
 
   removeFromDownloads (idToRemove: number): void {
@@ -257,13 +267,13 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
       } else {
         newDownloads.splice(indexToRemove, 1)
 
-        this.setState({ downloads: newDownloads })
+        this.updateDownloads(newDownloads)
       }
     }
   }
 
   updateFilters (newFilters: FiltersTypes): void {
-    this.setState({ filters: newFilters })
+    this.setState({ ...this.state, filters: newFilters })
   }
 
   updateShowCurrentRequestMobile (value: boolean): void {
@@ -384,7 +394,13 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
     try {
       if (postType === 'literature') {
         const client = new CPTApiClient(postType)
-        const response = await client.getLatest(-1)
+        const response = await client.getLatest(
+          -1,
+          0,
+          0,
+          null,
+          this.state.filters.literature.search
+        )
 
         const optionsData: Array<LiteraturePost> = response.data
 

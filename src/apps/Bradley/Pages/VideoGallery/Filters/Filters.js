@@ -59,7 +59,6 @@ class Filters extends React.Component<Props> {
         <div className={`col1 col2-tablet ${style.search}`}>
           <BCorpSearchField
             title={'Search'}
-            filterState={this.props.filters.search || ''}
             handleSubmit={this.handleSearchSubmit.bind(this)}
           />
         </div>

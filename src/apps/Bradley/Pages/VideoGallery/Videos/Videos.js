@@ -34,7 +34,9 @@ class Videos extends React.Component<Props> {
       'OR',
       postsPerPage,
       paged,
-      offset
+      offset,
+      null,
+      this.props.filters.search
     )
   }
 

@@ -21,9 +21,13 @@ type Props = {
  */
 class ProductLineSelect extends React.Component<Props> {
   handleChange (event: SyntheticInputEvent<HTMLSelectElement>) {
-    const newFilters = { ...this.props.filters }
-    newFilters.literature.productLine = event.target.value
-    this.props.updateFilters(newFilters)
+    this.props.updateFilters({
+      ...this.props.filters,
+      literature: {
+        ...this.props.filters.literature,
+        productLine: event.target.value
+      }
+    })
   }
 
   render () {
