@@ -4,9 +4,9 @@ import Media from 'react-media'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../../globals'
 import FillColumns from '../../../../../lib/components/FillColumns/FillColumns'
 import style from './../Results.scss'
+import Default from './Default'
 
-
-export default class SearchLiterature extends Component {
+export default class SearchLiterature extends Default {
 
     renderLiterature () {
         return <li>

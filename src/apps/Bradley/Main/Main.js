@@ -88,7 +88,7 @@ const Main = props => {
       />
       <Route
         exact
-        path="/results"
+        path="/results/:query"
         component={ResultsLoadable}
       />
 

@@ -1,8 +1,9 @@
 // @flow
 import React, { Component } from 'react'
 import style from './../Results.scss'
+import Default from './Default'
 
-export default class SearchNews extends Component {
+export default class SearchNews extends Default {
     render(){
         return <div className={`${style.resultsTextContentWrapper}`}>
             <ul className={`${style.newsList}`}>

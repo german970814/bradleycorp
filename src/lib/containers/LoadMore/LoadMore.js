@@ -39,6 +39,9 @@ type Props = {
   children: ChildFunctionArgs => React.Node,
   postsPerPage: number,
   getPosts: GetPostsFunctionType,
+  posts?: Array<BcorpPost>,
+  paged?: number,
+  onPageLoaded?: ChildFunctionArgs => any,
   // passed by withRouter HOC
   match: Match,
   history: RouterHistory
@@ -109,9 +112,13 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
     const initOffset =
       parseInt(this.props.match.params.page) * this.props.postsPerPage || 0
 
-    const initPaged = initOffset === 0 ? 1 : 0
+    const initPaged = ('paged' in props && props.paged) ? props.paged: (initOffset === 0 ? 1 : 0)
 
     this.state = { loading: true, paged: initPaged, offset: initOffset }
+    if ('posts' in props && props.posts) {
+      const { posts } = props
+      this.state = Object.assign({}, this.state, { posts })
+    }
 
     this.getPageDebounced = debounce(this.getPage, 1500)
     this.getPageDebouncedNext = debounce(this.getPage, 2000)
@@ -131,8 +138,10 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
     } else {
       // if there's no offset then we proceed as normal
       // just getting the first and second pages from 0
-      this.getPage(this.props.postsPerPage, 1, this.state.offset)
-      this.getPageDebounced(this.props.postsPerPage, 2, this.state.offset)
+      if (!this.props.posts) {
+        this.getPage(this.props.postsPerPage, 1, this.state.offset)
+        this.getPageDebounced(this.props.postsPerPage, 2, this.state.offset)
+      }
     }
   }
 
@@ -220,7 +229,18 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
       const prevPosts = this.state.posts || []
       posts = [...prevPosts, ...posts]
 
-      return this.setState({ posts, loading: false })
+      return this.setState({ posts, loading: false }, () => {
+        this.props.onPageLoaded && this.props.onPageLoaded({
+          posts: this.state.posts,
+          postsPerPage: this.props.postsPerPage,
+          paged: this.state.paged,
+          offset: this.state.offset,
+          canLoadMore: this.canLoadMore(),
+          shouldDisplayPost: this.shouldDisplayPost.bind(this),
+          loadNextPage: this.loadNextPage.bind(this),
+          reset: this.reset.bind(this)
+        })
+      })
     } catch (error) {
       console.log(error)
       this.setState({ loading: false })
