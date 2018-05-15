@@ -1,0 +1,183 @@
+@import '../../../../scss/partials/layout';
+@import '../../../../scss/partials/variables';
+@import '../../../../scss/partials/mixins';
+@import '../../../../lib/components/BCorpBackground/BCorpBackground';
+
+.Home {
+  .headerMobile {
+    $imageWidth: 45px;
+    position: relative;
+    padding: 10px 14px;
+    min-height: $imageWidth;
+    background-color: #252525;
+
+    img {
+      position: absolute;
+      left: 14px;
+      top: 10px;
+      width: $imageWidth;
+      height: $imageWidth;
+    }
+
+    .headerCaption {
+      display: inline-block;
+      vertical-align: middle;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      padding-left: $imageWidth + 14px;
+      width: 100%;
+      color: #fff;
+      box-sizing: border-box;
+    }
+  }
+
+  .header {
+    position: relative;
+    width: 100%;
+    height: 0;
+
+    img {
+      position: absolute;
+      top: 33px;
+      left: 50%;
+      transform: translateX(-28px);
+      z-index: 100;
+      width: 56px;
+      height: 56px;
+
+      @include respond-to(desktop) {
+        top: 42px;
+        transform: translateX(-34px);
+        width: 68px;
+        height: 68px;
+      }
+    }
+  }
+
+  .blackBlueContainer {
+    position: relative;
+
+    @include respond-to(tablet) {
+      height: 100vh;
+    }
+
+    .commercialWashroom,
+    .emergencySafety {
+      @extend %bcorpBackgroundParent;
+      position: relative;
+      overflow: hidden;
+      padding: 85px 30px;
+
+      @include respond-to(tablet) {
+        height: 100%;
+      }
+
+      h1 {
+        color: #fff;
+        text-align: center;
+
+        @include respond-to(tablet) {
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 2;
+          padding-left: 70px;
+          padding-right: 70px;
+          width: 100%;
+          box-sizing: border-box;
+        }
+      }
+
+      .videoOverlay {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 0.33;
+        background-color: $black;
+      }
+    }
+
+    .emergencySafety {
+      .videoOverlay {
+        opacity: 0.33;
+        background-color: #2f3d70;
+      }
+    }
+
+    :global(.home-caption) {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0 100px;
+      width: 100%;
+      box-sizing: border-box;
+
+      @include respond-to(desktop) {
+        bottom: 40px;
+      }
+    }
+  }
+
+  .cta {
+    @extend %BodyPaddingWithMediaQueries;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    max-width: none;
+    text-align: center;
+    background-color: $light-gray;
+
+    @include respond-to(tablet) {
+      padding: 80px 190px;
+    }
+
+    @include respond-to(desktop) {
+      padding: 120px 170px;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      color: $navy;
+      letter-spacing: 3.2px;
+      text-transform: uppercase;
+
+      @include respond-to(tablet) {
+        margin-bottom: 20px;
+        letter-spacing: 4px;
+      }
+
+      @include respond-to(desktop) {
+        letter-spacing: 4.8px;
+      }
+    }
+
+    :global(.hero-headline) {
+      margin-bottom: 30px;
+      letter-spacing: 4.6px;
+      color: $navy;
+      opacity: 0.25;
+
+      @include respond-to(tablet) {
+        margin-bottom: 40px;
+        letter-spacing: 7.2px;
+      }
+
+      @include respond-to(desktop) {
+        letter-spacing: 9px;
+      }
+    }
+
+    button {
+      background-color: $navy;
+
+      @include respond-to(tablet) {
+        padding-left: 22px;
+        padding-right: 22px;
+        width: auto;
+      }
+    }
+  }
+}

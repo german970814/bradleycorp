@@ -135,6 +135,20 @@ body {
   }
 }
 
+:global(.home-caption) {
+  @extend %home-caption;
+
+  @include respond-to(tablet) {
+    font-size: 13px;
+    letter-spacing: 5.2px;
+  }
+
+  @include respond-to(desktop) {
+    font-size: 16px;
+    letter-spacing: 6.4px;
+  }
+}
+
 :global .legal :local {
   @extend %legal;
 }

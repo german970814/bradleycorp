@@ -3,9 +3,11 @@ import { Switch, Route } from 'react-router-dom'
 import Loadable from 'react-loadable'
 import Loading from '../../../lib/components/Loading/Loading'
 import Header from '../Header/Header'
-import Home from '../Pages/Home/Home'
-// cant make this loadable because we need to pass it props
-import DefaultCPTLandingPage from '../../../lib/containers/Pages/DefaultCPTLandingPage/DefaultCPTLandingPage'
+
+const HomeLoadable = Loadable({
+  loader: () => import('../Pages/Home/Home'),
+  loading: Loading
+})
 
 const CustomizableLoadable = Loadable({
   loader: () =>
@@ -16,6 +18,12 @@ const CustomizableLoadable = Loadable({
 const BlogSinglePostPageLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/BlogSinglePostPage/BlogSinglePostPage'),
+  loading: Loading
+})
+
+const DefaultCPTLandingPageLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/DefaultCPTLandingPage/DefaultCPTLandingPage'),
   loading: Loading
 })
 
@@ -61,7 +69,7 @@ const Main = () => {
         exact
         path="/"
         render={() => {
-          return <Home />
+          return <HomeLoadable />
         }}
       />
 
@@ -114,14 +122,21 @@ const RouterInner = () => {
         exact
         path="/literature/:slug"
         render={({ match }) => {
-          return <DefaultCPTLandingPage match={match} postType={'literature'} />
+          return (
+            <DefaultCPTLandingPageLoadable
+              match={match}
+              postType={'literature'}
+            />
+          )
         }}
       />
       <Route
         exact
         path="/chip/:slug"
         render={({ match }) => {
-          return <DefaultCPTLandingPage match={match} postType={'chip'} />
+          return (
+            <DefaultCPTLandingPageLoadable match={match} postType={'chip'} />
+          )
         }}
       />
       <Route
@@ -129,7 +144,10 @@ const RouterInner = () => {
         path="/case-studies/:slug"
         render={({ match }) => {
           return (
-            <DefaultCPTLandingPage match={match} postType={'case-studies'} />
+            <DefaultCPTLandingPageLoadable
+              match={match}
+              postType={'case-studies'}
+            />
           )
         }}
       />
@@ -138,7 +156,10 @@ const RouterInner = () => {
         path="/technical-info/:slug"
         render={({ match }) => {
           return (
-            <DefaultCPTLandingPage match={match} postType={'technical-info'} />
+            <DefaultCPTLandingPageLoadable
+              match={match}
+              postType={'technical-info'}
+            />
           )
         }}
       />
@@ -146,21 +167,30 @@ const RouterInner = () => {
         exact
         path="/news/:slug"
         render={({ match }) => {
-          return <DefaultCPTLandingPage match={match} postType={'news'} />
+          return (
+            <DefaultCPTLandingPageLoadable match={match} postType={'news'} />
+          )
         }}
       />
       <Route
         exact
         path="/faq/:slug"
         render={({ match }) => {
-          return <DefaultCPTLandingPage match={match} postType={'faq'} />
+          return (
+            <DefaultCPTLandingPageLoadable match={match} postType={'faq'} />
+          )
         }}
       />
       <Route
         exact
         path="/compliance/:slug"
         render={({ match }) => {
-          return <DefaultCPTLandingPage match={match} postType={'compliance'} />
+          return (
+            <DefaultCPTLandingPageLoadable
+              match={match}
+              postType={'compliance'}
+            />
+          )
         }}
       />
       <Route
@@ -168,7 +198,10 @@ const RouterInner = () => {
         path="/video-gallery/:slug"
         render={({ match }) => {
           return (
-            <DefaultCPTLandingPage match={match} postType={'video-gallery'} />
+            <DefaultCPTLandingPageLoadable
+              match={match}
+              postType={'video-gallery'}
+            />
           )
         }}
       />
