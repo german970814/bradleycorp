@@ -3,6 +3,14 @@
 @import '../../../../scss/partials/mixins';
 @import '../../../../lib/components/BCorpBackground/BCorpBackground';
 
+$logoWidthTablet: 56px;
+$logoTopTablet: 33px;
+$logoWidthDesktop: 68px;
+$logoTopDesktop: 42px;
+
+$captionBottom: 30px;
+$captionBottomDesktop: 40px;
+
 .Home {
   .headerMobile {
     $imageWidth: 45px;
@@ -38,18 +46,20 @@
 
     img {
       position: absolute;
-      top: 33px;
+      top: $logoTopTablet;
       left: 50%;
-      transform: translateX(-28px);
+      transform: translateX(-$logoWidthTablet / 2);
       z-index: 100;
-      width: 56px;
-      height: 56px;
+      width: $logoWidthTablet;
+      height: $logoWidthTablet;
+      animation: logodropdownfade 1s;
 
       @include respond-to(desktop) {
-        top: 42px;
-        transform: translateX(-34px);
-        width: 68px;
-        height: 68px;
+        top: $logoTopDesktop;
+        transform: translateX(-$logoWidthDesktop / 2);
+        width: $logoWidthDesktop;
+        height: $logoWidthDesktop;
+        animation: logodropdownfadedesktop 1s;
       }
     }
   }
@@ -109,15 +119,17 @@
 
     :global(.home-caption) {
       position: absolute;
-      bottom: 30px;
+      bottom: $captionBottom;
       left: 50%;
       transform: translateX(-50%);
       padding: 0 100px;
       width: 100%;
       box-sizing: border-box;
+      animation: captionrisefade 1s;
 
       @include respond-to(desktop) {
-        bottom: 40px;
+        bottom: $captionBottomDesktop;
+        animation: captionrisefadedesktop 1s;
       }
     }
   }
@@ -179,5 +191,68 @@
         width: auto;
       }
     }
+  }
+}
+
+.fadeIn {
+  animation: fadein 1s;
+}
+
+.fadeInMobile {
+  @include respond-to-max(tablet) {
+    animation: fadein 1s;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes logodropdownfade {
+  from {
+    opacity: 0;
+    top: -$logoWidthTablet;
+  }
+  to {
+    opacity: 1;
+    top: $logoTopTablet;
+  }
+}
+
+@keyframes logodropdownfadedesktop {
+  from {
+    opacity: 0;
+    top: -$logoWidthDesktop;
+  }
+  to {
+    opacity: 1;
+    top: $logoTopDesktop;
+  }
+}
+
+@keyframes captionrisefade {
+  from {
+    opacity: 0;
+    bottom: -$captionBottom;
+  }
+  to {
+    opacity: 1;
+    bottom: $captionBottom;
+  }
+}
+
+@keyframes captionrisefadedesktop {
+  from {
+    opacity: 0;
+    bottom: -$captionBottomDesktop;
+  }
+  to {
+    opacity: 1;
+    bottom: $captionBottomDesktop;
   }
 }

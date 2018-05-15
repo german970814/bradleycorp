@@ -5,6 +5,7 @@ import type {
   HomePageCookieOption
 } from '../../../../lib/types/cookie_types'
 import type { RouterHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Media from 'react-media'
 import { withCookies, Cookies } from 'react-cookie'
 import { MOBILEMAXWIDTH } from '../../../../globals'
@@ -32,6 +33,8 @@ class Home extends React.Component<Props, State> {
     this.state = {}
   }
 
+  componentDidMount () {}
+
   handleBlackBlueClick (type: HomePageCookieOption) {
     const cookieName: HomePageCookie = 'BcorpHomePage'
     this.props.cookies.set(cookieName, type)
@@ -41,7 +44,7 @@ class Home extends React.Component<Props, State> {
   renderHeader (isMobile: boolean) {
     if (isMobile) {
       return (
-        <div className={style.headerMobile}>
+        <div className={`${style.fadeIn} ${style.headerMobile}`}>
           <VerticalAlignHelper />
           <img src={require('../../../../images/logo-white/logo@2x.png')} />
           <div className={`home-caption ${style.headerCaption}`}>
@@ -52,7 +55,7 @@ class Home extends React.Component<Props, State> {
     }
 
     return (
-      <div className={style.header}>
+      <div className={`${style.header}`}>
         <img src={require('../../../../images/logo-white/logo@2x.png')} />
       </div>
     )
@@ -64,7 +67,7 @@ class Home extends React.Component<Props, State> {
     }
 
     const content = (
-      <h1 className={`row ${style.commercialWashroomContent}`}>
+      <h1 className={`row ${style.fadeIn} ${style.commercialWashroomContent}`}>
         {'Commercial Washroom Solutions'}
       </h1>
     )
@@ -99,7 +102,7 @@ class Home extends React.Component<Props, State> {
     }
 
     const content = (
-      <h1 className={`row ${style.emergencySafetyContent}`}>
+      <h1 className={`row ${style.fadeIn} ${style.emergencySafetyContent}`}>
         {'Emergency Safety & Industrial Solutions'}
       </h1>
     )
@@ -133,7 +136,9 @@ class Home extends React.Component<Props, State> {
       <React.Fragment>
         <h3>{'Not Just a Partner'}</h3>
         <div className={`hero-headline`}>{'A Well Of Experience'}</div>
-        <button>{'ABOUT BRADLEY'}</button>
+        <Link to="/about">
+          <button>{'ABOUT BRADLEY'}</button>
+        </Link>
       </React.Fragment>
     )
   }
@@ -146,7 +151,8 @@ class Home extends React.Component<Props, State> {
             <div className={`row ${style.Home}`}>
               {this.renderHeader(match)}
 
-              <div className={style.blackBlueContainer}>
+              <div
+                className={`${style.fadeInMobile} ${style.blackBlueContainer}`}>
                 <div
                   ref={node => {
                     if (!this.state.washroomNode && node) {
