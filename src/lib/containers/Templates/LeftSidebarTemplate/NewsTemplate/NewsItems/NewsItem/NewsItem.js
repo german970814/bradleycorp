@@ -108,7 +108,6 @@ class NewsItem extends React.Component<Props> {
   }
 
   render () {
-    console.log(this.props.post.meta)
     return (
       <div className={style.newsItem}>
         {this.renderTitle()}

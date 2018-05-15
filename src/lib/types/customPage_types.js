@@ -50,7 +50,8 @@ type BCorpMetaboxes = {
   sidebar_select?: string,
   careers_template?: BCorpCareersTemplateData,
   faq_category?: string,
-  product_landing_page?: BCorpProductLandingPageTemplateData
+  product_landing_page?: BCorpProductLandingPageTemplateData,
+  news_category?: string
 }
 
 type BCorpPageTemplateData = {
