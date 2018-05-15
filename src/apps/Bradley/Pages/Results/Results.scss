@@ -240,6 +240,9 @@ button.loadMore {
 
         .newH {
             position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
         }
         
         .new {
@@ -247,12 +250,14 @@ button.loadMore {
             color: #e51616;
             font-size: 12px;
             text-transform: uppercase;
+            float: left;
         }
         
         .h {
             border-radius: 50%;
             background-color: #474e5d;
             color: #fff;
+            float: right;
         }
 
         .productsImageContainer {
@@ -274,3 +279,22 @@ button.loadMore {
     }
 }
   
+.searchLiteratureWrapper {
+    margin: 0;
+    padding: 0;
+
+    li {
+        position: relative;
+        list-style-type: none;
+
+        .literatureImageContainer {
+            text-align: center;
+        }
+
+        .literatureTitle {
+            color: #000;
+            font-family: 'CentraleSansProBold';
+            font-weight: bold;
+        }
+    }
+}

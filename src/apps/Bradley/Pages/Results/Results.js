@@ -62,7 +62,7 @@ export default class Results extends Component {
                     </Media>
                 </div>
                 <div className={`row ${defaultStyle.defaultTemplate} ${style.contentWrapper}`}>
-                    <SearchProducts/>
+                    <SearchLiterature/>
                 </div>
             </div>
         )

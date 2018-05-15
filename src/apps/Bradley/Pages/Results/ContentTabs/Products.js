@@ -14,19 +14,19 @@ export default class SearchProducts extends Component {
                 <span className={`${style.h}`}>H</span>
             </div>
             <div className={`${style.productsImageContainer}`}>
-                <img src="../../../../../images/results/literature-image.jpg"/>
+                <img src={require('../../../../../images/results/products-mobile.jpg')}/>
             </div>
-            <div className={`${style.productReference}`}>MODEL S19-304</div>
-            <div className={`${style.productDescription}`}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+            <h6 className={`${style.productReference}`}>MODEL S19-304</h6>
+            <p className={`${style.productDescription}`}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </li>
     }
 
     renderColumns (classes: string) {
         return <FillColumns
           colClasses={[
-            `${classes}`, `${classes}`, `${classes}`
+            `${classes}`, `${classes}`, `${classes}`, `${classes}`
           ]}>
-          <ul  className={`${style.searchProductsWrapper}`}>
+          <ul className={`${style.searchProductsWrapper}`}>
             {this.renderProducts()}
           </ul>
         </FillColumns>
