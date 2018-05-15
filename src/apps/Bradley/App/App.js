@@ -5,7 +5,6 @@ import { site } from '../../../api'
 import type { User } from '../../../lib/types/user_types'
 import type { UpdateUserType } from '../../../lib/contexts/UserContext'
 import { UserProvider } from '../../../lib/contexts/UserContext'
-import Header from '../Header/Header'
 import Main from '../Main/Main'
 import MainBIMRevit from '../BIMRevit/Main/Main'
 import MainTheWashfountain from '../TheWashfountain/Main/Main'
@@ -61,8 +60,6 @@ class App extends React.Component<Props, State> {
     return (
       <UserProvider value={{ user, updateUser }}>
         <div id={'app'} className={`${style.app}`}>
-          <Header />
-
           {this.getMain()}
 
           <Footer />

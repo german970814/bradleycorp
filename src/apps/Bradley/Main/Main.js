@@ -2,6 +2,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Loadable from 'react-loadable'
 import Loading from '../../../lib/components/Loading/Loading'
+import Header from '../Header/Header'
 import Home from '../Pages/Home/Home'
 // cant make this loadable because we need to pass it props
 import DefaultCPTLandingPage from '../../../lib/containers/Pages/DefaultCPTLandingPage/DefaultCPTLandingPage'
@@ -44,11 +45,43 @@ const ApplicationGalleryDetailLoadable = Loadable({
   loading: Loading
 })
 
-const Main = props => {
+/*
+ * If we need the home page then we render it with a different header
+ * and check the home page cookie
+ *
+ * If the path isnt '/', Switch will always render this component
+ * which is the router for the rest of our pages
+ * with the header always included
+ * meaning it wont get re-rendered each time the route changes
+ */
+const Main = () => {
   return (
     <Switch>
-      <Route exact path="/" component={Home} />
+      <Route
+        exact
+        path="/"
+        render={() => {
+          return <Home />
+        }}
+      />
 
+      <Route
+        render={() => {
+          return (
+            <React.Fragment>
+              <Header />
+              <RouterInner />
+            </React.Fragment>
+          )
+        }}
+      />
+    </Switch>
+  )
+}
+
+const RouterInner = () => {
+  return (
+    <Switch>
       {/* Specific Custom Pages */}
       <Route
         exact

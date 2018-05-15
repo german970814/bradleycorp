@@ -1,7 +1,12 @@
-import React from 'react'
+// @flow
+import * as React from 'react'
 
-const Home = () => {
-  return <h1>Home</h1>
+type Props = {}
+
+class Home extends React.Component<Props> {
+  render () {
+    return null
+  }
 }
 
 export default Home
