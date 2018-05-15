@@ -1,0 +1,300 @@
+@import "../../../../scss/partials/text-styles";
+@import "../../../../scss/partials/layout";
+@import "../../../../scss/partials/variables";
+@import "../../../../scss/partials/mixins";
+
+.resultsSummary {
+    p {
+        font-family: $CentraleSansPro;
+        color: #000;
+        font-size: 16px;
+        font-weight: bold;
+    }
+}
+
+.resultsHeaderContainer {
+
+    @include respond-to(mobile) {
+
+        padding-top: 30px;
+    
+        & > div {
+            margin-top: 0;
+        }
+    }
+    
+}
+
+.itemsWrapper {
+    background: transparent;
+    clear: both;
+}
+
+.mobileSelectWtapper {
+    background-color: #2e3c6e;
+    padding: 20px 0;
+    min-height: 30px;
+
+}
+.resultsOptionsWrapper {
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+
+    li {
+        list-style-type: none;
+        display: inline-block;
+
+        &:first-child {
+
+            a {
+                border-left: 1px solid #d1d3d4;
+            }
+        }
+
+        .selected {
+            
+            a {
+                color: #fff;
+                background: #2f3d6f;
+            }
+        }
+
+        @include respond-to(tablet) {
+            &:nth-child(5) {
+                a {
+                    margin-top: -1px;
+                    border-left: 1px solid #d1d3d4;
+                }
+            }
+        }
+
+        @include respond-to(desktop) {
+            &:nth-child(5) {
+                a {
+                    border-left: none;
+                }
+            }
+        }
+
+        a {
+            background: #f1f2f2;
+            padding: 25px 38px 21px;
+            border-top: 1px solid #d1d3d4;
+            border-bottom: 1px solid #d1d3d4;
+            border-right: 1px solid #d1d3d4;
+            font-family: 'CentraleSansPro';
+            font-size: 13px;
+            font-weight: bold;
+            color: #808285;
+            text-transform: uppercase;
+            display: inline-block;
+
+            &:hover {
+                color: #fff;
+                background: #2f3d6f;
+            }
+            
+        }
+    }
+    
+}
+
+.contentWrapper {
+    
+    @include respond-to(mobile) {
+        padding: 0;
+    }
+
+    @include respond-to(tablet) {
+        padding: 0 40px;
+    }
+}
+
+.resultsTextContentWrapper {
+    
+        @include respond-to(mobile) {
+            width: 100%;
+            margin: 0 0 30px;
+        }
+    
+        @include respond-to(desktop) {
+            width: 61%;
+            margin: 0 auto;
+        }
+        
+}
+
+.newsList {
+
+    margin: 0;
+    padding: 0;
+
+    li {
+
+        list-style-type: none;
+
+        @include respond-to(mobile) {
+            padding: 26px 22px;
+        }
+    
+        @include respond-to(tablet) {
+            padding: 35px 40px;
+        }
+
+        &:nth-child(odd) {
+            background-color: #fff;
+        }
+
+        &:nth-child(even) {
+            background-color: #f1f2f2;
+        }
+
+        h5 {
+            a {
+                font-family: 'CentraleSansPro';
+                color: #000;
+                font-size: 16px;
+                font-weight: bold;
+                line-height: normal;
+                cursor: pointer;
+            }
+        }
+
+        p {
+            font-family: 'Helvetica';
+            color: #58595b;
+            font-size: 14px;
+            line-height: 21px;
+            font-weight: 300;
+            margin-top: 8px;
+            margin-bottom: 0;
+        }
+
+        &:last-child {
+            margin-bottom: 35px;
+        }
+    }
+    
+}
+
+.techInfoList {
+    background: transparent;
+
+    li {
+        list-style-type: none;
+    }
+}
+
+.tabTextOrangeLink {
+    display: block;
+    padding-left: 26px;
+    position: relative;
+    .wordPDFIcon {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+  
+  .tabTextOrange {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: inherit;
+  }
+  
+  .wordPDFIcon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 13px;
+    width: 13px;
+    height: 17px;
+  }
+
+.resultsDate {
+    span {
+        font-family: 'Helvetica';
+        color: #58595b;
+        font-style: italic;
+        font-size: 12px;
+        line-height: normal;
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+}
+
+button.loadMore {
+    @include respond-to(tablet) {
+      padding: 2px 30px;
+      width: auto;
+    }
+  }
+
+.searchProductsWrapper {
+    margin: 0;
+    padding: 0;
+
+    li {
+        position: relative;
+        list-style-type: none;
+
+        .newH {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+        
+        .new {
+            font-family: 'CentraleSansProBold';
+            color: #e51616;
+            font-size: 12px;
+            text-transform: uppercase;
+            float: left;
+        }
+        
+        .h {
+            border-radius: 50%;
+            background-color: #474e5d;
+            color: #fff;
+            float: right;
+        }
+
+        .productsImageContainer {
+            text-align: center;
+        }
+
+        .productReference {
+            color: #808285;
+            font-family: 'Helvetica';
+            font-size: 12px;
+            font-weight: 300;
+        }
+
+        .productDescription {
+            color: #000;
+            font-family: 'CentraleSansProBold';
+            font-weight: bold;
+        }
+    }
+}
+  
+.searchLiteratureWrapper {
+    margin: 0;
+    padding: 0;
+
+    li {
+        position: relative;
+        list-style-type: none;
+
+        .literatureImageContainer {
+            text-align: center;
+        }
+
+        .literatureTitle {
+            color: #000;
+            font-family: 'CentraleSansProBold';
+            font-weight: bold;
+        }
+    }
+}

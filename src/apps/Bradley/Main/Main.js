@@ -53,6 +53,11 @@ const ApplicationGalleryDetailLoadable = Loadable({
   loading: Loading
 })
 
+const ResultsLoadable = Loadable({
+  loader: () => import('../Pages/Results/Results'),
+  loading: Loading
+})
+
 /*
  * If we need the home page then we render it with a different header
  * and check the home page cookie
@@ -112,6 +117,7 @@ const RouterInner = () => {
         path="/application-gallery/:slug"
         component={ApplicationGalleryDetailLoadable}
       />
+      <Route exact path="/results/:query" component={ResultsLoadable} />
 
       {/* Post Types With Custom Templates */}
       <Route exact path="/post/:slug" component={BlogSinglePostPageLoadable} />
