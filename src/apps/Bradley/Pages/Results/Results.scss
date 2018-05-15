@@ -229,3 +229,48 @@ button.loadMore {
       width: auto;
     }
   }
+
+.searchProductsWrapper {
+    margin: 0;
+    padding: 0;
+
+    li {
+        position: relative;
+        list-style-type: none;
+
+        .newH {
+            position: absolute;
+        }
+        
+        .new {
+            font-family: 'CentraleSansProBold';
+            color: #e51616;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+        
+        .h {
+            border-radius: 50%;
+            background-color: #474e5d;
+            color: #fff;
+        }
+
+        .productsImageContainer {
+            text-align: center;
+        }
+
+        .productReference {
+            color: #808285;
+            font-family: 'Helvetica';
+            font-size: 12px;
+            font-weight: 300;
+        }
+
+        .productDescription {
+            color: #000;
+            font-family: 'CentraleSansProBold';
+            font-weight: bold;
+        }
+    }
+}
+  
