@@ -22,7 +22,7 @@ import type { Location, Match } from 'react-router-dom'
 
 type Props = {
   location: Location,
-  match: {params: { query: string }} & Match
+  match: { params: { query: string } } & Match
 }
 
 type State = {
@@ -39,7 +39,7 @@ type State = {
 }
 
 export default class Results extends Component<Props, State> {
-  constructor(props: Props) {
+  constructor (props: Props) {
     super(props)
 
     this.state = {
@@ -50,7 +50,7 @@ export default class Results extends Component<Props, State> {
     }
   }
 
-  get getTabs() {
+  get getTabs () {
     return {
       product: 'Products',
       literature: 'Literature',
@@ -60,24 +60,24 @@ export default class Results extends Component<Props, State> {
     }
   }
 
-  get tabsComponent() {
+  get tabsComponent () {
     const BASE = './ContentTabs/'
     return {
       product: BASE.concat('Products'),
       technical_info: BASE.concat('TechnicalInfo'),
       literature: BASE.concat('Literature'),
       news: BASE.concat('News'),
-      page: BASE.concat('Default'),
+      page: BASE.concat('Default')
     }
   }
 
-  onPageLoaded(data: ChildFunctionArgs) {
+  onPageLoaded (data: ChildFunctionArgs) {
     console.log(data)
   }
-  
-  componentDidMount() {
+
+  componentDidMount () {
     const Tabs = this.tabsComponent
-    let components = {}
+    const components = {}
 
     Object.keys(Tabs).forEach(tab => {
       components[tab] = Loadable({
@@ -90,65 +90,89 @@ export default class Results extends Component<Props, State> {
     this.setState({ components })
   }
 
-  handleChangeOptionSelect(event: SyntheticInputEvent<HTMLSelectElement>) {
+  handleChangeOptionSelect (event: SyntheticInputEvent<HTMLSelectElement>) {
     console.log(event)
   }
 
-  handleChangeTab(selected: string) {
+  handleChangeTab (selected: string) {
     this.setState({ selected })
   }
 
-  renderOptionsMobile() {
+  renderOptionsMobile () {
     const defaultOption = this.state.selected
-    return <div className={`${style.mobileSelectWtapper}`}>
-      <BCorpSelectField
-        filterState={''}
-        defaultOptionId={0}
-        options={this.getTabs}
-        className={`col1 col2-tablet`}
-        defaultOptionName={defaultOption}
-        handleChange={this.handleChangeOptionSelect.bind(this)}
+    return (
+      <div className={`${style.mobileSelectWtapper}`}>
+        <BCorpSelectField
+          filterState={''}
+          defaultOptionId={0}
+          options={this.getTabs}
+          className={`col1 col2-tablet`}
+          defaultOptionName={defaultOption}
+          handleChange={this.handleChangeOptionSelect.bind(this)}
         />
-    </div>
-  }
-  
-  renderOptions() {
-    return <div className={`row ${defaultStyle.defaultTemplate} ${style.resultsHeaderContainer}`}>
-      <ul className={`${style.resultsOptionsWrapper}`}>
-        {Object.keys(this.getTabs).map((tab, index) => {
-          return <li className={tab === this.state.selected ? 'selected': ''} key={index}>
-            <a onClick={() => { this.handleChangeTab(tab) }}>
-              {this.getTabs[tab]} {tab in this.state.resultCount ? `(${this.state.resultCount[tab].toString()})` : '(0)'}
-            </a>
-          </li>
-        })}
-      </ul>
-    </div>
-  }
-
-  renderHeader() {
-    const query = this.props.match.params.query
-    return <div className={`row ${defaultStyle.defaultTemplate} ${style.resultsHeaderContainer}`}>
-      <div className={`${style.resultsSummary}`}>
-        <p>{`You searched for "${query}" - 613 Results`}</p>
       </div>
-      {renderTitle('Search Results', 'col1')}
-    </div>
+    )
   }
 
-  renderTabs() {
-    return <div className={`${style.itemsWrapper}`}>
-      <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
-        {match =>
-          match ? (
-            this.renderOptionsMobile()  // mobile
-          ) : this.renderOptions()
-        }
-      </Media>
-    </div>
+  renderOptions () {
+    return (
+      <div
+        className={`row ${defaultStyle.defaultTemplate} ${
+          style.resultsHeaderContainer
+        }`}>
+        <ul className={`${style.resultsOptionsWrapper}`}>
+          {Object.keys(this.getTabs).map((tab, index) => {
+            return (
+              <li
+                className={tab === this.state.selected ? 'selected' : ''}
+                key={index}>
+                <a
+                  onClick={() => {
+                    this.handleChangeTab(tab)
+                  }}>
+                  {this.getTabs[tab]}{' '}
+                  {tab in this.state.resultCount
+                    ? `(${this.state.resultCount[tab].toString()})`
+                    : '(0)'}
+                </a>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+    )
   }
 
-  getComponents(ResultComponent) {
+  renderHeader () {
+    const query = this.props.match.params.query
+    return (
+      <div
+        className={`row ${defaultStyle.defaultTemplate} ${
+          style.resultsHeaderContainer
+        }`}>
+        <div className={`${style.resultsSummary}`}>
+          <p>{`You searched for "${query}" - 613 Results`}</p>
+        </div>
+        {renderTitle('Search Results', 'col1')}
+      </div>
+    )
+  }
+
+  renderTabs () {
+    return (
+      <div className={`${style.itemsWrapper}`}>
+        <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
+          {match =>
+            match
+              ? this.renderOptionsMobile() // mobile
+              : this.renderOptions()
+          }
+        </Media>
+      </div>
+    )
+  }
+
+  getComponents (ResultComponent) {
     const posts = this.state.results[this.state.selected] || null
     // const Wrapper = React.createElement(
     //   LoadMore, {
@@ -164,19 +188,25 @@ export default class Results extends Component<Props, State> {
     // )
     // return Wrapper
 
-    return <LoadMore getPosts={this.getResultsByTab.bind(this)} postsPerPage={20}>
-      {(data: ChildFunctionArgs) => {
-        return <ResultComponent {...data} />
-      }}
-    </LoadMore>
+    return (
+      <LoadMore
+        getPosts={(args: GetPostsArgs) => {
+          return this.getResultsByTab(args, this.state.selected)
+        }}
+        postsPerPage={20}>
+        {(data: ChildFunctionArgs) => {
+          return <ResultComponent {...data} />
+        }}
+      </LoadMore>
+    )
   }
 
-  renderResults() {
+  renderResults () {
     const SearchComponent = this.state.components[this.state.selected]
-    return SearchComponent ? this.getComponents(SearchComponent): null
+    return SearchComponent ? this.getComponents(SearchComponent) : null
   }
 
-  async getResultsCount() {
+  async getResultsCount () {
     const url = `${api.baseURL}search`
     const params = {
       keywords: encodeURIComponent(this.props.match.params.query),
@@ -188,10 +218,14 @@ export default class Results extends Component<Props, State> {
     console.log(response)
   }
 
-  getResultsByTab({ postsPerPage, paged, offset }: GetPostsArgs) {
+  getResultsByTab (
+    { postsPerPage, paged, offset }: GetPostsArgs,
+    postType: string
+  ) {
     const url = `${api.baseURL}search`
     const params = {
-      paged, offset,
+      paged,
+      offset,
       posts_per_page: postsPerPage,
       post_type: this.state.selected,
       keywords: encodeURIComponent(this.props.match.params.query)
@@ -206,19 +240,18 @@ export default class Results extends Component<Props, State> {
     })
   }
 
-  render() {
-    return <div>
-      {this.renderHeader()}
-      <div className={`${style.itemsWrapper}`}>
-        {this.renderTabs()}
+  render () {
+    return (
+      <div>
+        {this.renderHeader()}
+        <div className={`${style.itemsWrapper}`}>{this.renderTabs()}</div>
+        <div
+          className={`row ${defaultStyle.defaultTemplate} ${
+            style.contentWrapper
+          }`}>
+          {this.renderResults()}
+        </div>
       </div>
-      <div className={`row ${defaultStyle.defaultTemplate} ${style.contentWrapper}`}>
-        {this.renderResults()}
-      </div>
-    </div>
-  }   
-  
+    )
+  }
 }
-
-
-

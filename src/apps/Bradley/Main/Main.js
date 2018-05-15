@@ -1,5 +1,11 @@
-import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+// @flow
+import * as React from 'react'
+import type {
+  HomePageCookie,
+  HomePageCookieOption
+} from '../../../lib/types/cookie_types'
+import { Switch, Route, Redirect } from 'react-router-dom'
+import { withCookies, Cookies } from 'react-cookie'
 import Loadable from 'react-loadable'
 import Loading from '../../../lib/components/Loading/Loading'
 import Header from '../Header/Header'
@@ -58,6 +64,10 @@ const ResultsLoadable = Loadable({
   loading: Loading
 })
 
+type Props = {
+  cookies: Cookies
+}
+
 /*
  * If we need the home page then we render it with a different header
  * and check the home page cookie
@@ -67,14 +77,24 @@ const ResultsLoadable = Loadable({
  * with the header always included
  * meaning it wont get re-rendered each time the route changes
  */
-const Main = () => {
+const Main = (props: Props) => {
   return (
     <Switch>
       <Route
         exact
         path="/"
-        render={() => {
-          return <HomeLoadable />
+        render={({ history }) => {
+          // check for cookies to take us to the correct home page
+          const cookieName: HomePageCookie = 'BcorpHomePage'
+          const homepage: HomePageCookieOption = props.cookies.get(cookieName)
+
+          if (!homepage) {
+            return <HomeLoadable history={history} />
+          } else if (homepage === 'commercial') {
+            return <Redirect to="/commercial-home" />
+          } else if (homepage === 'industrial') {
+            return <Redirect to="/industrial-home" />
+          }
         }}
       />
 
@@ -219,4 +239,4 @@ const RouterInner = () => {
   )
 }
 
-export default Main
+export default withCookies(Main)

@@ -1,6 +1,12 @@
 // @flow
 import * as React from 'react'
+import type {
+  HomePageCookie,
+  HomePageCookieOption
+} from '../../../../lib/types/cookie_types'
+import type { RouterHistory } from 'react-router-dom'
 import Media from 'react-media'
+import { withCookies, Cookies } from 'react-cookie'
 import { MOBILEMAXWIDTH } from '../../../../globals'
 import commercialWashroomImageSrc from '../../../../images/home-images/water-falling/water-falling@2x.png'
 import emergencySafetyImageSrc from '../../../../images/home-images/water-splashing/water-splashing@2x.png'
@@ -9,7 +15,10 @@ import BCorpBackground from '../../../../lib/components/BCorpBackground/BCorpBac
 import VerticalAlignHelper from '../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import style from './Home.scss'
 
-type Props = {}
+type Props = {
+  cookies: Cookies,
+  history: RouterHistory
+}
 
 type State = {
   washroomNode?: HTMLDivElement,
@@ -21,6 +30,12 @@ class Home extends React.Component<Props, State> {
     super(props)
 
     this.state = {}
+  }
+
+  handleBlackBlueClick (type: HomePageCookieOption) {
+    const cookieName: HomePageCookie = 'BcorpHomePage'
+    this.props.cookies.set(cookieName, type)
+    this.props.history.push('/')
   }
 
   renderHeader (isMobile: boolean) {
@@ -138,6 +153,9 @@ class Home extends React.Component<Props, State> {
                       this.setState({ washroomNode: node })
                     }
                   }}
+                  onClick={() => {
+                    return this.handleBlackBlueClick('commercial')
+                  }}
                   className={`col1 col2-tablet ${style.commercialWashroom}`}>
                   {this.renderCommercialWashroom(match)}
                 </div>
@@ -146,6 +164,9 @@ class Home extends React.Component<Props, State> {
                     if (!this.state.emergencySafetyNode && node) {
                       this.setState({ emergencySafetyNode: node })
                     }
+                  }}
+                  onClick={() => {
+                    return this.handleBlackBlueClick('industrial')
                   }}
                   className={`col1 col2-tablet ${style.emergencySafety}`}>
                   {this.renderEmergencySafety(match)}
@@ -167,4 +188,4 @@ class Home extends React.Component<Props, State> {
   }
 }
 
-export default Home
+export default withCookies(Home)
