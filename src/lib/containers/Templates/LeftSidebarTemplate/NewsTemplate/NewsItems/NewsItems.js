@@ -22,7 +22,13 @@ class NewsItems extends React.Component<Props> {
     const dateQuery = { year: this.props.filters.year }
 
     const client = new CPTApiClient('news')
-    return client.getLatest(postsPerPage, paged, offset, dateQuery)
+    return client.getLatest(
+      postsPerPage,
+      paged,
+      offset,
+      dateQuery,
+      this.props.filters.search
+    )
   }
 
   render () {

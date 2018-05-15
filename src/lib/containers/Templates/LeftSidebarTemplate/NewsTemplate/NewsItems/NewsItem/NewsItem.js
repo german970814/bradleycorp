@@ -1,9 +1,11 @@
 // @flow
 import * as React from 'react'
 import type { BCorpPost } from '../../../../../../types/post_types'
+import { Link } from 'react-router-dom'
 import ReactHtmlParser from 'react-html-parser'
 import moment from 'moment'
 import { getExcerpt } from '../../../../../../bcorpPost'
+import BCorpLink from '../../../../../../components/BCorpLink/BCorpLink'
 import ContentTransformer from '../../../../../Modules/transformContent/transformContent'
 import style from './NewsItem.scss'
 
@@ -12,10 +14,59 @@ type Props = {
 }
 
 class NewsItem extends React.Component<Props> {
+  source: ?{ name: string, url: string }
+  pdf: ?string
+
+  constructor (props: Props) {
+    super(props)
+
+    const { meta } = props.post || {}
+    this.source =
+      meta.news_source && meta.news_source.name && meta.news_source.url
+        ? {
+          name: meta.news_source.name,
+          url: meta.news_source.url
+        }
+        : undefined
+
+    this.pdf = meta.news_pdf && meta.news_pdf !== '' ? meta.news_pdf : undefined
+  }
+
   renderTitle () {
-    return (
-      <h5 className={style.title}>{this.props.post.post.post_title || ''}</h5>
-    )
+    if (this.pdf) {
+      return (
+        <a href={this.pdf} target="_blank">
+          <h5 className={style.title}>
+            {this.props.post.post.post_title || ''}
+          </h5>
+        </a>
+      )
+    } else {
+      const url = (this.source && this.source.url) || this.props.post.post.path
+      return (
+        <BCorpLink
+          url={url}
+          renderInternal={url => {
+            return (
+              <Link to={url}>
+                <h5 className={style.title}>
+                  {this.props.post.post.post_title || ''}
+                </h5>
+              </Link>
+            )
+          }}
+          renderExternal={url => {
+            return (
+              <a href={url} target="_blank">
+                <h5 className={style.title}>
+                  {this.props.post.post.post_title || ''}
+                </h5>
+              </a>
+            )
+          }}
+        />
+      )
+    }
   }
 
   renderMeta () {
@@ -26,16 +77,14 @@ class NewsItem extends React.Component<Props> {
       prettyDate = moment(date).format('MMMM Do YYYY')
     }
 
-    const source =
-      this.props.post.meta && this.props.post.meta.news_category
-        ? ` * ${this.props.post.meta.news_category}`
-        : ''
-
-    return (
-      <div
-        className={`post-meta-data ${
-          style.meta
-        }`}>{`${prettyDate}${source}`}</div>
+    return this.source ? (
+      <a href={this.source.url} target="_blank">
+        <div className={`post-meta-data ${style.meta}`}>{`${prettyDate} * ${
+          this.source.name
+        }`}</div>
+      </a>
+    ) : (
+      <div className={`post-meta-data ${style.meta}`}>{`${prettyDate}`}</div>
     )
   }
 
@@ -59,6 +108,7 @@ class NewsItem extends React.Component<Props> {
   }
 
   render () {
+    console.log(this.props.post.meta)
     return (
       <div className={style.newsItem}>
         {this.renderTitle()}

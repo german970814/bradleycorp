@@ -19,14 +19,16 @@ class CPTApiClient {
     numberPosts: number = 0,
     paged?: number,
     offset?: number,
-    dateQuery?: DateQuery
+    dateQuery?: DateQuery,
+    keywords?: string
   ): AxiosPromise<Array<BCorpPost>> {
     const url = `${api.baseURL}${this.cptName}`
     const params = {
       posts_per_page: numberPosts,
       paged,
       offset,
-      date_query: dateQuery
+      date_query: dateQuery,
+      keywords: encodeURIComponent(keywords || '')
     }
 
     return axios.get(url, { params })
@@ -61,7 +63,8 @@ class CPTApiClient {
     postsPerPage?: number,
     paged?: number,
     offset?: number,
-    dateQuery?: DateQuery
+    dateQuery?: DateQuery,
+    keywords?: string
   ): AxiosPromise<Array<BCorpPost>> {
     const url = `${api.baseURL}${this.cptName}`
     const params = {
@@ -70,7 +73,8 @@ class CPTApiClient {
       posts_per_page: postsPerPage,
       paged,
       offset,
-      date_query: dateQuery
+      date_query: dateQuery,
+      keywords: encodeURIComponent(keywords || '')
     }
 
     return axios.get(url, { params })
@@ -82,7 +86,8 @@ class CPTApiClient {
     postsPerPage?: number,
     paged?: number,
     offset?: number,
-    dateQuery?: DateQuery
+    dateQuery?: DateQuery,
+    keywords?: string
   ): AxiosPromise<Array<BCorpPost>> {
     const url = `${api.baseURL}${this.cptName}`
     const params = {
@@ -91,7 +96,8 @@ class CPTApiClient {
       posts_per_page: postsPerPage,
       paged,
       offset,
-      date_query: dateQuery
+      date_query: dateQuery,
+      keywords: encodeURIComponent(keywords || '')
     }
 
     return axios.get(url, { params })
@@ -105,7 +111,8 @@ class CPTApiClient {
     postsPerPage?: number,
     paged?: number,
     offset?: number,
-    dateQuery?: DateQuery
+    dateQuery?: DateQuery,
+    keywords?: string
   ): AxiosPromise<Array<BCorpPost>> {
     const url = `${api.baseURL}${this.cptName}`
     const params = {
@@ -116,7 +123,8 @@ class CPTApiClient {
       posts_per_page: postsPerPage,
       paged,
       offset,
-      date_query: dateQuery
+      date_query: dateQuery,
+      keywords: encodeURIComponent(keywords || '')
     }
 
     return axios.get(url, { params })
