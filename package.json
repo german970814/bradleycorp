@@ -36,6 +36,7 @@
     "prop-types-extra": "^1.0.1",
     "react": "^16.3.2",
     "react-collapsible": "^2.2.0",
+    "react-cookie": "^2.1.4",
     "react-css-modules": "^4.7.1",
     "react-dom": "^16.3.2",
     "react-html-parser": "^2.0.2",

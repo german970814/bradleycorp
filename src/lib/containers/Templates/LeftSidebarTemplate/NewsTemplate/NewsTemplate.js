@@ -53,6 +53,11 @@ class NewsTemplate extends React.Component<Props, State> {
   }
 
   renderContent () {
+    const category =
+      this.props.data.metaboxes && this.props.data.metaboxes.news_category
+        ? this.props.data.metaboxes.news_category
+        : ''
+
     return (
       <div className={style.newsTemplateContent}>
         <Filters
@@ -61,7 +66,7 @@ class NewsTemplate extends React.Component<Props, State> {
           updateFilters={this.updateFilters.bind(this)}
           yearOptions={this.yearOptions}
         />
-        <NewsItems filters={this.state.filters} />
+        <NewsItems filters={this.state.filters} category={category} />
       </div>
     )
   }

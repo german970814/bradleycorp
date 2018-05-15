@@ -8,7 +8,8 @@ import DefaultTemplate from '../../Templates/DefaultTemplate/DefaultTemplate'
 import style from './DefaultCPTLandingPage.scss'
 
 type Props = {
-  match: Match
+  match: Match,
+  postType: CPTName
 }
 
 type State = {
@@ -24,8 +25,8 @@ class DefaultCPTLandingPage extends Component<Props, State> {
 
   componentDidMount () {
     const { match } = this.props
-    if (match.params.slug && match.params.postType) {
-      this.getPost(match.params.postType, match.params.slug)
+    if (match.params.slug) {
+      this.getPost(this.props.postType, match.params.slug)
     }
   }
 
@@ -34,13 +35,11 @@ class DefaultCPTLandingPage extends Component<Props, State> {
     const nextMatch = nextProps.match
     if (
       nextMatch.params.slug &&
-      nextMatch.params.postType &&
       match.params.slug &&
-      match.params.postType &&
       (nextMatch.params.slug !== match.params.slug ||
-        nextMatch.params.postType !== match.params.postType)
+        nextProps.postType !== this.props.postType)
     ) {
-      this.getPost(nextMatch.params.postType, nextMatch.params.slug)
+      this.getPost(nextProps.postType, nextMatch.params.slug)
     }
   }
 

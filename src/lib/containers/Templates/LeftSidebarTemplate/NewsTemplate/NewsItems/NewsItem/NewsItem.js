@@ -4,8 +4,8 @@ import type { BCorpPost } from '../../../../../../types/post_types'
 import { Link } from 'react-router-dom'
 import ReactHtmlParser from 'react-html-parser'
 import moment from 'moment'
+import { createCPTUrl } from '../../../../../../bcorpUrl'
 import { getExcerpt } from '../../../../../../bcorpPost'
-import BCorpLink from '../../../../../../components/BCorpLink/BCorpLink'
 import ContentTransformer from '../../../../../Modules/transformContent/transformContent'
 import style from './NewsItem.scss'
 
@@ -22,7 +22,9 @@ class NewsItem extends React.Component<Props> {
 
     const { meta } = props.post || {}
     this.source =
-      meta.news_source && meta.news_source.name && meta.news_source.url
+      meta.news_source &&
+      (meta.news_source.name && meta.news_source.name !== '') &&
+      (meta.news_source.url && meta.news_source.url !== '')
         ? {
           name: meta.news_source.name,
           url: meta.news_source.url
@@ -42,29 +44,18 @@ class NewsItem extends React.Component<Props> {
         </a>
       )
     } else {
-      const url = (this.source && this.source.url) || this.props.post.post.path
-      return (
-        <BCorpLink
-          url={url}
-          renderInternal={url => {
-            return (
-              <Link to={url}>
-                <h5 className={style.title}>
-                  {this.props.post.post.post_title || ''}
-                </h5>
-              </Link>
-            )
-          }}
-          renderExternal={url => {
-            return (
-              <a href={url} target="_blank">
-                <h5 className={style.title}>
-                  {this.props.post.post.post_title || ''}
-                </h5>
-              </a>
-            )
-          }}
-        />
+      return this.source && this.source.url ? (
+        <a href={this.source.url} target="_blank">
+          <h5 className={style.title}>
+            {this.props.post.post.post_title || ''}
+          </h5>
+        </a>
+      ) : (
+        <Link to={createCPTUrl(this.props.post.post) || '#'}>
+          <h5 className={style.title}>
+            {this.props.post.post.post_title || ''}
+          </h5>
+        </Link>
       )
     }
   }
@@ -108,7 +99,6 @@ class NewsItem extends React.Component<Props> {
   }
 
   render () {
-    console.log(this.props.post.meta)
     return (
       <div className={style.newsItem}>
         {this.renderTitle()}

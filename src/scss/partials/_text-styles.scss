@@ -308,6 +308,31 @@
   line-height: 1.5;
 }
 
+%home-caption {
+  font-family: $CentraleSansPro;
+  font-size: 11px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 4.4px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+%home-caption-tablet {
+  @extend %home-caption;
+  font-size: 13px;
+  letter-spacing: 5.2px;
+}
+
+%home-caption-desktop {
+  @extend %home-caption;
+  font-size: 16px;
+  letter-spacing: 6.4px;
+}
+
 %legal {
   margin-top: 0;
   margin-bottom: 0;

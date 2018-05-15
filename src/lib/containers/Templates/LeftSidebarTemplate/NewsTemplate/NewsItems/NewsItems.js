@@ -12,7 +12,8 @@ import NewsItem from './NewsItem/NewsItem'
 import style from './NewsItems.scss'
 
 type Props = {
-  filters: FiltersType
+  filters: FiltersType,
+  category?: string
 }
 
 class NewsItems extends React.Component<Props> {
@@ -22,13 +23,24 @@ class NewsItems extends React.Component<Props> {
     const dateQuery = { year: this.props.filters.year }
 
     const client = new CPTApiClient('news')
-    return client.getLatest(
-      postsPerPage,
-      paged,
-      offset,
-      dateQuery,
-      this.props.filters.search
-    )
+
+    return this.props.category && this.props.category !== ''
+      ? client.getByTax(
+        'news_cat',
+        this.props.category,
+        postsPerPage,
+        paged,
+        offset,
+        dateQuery,
+        this.props.filters.search
+      )
+      : client.getLatest(
+        postsPerPage,
+        paged,
+        offset,
+        dateQuery,
+        this.props.filters.search
+      )
   }
 
   render () {

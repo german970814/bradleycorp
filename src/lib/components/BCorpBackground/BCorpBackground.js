@@ -42,12 +42,17 @@ function getBackgroundStyle (props) {
   backgroundStyle.backgroundImage = props.imageSrc
     ? `url(${props.imageSrc})`
     : undefined
-  backgroundStyle.opacity = props.overlay ? props.imageOpacity : 1
+  backgroundStyle.opacity =
+    props.overlay || props.customOverlayColor ? props.imageOpacity : 1
 
   return backgroundStyle
 }
 
 function getOverlay (props) {
+  if (props.customOverlayColor) {
+    return props.customOverlayColor
+  }
+
   const color = lookupColor(props.overlay)
   if (color) {
     return color
@@ -64,6 +69,7 @@ BCorpBackground.propTypes = {
    * The name of the colour to use, as named in the styleguide. Colour must exists in the styleguide
    */
   overlay: PropTypes.oneOf(['', ...Object.keys(styleguideColors)]),
+  customOverlayColor: PropTypes.string,
   /**
    * This defines the default when no image or overlay are found.
    */
