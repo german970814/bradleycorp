@@ -6,7 +6,6 @@ import ReactHtmlParser from 'react-html-parser'
 import moment from 'moment'
 import { createCPTUrl } from '../../../../../../bcorpUrl'
 import { getExcerpt } from '../../../../../../bcorpPost'
-import BCorpLink from '../../../../../../components/BCorpLink/BCorpLink'
 import ContentTransformer from '../../../../../Modules/transformContent/transformContent'
 import style from './NewsItem.scss'
 

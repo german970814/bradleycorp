@@ -3,6 +3,8 @@ import { Switch, Route } from 'react-router-dom'
 import Loadable from 'react-loadable'
 import Loading from '../../../lib/components/Loading/Loading'
 import Home from '../Pages/Home/Home'
+// cant make this loadable because we need to pass it props
+import DefaultCPTLandingPage from '../../../lib/containers/Pages/DefaultCPTLandingPage/DefaultCPTLandingPage'
 
 const CustomizableLoadable = Loadable({
   loader: () =>
@@ -20,12 +22,6 @@ const ProductDetailLoadable = Loadable({
   loader: () => import('../Pages/ProductDetail/ProductDetail'),
   loading: Loading
 })
-
-/* const DefaultCPTLandingPageLoadable = Loadable({
-  loader: () =>
-    import('../../../lib/containers/Pages/DefaultCPTLandingPage/DefaultCPTLandingPage'),
-  loading: Loading
-}) */
 
 const LiteratureAndChipSamplesLoadable = Loadable({
   loader: () =>
@@ -48,16 +44,10 @@ const ApplicationGalleryDetailLoadable = Loadable({
   loading: Loading
 })
 
-// Note: <Route exact path="/post/:slug" component={...} /> ie Blog post route
-// will use right sidebar template and get blog_sidebar
-
 const Main = props => {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
-      {/* Post Types With Custom Templates */}
-      <Route exact path="/post/:slug" component={BlogSinglePostPageLoadable} />
-      <Route exact path="/product/:slug" component={ProductDetailLoadable} />
 
       {/* Specific Custom Pages */}
       <Route
@@ -82,19 +72,79 @@ const Main = props => {
         component={ApplicationGalleryDetailLoadable}
       />
 
+      {/* Post Types With Custom Templates */}
+      <Route exact path="/post/:slug" component={BlogSinglePostPageLoadable} />
+      <Route exact path="/product/:slug" component={ProductDetailLoadable} />
+
+      {/* Post Types With Default Template */}
+      <Route
+        exact
+        path="/literature/:slug"
+        render={({ match }) => {
+          return <DefaultCPTLandingPage match={match} postType={'literature'} />
+        }}
+      />
+      <Route
+        exact
+        path="/chip/:slug"
+        render={({ match }) => {
+          return <DefaultCPTLandingPage match={match} postType={'chip'} />
+        }}
+      />
+      <Route
+        exact
+        path="/case-studies/:slug"
+        render={({ match }) => {
+          return (
+            <DefaultCPTLandingPage match={match} postType={'case-studies'} />
+          )
+        }}
+      />
+      <Route
+        exact
+        path="/technical-info/:slug"
+        render={({ match }) => {
+          return (
+            <DefaultCPTLandingPage match={match} postType={'technical-info'} />
+          )
+        }}
+      />
+      <Route
+        exact
+        path="/news/:slug"
+        render={({ match }) => {
+          return <DefaultCPTLandingPage match={match} postType={'news'} />
+        }}
+      />
+      <Route
+        exact
+        path="/faq/:slug"
+        render={({ match }) => {
+          return <DefaultCPTLandingPage match={match} postType={'faq'} />
+        }}
+      />
+      <Route
+        exact
+        path="/compliance/:slug"
+        render={({ match }) => {
+          return <DefaultCPTLandingPage match={match} postType={'compliance'} />
+        }}
+      />
+      <Route
+        exact
+        path="/video-gallery/:slug"
+        render={({ match }) => {
+          return (
+            <DefaultCPTLandingPage match={match} postType={'video-gallery'} />
+          )
+        }}
+      />
+
       {/* Any other route is sent to the Customizable Page */}
       <Route exact path="/*/page=:page" component={CustomizableLoadable} />
       <Route exact path="/*" component={CustomizableLoadable} />
     </Switch>
   )
 }
-
-/*
-<Route
-  exact
-  path="/:postType/:slug"
-  // component={DefaultCPTLandingPageLoadable}
-/>
-*/
 
 export default Main
