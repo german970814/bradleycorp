@@ -13,7 +13,8 @@ import style from './NewsItems.scss'
 
 type Props = {
   filters: FiltersType,
-  category?: string
+  category?: string,
+  isCaseStudyTemplate?: boolean
 }
 
 class NewsItems extends React.Component<Props> {
@@ -22,9 +23,13 @@ class NewsItems extends React.Component<Props> {
   getPosts ({ postsPerPage, paged, offset }: GetPostsArgs) {
     const dateQuery = { year: this.props.filters.year }
 
-    const client = new CPTApiClient('news')
+    const client = this.props.isCaseStudyTemplate
+      ? new CPTApiClient('case-study')
+      : new CPTApiClient('news')
 
-    return this.props.category && this.props.category !== ''
+    return this.props.category &&
+      this.props.category !== '' &&
+      !this.props.isCaseStudyTemplate
       ? client.getByTax(
         'news_cat',
         this.props.category,
@@ -67,6 +72,7 @@ class NewsItems extends React.Component<Props> {
               shouldDisplayPost={shouldDisplayPost}
               loadNextPage={loadNextPage}
               reset={reset}
+              isCaseStudyTemplate={this.props.isCaseStudyTemplate}
             />
           )
         }}
@@ -75,7 +81,10 @@ class NewsItems extends React.Component<Props> {
   }
 }
 
-type InnerProps = ChildFunctionArgs & { filters: FiltersType }
+type InnerProps = ChildFunctionArgs & {
+  filters: FiltersType,
+  isCaseStudyTemplate?: boolean
+}
 
 class NewsItemsInner extends React.Component<InnerProps> {
   componentWillReceiveProps (nextProps: InnerProps) {
@@ -91,7 +100,13 @@ class NewsItemsInner extends React.Component<InnerProps> {
 
     return this.props.posts.map((post, index) => {
       if (this.props.shouldDisplayPost(index)) {
-        return <NewsItem key={index} post={post} />
+        return (
+          <NewsItem
+            key={index}
+            post={post}
+            caseStudy={this.props.isCaseStudyTemplate}
+          />
+        )
       }
     })
   }

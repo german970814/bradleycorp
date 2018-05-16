@@ -10,7 +10,8 @@ import ContentTransformer from '../../../../../Modules/transformContent/transfor
 import style from './NewsItem.scss'
 
 type Props = {
-  post: BCorpPost
+  post: BCorpPost,
+  caseStudy?: boolean
 }
 
 class NewsItem extends React.Component<Props> {
@@ -22,6 +23,7 @@ class NewsItem extends React.Component<Props> {
 
     const { meta } = props.post || {}
     this.source =
+      !this.props.caseStudy &&
       meta.news_source &&
       (meta.news_source.name && meta.news_source.name !== '') &&
       (meta.news_source.url && meta.news_source.url !== '')
@@ -31,7 +33,15 @@ class NewsItem extends React.Component<Props> {
         }
         : undefined
 
-    this.pdf = meta.news_pdf && meta.news_pdf !== '' ? meta.news_pdf : undefined
+    if (this.props.caseStudy) {
+      this.pdf =
+        meta.case_study_pdf && meta.case_study_pdf !== ''
+          ? meta.case_study_pdf
+          : undefined
+    } else {
+      this.pdf =
+        meta.news_pdf && meta.news_pdf !== '' ? meta.news_pdf : undefined
+    }
   }
 
   renderTitle () {
@@ -61,6 +71,10 @@ class NewsItem extends React.Component<Props> {
   }
 
   renderMeta () {
+    if (this.props.caseStudy) {
+      return null
+    }
+
     let prettyDate = ''
     const postDate = this.props.post.post.post_date
     if (postDate) {

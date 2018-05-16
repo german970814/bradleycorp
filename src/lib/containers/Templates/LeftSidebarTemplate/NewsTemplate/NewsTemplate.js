@@ -67,7 +67,11 @@ class NewsTemplate extends React.Component<Props, State> {
           updateFilters={this.updateFilters.bind(this)}
           yearOptions={this.yearOptions}
         />
-        <NewsItems filters={this.state.filters} category={category} />
+        <NewsItems
+          filters={this.state.filters}
+          category={category}
+          isCaseStudyTemplate={this.props.isCaseStudyTemplate}
+        />
       </div>
     )
   }

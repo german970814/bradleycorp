@@ -41,7 +41,8 @@ type BCorpMeta = {
     name: string,
     url: string
   },
-  news_pdf?: string
+  news_pdf?: string,
+  case_study_pdf?: string
 }
 
 type BCorpPost = {
