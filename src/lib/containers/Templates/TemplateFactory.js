@@ -73,6 +73,9 @@ const TemplateFactory = (props: Props): React.Node => {
     case 'news':
       return <NewsTemplate data={props.data} />
 
+    case 'case-studies':
+      return <NewsTemplate data={props.data} isCaseStudyTemplate />
+
     case 'careers':
       return (
         <CareersTemplate

@@ -19,7 +19,8 @@ type Props = {
     page_id: number,
     page_title: string,
     metaboxes: false | BCorpMetaboxes
-  }
+  },
+  isCaseStudyTemplate?: boolean
 }
 
 type State = {
