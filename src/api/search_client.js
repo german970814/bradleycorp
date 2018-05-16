@@ -34,7 +34,7 @@ const SearchClient = {
     keywords: string,
     postType?: string,
     dateQuery?: DateQuery
-  ): AxiosPromise<Array<BCorpPost>> {
+  ): AxiosPromise<{ [string]: number }> {
     const url = `${api.baseURL}search`
     const params = {
       keywords: encodeURIComponent(keywords || ''),

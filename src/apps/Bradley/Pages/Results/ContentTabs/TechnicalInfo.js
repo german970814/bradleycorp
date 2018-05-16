@@ -14,11 +14,11 @@ export default class SearchTechnicalInfo extends Default {
         {this.props.posts && this.props.posts.map((post, index) => {
           return <li key={index}>
             <FileDownloadLink
-            title={'Link Title'}
-            link={'Article Name Goes Here'}
-            titleClass={`link-orange ${style.tabTextOrange}`}
-            linkClass={style.tabTextOrangeLink}
-            iconClass={style.wordPDFIcon} />
+              title={'Link Title'}
+              link={'Article Name Goes Here'}
+              titleClass={`link-orange ${style.tabTextOrange}`}
+              linkClass={style.tabTextOrangeLink}
+              iconClass={style.wordPDFIcon} />
           </li>
         })}
       </ul>

@@ -3,14 +3,13 @@ import React, { Component } from 'react'
 import style from './../Results.scss'
 
 export default class SearchDefault extends Component {
-  constructor(props) {
-    super(props)
-    if (props.shouldReset) {
-      props.reset()
+  componentDidMount() {
+    if (this.props.shouldReset) {
+      this.props.reset()
     }
   }
-  
-  render(){
+
+  render () {
     return <div className={`${style.resultsTextContentWrapper}`}>
       <ul className={`${style.newsList}`}>
         <li>
