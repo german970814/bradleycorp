@@ -25,7 +25,7 @@ export default class SearchProducts extends Default {
   
   renderColumns (classes: string) {
     return <div className={`${style.searchProductsWrapper}`}>
-      <FillColumns colClasses={[ `${classes}`, `${classes}`, `${classes}`, `${classes}` ]}>
+      <FillColumns colClasses={[ `${classes}`, `${classes}`, `${classes}`, `${classes}`, `${classes}`, `${classes}` ]}>
         {this.renderProducts()}
       </FillColumns>
     </div>
@@ -40,8 +40,8 @@ export default class SearchProducts extends Default {
         ) : <Media query={{ maxWidth: TABLETMAXWIDTH }}>
           { match =>
             match ? (
-              this.renderColumns('col3-tablet')  // tablet
-            ) : this.renderColumns('col4-desktop')  // desktop
+              this.renderColumns('col4-tablet')  // tablet
+            ) : this.renderColumns('col6-desktop')  // desktop
           }
         </Media>
       }

@@ -234,9 +234,10 @@ button.loadMore {
     margin: 0;
     padding: 0;
 
-    li {
+    article {
         position: relative;
-        list-style-type: none;
+        padding: 20px;
+        margin-top: 22px;
 
         .newH {
             position: absolute;
@@ -246,11 +247,13 @@ button.loadMore {
         }
         
         .new {
-            font-family: 'CentraleSansProBold';
+            font-family: 'CentraleSansPro';
             color: #e51616;
-            font-size: 12px;
+            font-weight: bold;
+            font-size: 14px;
             text-transform: uppercase;
             float: left;
+            margin-left: 22px;
         }
         
         .h {
@@ -258,6 +261,10 @@ button.loadMore {
             background-color: #474e5d;
             color: #fff;
             float: right;
+            margin-top: 5px;
+            margin-right: 39px;
+            font-size: 15px;
+        
         }
 
         .productsImageContainer {
