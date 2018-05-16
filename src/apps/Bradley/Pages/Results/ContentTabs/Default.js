@@ -6,7 +6,7 @@ export default class SearchDefault extends Component {
   constructor(props) {
     super(props)
     if (props.shouldReset) {
-      // props.reset()
+      props.reset()
     }
   }
   

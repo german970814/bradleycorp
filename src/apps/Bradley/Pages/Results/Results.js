@@ -9,6 +9,7 @@ import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplat
 import style from './Results.scss'
 import axios from 'axios'
 import api from './../../../../api/index'
+import SearchClient from './../../../../api/search_client'
 
 import Loadable from 'react-loadable'
 import Loading from '../../../../lib/components/Loading/Loading'
@@ -148,32 +149,35 @@ export default class Results extends Component<Props, State> {
     </div>
   }
 
-  getComponents(ResultComponent) {
-    const posts = this.state.results[this.state.selected] || null
-    // const Wrapper = React.createElement(
-    //   LoadMore, {
-    //     // posts,
-    //     getPosts: this.getResultsByTab.bind(this),
-    //     postsPerPage: 20,
-    //     onPageLoaded: (data: ChildFunctionArgs) => {
-    //       this.onPageLoaded(data)
-    //     }
-    //   }, (data: ChildFunctionArgs) => {
-    //     return <ResultComponent {...data} />
-    //   }
-    // )
-    // return Wrapper
-
-    return <LoadMore getPosts={this.getResultsByTab.bind(this)} postsPerPage={20}>
-      {(data: ChildFunctionArgs) => {
-        return <ResultComponent {...data} />
-      }}
-    </LoadMore>
+  wrapComponent(ResultComponent, postType: string) {
+    return React.createElement(
+      LoadMore, {
+        getPosts: (args: GetPostsArgs) => {
+          return this.getResultsByTab(args, postType)
+        },
+        postsPerPage: 20,
+        onPageLoaded: (data: ChildFunctionArgs) => {
+          this.onPageLoaded(data)
+        },
+        onRequestFail: (error: Error) => {
+          if (!(postType in this.state.results)) {
+            this.setState({
+              results: Object.assign({}, this.state.results, {
+                [postType]: []
+              })
+            })
+          }
+        }
+      }, (data: ChildFunctionArgs) => {
+        return <ResultComponent {...data} shouldReset={!(postType in this.state.results)} />
+      }
+    )
   }
 
   renderResults() {
-    const SearchComponent = this.state.components[this.state.selected]
-    return SearchComponent ? this.getComponents(SearchComponent): null
+    const postType = this.state.selected
+    const SearchComponent = this.state.components[postType]
+    return SearchComponent ? this.wrapComponent(SearchComponent, postType): null
   }
 
   async getResultsCount() {
@@ -185,21 +189,16 @@ export default class Results extends Component<Props, State> {
     const response = await axios.get(url, { params })
 
     this.setState({ resultCount: response.data })
-    console.log(response)
   }
 
-  getResultsByTab({ postsPerPage, paged, offset }: GetPostsArgs) {
-    const url = `${api.baseURL}search`
-    const params = {
-      paged, offset,
-      posts_per_page: postsPerPage,
-      post_type: this.state.selected,
-      keywords: encodeURIComponent(this.props.match.params.query)
-    }
-    return axios.get(url, { params }).then(response => {
+  getResultsByTab({ postsPerPage, paged, offset }: GetPostsArgs, postType: string) {
+    return SearchClient.getSearchResults(
+      this.props.match.params.query, postType,
+      postsPerPage, paged, offset
+    ).then(response => {
       this.setState({
         results: Object.assign({}, this.state.results, {
-          [this.state.selected]: response.data
+          [postType]: response.data
         })
       })
       return response
