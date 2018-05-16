@@ -7,6 +7,7 @@ import style from './../Results.scss'
 import Default from './Default'
 
 export default class SearchProducts extends Default {
+
   renderProducts () {
     return this.props.posts && this.props.posts.map((post, ind) => {
       return <article key={ind}>
