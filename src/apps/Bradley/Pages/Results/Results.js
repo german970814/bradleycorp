@@ -175,7 +175,13 @@ export default class Results extends React.Component<Props, State> {
     )
   }
 
+  canLoadMore(selected: TabOption) {
+    return selected in this.state.results ?
+      this.state.resultCount[selected] > this.state.results[selected].length : false
+  }
+
   renderResultsComponent (selected: TabOption, args: ChildFunctionArgs): React.Node {
+    args = { ...args, shouldReset: false, canLoadMore: this.canLoadMore(selected) }
     switch (selected) {
       case 'product':
         return <ProductsResults {...args} />
@@ -195,7 +201,6 @@ export default class Results extends React.Component<Props, State> {
       const response = await SearchClient.getSearchNumberOfResults(
         this.props.match.params.query
       )
-
       this.setState({ resultCount: response.data })
     } catch (error) {
       console.log(error)
@@ -209,15 +214,13 @@ export default class Results extends React.Component<Props, State> {
   }: GetPostsArgs): Promise<void> {
     try {
       const response = await SearchClient.getSearchResults(
-        this.props.match.params.query,
-        this.state.selected,
-        postsPerPage,
-        paged,
-        offset
+        this.props.match.params.query, this.state.selected,
+        postsPerPage, paged, offset
       )
-
-      const results = { ...this.state.results }
-      results[this.state.selected] = response.data
+      const results = {
+        ...this.state.results,
+        [this.state.selected]: response.data
+      }
       this.setState({ ...this.state, results })
     } catch (error) {
       console.log(error)
