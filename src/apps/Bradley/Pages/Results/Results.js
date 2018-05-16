@@ -1,25 +1,35 @@
 // @flow
-import React, { Component } from 'react'
+import * as React from 'react'
 import type { BCorpPost } from '../../../../lib/types/post_types'
-import BCorpSelectField from '../../../../lib/components/BCorpFilterField/BCorpSelectField'
-import Media from 'react-media'
-import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../globals'
-import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
-import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
-import style from './Results.scss'
-import axios from 'axios'
-import api from './../../../../api/index'
-import SearchClient from './../../../../api/search_client'
-
-import Loadable from 'react-loadable'
-import Loading from '../../../../lib/components/Loading/Loading'
-import LoadMore from '../../../../lib/containers/LoadMore/LoadMore'
 import type {
   ChildFunctionArgs,
   GetPostsArgs,
   GetPostsFunctionType
 } from '../../../../lib/containers/LoadMore/LoadMore'
 import type { Location, Match } from 'react-router-dom'
+import type { PostType } from '../../../../lib/types/cpt_types'
+import axios from 'axios'
+import Media from 'react-media'
+import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../globals'
+import BCorpSelectField from '../../../../lib/components/BCorpFilterField/BCorpSelectField'
+import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
+import api from './../../../../api/index'
+import SearchClient from './../../../../api/search_client'
+import LoadMore from '../../../../lib/containers/LoadMore/LoadMore'
+import DefaultResults from './ContentTabs/Default'
+import LiteratureResults from './ContentTabs/Literature'
+import NewsResults from './ContentTabs/News'
+import ProductsResults from './ContentTabs/Products'
+import TechnicalInfoResults from './ContentTabs/TechnicalInfo'
+import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
+import style from './Results.scss'
+
+type TabOption =
+  | (PostType & 'product')
+  | 'literature'
+  | 'technical_info'
+  | 'news'
+  | 'page'
 
 type Props = {
   location: Location,
@@ -27,25 +37,21 @@ type Props = {
 }
 
 type State = {
-  selected: string,
-  components: {
-    [string]: Object
-  },
+  selected: TabOption,
   resultCount: {
-    [string]: Number
+    [string]: number
   },
   results: {
-    [string]: Array<BCorpPost>
+    [string: TabOption]: Array<BCorpPost>
   }
 }
 
-export default class Results extends Component<Props, State> {
+export default class Results extends React.Component<Props, State> {
   constructor (props: Props) {
     super(props)
 
     this.state = {
       selected: 'product',
-      components: {},
       resultCount: {},
       results: {}
     }
@@ -61,41 +67,19 @@ export default class Results extends Component<Props, State> {
     }
   }
 
-  get tabsComponent () {
-    const BASE = './ContentTabs/'
-    return {
-      product: BASE.concat('Products'),
-      technical_info: BASE.concat('TechnicalInfo'),
-      literature: BASE.concat('Literature'),
-      news: BASE.concat('News'),
-      page: BASE.concat('Default')
-    }
-  }
-
   onPageLoaded (data: ChildFunctionArgs) {
     console.log(data)
   }
 
   componentDidMount () {
-    const Tabs = this.tabsComponent
-    const components = {}
-
-    Object.keys(Tabs).forEach(tab => {
-      components[tab] = Loadable({
-        loader: () => import(`${Tabs[tab]}`),
-        loading: Loading
-      })
-    })
-
     this.getResultsCount()
-    this.setState({ components })
   }
 
   handleChangeOptionSelect (event: SyntheticInputEvent<HTMLSelectElement>) {
     console.log(event)
   }
 
-  handleChangeTab (selected: string) {
+  handleChangeTab (selected: TabOption) {
     this.setState({ selected })
   }
 
@@ -173,78 +157,74 @@ export default class Results extends Component<Props, State> {
     )
   }
 
-  wrapComponent (ResultComponent, postType: string) {
-    return React.createElement(
-      LoadMore,
-      {
-        getPosts: (args: GetPostsArgs) => {
-          return this.getResultsByTab(args, postType)
-        },
-        postsPerPage: 20,
-        onPageLoaded: (data: ChildFunctionArgs) => {
-          this.onPageLoaded(data)
-        },
-        onRequestFail: (error: Error) => {
-          if (!(postType in this.state.results)) {
-            this.setState({
-              results: Object.assign({}, this.state.results, {
-                [postType]: []
-              })
-            })
-          }
-        }
-      },
-      (data: ChildFunctionArgs) => {
-        return (
-          <ResultComponent
-            {...data}
-            shouldReset={!(postType in this.state.results)}
-          />
-        )
-      }
+  renderResults () {
+    return (
+      <div className={style[this.state.selected]}>
+        <LoadMore
+          getPosts={(args: GetPostsArgs) => {
+            return this.getResultsByTab(args)
+          }}
+          postsPerPage={20}>
+          {this.renderResultsComponent()}
+        </LoadMore>
+      </div>
     )
   }
 
-  renderResults () {
-    const postType = this.state.selected
-    const SearchComponent = this.state.components[postType]
-    return SearchComponent
-      ? this.wrapComponent(SearchComponent, postType)
-      : null
-  }
-
-  async getResultsCount () {
-    const url = `${api.baseURL}search`
-    const params = {
-      keywords: encodeURIComponent(this.props.match.params.query),
-      numbers_only: 'true'
+  renderResultsComponent () {
+    if (this.state.selected === 'product') {
+      return <ProductsResults />
     }
-    const response = await axios.get(url, { params })
-
-    this.setState({ resultCount: response.data })
+    if (this.state.selected === 'literature') {
+      return <LiteratureResults />
+    }
+    if (this.state.selected === 'technical_info') {
+      return <TechnicalInfoResults />
+    }
+    if (this.state.selected === 'news') {
+      return <NewsResults />
+    } else {
+      return <DefaultResults />
+    }
   }
 
-  getResultsByTab (
-    { postsPerPage, paged, offset }: GetPostsArgs,
-    postType: string
-  ) {
-    return SearchClient.getSearchResults(
-      this.props.match.params.query,
-      postType,
-      postsPerPage,
-      paged,
-      offset
-    ).then(response => {
-      this.setState({
-        results: Object.assign({}, this.state.results, {
-          [postType]: response.data
-        })
-      })
-      return response
-    })
+  async getResultsCount (): Promise<void> {
+    try {
+      const response = await SearchClient.getSearchNumberOfResults(
+        this.props.match.params.query
+      )
+
+      this.setState({ resultCount: response.data })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async getResultsByTab ({
+    postsPerPage,
+    paged,
+    offset
+  }: GetPostsArgs): Promise<void> {
+    try {
+      const response = await SearchClient.getSearchResults(
+        this.props.match.params.query,
+        this.state.selected,
+        postsPerPage,
+        paged,
+        offset
+      )
+
+      const results = { ...this.state.results }
+      results[this.state.selected] = response.data
+
+      this.setState({ ...this.state, results })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   render () {
+    console.log(this.state)
     return (
       <div>
         {this.renderHeader()}
