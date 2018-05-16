@@ -1,34 +1,36 @@
 // @flow
-import React, { Component } from 'react'
+import * as React from 'react'
 import style from './../Results.scss'
+import type { ChildFunctionArgs } from '../../../../../lib/containers/LoadMore/LoadMore'
 
-export default class SearchDefault extends Component {
+type Props = {
+  shouldReset: boolean
+} & ChildFunctionArgs
+
+export default class SearchDefault extends React.Component<Props> {
   componentDidMount() {
     if (this.props.shouldReset) {
       this.props.reset()
     }
   }
 
+  renderLoadMoreButton(): ?React.Node {
+    if (this.props.canLoadMore) {
+      return <button onClick={this.props.loadNextPage}>Load More</button>
+    }
+  }
+
   render () {
     return <div className={`${style.resultsTextContentWrapper}`}>
       <ul className={`${style.newsList}`}>
-        <li>
-          <h5><a href="#">Article Name Goes Here</a></h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        </li>
-        <li>
-          <h5><a href="#">Article Name Goes Here</a></h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        </li>
-        <li>
-          <h5><a href="#">Article Name Goes Here</a></h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </li>
-        <li>
-          <h5><a href="#">Article Name Goes Here</a></h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </li>
+        {this.props.posts && this.props.posts.map((post, index) => {
+          return <li key={index}>
+            <h5><a href="#">{post.post.post_title}</a></h5>
+            <p>{post.meta.meta_description}</p>
+          </li>
+        })}
       </ul>
+      {this.renderLoadMoreButton()}
     </div>
   }
 }
