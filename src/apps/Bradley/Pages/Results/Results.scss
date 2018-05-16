@@ -232,11 +232,11 @@ button.loadMore {
 
 .searchProductsWrapper {
     margin: 0;
-    padding: 0;
+    padding: 22px 0 0;
 
-    li {
+    article {
         position: relative;
-        list-style-type: none;
+        padding: 0 20px 10px;
 
         .newH {
             position: absolute;
@@ -246,11 +246,13 @@ button.loadMore {
         }
         
         .new {
-            font-family: 'CentraleSansProBold';
+            font-family: 'CentraleSansPro';
             color: #e51616;
-            font-size: 12px;
+            font-weight: bold;
+            font-size: 14px;
             text-transform: uppercase;
             float: left;
+            margin-left: 22px;
         }
         
         .h {
@@ -258,10 +260,15 @@ button.loadMore {
             background-color: #474e5d;
             color: #fff;
             float: right;
+            margin-top: 5px;
+            margin-right: 39px;
+            font-size: 15px;
+        
         }
 
         .productsImageContainer {
             text-align: center;
+            margin-bottom: 4px;
         }
 
         .productReference {
@@ -269,12 +276,18 @@ button.loadMore {
             font-family: 'Helvetica';
             font-size: 12px;
             font-weight: 300;
+            text-transform: capitalize;
+            text-align: center;
+            line-height: normal;
         }
 
         .productDescription {
             color: #000;
-            font-family: 'CentraleSansProBold';
+            font-family: 'CentraleSansPro';
             font-weight: bold;
+            line-height: normal;
+            text-align: center;
+            margin-top: 8px;
         }
     }
 }
