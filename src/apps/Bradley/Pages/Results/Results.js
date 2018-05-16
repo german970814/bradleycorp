@@ -158,33 +158,35 @@ export default class Results extends React.Component<Props, State> {
   }
 
   renderResults () {
+    const { selected } = this.state
     return (
-      <div className={style[this.state.selected]}>
+      <div className={style[selected]}>
         <LoadMore
+          posts={this.state.results[selected]}
           getPosts={(args: GetPostsArgs) => {
             return this.getResultsByTab(args)
           }}
           postsPerPage={20}>
-          {this.renderResultsComponent()}
+          {(args: ChildFunctionArgs) => {
+            return this.renderResultsComponent(selected, args)
+          }}
         </LoadMore>
       </div>
     )
   }
 
-  renderResultsComponent () {
-    if (this.state.selected === 'product') {
-      return <ProductsResults />
-    }
-    if (this.state.selected === 'literature') {
-      return <LiteratureResults />
-    }
-    if (this.state.selected === 'technical_info') {
-      return <TechnicalInfoResults />
-    }
-    if (this.state.selected === 'news') {
-      return <NewsResults />
-    } else {
-      return <DefaultResults />
+  renderResultsComponent (selected: TabOption, args: ChildFunctionArgs): React.Node {
+    switch (selected) {
+      case 'product':
+        return <ProductsResults {...args} />
+      case 'literature':
+        return <LiteratureResults {...args} />
+      case 'technical_info':
+        return <TechnicalInfoResults {...args} />
+      case 'news':
+        return <NewsResults {...args} />
+      default:
+        return <DefaultResults {...args} />
     }
   }
 
@@ -216,7 +218,6 @@ export default class Results extends React.Component<Props, State> {
 
       const results = { ...this.state.results }
       results[this.state.selected] = response.data
-
       this.setState({ ...this.state, results })
     } catch (error) {
       console.log(error)
@@ -224,7 +225,6 @@ export default class Results extends React.Component<Props, State> {
   }
 
   render () {
-    console.log(this.state)
     return (
       <div>
         {this.renderHeader()}
