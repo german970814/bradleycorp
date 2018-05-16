@@ -113,7 +113,7 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
     const initOffset =
       parseInt(this.props.match.params.page) * this.props.postsPerPage || 0
 
-    const initPaged = ('paged' in props && props.paged) ? props.paged: (initOffset === 0 ? 1 : 0)
+    const initPaged = ('paged' in props && props.paged) ? props.paged : (initOffset === 0 ? 1 : 0)
 
     this.state = { loading: true, paged: initPaged, offset: initOffset }
     if ('posts' in props && props.posts) {

@@ -22,7 +22,7 @@ export default class SearchProducts extends Default {
       </article>
     })
   }
-  
+
   renderColumns (classes: string) {
     return <div className={`${style.searchProductsWrapper}`}>
       <FillColumns colClasses={[ `${classes}`, `${classes}`, `${classes}`, `${classes}` ]}>
@@ -30,22 +30,22 @@ export default class SearchProducts extends Default {
       </FillColumns>
     </div>
   }
-  
+
   render () {
     return <div>
       <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
-      { match =>
-        match ? (
-          this.renderColumns('col2')  // mobile
-        ) : <Media query={{ maxWidth: TABLETMAXWIDTH }}>
-          { match =>
-            match ? (
-              this.renderColumns('col3-tablet')  // tablet
-            ) : this.renderColumns('col4-desktop')  // desktop
-          }
-        </Media>
-      }
+        { match =>
+          match ? (
+            this.renderColumns('col2') // mobile
+          ) : <Media query={{ maxWidth: TABLETMAXWIDTH }}>
+            { match =>
+              match ? (
+                this.renderColumns('col3-tablet') // tablet
+              ) : this.renderColumns('col4-desktop') // desktop
+            }
+          </Media>
+        }
       </Media>
     </div>
-  } 
+  }
 }

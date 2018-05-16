@@ -23,7 +23,7 @@ import type { Location, Match } from 'react-router-dom'
 
 type Props = {
   location: Location,
-  match: {params: { query: string }} & Match
+  match: { params: { query: string } } & Match
 }
 
 type State = {
@@ -40,7 +40,7 @@ type State = {
 }
 
 export default class Results extends Component<Props, State> {
-  constructor(props: Props) {
+  constructor (props: Props) {
     super(props)
 
     this.state = {
@@ -51,7 +51,7 @@ export default class Results extends Component<Props, State> {
     }
   }
 
-  get getTabs() {
+  get getTabs () {
     return {
       product: 'Products',
       literature: 'Literature',
@@ -61,24 +61,24 @@ export default class Results extends Component<Props, State> {
     }
   }
 
-  get tabsComponent() {
+  get tabsComponent () {
     const BASE = './ContentTabs/'
     return {
       product: BASE.concat('Products'),
       technical_info: BASE.concat('TechnicalInfo'),
       literature: BASE.concat('Literature'),
       news: BASE.concat('News'),
-      page: BASE.concat('Default'),
+      page: BASE.concat('Default')
     }
   }
 
-  onPageLoaded(data: ChildFunctionArgs) {
+  onPageLoaded (data: ChildFunctionArgs) {
     console.log(data)
   }
-  
-  componentDidMount() {
+
+  componentDidMount () {
     const Tabs = this.tabsComponent
-    let components = {}
+    const components = {}
 
     Object.keys(Tabs).forEach(tab => {
       components[tab] = Loadable({
@@ -91,67 +91,92 @@ export default class Results extends Component<Props, State> {
     this.setState({ components })
   }
 
-  handleChangeOptionSelect(event: SyntheticInputEvent<HTMLSelectElement>) {
+  handleChangeOptionSelect (event: SyntheticInputEvent<HTMLSelectElement>) {
     console.log(event)
   }
 
-  handleChangeTab(selected: string) {
+  handleChangeTab (selected: string) {
     this.setState({ selected })
   }
 
-  renderOptionsMobile() {
+  renderOptionsMobile () {
     const defaultOption = this.state.selected
-    return <div className={`${style.mobileSelectWtapper}`}>
-      <BCorpSelectField
-        filterState={''}
-        defaultOptionId={0}
-        options={this.getTabs}
-        className={`col1 col2-tablet`}
-        defaultOptionName={defaultOption}
-        handleChange={this.handleChangeOptionSelect.bind(this)}
+    return (
+      <div className={`${style.mobileSelectWtapper}`}>
+        <BCorpSelectField
+          filterState={''}
+          defaultOptionId={0}
+          options={this.getTabs}
+          className={`col1 col2-tablet`}
+          defaultOptionName={defaultOption}
+          handleChange={this.handleChangeOptionSelect.bind(this)}
         />
-    </div>
-  }
-  
-  renderOptions() {
-    return <div className={`row ${defaultStyle.defaultTemplate} ${style.resultsHeaderContainer}`}>
-      <ul className={`${style.resultsOptionsWrapper}`}>
-        {Object.keys(this.getTabs).map((tab, index) => {
-          return <li className={tab === this.state.selected ? 'selected': ''} key={index}>
-            <a onClick={() => { this.handleChangeTab(tab) }}>
-              {this.getTabs[tab]} {tab in this.state.resultCount ? `(${this.state.resultCount[tab].toString()})` : '(0)'}
-            </a>
-          </li>
-        })}
-      </ul>
-    </div>
-  }
-
-  renderHeader() {
-    const query = this.props.match.params.query
-    return <div className={`row ${defaultStyle.defaultTemplate} ${style.resultsHeaderContainer}`}>
-      <div className={`${style.resultsSummary}`}>
-        <p>{`You searched for "${query}" - 613 Results`}</p>
       </div>
-      {renderTitle('Search Results', 'col1')}
-    </div>
+    )
   }
 
-  renderTabs() {
-    return <div className={`${style.itemsWrapper}`}>
-      <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
-        {match =>
-          match ? (
-            this.renderOptionsMobile()  // mobile
-          ) : this.renderOptions()
-        }
-      </Media>
-    </div>
+  renderOptions () {
+    return (
+      <div
+        className={`row ${defaultStyle.defaultTemplate} ${
+          style.resultsHeaderContainer
+        }`}>
+        <ul className={`${style.resultsOptionsWrapper}`}>
+          {Object.keys(this.getTabs).map((tab, index) => {
+            return (
+              <li
+                className={tab === this.state.selected ? 'selected' : ''}
+                key={index}>
+                <a
+                  onClick={() => {
+                    this.handleChangeTab(tab)
+                  }}>
+                  {this.getTabs[tab]}{' '}
+                  {tab in this.state.resultCount
+                    ? `(${this.state.resultCount[tab].toString()})`
+                    : '(0)'}
+                </a>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+    )
   }
 
-  wrapComponent(ResultComponent, postType: string) {
+  renderHeader () {
+    const query = this.props.match.params.query
+    return (
+      <div
+        className={`row ${defaultStyle.defaultTemplate} ${
+          style.resultsHeaderContainer
+        }`}>
+        <div className={`${style.resultsSummary}`}>
+          <p>{`You searched for "${query}" - 613 Results`}</p>
+        </div>
+        {renderTitle('Search Results', 'col1')}
+      </div>
+    )
+  }
+
+  renderTabs () {
+    return (
+      <div className={`${style.itemsWrapper}`}>
+        <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
+          {match =>
+            match
+              ? this.renderOptionsMobile() // mobile
+              : this.renderOptions()
+          }
+        </Media>
+      </div>
+    )
+  }
+
+  wrapComponent (ResultComponent, postType: string) {
     return React.createElement(
-      LoadMore, {
+      LoadMore,
+      {
         getPosts: (args: GetPostsArgs) => {
           return this.getResultsByTab(args, postType)
         },
@@ -168,19 +193,27 @@ export default class Results extends Component<Props, State> {
             })
           }
         }
-      }, (data: ChildFunctionArgs) => {
-        return <ResultComponent {...data} shouldReset={!(postType in this.state.results)} />
+      },
+      (data: ChildFunctionArgs) => {
+        return (
+          <ResultComponent
+            {...data}
+            shouldReset={!(postType in this.state.results)}
+          />
+        )
       }
     )
   }
 
-  renderResults() {
+  renderResults () {
     const postType = this.state.selected
     const SearchComponent = this.state.components[postType]
-    return SearchComponent ? this.wrapComponent(SearchComponent, postType): null
+    return SearchComponent
+      ? this.wrapComponent(SearchComponent, postType)
+      : null
   }
 
-  async getResultsCount() {
+  async getResultsCount () {
     const url = `${api.baseURL}search`
     const params = {
       keywords: encodeURIComponent(this.props.match.params.query),
@@ -191,10 +224,16 @@ export default class Results extends Component<Props, State> {
     this.setState({ resultCount: response.data })
   }
 
-  getResultsByTab({ postsPerPage, paged, offset }: GetPostsArgs, postType: string) {
+  getResultsByTab (
+    { postsPerPage, paged, offset }: GetPostsArgs,
+    postType: string
+  ) {
     return SearchClient.getSearchResults(
-      this.props.match.params.query, postType,
-      postsPerPage, paged, offset
+      this.props.match.params.query,
+      postType,
+      postsPerPage,
+      paged,
+      offset
     ).then(response => {
       this.setState({
         results: Object.assign({}, this.state.results, {
@@ -205,19 +244,18 @@ export default class Results extends Component<Props, State> {
     })
   }
 
-  render() {
-    return <div>
-      {this.renderHeader()}
-      <div className={`${style.itemsWrapper}`}>
-        {this.renderTabs()}
+  render () {
+    return (
+      <div>
+        {this.renderHeader()}
+        <div className={`${style.itemsWrapper}`}>{this.renderTabs()}</div>
+        <div
+          className={`row ${defaultStyle.defaultTemplate} ${
+            style.contentWrapper
+          }`}>
+          {this.renderResults()}
+        </div>
       </div>
-      <div className={`row ${defaultStyle.defaultTemplate} ${style.contentWrapper}`}>
-        {this.renderResults()}
-      </div>
-    </div>
-  }   
-  
+    )
+  }
 }
-
-
-
