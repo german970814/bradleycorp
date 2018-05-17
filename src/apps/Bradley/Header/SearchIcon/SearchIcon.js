@@ -1,12 +1,27 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import { updateBlur } from '../../App/updateBlur'
 import Lightbox from '../../../../lib/containers/Lightbox/Lightbox'
 import VerticalAlignHelper from '../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import style from './SearchIcon.scss'
 
 class SearchIcon extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      search: ''
+    }
+  }
   handleClick (e) {
     e.stopPropagation()
+  }
+
+  searchApplication(event) {
+    event.preventDefault()
+    event.stopPropagation()
+    this.state.search && this.props.history.push(`/results/${this.state.search}`)
+    updateBlur(false)
   }
 
   render () {
@@ -39,12 +54,14 @@ class SearchIcon extends Component {
                 name={'search'}
                 className={style.lightboxSearchFormInput}
                 onClick={this.handleClick.bind(this)}
+                onInput={(e) => {this.setState({ search: e.target.value })}}
               />
 
               <input
                 type={'image'}
                 src={require('../../../../images/magnifying-glass/magnifying-glass-white@2x.png')}
                 className={style.submit}
+                onClick={this.searchApplication.bind(this)}
               />
             </form>
           </React.Fragment>
@@ -54,4 +71,4 @@ class SearchIcon extends Component {
   }
 }
 
-export default SearchIcon
+export default withRouter(SearchIcon)

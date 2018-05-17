@@ -90,10 +90,6 @@ export default class Results extends React.Component<Props, State> {
     return undefined
   }
 
-  onPageLoaded (data: ChildFunctionArgs) {
-    console.log(data)
-  }
-
   componentDidMount () {
     this.getResultsCount()
   }
@@ -114,8 +110,10 @@ export default class Results extends React.Component<Props, State> {
   }
 
   componentDidUpdate (prevProps: Props, prevState: State) {
-    if (prevProps.match.params.tab !== this.props.match.params.tab) {
-
+    if (prevProps.match.params.query !== this.props.match.params.query) {
+      this.setState({ results: {} }, () => {
+        this.getResultsCount()
+      })
     }
   }
 
@@ -211,9 +209,12 @@ export default class Results extends React.Component<Props, State> {
   }
 
   getTotalResults(): ?number {
+    if (!Object.keys(this.state.resultCount).length) {
+      return null
+    }
     return Object.keys(this.getTabs).map(postType => {
       return postType in this.state.resultCount ? this.state.resultCount[postType] : 0
-    }).reduce((first, second) => { return first + second }) || null
+    }).reduce((first, second) => { return first + second })
   }
 
   canLoadMore(selected: TabOption) {
@@ -261,7 +262,12 @@ export default class Results extends React.Component<Props, State> {
         }
       }
     } catch (error) {
-      console.log(error)
+      const resultCount = {}
+
+      for (let tab in this.getTabs) {
+        resultCount[tab] = 0
+      }
+      this.setState({ resultCount })
     }
   }
 
