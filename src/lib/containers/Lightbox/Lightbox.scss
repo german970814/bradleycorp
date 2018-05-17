@@ -25,8 +25,8 @@ $lightboxHeightPerc: $lightboxHeight + %;
   text-align: left;
 
   @include respond-to(tablet) {
-    padding: 0 ((100 - $lightboxWidthTabletDesktop)/2 + %);
-    width: $lightboxWidthTabletDesktop + %;
+    // padding: 0 ((100 - $lightboxWidthTabletDesktop)/2 + %);
+    // width: $lightboxWidthTabletDesktop + %;
     text-align: center;
   }
 }
