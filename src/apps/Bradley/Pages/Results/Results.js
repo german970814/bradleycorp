@@ -9,6 +9,7 @@ import Loading from '../../../../lib/components/Loading/Loading'
 import type { BCorpPost } from '../../../../lib/types/post_types'
 import LoadMore from '../../../../lib/containers/LoadMore/LoadMore'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../globals'
+import NoResults from '../../../../lib/components/NoResuts/NoResults'
 import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
 import BCorpSelectField from '../../../../lib/components/BCorpFilterField/BCorpSelectField'
 import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
@@ -173,6 +174,9 @@ export default class Results extends React.Component<Props, State> {
 
   renderResults () {
     const selected = this.activeTab
+    if (this.getTotalResults() === 0) {
+      return <NoResults message={'No results match your search'} />
+    }
     return selected ? <div className={style[selected]}>
       <LoadMore
         posts={this.state.results[selected]}
