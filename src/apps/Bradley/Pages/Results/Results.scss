@@ -77,8 +77,9 @@
 }
 
 .contentWrapper {
-    
+    min-height: 350px;
     margin-bottom: 60px;
+    position: relative;
 
     @include respond-to(mobile) {
         padding: 0;
