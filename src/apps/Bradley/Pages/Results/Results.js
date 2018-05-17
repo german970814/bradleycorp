@@ -109,7 +109,7 @@ export default class Results extends React.Component<Props, State> {
           {Object.keys(this.getTabs).map((tab, index) => {
             return (
               <li
-                className={tab === this.state.selected ? 'selected' : ''}
+                className={tab === this.state.selected ? `${style.selected}` : ''}
                 key={index}>
                 <a
                   onClick={() => {

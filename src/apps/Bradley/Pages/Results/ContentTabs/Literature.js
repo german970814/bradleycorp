@@ -13,7 +13,7 @@ export default class SearchLiterature extends Default {
         <div className={`${style.literatureImageContainer}`}>
           <img src={require('../../../../../images/results/literature-image.jpg')}/>
         </div>
-        <h6 className={`${style.literatureTitle}`}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h6>
+        <h6 className={`${style.literatureTitle}`}>Lorem ipsum dolor sit</h6>
       </article>
     })
   }
@@ -21,7 +21,7 @@ export default class SearchLiterature extends Default {
   renderColumns (classes: string) {
     return <div className={`${style.searchLiteratureWrapper}`}>
       <FillColumns colClasses={[
-        `${classes}`, `${classes}`, `${classes}`, `${classes}`
+        `${classes}`, `${classes}`, `${classes}`, `${classes}`, `${classes}`, `${classes}`
       ]}>
         {this.renderLiterature()}
       </FillColumns>
