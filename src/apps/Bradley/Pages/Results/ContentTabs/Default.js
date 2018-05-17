@@ -39,7 +39,7 @@ export default class SearchDefault extends React.Component<Props> {
       <div>
         {this.renderContent()}
         {this.renderLoadMoreButton()}
-    </div>
+      </div>
     ) : <Loading />
   }
 }

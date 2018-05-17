@@ -251,9 +251,13 @@ export default class Results extends React.Component<Props, State> {
         this.props.match.params.query, activeTab,
         postsPerPage, paged, offset
       )
+      let data = response.data
+      if (Array.isArray(this.state.results[activeTab])) {
+        data = [...this.state.results[activeTab], ...data]
+      }
       const results = {
         ...this.state.results,
-        [activeTab]: response.data
+        [activeTab]: data
       }
       this.setState({ ...this.state, results })
     } catch (error) {

@@ -43,6 +43,12 @@ type Props = {
   paged?: number,
   onPageLoaded?: ChildFunctionArgs => void,
   onRequestFail?: (Error) => void,
+  onResponse?: {
+    posts: Array<BcorpPost>,
+    postsPerPage: number,
+    paged: number,
+    offset: number
+  } => void,
   // passed by withRouter HOC
   match: Match,
   history: RouterHistory
@@ -184,7 +190,7 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
   }
 
   loadNextPage () {
-    if (this.canLoadMore()) {
+    if (this.props.posts || this.canLoadMore()) {
       const paged = this.state.paged + 1
       return this.setState({ paged })
     }
