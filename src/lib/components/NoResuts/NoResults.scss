@@ -6,15 +6,20 @@
 .noResultsWrapper {
     position: absolute;
     text-align: center;
-    width: 100%;
     padding-top: 70px;
 
     @include respond-to(mobile) {
         padding-top: 30px;
+        width: 100%;
     }
 
     @include respond-to(tablet) {
         padding-top: 70px;
+        width: 90%;
+    }
+
+    @include respond-to(desktop) {
+        width: 100%;
     }
 
     h1 {
