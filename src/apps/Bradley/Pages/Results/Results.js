@@ -118,16 +118,23 @@ export default class Results extends React.Component<Props, State> {
   }
 
   renderOptionsMobile () {
-    const defaultOption = this.getTabs[this.activeTab]
+    const options = {}
+    for (let tab in this.getTabs) {
+      const count = this.state.resultCount[tab] || 0
+      if (count >= 1) {
+        options[tab] = `${this.getTabs[tab]} (${count})`
+      }
+    }
     return (
       <div className={`${style.mobileSelectWtapper}`}>
         <BCorpSelectField
-          filterState={''}
           defaultOptionId={0}
-          options={this.getTabs}
-          className={`col1 col2-tablet`}
           defaultOptionName={''}
+          options={options}
+          filterState={this.activeTab}
+          className={`col1 col2-tablet`}
           handleChange={this.handleChangeOptionSelect.bind(this)}
+          notShowDefault
         />
       </div>
     )
