@@ -32,7 +32,7 @@
 
 .mobileSelectWtapper {
     background-color: #2e3c6e;
-    padding: 20px 0;
+    padding: 20px 22px;
     min-height: 30px;
 
 }
@@ -45,13 +45,6 @@
         list-style-type: none;
         display: inline-block;
 
-        &:first-child {
-
-            a {
-                border-left: 1px solid #d1d3d4;
-            }
-        }
-
         &.selected {
             
             a {
@@ -59,36 +52,19 @@
                 background: #2f3d6f;
             }
         }
-
-        @include respond-to(tablet) {
-            &:nth-child(5) {
-                a {
-                    margin-top: -1px;
-                    border-left: 1px solid #d1d3d4;
-                }
-            }
-        }
-
-        @include respond-to(desktop) {
-            &:nth-child(5) {
-                a {
-                    border-left: none;
-                }
-            }
-        }
-
+        
         a {
             background: #f1f2f2;
             padding: 25px 38px 21px;
-            border-top: 1px solid #d1d3d4;
-            border-bottom: 1px solid #d1d3d4;
-            border-right: 1px solid #d1d3d4;
+            border: 1px solid #d1d3d4;
             font-family: 'CentraleSansPro';
             font-size: 13px;
             font-weight: bold;
             color: #808285;
             text-transform: uppercase;
             display: inline-block;
+            margin-left: -1px;
+            margin-top: -1px;
 
             &:hover {
                 color: #fff;
@@ -102,6 +78,8 @@
 
 .contentWrapper {
     
+    margin-bottom: 60px;
+
     @include respond-to(mobile) {
         padding: 0;
     }
@@ -238,6 +216,7 @@ button.loadMore {
         position: relative;
         padding: 0 20px 25px;
         height: 309px;
+        border: 1px solid transparent;
 
         img {
             max-width: 100%;
@@ -253,6 +232,7 @@ button.loadMore {
             top: 20px;
             left: 0;
             width: 100%;
+            z-index: 9999;
         }
         
         .new {
@@ -279,12 +259,15 @@ button.loadMore {
         .productsImageContainer {
             text-align: center;
             margin-bottom: 4px;
-            padding-top: 20px;
             width: 155px;
             height: 180px;
+            position: relative;
 
             img {
-                width: 100%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
             }
         }
 
@@ -356,4 +339,15 @@ button.loadMore {
             height: 32px;
         }
     }
+}
+
+.searchLoadMore {
+    @include respond-to(mobile) {
+        width: 100%
+    }
+    @include respond-to(tablet) {
+        width: 144px;
+        margin: 50px auto 0;
+        display: block;
+    }   
 }
