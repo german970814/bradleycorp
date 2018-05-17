@@ -23,7 +23,7 @@ export default class SearchDefault extends React.Component<Props> {
   render () {
     return <div className={`${style.resultsTextContentWrapper}`}>
       <ul className={`${style.newsList}`}>
-        {this.props.posts && this.props.posts.map((post, index) => {
+        {Array.isArray(this.props.posts) && this.props.posts.map((post, index) => {
           return <li key={index}>
             <h5><a href="#">{post.post.post_title}</a></h5>
             <p>{post.meta.meta_description}</p>

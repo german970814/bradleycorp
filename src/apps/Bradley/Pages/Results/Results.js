@@ -1,18 +1,22 @@
 // @flow
 import * as React from 'react'
+import Media from 'react-media'
+import style from './Results.scss'
+import type { Location, Match, History } from 'react-router-dom'
+import SearchClient from './../../../../api/search_client'
+import type { PostType } from '../../../../lib/types/cpt_types'
+import Loading from '../../../../lib/components/Loading/Loading'
 import type { BCorpPost } from '../../../../lib/types/post_types'
+import LoadMore from '../../../../lib/containers/LoadMore/LoadMore'
+import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../globals'
+import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
+import BCorpSelectField from '../../../../lib/components/BCorpFilterField/BCorpSelectField'
+import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import type {
   ChildFunctionArgs,
   GetPostsArgs,
   GetPostsFunctionType
 } from '../../../../lib/containers/LoadMore/LoadMore'
-import type { Location, Match } from 'react-router-dom'
-import type { PostType } from '../../../../lib/types/cpt_types'
-import Media from 'react-media'
-import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../globals'
-import BCorpSelectField from '../../../../lib/components/BCorpFilterField/BCorpSelectField'
-import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
-import SearchClient from './../../../../api/search_client'
 import {
   SearchDefault,
   SearchLiterature,
@@ -20,9 +24,7 @@ import {
   SearchProduct,
   SearchTechnicalIfo
 } from './ContentTabs'
-import LoadMore from '../../../../lib/containers/LoadMore/LoadMore'
-import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
-import style from './Results.scss'
+
 
 type TabOption =
   | (PostType & 'product')
@@ -31,13 +33,17 @@ type TabOption =
   | 'news'
   | 'page'
 
+type Tab = {
+  [TabOption]: string
+}
+
 type Props = {
   location: Location,
-  match: { params: { query: string } } & Match
+  match: { params: { query: string, tab: TabOption } } & Match,
+  history: History
 }
 
 type State = {
-  selected: TabOption,
   resultCount: {
     [string]: number
   },
@@ -51,13 +57,12 @@ export default class Results extends React.Component<Props, State> {
     super(props)
 
     this.state = {
-      selected: 'product',
       resultCount: {},
       results: {}
     }
   }
 
-  get getTabs ():{ [TabOption]: string } {
+  get getTabs (): Tab {
     return {
       product: 'Products',
       literature: 'Literature',
@@ -65,6 +70,10 @@ export default class Results extends React.Component<Props, State> {
       news: 'In The News',
       page: 'Web Pages'
     }
+  }
+
+  get activeTab() {
+    return this.props.match.params.tab
   }
 
   onPageLoaded (data: ChildFunctionArgs) {
@@ -80,11 +89,19 @@ export default class Results extends React.Component<Props, State> {
   }
 
   handleChangeTab (selected: TabOption) {
-    this.setState({ selected })
+    const regex = /\/(product|literature|technical_info|news|pages)\/?/g
+    // console.log(this.props.match.url.replace(regex, `/${selected}/`))
+    this.props.history.push(this.props.match.url.replace(regex, `/${selected}/`))
+  }
+
+  componentDidUpdate (prevProps: Props, prevState: State) {
+    if (prevProps.match.params.tab !== this.props.match.params.tab) {
+
+    }
   }
 
   renderOptionsMobile () {
-    const defaultOption = this.getTabs[this.state.selected]
+    const defaultOption = this.getTabs[this.activeTab]
     return (
       <div className={`${style.mobileSelectWtapper}`}>
         <BCorpSelectField
@@ -110,7 +127,7 @@ export default class Results extends React.Component<Props, State> {
             const count = this.state.resultCount[tab]
             return count ? (
               <li
-                className={tab === this.state.selected ? `${style.selected}` : ''}
+                className={tab === this.activeTab ? `${style.selected}` : ''}
                 key={index}>
                 <a
                   onClick={() => {
@@ -134,7 +151,7 @@ export default class Results extends React.Component<Props, State> {
           style.resultsHeaderContainer
         }`}>
         <div className={`${style.resultsSummary}`}>
-          <p>{`You searched for "${query}" - 613 Results`}</p>
+          <p>{`You searched for "${query}" - ${this.getTotalResults()} Results`}</p>
         </div>
         {renderTitle('Search Results', 'col1')}
       </div>
@@ -156,21 +173,25 @@ export default class Results extends React.Component<Props, State> {
   }
 
   renderResults () {
-    const { selected } = this.state
-    return (
-      <div className={style[selected]}>
-        <LoadMore
-          posts={this.state.results[selected]}
-          getPosts={(args: GetPostsArgs) => {
-            return this.getResultsByTab(args)
-          }}
-          postsPerPage={20}>
-          {(args: ChildFunctionArgs) => {
-            return this.renderResultsComponent(selected, args)
-          }}
-        </LoadMore>
-      </div>
-    )
+    const selected = this.activeTab
+    return selected ? <div className={style[selected]}>
+      <LoadMore
+        posts={this.state.results[selected]}
+        getPosts={(args: GetPostsArgs) => {
+          return this.getResultsByTab(args)
+        }}
+        postsPerPage={20}>
+        {(args: ChildFunctionArgs) => {
+          return this.renderResultsComponent(args)
+        }}
+      </LoadMore>
+    </div> : <Loading />
+  }
+
+  getTotalResults(): number {
+    return Object.keys(this.getTabs).map(postType => {
+      return postType in this.state.resultCount ? this.state.resultCount[postType] : 0
+    }).reduce((first, second) => { return first + second })
   }
 
   canLoadMore(selected: TabOption) {
@@ -178,9 +199,9 @@ export default class Results extends React.Component<Props, State> {
       this.state.resultCount[selected] > this.state.results[selected].length : false
   }
 
-  renderResultsComponent (selected: TabOption, args: ChildFunctionArgs): React.Node {
-    args = { ...args, shouldReset: false, canLoadMore: this.canLoadMore(selected) }
-    switch (selected) {
+  renderResultsComponent (args: ChildFunctionArgs): React.Node {
+    args = { ...args, shouldReset: false, canLoadMore: this.canLoadMore(this.activeTab) }
+    switch (this.activeTab) {
       case 'product':
         return <SearchProduct {...args} />
       case 'literature':
@@ -200,6 +221,21 @@ export default class Results extends React.Component<Props, State> {
         this.props.match.params.query
       )
       this.setState({ resultCount: response.data })
+
+      if (this.activeTab && this.activeTab in response.data && response.data[this.activeTab] < 1) {
+        for (let tab in this.getTabs) {
+          if (response.data[tab] >= 1) {
+            this.handleChangeTab(tab)
+          }
+        }
+      } else if (!this.activeTab) {
+        for (let tab in this.getTabs) {
+          if (tab in response.data && response.data[tab] >= 1) {
+            this.props.history.push(this.props.match.url.concat(`/${tab}`))
+            break
+          }
+        }
+      }
     } catch (error) {
       console.log(error)
     }
@@ -210,17 +246,25 @@ export default class Results extends React.Component<Props, State> {
     paged,
     offset
   }: GetPostsArgs): Promise<void> {
-    try {
+    const activeTab = this.activeTab
+    try {  // TODO: Traer datos paginados, tener en cuenta los anteriores
       const response = await SearchClient.getSearchResults(
-        this.props.match.params.query, this.state.selected,
+        this.props.match.params.query, activeTab,
         postsPerPage, paged, offset
       )
       const results = {
         ...this.state.results,
-        [this.state.selected]: response.data
+        [activeTab]: response.data
       }
       this.setState({ ...this.state, results })
     } catch (error) {
+      if (!Array.isArray(this.state.results[activeTab])) {
+        const results = {
+          ...this.state.results,
+          [activeTab]: []
+        }
+        this.setState({ ...this.state, results })
+      }
       console.log(error)
     }
   }
