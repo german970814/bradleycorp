@@ -52,7 +52,7 @@
             }
         }
 
-        .selected {
+        &.selected {
             
             a {
                 color: #fff;
@@ -236,11 +236,21 @@ button.loadMore {
 
     article {
         position: relative;
-        padding: 0 20px 10px;
+        padding: 0 20px 25px;
+        height: 309px;
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            overflow: hidden;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
         .newH {
             position: absolute;
-            top: 0;
+            top: 20px;
             left: 0;
             width: 100%;
         }
@@ -269,6 +279,9 @@ button.loadMore {
         .productsImageContainer {
             text-align: center;
             margin-bottom: 4px;
+            padding-top: 20px;
+            width: 155px;
+            height: 180px;
 
             img {
                 width: 100%;
@@ -292,26 +305,55 @@ button.loadMore {
             line-height: normal;
             text-align: center;
             margin-top: 8px;
+            margin-bottom: 0;
+            overflow: hidden;
+            height: 82.5px;
+        }
+
+        &:hover {
+            -moz-box-shadow:    0 0 22px #ece8e8;
+            -webkit-box-shadow: 0 0 22px #ece8e8;
+            box-shadow:         0 0 22px #ece8e8;
+            border: 1px solid #d1d3d4;
         }
     }
 }
   
 .searchLiteratureWrapper {
     margin: 0;
-    padding: 0;
+    padding: 40px 0 0;
 
-    li {
+    article {
         position: relative;
-        list-style-type: none;
+        margin-bottom: 25px;
+        padding: 0 10px;
 
         .literatureImageContainer {
             text-align: center;
+            margin-bottom: 8px;
+            width: 170px;
+            height: 211px;
+
+            img {
+                max-width: 100%;
+                max-height: 100%;
+                overflow: hidden;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
         }
 
         .literatureTitle {
             color: #000;
-            font-family: 'CentraleSansProBold';
+            font-family: 'CentraleSansPro';
             font-weight: bold;
+            text-align: center;
+            text-transform: capitalize;
+            width: 50%;
+            margin: 0 auto;
+            overflow: hidden;
+            height: 32px;
         }
     }
 }

@@ -110,7 +110,7 @@ export default class Results extends React.Component<Props, State> {
             const count = this.state.resultCount[tab]
             return count ? (
               <li
-                className={tab === this.state.selected ? 'selected' : ''}
+                className={tab === this.state.selected ? `${style.selected}` : ''}
                 key={index}>
                 <a
                   onClick={() => {

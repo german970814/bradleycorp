@@ -9,19 +9,19 @@ import Default from './Default'
 export default class SearchLiterature extends Default {
   renderLiterature () {
     return this.props.posts && this.props.posts.map((post, index) => {
-      return <li key={index}>
+      return <article key={index}>
         <div className={`${style.literatureImageContainer}`}>
           <img src={require('../../../../../images/results/literature-image.jpg')}/>
         </div>
-        <h6 className={`${style.literatureTitle}`}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h6>
-      </li>
+        <h6 className={`${style.literatureTitle}`}>Lorem ipsum dolor sit</h6>
+      </article>
     })
   }
   
   renderColumns (classes: string) {
     return <div className={`${style.searchLiteratureWrapper}`}>
       <FillColumns colClasses={[
-        `${classes}`, `${classes}`, `${classes}`, `${classes}`
+        `${classes}`, `${classes}`, `${classes}`, `${classes}`, `${classes}`, `${classes}`
       ]}>
         {this.renderLiterature()}
       </FillColumns>
@@ -37,8 +37,8 @@ export default class SearchLiterature extends Default {
         ) : <Media query={{ maxWidth: TABLETMAXWIDTH }}>
         {match =>
           match ? (
-            this.renderColumns('col3-tablet')  // tablet
-          ) : this.renderColumns('col4-desktop')  // desktop
+            this.renderColumns('col4-tablet')  // tablet
+          ) : this.renderColumns('col6-desktop')  // desktop
         }
         </Media>
       }
