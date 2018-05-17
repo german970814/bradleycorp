@@ -11,9 +11,13 @@ export default class SearchLiterature extends Default {
     return this.props.posts && this.props.posts.map((post, index) => {
       return <article key={index}>
         <div className={`${style.literatureImageContainer}`}>
-          <img src={require('../../../../../images/results/literature-image.jpg')}/>
+          <a href={post.meta.literature_pdf} target="_blank">
+            <img src={post.media.featured_image[0]} />
+          </a>
         </div>
-        <h6 className={`${style.literatureTitle}`}>Lorem ipsum dolor sit</h6>
+        <a href={post.meta.literature_pdf} target="_blank">
+          <h6 className={`${style.literatureTitle}`}>{post.post.post_title}</h6>
+        </a>
       </article>
     })
   }
@@ -29,6 +33,7 @@ export default class SearchLiterature extends Default {
   }
   
   renderContent () {
+    console.log(this.props)
     return <div>
       <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
       {match =>
