@@ -89,8 +89,7 @@ export default class Results extends React.Component<Props, State> {
   }
 
   handleChangeTab (selected: TabOption) {
-    const regex = /\/(product|literature|technical_info|news|pages)\/?/g
-    // console.log(this.props.match.url.replace(regex, `/${selected}/`))
+    const regex = /\/(product|literature|technical_info|news|page)\/?/g
     this.props.history.push(this.props.match.url.replace(regex, `/${selected}/`))
   }
 
