@@ -49,9 +49,14 @@ type State = {
     [string]: number
   },
   results: {
-    [string: TabOption]: Array<BCorpPost>
+    [string: TabOption]: {
+      data: Array<BCorpPost>,
+      paged: number
+    }
   }
 }
+
+const POSTS_PER_PAGE = 20
 
 export default class Results extends React.Component<Props, State> {
   constructor (props: Props) {
@@ -77,6 +82,14 @@ export default class Results extends React.Component<Props, State> {
     return this.props.match.params.tab
   }
 
+  getPosts(postType: ?TabOption): ?Array<BCorpPost>{
+    if (postType && postType in this.state.results) {
+      const data = this.state.results[postType].data
+      return data.slice(0, POSTS_PER_PAGE * this.state.results[postType].paged)
+    }
+    return undefined
+  }
+
   onPageLoaded (data: ChildFunctionArgs) {
     console.log(data)
   }
@@ -91,7 +104,13 @@ export default class Results extends React.Component<Props, State> {
 
   handleChangeTab (selected: TabOption) {
     const regex = /\/(product|literature|technical_info|news|page)\/?/g
-    this.props.history.push(this.props.match.url.replace(regex, `/${selected}/`))
+    const paged = selected in this.state.results ? this.state.results[selected].paged : null
+    let url = this.props.match.url.replace(regex, `/${selected}/`).replace(/\/page=\d*/g, '')
+    if (paged && paged > 1) {
+      const toConcat = `page=${paged}`
+      url = url.endsWith('/') ? url.concat(toConcat) : url.concat(`/${toConcat}`)
+    }
+    this.props.history.push(url)
   }
 
   componentDidUpdate (prevProps: Props, prevState: State) {
@@ -179,11 +198,11 @@ export default class Results extends React.Component<Props, State> {
     }
     return selected ? <div className={style[selected]}>
       <LoadMore
-        posts={this.state.results[selected]}
+        posts={this.getPosts(selected)}
         getPosts={(args: GetPostsArgs) => {
           return this.getResultsByTab(args)
         }}
-        postsPerPage={20}>
+        postsPerPage={POSTS_PER_PAGE}>
         {(args: ChildFunctionArgs) => {
           return this.renderResultsComponent(args)
         }}
@@ -191,30 +210,32 @@ export default class Results extends React.Component<Props, State> {
     </div> : <Loading />
   }
 
-  getTotalResults(): number {
+  getTotalResults(): ?number {
     return Object.keys(this.getTabs).map(postType => {
       return postType in this.state.resultCount ? this.state.resultCount[postType] : 0
-    }).reduce((first, second) => { return first + second })
+    }).reduce((first, second) => { return first + second }) || null
   }
 
   canLoadMore(selected: TabOption) {
     return selected in this.state.results ?
-      this.state.resultCount[selected] > this.state.results[selected].length : false
+      this.state.resultCount[selected] > this.state.results[selected].data.length : false
   }
 
-  renderResultsComponent (args: ChildFunctionArgs): React.Node {
-    args = { ...args, shouldReset: false, canLoadMore: this.canLoadMore(this.activeTab) }
-    switch (this.activeTab) {
-      case 'product':
-        return <SearchProduct {...args} />
-      case 'literature':
-        return <SearchLiterature {...args} />
-      case 'technical_info':
-        return <SearchTechnicalIfo {...args} />
-      case 'news':
-        return <SearchNews {...args} />
-      default:
-        return <SearchDefault {...args} />
+  renderResultsComponent (args: ChildFunctionArgs): ?React.Node {
+    if (this.activeTab) {
+      args = { ...args, shouldReset: false, canLoadMore: this.canLoadMore(this.activeTab) }
+      switch (this.activeTab) {
+        case 'product':
+          return <SearchProduct {...args} />
+        case 'literature':
+          return <SearchLiterature {...args} />
+        case 'technical_info':
+          return <SearchTechnicalIfo {...args} />
+        case 'news':
+          return <SearchNews {...args} />
+        default:
+          return <SearchDefault {...args} />
+      }
     }
   }
 
@@ -250,27 +271,33 @@ export default class Results extends React.Component<Props, State> {
     offset
   }: GetPostsArgs): Promise<void> {
     const activeTab = this.activeTab
-    try {  // TODO: Traer datos paginados, tener en cuenta los anteriores
+    try {
       const response = await SearchClient.getSearchResults(
         this.props.match.params.query, activeTab,
         postsPerPage, paged, offset
       )
       let data = response.data
-      if (Array.isArray(this.state.results[activeTab])) {
-        data = [...this.state.results[activeTab], ...data]
-      }
-      const results = {
-        ...this.state.results,
-        [activeTab]: data
-      }
-      this.setState({ ...this.state, results })
-    } catch (error) {
-      if (!Array.isArray(this.state.results[activeTab])) {
+      if (activeTab) {
+        if (activeTab in this.state.results && Array.isArray(this.state.results[activeTab].data)) {
+          data = [...this.state.results[activeTab].data, ...data]
+        }
         const results = {
           ...this.state.results,
-          [activeTab]: []
+          [activeTab]: { data, paged }
         }
         this.setState({ ...this.state, results })
+      }
+    } catch (error) {
+      if (activeTab) {
+        if (activeTab in this.state.results && !Array.isArray(this.state.results[activeTab].data)) {
+          const results = {
+            ...this.state.results,
+            [activeTab]: {
+              data: [], paged
+            }
+          }
+          this.setState({ ...this.state, results })
+        }
       }
       console.log(error)
     }
