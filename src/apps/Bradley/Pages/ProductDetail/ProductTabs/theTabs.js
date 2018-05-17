@@ -46,7 +46,7 @@ function getTheTabs (tabsData) {
     tabs = [ ...tabs,
       <Tab
         key={2}
-        text={`Design`}
+        text={`Design Tools`}
         isActive={false}
         isDesktop={false}
         isOpen={false} >
