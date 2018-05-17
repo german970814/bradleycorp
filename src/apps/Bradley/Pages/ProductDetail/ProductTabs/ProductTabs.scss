@@ -73,7 +73,7 @@ $tabContentPaddingRight: 11.5vw;
   @extend %BodyPaddingWithMediaQueries;
   margin-bottom: 0;
   overflow-x: scroll;
-  text-align: center;
+  text-align: left;
   white-space: nowrap;
 
   @include respond-to(desktop) {
