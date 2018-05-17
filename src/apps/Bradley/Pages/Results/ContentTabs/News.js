@@ -4,7 +4,7 @@ import style from './../Results.scss'
 import Default from './Default'
 
 export default class SearchNews extends Default {
-  render() {
+  renderContent() {
     return <div className={`${style.resultsTextContentWrapper}`}>
       <ul className={`${style.newsList}`}>
         {this.props.posts && this.props.posts.map((posts, index) => {

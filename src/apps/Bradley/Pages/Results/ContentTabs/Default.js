@@ -2,6 +2,7 @@
 import * as React from 'react'
 import style from './../Results.scss'
 import type { ChildFunctionArgs } from '../../../../../lib/containers/LoadMore/LoadMore'
+import Loading from '../../../../../lib/components/Loading/Loading'
 
 type Props = {
   shouldReset: boolean
@@ -20,10 +21,10 @@ export default class SearchDefault extends React.Component<Props> {
     }
   }
 
-  render () {
+  renderContent() {
     return <div className={`${style.resultsTextContentWrapper}`}>
       <ul className={`${style.newsList}`}>
-        {Array.isArray(this.props.posts) && this.props.posts.map((post, index) => {
+        {this.props.posts.map((post, index) => {
           return <li key={index}>
             <h5><a href="#">{post.post.post_title}</a></h5>
             <p>{post.meta.meta_description}</p>
@@ -32,5 +33,9 @@ export default class SearchDefault extends React.Component<Props> {
       </ul>
       {this.renderLoadMoreButton()}
     </div>
+  }
+
+  render () {
+    return Array.isArray(this.props.posts) ? this.renderContent() : <Loading />
   }
 }

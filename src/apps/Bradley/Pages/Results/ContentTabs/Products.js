@@ -40,7 +40,7 @@ export default class SearchProducts extends Default {
     </div>
   }
 
-  render () {
+  renderContent () {
     return <div>
       <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
         { match =>

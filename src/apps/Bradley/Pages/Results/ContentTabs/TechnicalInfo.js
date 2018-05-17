@@ -8,7 +8,7 @@ import style from './../Results.scss'
 import Default from './Default'
 
 export default class SearchTechnicalInfo extends Default {
-  render() {
+  renderContent() {
     return <div className={`${style.resultsTextContentWrapper}`}>
       <ul className={`${style.techInfoList}`}>
         {this.props.posts && this.props.posts.map((post, index) => {

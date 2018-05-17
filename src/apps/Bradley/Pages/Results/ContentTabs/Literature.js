@@ -28,7 +28,7 @@ export default class SearchLiterature extends Default {
     </div>
   }
   
-  render () {
+  renderContent () {
     return <div>
       <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
       {match =>
