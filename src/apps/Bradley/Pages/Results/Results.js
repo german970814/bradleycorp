@@ -8,19 +8,19 @@ import type {
 } from '../../../../lib/containers/LoadMore/LoadMore'
 import type { Location, Match } from 'react-router-dom'
 import type { PostType } from '../../../../lib/types/cpt_types'
-import axios from 'axios'
 import Media from 'react-media'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../globals'
 import BCorpSelectField from '../../../../lib/components/BCorpFilterField/BCorpSelectField'
 import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
-import api from './../../../../api/index'
 import SearchClient from './../../../../api/search_client'
+import {
+  SearchDefault,
+  SearchLiterature,
+  SearchNews,
+  SearchProduct,
+  SearchTechnicalIfo
+} from './ContentTabs'
 import LoadMore from '../../../../lib/containers/LoadMore/LoadMore'
-import DefaultResults from './ContentTabs/Default'
-import LiteratureResults from './ContentTabs/Literature'
-import NewsResults from './ContentTabs/News'
-import ProductsResults from './ContentTabs/Products'
-import TechnicalInfoResults from './ContentTabs/TechnicalInfo'
 import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
 import style from './Results.scss'
 
@@ -57,7 +57,7 @@ export default class Results extends React.Component<Props, State> {
     }
   }
 
-  get getTabs () {
+  get getTabs ():{ [TabOption]: string } {
     return {
       product: 'Products',
       literature: 'Literature',
@@ -76,7 +76,7 @@ export default class Results extends React.Component<Props, State> {
   }
 
   handleChangeOptionSelect (event: SyntheticInputEvent<HTMLSelectElement>) {
-    console.log(event)
+    this.handleChangeTab(event.target.value)
   }
 
   handleChangeTab (selected: TabOption) {
@@ -84,7 +84,7 @@ export default class Results extends React.Component<Props, State> {
   }
 
   renderOptionsMobile () {
-    const defaultOption = this.state.selected
+    const defaultOption = this.getTabs[this.state.selected]
     return (
       <div className={`${style.mobileSelectWtapper}`}>
         <BCorpSelectField
@@ -92,7 +92,7 @@ export default class Results extends React.Component<Props, State> {
           defaultOptionId={0}
           options={this.getTabs}
           className={`col1 col2-tablet`}
-          defaultOptionName={defaultOption}
+          defaultOptionName={''}
           handleChange={this.handleChangeOptionSelect.bind(this)}
         />
       </div>
@@ -107,7 +107,8 @@ export default class Results extends React.Component<Props, State> {
         }`}>
         <ul className={`${style.resultsOptionsWrapper}`}>
           {Object.keys(this.getTabs).map((tab, index) => {
-            return (
+            const count = this.state.resultCount[tab]
+            return count ? (
               <li
                 className={tab === this.state.selected ? `${style.selected}` : ''}
                 key={index}>
@@ -115,13 +116,10 @@ export default class Results extends React.Component<Props, State> {
                   onClick={() => {
                     this.handleChangeTab(tab)
                   }}>
-                  {this.getTabs[tab]}{' '}
-                  {tab in this.state.resultCount
-                    ? `(${this.state.resultCount[tab].toString()})`
-                    : '(0)'}
+                  {`${this.getTabs[tab]} (${count.toString()})`}
                 </a>
               </li>
-            )
+            ) : null
           })}
         </ul>
       </div>
@@ -184,15 +182,15 @@ export default class Results extends React.Component<Props, State> {
     args = { ...args, shouldReset: false, canLoadMore: this.canLoadMore(selected) }
     switch (selected) {
       case 'product':
-        return <ProductsResults {...args} />
+        return <SearchProduct {...args} />
       case 'literature':
-        return <LiteratureResults {...args} />
+        return <SearchLiterature {...args} />
       case 'technical_info':
-        return <TechnicalInfoResults {...args} />
+        return <SearchTechnicalIfo {...args} />
       case 'news':
-        return <NewsResults {...args} />
+        return <SearchNews {...args} />
       default:
-        return <DefaultResults {...args} />
+        return <SearchDefault {...args} />
     }
   }
 
