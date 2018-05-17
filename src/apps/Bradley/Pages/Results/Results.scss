@@ -343,7 +343,9 @@ button.loadMore {
 
 .searchLoadMore {
     @include respond-to(mobile) {
-        width: 100%
+        width: 88%;
+        margin: 0 auto;
+        display: block;
     }
     @include respond-to(tablet) {
         width: 144px;

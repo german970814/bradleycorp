@@ -31,11 +31,15 @@ export default class SearchDefault extends React.Component<Props> {
           </li>
         })}
       </ul>
-      {this.renderLoadMoreButton()}
     </div>
   }
 
   render () {
-    return Array.isArray(this.props.posts) ? this.renderContent() : <Loading />
+    return Array.isArray(this.props.posts) ? (
+      <div>
+        {this.renderContent()}
+        {this.renderLoadMoreButton()}
+    </div>
+    ) : <Loading />
   }
 }
