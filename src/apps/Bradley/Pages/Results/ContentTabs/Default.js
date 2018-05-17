@@ -16,7 +16,7 @@ export default class SearchDefault extends React.Component<Props> {
 
   renderLoadMoreButton(): ?React.Node {
     if (this.props.canLoadMore) {
-      return <button onClick={this.props.loadNextPage}>Load More</button>
+      return <button onClick={this.props.loadNextPage} className={`${style.searchLoadMore}`}>Load More</button>
     }
   }
 
