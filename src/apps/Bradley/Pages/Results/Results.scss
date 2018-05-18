@@ -158,7 +158,14 @@
 }
 .searchTechInfoWrapper {
     margin: 0;
-    padding: 22px 0 0;
+    
+    @include respond-to(mobile) {
+        padding: 40px 20px 0;
+    }
+
+    @include respond-to(tablet) {
+        padding: 40px 0 0;
+    }
 }
 
 .techInfoItem {
