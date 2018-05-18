@@ -51,7 +51,8 @@ type State = {
   results: {
     [string: TabOption]: {
       data: Array<BCorpPost>,
-      paged: number
+      paged: number,
+      offset: number
     }
   }
 }
@@ -201,10 +202,18 @@ export default class Results extends React.Component<Props, State> {
     if (this.getTotalResults() === 0) {
       return <NoResults message={'No results match your search'} />
     }
+    const loadMoreProps = {
+      posts: this.getPosts(selected)
+    }
+    if (selected in this.state.results) {
+      const { page } = this.props.match.params || 1
+      loadMoreProps['paged'] = page
+      loadMoreProps['offset'] = page * POSTS_PER_PAGE
+    }
     return selected ? <div className={style[selected]}>
       <LoadMore
+        {...loadMoreProps}
         omitDebounce
-        posts={this.getPosts(selected)}
         getPosts={(args: GetPostsArgs) => {
           return this.getResultsByTab(args)
         }}
@@ -295,19 +304,25 @@ export default class Results extends React.Component<Props, State> {
         if (activeTab in this.state.results && Array.isArray(this.state.results[activeTab].data)) {
           data = [...this.state.results[activeTab].data, ...data]
         }
+        const { page } = this.props.match.params
+        if (page && page > 1) {
+          paged = page
+        }
         const results = {
           ...this.state.results,
-          [activeTab]: { data, paged }
+          [activeTab]: { data, paged, offset }
         }
-        this.setState({ ...this.state, results })
+        this.setState((previousState, currentProps) => {
+          return { ...previousState, results }
+        })
       }
     } catch (error) {
       if (activeTab) {
-        if (activeTab in this.state.results && !Array.isArray(this.state.results[activeTab].data)) {
+        if ((activeTab in this.state.results && !Array.isArray(this.state.results[activeTab].data)) || !(activeTab in this.state.results)) {
           const results = {
             ...this.state.results,
             [activeTab]: {
-              data: [], paged
+              data: [], paged, offset
             }
           }
           this.setState({ ...this.state, results })
