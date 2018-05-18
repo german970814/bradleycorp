@@ -11,13 +11,10 @@ export default class SearchProducts extends Default {
 
   renderProducts () {
     return this.props.posts && this.props.posts.map((post, ind) => {
-      return (
-        <article>
-          <ProductScrollerProduct
-            key={ind}
-            product={post} />
-        </article>
-      )
+      return <article key={ind}>
+        <ProductScrollerProduct
+          product={post} />
+      </article>
     })
   }
 

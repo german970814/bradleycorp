@@ -156,7 +156,14 @@
     }
     
 }
+.searchTechInfoWrapper {
+    margin: 0;
+    padding: 22px 0 0;
+}
 
+.techInfoItem {
+    display: inline-block;
+}
 .techInfoList {
     background: transparent;
 
@@ -226,7 +233,8 @@ button.loadMore {
         }
 
         h6 {
-            height: 77px;
+            overflow: hidden;
+            height: 95px;
         }
     }
 }
