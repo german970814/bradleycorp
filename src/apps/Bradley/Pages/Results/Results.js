@@ -205,10 +205,12 @@ export default class Results extends React.Component<Props, State> {
     const loadMoreProps = {
       posts: this.getPosts(selected)
     }
-    if (selected in this.state.results) {
-      const { page } = this.props.match.params || 1
-      loadMoreProps['paged'] = page
+    const page = parseInt(this.props.match.params.page || 1)
+    loadMoreProps['paged'] = page
+    if (page > 1 && !(selected in this.state.results)) {
       loadMoreProps['offset'] = page * POSTS_PER_PAGE
+    } else {
+      loadMoreProps['offset'] = 0
     }
     return selected ? <div className={style[selected]}>
       <LoadMore

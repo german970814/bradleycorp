@@ -137,18 +137,18 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
       //
       // passing the initial offset as the postsPerPage
       // and the offset as 0 will get us all the posts up to the offset
-      this.getPage(this.state.offset, 1, 0)
+      this.getPage(this.offset, 1, 0)
       // then we want to get what would effectively be the first page
       // using our actual postsPerPage, paged, and offset params.
       if (!this.props.omitDebounce) {
-        this.getPageDebounced(this.props.postsPerPage, 1, this.state.offset)
+        this.getPageDebounced(this.props.postsPerPage, 1, this.offset)
       }
     } else if (!this.props.posts) {
       // if there's no offset then we proceed as normal
       // just getting the first and second pages from 0
-      this.getPage(this.props.postsPerPage, 1, this.state.offset)
+      this.getPage(this.props.postsPerPage, 1, this.offset)
       if (!this.props.omitDebounce) {
-        this.getPageDebounced(this.props.postsPerPage, 2, this.state.offset)
+        this.getPageDebounced(this.props.postsPerPage, 2, this.offset)
       }
     }
   }
@@ -158,14 +158,14 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
     if (!(this.props.posts) && !this.state.loading) {
       this.getPage(
         this.props.postsPerPage,
-        this.state.paged,
-        this.props.offset || this.state.offset
+        this.props.paged || this.state.paged,
+        this.offset
       )
     } else if (prevState.paged !== this.state.paged) {
       this.getPage(
         this.props.postsPerPage,
-        this.state.paged + 1,
-        this.props.offset || this.state.offset
+        (this.props.paged || this.state.paged) + 1,
+        this.offset
       )
 
       // we keep track of the page state in the url
@@ -183,6 +183,13 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
     }
   }
 
+  get offset() {
+    if ('offset' in this.props && this.props.offset === 0) {
+      return this.props.offset
+    }
+    return this.props.offset || this.state.offset
+  }
+
   reset () {
     // we can run this function to start everything again from 0
     //
@@ -198,7 +205,7 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
 
   loadNextPage () {
     if (this.props.posts || this.canLoadMore()) {
-      const paged = this.state.paged + 1
+      const paged = (this.props.paged || this.state.paged) + 1
       return this.setState({ paged })
     }
   }
@@ -212,8 +219,8 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
       this.props.children({
         posts,
         postsPerPage: this.props.postsPerPage,
-        paged: this.state.paged,
-        offset: this.state.offset,
+        paged: this.props.paged || this.state.paged,
+        offset: this.offset,
         canLoadMore: this.canLoadMore(),
         shouldDisplayPost: this.shouldDisplayPost.bind(this),
         loadNextPage: this.loadNextPage.bind(this),
@@ -252,7 +259,7 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
               posts: this.state.posts || [],
               postsPerPage: this.props.postsPerPage,
               paged: this.state.paged,
-              offset: this.state.offset,
+              offset: this.offset,
               canLoadMore: this.canLoadMore(),
               shouldDisplayPost: this.shouldDisplayPost.bind(this),
               loadNextPage: this.loadNextPage.bind(this),
@@ -265,7 +272,7 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
             posts: this.props.posts || [],
             postsPerPage: this.props.postsPerPage,
             paged: this.state.paged,
-            offset: this.state.offset,
+            offset: this.offset,
           })
         }
       })
