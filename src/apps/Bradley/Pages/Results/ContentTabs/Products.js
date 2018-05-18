@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react'
+import React from 'react'
 import Media from 'react-media'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../../globals'
 import FillColumns from '../../../../../lib/components/FillColumns/FillColumns'
@@ -8,7 +8,6 @@ import Default from './Default'
 import ProductScrollerProduct from '../../../../../lib/containers/ProductScroller/ProductScrollerProduct/ProductScrollerProduct'
 
 export default class SearchProducts extends Default {
-
   renderProducts () {
     return this.props.posts && this.props.posts.map((post, ind) => {
       return <article key={ind}>

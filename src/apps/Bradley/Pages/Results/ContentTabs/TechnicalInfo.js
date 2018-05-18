@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react'
+import React from 'react'
 import Media from 'react-media'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../../globals'
 import FileDownloadLink from '../../../../../lib/components/FileDownloadLink/FileDownloadLink'
@@ -8,9 +8,7 @@ import style from './../Results.scss'
 import Default from './Default'
 
 export default class SearchTechnicalInfo extends Default {
-
   renderTechicalInfo () {
-    console.log(this.props)
     return this.props.posts && this.props.posts.map((post, ind) => {
       return <div key={ind} className={`${style.techInfoItem}`}>
         <FileDownloadLink
@@ -25,14 +23,13 @@ export default class SearchTechnicalInfo extends Default {
 
   renderColumns (classes: string) {
     return <div className={`${style.searchTechInfoWrapper}`}>
-      <FillColumns colClasses={[ `${classes}`, `${classes}`]}>
+      <FillColumns colClasses={[`${classes}`, `${classes}`]}>
         {this.renderTechicalInfo()}
       </FillColumns>
     </div>
   }
 
-
-  renderContent() {
+  renderContent () {
     return <div>
       <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
         { match =>

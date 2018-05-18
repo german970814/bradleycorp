@@ -41,7 +41,9 @@ type Props = {
   getPosts: GetPostsFunctionType,
   // passed by withRouter HOC
   match: Match,
-  history: RouterHistory
+  history: RouterHistory,
+  posts: Array<BCorpPost>,
+  paged: number
 }
 
 type State = {
@@ -193,7 +195,7 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
         canLoadMore: this.canLoadMore(),
         shouldDisplayPost: this.shouldDisplayPost.bind(this),
         loadNextPage: this.loadNextPage.bind(this),
-        reset: this.reset.bind(this),
+        reset: this.reset.bind(this)
       })
     )
   }

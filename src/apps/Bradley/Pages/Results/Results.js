@@ -8,15 +8,14 @@ import SearchClient from './../../../../api/search_client'
 import type { PostType } from '../../../../lib/types/cpt_types'
 import Loading from '../../../../lib/components/Loading/Loading'
 import type { BCorpPost } from '../../../../lib/types/post_types'
-import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../globals'
+import { MOBILEMAXWIDTH } from '../../../../globals'
 import NoResults from '../../../../lib/components/NoResuts/NoResults'
 import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
 import BCorpSelectField from '../../../../lib/components/BCorpFilterField/BCorpSelectField'
 import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import type {
   ChildFunctionArgs,
-  GetPostsArgs,
-  GetPostsFunctionType
+  GetPostsArgs
 } from './LoadMore'
 import {
   SearchDefault,
@@ -25,7 +24,6 @@ import {
   SearchProduct,
   SearchTechnicalInfo
 } from './ContentTabs'
-
 
 type TabOption =
   | (PostType & 'product')
@@ -79,11 +77,11 @@ export default class Results extends React.Component<Props, State> {
     }
   }
 
-  get activeTab() {
+  get activeTab () {
     return this.props.match.params.tab
   }
 
-  getPosts(postType: ?TabOption): ?Array<BCorpPost>{
+  getPosts (postType: ?TabOption): ?Array<BCorpPost> {
     if (postType && postType in this.state.results) {
       const data = this.state.results[postType].data
       return data.slice(0, POSTS_PER_PAGE * this.state.results[postType].paged)
@@ -120,7 +118,7 @@ export default class Results extends React.Component<Props, State> {
 
   renderOptionsMobile () {
     const options = {}
-    for (let tab in this.getTabs) {
+    for (const tab in this.getTabs) {
       const count = this.state.resultCount[tab] || 0
       if (count >= 1) {
         options[tab] = `${this.getTabs[tab]} (${count})`
@@ -227,7 +225,7 @@ export default class Results extends React.Component<Props, State> {
     </div> : <Loading />
   }
 
-  getTotalResults(): ?number {
+  getTotalResults (): ?number {
     if (!Object.keys(this.state.resultCount).length) {
       return null
     }
@@ -236,9 +234,9 @@ export default class Results extends React.Component<Props, State> {
     }).reduce((first, second) => { return first + second })
   }
 
-  canLoadMore(selected: TabOption) {
-    return selected in this.state.results ?
-      this.state.resultCount[selected] > this.state.results[selected].data.length : false
+  canLoadMore (selected: TabOption) {
+    return selected in this.state.results
+      ? this.state.resultCount[selected] > this.state.results[selected].data.length : false
   }
 
   renderResultsComponent (args: ChildFunctionArgs): ?React.Node {
@@ -267,13 +265,13 @@ export default class Results extends React.Component<Props, State> {
       this.setState({ resultCount: response.data })
 
       if (this.activeTab && this.activeTab in response.data && response.data[this.activeTab] < 1) {
-        for (let tab in this.getTabs) {
+        for (const tab in this.getTabs) {
           if (response.data[tab] >= 1) {
             this.handleChangeTab(tab)
           }
         }
       } else if (!this.activeTab) {
-        for (let tab in this.getTabs) {
+        for (const tab in this.getTabs) {
           if (tab in response.data && response.data[tab] >= 1) {
             this.props.history.push(this.props.match.url.concat(`/${tab}`))
             break
@@ -283,7 +281,7 @@ export default class Results extends React.Component<Props, State> {
     } catch (error) {
       const resultCount = {}
 
-      for (let tab in this.getTabs) {
+      for (const tab in this.getTabs) {
         resultCount[tab] = 0
       }
       this.setState({ resultCount })

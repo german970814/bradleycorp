@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react'
+import React from 'react'
 import Media from 'react-media'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../../globals'
 import FillColumns from '../../../../../lib/components/FillColumns/FillColumns'
@@ -21,7 +21,7 @@ export default class SearchLiterature extends Default {
       </article>
     })
   }
-  
+
   renderColumns (classes: string) {
     return <div className={`${style.searchLiteratureWrapper}`}>
       <FillColumns colClasses={[
@@ -31,21 +31,21 @@ export default class SearchLiterature extends Default {
       </FillColumns>
     </div>
   }
-  
+
   renderContent () {
     return <div>
       <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
-      {match =>
-        match ? (
-          this.renderColumns('col2')
-        ) : <Media query={{ maxWidth: TABLETMAXWIDTH }}>
         {match =>
           match ? (
-            this.renderColumns('col4-tablet')  // tablet
-          ) : this.renderColumns('col6-desktop')  // desktop
+            this.renderColumns('col2')
+          ) : <Media query={{ maxWidth: TABLETMAXWIDTH }}>
+            {match =>
+              match ? (
+                this.renderColumns('col4-tablet') // tablet
+              ) : this.renderColumns('col6-desktop') // desktop
+            }
+          </Media>
         }
-        </Media>
-      }
       </Media>
     </div>
   }

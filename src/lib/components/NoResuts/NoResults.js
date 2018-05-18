@@ -19,4 +19,3 @@ class NoResults extends React.Component<Props> {
 }
 
 export default NoResults
-  

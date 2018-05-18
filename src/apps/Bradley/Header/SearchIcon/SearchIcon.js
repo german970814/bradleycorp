@@ -6,7 +6,7 @@ import VerticalAlignHelper from '../../../../lib/components/VerticalAlignHelper/
 import style from './SearchIcon.scss'
 
 class SearchIcon extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -17,7 +17,7 @@ class SearchIcon extends Component {
     e.stopPropagation()
   }
 
-  searchApplication(event) {
+  searchApplication (event) {
     event.preventDefault()
     event.stopPropagation()
     this.state.search && this.props.history.push(`/results/${this.state.search}`)
@@ -54,7 +54,7 @@ class SearchIcon extends Component {
                 name={'search'}
                 className={style.lightboxSearchFormInput}
                 onClick={this.handleClick.bind(this)}
-                onInput={(e) => {this.setState({ search: e.target.value })}}
+                onInput={(e) => { this.setState({ search: e.target.value }) }}
               />
 
               <input

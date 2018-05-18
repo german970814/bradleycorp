@@ -9,19 +9,19 @@ type Props = {
 } & ChildFunctionArgs
 
 export default class SearchDefault extends React.Component<Props> {
-  componentDidMount() {
+  componentDidMount () {
     if (this.props.shouldReset) {
       this.props.reset()
     }
   }
 
-  renderLoadMoreButton(): ?React.Node {
+  renderLoadMoreButton (): ?React.Node {
     if (this.props.canLoadMore) {
       return <button onClick={this.props.loadNextPage} className={`${style.searchLoadMore}`}>Load More</button>
     }
   }
 
-  renderContent() {
+  renderContent () {
     return <div className={`${style.resultsTextContentWrapper}`}>
       <ul className={`${style.newsList}`}>
         {this.props.posts.map((post, index) => {

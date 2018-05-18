@@ -183,7 +183,7 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
     }
   }
 
-  get offset() {
+  get offset () {
     if ('offset' in this.props && this.props.offset === 0) {
       return this.props.offset
     }
@@ -268,12 +268,12 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
       this.setState({ loading: true }, () => {
         if (response) {
           let posts: Array<BCorpPost> = response.data
-    
+
           // console.log(`got ${posts.length} posts`, paged)
-    
+
           const prevPosts = this.state.posts || []
           posts = [...prevPosts, ...posts]
-    
+
           return this.setState({ posts, loading: false }, () => {
             this.props.onPageLoaded && this.props.onPageLoaded({
               posts: this.state.posts || [],
@@ -292,7 +292,7 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
             posts: this.props.posts || [],
             postsPerPage: this.props.postsPerPage,
             paged: this.state.paged,
-            offset: this.offset,
+            offset: this.offset
           })
         }
       })
