@@ -203,6 +203,7 @@ export default class Results extends React.Component<Props, State> {
     }
     return selected ? <div className={style[selected]}>
       <LoadMore
+        omitDebounce
         posts={this.getPosts(selected)}
         getPosts={(args: GetPostsArgs) => {
           return this.getResultsByTab(args)

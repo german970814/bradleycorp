@@ -41,6 +41,7 @@ type Props = {
   getPosts: GetPostsFunctionType,
   posts?: Array<BcorpPost>,
   paged?: number,
+  omitDebounce: boolean,
   onPageLoaded?: ChildFunctionArgs => void,
   onRequestFail?: (Error) => void,
   onResponse?: {
@@ -137,12 +138,18 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
       this.getPage(this.state.offset, 1, 0)
       // then we want to get what would effectively be the first page
       // using our actual postsPerPage, paged, and offset params.
-      this.getPageDebounced(this.props.postsPerPage, 1, this.state.offset)
+      if (!this.props.omitDebounce) {
+        console.log('here')
+        this.getPageDebounced(this.props.postsPerPage, 1, this.state.offset)
+      }
     } else if (!this.props.posts) {
       // if there's no offset then we proceed as normal
       // just getting the first and second pages from 0
       this.getPage(this.props.postsPerPage, 1, this.state.offset)
-      this.getPageDebounced(this.props.postsPerPage, 2, this.state.offset)
+      if (!this.props.omitDebounce) {
+        console.log('here')
+        this.getPageDebounced(this.props.postsPerPage, 2, this.state.offset)
+      }
     }
   }
 

@@ -33,7 +33,6 @@ export default class SearchLiterature extends Default {
   }
   
   renderContent () {
-    console.log(this.props)
     return <div>
       <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
       {match =>
