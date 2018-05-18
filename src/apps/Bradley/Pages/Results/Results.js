@@ -17,7 +17,7 @@ import type {
   ChildFunctionArgs,
   GetPostsArgs,
   GetPostsFunctionType
-} from '../../../../lib/containers/LoadMore/LoadMore'
+} from './LoadMore'
 import {
   SearchDefault,
   SearchLiterature,

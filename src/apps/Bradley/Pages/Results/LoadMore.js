@@ -206,6 +206,26 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
   loadNextPage () {
     if (this.props.posts || this.canLoadMore()) {
       const paged = (this.props.paged || this.state.paged) + 1
+      if (paged === this.state.paged) {
+        this.getPage(
+          this.props.postsPerPage,
+          paged,
+          this.offset
+        )
+
+        // we keep track of the page state in the url
+        // in case they refresh teh page we can continue from the same point
+        const page =
+          this.state.offset !== 0
+            ? parseInt(this.props.match.params.page) + 1
+            : this.state.paged
+
+        // replace any old page parameters then re add them
+        let newUrl = getUrlWithoutPageParam(this.props.match)
+        newUrl = `${newUrl}/page=${page}`
+
+        this.props.history.push(newUrl)
+      }
       return this.setState({ paged })
     }
   }
