@@ -317,14 +317,13 @@ button.loadMore {
             margin-bottom: 8px;
             width: 170px;
             height: 211px;
+            position: relative;
 
             img {
-                max-width: 100%;
-                max-height: 100%;
-                overflow: hidden;
-                display: block;
-                margin-left: auto;
-                margin-right: auto;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
             }
         }
 
