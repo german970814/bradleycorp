@@ -38,6 +38,7 @@ export default class SearchDefault extends React.Component<Props> {
     return Array.isArray(this.props.posts) ? (
       <div>
         {this.renderContent()}
+        {this.props.loading && <Loading />}
         {this.renderLoadMoreButton()}
       </div>
     ) : <Loading />

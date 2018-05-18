@@ -1,13 +1,13 @@
 // @flow
 import * as React from 'react'
 import Media from 'react-media'
+import LoadMore from './LoadMore'
 import style from './Results.scss'
 import type { Location, Match, History } from 'react-router-dom'
 import SearchClient from './../../../../api/search_client'
 import type { PostType } from '../../../../lib/types/cpt_types'
 import Loading from '../../../../lib/components/Loading/Loading'
 import type { BCorpPost } from '../../../../lib/types/post_types'
-import LoadMore from '../../../../lib/containers/LoadMore/LoadMore'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../globals'
 import NoResults from '../../../../lib/components/NoResuts/NoResults'
 import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
@@ -17,7 +17,7 @@ import type {
   ChildFunctionArgs,
   GetPostsArgs,
   GetPostsFunctionType
-} from '../../../../lib/containers/LoadMore/LoadMore'
+} from './LoadMore'
 import {
   SearchDefault,
   SearchLiterature,
@@ -205,10 +205,12 @@ export default class Results extends React.Component<Props, State> {
     const loadMoreProps = {
       posts: this.getPosts(selected)
     }
-    if (selected in this.state.results) {
-      const { page } = this.props.match.params || 1
-      loadMoreProps['paged'] = page
+    const page = parseInt(this.props.match.params.page || 1)
+    loadMoreProps['paged'] = page
+    if (page > 1 && !(selected in this.state.results)) {
       loadMoreProps['offset'] = page * POSTS_PER_PAGE
+    } else {
+      loadMoreProps['offset'] = 0
     }
     return selected ? <div className={style[selected]}>
       <LoadMore

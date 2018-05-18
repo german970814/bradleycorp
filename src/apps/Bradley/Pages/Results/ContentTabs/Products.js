@@ -12,8 +12,7 @@ export default class SearchProducts extends Default {
   renderProducts () {
     return this.props.posts && this.props.posts.map((post, ind) => {
       return <article key={ind}>
-        <ProductScrollerProduct
-          product={post} />
+        <ProductScrollerProduct product={post} />
       </article>
     })
   }
