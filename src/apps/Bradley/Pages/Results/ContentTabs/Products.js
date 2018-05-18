@@ -5,31 +5,20 @@ import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../../globals'
 import FillColumns from '../../../../../lib/components/FillColumns/FillColumns'
 import style from './../Results.scss'
 import Default from './Default'
-import type { ProductPost } from '../../../../../lib/types/cpt_types'
+import ProductScrollerProduct from '../../../../../lib/containers/ProductScroller/ProductScrollerProduct/ProductScrollerProduct'
 
 export default class SearchProducts extends Default {
 
   renderProducts () {
     return this.props.posts && this.props.posts.map((post, ind) => {
-      return <article key={ind}>
-        <div className={`${style.newH}`}>
-          {this.isProductNew(post) && <span className={`${style.new}`}>NEW</span>}
-          <span className={`${style.h}`}>H</span>
-        </div>
-        <div className={`${style.productsImageContainer}`}>
-          {post.meta.product_media.images.length && 
-            <img src={Array.isArray(post.meta.product_media.images) ? post.meta.product_media.images[0] : post.meta.product_media.images} />}
-        </div>
-        <h6 className={`${style.productReference}`}>MODEL {post.meta.product_sku}</h6>
-        <p className={`${style.productDescription}`}>{post.post.post_excerpt}</p>
-      </article>
+      return (
+        <article>
+          <ProductScrollerProduct
+            key={ind}
+            product={post} />
+        </article>
+      )
     })
-  }
-
-  isProductNew(product: ProductPost) {
-    const dateUntilNew = new Date(product.meta.product_new_until)
-    const today = new Date()
-    return today < dateUntilNew
   }
 
   renderColumns (classes: string) {

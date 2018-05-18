@@ -35,7 +35,6 @@ export default class SearchDefault extends React.Component<Props> {
   }
 
   render () {
-    console.log(this.props)
     return Array.isArray(this.props.posts) ? (
       <div>
         {this.renderContent()}
