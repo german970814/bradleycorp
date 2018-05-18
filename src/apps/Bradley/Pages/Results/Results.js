@@ -23,7 +23,7 @@ import {
   SearchLiterature,
   SearchNews,
   SearchProduct,
-  SearchTechnicalIfo
+  SearchTechnicalInfo
 } from './ContentTabs'
 
 
@@ -250,7 +250,7 @@ export default class Results extends React.Component<Props, State> {
         case 'literature':
           return <SearchLiterature {...args} />
         case 'technical_info':
-          return <SearchTechnicalIfo {...args} />
+          return <SearchTechnicalInfo {...args} />
         case 'news':
           return <SearchNews {...args} />
         default:
