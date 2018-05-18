@@ -31,7 +31,8 @@ type ChildFunctionArgs = {
   canLoadMore: boolean,
   shouldDisplayPost: (index: number) => boolean,
   loadNextPage: () => void,
-  reset: () => void
+  reset: () => void,
+  loading?: boolean
 }
 
 type Props = {
@@ -41,6 +42,7 @@ type Props = {
   getPosts: GetPostsFunctionType,
   posts?: Array<BcorpPost>,
   paged?: number,
+  offset?: number,
   omitDebounce: boolean,
   onPageLoaded?: ChildFunctionArgs => void,
   onRequestFail?: (Error) => void,
@@ -139,7 +141,6 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
       // then we want to get what would effectively be the first page
       // using our actual postsPerPage, paged, and offset params.
       if (!this.props.omitDebounce) {
-        console.log('here')
         this.getPageDebounced(this.props.postsPerPage, 1, this.state.offset)
       }
     } else if (!this.props.posts) {
@@ -147,7 +148,6 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
       // just getting the first and second pages from 0
       this.getPage(this.props.postsPerPage, 1, this.state.offset)
       if (!this.props.omitDebounce) {
-        console.log('here')
         this.getPageDebounced(this.props.postsPerPage, 2, this.state.offset)
       }
     }
@@ -155,17 +155,17 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
 
   componentDidUpdate (prevProps: Props, prevState: State) {
     // if we 'load more' we need to request the next page
-    if (!(this.props.posts)) {
+    if (!(this.props.posts) && !this.state.loading) {
       this.getPage(
         this.props.postsPerPage,
         this.state.paged,
-        this.state.offset
+        this.props.offset || this.state.offset
       )
     } else if (prevState.paged !== this.state.paged) {
       this.getPage(
         this.props.postsPerPage,
         this.state.paged + 1,
-        this.state.offset
+        this.props.offset || this.state.offset
       )
 
       // we keep track of the page state in the url
@@ -205,18 +205,20 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
 
   render () {
     // console.log(this.state)
-    return this.state.loading ? (
+    const posts = this.props.posts ? this.props.posts : this.state.posts || []
+    return (this.state.loading && !posts.length) ? (
       <Loading />
     ) : (
       this.props.children({
-        posts: this.props.posts ? this.props.posts : this.state.posts || [],
+        posts,
         postsPerPage: this.props.postsPerPage,
         paged: this.state.paged,
         offset: this.state.offset,
         canLoadMore: this.canLoadMore(),
         shouldDisplayPost: this.shouldDisplayPost.bind(this),
         loadNextPage: this.loadNextPage.bind(this),
-        reset: this.reset.bind(this)
+        reset: this.reset.bind(this),
+        loading: this.state.loading
       })
     )
   }
@@ -236,35 +238,37 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
       }
       const response = await this.props.getPosts(args)
 
-      if (response) {
-        let posts: Array<BCorpPost> = response.data
-  
-        // console.log(`got ${posts.length} posts`, paged)
-  
-        const prevPosts = this.state.posts || []
-        posts = [...prevPosts, ...posts]
-  
-        return this.setState({ posts, loading: false }, () => {
-          this.props.onPageLoaded && this.props.onPageLoaded({
-            posts: this.state.posts || [],
+      this.setState({ loading: true }, () => {
+        if (response) {
+          let posts: Array<BCorpPost> = response.data
+    
+          // console.log(`got ${posts.length} posts`, paged)
+    
+          const prevPosts = this.state.posts || []
+          posts = [...prevPosts, ...posts]
+    
+          return this.setState({ posts, loading: false }, () => {
+            this.props.onPageLoaded && this.props.onPageLoaded({
+              posts: this.state.posts || [],
+              postsPerPage: this.props.postsPerPage,
+              paged: this.state.paged,
+              offset: this.state.offset,
+              canLoadMore: this.canLoadMore(),
+              shouldDisplayPost: this.shouldDisplayPost.bind(this),
+              loadNextPage: this.loadNextPage.bind(this),
+              reset: this.reset.bind(this)
+            })
+          })
+        } else {
+          this.setState({ loading: false })
+          this.props.onResponse && this.props.onResponse({
+            posts: this.props.posts || [],
             postsPerPage: this.props.postsPerPage,
             paged: this.state.paged,
             offset: this.state.offset,
-            canLoadMore: this.canLoadMore(),
-            shouldDisplayPost: this.shouldDisplayPost.bind(this),
-            loadNextPage: this.loadNextPage.bind(this),
-            reset: this.reset.bind(this)
           })
-        })
-      } else {
-        this.setState({ loading: false })
-        this.props.onResponse && this.props.onResponse({
-          posts: this.props.posts || [],
-          postsPerPage: this.props.postsPerPage,
-          paged: this.state.paged,
-          offset: this.state.offset,
-        })
-      }
+        }
+      })
     } catch (error) {
       console.log(error)
       this.props.onRequestFail && this.props.onRequestFail(error)
