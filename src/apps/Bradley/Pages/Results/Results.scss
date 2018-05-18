@@ -214,91 +214,19 @@ button.loadMore {
     padding: 22px 0 0;
 
     article {
-        position: relative;
-        padding: 0 20px 25px;
-        height: 309px;
+        padding: 15px 20px;
+        margin-bottom: 25px;
         border: 1px solid transparent;
-
-        img {
-            max-width: 100%;
-            max-height: 100%;
-            overflow: hidden;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .newH {
-            position: absolute;
-            top: 20px;
-            left: 0;
-            width: 100%;
-            z-index: 9999;
-        }
-        
-        .new {
-            font-family: 'CentraleSansPro';
-            color: #e51616;
-            font-weight: bold;
-            font-size: 14px;
-            text-transform: uppercase;
-            float: left;
-            margin-left: 22px;
-        }
-        
-        .h {
-            border-radius: 50%;
-            background-color: #474e5d;
-            color: #fff;
-            float: right;
-            margin-top: 5px;
-            margin-right: 39px;
-            font-size: 15px;
-        
-        }
-
-        .productsImageContainer {
-            text-align: center;
-            margin-bottom: 4px;
-            width: 155px;
-            height: 180px;
-            position: relative;
-
-            img {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-        }
-
-        .productReference {
-            color: #808285;
-            font-family: 'Helvetica';
-            font-size: 12px;
-            font-weight: 300;
-            text-transform: capitalize;
-            text-align: center;
-            line-height: normal;
-        }
-
-        .productDescription {
-            color: #000;
-            font-family: 'CentraleSansPro';
-            font-weight: bold;
-            line-height: normal;
-            text-align: center;
-            margin-top: 8px;
-            margin-bottom: 0;
-            overflow: hidden;
-            height: 82.5px;
-        }
 
         &:hover {
             -moz-box-shadow:    0 0 22px #ece8e8;
             -webkit-box-shadow: 0 0 22px #ece8e8;
             box-shadow:         0 0 22px #ece8e8;
             border: 1px solid #d1d3d4;
+        }
+
+        h6 {
+            height: 77px;
         }
     }
 }
@@ -315,16 +243,16 @@ button.loadMore {
         .literatureImageContainer {
             text-align: center;
             margin-bottom: 8px;
-            width: 170px;
-            height: 211px;
+            width: 162px;
+            height: 212px;
+            position: relative;
+            overflow: hidden;
 
             img {
-                max-width: 100%;
-                max-height: 100%;
-                overflow: hidden;
-                display: block;
-                margin-left: auto;
-                margin-right: auto;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
             }
         }
 
