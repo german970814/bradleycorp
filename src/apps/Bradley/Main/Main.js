@@ -138,6 +138,8 @@ const RouterInner = () => {
         component={ApplicationGalleryDetailLoadable}
       />
       <Route exact path="/results/:query" component={ResultsLoadable} />
+      <Route exact path="/results/:query/:tab" component={ResultsLoadable} />
+      <Route exact path="/results/:query/:tab/page=:page" component={ResultsLoadable} />
 
       {/* Post Types With Custom Templates */}
       <Route exact path="/post/:slug" component={BlogSinglePostPageLoadable} />

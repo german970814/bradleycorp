@@ -138,6 +138,12 @@
     }
   }
 
+  .col6-desktop {
+    @include respond-to(desktop) {
+      @include col(6);
+    }
+  }
+
   .col4x3-desktop {
     @include respond-to(desktop) {
       @include col(4 / 3);

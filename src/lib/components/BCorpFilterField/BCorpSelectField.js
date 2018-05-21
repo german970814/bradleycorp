@@ -8,6 +8,7 @@ type Options = {
 }
 
 type Props = {
+  notShowDefault: boolean,
   defaultOptionId: string | number,
   defaultOptionName: string,
   options?: Options,
@@ -62,9 +63,9 @@ class BCorpSelectField extends React.Component<Props> {
         <select
           value={this.props.filterState}
           onChange={this.handleChange.bind(this)}>
-          <option value={this.props.defaultOptionId}>
+          {!this.props.notShowDefault && <option value={this.props.defaultOptionId}>
             {this.props.defaultOptionName}
-          </option>
+          </option>}
           {this.renderOptions()}
         </select>
         {requiredClassName !== '' ? (

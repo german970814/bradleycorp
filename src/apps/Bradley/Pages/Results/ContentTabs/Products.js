@@ -1,37 +1,30 @@
 // @flow
-import React, { Component } from 'react'
+import React from 'react'
 import Media from 'react-media'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../../globals'
 import FillColumns from '../../../../../lib/components/FillColumns/FillColumns'
 import style from './../Results.scss'
 import Default from './Default'
+import ProductScrollerProduct from '../../../../../lib/containers/ProductScroller/ProductScrollerProduct/ProductScrollerProduct'
 
 export default class SearchProducts extends Default {
   renderProducts () {
     return this.props.posts && this.props.posts.map((post, ind) => {
       return <article key={ind}>
-        <div className={`${style.newH}`}>
-          <span className={`${style.new}`}>NEW</span>
-          <span className={`${style.h}`}>H</span>
-        </div>
-        <div className={`${style.productsImageContainer}`}>
-          <img src={require('../../../../../images/results/products-mobile.jpg')}/>
-        </div>
-        <h6 className={`${style.productReference}`}>MODEL S19-304</h6>
-        <p className={`${style.productDescription}`}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <ProductScrollerProduct product={post} />
       </article>
     })
   }
 
   renderColumns (classes: string) {
     return <div className={`${style.searchProductsWrapper}`}>
-      <FillColumns colClasses={[ `${classes}`, `${classes}`, `${classes}`, `${classes}` ]}>
+      <FillColumns colClasses={[ `${classes}`, `${classes}`, `${classes}`, `${classes}`, `${classes}`, `${classes}` ]}>
         {this.renderProducts()}
       </FillColumns>
     </div>
   }
 
-  render () {
+  renderContent () {
     return <div>
       <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
         { match =>
@@ -40,8 +33,8 @@ export default class SearchProducts extends Default {
           ) : <Media query={{ maxWidth: TABLETMAXWIDTH }}>
             { match =>
               match ? (
-                this.renderColumns('col3-tablet') // tablet
-              ) : this.renderColumns('col4-desktop') // desktop
+                this.renderColumns('col4-tablet') // tablet
+              ) : this.renderColumns('col6-desktop') // desktop
             }
           </Media>
         }

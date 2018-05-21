@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react'
+import React from 'react'
 import Media from 'react-media'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../../globals'
 import FileDownloadLink from '../../../../../lib/components/FileDownloadLink/FileDownloadLink'
@@ -8,34 +8,42 @@ import style from './../Results.scss'
 import Default from './Default'
 
 export default class SearchTechnicalInfo extends Default {
-  render () {
-    return <div className={`${style.resultsTextContentWrapper}`}>
-      <ul className={`${style.techInfoList}`}>
-        <li>
-          <FileDownloadLink
-            title={'Link Title'}
-            link={'Article Name Goes Here'}
-            titleClass={`link-orange ${style.tabTextOrange}`}
-            linkClass={style.tabTextOrangeLink}
-            iconClass={style.wordPDFIcon} />
-        </li>
-        <li>
-          <FileDownloadLink
-            title={'Link Title'}
-            link={'Article Name Goes Here'}
-            titleClass={`link-orange ${style.tabTextOrange}`}
-            linkClass={style.tabTextOrangeLink}
-            iconClass={style.wordPDFIcon} />
-        </li>
-        <li>
-          <FileDownloadLink
-            title={'Link Title'}
-            link={'Article Name Goes Here'}
-            titleClass={`link-orange ${style.tabTextOrange}`}
-            linkClass={style.tabTextOrangeLink}
-            iconClass={style.wordPDFIcon} />
-        </li>
-      </ul>
+  renderTechicalInfo () {
+    return this.props.posts && this.props.posts.map((post, ind) => {
+      return <div key={ind} className={`${style.techInfoItem}`}>
+        <FileDownloadLink
+          title={post.post['post_title'] || ''}
+          link={post.meta['technical_info_pdf']}
+          titleClass={`link-orange ${style.tabTextOrange}`}
+          linkClass={style.tabTextOrangeLink}
+          iconClass={style.wordPDFIcon} />
+      </div>
+    })
+  }
+
+  renderColumns (classes: string) {
+    return <div className={`${style.searchTechInfoWrapper}`}>
+      <FillColumns colClasses={[`${classes}`, `${classes}`]}>
+        {this.renderTechicalInfo()}
+      </FillColumns>
+    </div>
+  }
+
+  renderContent () {
+    return <div>
+      <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
+        { match =>
+          match ? (
+            this.renderColumns('col1') // mobile
+          ) : <Media query={{ maxWidth: TABLETMAXWIDTH }}>
+            { match =>
+              match ? (
+                this.renderColumns('col2-tablet') // tablet
+              ) : this.renderColumns('col2-desktop') // desktop
+            }
+          </Media>
+        }
+      </Media>
     </div>
   }
 }

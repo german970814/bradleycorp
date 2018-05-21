@@ -1,0 +1,37 @@
+@import "../../../scss/partials/layout";
+@import "../../../scss/partials/variables";
+@import "../../../scss/partials/mixins";
+
+
+.noResultsWrapper {
+    position: absolute;
+    text-align: center;
+    padding-top: 70px;
+
+    @include respond-to(mobile) {
+        padding-top: 30px;
+        width: 100%;
+    }
+
+    @include respond-to(tablet) {
+        padding-top: 70px;
+        width: 90%;
+    }
+
+    @include respond-to(desktop) {
+        width: 100%;
+    }
+
+    h1 {
+        position: relative;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    span {
+        color: #a7a9ac;
+        font-size: 13px;
+        font-family: 'CentraleSansPro';
+        text-transform: uppercase;
+    }
+}

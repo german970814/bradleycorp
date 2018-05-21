@@ -32,7 +32,7 @@
 
 .mobileSelectWtapper {
     background-color: #2e3c6e;
-    padding: 20px 0;
+    padding: 20px 22px;
     min-height: 30px;
 
 }
@@ -45,50 +45,26 @@
         list-style-type: none;
         display: inline-block;
 
-        &:first-child {
-
-            a {
-                border-left: 1px solid #d1d3d4;
-            }
-        }
-
-        .selected {
+        &.selected {
             
             a {
                 color: #fff;
                 background: #2f3d6f;
             }
         }
-
-        @include respond-to(tablet) {
-            &:nth-child(5) {
-                a {
-                    margin-top: -1px;
-                    border-left: 1px solid #d1d3d4;
-                }
-            }
-        }
-
-        @include respond-to(desktop) {
-            &:nth-child(5) {
-                a {
-                    border-left: none;
-                }
-            }
-        }
-
+        
         a {
             background: #f1f2f2;
             padding: 25px 38px 21px;
-            border-top: 1px solid #d1d3d4;
-            border-bottom: 1px solid #d1d3d4;
-            border-right: 1px solid #d1d3d4;
+            border: 1px solid #d1d3d4;
             font-family: 'CentraleSansPro';
             font-size: 13px;
             font-weight: bold;
             color: #808285;
             text-transform: uppercase;
             display: inline-block;
+            margin-left: -1px;
+            margin-top: -1px;
 
             &:hover {
                 color: #fff;
@@ -101,7 +77,10 @@
 }
 
 .contentWrapper {
-    
+    min-height: 350px;
+    margin-bottom: 60px;
+    position: relative;
+
     @include respond-to(mobile) {
         padding: 0;
     }
@@ -177,13 +156,20 @@
     }
     
 }
-
-.techInfoList {
-    background: transparent;
-
-    li {
-        list-style-type: none;
+.searchTechInfoWrapper {
+    margin: 0;
+    
+    @include respond-to(mobile) {
+        padding: 40px 20px 0;
     }
+
+    @include respond-to(tablet) {
+        padding: 40px 0 0;
+    }
+}
+
+.techInfoItem {
+    display: block;
 }
 
 .tabTextOrangeLink {
@@ -232,69 +218,75 @@ button.loadMore {
 
 .searchProductsWrapper {
     margin: 0;
-    padding: 0;
+    padding: 22px 0 0;
 
-    li {
-        position: relative;
-        list-style-type: none;
+    article {
+        padding: 15px 20px;
+        margin-bottom: 25px;
+        border: 1px solid transparent;
 
-        .newH {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-        }
-        
-        .new {
-            font-family: 'CentraleSansProBold';
-            color: #e51616;
-            font-size: 12px;
-            text-transform: uppercase;
-            float: left;
-        }
-        
-        .h {
-            border-radius: 50%;
-            background-color: #474e5d;
-            color: #fff;
-            float: right;
+        &:hover {
+            -moz-box-shadow:    0 0 22px #ece8e8;
+            -webkit-box-shadow: 0 0 22px #ece8e8;
+            box-shadow:         0 0 22px #ece8e8;
+            border: 1px solid #d1d3d4;
         }
 
-        .productsImageContainer {
-            text-align: center;
-        }
-
-        .productReference {
-            color: #808285;
-            font-family: 'Helvetica';
-            font-size: 12px;
-            font-weight: 300;
-        }
-
-        .productDescription {
-            color: #000;
-            font-family: 'CentraleSansProBold';
-            font-weight: bold;
+        h6 {
+            overflow: hidden;
+            height: 95px;
         }
     }
 }
   
 .searchLiteratureWrapper {
     margin: 0;
-    padding: 0;
+    padding: 40px 0 0;
 
-    li {
+    article {
         position: relative;
-        list-style-type: none;
+        margin-bottom: 25px;
+        padding: 0 10px;
 
         .literatureImageContainer {
             text-align: center;
+            margin-bottom: 8px;
+            width: 162px;
+            height: 212px;
+            position: relative;
+            overflow: hidden;
+
+            img {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
         }
 
         .literatureTitle {
             color: #000;
-            font-family: 'CentraleSansProBold';
+            font-family: 'CentraleSansPro';
             font-weight: bold;
+            text-align: center;
+            text-transform: capitalize;
+            width: 50%;
+            margin: 0 auto;
+            overflow: hidden;
+            height: 32px;
         }
     }
+}
+
+.searchLoadMore {
+    @include respond-to(mobile) {
+        width: 88%;
+        margin: 0 auto;
+        display: block;
+    }
+    @include respond-to(tablet) {
+        width: 144px;
+        margin: 50px auto 0;
+        display: block;
+    }   
 }
