@@ -35,7 +35,7 @@ class TabInstallation extends Component {
           className={this.getColumnWidth()} >
           <h5
             className={tabStyle.tabColTitle} >
-            {'Guides'}
+            {'Manuals'}
           </h5>
           <ul
             className={tabStyle.tabColUl} >

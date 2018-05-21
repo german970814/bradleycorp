@@ -21,7 +21,7 @@ type Props = {
 type State = {
   faqs: Array<WPPost>,
   processing: boolean
-}
+};
 
 class FAQTemplate extends React.Component<Props, State> {
   constructor (props: Props) {
