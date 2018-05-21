@@ -1,3 +1,19 @@
-.tabBimRevit {
+@import '../../../../../../../scss/partials/mixins';
 
+.tabBimRevit {
+  .buttons {
+    margin-top: 20px;
+
+    button {
+      margin-bottom: 10px;
+
+      @include respond-to(tablet) {
+        width: auto;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-right: 10px;
+        margin-bottom: 0px;
+      }
+    }
+  }
 }
