@@ -1,3 +1,19 @@
-.tabApplicationGallery {
+@import '../../../../../../../scss/partials/mixins';
 
+.tabApplicationGallery {
+  .image {
+    float: left;
+    margin-right: 30px;
+    margin-bottom: 5px;
+    width: 210px;
+    height: 140px;
+    background-position: center;
+    background-size: cover;
+
+    @include respond-to(tablet) {
+      margin-bottom: 35px;
+      width: 300px;
+      height: 200px;
+    }
+  }
 }
