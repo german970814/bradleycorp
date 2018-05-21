@@ -41,9 +41,7 @@ type Props = {
   getPosts: GetPostsFunctionType,
   // passed by withRouter HOC
   match: Match,
-  history: RouterHistory,
-  posts: Array<BCorpPost>,
-  paged: number
+  history: RouterHistory
 }
 
 type State = {
@@ -130,7 +128,7 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
       // then we want to get what would effectively be the first page
       // using our actual postsPerPage, paged, and offset params.
       this.getPageDebounced(this.props.postsPerPage, 1, this.state.offset)
-    } else if (!this.props.posts) {
+    } else {
       // if there's no offset then we proceed as normal
       // just getting the first and second pages from 0
       this.getPage(this.props.postsPerPage, 1, this.state.offset)
@@ -177,18 +175,18 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
 
   loadNextPage () {
     if (this.canLoadMore()) {
-      const paged = (this.props.paged || this.state.paged) + 1
+      const paged = this.state.paged + 1
       return this.setState({ paged })
     }
   }
 
   render () {
-    // console.log(this.state)
-    return (this.state.loading) ? (
+    console.log(this.state)
+    return this.state.loading ? (
       <Loading />
     ) : (
       this.props.children({
-        posts: this.state.posts,
+        posts: this.state.posts || [],
         postsPerPage: this.props.postsPerPage,
         paged: this.state.paged,
         offset: this.state.offset,
@@ -202,11 +200,11 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
 
   async getPage (postsPerPage: number, paged: number, offset: number) {
     try {
-      // console.log('sending', {
-      //   postsPerPage,
-      //   paged,
-      //   offset
-      // })
+      console.log('sending', {
+        postsPerPage,
+        paged,
+        offset
+      })
 
       const args = {
         postsPerPage,
@@ -217,15 +215,14 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
 
       let posts: Array<BCorpPost> = response.data
 
-      // console.log(`got ${posts.length} posts`, paged)
+      console.log(`got ${posts.length} posts`, paged)
 
       const prevPosts = this.state.posts || []
       posts = [...prevPosts, ...posts]
 
-      this.setState({ posts, loading: false })
+      return this.setState({ posts, loading: false })
     } catch (error) {
       console.log(error)
-      this.setState({ loading: false })
     }
   }
 
@@ -245,7 +242,7 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
   }
 }
 
-const LoadMore = withRouter(LoadMoreWithRouter)
+const LoadMore: withRouter<Props> = withRouter(LoadMoreWithRouter)
 
 export default LoadMore
 export type { GetPostsArgs, GetPostsFunctionType, ChildFunctionArgs }

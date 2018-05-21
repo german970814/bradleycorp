@@ -40,18 +40,18 @@ type Props = {
   children: ChildFunctionArgs => React.Node,
   postsPerPage: number,
   getPosts: GetPostsFunctionType,
-  posts?: Array<BcorpPost>,
+  posts?: Array<BCorpPost>,
   paged?: number,
   offset?: number,
   omitDebounce: boolean,
   onPageLoaded?: ChildFunctionArgs => void,
-  onRequestFail?: (Error) => void,
-  onResponse?: {
-    posts: Array<BcorpPost>,
+  onRequestFail?: Error => void,
+  onResponse?: ({
+    posts: Array<BCorpPost>,
     postsPerPage: number,
     paged: number,
     offset: number
-  } => void,
+  }) => void,
   // passed by withRouter HOC
   match: Match,
   history: RouterHistory
@@ -122,7 +122,8 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
     const initOffset =
       parseInt(this.props.match.params.page) * this.props.postsPerPage || 0
 
-    const initPaged = ('paged' in props && props.paged) ? props.paged : (initOffset === 0 ? 1 : 0)
+    const initPaged =
+      'paged' in props && props.paged ? props.paged : initOffset === 0 ? 1 : 0
 
     this.state = { loading: true, paged: initPaged, offset: initOffset }
 
@@ -155,7 +156,7 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
 
   componentDidUpdate (prevProps: Props, prevState: State) {
     // if we 'load more' we need to request the next page
-    if (!(this.props.posts) && !this.state.loading) {
+    if (!this.props.posts && !this.state.loading) {
       this.getPage(
         this.props.postsPerPage,
         this.props.paged || this.state.paged,
@@ -207,11 +208,7 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
     if (this.props.posts || this.canLoadMore()) {
       const paged = (this.props.paged || this.state.paged) + 1
       if (paged === this.state.paged) {
-        this.getPage(
-          this.props.postsPerPage,
-          paged,
-          this.offset
-        )
+        this.getPage(this.props.postsPerPage, paged, this.offset)
 
         // we keep track of the page state in the url
         // in case they refresh teh page we can continue from the same point
@@ -233,7 +230,7 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
   render () {
     // console.log(this.state)
     const posts = this.props.posts ? this.props.posts : this.state.posts || []
-    return (this.state.loading && !posts.length) ? (
+    return this.state.loading && !posts.length ? (
       <Loading />
     ) : (
       this.props.children({
@@ -275,25 +272,27 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
           posts = [...prevPosts, ...posts]
 
           return this.setState({ posts, loading: false }, () => {
-            this.props.onPageLoaded && this.props.onPageLoaded({
-              posts: this.state.posts || [],
-              postsPerPage: this.props.postsPerPage,
-              paged: this.state.paged,
-              offset: this.offset,
-              canLoadMore: this.canLoadMore(),
-              shouldDisplayPost: this.shouldDisplayPost.bind(this),
-              loadNextPage: this.loadNextPage.bind(this),
-              reset: this.reset.bind(this)
-            })
+            this.props.onPageLoaded &&
+              this.props.onPageLoaded({
+                posts: this.state.posts || [],
+                postsPerPage: this.props.postsPerPage,
+                paged: this.state.paged,
+                offset: this.offset,
+                canLoadMore: this.canLoadMore(),
+                shouldDisplayPost: this.shouldDisplayPost.bind(this),
+                loadNextPage: this.loadNextPage.bind(this),
+                reset: this.reset.bind(this)
+              })
           })
         } else {
           this.setState({ loading: false })
-          this.props.onResponse && this.props.onResponse({
-            posts: this.props.posts || [],
-            postsPerPage: this.props.postsPerPage,
-            paged: this.state.paged,
-            offset: this.offset
-          })
+          this.props.onResponse &&
+            this.props.onResponse({
+              posts: this.props.posts || [],
+              postsPerPage: this.props.postsPerPage,
+              paged: this.state.paged,
+              offset: this.offset
+            })
         }
       })
     } catch (error) {
@@ -319,7 +318,7 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
   }
 }
 
-const LoadMore = withRouter(LoadMoreWithRouter)
+const LoadMore: withRouter<Props> = withRouter(LoadMoreWithRouter)
 
 export default LoadMore
 export type { GetPostsArgs, GetPostsFunctionType, ChildFunctionArgs }
