@@ -8,7 +8,7 @@ type Options = {
 }
 
 type Props = {
-  notShowDefault: boolean,
+  notShowDefault?: boolean,
   defaultOptionId: string | number,
   defaultOptionName: string,
   options?: Options,

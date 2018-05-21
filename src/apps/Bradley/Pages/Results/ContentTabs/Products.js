@@ -1,13 +1,14 @@
 // @flow
 import React from 'react'
 import Media from 'react-media'
+import Default from './Default'
+import style from './../Results.scss'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../../globals'
 import FillColumns from '../../../../../lib/components/FillColumns/FillColumns'
-import style from './../Results.scss'
-import Default from './Default'
 import ProductScrollerProduct from '../../../../../lib/containers/ProductScroller/ProductScrollerProduct/ProductScrollerProduct'
+import type { TemplateProps } from './Default'
 
-export default class SearchProducts extends Default {
+export default class SearchProducts extends React.Component<TemplateProps> {
   renderProducts () {
     return this.props.posts && this.props.posts.map((post, ind) => {
       return <article key={ind}>
@@ -40,5 +41,9 @@ export default class SearchProducts extends Default {
         }
       </Media>
     </div>
+  }
+
+  render () {
+    return <Default render={this.renderContent.bind(this)} {...this.props} />
   }
 }
