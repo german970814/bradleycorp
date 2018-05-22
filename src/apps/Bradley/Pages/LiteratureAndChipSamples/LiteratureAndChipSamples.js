@@ -4,10 +4,10 @@ import type {
   LiteraturePost,
   ChipSamplePost
 } from '../../../../lib/types/cpt_types'
+import type { ScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
 import type { WPMaterialTypeTerm } from '../../../../lib/types/term_types'
 import type { CheckboxObject } from '../../../../lib/components/BCorpFilterField/BCorpCheckboxField'
-import Media from 'react-media'
-import { MOBILEMAXWIDTH } from '../../../../globals'
+import { withScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
 import CPTApiClient from '../../../../api/cpt_client'
 import RightSidebarTemplate from '../../../../lib/containers/Templates/RightSidebarTemplate/RightSidebarTemplate'
 import PostTypeSelector from './PostTypeSelector/PostTypeSelector'
@@ -106,7 +106,10 @@ type ShippingInfoType = {
   userArea: ShippingInfoUserAreaType
 }
 
-type Props = {}
+type Props = {
+  // from withScreenSize HOC
+  screenSize: ScreenSize
+}
 
 type State = {
   options: OptionsTypes,
@@ -362,34 +365,30 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
     )
   }
 
-  renderContent (isMobile: boolean) {
-    if (isMobile) {
+  renderContent () {
+    if (this.props.screenSize === 'mobile') {
       return this.state.showCurrentRequestMobile
-        ? this.renderCurrentRequest(isMobile)
-        : this.renderOptions(isMobile)
+        ? this.renderCurrentRequest(true)
+        : this.renderOptions(true)
     } else {
-      return this.renderOptions(isMobile)
+      return this.renderOptions(false)
     }
   }
 
-  renderRightSidebarWidgets (isMobile: boolean) {
-    return isMobile ? null : this.renderCurrentRequest(isMobile)
+  renderRightSidebarWidgets () {
+    return this.props.screenSize === 'mobile'
+      ? null
+      : this.renderCurrentRequest(true)
   }
 
   render () {
     return (
-      <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
-        {match => (
-          <RightSidebarTemplate
-            data={{ page_title: 'Literature & Chip Samples' }}
-            renderModules={() => this.renderContent(match)}
-            renderRightSidebarWidgets={() =>
-              this.renderRightSidebarWidgets(match)
-            }
-            widgetsMoveWithScroll
-          />
-        )}
-      </Media>
+      <RightSidebarTemplate
+        data={{ page_title: 'Literature & Chip Samples' }}
+        renderModules={() => this.renderContent()}
+        renderRightSidebarWidgets={() => this.renderRightSidebarWidgets()}
+        widgetsMoveWithScroll
+      />
     )
   }
 
@@ -552,7 +551,7 @@ function download (literature: LiteraturePost) {
   window.open(downloadLink)
 }
 
-export default LiteratureAndChipSamples
+export default withScreenSize(LiteratureAndChipSamples)
 export {
   productLineFilterDefault,
   languageFilterDefault,

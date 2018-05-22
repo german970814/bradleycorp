@@ -6,7 +6,6 @@ import { withScreenSize } from '../../../contexts/ScreenSizeContext'
 import { renderTitle } from '../DefaultTemplate/DefaultTemplate'
 import style from './RightSidebarTemplate.scss'
 import defaultStyle, { titlemarginbottom } from '../Templates.scss'
-import { TABLETMAXWIDTH } from '../../../../globals'
 
 type Props = {
   /**
