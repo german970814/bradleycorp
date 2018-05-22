@@ -42,7 +42,8 @@ type BCorpMeta = {
     url: string
   },
   news_pdf?: string,
-  case_study_pdf?: string
+  case_study_pdf?: string,
+  meta_description?: string
 }
 
 type BCorpPost = {

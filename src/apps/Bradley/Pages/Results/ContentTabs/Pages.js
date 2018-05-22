@@ -5,30 +5,34 @@ import style from './../Results.scss'
 import type { TemplateProps } from './Default'
 import type { BCorpPost, BCorpMeta } from '../../../../../lib/types/post_types'
 
-type BCorpMetaWithDescription = {
-  meta_description: string
-} & BCorpMeta
+type BCorpMetaWithDescription = BCorpMeta
 
 type BCorpPostWithMeta = {
   meta: BCorpMetaWithDescription
 } & BCorpPost
 
 type Props = {
-  posts: Array<BCorpPostWithMeta>,
+  posts: Array<BCorpPostWithMeta>
 } & TemplateProps
 
 export default class PageTabResults extends React.Component<Props> {
   renderContent () {
-    return <div className={`${style.resultsTextContentWrapper}`}>
-      <ul className={`${style.newsList}`}>
-        {this.props.posts.map((post, index) => {
-          return <li key={index}>
-            <h5><a href="#">{post.post.post_title}</a></h5>
-            <p>{post.meta.meta_description}</p>
-          </li>
-        })}
-      </ul>
-    </div>
+    return (
+      <div className={`${style.resultsTextContentWrapper}`}>
+        <ul className={`${style.newsList}`}>
+          {this.props.posts.map((post, index) => {
+            return (
+              <li key={index}>
+                <h5>
+                  <a href="#">{post.post.post_title}</a>
+                </h5>
+                <p>{post.meta.meta_description || ''}</p>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+    )
   }
 
   render () {
