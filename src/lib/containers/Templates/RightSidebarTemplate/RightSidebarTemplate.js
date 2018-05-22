@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react'
 import type { ScreenSize } from '../../../contexts/ScreenSizeContext'
+import debounce from 'debounce'
 import { withScreenSize } from '../../../contexts/ScreenSizeContext'
 import { renderTitle } from '../DefaultTemplate/DefaultTemplate'
 import style from './RightSidebarTemplate.scss'
@@ -42,6 +43,7 @@ class RightSidebarTemplate extends React.Component<Props, State> {
   titleMarginBottom: number
   snappedAtY: ?number
   maxScroll: number
+  onScroll: () => void
 
   constructor (props: Props) {
     super(props)
@@ -56,6 +58,8 @@ class RightSidebarTemplate extends React.Component<Props, State> {
     }
 
     this.maxScroll = 0
+
+    this.onScroll = debounce(this.onScroll, 200)
   }
 
   componentDidMount () {
