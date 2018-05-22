@@ -15,6 +15,7 @@ import Filters from './Filters/Filters'
 import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
 import style from './ApplicationGallery.scss'
 import GalleryItem from './GalleryItem'
+import NoResults from '../../../../lib/components/NoResults/NoResults'
 
 const PostType: CPTName = 'application-gallery'
 
@@ -51,7 +52,7 @@ type State = {
   gallery: ?Array<GalleryType>,
   activeFilters: TaxAndTermSlugObject,
   loading: boolean
-};
+}
 
 export default class ApplicationGallery extends Component<Props, State> {
   getApplicationGalleryDebounced: (filters: TaxAndTermSlugObject) => void
@@ -89,29 +90,37 @@ export default class ApplicationGallery extends Component<Props, State> {
   }
 
   renderGallery () {
-    return this.state.gallery ? this.state.gallery.map((appGallery, idx) => {
-      return <GalleryItem key={idx} applicationGallery={appGallery} />
-    }) : <div></div>
+    return this.state.gallery ? (
+      this.state.gallery.map((appGallery, idx) => {
+        return <GalleryItem key={idx} applicationGallery={appGallery} />
+      })
+    ) : (
+      <div />
+    )
   }
 
   renderNoResults () {
-    return <div className={`${style.noResultsWrapper}`}>
-      <img src={require('../../../../images/warning-icon/warning-icon.png')} />
-      <h1>No images match your filter selections</h1>
-      <span>PLEASE TRY AGAIN</span>
-    </div>
+    return (
+      <NoResults
+        message={'No images match your filter selections'}
+        className={style.noResults}
+      />
+    )
   }
 
   renderColumns (classes: string) {
-    return this.state.gallery === null ? this.renderNoResults() : <FillColumns
-      colClasses={[
-        `${classes} ${style.appGalleryItem} ${
-          style.appMinHeightGalleryItem}`, `${classes} ${
-          style.appGalleryItem
-        }`, `${classes} ${style.appGalleryItem}`
-      ]}>
-      {this.renderGallery()}
-    </FillColumns>
+    return this.state.gallery === null ? (
+      this.renderNoResults()
+    ) : (
+      <FillColumns
+        colClasses={[
+          `${classes} ${style.appGalleryItem} ${style.appMinHeightGalleryItem}`,
+          `${classes} ${style.appGalleryItem}`,
+          `${classes} ${style.appGalleryItem}`
+        ]}>
+        {this.renderGallery()}
+      </FillColumns>
+    )
   }
 
   render () {
@@ -130,13 +139,11 @@ export default class ApplicationGallery extends Component<Props, State> {
               ) : (
                 <Media query={{ maxWidth: TABLETMAXWIDTH }}>
                   {match =>
-                    match ? (
-                      // tablet
+                    match
+                      ? // tablet
                       this.renderColumns('col2-tablet')
-                    ) : (
-                      // desktop
+                      : // desktop
                       this.renderColumns('col3')
-                    )
                   }
                 </Media>
               )

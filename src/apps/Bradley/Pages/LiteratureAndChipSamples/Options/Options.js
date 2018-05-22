@@ -20,6 +20,7 @@ import {
   filterPostsByMeta
 } from '../../../../../lib/bcorpPost'
 import Loading from '../../../../../lib/components/Loading/Loading'
+import NoResults from '../../../../../lib/components/NoResults/NoResults'
 import Option from './Option/Option'
 import style from './Options.scss'
 
@@ -41,7 +42,7 @@ class Options extends React.Component<Props> {
     let literature = this.props.options.literature
 
     if (!literature || !literature.length) {
-      return null
+      return this.renderNoLiteratureMessage()
     }
 
     if (
@@ -54,7 +55,7 @@ class Options extends React.Component<Props> {
       )
 
       if (!literature || !literature.length) {
-        return null
+        return this.renderNoLiteratureMessage()
       }
     }
 
@@ -81,7 +82,7 @@ class Options extends React.Component<Props> {
         }),
         2
       )
-      : null
+      : this.renderNoLiteratureMessage()
   }
 
   getFilteredAndSortedChipSamples () {
@@ -124,7 +125,7 @@ class Options extends React.Component<Props> {
     const chipSamplesGrouped = this.getFilteredAndSortedChipSamples()
 
     if (!chipSamplesGrouped) {
-      return null
+      return this.renderNoChipMessage()
     }
 
     return (
@@ -178,6 +179,24 @@ class Options extends React.Component<Props> {
           }
         })}
       </React.Fragment>
+    )
+  }
+
+  renderNoLiteratureMessage () {
+    return (
+      <NoResults
+        message={'No literature matched your filter selections'}
+        className={style.noResults}
+      />
+    )
+  }
+
+  renderNoChipMessage () {
+    return (
+      <NoResults
+        message={'No chip samples matched your filter selections'}
+        className={style.noResults}
+      />
     )
   }
 

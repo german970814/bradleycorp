@@ -17,3 +17,17 @@
     color: $navy;
   }
 }
+
+.noResults {
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  @include respond-to(tablet) {
+    padding-top: 30px;
+    padding-bottom: 70px;
+  }
+
+  @include respond-to(desktop) {
+    padding-top: 10px;
+  }
+}

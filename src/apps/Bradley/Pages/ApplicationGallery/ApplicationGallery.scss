@@ -1,192 +1,186 @@
-@import "../../../../scss/partials/layout";
-@import "../../../../scss/partials/variables";
-@import "../../../../scss/partials/mixins";
+@import '../../../../scss/partials/layout';
+@import '../../../../scss/partials/variables';
+@import '../../../../scss/partials/mixins';
 
 .appGallerySidebar {
-    
-    @include respond-to(mobile) {
+  @include respond-to(mobile) {
+    margin-bottom: 15px;
+  }
 
-        margin-bottom: 15px;
-        
+  @include respond-to(tablet) {
+    margin-bottom: 60px;
+
+    h5 {
+      padding-bottom: 5px;
+      padding-right: 10px;
+      font-family: 'CentraleSansPro';
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #a7a9ac;
+      text-align: left;
+      line-height: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    @include respond-to(tablet) {
-        
-        margin-bottom: 60px;
-
-        h5 {
-            padding-bottom: 5px;
-            padding-right: 10px;
-            font-family: 'CentraleSansPro';
-            font-size: 12.5px;
-            font-weight: 500;
-            color: #a7a9ac;
-            text-align: left;
-            line-height: normal;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        & > div > div {
-            margin-bottom: 35px;
-        }
-
-        & > div > div label {
-            color: #2f3d6f;
-            font-family: 'Helvetica';
-            font-size: 14px;
-            font-weight: normal;
-        }
-
+    & > div > div {
+      margin-bottom: 35px;
     }
+
+    & > div > div label {
+      color: #2f3d6f;
+      font-family: 'Helvetica';
+      font-size: 14px;
+      font-weight: normal;
+    }
+  }
 }
 
 .appGalleryContent {
-    min-height: 300px!important;
-    margin-bottom: 60px;
-    position: relative;
+  min-height: 300px !important;
+  margin-bottom: 60px;
+  position: relative;
 }
 
 .appGalleryItem {
-    
-    @include respond-to(mobile) {
-
-        & > div {
-            margin-bottom: 16px;
-        }
-
-        &:nth-child(2n + 1) {
-            padding-right: 8px;
-          }
-      
-          &:nth-child(2n) {
-            padding-left: 8px;
-          }
+  @include respond-to(mobile) {
+    & > div {
+      margin-bottom: 16px;
     }
 
-    @include respond-to(desktop) {
-
-        & > div {
-            margin-bottom: 7%;
-        }
-
-        width: 32%!important;
-
-        &:nth-child(2n + 1) {
-            padding-right: 0;
-        }
-
-        &:nth-child(3n + 1) {
-            margin-right: 2%;
-        }
-    
-        &:nth-child(2n) {
-            padding-left: 0;
-            margin-right: 2%;
-        }
-
+    &:nth-child(2n + 1) {
+      padding-right: 8px;
     }
 
-    
+    &:nth-child(2n) {
+      padding-left: 8px;
+    }
+  }
+
+  @include respond-to(desktop) {
+    & > div {
+      margin-bottom: 7%;
+    }
+
+    width: 32% !important;
+
+    &:nth-child(2n + 1) {
+      padding-right: 0;
+    }
+
+    &:nth-child(3n + 1) {
+      margin-right: 2%;
+    }
+
+    &:nth-child(2n) {
+      padding-left: 0;
+      margin-right: 2%;
+    }
+  }
 }
 
 .horizontalRightItemSpace {
-    padding-right: 8px;
+  padding-right: 8px;
 }
 
 .horizontalLeftItemSpace {
-    padding-left: 8px;
+  padding-left: 8px;
 }
 
 .lastHorizontalLeftItemSpace {
-    padding-left: 16px;
+  padding-left: 16px;
 }
 
 .imageContainer {
-    position: relative;
-    .arrowButton {
-        position: absolute;
-        right: 10px;
-        bottom: 10px;
-    }
-    img {
-        
-    }
+  position: relative;
+  .arrowButton {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+  }
+  img {
+  }
 }
 
 .arrowContainer {
-    
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 37%;
+  height: 62%;
+
+  img {
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 37%;
-    height: 62%;
-    
-    img {
-        position: absolute;
-        bottom: 0;
-        right: 0;
 
-        @include respond-to(mobile) {
-            width: 160%;
-        }
-    
-        @include respond-to(tablet) {
-            width: auto;
-        }
+    @include respond-to(mobile) {
+      width: 160%;
     }
+
+    @include respond-to(tablet) {
+      width: auto;
+    }
+  }
 }
 
 .arrowWrapper {
-    position: absolute;
-    @include respond-to(mobile) {
-        bottom: 10px;
-        right: 10px;
-    }
+  position: absolute;
+  @include respond-to(mobile) {
+    bottom: 10px;
+    right: 10px;
+  }
 
-    @include respond-to(tablet) {
-        bottom: 18px;
-        right: 18px;
-    }
-    
+  @include respond-to(tablet) {
+    bottom: 18px;
+    right: 18px;
+  }
 }
 
 .showArrow {
-    visibility: visible;
+  visibility: visible;
 }
 
 .hideArrow {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 .noResultsWrapper {
-    position: absolute;
-    text-align: center;
-    width: 100%;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  padding-top: 70px;
+
+  @include respond-to(mobile) {
+    padding-top: 30px;
+  }
+
+  @include respond-to(tablet) {
     padding-top: 70px;
+  }
 
-    @include respond-to(mobile) {
-        padding-top: 30px;
-    }
+  h1 {
+    position: relative;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
 
-    @include respond-to(tablet) {
-        padding-top: 70px;
-    }
-
-    h1 {
-        position: relative;
-        margin-top: 30px;
-        margin-bottom: 30px;
-    }
-
-    span {
-        color: #a7a9ac;
-        font-size: 13px;
-        font-family: 'CentraleSansPro';
-        text-transform: uppercase;
-    }
+  span {
+    color: #a7a9ac;
+    font-size: 13px;
+    font-family: 'CentraleSansPro';
+    text-transform: uppercase;
+  }
 }
 
 .appMinHeightGalleryItem {
-    min-height: 300px!important;
+  min-height: 300px !important;
+}
+
+.noResults {
+  margin-top: 30px;
+
+  @include respond-to(tablet) {
+    margin-top: 70px;
+  }
 }
