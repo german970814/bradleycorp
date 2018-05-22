@@ -116,7 +116,8 @@ type State = {
   shippingInfo: ShippingInfoType,
   selected: PostTypeOptions,
   materialTypes: MaterialTypes,
-  showCurrentRequestMobile: boolean
+  showCurrentRequestMobile: boolean,
+  loading: boolean
 }
 
 const productLineFilterDefault: string = 'product-line'
@@ -143,7 +144,8 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
       shippingInfo: shippingInfoDefault,
       selected: 'literature',
       materialTypes: {},
-      showCurrentRequestMobile: false
+      showCurrentRequestMobile: false,
+      loading: true
     }
   }
 
@@ -327,6 +329,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
           addToShipment={this.addToShipment.bind(this)}
           addToDownloads={this.addToDownloads.bind(this)}
           isMobile={isMobile}
+          isLoading={this.state.loading}
         />
       </React.Fragment>
     )
@@ -391,6 +394,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
   }
 
   async getOptions (postType: PostTypeOptions) {
+    this.setState({ loading: true })
     try {
       if (postType === 'literature') {
         const client = new CPTApiClient(postType)
@@ -405,7 +409,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
         const optionsData: Array<LiteraturePost> = response.data
 
         const options = { ...this.state.options, literature: optionsData }
-        return this.setState({ options })
+        return this.setState({ options, loading: false })
       } else if (postType === 'chip') {
         const client = new CPTApiClient('chip')
         const response = await client.getLatest(-1)
@@ -413,14 +417,14 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
         const optionsData: Array<ChipSamplePost> = response.data
 
         const options = { ...this.state.options, chipSamples: optionsData }
-        return this.setState({ options })
+        return this.setState({ options, loading: false })
       }
     } catch (err) {
       console.log(err)
       const options = { ...this.state.options }
       const optionPostType = postType === 'chip' ? 'chipSamples' : postType
       options[optionPostType] = []
-      return this.setState({ options })
+      return this.setState({ options, loading: false })
     }
   }
 

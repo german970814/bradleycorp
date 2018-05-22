@@ -19,6 +19,7 @@ import {
   filterPostsByTerm,
   filterPostsByMeta
 } from '../../../../../lib/bcorpPost'
+import Loading from '../../../../../lib/components/Loading/Loading'
 import Option from './Option/Option'
 import style from './Options.scss'
 
@@ -28,7 +29,8 @@ type Props = {
   selected: PostTypeOptions,
   addToShipment: (postToAdd: LiteraturePost | ChipSamplePost) => void,
   addToDownloads: (postToAdd: LiteraturePost) => void,
-  isMobile: boolean
+  isMobile: boolean,
+  isLoading: boolean
 }
 
 /**
@@ -180,6 +182,10 @@ class Options extends React.Component<Props> {
   }
 
   render () {
+    if (this.props.isLoading) {
+      return <Loading />
+    }
+
     return (
       <div className={'row'}>
         {this.props.selected === 'literature'
