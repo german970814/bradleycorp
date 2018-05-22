@@ -4,6 +4,7 @@
 .option {
   position: relative;
   margin-bottom: 10px;
+  min-height: 30px !important;
 
   @include respond-to(tablet) {
     margin-bottom: 30px;

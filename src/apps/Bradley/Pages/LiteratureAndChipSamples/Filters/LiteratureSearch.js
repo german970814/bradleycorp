@@ -28,6 +28,7 @@ class LiteratureSearch extends React.Component<Props> {
         handleSubmit={this.handleSubmit.bind(this)}
         title={'Search'}
         className={`col1 col2-tablet`}
+        placeholder={'Search for Literature'}
       />
     )
   }

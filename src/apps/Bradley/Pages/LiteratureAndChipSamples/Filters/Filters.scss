@@ -53,11 +53,15 @@ $tabletGapBetweenFilters: 24px;
 .materialType {
   padding-bottom: 0px;
 
-  &::before {
+  &::before,
+  &::after {
     bottom: 16px;
   }
 
-  &::after {
-    bottom: 16px;
+  @include respond-to-max(tablet) {
+    &::before,
+    &::after {
+      right: 10px;
+    }
   }
 }
