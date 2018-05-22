@@ -1,5 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
+import Header from '../../Header/Header'
 import Loadable from 'react-loadable'
 import Loading from '../../../../lib/components/Loading/Loading'
 
@@ -17,10 +18,17 @@ const BlogSinglePostPageLoadable = Loadable({
 
 const Main = props => {
   return (
-    <Switch>
-      <Route exact path="/" component={BlogLandingPageLoadable} />
-      <Route exact path="/post/:slug" component={BlogSinglePostPageLoadable} />
-    </Switch>
+    <React.Fragment>
+      <Header />
+      <Switch>
+        <Route exact path="/" component={BlogLandingPageLoadable} />
+        <Route
+          exact
+          path="/post/:slug"
+          component={BlogSinglePostPageLoadable}
+        />
+      </Switch>
+    </React.Fragment>
   )
 }
 
