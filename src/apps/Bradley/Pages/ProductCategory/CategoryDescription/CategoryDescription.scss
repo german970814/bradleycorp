@@ -1,6 +1,16 @@
 @import '../../../../../scss/partials/mixins';
 
 .categoryDescription {
+  margin-bottom: 30px;
+
+  @include respond-to(tablet) {
+    margin-bottom: 45px;
+  }
+
+  @include respond-to(desktop) {
+    margin-bottom: 60px;
+  }
+
   .description {
     margin-bottom: 20px;
 
@@ -30,6 +40,7 @@
     margin-bottom: 25px;
 
     @include respond-to(tablet) {
+      margin-bottom: 0px;
       padding-left: 50px;
       text-align: right;
     }

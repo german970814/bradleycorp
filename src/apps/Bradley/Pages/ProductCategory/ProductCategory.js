@@ -4,6 +4,7 @@ import Media from 'react-media'
 import { MOBILEMAXWIDTH } from '../../../../globals'
 import CategoryDescription from './CategoryDescription/CategoryDescription'
 import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
+import Pagination from './Pagination/Pagination'
 import style from './ProductCategory.scss'
 
 type FilterGroup = {
@@ -19,10 +20,12 @@ type State = {
   filters: {
     [string]: FilterGroup
   },
-  paged: number
+  paged: number,
+  showFiltersMobile: boolean
 }
 
 class ProductCategory extends React.Component<Props, State> {
+  postsPerPage: number
   childCategory: string
   topCategory: string
   categoryDescription: string
@@ -33,9 +36,11 @@ class ProductCategory extends React.Component<Props, State> {
 
     this.state = {
       filters: {},
-      paged: 0
+      paged: 0,
+      showFiltersMobile: false
     }
 
+    this.postsPerPage = 20
     this.topCategory = 'Safety Fixtures'
     this.childCategory = 'Combination Fixtures'
     this.categoryDescription =
@@ -44,6 +49,10 @@ class ProductCategory extends React.Component<Props, State> {
       { name: 'link title goes right here', link: '#' },
       { name: 'link title goes right here', link: '#' }
     ]
+  }
+
+  updatePaged (paged: number) {
+    this.setState({ paged })
   }
 
   renderContent (isMobile: boolean) {
@@ -58,12 +67,21 @@ class ProductCategory extends React.Component<Props, State> {
           }
         />
         <div className={`col1 col4-tablet ${style.sidebar}`} />
-        <div className={`col1 col4x3-tablet ${style.sidebar}`} />
+        <div className={`col1 col4x3-tablet ${style.products}`}>
+          <Pagination
+            paged={this.state.paged}
+            updatePaged={this.updatePaged.bind(this)}
+            postsPerPage={this.postsPerPage}
+            numPosts={81}
+            isMobile={isMobile}
+          />
+        </div>
       </div>
     )
   }
 
   render () {
+    console.log(this.state)
     return (
       <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
         {match => {

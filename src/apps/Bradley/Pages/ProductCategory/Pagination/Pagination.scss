@@ -1,0 +1,74 @@
+@import '../../../../../scss/partials/variables';
+@import '../../../../../scss/partials/mixins';
+
+$height: 70px;
+$heightTablet: 60px;
+
+.Pagination {
+  height: $height;
+  background-color: $light-gray;
+
+  @include respond-to-max(tablet) {
+    margin-bottom: 20px;
+    margin-left: -$MobileBodyPadding;
+    margin-right: -$MobileBodyPadding;
+    padding: 0 $MobileBodyPadding;
+  }
+
+  @include respond-to(tablet) {
+    padding-left: 20px;
+    padding-right: 15px;
+    height: $heightTablet;
+  }
+
+  h6.showing {
+    width: 60%;
+    line-height: $height;
+    text-transform: none;
+
+    @include respond-to(tablet) {
+      line-height: $heightTablet;
+      width: 50%;
+    }
+  }
+
+  .dropdownWrapper {
+    line-height: $height;
+    width: 40%;
+
+    @include respond-to(tablet) {
+      line-height: $heightTablet;
+      width: 50%;
+    }
+
+    .select {
+      float: right;
+      padding-bottom: 0px;
+      width: 100%;
+      max-width: 170px;
+
+      &:before,
+      &:after {
+        bottom: 34px;
+        right: 10px;
+
+        @include respond-to(tablet) {
+          bottom: 29px;
+          right: 20px;
+        }
+      }
+    }
+
+    .buttonWrapper {
+      float: right;
+      line-height: $heightTablet;
+
+      button {
+        padding: 1px 13px 0px 13px;
+        width: auto;
+        height: 33px;
+        line-height: 33px;
+      }
+    }
+  }
+}
