@@ -1,5 +1,7 @@
 // @flow
 import * as React from 'react'
+import type { ScreenSize } from '../../../contexts/ScreenSizeContext'
+import { withScreenSize } from '../../../contexts/ScreenSizeContext'
 import { renderTitle } from '../DefaultTemplate/DefaultTemplate'
 import style from './RightSidebarTemplate.scss'
 import defaultStyle, { titlemarginbottom } from '../Templates.scss'
@@ -20,7 +22,10 @@ type Props = {
    * A render function for the widgets
    */
   renderRightSidebarWidgets: () => React.Node,
-  widgetsMoveWithScroll?: boolean
+  widgetsMoveWithScroll?: boolean,
+
+  // from withScreenSize HOC
+  screenSize: ScreenSize
 }
 
 type State = {
@@ -54,7 +59,10 @@ class RightSidebarTemplate extends React.Component<Props, State> {
   }
 
   componentDidMount () {
-    if (this.props.widgetsMoveWithScroll) {
+    if (
+      this.props.widgetsMoveWithScroll &&
+      this.props.screenSize === 'desktop'
+    ) {
       // find function at the bottom, just to keep it out the way
       this._bindSidebarScroll()
     }
@@ -64,20 +72,40 @@ class RightSidebarTemplate extends React.Component<Props, State> {
     this._removeSidebarScroll()
   }
 
-  componentWillReceiveProps (nextProps: Props) {
-    if (!nextProps.widgetsMoveWithScroll) {
-      this._removeSidebarScroll()
-    } else {
-      // will not add a duplicate
-      this._bindSidebarScroll()
-      // calling this will work out if we need to set the state back to false or not
-      this.onScroll()
+  componentDidUpdate (prevProps: Props, prevState: State) {
+    // screen size changed
+    if (prevProps.screenSize !== this.props.screenSize) {
+      if (this.props.screenSize === 'desktop') {
+        // will not add a duplicate
+        this._bindSidebarScroll()
+        // calling this will work out if we need to set the state back to false or not
+        this.onScroll()
+      } else {
+        // make sure we remove fixed sidebar if not desktop
+        this._removeSidebarScroll()
+        this.unfixSidebar()
+      }
+    }
+
+    // widgetsMoveWithScroll changed
+    if (this.props.widgetsMoveWithScroll !== prevProps.widgetsMoveWithScroll) {
+      if (
+        this.props.widgetsMoveWithScroll &&
+        this.props.screenSize === 'desktop'
+      ) {
+        // will not add a duplicate
+        this._bindSidebarScroll()
+        // calling this will work out if we need to set the state back to false or not
+        this.onScroll()
+      } else {
+        this._removeSidebarScroll()
+        this.unfixSidebar()
+      }
     }
   }
 
   _bindSidebarScroll () {
-    window.innerWidth > TABLETMAXWIDTH &&
-      window.addEventListener('scroll', this.onScroll.bind(this))
+    window.addEventListener('scroll', this.onScroll.bind(this))
   }
 
   _removeSidebarScroll () {
@@ -123,7 +151,7 @@ class RightSidebarTemplate extends React.Component<Props, State> {
   _setupSidebarForScroll () {
     // if no sidebar node (or content node), why continue?
     if (!this.sidebarNode || !this.contentNode) {
-      return
+      return this.setState({ isSidebarFixed: false })
     }
 
     // reference our nodes
@@ -141,6 +169,7 @@ class RightSidebarTemplate extends React.Component<Props, State> {
       contentNode.offsetTop -
       window.innerHeight
 
+    // set min heights of content and sidebar
     if (contentBoundingClientRect.height < boundingClientRect.height) {
       contentNode.style.minHeight = `${boundingClientRect.height}px`
       sidebarNode.style.minHeight = `${boundingClientRect.height}px`
@@ -148,23 +177,26 @@ class RightSidebarTemplate extends React.Component<Props, State> {
       sidebarNode.style.minHeight = `${contentBoundingClientRect.height}px`
     }
 
-    // set the inner sidebar size and fixed position to the left of the window
-    if (window.innerWidth > TABLETMAXWIDTH) {
-      // note the 50 to cancel out effects of adding extra padding
-      // to be able to still see the border shadow
-      innerSidebarNode.style.width = `${boundingClientRect.width - 50}px`
-      innerSidebarNode.style.left = boundingClientRect.left + 25 + 'px'
-    } else {
-      sidebarNode.style.height = ''
-      innerSidebarNode.style.width = ''
-      innerSidebarNode.style.left = ''
-    }
+    // note the 50 to cancel out effects of adding extra padding
+    // to be able to still see the border shadow
+    innerSidebarNode.style.width = `${boundingClientRect.width - 50}px`
+    innerSidebarNode.style.left = boundingClientRect.left + 25 + 'px'
   }
 
   onScroll () {
-    // move this out of here
+    if (this.props.screenSize !== 'desktop') {
+      return
+    }
+
+    // TODO: move this out of here
     this._setupSidebarForScroll()
 
+    if (!this.sidebarNode || !this.contentNode || !this.titleMarginBottom) {
+      // if we dont have necessary DOM nodes then we cant move with scroll
+      return this.setState({ isSidebarFixed: false })
+    }
+
+    // get current scroll top
     let scrollTop: number = 0
     if (window.pageYOffset !== undefined) {
       scrollTop = parseInt(window.pageYOffset)
@@ -177,11 +209,6 @@ class RightSidebarTemplate extends React.Component<Props, State> {
         scrollTopOfThis && scrollTopOfThis !== null && scrollTopOfThis.scrollTop
           ? parseInt(scrollTopOfThis.scrollTop)
           : 0
-    }
-    // console.log( scrollTop )
-    if (!this.sidebarNode || !this.contentNode || !this.titleMarginBottom) {
-      // if we dont have necessary DOM nodes then we cant move with scroll
-      return this.setState({ isSidebarFixed: false })
     }
 
     // set these as constants in this scope so flow knows they havent changed
@@ -217,6 +244,13 @@ class RightSidebarTemplate extends React.Component<Props, State> {
       innerSidebarNode.style.height = 'auto'
     }
   }
+
+  unfixSidebar () {
+    this.setState({
+      isSidebarFixed: false,
+      sidebarScrollClass: ''
+    })
+  }
 }
 
-export default RightSidebarTemplate
+export default withScreenSize(RightSidebarTemplate)
