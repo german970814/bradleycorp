@@ -3,12 +3,12 @@ import * as React from 'react'
 import Media from 'react-media'
 import LoadMore from './LoadMore'
 import style from './Results.scss'
-import type { Location, Match, History } from 'react-router-dom'
+import { MOBILEMAXWIDTH } from '../../../../globals'
 import SearchClient from './../../../../api/search_client'
 import type { PostType } from '../../../../lib/types/cpt_types'
 import Loading from '../../../../lib/components/Loading/Loading'
+import type { Location, Match, RouterHistory } from 'react-router-dom'
 import type { BCorpPost } from '../../../../lib/types/post_types'
-import { MOBILEMAXWIDTH } from '../../../../globals'
 import NoResults from '../../../../lib/components/NoResuts/NoResults'
 import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
 import BCorpSelectField from '../../../../lib/components/BCorpFilterField/BCorpSelectField'
@@ -18,19 +18,14 @@ import type {
   GetPostsArgs
 } from './LoadMore'
 import {
-  SearchDefault,
   SearchLiterature,
   SearchNews,
   SearchProduct,
-  SearchTechnicalInfo
+  SearchTechnicalInfo,
+  SearchPage
 } from './ContentTabs'
 
-type TabOption =
-  | (PostType & 'product')
-  | 'literature'
-  | 'technical_info'
-  | 'news'
-  | 'page'
+type TabOption = 'page' | PostType
 
 type Tab = {
   [TabOption]: string
@@ -38,8 +33,8 @@ type Tab = {
 
 type Props = {
   location: Location,
-  match: { params: { query: string, tab: TabOption } } & Match,
-  history: History
+  match: { params: { query: string, tab: TabOption, page?: number } } & Match,
+  history: RouterHistory
 }
 
 type State = {
@@ -69,15 +64,15 @@ export default class Results extends React.Component<Props, State> {
 
   get getTabs (): Tab {
     return {
-      product: 'Products',
-      literature: 'Literature',
-      technical_info: 'Technical Info',
-      news: 'In The News',
-      page: 'Web Pages'
+      'product': 'Products',
+      'literature': 'Literature',
+      'technical_info': 'Technical Info',
+      'news': 'In The News',
+      'page': 'Web Pages'
     }
   }
 
-  get activeTab () {
+  get activeTab (): TabOption {
     return this.props.match.params.tab
   }
 
@@ -118,10 +113,11 @@ export default class Results extends React.Component<Props, State> {
 
   renderOptionsMobile () {
     const options = {}
-    for (const tab in this.getTabs) {
+    const tabs = this.getTabs
+    for (const tab in tabs) {
       const count = this.state.resultCount[tab] || 0
       if (count >= 1) {
-        options[tab] = `${this.getTabs[tab]} (${count})`
+        options[tab] = `${tabs[tab]} (${count})`
       }
     }
     return (
@@ -174,7 +170,7 @@ export default class Results extends React.Component<Props, State> {
           style.resultsHeaderContainer
         }`}>
         <div className={`${style.resultsSummary}`}>
-          <p>{`You searched for "${query}" - ${this.getTotalResults()} Results`}</p>
+          <p>{`You searched for "${query}" - ${this.getTotalResults() || 0} Results`}</p>
         </div>
         {renderTitle('Search Results', 'col1')}
       </div>
@@ -204,15 +200,11 @@ export default class Results extends React.Component<Props, State> {
       posts: this.getPosts(selected)
     }
     const page = parseInt(this.props.match.params.page || 1)
-    loadMoreProps['paged'] = page
-    if (page > 1 && !(selected in this.state.results)) {
-      loadMoreProps['offset'] = page * POSTS_PER_PAGE
-    } else {
-      loadMoreProps['offset'] = 0
-    }
     return selected ? <div className={style[selected]}>
       <LoadMore
         {...loadMoreProps}
+        paged={page}
+        offset={page > 1 && !(selected in this.state.results) ? page * POSTS_PER_PAGE : 0}
         omitDebounce
         getPosts={(args: GetPostsArgs) => {
           return this.getResultsByTab(args)
@@ -241,7 +233,7 @@ export default class Results extends React.Component<Props, State> {
 
   renderResultsComponent (args: ChildFunctionArgs): ?React.Node {
     if (this.activeTab) {
-      args = { ...args, shouldReset: false, canLoadMore: this.canLoadMore(this.activeTab) }
+      args = { ...args, canLoadMore: this.canLoadMore(this.activeTab) }
       switch (this.activeTab) {
         case 'product':
           return <SearchProduct {...args} />
@@ -252,7 +244,7 @@ export default class Results extends React.Component<Props, State> {
         case 'news':
           return <SearchNews {...args} />
         default:
-          return <SearchDefault {...args} />
+          return <SearchPage {...args} />
       }
     }
   }

@@ -6,8 +6,14 @@ import FileDownloadLink from '../../../../../lib/components/FileDownloadLink/Fil
 import FillColumns from '../../../../../lib/components/FillColumns/FillColumns'
 import style from './../Results.scss'
 import Default from './Default'
+import type { TemplateProps } from './Default'
+import type { TechnicalInfo } from '../../../../../lib/types/cpt_types'
 
-export default class SearchTechnicalInfo extends Default {
+type Props = {
+  posts: Array<TechnicalInfo>
+} & TemplateProps
+
+export default class SearchTechnicalInfo extends React.Component<Props> {
   renderTechicalInfo () {
     return this.props.posts && this.props.posts.map((post, ind) => {
       return <div key={ind} className={`${style.techInfoItem}`}>
@@ -45,5 +51,9 @@ export default class SearchTechnicalInfo extends Default {
         }
       </Media>
     </div>
+  }
+
+  render () {
+    return <Default render={this.renderContent.bind(this)} {...this.props} />
   }
 }

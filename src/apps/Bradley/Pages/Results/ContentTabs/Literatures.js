@@ -5,8 +5,14 @@ import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../../globals'
 import FillColumns from '../../../../../lib/components/FillColumns/FillColumns'
 import style from './../Results.scss'
 import Default from './Default'
+import type { TemplateProps } from './Default'
+import type { LiteraturePost } from '../../../../../lib/types/cpt_types'
 
-export default class SearchLiterature extends Default {
+type Props = {
+  posts: Array<LiteraturePost>
+} & TemplateProps
+
+export default class SearchLiterature extends React.Component<Props> {
   renderLiterature () {
     return this.props.posts && this.props.posts.map((post, index) => {
       return <article key={index}>
@@ -48,5 +54,9 @@ export default class SearchLiterature extends Default {
         }
       </Media>
     </div>
+  }
+
+  render () {
+    return <Default render={this.renderContent.bind(this)} {...this.props} />
   }
 }

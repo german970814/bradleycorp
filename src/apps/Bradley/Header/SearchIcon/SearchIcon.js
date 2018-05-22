@@ -1,12 +1,22 @@
-import React, { Component } from 'react'
+// @flow
+import * as React from 'react'
 import { withRouter } from 'react-router-dom'
 import { updateBlur } from '../../App/updateBlur'
+import type { RouterHistory } from 'react-router-dom'
 import Lightbox from '../../../../lib/containers/Lightbox/Lightbox'
 import VerticalAlignHelper from '../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import style from './SearchIcon.scss'
 
-class SearchIcon extends Component {
-  constructor (props) {
+type Props = {
+  history: RouterHistory
+}
+
+type State = {
+  search: string
+}
+
+class SearchIcon extends React.Component<Props, State> {
+  constructor (props: Props) {
     super(props)
 
     this.state = {
