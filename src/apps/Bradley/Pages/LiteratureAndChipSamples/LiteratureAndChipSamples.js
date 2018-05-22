@@ -304,6 +304,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
   }
 
   renderOptions (isMobile: boolean) {
+    console.log(isMobile)
     return (
       <React.Fragment>
         <PostTypeSelector
@@ -378,7 +379,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
   renderRightSidebarWidgets () {
     return this.props.screenSize === 'mobile'
       ? null
-      : this.renderCurrentRequest(true)
+      : this.renderCurrentRequest(false)
   }
 
   render () {
