@@ -8,13 +8,15 @@ type Props = {
 
 class NoResults extends React.Component<Props> {
   render () {
-    return <div className={'row'}>
-      <div className={`${style.noResultsWrapper}`}>
-        <img src={require('../../../images/warning-icon/warning-icon.png')} />
-        <h1>{this.props.message}</h1>
-        <span>PLEASE TRY AGAIN</span>
+    return (
+      <div className={'row'}>
+        <div className={`col1 ${style.noResultsWrapper}`}>
+          <img src={require('../../../images/warning-icon/warning-icon.png')} />
+          <h1>{this.props.message}</h1>
+          <h6>PLEASE TRY AGAIN</h6>
+        </div>
       </div>
-    </div>
+    )
   }
 }
 
