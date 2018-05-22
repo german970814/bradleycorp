@@ -9,14 +9,11 @@ import type { PostType } from '../../../../lib/types/cpt_types'
 import Loading from '../../../../lib/components/Loading/Loading'
 import type { Location, Match, RouterHistory } from 'react-router-dom'
 import type { BCorpPost } from '../../../../lib/types/post_types'
-import NoResults from '../../../../lib/components/NoResuts/NoResults'
+import NoResults from '../../../../lib/components/NoResults/NoResults'
 import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
 import BCorpSelectField from '../../../../lib/components/BCorpFilterField/BCorpSelectField'
 import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
-import type {
-  ChildFunctionArgs,
-  GetPostsArgs
-} from './LoadMore'
+import type { ChildFunctionArgs, GetPostsArgs } from './LoadMore'
 import {
   SearchLiterature,
   SearchNews,
@@ -64,11 +61,11 @@ export default class Results extends React.Component<Props, State> {
 
   get getTabs (): Tab {
     return {
-      'product': 'Products',
-      'literature': 'Literature',
-      'technical_info': 'Technical Info',
-      'news': 'In The News',
-      'page': 'Web Pages'
+      product: 'Products',
+      literature: 'Literature',
+      technical_info: 'Technical Info',
+      news: 'In The News',
+      page: 'Web Pages'
     }
   }
 
@@ -94,11 +91,16 @@ export default class Results extends React.Component<Props, State> {
 
   handleChangeTab (selected: TabOption) {
     const regex = /\/(product|literature|technical_info|news|page)\/?/g
-    const paged = selected in this.state.results ? this.state.results[selected].paged : null
-    let url = this.props.match.url.replace(regex, `/${selected}/`).replace(/\/page=\d*/g, '')
+    const paged =
+      selected in this.state.results ? this.state.results[selected].paged : null
+    let url = this.props.match.url
+      .replace(regex, `/${selected}/`)
+      .replace(/\/page=\d*/g, '')
     if (paged && paged > 1) {
       const toConcat = `page=${paged}`
-      url = url.endsWith('/') ? url.concat(toConcat) : url.concat(`/${toConcat}`)
+      url = url.endsWith('/')
+        ? url.concat(toConcat)
+        : url.concat(`/${toConcat}`)
     }
     this.props.history.push(url)
   }
@@ -170,7 +172,8 @@ export default class Results extends React.Component<Props, State> {
           style.resultsHeaderContainer
         }`}>
         <div className={`${style.resultsSummary}`}>
-          <p>{`You searched for "${query}" - ${this.getTotalResults() || 0} Results`}</p>
+          <p>{`You searched for "${query}" - ${this.getTotalResults() ||
+            0} Results`}</p>
         </div>
         {renderTitle('Search Results', 'col1')}
       </div>
@@ -200,35 +203,51 @@ export default class Results extends React.Component<Props, State> {
       posts: this.getPosts(selected)
     }
     const page = parseInt(this.props.match.params.page || 1)
-    return selected ? <div className={style[selected]}>
-      <LoadMore
-        {...loadMoreProps}
-        paged={page}
-        offset={page > 1 && !(selected in this.state.results) ? page * POSTS_PER_PAGE : 0}
-        omitDebounce
-        getPosts={(args: GetPostsArgs) => {
-          return this.getResultsByTab(args)
-        }}
-        postsPerPage={POSTS_PER_PAGE}>
-        {(args: ChildFunctionArgs) => {
-          return this.renderResultsComponent(args)
-        }}
-      </LoadMore>
-    </div> : <Loading />
+    return selected ? (
+      <div className={style[selected]}>
+        <LoadMore
+          {...loadMoreProps}
+          paged={page}
+          offset={
+            page > 1 && !(selected in this.state.results)
+              ? page * POSTS_PER_PAGE
+              : 0
+          }
+          omitDebounce
+          getPosts={(args: GetPostsArgs) => {
+            return this.getResultsByTab(args)
+          }}
+          postsPerPage={POSTS_PER_PAGE}>
+          {(args: ChildFunctionArgs) => {
+            return this.renderResultsComponent(args)
+          }}
+        </LoadMore>
+      </div>
+    ) : (
+      <Loading />
+    )
   }
 
   getTotalResults (): ?number {
     if (!Object.keys(this.state.resultCount).length) {
       return null
     }
-    return Object.keys(this.getTabs).map(postType => {
-      return postType in this.state.resultCount ? this.state.resultCount[postType] : 0
-    }).reduce((first, second) => { return first + second })
+    return Object.keys(this.getTabs)
+      .map(postType => {
+        return postType in this.state.resultCount
+          ? this.state.resultCount[postType]
+          : 0
+      })
+      .reduce((first, second) => {
+        return first + second
+      })
   }
 
   canLoadMore (selected: TabOption) {
     return selected in this.state.results
-      ? this.state.resultCount[selected] > this.state.results[selected].data.length : false
+      ? this.state.resultCount[selected] >
+          this.state.results[selected].data.length
+      : false
   }
 
   renderResultsComponent (args: ChildFunctionArgs): ?React.Node {
@@ -256,7 +275,11 @@ export default class Results extends React.Component<Props, State> {
       )
       this.setState({ resultCount: response.data })
 
-      if (this.activeTab && this.activeTab in response.data && response.data[this.activeTab] < 1) {
+      if (
+        this.activeTab &&
+        this.activeTab in response.data &&
+        response.data[this.activeTab] < 1
+      ) {
         for (const tab in this.getTabs) {
           if (response.data[tab] >= 1) {
             this.handleChangeTab(tab)
@@ -288,12 +311,18 @@ export default class Results extends React.Component<Props, State> {
     const activeTab = this.activeTab
     try {
       const response = await SearchClient.getSearchResults(
-        this.props.match.params.query, activeTab,
-        postsPerPage, paged, offset
+        this.props.match.params.query,
+        activeTab,
+        postsPerPage,
+        paged,
+        offset
       )
       let data = response.data
       if (activeTab) {
-        if (activeTab in this.state.results && Array.isArray(this.state.results[activeTab].data)) {
+        if (
+          activeTab in this.state.results &&
+          Array.isArray(this.state.results[activeTab].data)
+        ) {
           data = [...this.state.results[activeTab].data, ...data]
         }
         const { page } = this.props.match.params
@@ -310,11 +339,17 @@ export default class Results extends React.Component<Props, State> {
       }
     } catch (error) {
       if (activeTab) {
-        if ((activeTab in this.state.results && !Array.isArray(this.state.results[activeTab].data)) || !(activeTab in this.state.results)) {
+        if (
+          (activeTab in this.state.results &&
+            !Array.isArray(this.state.results[activeTab].data)) ||
+          !(activeTab in this.state.results)
+        ) {
           const results = {
             ...this.state.results,
             [activeTab]: {
-              data: [], paged, offset
+              data: [],
+              paged,
+              offset
             }
           }
           this.setState({ ...this.state, results })
