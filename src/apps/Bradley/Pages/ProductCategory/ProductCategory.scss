@@ -1,0 +1,35 @@
+@import '../../../../scss/partials/layout';
+@import '../../../../scss/partials/mixins';
+@import '../../../../scss/partials/variables';
+
+.ProductCategory {
+  padding-top: 40px;
+
+  @include respond-to(tablet) {
+    padding-top: 35px;
+  }
+
+  @include respond-to(desktop) {
+    padding-top: 60px;
+  }
+
+  h5.topCategoryTitle {
+    @extend %BodyPaddingWithMediaQueries;
+    color: $black;
+  }
+
+  :global(.default-template-title) {
+    margin-top: 8px;
+    margin-bottom: 25px;
+
+    @include respond-to(tablet) {
+      margin-top: 16px;
+      margin-bottom: 45px;
+    }
+
+    @include respond-to(desktop) {
+      margin-top: 14px;
+      margin-bottom: 60px;
+    }
+  }
+}

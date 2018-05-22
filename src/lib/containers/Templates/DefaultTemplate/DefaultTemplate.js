@@ -7,7 +7,7 @@ type Props = {
     page_title: string
   },
   renderModules: () => React.Node
-};
+}
 
 class DefaultTemplate extends React.Component<Props> {
   render () {
@@ -26,7 +26,10 @@ export function renderTitle (title?: string, className?: string): React.Node {
   }
 
   return (
-    <div className={`${className || ''} ${defaultStyle.pageTitle}`}>
+    <div
+      className={`${className || ''} default-template-title ${
+        defaultStyle.pageTitle
+      }`}>
       <h1>{title}</h1>
     </div>
   )

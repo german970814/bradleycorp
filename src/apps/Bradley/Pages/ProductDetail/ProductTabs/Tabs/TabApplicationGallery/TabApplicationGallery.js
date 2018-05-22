@@ -3,7 +3,6 @@ import * as React from 'react'
 import type { BCorpPost } from '../../../../../../../lib/types/post_types'
 import { Link } from 'react-router-dom'
 import { DarkGray } from '../../../../../../../scss/partials/_variables.scss'
-import tabStyle from '../Tabs.scss'
 import style from './TabApplicationGallery.scss'
 
 type Props = {

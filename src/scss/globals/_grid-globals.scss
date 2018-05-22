@@ -114,6 +114,22 @@
     }
   }
 
+  .inline-col3-middle-tablet {
+    @include respond-to(tablet) {
+      @include inline-col(3, middle) {
+        float: none;
+      }
+    }
+  }
+
+  .inline-col3x2-middle-tablet {
+    @include respond-to(tablet) {
+      @include inline-col(3 / 2, middle) {
+        float: none;
+      }
+    }
+  }
+
   .col1-desktop {
     @include respond-to(desktop) {
       @include col(1);

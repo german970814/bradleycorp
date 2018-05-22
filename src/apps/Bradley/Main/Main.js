@@ -38,6 +38,11 @@ const ProductDetailLoadable = Loadable({
   loading: Loading
 })
 
+const ProductCategoryLoadable = Loadable({
+  loader: () => import('../Pages/ProductCategory/ProductCategory'),
+  loading: Loading
+})
+
 const LiteratureAndChipSamplesLoadable = Loadable({
   loader: () =>
     import('../Pages/LiteratureAndChipSamples/LiteratureAndChipSamples'),
@@ -115,6 +120,12 @@ const Main = (props: Props) => {
 const RouterInner = () => {
   return (
     <Switch>
+      <Route
+        exact
+        path="/product-category"
+        component={ProductCategoryLoadable}
+      />
+
       {/* Specific Custom Pages */}
       <Route
         exact
@@ -139,7 +150,11 @@ const RouterInner = () => {
       />
       <Route exact path="/results/:query" component={ResultsLoadable} />
       <Route exact path="/results/:query/:tab" component={ResultsLoadable} />
-      <Route exact path="/results/:query/:tab/page=:page" component={ResultsLoadable} />
+      <Route
+        exact
+        path="/results/:query/:tab/page=:page"
+        component={ResultsLoadable}
+      />
 
       {/* Post Types With Custom Templates */}
       <Route exact path="/post/:slug" component={BlogSinglePostPageLoadable} />

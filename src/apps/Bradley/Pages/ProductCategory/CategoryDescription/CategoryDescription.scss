@@ -1,0 +1,50 @@
+@import '../../../../../scss/partials/mixins';
+
+.categoryDescription {
+  .description {
+    margin-bottom: 20px;
+
+    @include respond-to(tablet) {
+      margin-bottom: 25px;
+    }
+  }
+
+  .descriptionLinks {
+    a {
+      @include respond-to(tablet) {
+        margin-right: 50px;
+      }
+    }
+
+    .arrowWrapper {
+      margin-bottom: 15px;
+
+      &:last-child {
+        margin-bottom: 0px;
+      }
+    }
+  }
+
+  .descriptionIcon {
+    float: right;
+    margin-bottom: 25px;
+
+    @include respond-to(tablet) {
+      padding-left: 50px;
+      text-align: right;
+    }
+
+    @include respond-to(desktop) {
+      padding-left: 100px;
+      padding-right: 100px;
+    }
+
+    img {
+      width: ((160 / 270) * 100) + %;
+
+      @include respond-to(tablet) {
+        width: 100%;
+      }
+    }
+  }
+}
