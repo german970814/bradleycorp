@@ -1,27 +1,52 @@
 // @flow
 import * as React from 'react'
+import type { Match } from 'react-router-dom'
 import Media from 'react-media'
 import { MOBILEMAXWIDTH } from '../../../../globals'
+import ProductApiClient from '../../../../api/product_client'
 import CategoryDescription from './CategoryDescription/CategoryDescription'
 import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import Pagination from './Pagination/Pagination'
+import Loading from '../../../../lib/components/Loading/Loading'
 import style from './ProductCategory.scss'
 
-type FilterGroup = {
+type CategoryData = {|
+  parent_name?: string,
+  name: string,
+  description?: string,
+  count: number
+|}
+
+type MetaFilterGroup = {
+  [string]: string | number
+}
+
+type TaxFilterGroup = {
   [string]: {
-    number: number,
-    selected: boolean
+    name: string,
+    terms: {
+      [string]: {
+        name: string,
+        count: number,
+        selected: boolean
+      }
+    }
   }
 }
 
-type Props = {}
+type Props = {
+  match: Match
+}
 
 type State = {
-  filters: {
-    [string]: FilterGroup
+  categoryData?: CategoryData,
+  filters?: {
+    metaFilters: MetaFilterGroup,
+    taxFilters: TaxFilterGroup
   },
   paged: number,
-  showFiltersMobile: boolean
+  showFiltersMobile: boolean,
+  loading: boolean
 }
 
 class ProductCategory extends React.Component<Props, State> {
@@ -35,9 +60,9 @@ class ProductCategory extends React.Component<Props, State> {
     super(props)
 
     this.state = {
-      filters: {},
       paged: 0,
-      showFiltersMobile: false
+      showFiltersMobile: false,
+      loading: true
     }
 
     this.postsPerPage = 20
@@ -51,6 +76,20 @@ class ProductCategory extends React.Component<Props, State> {
     ]
   }
 
+  componentDidMount () {
+    this.getProductCategoryPageData()
+  }
+
+  componentDidUpdate (prevProps: Props, prevState: State) {
+    if (
+      prevProps.match.params.slug &&
+      this.props.match.params.slug &&
+      prevProps.match.params.slug !== this.props.match.params.slug
+    ) {
+      this.getProductCategoryPageData()
+    }
+  }
+
   updatePaged (paged: number) {
     this.setState({ paged })
   }
@@ -61,7 +100,10 @@ class ProductCategory extends React.Component<Props, State> {
         <CategoryDescription
           isMobile={isMobile}
           links={this.categoryLinks}
-          description={this.categoryDescription}
+          description={
+            (this.state.categoryData && this.state.categoryData.description) ||
+            ''
+          }
           logoSrc={
             'http://bradleydev.twoxfour.com/wp-content/uploads/2018/01/halo-web-icon@3x.png'
           }
@@ -72,7 +114,9 @@ class ProductCategory extends React.Component<Props, State> {
             paged={this.state.paged}
             updatePaged={this.updatePaged.bind(this)}
             postsPerPage={this.postsPerPage}
-            numPosts={81}
+            numPosts={
+              (this.state.categoryData && this.state.categoryData.count) || 0
+            }
             isMobile={isMobile}
           />
         </div>
@@ -81,15 +125,23 @@ class ProductCategory extends React.Component<Props, State> {
   }
 
   render () {
-    console.log(this.state)
+    if (!this.state.categoryData || this.state.loading) {
+      return <Loading />
+    }
+    const { categoryData } = this.state
+
     return (
       <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
         {match => {
           return (
             <div className={style.ProductCategory}>
-              <h5 className={style.topCategoryTitle}>{this.topCategory}</h5>
+              {categoryData.parent_name && (
+                <h5 className={style.topCategoryTitle}>
+                  {categoryData.parent_name}
+                </h5>
+              )}
               <DefaultTemplate
-                data={{ page_title: this.childCategory }}
+                data={{ page_title: categoryData.name }}
                 renderModules={() => {
                   return this.renderContent(match)
                 }}
@@ -100,6 +152,27 @@ class ProductCategory extends React.Component<Props, State> {
       </Media>
     )
   }
+
+  async getProductCategoryPageData () {
+    this.setState({ loading: true })
+    try {
+      const slug = this.props.match.params.slug || ''
+      const client = new ProductApiClient()
+      const response = await client.getProductCategoryPage(slug)
+
+      return this.setState({
+        categoryData: response.data.category_data,
+        filters: {
+          metaFilters: response.data.filters.meta_filters,
+          taxFilters: response.data.filters.tax_filters
+        },
+        loading: false
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }
 
 export default ProductCategory
+export type { CategoryData, MetaFilterGroup, TaxFilterGroup }

@@ -120,12 +120,6 @@ const Main = (props: Props) => {
 const RouterInner = () => {
   return (
     <Switch>
-      <Route
-        exact
-        path="/product-category"
-        component={ProductCategoryLoadable}
-      />
-
       {/* Specific Custom Pages */}
       <Route
         exact
@@ -159,6 +153,13 @@ const RouterInner = () => {
       {/* Post Types With Custom Templates */}
       <Route exact path="/post/:slug" component={BlogSinglePostPageLoadable} />
       <Route exact path="/product/:slug" component={ProductDetailLoadable} />
+
+      {/* Taxonomy pages */}
+      <Route
+        exact
+        path="/product-category/:slug"
+        component={ProductCategoryLoadable}
+      />
 
       {/* Post Types With Default Template */}
       <Route
