@@ -82,6 +82,7 @@ $addButtonMobileWidth: 30px;
   background-color: #fff;
   border: solid 1px $silver;
   box-sizing: border-box;
+  transition: opacity 0.2s;
 
   .relativePosition {
     position: relative;
@@ -97,6 +98,28 @@ $addButtonMobileWidth: 30px;
       box-shadow: 2px -2px 2.9px 0px rgba(0, 0, 0, 0.3);
       background-color: #fff;
     }
+  }
+
+  &.added {
+    top: -6px;
+    padding: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: auto;
+    height: 42px;
+
+    .rightTriangle {
+      right: -16px;
+    }
+
+    h5 {
+      line-height: 42px;
+      color: $navy;
+    }
+  }
+
+  &.hide {
+    opacity: 0;
   }
 }
 

@@ -18,8 +18,14 @@ type State = {
 }
 
 class AddToOrderButton extends React.Component<Props, State> {
+  isPrintable: boolean
+  postType: string
+
   constructor (props: Props) {
     super(props)
+
+    this.isPrintable = this.isOptionPrintable()
+    this.postType = this.props.post.post.post_type
 
     this.state = { isClicked: false }
   }
@@ -36,18 +42,30 @@ class AddToOrderButton extends React.Component<Props, State> {
     this.setState({ isClicked: false })
   }
 
+  showAdded () {
+    this.clicked()
+    setTimeout(() => {
+      this.clickedOff()
+    }, 2000)
+  }
+
   handleAddToShipmentClick () {
-    this.clickedOff()
     this.props.addToShipment(this.props.post)
+
+    if (this.postType === 'literature') {
+      this.clickedOff()
+    } else {
+      this.showAdded()
+    }
   }
 
   handleAddToDownloadsClick () {
-    this.clickedOff()
+    this.showAdded()
     this.props.addToDownloads(this.props.post)
   }
 
   handleMobileClick () {
-    if (this.isPrintable()) {
+    if (this.isPrintable) {
       return this.toggleClicked()
     } else {
       return this.props.post.post.post_type === 'literature'
@@ -57,7 +75,7 @@ class AddToOrderButton extends React.Component<Props, State> {
   }
 
   handleDesktopClick () {
-    if (this.isPrintable()) {
+    if (this.isPrintable) {
       return this.clicked()
     } else {
       return this.props.post.post.post_type === 'literature'
@@ -98,12 +116,22 @@ class AddToOrderButton extends React.Component<Props, State> {
     )
   }
 
-  renderShipmentOrDownloadMobile () {
+  renderPopup () {
+    const extraClass = !this.isPrintable && style.added
+    const hideClass = !this.state.isClicked && style.hide
     return (
-      <div className={style.shipmentOrDownloadMobileContainer}>
+      <div
+        className={`${style.shipmentOrDownloadMobileContainer} ${extraClass ||
+          ''} ${hideClass || ''}`}>
         <div className={style.relativePosition}>
-          {this.renderAddToShipment()}
-          {this.renderAddToDownloads()}
+          {this.isPrintable ? (
+            <React.Fragment>
+              {this.renderAddToShipment()}
+              {this.renderAddToDownloads()}
+            </React.Fragment>
+          ) : (
+            <h5 className={style.added}>{'Added!'}</h5>
+          )}
           <div className={style.rightTriangle} />
         </div>
       </div>
@@ -111,7 +139,7 @@ class AddToOrderButton extends React.Component<Props, State> {
   }
 
   renderDesktop () {
-    return this.state.isClicked && this.isPrintable() ? (
+    return this.state.isClicked && this.isPrintable ? (
       <React.Fragment>
         {this.renderAddToShipment()}
         {this.renderAddToDownloads()}
@@ -133,9 +161,7 @@ class AddToOrderButton extends React.Component<Props, State> {
           onClick={this.handleMobileClick.bind(this)}>
           <div className={style.addButtonLines} />
         </div>
-        {this.state.isClicked && this.isPrintable()
-          ? this.renderShipmentOrDownloadMobile()
-          : null}
+        {this.renderPopup()}
       </React.Fragment>
     )
   }
@@ -144,8 +170,8 @@ class AddToOrderButton extends React.Component<Props, State> {
     return this.props.isMobile ? this.renderMobile() : this.renderDesktop()
   }
 
-  isPrintable (): boolean {
-    if (this.props.post.post.post_type !== 'literature') {
+  isOptionPrintable (): boolean {
+    if (this.postType !== 'literature') {
       return false
     } else {
       if (this.props.post.meta.can_print === '1') {

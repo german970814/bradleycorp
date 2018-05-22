@@ -140,10 +140,8 @@ export default class ApplicationGallery extends Component<Props, State> {
                 <Media query={{ maxWidth: TABLETMAXWIDTH }}>
                   {match =>
                     match
-                      ? // tablet
-                      this.renderColumns('col2-tablet')
-                      : // desktop
-                      this.renderColumns('col3')
+                      ? this.renderColumns('col2-tablet')
+                      : this.renderColumns('col3')
                   }
                 </Media>
               )
