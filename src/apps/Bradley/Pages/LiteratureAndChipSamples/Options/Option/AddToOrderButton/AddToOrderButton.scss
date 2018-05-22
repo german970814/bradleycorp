@@ -105,7 +105,6 @@ $addButtonMobileWidth: 30px;
   float: left;
   position: relative;
   z-index: 2;
-  padding: 6px 22px;
   width: 70px;
   height: 40px;
 
@@ -113,18 +112,31 @@ $addButtonMobileWidth: 30px;
     margin-right: 4px;
   }
 
-  &.addToDownloads {
-    padding: 8px 22px;
+  .iconWrapper {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -42%);
+    width: auto;
+    line-height: normal;
 
-    img {
-      width: auto;
-      height: 100%;
+    .iconText {
+      margin-bottom: 2px;
+      font-size: 9px;
+      line-height: normal;
     }
-  }
 
-  img {
-    width: 100%;
-    height: auto;
+    .shippingIcon {
+      width: 27px;
+      height: 19px;
+      line-height: normal;
+    }
+
+    .downloadIcon {
+      width: 19px;
+      height: 19px;
+      line-height: normal;
+    }
   }
 
   &:hover {

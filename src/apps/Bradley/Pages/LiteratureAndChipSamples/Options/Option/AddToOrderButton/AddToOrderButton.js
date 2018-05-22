@@ -71,10 +71,13 @@ class AddToOrderButton extends React.Component<Props, State> {
       <button
         className={`${style.iconButton} ${style.addToShipment}`}
         onClick={this.handleAddToShipmentClick.bind(this)}>
-        <img
-          className={style.shippingIcon}
-          src={require('../../../../../../../images/shipping-icon/shipping-icon@2x.png')}
-        />
+        <div className={style.iconWrapper}>
+          <div className={style.iconText}>{'SHIP'}</div>
+          <img
+            className={style.shippingIcon}
+            src={require('../../../../../../../images/shipping-icon/shipping-icon@2x.png')}
+          />
+        </div>
       </button>
     )
   }
@@ -84,10 +87,13 @@ class AddToOrderButton extends React.Component<Props, State> {
       <button
         className={`button-orange ${style.iconButton} ${style.addToDownloads}`}
         onClick={this.handleAddToDownloadsClick.bind(this)}>
-        <img
-          className={style.downloadIcon}
-          src={require('../../../../../../../images/download-icon/download-icon@2x.png')}
-        />
+        <div className={style.iconWrapper}>
+          <div className={style.iconText}>{'DOWNLOAD'}</div>
+          <img
+            className={style.downloadIcon}
+            src={require('../../../../../../../images/download-icon/download-icon@2x.png')}
+          />
+        </div>
       </button>
     )
   }
