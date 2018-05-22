@@ -10,7 +10,8 @@ type Props = {
   handleSubmit: string => void,
   title?: string,
   className?: string,
-  placeholder?: string
+  placeholder?: string,
+  initValue?: string
 }
 
 type State = {
@@ -26,7 +27,7 @@ class BCorpSearchField extends React.Component<Props, State> {
   constructor (props: Props) {
     super(props)
 
-    this.state = { value: '' }
+    this.state = { value: this.props.initValue || '' }
   }
 
   handleSubmit (event: SyntheticInputEvent<HTMLFormElement>) {

@@ -29,6 +29,7 @@ class LiteratureSearch extends React.Component<Props> {
         title={'Search'}
         className={`col1 col2-tablet`}
         placeholder={'Search for Literature'}
+        initValue={this.props.filters.literature.search}
       />
     )
   }

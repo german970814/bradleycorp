@@ -417,6 +417,10 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
       }
     } catch (err) {
       console.log(err)
+      const options = { ...this.state.options }
+      const optionPostType = postType === 'chip' ? 'chipSamples' : postType
+      options[optionPostType] = []
+      return this.setState({ options })
     }
   }
 
