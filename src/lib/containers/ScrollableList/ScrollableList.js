@@ -167,6 +167,10 @@ class ScrollableList extends Component {
   }
 
   buttonUp () {
+    if (!this.shouldRenderNavigation()) {
+      return
+    }
+
     return (
       <div
         className={`${style.buttonUp} button-up`}
@@ -293,10 +297,7 @@ class ScrollableList extends Component {
   }
 
   renderSliderNavigation () {
-    if (
-      this.props.numberOfPosts &&
-      this.props.numberToDisplay > this.props.numberOfPosts
-    ) {
+    if (!this.shouldRenderNavigation()) {
       return
     }
 
@@ -344,6 +345,15 @@ class ScrollableList extends Component {
 
   numberToDisplayDidUpdate (newNumber, oldNumber) {
     return newNumber !== oldNumber
+  }
+
+  shouldRenderNavigation () {
+    return (
+      (this.props.numberOfPosts &&
+        this.props.numberToDisplay > this.props.numberOfPosts) ||
+      (this.state.children &&
+        this.state.children.length < this.props.numberToDisplay)
+    )
   }
 }
 

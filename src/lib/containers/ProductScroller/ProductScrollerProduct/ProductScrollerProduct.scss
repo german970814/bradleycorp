@@ -1,8 +1,8 @@
-@import "../../../../scss/partials/variables";
-@import "../../../../scss/partials/helpers";
-@import "../../../../scss/partials/mixins";
+@import '../../../../scss/partials/variables';
+@import '../../../../scss/partials/helpers';
+@import '../../../../scss/partials/mixins';
 
-@import "../../SimpleSlider/SimpleSlider";
+@import '../../SimpleSlider/SimpleSlider';
 
 %widthController {
   width: 100%;
@@ -16,6 +16,7 @@
 
 .productScrollerProduct {
   padding: 0 ($distanceBetweenItems / 2);
+  text-align: center;
 
   @include respond-to(tablet) {
     padding: 0 ($distanceBetweenItemsTabletDesktop / 2);
