@@ -17,6 +17,7 @@ type Props = {
   title: string,
   filterState: CheckboxesType,
   updateFilters: (newFilters: CheckboxesType) => void,
+  collapseOnMobile?: boolean,
   // from withScreenSize HOC
   screenSize: ScreenSize
 }
@@ -34,6 +35,7 @@ class LeftSidebarCheckboxGroup extends React.Component<Props, State> {
   renderCheckbox () {
     return (
       <BCorpCheckboxField
+        className={style.checkbox}
         title={this.props.title.replace(/_/g, ' ')}
         filterState={{ checkboxes: this.props.filterState }}
         handleChange={this.handleChange.bind(this)}
@@ -45,6 +47,7 @@ class LeftSidebarCheckboxGroup extends React.Component<Props, State> {
   renderCheckboxMobile () {
     return (
       <BCorpCheckboxField
+        className={style.checkbox}
         filterState={{ checkboxes: this.props.filterState }}
         handleChange={this.handleChange.bind(this)}
         options={this.props.options}
@@ -53,18 +56,11 @@ class LeftSidebarCheckboxGroup extends React.Component<Props, State> {
   }
 
   render () {
-    return this.props.screenSize === 'mobile' ? (
+    return this.props.screenSize === 'mobile' && this.props.collapseOnMobile ? (
       <Collapsible
         trigger={this.props.title.replace(/_/g, ' ')}
         triggerTagName={'button'}
-        classParentString={`Collapsible ${style.checkBoxTitle}`}
-        triggerStyle={{
-          color: '#a7a9ac',
-          fontSize: '13px',
-          fontWeight: '300',
-          textTransform: 'uppercase',
-          letterSpacing: '0.5px'
-        }}>
+        classParentString={`Collapsible ${style.checkBoxTitle}`}>
         {this.renderCheckboxMobile()}
       </Collapsible>
     ) : (

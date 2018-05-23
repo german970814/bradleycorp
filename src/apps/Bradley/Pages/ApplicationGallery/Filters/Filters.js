@@ -67,6 +67,7 @@ class Filters extends React.Component<Props, State> {
               updateFilters={(v: CheckboxesType) =>
                 this.updateActiveFilters(el, v)
               }
+              collapseOnMobile
             />
           )
         })}

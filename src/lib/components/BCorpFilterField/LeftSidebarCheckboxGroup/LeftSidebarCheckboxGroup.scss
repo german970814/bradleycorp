@@ -2,26 +2,30 @@
 @import '../../../../scss/partials/text-styles';
 @import '../../../../scss/partials/mixins';
 
-.checkBoxContainer {
+.checkbox {
+  :global(.checkbox-title) {
+    @extend %h6-desktop;
+  }
+
   @include respond-to(mobile) {
-    padding-bottom: 0;
+    margin-bottom: 15px;
   }
 
   @include respond-to(tablet) {
-    padding-bottom: 30px;
+    margin-bottom: 60px;
+
+    :global(.checkbox-title) {
+      padding-bottom: 5px;
+      padding-right: 10px;
+      color: $gray;
+    }
   }
 }
 
+// applies to mobile Collapsible only
 .checkBoxTitle {
   padding-bottom: 5px;
-  font-family: 'CentraleSansPro';
-  font-size: 13px;
-  font-weight: 500;
-  color: #a7a9ac;
-  text-align: left;
-  line-height: normal;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+
   @include respond-to(mobile) {
     padding-right: 0;
   }
@@ -31,15 +35,10 @@
   }
 
   button {
+    @extend %h6-desktop;
     background: #fff;
-    color: hsl(216, 3%, 66%);
-    font-size: 13px;
-    font-weight: 300;
-    color: #a7a9ac;
+    color: $gray;
     text-align: left;
-    line-height: normal;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
     height: 27px;
     cursor: pointer;
     padding-left: 0;
@@ -57,11 +56,4 @@
       margin-top: -3px;
     }
   }
-}
-
-.panel {
-  padding: 0 18px;
-  background-color: white;
-  overflow: hidden;
-  display: none;
 }

@@ -250,12 +250,8 @@ h5.title {
   }
 
   label {
-    font-family: Helvetica;
-    font-size: 14px;
-    font-weight: 300;
-    color: #2f3d6f;
-    text-align: left;
+    @extend %body;
+    color: $navy;
     line-height: normal;
-    text-transform: capitalize;
   }
 }
