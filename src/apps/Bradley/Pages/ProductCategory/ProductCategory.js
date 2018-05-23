@@ -2,13 +2,12 @@
 import * as React from 'react'
 import type { Match } from 'react-router-dom'
 import type { ScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
-import Media from 'react-media'
-import { MOBILEMAXWIDTH } from '../../../../globals'
 import { withScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
 import ProductApiClient from '../../../../api/product_client'
 import CategoryDescription from './CategoryDescription/CategoryDescription'
 import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import Pagination from './Pagination/Pagination'
+import Filters from './Filters/Filters'
 import Loading from '../../../../lib/components/Loading/Loading'
 import style from './ProductCategory.scss'
 
@@ -20,7 +19,7 @@ type CategoryData = {|
 |}
 
 type MetaFilterGroup = {
-  [string]: string | number
+  [string]: number
 }
 
 type TaxFilterGroup = {
@@ -29,10 +28,23 @@ type TaxFilterGroup = {
     terms: {
       [string]: {
         name: string,
-        count: number,
-        selected: boolean
+        count: number
       }
     }
+  }
+}
+
+type FiltersType =
+  | {
+      metaFilters: MetaFilterGroup,
+      taxFilters: TaxFilterGroup
+    }
+  | false
+
+type ActiveFilterType = {
+  metaFilters?: Array<string>,
+  taxFilters: {
+    [string]: ?Array<string>
   }
 }
 
@@ -43,11 +55,9 @@ type Props = {
 }
 
 type State = {
-  categoryData?: CategoryData,
-  filters?: {
-    metaFilters: MetaFilterGroup,
-    taxFilters: TaxFilterGroup
-  },
+  categoryData: CategoryData | false,
+  filters: FiltersType,
+  activeFilters: ActiveFilterType,
   paged: number,
   showFiltersMobile: boolean,
   loading: boolean
@@ -64,6 +74,12 @@ class ProductCategory extends React.Component<Props, State> {
     super(props)
 
     this.state = {
+      categoryData: false,
+      filters: false,
+      activeFilters: {
+        metaFilters: [],
+        taxFilters: {}
+      },
       paged: 0,
       showFiltersMobile: false,
       loading: true
@@ -98,6 +114,23 @@ class ProductCategory extends React.Component<Props, State> {
     this.setState({ paged })
   }
 
+  updateMetaActiveFilters (newFilters: Array<string>) {
+    return this.setState({
+      ...this.state,
+      activeFilters: {
+        ...this.state.activeFilters,
+        metaFilters: newFilters
+      }
+    })
+  }
+
+  updateTaxActiveFilters (tax: string, newFilters: Array<string>) {
+    const newState = { ...this.state }
+    newState.activeFilters.taxFilters[tax] = newFilters
+
+    this.setState({ ...this.state, ...newState })
+  }
+
   renderContent () {
     const isMobile = this.props.screenSize === 'mobile'
 
@@ -114,7 +147,16 @@ class ProductCategory extends React.Component<Props, State> {
             'http://bradleydev.twoxfour.com/wp-content/uploads/2018/01/halo-web-icon@3x.png'
           }
         />
-        <div className={`col1 col4-tablet ${style.sidebar}`} />
+
+        <div className={`col1 col4-tablet ${style.sidebar}`}>
+          <Filters
+            filters={this.state.filters}
+            activeFilters={this.state.activeFilters}
+            updateMetaActiveFilters={this.updateMetaActiveFilters.bind(this)}
+            updateTaxActiveFilters={this.updateTaxActiveFilters.bind(this)}
+          />
+        </div>
+
         <div className={`col1 col4x3-tablet ${style.products}`}>
           <Pagination
             paged={this.state.paged}
@@ -131,6 +173,8 @@ class ProductCategory extends React.Component<Props, State> {
   }
 
   render () {
+    console.log(this.state)
+
     if (!this.state.categoryData || this.state.loading) {
       return <Loading />
     }
@@ -158,14 +202,17 @@ class ProductCategory extends React.Component<Props, State> {
       const client = new ProductApiClient()
       const response = await client.getProductCategoryPage(slug)
 
-      return this.setState({
-        categoryData: response.data.category_data,
-        filters: {
+      const newState = {}
+      newState.categoryData = response.data.category_data
+      newState.filters = response.data.filters
+        ? {
           metaFilters: response.data.filters.meta_filters,
           taxFilters: response.data.filters.tax_filters
-        },
-        loading: false
-      })
+        }
+        : false
+      newState.loading = false
+
+      return this.setState(newState)
     } catch (error) {
       console.log(error)
     }
@@ -173,4 +220,10 @@ class ProductCategory extends React.Component<Props, State> {
 }
 
 export default withScreenSize(ProductCategory)
-export type { CategoryData, MetaFilterGroup, TaxFilterGroup }
+export type {
+  CategoryData,
+  FiltersType,
+  ActiveFilterType,
+  TaxFilterGroup,
+  MetaFilterGroup
+}

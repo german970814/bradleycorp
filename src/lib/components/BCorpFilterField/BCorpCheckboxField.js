@@ -150,7 +150,10 @@ class BCorpCheckboxField extends React.Component<Props> {
             id={optionName}
             checked={checked || false}
           />
-          <label htmlFor={optionName}>{label}</label>
+          <label
+            htmlFor={optionName}
+            dangerouslySetInnerHTML={{ __html: label }}
+          />
         </div>
       )
     })
