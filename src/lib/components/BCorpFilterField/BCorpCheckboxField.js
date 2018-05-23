@@ -7,8 +7,11 @@ type Options = {
   [string]: ?string
 }
 
+// we just keep a record of the selected fields id or slug
+type CheckboxesType = Array<string>
+
 type CheckboxObject = {
-  checkboxes?: Array<string>,
+  checkboxes?: CheckboxesType,
   other?: {
     checked?: boolean,
     content?: string
@@ -168,11 +171,9 @@ class BCorpCheckboxField extends React.Component<Props> {
   }
 
   render () {
-    return (
-      this.renderCheckBoxes()
-    )
+    return this.renderCheckBoxes()
   }
 }
 
 export default BCorpCheckboxField
-export type { CheckboxObject }
+export type { CheckboxObject, CheckboxesType }

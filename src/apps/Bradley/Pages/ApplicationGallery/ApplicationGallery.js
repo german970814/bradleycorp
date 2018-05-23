@@ -5,6 +5,8 @@ import type {
   ApplicationGalleryPost,
   CPTName
 } from '../../../../lib/types/cpt_types'
+import type { TaxAndTermSlugObject } from '../../../../api/cpt_client'
+import type { CheckboxesType } from '../../../../lib/components/BCorpFilterField/BCorpCheckboxField'
 import debounce from 'debounce'
 import Media from 'react-media'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../globals'
@@ -19,19 +21,6 @@ import NoResults from '../../../../lib/components/NoResults/NoResults'
 
 const PostType: CPTName = 'application-gallery'
 
-type Props = {}
-
-/**
- * This is the object shape that our function getByTaxNameAndTermSlugObject requires.
- *
- * Note, it will always have a tax name (string) as key,
- * and an array of tax slugs (Array<string>) as values.
- * BUT, we've allowed the object to be empty for getting all posts.
- */
-type TaxAndTermSlugObject = {
-  [string]: ?Array<string>
-}
-
 type MetaType = BCorpMeta & {
   app_gallery_img?: string,
   app_gallery_img_filters?: {
@@ -41,12 +30,12 @@ type MetaType = BCorpMeta & {
   }
 }
 
-type FiltersType = Array<string>
-
 type GalleryType = BCorpPost & {
   post: ApplicationGalleryPost,
   meta: MetaType
 }
+
+type Props = {}
 
 type State = {
   gallery: ?Array<GalleryType>,
@@ -76,7 +65,13 @@ export default class ApplicationGallery extends Component<Props, State> {
     this.getApplicationGallery({})
   }
 
-  updateFilters (tax: string, newFilters: FiltersType): void {
+  componentDidUpdate (prevProps: Props, prevState: State) {
+    if (this.shouldResendRequest(prevState)) {
+      this.getApplicationGalleryDebounced(this.state.activeFilters)
+    }
+  }
+
+  updateActiveFilters (tax: string, newFilters: CheckboxesType): void {
     let activeFilters: TaxAndTermSlugObject = this.state.activeFilters
     if (!newFilters.length) {
       delete activeFilters[tax]
@@ -86,7 +81,6 @@ export default class ApplicationGallery extends Component<Props, State> {
       })
     }
     this.setState({ activeFilters, loading: true })
-    this.getApplicationGalleryDebounced(activeFilters)
   }
 
   renderGallery () {
@@ -124,11 +118,15 @@ export default class ApplicationGallery extends Component<Props, State> {
   }
 
   render () {
+    console.log(this.state)
     return (
       <div className={`row ${defaultStyle.defaultTemplate}`}>
         {renderTitle('Application Gallery', 'col1')}
         <div className={`col1 col4-tablet ${style.appGallerySidebar}`}>
-          <Filters updateFilters={this.updateFilters.bind(this)} />
+          <Filters
+            activeFilters={this.state.activeFilters}
+            updateActiveFilters={this.updateActiveFilters.bind(this)}
+          />
         </div>
         <div className={`col1 col4x3-tablet ${style.appGalleryContent}`}>
           <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
@@ -153,9 +151,10 @@ export default class ApplicationGallery extends Component<Props, State> {
   }
 
   async getApplicationGallery (filters: TaxAndTermSlugObject) {
-    const client = new CPTApiClient(PostType)
     let gallery: ?Array<GalleryType>
+
     try {
+      const client = new CPTApiClient(PostType)
       const response = await client.getByTaxNameAndTermSlugObject(filters, 'OR')
 
       gallery = response.data.length ? response.data : null
@@ -169,8 +168,16 @@ export default class ApplicationGallery extends Component<Props, State> {
       loading: false
     })
   }
+
+  shouldResendRequest (prevState: State) {
+    return Object.keys(prevState.activeFilters).some(filter => {
+      return (
+        prevState.activeFilters[filter] !== this.state.activeFilters[filter]
+      )
+    })
+  }
 }
 
 export { PostType }
 
-export type { FiltersType, GalleryType }
+export type { CheckboxesType, GalleryType }

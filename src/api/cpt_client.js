@@ -6,6 +6,17 @@ import type { DateQuery } from '../lib/types/query_types'
 import axios from 'axios'
 import api from './index'
 
+/**
+ * This is the object shape that our function getByTaxNameAndTermSlugObject requires.
+ *
+ * Note, it will always have a tax name (string) as key,
+ * and an array of tax slugs (Array<string>) as values.
+ * BUT, we've allowed the object to be empty for getting all posts.
+ */
+type TaxAndTermSlugObject = {
+  [string]: ?Array<string>
+}
+
 class CPTApiClient {
   cptName: CPTName
 
@@ -104,9 +115,7 @@ class CPTApiClient {
   }
 
   getByTaxNameAndTermSlugObject (
-    taxNameAndTermSlugObject: {
-      [string]: ?Array<string>
-    },
+    taxNameAndTermSlugObject: TaxAndTermSlugObject,
     relation: 'AND' | 'OR',
     postsPerPage?: number,
     paged?: number,
@@ -174,3 +183,4 @@ class CPTApiClient {
 }
 
 export default CPTApiClient
+export type { TaxAndTermSlugObject }
