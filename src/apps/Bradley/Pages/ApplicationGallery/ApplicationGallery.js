@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react'
+import type { ScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
 import type { BCorpPost, BCorpMeta } from '../../../../lib/types/post_types'
 import type {
   ApplicationGalleryPost,
@@ -8,8 +9,7 @@ import type {
 import type { TaxAndTermSlugObject } from '../../../../api/cpt_client'
 import type { CheckboxesType } from '../../../../lib/components/BCorpFilterField/BCorpCheckboxField'
 import debounce from 'debounce'
-import Media from 'react-media'
-import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../globals'
+import { withScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
 import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import CPTApiClient from '../../../../api/cpt_client'
 import FillColumns from '../../../../lib/components/FillColumns/FillColumns'
@@ -17,6 +17,7 @@ import Filters from './Filters/Filters'
 import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
 import style from './ApplicationGallery.scss'
 import GalleryItem from './GalleryItem'
+import Loading from '../../../../lib/components/Loading/Loading'
 import NoResults from '../../../../lib/components/NoResults/NoResults'
 
 const PostType: CPTName = 'application-gallery'
@@ -35,7 +36,10 @@ type GalleryType = BCorpPost & {
   meta: MetaType
 }
 
-type Props = {}
+type Props = {
+  // from withScreenSize HOC
+  screenSize: ScreenSize
+}
 
 type State = {
   gallery: ?Array<GalleryType>,
@@ -43,7 +47,7 @@ type State = {
   loading: boolean
 }
 
-export default class ApplicationGallery extends Component<Props, State> {
+class ApplicationGallery extends Component<Props, State> {
   getApplicationGalleryDebounced: (filters: TaxAndTermSlugObject) => void
 
   constructor (props: Props) {
@@ -84,12 +88,12 @@ export default class ApplicationGallery extends Component<Props, State> {
   }
 
   renderGallery () {
-    return this.state.gallery ? (
+    return this.state.gallery && !this.state.loading ? (
       this.state.gallery.map((appGallery, idx) => {
         return <GalleryItem key={idx} applicationGallery={appGallery} />
       })
     ) : (
-      <div />
+      <Loading />
     )
   }
 
@@ -129,22 +133,10 @@ export default class ApplicationGallery extends Component<Props, State> {
           />
         </div>
         <div className={`col1 col4x3-tablet ${style.appGalleryContent}`}>
-          <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
-            {match =>
-              match ? (
-                // mobile
-                this.renderColumns('col2')
-              ) : (
-                <Media query={{ maxWidth: TABLETMAXWIDTH }}>
-                  {match =>
-                    match
-                      ? this.renderColumns('col2-tablet')
-                      : this.renderColumns('col3')
-                  }
-                </Media>
-              )
-            }
-          </Media>
+          {this.props.screenSize === 'mobile' && this.renderColumns('col2')}
+          {this.props.screenSize === 'tablet' &&
+            this.renderColumns('col2-tablet')}
+          {this.props.screenSize === 'desktop' && this.renderColumns('col3')}
         </div>
       </div>
     )
@@ -181,3 +173,5 @@ export default class ApplicationGallery extends Component<Props, State> {
 export { PostType }
 
 export type { CheckboxesType, GalleryType }
+
+export default withScreenSize(ApplicationGallery)
