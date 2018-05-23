@@ -1,0 +1,14 @@
+@import '../../../../../scss/partials/variables';
+
+.filters {
+  h6.parentTitle {
+    margin-bottom: 5px;
+    color: $gray;
+  }
+
+  .checkbox {
+    h5 {
+      text-transform: none;
+    }
+  }
+}

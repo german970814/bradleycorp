@@ -7,6 +7,7 @@ import style from './Filters.scss'
 type Props = {
   filters: FiltersType,
   activeFilters: ActiveFilterType,
+  catParentTitle?: string,
   updateMetaActiveFilters: (newFilters: Array<string>) => void,
   updateTaxActiveFilters: (tax: string, newFilters: Array<string>) => void
 }
@@ -44,6 +45,7 @@ class Filters extends React.Component<Props> {
         ...MetaFiltersElements,
         <LeftSidebarCheckboxGroup
           key={'new'}
+          className={style.checkbox}
           options={option}
           title={'New'}
           filterState={filterState}
@@ -63,30 +65,41 @@ class Filters extends React.Component<Props> {
       return null
     }
 
-    return Object.keys(filters.taxFilters).map((taxName, index) => {
-      const options = {}
+    return (
+      <React.Fragment>
+        {this.props.catParentTitle && (
+          <h6 className={style.parentTitle}>{this.props.catParentTitle}</h6>
+        )}
+        {Object.keys(filters.taxFilters).map((taxName, index) => {
+          const options = {}
 
-      if (filters.taxFilters[taxName].terms.length === 0) {
-        return null
-      }
+          if (filters.taxFilters[taxName].terms.length === 0) {
+            return null
+          }
 
-      Object.keys(filters.taxFilters[taxName].terms).forEach(term => {
-        const termObj = filters.taxFilters[taxName].terms[term]
-        options[term] = this.createLabelWithCount(termObj.name, termObj.count)
-      })
+          Object.keys(filters.taxFilters[taxName].terms).forEach(term => {
+            const termObj = filters.taxFilters[taxName].terms[term]
+            options[term] = this.createLabelWithCount(
+              termObj.name,
+              termObj.count
+            )
+          })
 
-      return (
-        <LeftSidebarCheckboxGroup
-          key={index}
-          options={options}
-          title={filters.taxFilters[taxName].name}
-          filterState={activeFilters.taxFilters[taxName] || []}
-          updateFilters={newFilters => {
-            this.props.updateTaxActiveFilters(taxName, newFilters)
-          }}
-        />
-      )
-    })
+          return (
+            <LeftSidebarCheckboxGroup
+              key={index}
+              className={style.checkbox}
+              options={options}
+              title={filters.taxFilters[taxName].name}
+              filterState={activeFilters.taxFilters[taxName] || []}
+              updateFilters={newFilters => {
+                this.props.updateTaxActiveFilters(taxName, newFilters)
+              }}
+            />
+          )
+        })}
+      </React.Fragment>
+    )
   }
 
   render () {

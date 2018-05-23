@@ -18,6 +18,7 @@ type Props = {
   filterState: CheckboxesType,
   updateFilters: (newFilters: CheckboxesType) => void,
   collapseOnMobile?: boolean,
+  className?: string,
   // from withScreenSize HOC
   screenSize: ScreenSize
 }
@@ -27,6 +28,16 @@ type State = {
 }
 
 class LeftSidebarCheckboxGroup extends React.Component<Props, State> {
+  collapsibleClassName: string
+
+  constructor (props: Props) {
+    super(props)
+
+    this.collapsibleClassName = this.props.collapseOnMobile
+      ? style.collapsible
+      : ''
+  }
+
   handleChange (value: CheckboxObject) {
     const checkboxes = value.checkboxes
     checkboxes && this.props.updateFilters(checkboxes)
@@ -35,7 +46,7 @@ class LeftSidebarCheckboxGroup extends React.Component<Props, State> {
   renderCheckbox () {
     return (
       <BCorpCheckboxField
-        className={style.checkbox}
+        className={`${style.checkbox} ${this.props.className || ''}`}
         title={this.props.title.replace(/_/g, ' ')}
         filterState={{ checkboxes: this.props.filterState }}
         handleChange={this.handleChange.bind(this)}
@@ -47,7 +58,8 @@ class LeftSidebarCheckboxGroup extends React.Component<Props, State> {
   renderCheckboxMobile () {
     return (
       <BCorpCheckboxField
-        className={style.checkbox}
+        className={`${style.checkbox} ${this.collapsibleClassName} ${this.props
+          .className || ''}`}
         filterState={{ checkboxes: this.props.filterState }}
         handleChange={this.handleChange.bind(this)}
         options={this.props.options}

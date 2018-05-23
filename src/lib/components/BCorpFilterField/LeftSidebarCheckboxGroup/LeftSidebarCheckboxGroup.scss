@@ -3,22 +3,16 @@
 @import '../../../../scss/partials/mixins';
 
 .checkbox {
+  margin-bottom: 40px;
+
   :global(.checkbox-title) {
     @extend %h6-desktop;
+    margin-bottom: 5px;
+    color: $gray;
   }
 
-  @include respond-to(mobile) {
-    margin-bottom: 15px;
-  }
-
-  @include respond-to(tablet) {
-    margin-bottom: 60px;
-
-    :global(.checkbox-title) {
-      padding-bottom: 5px;
-      padding-right: 10px;
-      color: $gray;
-    }
+  &.collapsible {
+    margin-bottom: 0px;
   }
 }
 

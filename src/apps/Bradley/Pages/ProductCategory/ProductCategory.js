@@ -150,6 +150,11 @@ class ProductCategory extends React.Component<Props, State> {
 
         <div className={`col1 col4-tablet ${style.sidebar}`}>
           <Filters
+            catParentTitle={
+              (this.state.categoryData &&
+                this.state.categoryData.parent_name) ||
+              ''
+            }
             filters={this.state.filters}
             activeFilters={this.state.activeFilters}
             updateMetaActiveFilters={this.updateMetaActiveFilters.bind(this)}
