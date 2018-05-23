@@ -1,8 +1,10 @@
 // @flow
 import * as React from 'react'
 import type { Match } from 'react-router-dom'
+import type { ScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
 import Media from 'react-media'
 import { MOBILEMAXWIDTH } from '../../../../globals'
+import { withScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
 import ProductApiClient from '../../../../api/product_client'
 import CategoryDescription from './CategoryDescription/CategoryDescription'
 import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
@@ -35,7 +37,9 @@ type TaxFilterGroup = {
 }
 
 type Props = {
-  match: Match
+  match: Match,
+  // from withScreenSize HOC
+  screenSize: ScreenSize
 }
 
 type State = {
@@ -94,7 +98,9 @@ class ProductCategory extends React.Component<Props, State> {
     this.setState({ paged })
   }
 
-  renderContent (isMobile: boolean) {
+  renderContent () {
+    const isMobile = this.props.screenSize === 'mobile'
+
     return (
       <div className={`row ${style.content}`}>
         <CategoryDescription
@@ -131,25 +137,17 @@ class ProductCategory extends React.Component<Props, State> {
     const { categoryData } = this.state
 
     return (
-      <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
-        {match => {
-          return (
-            <div className={style.ProductCategory}>
-              {categoryData.parent_name && (
-                <h5 className={style.topCategoryTitle}>
-                  {categoryData.parent_name}
-                </h5>
-              )}
-              <DefaultTemplate
-                data={{ page_title: categoryData.name }}
-                renderModules={() => {
-                  return this.renderContent(match)
-                }}
-              />
-            </div>
-          )
-        }}
-      </Media>
+      <div className={style.ProductCategory}>
+        {categoryData.parent_name && (
+          <h5 className={style.topCategoryTitle}>{categoryData.parent_name}</h5>
+        )}
+        <DefaultTemplate
+          data={{ page_title: categoryData.name }}
+          renderModules={() => {
+            return this.renderContent()
+          }}
+        />
+      </div>
     )
   }
 
@@ -174,5 +172,5 @@ class ProductCategory extends React.Component<Props, State> {
   }
 }
 
-export default ProductCategory
+export default withScreenSize(ProductCategory)
 export type { CategoryData, MetaFilterGroup, TaxFilterGroup }
