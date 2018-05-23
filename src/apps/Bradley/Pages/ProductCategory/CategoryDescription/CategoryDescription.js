@@ -1,6 +1,8 @@
 // @flow
 import * as React from 'react'
 import { Link } from 'react-router-dom'
+import ReactHtmlParser from 'react-html-parser'
+import ContentTransformer from '../../../../../lib/containers/Modules/transformContent/transformContent'
 import VerticalAlignHelper from '../../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import BCorpLink from '../../../../../lib/components/BCorpLink/BCorpLink'
 import ArrowThumbnail from '../../../../../lib/components/ArrowThumbnail/ArrowThumbnail'
@@ -74,7 +76,14 @@ class CategoryDescription extends React.Component<Props> {
           className={`col1 inline-col3x2-middle-tablet ${
             style.descriptionWrapper
           }`}>
-          <div className={style.description}>{this.props.description}</div>
+          <div className={style.description}>
+            {ReactHtmlParser(this.props.description, {
+              transform: (node, index) => {
+                const contentTransformer = new ContentTransformer(node, index)
+                return contentTransformer.transform()
+              }
+            })}
+          </div>
           <div className={style.descriptionLinks}>{this.renderLinks()}</div>
         </div>
       </div>
