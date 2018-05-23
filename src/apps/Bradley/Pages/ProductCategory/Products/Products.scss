@@ -30,4 +30,10 @@
   @include respond-to(desktop) {
     margin-bottom: 35px;
   }
+
+  .noResults {
+    @include respond-to(tablet) {
+      margin-bottom: 20px;
+    }
+  }
 }

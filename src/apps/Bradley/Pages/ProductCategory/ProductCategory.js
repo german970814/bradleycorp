@@ -10,6 +10,7 @@ import Pagination from './Pagination/Pagination'
 import Filters from './Filters/Filters'
 import Products from './Products/Products'
 import Loading from '../../../../lib/components/Loading/Loading'
+import NoResults from '../../../../lib/components/NoResults/NoResults'
 import style from './ProductCategory.scss'
 
 type CategoryData = {|
@@ -86,11 +87,11 @@ class ProductCategory extends React.Component<Props, State> {
       loading: true
     }
 
-    this.postsPerPage = 4
-    this.categoryLinks = [
+    this.postsPerPage = 8
+    /* this.categoryLinks = [
       { name: 'link title goes right here', link: '#' },
       { name: 'link title goes right here', link: '#' }
-    ]
+    ] */
   }
 
   componentDidMount () {
@@ -137,17 +138,18 @@ class ProductCategory extends React.Component<Props, State> {
   renderContent () {
     const isMobile = this.props.screenSize === 'mobile'
 
-    return (
+    return this.state.categoryData.count === 0 ? (
+      <NoResults
+        className={style.noResults}
+        message={'No products were found in this category'}
+      />
+    ) : (
       <div className={`row ${style.content}`}>
         <CategoryDescription
           isMobile={isMobile}
-          links={this.categoryLinks}
           description={
             (this.state.categoryData && this.state.categoryData.description) ||
             ''
-          }
-          logoSrc={
-            'http://bradleydev.twoxfour.com/wp-content/uploads/2018/01/halo-web-icon@3x.png'
           }
         />
 

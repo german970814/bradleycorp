@@ -10,20 +10,21 @@ import style from './CategoryDescription.scss'
 
 type Props = {
   isMobile?: boolean,
-  links: Array<{ name: string, link: string }>,
+  links?: Array<{ name: string, link: string }>,
   description: string,
   logoSrc?: string
 }
 
 class CategoryDescription extends React.Component<Props> {
-  renderImage () {
+  /* renderImage () {
     if (!this.props.logoSrc) {
       return
     }
 
     return <img src={this.props.logoSrc} />
-  }
+  } */
 
+  /*
   renderLinks () {
     return this.props.links.map((link, index) => {
       return (
@@ -62,9 +63,10 @@ class CategoryDescription extends React.Component<Props> {
         />
       )
     })
-  }
+  } */
 
   render () {
+    /*
     return (
       <div className={`row ${style.categoryDescription}`}>
         <VerticalAlignHelper />
@@ -85,6 +87,25 @@ class CategoryDescription extends React.Component<Props> {
             })}
           </div>
           <div className={style.descriptionLinks}>{this.renderLinks()}</div>
+        </div>
+      </div>
+    )
+    */
+
+    return (
+      <div className={`row ${style.categoryDescription}`}>
+        <div
+          className={`col1 inline-col3x2-middle-tablet ${
+            style.descriptionWrapper
+          }`}>
+          <div className={style.description}>
+            {ReactHtmlParser(this.props.description, {
+              transform: (node, index) => {
+                const contentTransformer = new ContentTransformer(node, index)
+                return contentTransformer.transform()
+              }
+            })}
+          </div>
         </div>
       </div>
     )

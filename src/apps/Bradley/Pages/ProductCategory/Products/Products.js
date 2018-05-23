@@ -8,6 +8,7 @@ import CPTApiClient from '../../../../../api/cpt_client'
 import { filterPostsByMeta } from '../../../../../lib/bcorpPost'
 import { sortIntoRows } from '../../../../../lib/bcorpJSX'
 import Loading from '../../../../../lib/components/Loading/Loading'
+import NoResults from '../../../../../lib/components/NoResults/NoResults'
 import ProductScrollerProduct from '../../../../../lib/containers/ProductScroller/ProductScrollerProduct/ProductScrollerProduct'
 import style from './Products.scss'
 
@@ -77,11 +78,17 @@ class Products extends React.Component<Props, State> {
       )
     })
 
-    return sortIntoRows(products, args.numInEachRow)
+    return products.length && products.length !== 0 ? (
+      sortIntoRows(products, args.numInEachRow)
+    ) : (
+      <NoResults
+        className={style.noResults}
+        message={'No products matched your filter selections'}
+      />
+    )
   }
 
   render () {
-    console.log(this.state)
     return this.state.loading ? (
       <Loading />
     ) : (
@@ -94,6 +101,8 @@ class Products extends React.Component<Props, State> {
 
     try {
       const taxArgs = this.combineProductCatAndFilters()
+
+      console.log('sending', taxArgs, this.props.paged)
 
       const client = new CPTApiClient('product')
       const response = await client.getByTaxNameAndTermSlugObject(
@@ -121,6 +130,7 @@ class Products extends React.Component<Props, State> {
       this.setState({ products, loading: false })
     } catch (error) {
       console.log(error)
+      this.setState({ products: [], loading: false })
     }
   }
 
