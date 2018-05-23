@@ -4,14 +4,22 @@
   margin-bottom: 20px;
 
   .product {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 
     @include respond-to(tablet) {
-      margin-bottom: 40px;
+      margin-bottom: 25px;
     }
 
     @include respond-to(desktop) {
-      margin-bottom: 25px;
+      margin-bottom: 10px;
+    }
+
+    &:hover {
+      box-shadow: 0px 8px 30px 0 rgba(209, 211, 212, 0.59);
+      background-color: #fff;
+      border: solid 1px #bfbfbf;
     }
   }
 
