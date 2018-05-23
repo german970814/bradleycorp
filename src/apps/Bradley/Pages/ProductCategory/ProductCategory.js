@@ -8,6 +8,7 @@ import CategoryDescription from './CategoryDescription/CategoryDescription'
 import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import Pagination from './Pagination/Pagination'
 import Filters from './Filters/Filters'
+import Products from './Products/Products'
 import Loading from '../../../../lib/components/Loading/Loading'
 import style from './ProductCategory.scss'
 
@@ -85,11 +86,7 @@ class ProductCategory extends React.Component<Props, State> {
       loading: true
     }
 
-    this.postsPerPage = 20
-    this.topCategory = 'Safety Fixtures'
-    this.childCategory = 'Combination Fixtures'
-    this.categoryDescription =
-      'Lorem ipsum dolor sit amet, consectetur adiciagewbng elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Al ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adiciagewbng elit.'
+    this.postsPerPage = 4
     this.categoryLinks = [
       { name: 'link title goes right here', link: '#' },
       { name: 'link title goes right here', link: '#' }
@@ -125,10 +122,16 @@ class ProductCategory extends React.Component<Props, State> {
   }
 
   updateTaxActiveFilters (tax: string, newFilters: Array<string>) {
-    const newState = { ...this.state }
-    newState.activeFilters.taxFilters[tax] = newFilters
+    const newTaxFilters = { ...this.state.activeFilters.taxFilters }
+    newTaxFilters[tax] = newFilters
 
-    this.setState({ ...this.state, ...newState })
+    this.setState({
+      ...this.state,
+      activeFilters: {
+        ...this.state.activeFilters,
+        taxFilters: newTaxFilters
+      }
+    })
   }
 
   renderContent () {
@@ -163,6 +166,22 @@ class ProductCategory extends React.Component<Props, State> {
         </div>
 
         <div className={`col1 col4x3-tablet ${style.products}`}>
+          <Pagination
+            paged={this.state.paged}
+            updatePaged={this.updatePaged.bind(this)}
+            postsPerPage={this.postsPerPage}
+            numPosts={
+              (this.state.categoryData && this.state.categoryData.count) || 0
+            }
+            isMobile={isMobile}
+          />
+          <Products
+            catSlug={this.props.match.params.slug || ''}
+            activeFilters={this.state.activeFilters}
+            paged={this.state.paged}
+            postsPerPage={this.postsPerPage}
+            screenSize={this.props.screenSize}
+          />
           <Pagination
             paged={this.state.paged}
             updatePaged={this.updatePaged.bind(this)}

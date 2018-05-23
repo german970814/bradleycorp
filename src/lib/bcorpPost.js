@@ -62,8 +62,8 @@ export function filterPostsByTerm (
 export function filterPostsByMeta (
   posts: Array<BCorpPost>,
   metaName: string,
-  metaValue: number | string,
-  matchType: 'EQUAL' | 'NOTEQUAL'
+  metaValue: number | string | 'now',
+  matchType: 'EQUAL' | 'NOTEQUAL' | 'DATEBEFORE' | 'DATEAFTER'
 ): Array<BCorpPost> {
   return posts.filter(post => {
     if (matchType === 'EQUAL') {
@@ -75,6 +75,27 @@ export function filterPostsByMeta (
       return (
         !post.meta || !post.meta[metaName] || post.meta[metaName] !== metaValue
       )
+    }
+    if (matchType === 'DATEBEFORE' || matchType === 'DATEAFTER') {
+      if (!post.meta || !post.meta[metaName]) {
+        return false
+      }
+      if (
+        typeof metaValue !== 'string' ||
+        typeof post.meta[metaName] !== 'string'
+      ) {
+        console.warn(
+          'Couldnt compare using DATEBEFORE or DATEAFTER if values are not string'
+        )
+        return false
+      }
+      const passedDate = metaValue === 'now' ? new Date() : new Date(metaValue)
+
+      const postDate = new Date(post.meta[metaName])
+
+      return matchType === 'DATEBEFORE'
+        ? passedDate < postDate
+        : passedDate > postDate
     }
   })
 }

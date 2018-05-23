@@ -1,30 +1,35 @@
+// @flow
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import type { BCorpPost } from '../../../types/post_types'
 import { Link } from 'react-router-dom'
 import { createCPTUrl } from '../../../bcorpUrl'
 import { isNew } from '../../../bcorpPost'
 import style from './ProductScrollerProduct.scss'
 
-class ProductScrollerProduct extends Component {
+type Props = {
+  product: BCorpPost,
+  className?: string
+}
+
+class ProductScrollerProduct extends Component<Props> {
   renderNew () {
-    if (isNew(this.props.product.meta['product_new_until'])) {
-      return (
-        <h6 className={style.new}>
-          {'NEW'}
-        </h6>
-      )
+    if (isNew(this.props.product.meta['product_new_until'] || '')) {
+      return <h6 className={style.new}>{'NEW'}</h6>
     }
   }
 
   renderImage () {
+    const src =
+      (this.props.product.media &&
+        this.props.product.media['featured_image'] &&
+        this.props.product.media['featured_image'] !== '' &&
+        typeof this.props.product.media['featured_image'][0] === 'string' &&
+        typeof this.props.product.media['featured_image'][0]) ||
+      ''
     const imgStyle = {
-      backgroundImage: `url(${this.props.product.media['featured_image'][0]})`
+      backgroundImage: `url(${src})`
     }
-    return (
-      <div
-        className={style.image}
-        style={imgStyle} />
-    )
+    return <div className={style.image} style={imgStyle} />
   }
 
   renderSKU () {
@@ -32,16 +37,12 @@ class ProductScrollerProduct extends Component {
       <span className={`small-body ${style.sku}`}>
         {this.props.product.meta['product_sku']}
       </span>
-
     )
   }
 
   renderTitle () {
     return (
-      <h6
-        className={style.title}>
-        {this.props.product.post['post_title']}
-      </h6>
+      <h6 className={style.title}>{this.props.product.post['post_title']}</h6>
     )
   }
 
@@ -64,59 +65,36 @@ class ProductScrollerProduct extends Component {
               key={compliance}
               className={style.complianceIconWrapper}
               title={title}>
-              <img
-                src={iconSrc}
-                className={style.complianceIcon} />
+              <img src={iconSrc} className={style.complianceIcon} />
             </span>
           )
           _icons.push(__i)
         }
         _i++
       }
-      return (
-        <span
-          className={style.compliance}>
-          {_icons}
-        </span>
-      )
+      return <span className={style.compliance}>{_icons}</span>
     }
   }
 
   render () {
     return (
       <div
-        className={style.productScrollerProduct}>
-
-        <Link
-          to={`${createCPTUrl(this.props.product.post)}`}
-          replace >
-
-          <div
-            className={style.topIcons}>
+        className={`${style.productScrollerProduct} ${this.props.className ||
+          ''}`}>
+        <Link to={`${createCPTUrl(this.props.product.post) || ''}`} replace>
+          <div className={style.topIcons}>
             {this.renderNew()}
             {this.renderCompliance()}
           </div>
-          <div
-            className={style.elementWrapper}>
-            {this.renderImage()}
-          </div>
-          <div
-            className={style.elementWrapper}>
-            {this.renderSKU()}
-          </div>
-          <div
-            className={style.elementWrapper}>
-            {this.renderTitle()}
-          </div>
-
+          <div className={style.elementWrapper}>{this.renderImage()}</div>
+          <div className={style.elementWrapper}>{this.renderSKU()}</div>
+          <div className={style.elementWrapper}>{this.renderTitle()}</div>
         </Link>
-
       </div>
-
     )
   }
 
-  getIconSrc (compliance) {
+  getIconSrc (compliance: string) {
     switch (compliance) {
       case 'ADA':
         return require('../../../../images/compliance-icons/ada-web-icon@2x.png')
@@ -155,10 +133,6 @@ class ProductScrollerProduct extends Component {
         return false
     }
   }
-}
-
-ProductScrollerProduct.propTypes = {
-  product: PropTypes.object.isRequired
 }
 
 export default ProductScrollerProduct

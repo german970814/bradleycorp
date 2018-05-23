@@ -31,6 +31,10 @@ type WPFeaturedImageArrayTypes = string | number | boolean
 type BCorpMeta = {
   video_gallery_video?: string,
   product_sku?: string,
+  product_new_until?: string,
+  product_compliance?: {
+    [string]: string
+  },
   app_gallery_img?: string,
   app_gallery_img_filters?: {
     color: string,
