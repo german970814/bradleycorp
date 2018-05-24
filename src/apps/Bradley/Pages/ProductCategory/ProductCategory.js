@@ -114,6 +114,10 @@ class ProductCategory extends React.Component<Props, State> {
     }
   }
 
+  toggleShowFiltersMobile () {
+    this.setState({ showFiltersMobile: !this.state.showFiltersMobile })
+  }
+
   updateNumberResults (numberResults: number) {
     this.setState({ numberResults })
   }
@@ -155,6 +159,26 @@ class ProductCategory extends React.Component<Props, State> {
     })
   }
 
+  renderFilters () {
+    return (
+      <div className={`col1 col4-tablet ${style.sidebar}`}>
+        <Filters
+          catParentTitle={
+            (this.state.categoryData && this.state.categoryData.parent_name) ||
+            ''
+          }
+          catSlug={
+            (this.state.categoryData && this.state.categoryData.name) || ''
+          }
+          filters={this.state.filters}
+          activeFilters={this.state.activeFilters}
+          updateMetaActiveFilters={this.updateMetaActiveFilters.bind(this)}
+          updateTaxActiveFilters={this.updateTaxActiveFilters.bind(this)}
+        />
+      </div>
+    )
+  }
+
   renderContent () {
     const isMobile = this.props.screenSize === 'mobile'
 
@@ -173,22 +197,7 @@ class ProductCategory extends React.Component<Props, State> {
           }
         />
 
-        <div className={`col1 col4-tablet ${style.sidebar}`}>
-          <Filters
-            catParentTitle={
-              (this.state.categoryData &&
-                this.state.categoryData.parent_name) ||
-              ''
-            }
-            catSlug={
-              (this.state.categoryData && this.state.categoryData.name) || ''
-            }
-            filters={this.state.filters}
-            activeFilters={this.state.activeFilters}
-            updateMetaActiveFilters={this.updateMetaActiveFilters.bind(this)}
-            updateTaxActiveFilters={this.updateTaxActiveFilters.bind(this)}
-          />
-        </div>
+        {this.props.screenSize !== 'mobile' && this.renderFilters()}
 
         <div className={`col1 col4x3-tablet ${style.products}`}>
           <Pagination
@@ -198,14 +207,30 @@ class ProductCategory extends React.Component<Props, State> {
             numPosts={this.state.numberResults}
             isMobile={isMobile}
           />
-          <Products
-            catSlug={this.props.match.params.slug || ''}
-            activeFilters={this.state.activeFilters}
-            paged={this.state.paged}
-            postsPerPage={this.postsPerPage}
-            updateNumberResults={this.updateNumberResults.bind(this)}
-            screenSize={this.props.screenSize}
-          />
+
+          {this.props.screenSize === 'mobile' && (
+            <button
+              className={style.showFilters}
+              onClick={this.toggleShowFiltersMobile.bind(this)}>
+              {this.state.showFiltersMobile ? 'SHOW RESULTS' : 'FILTER RESULTS'}
+            </button>
+          )}
+
+          {this.props.screenSize !== 'mobile' ||
+          (this.props.screenSize === 'mobile' &&
+            !this.state.showFiltersMobile) ? (
+              <Products
+                catSlug={this.props.match.params.slug || ''}
+                activeFilters={this.state.activeFilters}
+                paged={this.state.paged}
+                postsPerPage={this.postsPerPage}
+                updateNumberResults={this.updateNumberResults.bind(this)}
+                screenSize={this.props.screenSize}
+              />
+            ) : (
+              <div className={'row'}>{this.renderFilters()}</div>
+            )}
+
           <Pagination
             paged={this.state.paged}
             updatePaged={this.updatePaged.bind(this)}
