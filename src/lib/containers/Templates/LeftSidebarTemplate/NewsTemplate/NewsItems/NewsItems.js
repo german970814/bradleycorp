@@ -8,6 +8,7 @@ import type {
 } from '../../../../LoadMore/LoadMore'
 import CPTApiClient from '../../../../../../api/cpt_client'
 import LoadMore from '../../../../LoadMore/LoadMore'
+import NoResults from '../../../../../components/NoResults/NoResults'
 import NewsItem from './NewsItem/NewsItem'
 import style from './NewsItems.scss'
 
@@ -129,11 +130,13 @@ class NewsItemsInner extends React.Component<InnerProps> {
   }
 
   render () {
-    return (
+    return this.props.posts.length ? (
       <React.Fragment>
         <div className={style.newsItems}>{this.renderNewsItems()}</div>
         {this.renderLoadMoreButton()}
       </React.Fragment>
+    ) : (
+      <NoResults message={'No results matched your filter selections'} />
     )
   }
 
