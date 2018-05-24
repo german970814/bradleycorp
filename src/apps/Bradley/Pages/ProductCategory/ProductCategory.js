@@ -89,7 +89,7 @@ class ProductCategory extends React.Component<Props, State> {
       loading: true
     }
 
-    this.postsPerPage = 8
+    this.postsPerPage = 20
     /* this.categoryLinks = [
       { name: 'link title goes right here', link: '#' },
       { name: 'link title goes right here', link: '#' }
