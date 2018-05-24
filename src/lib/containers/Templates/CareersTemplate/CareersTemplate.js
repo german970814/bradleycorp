@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react'
 import type { BCorpPageTemplateData } from '../../../types/customPage_types'
-import Media from 'react-media'
-import { MOBILEMAXWIDTH } from '../../../../globals'
+import type { ScreenSize } from '../../../contexts/ScreenSizeContext'
+import { withScreenSize } from '../../../contexts/ScreenSizeContext'
 import FullWidthTemplate from '../FullWidthTemplate/FullWidthTemplate'
 import LeftSidebarTemplate from '../LeftSidebarTemplate/LeftSidebarTemplate'
 import CTAModule from '../../Modules/CTAModule/CTAModule'
@@ -14,7 +14,9 @@ import style from './CareersTemplate.scss'
 type Props = {
   data: BCorpPageTemplateData,
   renderModules: () => React.Node,
-  pagePath: string
+  pagePath: string,
+  // from withScreenSize HOC
+  screenSize: ScreenSize
 }
 
 class CareersTemplate extends React.Component<Props> {
@@ -55,29 +57,23 @@ class CareersTemplate extends React.Component<Props> {
         this.props.data.metaboxes.careers_template.media_4
       ]
 
-      return (
-        <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
-          {match =>
-            match ? (
-              this.renderSlider(media)
-            ) : (
-              <div className={'row'}>
-                {media.map((media, index) => {
-                  return (
-                    <div key={index} className={`col2-tablet col4-desktop`}>
-                      <ImageFrame
-                        src={media}
-                        aspectRatio={200 / 385}
-                        aspectRatioTablet={200 / 385}
-                        aspectRatioDesktop={250 / 320}
-                      />
-                    </div>
-                  )
-                })}
+      return this.props.screenSize === 'mobile' ? (
+        this.renderSlider(media)
+      ) : (
+        <div className={'row'}>
+          {media.map((media, index) => {
+            return (
+              <div key={index} className={`col2-tablet col4-desktop`}>
+                <ImageFrame
+                  src={media}
+                  aspectRatio={200 / 385}
+                  aspectRatioTablet={200 / 385}
+                  aspectRatioDesktop={250 / 320}
+                />
               </div>
             )
-          }
-        </Media>
+          })}
+        </div>
       )
     }
   }
@@ -88,7 +84,8 @@ class CareersTemplate extends React.Component<Props> {
         showPosition
         animation={['slide']}
         slideShow
-        wrapperClassName={style.slider}>
+        wrapperClassName={style.slider}
+        touchMoveSensitivity={1.5}>
         {media.map((media, index) => {
           return (
             <FixedAspectRatioBox key={index} aspectRatio={180 / 320}>
@@ -142,4 +139,4 @@ class CareersTemplate extends React.Component<Props> {
   }
 }
 
-export default CareersTemplate
+export default withScreenSize(CareersTemplate)
