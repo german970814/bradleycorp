@@ -8,7 +8,7 @@ import style from './NewsTemplate.scss'
 
 type FiltersType = {
   search?: string,
-  year: number
+  year: string
 }
 
 type Props = {
@@ -45,7 +45,7 @@ class NewsTemplate extends React.Component<Props, State> {
     this.yearOptions = this.getYearOptions()
 
     this.state = {
-      filters: { year: 0 }
+      filters: { year: '0_' }
     }
   }
 
@@ -90,10 +90,15 @@ class NewsTemplate extends React.Component<Props, State> {
   }
 
   getYearOptions () {
-    const filterOptions = {}
+    let filterOptions = {}
 
-    for (let year = this.yearEndDate; year >= this.yearStartDate; year--) {
-      filterOptions[year] = year.toString()
+    for (let year = this.yearStartDate; year <= this.yearEndDate; year++) {
+      const newYear = {}
+      newYear[`${year.toString()}_`] = year.toString()
+      filterOptions = {
+        ...newYear,
+        ...filterOptions
+      }
     }
 
     return filterOptions

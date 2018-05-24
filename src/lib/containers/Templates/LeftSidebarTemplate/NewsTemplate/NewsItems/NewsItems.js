@@ -22,7 +22,9 @@ class NewsItems extends React.Component<Props> {
   getPosts: GetPostsFunctionType
 
   getPosts ({ postsPerPage, paged, offset }: GetPostsArgs) {
-    const dateQuery = { year: this.props.filters.year }
+    const dateQuery = {
+      year: parseInt(this.props.filters.year.replace('_', ''))
+    }
 
     const client = this.props.isCaseStudyTemplate
       ? new CPTApiClient('case-study')
