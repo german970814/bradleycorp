@@ -60,6 +60,7 @@ type State = {
   categoryData: CategoryData | false,
   filters: FiltersType,
   activeFilters: ActiveFilterType,
+  numberResults: number,
   paged: number,
   showFiltersMobile: boolean,
   loading: boolean
@@ -82,11 +83,11 @@ class ProductCategory extends React.Component<Props, State> {
         metaFilters: [],
         taxFilters: {}
       },
+      numberResults: 0,
       paged: 0,
       showFiltersMobile: false,
       loading: true
     }
-    console.log(this.state)
 
     this.postsPerPage = 8
     /* this.categoryLinks = [
@@ -107,6 +108,10 @@ class ProductCategory extends React.Component<Props, State> {
     ) {
       this.getProductCategoryPageData()
     }
+  }
+
+  updateNumberResults (numberResults: number) {
+    this.setState({ numberResults })
   }
 
   updatePaged (paged: number) {
@@ -186,9 +191,7 @@ class ProductCategory extends React.Component<Props, State> {
             paged={this.state.paged}
             updatePaged={this.updatePaged.bind(this)}
             postsPerPage={this.postsPerPage}
-            numPosts={
-              (this.state.categoryData && this.state.categoryData.count) || 0
-            }
+            numPosts={this.state.numberResults}
             isMobile={isMobile}
           />
           <Products
@@ -196,15 +199,14 @@ class ProductCategory extends React.Component<Props, State> {
             activeFilters={this.state.activeFilters}
             paged={this.state.paged}
             postsPerPage={this.postsPerPage}
+            updateNumberResults={this.updateNumberResults.bind(this)}
             screenSize={this.props.screenSize}
           />
           <Pagination
             paged={this.state.paged}
             updatePaged={this.updatePaged.bind(this)}
             postsPerPage={this.postsPerPage}
-            numPosts={
-              (this.state.categoryData && this.state.categoryData.count) || 0
-            }
+            numPosts={this.state.numberResults}
             isMobile={isMobile}
           />
         </div>
@@ -251,6 +253,8 @@ class ProductCategory extends React.Component<Props, State> {
         }
         : false
       newState.loading = false
+      newState.numberResults =
+        (response.data.category_data && response.data.category_data.count) || 0
 
       return this.setState(newState)
     } catch (error) {

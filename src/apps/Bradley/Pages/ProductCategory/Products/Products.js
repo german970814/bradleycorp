@@ -17,6 +17,7 @@ type Props = {
   activeFilters: ActiveFilterType,
   paged: number,
   postsPerPage: number,
+  updateNumberResults: (numberResults: number) => void,
   screenSize: ScreenSize
 }
 
@@ -108,10 +109,14 @@ class Products extends React.Component<Props, State> {
       const response = await client.getByNestedTaxQuery(
         nestedTaxQuery,
         this.props.postsPerPage,
-        this.props.paged
+        this.props.paged,
+        undefined,
+        null,
+        '',
+        true
       )
 
-      let products = response.data
+      let products = response.data.posts
 
       // filter each meta value from returned products
       if (
@@ -127,9 +132,11 @@ class Products extends React.Component<Props, State> {
       }
 
       this.setState({ products, loading: false })
+      this.props.updateNumberResults(response.data.found_posts)
     } catch (error) {
       console.log(error)
       this.setState({ products: [], loading: false })
+      this.props.updateNumberResults(0)
     }
   }
 
