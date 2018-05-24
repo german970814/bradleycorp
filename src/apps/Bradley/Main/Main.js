@@ -96,9 +96,9 @@ const Main = (props: Props) => {
           if (!homepage) {
             return <HomeLoadable history={history} />
           } else if (homepage === 'commercial') {
-            return <Redirect to="/commercial-home" />
+            return <Redirect to="/commercial" />
           } else if (homepage === 'industrial') {
-            return <Redirect to="/industrial-home" />
+            return <Redirect to="/industrial" />
           }
         }}
       />
