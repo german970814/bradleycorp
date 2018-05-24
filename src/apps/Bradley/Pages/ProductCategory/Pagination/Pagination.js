@@ -19,7 +19,9 @@ class Pagination extends React.Component<Props, State> {
   constructor (props: Props) {
     super(props)
 
-    this.state = { paged: 0 }
+    this.state = {
+      paged: props.paged
+    }
   }
 
   static getDerivedStateFromProps (nextProps: Props, prevState: State) {
@@ -93,7 +95,7 @@ class Pagination extends React.Component<Props, State> {
 
     const options = {}
 
-    for (let page = 0; page < numPages; page++) {
+    for (let page = 1; page <= numPages; page++) {
       options[page] = `Show ${this.getPageRange(page)}`
     }
 
@@ -105,11 +107,11 @@ class Pagination extends React.Component<Props, State> {
   }
 
   getPageStart (paged: number) {
-    return paged * this.props.postsPerPage + 1
+    return (paged - 1) * this.props.postsPerPage + 1
   }
 
   getPageEnd (paged: number) {
-    const pageEnd = (paged + 1) * this.props.postsPerPage
+    const pageEnd = paged * this.props.postsPerPage
     return pageEnd > this.props.numPosts ? this.props.numPosts : pageEnd
   }
 }

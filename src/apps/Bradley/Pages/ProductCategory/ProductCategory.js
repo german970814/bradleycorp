@@ -84,7 +84,7 @@ class ProductCategory extends React.Component<Props, State> {
         taxFilters: {}
       },
       numberResults: 0,
-      paged: 0,
+      paged: 1,
       showFiltersMobile: false,
       loading: true
     }
@@ -107,6 +107,10 @@ class ProductCategory extends React.Component<Props, State> {
       prevProps.match.params.slug !== this.props.match.params.slug
     ) {
       this.getProductCategoryPageData()
+    }
+
+    if (prevState.activeFilters !== this.state.activeFilters) {
+      this.updatePaged(1)
     }
   }
 
