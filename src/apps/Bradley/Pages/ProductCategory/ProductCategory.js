@@ -86,6 +86,7 @@ class ProductCategory extends React.Component<Props, State> {
       showFiltersMobile: false,
       loading: true
     }
+    console.log(this.state)
 
     this.postsPerPage = 8
     /* this.categoryLinks = [
@@ -114,7 +115,6 @@ class ProductCategory extends React.Component<Props, State> {
 
   updateMetaActiveFilters (newFilters: Array<string>) {
     return this.setState({
-      ...this.state,
       activeFilters: {
         ...this.state.activeFilters,
         metaFilters: newFilters
@@ -124,6 +124,17 @@ class ProductCategory extends React.Component<Props, State> {
 
   updateTaxActiveFilters (tax: string, newFilters: Array<string>) {
     const newTaxFilters = { ...this.state.activeFilters.taxFilters }
+
+    if (
+      tax === 'product_category' &&
+      this.state.categoryData &&
+      this.state.categoryData.name
+    ) {
+      const index = newFilters.indexOf(this.state.categoryData.name)
+
+      newFilters = index !== -1 ? newFilters.splice(index, 1) : newFilters
+    }
+
     newTaxFilters[tax] = newFilters
 
     this.setState({
@@ -159,6 +170,9 @@ class ProductCategory extends React.Component<Props, State> {
               (this.state.categoryData &&
                 this.state.categoryData.parent_name) ||
               ''
+            }
+            catSlug={
+              (this.state.categoryData && this.state.categoryData.name) || ''
             }
             filters={this.state.filters}
             activeFilters={this.state.activeFilters}

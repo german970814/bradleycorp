@@ -17,6 +17,24 @@ type TaxAndTermSlugObject = {
   [string]: ?Array<string>
 }
 
+/**
+ * A recursive object structure that will let us nest tax queries
+ * to let us get posts using more complex combinations of taxonomies and terms
+ *
+ * This is not the actual object structure used by Wordpress,
+ * but it is translated in the backend
+ */
+type NestedTaxQuery = {
+  relation: 'OR' | 'AND',
+  queries: Array<
+    | {
+        tax: string,
+        slugs: Array<string>
+      }
+    | NestedTaxQuery
+  >
+}
+
 class CPTApiClient {
   cptName: CPTName
 
@@ -135,6 +153,29 @@ class CPTApiClient {
       date_query: dateQuery,
       keywords: encodeURIComponent(keywords || '')
     }
+
+    return axios.get(url, { params })
+  }
+
+  getByNestedTaxQuery (
+    nestedTaxQuery: NestedTaxQuery,
+    postsPerPage?: number,
+    paged?: number,
+    offset?: number,
+    dateQuery?: DateQuery,
+    keywords?: string
+  ): AxiosPromise<Array<BCorpPost>> {
+    const url = `${api.baseURL}${this.cptName}`
+    const params = {
+      nested_tax_query: encodeURIComponent(JSON.stringify(nestedTaxQuery)),
+      posts_per_page: postsPerPage,
+      paged,
+      offset,
+      date_query: dateQuery,
+      keywords: encodeURIComponent(keywords || '')
+    }
+
+    console.log(encodeURIComponent(JSON.stringify(nestedTaxQuery)))
 
     return axios.get(url, { params })
   }

@@ -8,6 +8,7 @@ type Props = {
   filters: FiltersType,
   activeFilters: ActiveFilterType,
   catParentTitle?: string,
+  catSlug: string,
   updateMetaActiveFilters: (newFilters: Array<string>) => void,
   updateTaxActiveFilters: (tax: string, newFilters: Array<string>) => void
 }
@@ -78,6 +79,11 @@ class Filters extends React.Component<Props> {
           }
 
           Object.keys(filters.taxFilters[taxName].terms).forEach(term => {
+            // no need to show filter for actual category
+            if (taxName === 'product_category' && term === this.props.catSlug) {
+              return
+            }
+
             const termObj = filters.taxFilters[taxName].terms[term]
             options[term] = this.createLabelWithCount(
               termObj.name,

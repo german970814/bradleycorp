@@ -100,14 +100,13 @@ class Products extends React.Component<Props, State> {
     this.setState({ loading: true })
 
     try {
-      const taxArgs = this.combineProductCatAndFilters()
+      const nestedTaxQuery = this.buildNestedTaxQuery()
 
-      console.log('sending', taxArgs, this.props.paged)
+      console.log('sending', nestedTaxQuery, this.props.paged)
 
       const client = new CPTApiClient('product')
-      const response = await client.getByTaxNameAndTermSlugObject(
-        taxArgs,
-        'OR',
+      const response = await client.getByNestedTaxQuery(
+        nestedTaxQuery,
         this.props.postsPerPage,
         this.props.paged
       )
@@ -134,21 +133,38 @@ class Products extends React.Component<Props, State> {
     }
   }
 
-  combineProductCatAndFilters () {
-    const taxArgs = this.props.activeFilters.taxFilters
+  buildNestedTaxQuery () {
+    const taxFilters = { ...this.props.activeFilters.taxFilters }
 
-    if (taxArgs['product_category']) {
-      // if we already have product category filters
-      // we just want to add our actual top level filter
-      taxArgs['product_category'] = [
-        ...taxArgs['product_category'],
-        this.props.catSlug
+    let filterQueries = []
+
+    Object.keys(taxFilters).forEach(taxName => {
+      if (taxFilters[taxName].length) {
+        filterQueries = [
+          ...filterQueries,
+          {
+            tax: taxName,
+            slugs: taxFilters[taxName]
+          }
+        ]
+      }
+    })
+
+    const nestedTaxQuery = {
+      relation: 'AND',
+      queries: [
+        {
+          tax: 'product_category',
+          slugs: [this.props.catSlug]
+        },
+        {
+          relation: 'OR',
+          queries: filterQueries
+        }
       ]
-    } else {
-      taxArgs['product_category'] = [this.props.catSlug]
     }
 
-    return taxArgs
+    return nestedTaxQuery
   }
 
   shouldResendRequest (prevProps: Props) {

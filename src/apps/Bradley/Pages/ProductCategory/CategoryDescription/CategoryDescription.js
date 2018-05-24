@@ -1,11 +1,11 @@
 // @flow
 import * as React from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import ReactHtmlParser from 'react-html-parser'
 import ContentTransformer from '../../../../../lib/containers/Modules/transformContent/transformContent'
-import VerticalAlignHelper from '../../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
-import BCorpLink from '../../../../../lib/components/BCorpLink/BCorpLink'
-import ArrowThumbnail from '../../../../../lib/components/ArrowThumbnail/ArrowThumbnail'
+// import VerticalAlignHelper from '../../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
+// import BCorpLink from '../../../../../lib/components/BCorpLink/BCorpLink'
+// import ArrowThumbnail from '../../../../../lib/components/ArrowThumbnail/ArrowThumbnail'
 import style from './CategoryDescription.scss'
 
 type Props = {
