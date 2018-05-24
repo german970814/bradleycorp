@@ -14,6 +14,7 @@ import style from './NewsItems.scss'
 type Props = {
   filters: FiltersType,
   category?: string,
+  pageID: number,
   isCaseStudyTemplate?: boolean
 }
 
@@ -63,7 +64,6 @@ class NewsItems extends React.Component<Props> {
         }: ChildFunctionArgs) => {
           return (
             <NewsItemsInner
-              filters={this.props.filters}
               posts={posts}
               postsPerPage={postsPerPage}
               paged={paged}
@@ -72,6 +72,8 @@ class NewsItems extends React.Component<Props> {
               shouldDisplayPost={shouldDisplayPost}
               loadNextPage={loadNextPage}
               reset={reset}
+              filters={this.props.filters}
+              pageID={this.props.pageID}
               isCaseStudyTemplate={this.props.isCaseStudyTemplate}
             />
           )
@@ -83,12 +85,13 @@ class NewsItems extends React.Component<Props> {
 
 type InnerProps = ChildFunctionArgs & {
   filters: FiltersType,
+  pageID: number,
   isCaseStudyTemplate?: boolean
 }
 
 class NewsItemsInner extends React.Component<InnerProps> {
-  componentWillReceiveProps (nextProps: InnerProps) {
-    if (this.shouldResendRequest(nextProps)) {
+  componentDidUpdate (prevProps: InnerProps) {
+    if (this.shouldResendRequest(prevProps)) {
       this.props.reset()
     }
   }
@@ -132,9 +135,16 @@ class NewsItemsInner extends React.Component<InnerProps> {
     )
   }
 
-  shouldResendRequest (nextProps: InnerProps) {
-    return Object.keys(nextProps.filters).some(filter => {
-      return nextProps.filters[filter] !== this.props.filters[filter]
+  shouldResendRequest (prevProps: InnerProps) {
+    if (
+      prevProps.pageID !== this.props.pageID ||
+      prevProps.isCaseStudyTemplate !== this.props.isCaseStudyTemplate
+    ) {
+      return true
+    }
+
+    return Object.keys(prevProps.filters).some(filter => {
+      return prevProps.filters[filter] !== this.props.filters[filter]
     })
   }
 }

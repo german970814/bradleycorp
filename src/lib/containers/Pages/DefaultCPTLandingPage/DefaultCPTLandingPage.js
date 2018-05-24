@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import type { Match } from 'react-router-dom'
 import type { CPTName } from '../../../types/cpt_types'
 import type { BCorpPost } from '../../../types/post_types'
+import ReactHtmlParser from 'react-html-parser'
+import ContentTransformer from '../../Modules/transformContent/transformContent'
 import CPTApiClient from '../../../../api/cpt_client'
 import DefaultTemplate from '../../Templates/DefaultTemplate/DefaultTemplate'
 import style from './DefaultCPTLandingPage.scss'
@@ -58,7 +60,17 @@ class DefaultCPTLandingPage extends Component<Props, State> {
           renderModules={() => {
             return (
               <div className={`row ${style.content}`}>
-                <div className={`col1`}>{post.post.post_content || ''}</div>
+                <div className={`col1`}>
+                  {ReactHtmlParser(post.post.post_content || '', {
+                    transform: (node, index) => {
+                      const contentTransformer = new ContentTransformer(
+                        node,
+                        index
+                      )
+                      return contentTransformer.transform()
+                    }
+                  })}
+                </div>
               </div>
             )
           }}

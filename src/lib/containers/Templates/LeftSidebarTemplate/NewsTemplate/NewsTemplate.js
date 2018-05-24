@@ -70,6 +70,7 @@ class NewsTemplate extends React.Component<Props, State> {
         <NewsItems
           filters={this.state.filters}
           category={category}
+          pageID={this.props.data.page_id}
           isCaseStudyTemplate={this.props.isCaseStudyTemplate}
         />
       </div>
