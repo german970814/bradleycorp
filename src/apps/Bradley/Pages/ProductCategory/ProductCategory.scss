@@ -34,6 +34,12 @@
     }
   }
 
+  .sidebar {
+    @include respond-to(tablet) {
+      padding-right: 20px;
+    }
+  }
+
   button.showFilters {
     margin-bottom: 20px;
     background-color: $slate-grey;
