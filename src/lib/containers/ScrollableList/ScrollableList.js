@@ -311,7 +311,6 @@ class ScrollableList extends Component {
   }
 
   render () {
-    console.log(this.shouldRenderNavigation())
     return this.renderScroller()
   }
 
