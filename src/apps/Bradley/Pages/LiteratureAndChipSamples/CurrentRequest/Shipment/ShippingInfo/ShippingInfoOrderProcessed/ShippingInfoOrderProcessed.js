@@ -2,7 +2,9 @@
 import * as React from 'react'
 import style from './ShippingInfoOrderProcessed.scss'
 
-type Props = {}
+type Props = {
+  id: number
+}
 
 const ShippingInfoOrderProcessed = (props: Props) => {
   return (
@@ -13,7 +15,7 @@ const ShippingInfoOrderProcessed = (props: Props) => {
         }
       </div>
       <h6>{'ORDER NUMBER'}</h6>
-      <h5>{'#1234567890-AJS1231817'}</h5>
+      <h5>{props.id}</h5>
       <div className={style.buttonWrapper}>
         <button>{'PRINT ORDER CONFIRMATION'}</button>
       </div>

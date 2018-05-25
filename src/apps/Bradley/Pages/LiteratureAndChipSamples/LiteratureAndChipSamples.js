@@ -74,30 +74,30 @@ type DownloadTypes = Array<LiteraturePost>
 /* Shipping Info */
 
 type ShippingInfoField =
-  | 'fullName'
+  | 'full_name'
   | 'title'
-  | 'companyName'
-  | 'mailingAddress'
+  | 'company_name'
+  | 'mailing_address'
   | 'city'
-  | 'stateProvince'
-  | 'postCode'
+  | 'state_province'
+  | 'post_code'
   | 'country'
   | 'email'
   | 'phone'
-  | 'userArea'
+  | 'user_area'
 
 type ShippingInfoUserAreaField =
-  | 'normallyPurchaseFrom'
+  | 'normally_purchase_from'
   | 'overnight'
   | 'carrier'
   | 'account'
   | 'rep'
-  | 'requestEmail'
+  | 'request_email'
   | 'notes'
 
 type ShippingInfoUserAreaType = {
   [ShippingInfoUserAreaField]: ?string,
-  normallyPurchaseFrom?: CheckboxObject,
+  normally_purchase_from?: CheckboxObject,
   overnight?: CheckboxObject
 }
 

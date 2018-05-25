@@ -3,7 +3,6 @@ import * as React from 'react'
 import type { TemplateProps } from './Default'
 import type { BCorpPost, BCorpMeta } from '../../../../../lib/types/post_types'
 import PostTabResults from './Posts'
-import style from './../Results.scss'
 
 type BCorpMetaWithDescription = BCorpMeta
 

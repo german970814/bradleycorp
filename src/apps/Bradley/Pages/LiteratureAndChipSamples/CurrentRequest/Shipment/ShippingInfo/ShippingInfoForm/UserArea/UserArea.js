@@ -26,7 +26,7 @@ class UserArea extends React.Component<Props> {
   ): void {
     const newUserArea = { ...this.props.shippingInfoUserArea }
     if (
-      propertyName !== 'normallyPurchaseFrom' &&
+      propertyName !== 'normally_purchase_from' &&
       propertyName !== 'overnight'
     ) {
       newUserArea[propertyName] = value
@@ -38,7 +38,7 @@ class UserArea extends React.Component<Props> {
     newNormallyPurchaseFrom: CheckboxObject
   ): void {
     const userArea = { ...this.props.shippingInfoUserArea }
-    userArea.normallyPurchaseFrom = newNormallyPurchaseFrom
+    userArea.normally_purchase_from = newNormallyPurchaseFrom
     this.props.updateUserArea(userArea)
   }
 
@@ -57,7 +57,7 @@ class UserArea extends React.Component<Props> {
         otherCheckboxClassName={`col2-tablet ${sharedStyle.colWrapperLeft} ${
           style.other
         }`}
-        filterState={this.props.shippingInfoUserArea.normallyPurchaseFrom}
+        filterState={this.props.shippingInfoUserArea.normally_purchase_from}
         handleChange={this.handleNormallyPurchaseFromChange.bind(this)}
         options={{
           div10: 'Div 10 Distributor',
@@ -140,10 +140,10 @@ class UserArea extends React.Component<Props> {
           <div className={`row`}>
             <BCorpInputField
               className={`col1 col2-tablet ${sharedStyle.colWrapperLeft}`}
-              filterState={this.props.shippingInfoUserArea.requestEmail || ''}
+              filterState={this.props.shippingInfoUserArea.request_email || ''}
               handleChange={event => {
                 return this.updateUserAreaProperty(
-                  'requestEmail',
+                  'request_email',
                   event.target.value
                 )
               }}

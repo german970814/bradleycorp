@@ -18,7 +18,7 @@ type Props = {
   shippingInfo: ShippingInfoType,
   updateShippingInfo: (newShippingInfo: ShippingInfoType) => void,
   updateStage: (newStage: stageTypes) => void,
-  sendOrder: () => void,
+  sendOrder: () => Promise<void>,
   requiredFields: Array<ShippingInfoField>,
   highlightRequiredFields: boolean,
   isMobile: boolean,
@@ -31,7 +31,7 @@ class ShippingInfoForm extends React.Component<Props> {
     value: string
   ): void {
     const newShippingInfo = { ...this.props.shippingInfo }
-    if (propertyName !== 'userArea') {
+    if (propertyName !== 'user_area') {
       newShippingInfo[propertyName] = value
       return this.props.updateShippingInfo(newShippingInfo)
     }
@@ -66,16 +66,16 @@ class ShippingInfoForm extends React.Component<Props> {
             style.inputWrapper
           }`}>
           <BCorpInputField
-            className={this.requiredHighlightClass('fullName')}
-            filterState={this.props.shippingInfo.fullName || ''}
+            className={this.requiredHighlightClass('full_name')}
+            filterState={this.props.shippingInfo.full_name || ''}
             handleChange={event => {
               return this.updateShippingInfoProperty(
-                'fullName',
+                'full_name',
                 event.target.value
               )
             }}
             placeholder={'Full Name'}
-            required={this.isRequired('fullName')}
+            required={this.isRequired('full_name')}
           />
         </div>
 
@@ -103,16 +103,16 @@ class ShippingInfoForm extends React.Component<Props> {
           <BCorpInputField
             className={`col1 col2-tablet ${
               style.colWrapperLeft
-            } ${this.requiredHighlightClass('companyName')}`}
-            filterState={this.props.shippingInfo.companyName || ''}
+            } ${this.requiredHighlightClass('company_name')}`}
+            filterState={this.props.shippingInfo.company_name || ''}
             handleChange={event => {
               return this.updateShippingInfoProperty(
-                'companyName',
+                'company_name',
                 event.target.value
               )
             }}
             placeholder={'Company Name'}
-            required={this.isRequired('companyName')}
+            required={this.isRequired('company_name')}
           />
         </div>
 
@@ -120,18 +120,18 @@ class ShippingInfoForm extends React.Component<Props> {
           <BCorpInputField
             className={`col1 col2-tablet ${
               style.colWrapperLeft
-            } ${this.requiredHighlightClass('mailingAddress')} ${
+            } ${this.requiredHighlightClass('mailing_address')} ${
               style.mailingAddress
             }`}
-            filterState={this.props.shippingInfo.mailingAddress || ''}
+            filterState={this.props.shippingInfo.mailing_address || ''}
             handleChange={event => {
               return this.updateShippingInfoProperty(
-                'mailingAddress',
+                'mailing_address',
                 event.target.value
               )
             }}
             placeholder={'Mailing Address'}
-            required={this.isRequired('mailingAddress')}
+            required={this.isRequired('mailing_address')}
           />
         </div>
 
@@ -157,18 +157,18 @@ class ShippingInfoForm extends React.Component<Props> {
           <BCorpSelectField
             className={`col1 col2-tablet ${
               style.selectField
-            } ${this.requiredHighlightClass('stateProvince')}`}
+            } ${this.requiredHighlightClass('state_province')}`}
             defaultOptionId={0}
             defaultOptionName={'State / Province'}
             options={this.getStateProvinceOptions()}
-            filterState={this.props.shippingInfo.stateProvince || 0}
+            filterState={this.props.shippingInfo.state_province || 0}
             handleChange={event => {
               return this.updateShippingInfoProperty(
-                'stateProvince',
+                'state_province',
                 event.target.value
               )
             }}
-            required={this.isRequired('stateProvince')}
+            required={this.isRequired('state_province')}
           />
         </div>
 
@@ -176,16 +176,16 @@ class ShippingInfoForm extends React.Component<Props> {
           <div className={`row ${style.inputWrapper}`}>
             <div className={`col1 col2-tablet ${style.colWrapperLeft}`}>
               <BCorpInputField
-                className={`col2 ${this.requiredHighlightClass('postCode')}`}
-                filterState={this.props.shippingInfo.postCode || ''}
+                className={`col2 ${this.requiredHighlightClass('post_code')}`}
+                filterState={this.props.shippingInfo.post_code || ''}
                 handleChange={event => {
                   return this.updateShippingInfoProperty(
-                    'postCode',
+                    'post_code',
                     event.target.value
                   )
                 }}
                 placeholder={'Postal Code'}
-                required={this.isRequired('postCode')}
+                required={this.isRequired('post_code')}
               />
               <BCorpSelectField
                 className={`col2 ${style.selectField} ${
