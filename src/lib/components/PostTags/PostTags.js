@@ -19,7 +19,7 @@ const PostTags = (props: Props) => {
     <div className={`${style.postTags} ${props.className || ''}`}>
       {props.tags.map((tag, index) => {
         return (
-          <Link key={index} to={createArchiveUrl(tag) || '#'}>
+          <Link key={index} to={`/results/${tag.slug}`}>
             <div className={`post-tag ${style.tag}`}>{tag.name}</div>
           </Link>
         )
