@@ -60,6 +60,10 @@ class PostComments extends React.Component<Props, State> {
   }
 
   render () {
+    return null
+    /*
+    comment out until we have user handling
+
     return (
       <div className={style.PostCommentsForm}>
         <LeaveACommentForm
@@ -70,6 +74,7 @@ class PostComments extends React.Component<Props, State> {
         {this.renderComments()}
       </div>
     )
+    */
   }
 
   async submitComment (newComment: NewComment) {
