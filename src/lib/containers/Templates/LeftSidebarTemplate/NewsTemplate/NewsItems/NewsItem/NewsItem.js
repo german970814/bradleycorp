@@ -2,11 +2,10 @@
 import * as React from 'react'
 import type { BCorpPost } from '../../../../../../types/post_types'
 import { Link } from 'react-router-dom'
-import ReactHtmlParser from 'react-html-parser'
 import moment from 'moment'
 import { createCPTUrl } from '../../../../../../bcorpUrl'
 import { getExcerpt } from '../../../../../../bcorpPost'
-import ContentTransformer from '../../../../../Modules/transformContent/transformContent'
+import ContentTransformer from '../../../../../../components/ContentTransformer/ContentTransformer'
 import style from './NewsItem.scss'
 
 type Props = {
@@ -102,12 +101,7 @@ class NewsItem extends React.Component<Props> {
 
     return (
       <div className={style.content}>
-        {ReactHtmlParser(excerpt, {
-          transform: (node, index) => {
-            const contentTransformer = new ContentTransformer(node, index)
-            return contentTransformer.transform()
-          }
-        })}
+        <ContentTransformer content={excerpt} />
       </div>
     )
   }

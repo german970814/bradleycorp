@@ -21,6 +21,7 @@ import { renderTitle } from '../../../containers/Templates/DefaultTemplate/Defau
 import {
   SearchLiterature,
   SearchNews,
+  SearchPost,
   SearchProduct,
   SearchTechnicalInfo,
   SearchPage
@@ -270,8 +271,10 @@ export default class Results extends React.Component<Props, State> {
           return <SearchTechnicalInfo {...args} />
         case 'news':
           return <SearchNews {...args} />
-        default:
+        case 'page':
           return <SearchPage {...args} />
+        default:
+          return <SearchPost {...args} />
       }
     }
   }

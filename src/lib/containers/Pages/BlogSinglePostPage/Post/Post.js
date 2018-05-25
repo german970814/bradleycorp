@@ -1,8 +1,7 @@
 // @flow
 import * as React from 'react'
-import ReactHtmlParser from 'react-html-parser'
 import type { BCorpPost } from '../../../../types/post_types'
-import ContentTransformer from '../../../Modules/transformContent/transformContent'
+import ContentTransformer from '../../../../components/ContentTransformer/ContentTransformer'
 import ImageFrame from '../../../../components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import PostMetaData from '../../../../components/PostMetaData/PostMetaData'
 import PostTags from '../../../../components/PostTags/PostTags'
@@ -55,12 +54,7 @@ class Post extends React.Component<Props> {
     return (
       <div className={style.content}>
         {this.renderImage()}
-        {ReactHtmlParser(this.props.post.post.post_content, {
-          transform: (node, index) => {
-            const contentTransformer = new ContentTransformer(node, index)
-            return contentTransformer.transform()
-          }
-        })}
+        <ContentTransformer content={this.props.post.post.post_content || ''} />
       </div>
     )
   }
