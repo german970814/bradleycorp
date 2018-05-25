@@ -1,19 +1,22 @@
 // @flow
 import * as React from 'react'
+import type { Location, Match, RouterHistory } from 'react-router-dom'
+import type { BCorpPost } from '../../../types/post_types'
+import type { PostType } from '../../../types/cpt_types'
+import type { ChildFunctionArgs, GetPostsArgs } from './LoadMore'
 import Media from 'react-media'
 import LoadMore from './LoadMore'
 import style from './Results.scss'
 import { MOBILEMAXWIDTH } from '../../../../globals'
 import SearchClient from './../../../../api/search_client'
-import type { PostType } from '../../../../lib/types/cpt_types'
-import Loading from '../../../../lib/components/Loading/Loading'
-import type { Location, Match, RouterHistory } from 'react-router-dom'
-import type { BCorpPost } from '../../../../lib/types/post_types'
-import NoResults from '../../../../lib/components/NoResults/NoResults'
-import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
-import BCorpSelectField from '../../../../lib/components/BCorpFilterField/BCorpSelectField'
-import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
-import type { ChildFunctionArgs, GetPostsArgs } from './LoadMore'
+
+import Loading from '../../../components/Loading/Loading'
+
+import NoResults from '../../../components/NoResults/NoResults'
+import defaultStyle from '../../../containers/Templates/Templates.scss'
+import BCorpSelectField from '../../../components/BCorpFilterField/BCorpSelectField'
+import { renderTitle } from '../../../containers/Templates/DefaultTemplate/DefaultTemplate'
+
 import {
   SearchLiterature,
   SearchNews,

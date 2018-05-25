@@ -2,13 +2,7 @@
 import type { BlogName, BlogPrettyName } from '../lib/types/blog_types'
 import axios from 'axios'
 
-type HostType =
-  | 'http://bradley.test'
-  | 'http://bradleydev.twoxfour.com'
-  | 'http://thewashfountain.bradley.test'
-  | 'http://thewashfountain.bradleydev.twoxfour.com'
-  | 'http://bimrevit.bradley.test'
-  | 'http://bimrevit.bradleydev.twoxfour.com'
+type HostBradleyType = 'http://bradley.test' | 'http://bradleydev.twoxfour.com'
 
 type HostTheWashfountainType =
   | 'http://thewashfountain.bradley.test'
@@ -17,6 +11,8 @@ type HostTheWashfountainType =
 type HostBIMRevitType =
   | 'http://bimrevit.bradley.test'
   | 'http://bimrevit.bradleydev.twoxfour.com'
+
+type HostType = HostBradleyType | HostTheWashfountainType | HostBIMRevitType
 
 type URLTheWashfountainType =
   | 'http://localhost:8081'
@@ -30,6 +26,7 @@ type SiteType = BlogName | 'bcorp'
 
 type API = {
   host: HostType,
+  hostBradley: HostBradleyType,
   hostTheWashfountain: HostTheWashfountainType,
   hostBIMRevit: HostBIMRevitType,
   urlTheWashfountain: URLTheWashfountainType,
@@ -38,6 +35,7 @@ type API = {
   sitePrettyName: BlogPrettyName | 'Bradley Corp',
   namespace: string,
   baseURL: string,
+  baseURLBradley: string,
   baseURLTheWashfountain: string,
   baseURLBIMRevit: string,
   queryRoute: string,
@@ -45,13 +43,17 @@ type API = {
   query: ({ args?: {} }) => {}
 }
 
-const dev: boolean = false
+const dev: boolean = true
 
 let site: SiteType = 'bcorp'
 
 let sitePrettyName: BlogPrettyName | 'Bradley Corp' = 'Bradley Corp'
 
 let host: HostType = dev
+  ? 'http://bradley.test'
+  : 'http://bradleydev.twoxfour.com'
+
+const hostBradley: HostBradleyType = dev
   ? 'http://bradley.test'
   : 'http://bradleydev.twoxfour.com'
 
@@ -103,6 +105,8 @@ const baseURLWPDefaultAPI = `${host}/index.php/wp-json/wp/v2/`
 const api: API = {
   host,
 
+  hostBradley,
+
   hostTheWashfountain,
 
   hostBIMRevit,
@@ -118,6 +122,8 @@ const api: API = {
   namespace,
 
   baseURL,
+
+  baseURLBradley: `${hostBradley}/index.php/wp-json/${namespace}`,
 
   baseURLTheWashfountain: `${hostTheWashfountain}/index.php/wp-json/${namespace}`,
 

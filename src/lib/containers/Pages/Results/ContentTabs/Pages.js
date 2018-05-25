@@ -26,7 +26,7 @@ export default class PageTabResults extends React.Component<Props> {
                 <h5>
                   <a href="#">{post.post.post_title}</a>
                 </h5>
-                <p>{post.meta.meta_description || ''}</p>
+                <p>{(post.meta && post.meta.meta_description) || ''}</p>
               </li>
             )
           })}

@@ -38,10 +38,10 @@ const ProductDetailLoadable = Loadable({
   loading: Loading
 })
 
-const ProductCategoryLoadable = Loadable({
+/* const ProductCategoryLoadable = Loadable({
   loader: () => import('../Pages/ProductCategory/ProductCategory'),
   loading: Loading
-})
+}) */
 
 const LiteratureAndChipSamplesLoadable = Loadable({
   loader: () =>
@@ -65,7 +65,7 @@ const ApplicationGalleryDetailLoadable = Loadable({
 })
 
 const ResultsLoadable = Loadable({
-  loader: () => import('../Pages/Results/Results'),
+  loader: () => import('../../../lib/containers/Pages/Results/Results'),
   loading: Loading
 })
 
@@ -154,7 +154,7 @@ const RouterInner = () => {
       <Route exact path="/post/:slug" component={BlogSinglePostPageLoadable} />
       <Route exact path="/product/:slug" component={ProductDetailLoadable} />
 
-      {/* Taxonomy pages */}
+      {/* Taxonomy pages }
       <Route
         exact
         path="/product-category/:slug"
