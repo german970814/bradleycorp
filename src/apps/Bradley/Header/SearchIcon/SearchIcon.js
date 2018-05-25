@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react'
+import { site } from '../../../../api'
 import { withRouter } from 'react-router-dom'
 import { updateBlur } from '../../App/updateBlur'
 import type { RouterHistory } from 'react-router-dom'
@@ -30,7 +31,8 @@ class SearchIcon extends React.Component<Props, State> {
   searchApplication (event, closeLightbox) {
     event.preventDefault()
     event.stopPropagation()
-    this.state.search && this.props.history.push(`/results/${this.state.search}`)
+    this.state.search &&
+      this.props.history.push(`/results/${this.state.search}`)
     updateBlur(false)
     closeLightbox && closeLightbox()
   }
@@ -43,13 +45,15 @@ class SearchIcon extends React.Component<Props, State> {
           fitLightboxToContent
           fullWidth
           renderChildren={openLightbox => {
-            return <div className={style.magnifyingGlass}>
-              <img
-                src={require('../../../../images/magnifying-glass/magnifying-glass@2x.png')}
-                className={style.magnifyingGlassImage}
-                onClick={openLightbox}
-              />
-            </div>
+            return (
+              <div className={style.magnifyingGlass}>
+                <img
+                  src={require('../../../../images/magnifying-glass/magnifying-glass@2x.png')}
+                  className={style.magnifyingGlassImage}
+                  onClick={openLightbox}
+                />
+              </div>
+            )
           }}
           onLightboxClose={() => {
             return updateBlur(false)
@@ -58,26 +62,33 @@ class SearchIcon extends React.Component<Props, State> {
             return updateBlur(true)
           }}
           renderLightboxContents={closeLightbox => {
-            return <React.Fragment>
-              <VerticalAlignHelper />
+            return (
+              <React.Fragment>
+                <VerticalAlignHelper />
 
-              <form className={style.lightboxSearchForm}>
-                <input
-                  type={'text'}
-                  name={'search'}
-                  className={style.lightboxSearchFormInput}
-                  onClick={this.handleClick.bind(this)}
-                  onInput={(e) => { this.setState({ search: e.target.value }) }}
-                />
+                <form className={style.lightboxSearchForm}>
+                  <input
+                    type={'text'}
+                    name={'search'}
+                    className={style.lightboxSearchFormInput}
+                    onClick={this.handleClick.bind(this)}
+                    onInput={e => {
+                      this.setState({ search: e.target.value })
+                    }}
+                    placeholder={site !== 'bcorp' && 'Search The Blog'}
+                  />
 
-                <input
-                  type={'image'}
-                  src={require('../../../../images/magnifying-glass/magnifying-glass-white@2x.png')}
-                  className={style.submit}
-                  onClick={(e) => { this.searchApplication(e, closeLightbox) }}
-                />
-              </form>
-            </React.Fragment>
+                  <input
+                    type={'image'}
+                    src={require('../../../../images/magnifying-glass/magnifying-glass-white@2x.png')}
+                    className={style.submit}
+                    onClick={e => {
+                      this.searchApplication(e, closeLightbox)
+                    }}
+                  />
+                </form>
+              </React.Fragment>
+            )
           }}
         />
       </div>
