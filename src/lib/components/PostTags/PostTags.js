@@ -2,7 +2,6 @@
 import React from 'react'
 import type { WPPostTagTerm } from '../../types/term_types'
 import { Link } from 'react-router-dom'
-import { createArchiveUrl } from '../../bcorpUrl'
 import style from './PostTags.scss'
 
 type Props = {
