@@ -4,6 +4,7 @@ import type { Location, Match, RouterHistory } from 'react-router-dom'
 import type { BCorpPost } from '../../../types/post_types'
 import type { PostType } from '../../../types/cpt_types'
 import type { ChildFunctionArgs, GetPostsArgs } from './LoadMore'
+import { site } from '../../../../api'
 import Media from 'react-media'
 import LoadMore from './LoadMore'
 import style from './Results.scss'
@@ -63,13 +64,17 @@ export default class Results extends React.Component<Props, State> {
   }
 
   get getTabs (): Tab {
-    return {
-      product: 'Products',
-      literature: 'Literature',
-      technical_info: 'Technical Info',
-      news: 'In The News',
-      page: 'Web Pages'
-    }
+    return site === 'bcorp'
+      ? {
+        product: 'Products',
+        literature: 'Literature',
+        technical_info: 'Technical Info',
+        news: 'In The News',
+        page: 'Web Pages'
+      }
+      : {
+        post: 'Posts'
+      }
   }
 
   get activeTab (): TabOption {

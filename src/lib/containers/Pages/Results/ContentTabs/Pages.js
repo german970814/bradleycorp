@@ -4,6 +4,8 @@ import Default from './Default'
 import style from './../Results.scss'
 import type { TemplateProps } from './Default'
 import type { BCorpPost, BCorpMeta } from '../../../../../lib/types/post_types'
+import { createCPTUrl } from '../../../../bcorpUrl'
+import { getExcerpt } from '../../../../bcorpPost'
 
 type BCorpMetaWithDescription = BCorpMeta
 
@@ -16,6 +18,18 @@ type Props = {
 } & TemplateProps
 
 export default class PageTabResults extends React.Component<Props> {
+  getExcerpt (post: BCorpPostWithMeta) {
+    if (post.meta && post.meta.meta_description) {
+      return post.meta.meta_description
+    }
+
+    return getExcerpt(
+      post.post.post_excerpt,
+      post.post.post_content || '',
+      'short'
+    )
+  }
+
   renderContent () {
     return (
       <div className={`${style.resultsTextContentWrapper}`}>
@@ -24,9 +38,11 @@ export default class PageTabResults extends React.Component<Props> {
             return (
               <li key={index}>
                 <h5>
-                  <a href="#">{post.post.post_title}</a>
+                  <a href={createCPTUrl(post.post) || ''}>
+                    {post.post.post_title}
+                  </a>
                 </h5>
-                <p>{(post.meta && post.meta.meta_description) || ''}</p>
+                <p>{this.getExcerpt(post)}</p>
               </li>
             )
           })}
