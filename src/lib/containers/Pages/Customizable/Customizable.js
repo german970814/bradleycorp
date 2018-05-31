@@ -133,7 +133,7 @@ class Customizable extends Component<Props, State> {
    * @return {void}
    */
   render () {
-    console.log( this.state )
+    // console.log( this.state )
     if (this.state['page_template_data']['page_id'] === 0) {
       return null
     }
