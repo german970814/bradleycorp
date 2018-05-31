@@ -91,6 +91,16 @@ body {
   @extend %link-orange;
 }
 
+:global .link-orange-with-arrow :local {
+  @extend %link-orange;
+  display: inline-block;
+  padding-left: 16px;
+  background-image: url('../../../images/small-arrow/small-arrow@2x.png');
+  background-position: left 2px;
+  background-size: 6px 9px;
+  background-repeat: no-repeat;
+}
+
 :global .small-link-gray :local {
   @extend %small-link-gray;
 }
