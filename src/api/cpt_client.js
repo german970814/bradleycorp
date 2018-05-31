@@ -92,7 +92,7 @@ class CPTApiClient {
     const url = `${api.baseURL}${this.cptName}`
     const params = {
       id_array: JSON.stringify(idArray),
-      posts_per_page: postsPerPage,
+      posts_per_page: postsPerPage
     }
     return axios.get(url, { params })
   }
