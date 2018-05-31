@@ -63,6 +63,10 @@ h6 {
   @extend %h6-desktop;
 }
 
+a {
+  @extend %link-navy;
+}
+
 body {
   @extend %body;
 }
