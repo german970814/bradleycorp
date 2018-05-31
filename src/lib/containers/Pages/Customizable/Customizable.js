@@ -140,15 +140,15 @@ class Customizable extends Component<Props, State> {
 
     return (
       <div className={style.customizable}>
-      <ErrorBoundary>
-        <TemplateFactory
-          templateSlug={this.state['page_template_data'].template}
-          data={this.state['page_template_data']}
-          pagePath={this.props.match.url}
-          renderModules={this.renderModules.bind(this)}
-          renderRightSidebarWidgets={this.renderRightSidebarWidgets.bind(this)}
-        />
-      </ErrorBoundary>
+        <ErrorBoundary>
+          <TemplateFactory
+            templateSlug={this.state['page_template_data'].template}
+            data={this.state['page_template_data']}
+            pagePath={this.props.match.url}
+            renderModules={this.renderModules.bind(this)}
+            renderRightSidebarWidgets={this.renderRightSidebarWidgets.bind(this)}
+          />
+        </ErrorBoundary>
       </div>
     )
   }
