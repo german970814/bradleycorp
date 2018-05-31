@@ -45,8 +45,6 @@ export default class GalleryItem extends Component<Props, State> {
         <ImageFrame
           src={this.props.applicationGallery.meta.app_gallery_img}
           aspectRatio={180 / 301}
-          aspectRatioTablet={180 / 301}
-          aspectRatioDesktop={180 / 301}
         />
         <div className={`${style.arrowContainer} ${this.state.onHover ? style.showArrow : style.hideArrow}`}>
           <img src={require('../../../../images/arrow/hover-corner.png')} />

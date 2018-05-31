@@ -9,6 +9,11 @@
 
   @include respond-to(tablet) {
     margin-bottom: 60px;
+    padding-right: 15px;
+  }
+
+  @include respond-to(desktop) {
+    padding-right: 0;
   }
 }
 
@@ -74,8 +79,6 @@
     right: 10px;
     bottom: 10px;
   }
-  img {
-  }
 }
 
 .arrowContainer {
@@ -92,6 +95,7 @@
 
     @include respond-to(mobile) {
       width: 160%;
+      bottom: 0 !important;
     }
 
     @include respond-to(tablet) {

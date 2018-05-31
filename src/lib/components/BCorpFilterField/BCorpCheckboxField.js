@@ -143,17 +143,21 @@ class BCorpCheckboxField extends React.Component<Props> {
           key={index}
           className={`checkbox-option ${this.props.checkboxOptionClassName ||
             ''} ${style.checkboxOption}`}>
-          <input
-            onChange={this.handleChange.bind(this)}
-            type="checkbox"
-            value={optionName}
-            id={optionName}
-            checked={checked || false}
-          />
-          <label
-            htmlFor={optionName}
-            dangerouslySetInnerHTML={{ __html: label }}
-          />
+          <div>
+            <input
+              onChange={this.handleChange.bind(this)}
+              type="checkbox"
+              value={optionName}
+              id={optionName}
+              checked={checked || false}
+            />
+          </div>
+          <div>
+            <label
+              htmlFor={optionName}
+              dangerouslySetInnerHTML={{ __html: label }}
+            />
+          </div>
         </div>
       )
     })

@@ -70,6 +70,10 @@ h5.title {
   color: $navy;
 }
 
+.checkBoxTitle {
+  color: $navy;
+}
+
 .select {
   position: relative;
   padding-bottom: 20px;
@@ -213,6 +217,7 @@ h5.title {
   .checkboxOption {
     position: relative;
     margin-bottom: 6px;
+    display: flex;
 
     input {
       @extend %removeBrowserAppearance;

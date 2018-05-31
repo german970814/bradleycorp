@@ -79,7 +79,7 @@ class SearchIcon extends React.Component<Props, State> {
               </form>
             </React.Fragment>
           }}
-          />
+        />
       </div>
     )
   }
