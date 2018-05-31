@@ -94,7 +94,6 @@ class CPTApiClient {
       id_array: JSON.stringify(idArray),
       posts_per_page: postsPerPage,
     }
-console.log( params )
     return axios.get(url, { params })
   }
 
