@@ -17,7 +17,7 @@ type Props = {
 class Filters extends React.Component<Props> {
   updateYearFilter (event: SyntheticInputEvent<HTMLSelectElement>) {
     const filters = { ...this.props.filters }
-    filters.year = parseInt(event.target.value)
+    filters.year = event.target.value
 
     return this.props.updateFilters(filters)
   }

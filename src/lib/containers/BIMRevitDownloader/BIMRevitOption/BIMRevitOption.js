@@ -1,13 +1,14 @@
 // @flow
 import * as React from 'react'
-import type { WPTerm } from '../../../../../../../../lib/types/term_types'
+import type { WPTerm } from '../../../types/term_types'
 import { Link } from 'react-router-dom'
 import style from './BIMRevitOption.scss'
 
 type Props = {
   term: WPTerm,
   toggleSelect: (id: number) => void,
-  selected: boolean
+  selected: boolean,
+  showProductPageLinks?: boolean
 }
 
 class BIMRevitOption extends React.Component<Props> {
@@ -30,7 +31,7 @@ class BIMRevitOption extends React.Component<Props> {
         />
         {this.props.selected && (
           <img
-            src={require('../../../../../../../../images/check/check@2x.png')}
+            src={require('../../../../images/check/check@2x.png')}
             className={style.check}
           />
         )}
@@ -52,6 +53,10 @@ class BIMRevitOption extends React.Component<Props> {
   }
 
   renderProductPageLink () {
+    if (!this.props.showProductPageLinks) {
+      return
+    }
+
     return (
       <Link className={`link-orange ${style.productPage}`} to={'#'}>
         {'PRODUCT PAGE'}
@@ -62,7 +67,7 @@ class BIMRevitOption extends React.Component<Props> {
   renderDownloadIcon () {
     return (
       <img
-        src={require('../../../../../../../../images/download-arrow-icon/download@2x.png')}
+        src={require('../../../../images/download-arrow-icon/download@2x.png')}
         className={style.download}
       />
     )

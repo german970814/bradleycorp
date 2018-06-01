@@ -138,7 +138,10 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
 
   componentDidUpdate (prevProps: Props, prevState: State) {
     // if we 'load more' we need to request the next page
-    if (prevState.paged !== this.state.paged) {
+    //
+    // checking for this.state.post makes sure that this ONLY runs on load more,
+    // and not when we get posts via reset
+    if (prevState.paged !== this.state.paged && this.state.posts) {
       this.getPage(
         this.props.postsPerPage,
         this.state.paged + 1,
@@ -169,8 +172,8 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
     this.setState({ loading: true, paged: 1, posts: undefined, offset: 0 })
     this.props.history.push(this.props.match.url.replace(/\/page=\d*/g, ''))
 
-    this.getPage(this.props.postsPerPage, 1, this.state.offset)
-    this.getPageDebouncedNext(this.props.postsPerPage, 2, this.state.offset)
+    this.getPage(this.props.postsPerPage, 1, 0)
+    this.getPageDebouncedNext(this.props.postsPerPage, 2, 0)
   }
 
   loadNextPage () {
@@ -223,6 +226,10 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
       return this.setState({ posts, loading: false })
     } catch (error) {
       console.log(error)
+      this.setState({ loading: false })
+      if (paged === this.state.paged) {
+        this.setState({ posts: [] })
+      }
     }
   }
 

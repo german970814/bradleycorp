@@ -1,4 +1,5 @@
 @import '../../../../../../scss/partials/mixins';
+@import '../../../../../../scss/partials/variables';
 
 .videoWrapper {
   margin-bottom: 20px;
@@ -23,6 +24,7 @@
   h5 {
     margin-top: 20px;
     text-align: center;
+    color: $black;
   }
 }
 

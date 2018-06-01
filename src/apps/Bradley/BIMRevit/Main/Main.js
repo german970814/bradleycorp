@@ -16,6 +16,11 @@ const BlogSinglePostPageLoadable = Loadable({
   loading: Loading
 })
 
+const ResultsLoadable = Loadable({
+  loader: () => import('../../../../lib/containers/Pages/Results/Results'),
+  loading: Loading
+})
+
 const Main = props => {
   return (
     <React.Fragment>
@@ -26,6 +31,13 @@ const Main = props => {
           exact
           path="/post/:slug"
           component={BlogSinglePostPageLoadable}
+        />
+        <Route exact path="/results/:query" component={ResultsLoadable} />
+        <Route exact path="/results/:query/:tab" component={ResultsLoadable} />
+        <Route
+          exact
+          path="/results/:query/:tab/page=:page"
+          component={ResultsLoadable}
         />
       </Switch>
     </React.Fragment>

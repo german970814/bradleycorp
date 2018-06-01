@@ -6,19 +6,27 @@
 
 .buttonWrapper {
   @include respond-to(tablet) {
-    margin-left: -27vw;
-    width: 100vw;
+    position: relative;
+    width: 100%;
+    min-height: 62px;
     text-align: center;
-  }
-
-  @include respond-to(desktop) {
-    margin-left: -21vw;
   }
 
   button.loadMore {
     margin-bottom: 20px;
 
     @include respond-to(tablet) {
+      position: absolute;
+      left: 33.3333333333%;
+      transform: translateX(-50%);
+      width: auto;
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+
+    @include respond-to(desktop) {
+      position: static;
+      transform: none;
       width: auto;
       padding-left: 30px;
       padding-right: 30px;

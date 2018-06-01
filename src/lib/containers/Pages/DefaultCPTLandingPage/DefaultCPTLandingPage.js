@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import type { Match } from 'react-router-dom'
 import type { CPTName } from '../../../types/cpt_types'
 import type { BCorpPost } from '../../../types/post_types'
+import ContentTransformer from '../../../components/ContentTransformer/ContentTransformer'
 import CPTApiClient from '../../../../api/cpt_client'
 import DefaultTemplate from '../../Templates/DefaultTemplate/DefaultTemplate'
 import style from './DefaultCPTLandingPage.scss'
@@ -58,7 +59,9 @@ class DefaultCPTLandingPage extends Component<Props, State> {
           renderModules={() => {
             return (
               <div className={`row ${style.content}`}>
-                <div className={`col1`}>{post.post.post_content || ''}</div>
+                <div className={`col1`}>
+                  <ContentTransformer content={post.post.post_content || ''} />
+                </div>
               </div>
             )
           }}
