@@ -7,7 +7,7 @@ type Props = {
   data: BCorpPageTemplateData,
   renderModules: () => React.Node,
   pagePath: string
-}
+};
 
 class FullWidthTemplate extends React.Component<Props> {
   renderHero () {

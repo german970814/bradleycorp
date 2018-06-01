@@ -104,7 +104,7 @@ class BCorpModule extends Component {
       this.rowUpdateEvent = new CustomEvent(this.rowUpdateEventName)
 
       window.addEventListener(this.rowUpdateEventName, this.updateModuleHeight)
-      window.addEventListener('resize', this.updateModuleHeight)
+      // window.addEventListener('resize', this.updateModuleHeight)
     }
   }
 
@@ -112,7 +112,7 @@ class BCorpModule extends Component {
    * Make sure to run this in children if they also implement a componentWillUnmount method
    */
   componentWillUnmount () {
-    window.removeEventListener('resize', this.updateModuleHeight)
+    // window.removeEventListener('resize', this.updateModuleHeight)
     window.removeEventListener(this.rowUpdateEventName, this.updateModuleHeight)
   }
 

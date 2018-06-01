@@ -4,7 +4,7 @@ import ContentTransformerClass from './ContentTransformerClass/ContentTransforme
 
 type Props = {
   content: string
-}
+};
 
 const ContentTransformer = (props: Props) => {
   return ReactHtmlParser(props.content, {
