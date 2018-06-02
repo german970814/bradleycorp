@@ -15,7 +15,7 @@ type Props = {
 
 type State = {
   post?: BCorpPost
-}
+};
 
 class DefaultCPTLandingPage extends Component<Props, State> {
   constructor (props: Props) {
