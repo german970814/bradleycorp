@@ -69,9 +69,14 @@ const ResultsLoadable = Loadable({
   loading: Loading
 })
 
+const WhereToBuyPageLoadable = Loadable({
+  loader: () => import('../../../lib/containers/Pages/WhereToBuyPage/WhereToBuyPage'),
+  loading: Loading
+})
+
 type Props = {
   cookies: Cookies
-}
+};
 
 /*
  * If we need the home page then we render it with a different header
@@ -148,6 +153,11 @@ const RouterInner = () => {
         exact
         path="/results/:query/:tab/page=:page"
         component={ResultsLoadable}
+      />
+      <Route
+        exact
+        path="/locator"
+        component={WhereToBuyPageLoadable}
       />
 
       {/* Post Types With Custom Templates */}
