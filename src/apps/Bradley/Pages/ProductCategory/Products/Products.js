@@ -102,12 +102,15 @@ class Products extends React.Component<Props, State> {
 
     try {
       const nestedTaxQuery = this.buildNestedTaxQuery()
+      const metaQuery = this.buildMetaQuery()
 
-      console.log('sending', nestedTaxQuery, this.props.paged)
+      console.log('sending', nestedTaxQuery, metaQuery, this.props.paged)
 
       const client = new CPTApiClient('product')
-      const response = await client.getByNestedTaxQuery(
+      const response = await client.getByMetaAndTaxQuery(
         nestedTaxQuery,
+        metaQuery,
+        'OR',
         this.props.postsPerPage,
         this.props.paged,
         undefined,
@@ -116,20 +119,9 @@ class Products extends React.Component<Props, State> {
         true
       )
 
-      let products = response.data.posts
+      console.log(response)
 
-      // filter each meta value from returned products
-      if (
-        this.props.activeFilters.metaFilters &&
-        this.props.activeFilters.metaFilters.includes('product_new_until')
-      ) {
-        products = filterPostsByMeta(
-          products,
-          'product_new_until',
-          'now',
-          'DATEBEFORE'
-        )
-      }
+      const products = response.data.posts
 
       this.setState({ products, loading: false })
       this.props.updateNumberResults(response.data.found_posts)
@@ -172,6 +164,42 @@ class Products extends React.Component<Props, State> {
     }
 
     return nestedTaxQuery
+  }
+
+  buildMetaQuery () {
+    const { metaFilters } = this.props.activeFilters
+    let metaQuery = []
+
+    if (
+      metaFilters &&
+      metaFilters.other &&
+      metaFilters.other.includes('product_new_until')
+    ) {
+      metaQuery = [
+        ...metaQuery,
+        {
+          key: 'product_new_until',
+          value: new Date(),
+          compare: '>',
+          type: 'DATETIME'
+        }
+      ]
+    }
+
+    /*
+    if (
+      metaFilters &&
+      metaFilters.includes('product_attributes')
+    ) {
+      metaQuery = [...metaQuery, {
+        key: 'product_attributes',
+        value: ,
+        compare: 'IN',
+      }]
+    }
+    */
+
+    return metaQuery
   }
 
   shouldResendRequest (prevProps: Props) {
