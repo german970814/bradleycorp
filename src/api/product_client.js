@@ -2,12 +2,22 @@
 import type { AxiosPromise } from 'axios'
 import type {
   CategoryData,
-  TaxFilterGroup,
-  MetaFilterGroup
+  TaxFilterGroup
 } from '../apps/Bradley/Pages/ProductCategory/ProductCategory'
 import axios from 'axios'
 import api from './index'
 import CPTApiClient from './cpt_client'
+
+type CategoryPageMetaFiltersResponse = {
+  product_new_until?: number,
+  product_attributes?: {
+    // attribute name
+    [string]: {
+      // attribute value: count
+      [string]: number
+    }
+  }
+}
 
 class ProductApiClient extends CPTApiClient {
   constructor () {
@@ -34,7 +44,7 @@ class ProductApiClient extends CPTApiClient {
   ): AxiosPromise<{
     category_data: CategoryData,
     filters: {
-      meta_filters: MetaFilterGroup,
+      meta_filters: CategoryPageMetaFiltersResponse,
       tax_filters: TaxFilterGroup
     }
   }> {
