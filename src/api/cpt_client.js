@@ -33,14 +33,21 @@ type NestedTaxQuery = {
       }
     | NestedTaxQuery
   >
-};
+}
+
+type MetaQuery = Array<{
+  key: string,
+  value: any,
+  compare?: string,
+  type?: string
+}>
 
 type Response = AxiosPromise<Array<BCorpPost>>
 
 type FoundPostsResponse = AxiosPromise<{
   posts: Array<BCorpPost>,
   found_posts: number
-}>;
+}>
 
 class CPTApiClient {
   cptName: CPTName
@@ -199,6 +206,38 @@ class CPTApiClient {
     const url = `${api.baseURL}${this.cptName}`
     const params = {
       nested_tax_query: encodeURIComponent(JSON.stringify(nestedTaxQuery)),
+      posts_per_page: postsPerPage,
+      paged,
+      offset,
+      date_query: dateQuery,
+      keywords: encodeURIComponent(keywords || ''),
+      found_posts: foundPosts
+    }
+
+    // let flow imply the response shape
+    const request: Response = axios.get(url, { params })
+    const requestFoundPosts: FoundPostsResponse = axios.get(url, { params })
+
+    return foundPosts ? requestFoundPosts : request
+  }
+
+  getByMetaAndTaxQuery (
+    nestedTaxQuery: NestedTaxQuery,
+    metaQuery: MetaQuery,
+    metaRelation?: 'OR' | 'AND',
+    postsPerPage?: number,
+    paged?: number,
+    offset?: number,
+    dateQuery?: DateQuery,
+    keywords?: string,
+    // note: this changes the response shape
+    foundPosts?: boolean
+  ): * {
+    const url = `${api.baseURL}${this.cptName}`
+    const params = {
+      nested_tax_query: encodeURIComponent(JSON.stringify(nestedTaxQuery)),
+      meta_query: encodeURIComponent(JSON.stringify(metaQuery)),
+      meta_relation: metaRelation,
       posts_per_page: postsPerPage,
       paged,
       offset,
