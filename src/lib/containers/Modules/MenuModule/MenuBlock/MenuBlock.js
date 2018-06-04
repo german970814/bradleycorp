@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react'
 import type { MenuModuleMenuBlockData } from '../../../../types/module_types'
+import Collapsible from 'react-collapsible'
 import { Link } from 'react-router-dom'
 import BCorpLink from '../../../../components/BCorpLink/BCorpLink'
 import ArrowThumbnail from '../../../../components/ArrowThumbnail/ArrowThumbnail'
@@ -42,8 +43,7 @@ class MenuBlock extends React.Component<Props, State> {
   renderChildLinks () {
     if (
       !this.props.blockData.children ||
-      this.props.blockData.children.length === 0 ||
-      this.state.collapsed
+      this.props.blockData.children.length === 0
     ) {
       return
     }
@@ -121,8 +121,6 @@ class MenuBlock extends React.Component<Props, State> {
       return
     }
 
-    const collapsibleClass = collapsible ? style.collapsible : ''
-
     return (
       <div className={style.title}>
         <BCorpLink
@@ -130,18 +128,14 @@ class MenuBlock extends React.Component<Props, State> {
           renderInternal={url => {
             return (
               <Link className={style.blockDataTitle} to={url}>
-                <h6 className={`${style.blockTitle} ${collapsibleClass}`}>
-                  {blockData.title}
-                </h6>
+                <h6 className={`${style.blockTitle}`}>{blockData.title}</h6>
               </Link>
             )
           }}
           renderExternal={url => {
             return (
               <a className={style.blockDataTitle} href={url}>
-                <h6 className={`${style.blockTitle} ${collapsibleClass}`}>
-                  {blockData.title}
-                </h6>
+                <h6 className={`${style.blockTitle}`}>{blockData.title}</h6>
               </a>
             )
           }}
@@ -152,7 +146,11 @@ class MenuBlock extends React.Component<Props, State> {
   }
 
   render () {
-    return (
+    return this.props.collapsible ? (
+      <Collapsible trigger={this.renderParentLink()}>
+        {this.renderChildLinks()}
+      </Collapsible>
+    ) : (
       <React.Fragment>
         {this.renderParentLink()}
         {this.renderChildLinks()}

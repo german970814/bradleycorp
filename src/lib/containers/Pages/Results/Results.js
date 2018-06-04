@@ -1,22 +1,27 @@
 // @flow
 import * as React from 'react'
+import type { Location, Match, RouterHistory } from 'react-router-dom'
+import type { BCorpPost } from '../../../types/post_types'
+import type { PostType } from '../../../types/cpt_types'
+import type { ChildFunctionArgs, GetPostsArgs } from './LoadMore'
+import { site } from '../../../../api'
 import Media from 'react-media'
 import LoadMore from './LoadMore'
 import style from './Results.scss'
 import { MOBILEMAXWIDTH } from '../../../../globals'
 import SearchClient from './../../../../api/search_client'
-import type { PostType } from '../../../../lib/types/cpt_types'
-import Loading from '../../../../lib/components/Loading/Loading'
-import type { Location, Match, RouterHistory } from 'react-router-dom'
-import type { BCorpPost } from '../../../../lib/types/post_types'
-import NoResults from '../../../../lib/components/NoResults/NoResults'
-import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
-import BCorpSelectField from '../../../../lib/components/BCorpFilterField/BCorpSelectField'
-import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
-import type { ChildFunctionArgs, GetPostsArgs } from './LoadMore'
+
+import Loading from '../../../components/Loading/Loading'
+
+import NoResults from '../../../components/NoResults/NoResults'
+import defaultStyle from '../../../containers/Templates/Templates.scss'
+import BCorpSelectField from '../../../components/BCorpFilterField/BCorpSelectField'
+import { renderTitle } from '../../../containers/Templates/DefaultTemplate/DefaultTemplate'
+
 import {
   SearchLiterature,
   SearchNews,
+  SearchPost,
   SearchProduct,
   SearchTechnicalInfo,
   SearchPage
@@ -60,13 +65,17 @@ export default class Results extends React.Component<Props, State> {
   }
 
   get getTabs (): Tab {
-    return {
-      product: 'Products',
-      literature: 'Literature',
-      technical_info: 'Technical Info',
-      news: 'In The News',
-      page: 'Web Pages'
-    }
+    return site === 'bcorp'
+      ? {
+        product: 'Products',
+        literature: 'Literature',
+        technical_info: 'Technical Info',
+        news: 'In The News',
+        page: 'Web Pages'
+      }
+      : {
+        post: 'Posts'
+      }
   }
 
   get activeTab (): TabOption {
@@ -262,8 +271,10 @@ export default class Results extends React.Component<Props, State> {
           return <SearchTechnicalInfo {...args} />
         case 'news':
           return <SearchNews {...args} />
-        default:
+        case 'page':
           return <SearchPage {...args} />
+        default:
+          return <SearchPost {...args} />
       }
     }
   }

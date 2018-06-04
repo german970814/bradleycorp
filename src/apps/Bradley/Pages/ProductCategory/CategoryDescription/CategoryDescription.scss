@@ -1,4 +1,5 @@
 @import '../../../../../scss/partials/mixins';
+@import '../../../../../scss/partials/text-styles';
 
 .categoryDescription {
   margin-bottom: 30px;
@@ -9,6 +10,10 @@
 
   @include respond-to(desktop) {
     margin-bottom: 60px;
+  }
+
+  a {
+    @extend %link-orange;
   }
 
   .description {

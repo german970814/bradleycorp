@@ -84,7 +84,7 @@ class Home extends React.Component<Props, State> {
       <React.Fragment>
         <VideoBackground
           node={this.state.washroomNode}
-          url={'https://www.youtube.com/watch?v=FS0QJ-MXkOY'}
+          url={'https://www.youtube.com/watch?v=VWV1fER7vxI&feature=youtu.be'}
           placeholder={commercialWashroomImageSrc}
         />
 
@@ -119,7 +119,7 @@ class Home extends React.Component<Props, State> {
       <React.Fragment>
         <VideoBackground
           node={this.state.emergencySafetyNode}
-          url={'https://www.youtube.com/watch?v=lmWfSZ7xJbk'}
+          url={'https://www.youtube.com/watch?v=9Eso0FnROI4&feature=youtu.be'}
           placeholder={emergencySafetyImageSrc}
         />
 

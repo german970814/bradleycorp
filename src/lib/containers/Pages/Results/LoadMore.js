@@ -1,12 +1,12 @@
 // @flow
 import * as React from 'react'
 import type { AxiosPromise } from 'axios'
-import type { BCorpPost } from '../../../../lib/types/post_types'
+import type { BCorpPost } from '../../../types/post_types'
 import type { Match, RouterHistory } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 import debounce from 'debounce'
-import { getUrlWithoutPageParam } from '../../../../lib/bcorpUrl'
-import Loading from '../../../../lib/components/Loading/Loading'
+import { getUrlWithoutPageParam } from '../../../bcorpUrl'
+import Loading from '../../../components/Loading/Loading'
 
 // will need to pass LoadMore a function which deconstructs the
 // postsPerPage and paged object and passes it to an actual

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react'
 import type { WPComment } from '../../../types/comment_types'
-import ReactHtmlParser from 'react-html-parser'
+import ContentTransformer from '../../../components/ContentTransformer/ContentTransformer'
 import Divider from '../../../components/Divider/Divider'
 import style from './Comment.scss'
 
@@ -64,7 +64,7 @@ class Comment extends React.Component<Props> {
           </div>
         </div>
         <div className={`col1 col4x3-tablet ${style.content}`}>
-          {ReactHtmlParser(this.props.comment.content.rendered)}
+          <ContentTransformer content={this.props.comment.content.rendered} />
         </div>
       </div>
     )

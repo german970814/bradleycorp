@@ -8,12 +8,14 @@ import type {
 } from '../../../../LoadMore/LoadMore'
 import CPTApiClient from '../../../../../../api/cpt_client'
 import LoadMore from '../../../../LoadMore/LoadMore'
+import NoResults from '../../../../../components/NoResults/NoResults'
 import NewsItem from './NewsItem/NewsItem'
 import style from './NewsItems.scss'
 
 type Props = {
   filters: FiltersType,
   category?: string,
+  pageID: number,
   isCaseStudyTemplate?: boolean
 }
 
@@ -21,7 +23,9 @@ class NewsItems extends React.Component<Props> {
   getPosts: GetPostsFunctionType
 
   getPosts ({ postsPerPage, paged, offset }: GetPostsArgs) {
-    const dateQuery = { year: this.props.filters.year }
+    const dateQuery = {
+      year: parseInt(this.props.filters.year.replace('_', ''))
+    }
 
     const client = this.props.isCaseStudyTemplate
       ? new CPTApiClient('case-study')
@@ -63,7 +67,6 @@ class NewsItems extends React.Component<Props> {
         }: ChildFunctionArgs) => {
           return (
             <NewsItemsInner
-              filters={this.props.filters}
               posts={posts}
               postsPerPage={postsPerPage}
               paged={paged}
@@ -72,6 +75,8 @@ class NewsItems extends React.Component<Props> {
               shouldDisplayPost={shouldDisplayPost}
               loadNextPage={loadNextPage}
               reset={reset}
+              filters={this.props.filters}
+              pageID={this.props.pageID}
               isCaseStudyTemplate={this.props.isCaseStudyTemplate}
             />
           )
@@ -83,12 +88,13 @@ class NewsItems extends React.Component<Props> {
 
 type InnerProps = ChildFunctionArgs & {
   filters: FiltersType,
+  pageID: number,
   isCaseStudyTemplate?: boolean
 }
 
 class NewsItemsInner extends React.Component<InnerProps> {
-  componentWillReceiveProps (nextProps: InnerProps) {
-    if (this.shouldResendRequest(nextProps)) {
+  componentDidUpdate (prevProps: InnerProps) {
+    if (this.shouldResendRequest(prevProps)) {
       this.props.reset()
     }
   }
@@ -124,17 +130,26 @@ class NewsItemsInner extends React.Component<InnerProps> {
   }
 
   render () {
-    return (
+    return this.props.posts.length ? (
       <React.Fragment>
         <div className={style.newsItems}>{this.renderNewsItems()}</div>
         {this.renderLoadMoreButton()}
       </React.Fragment>
+    ) : (
+      <NoResults message={'No results matched your filter selections'} />
     )
   }
 
-  shouldResendRequest (nextProps: InnerProps) {
-    return Object.keys(nextProps.filters).some(filter => {
-      return nextProps.filters[filter] !== this.props.filters[filter]
+  shouldResendRequest (prevProps: InnerProps) {
+    if (
+      prevProps.pageID !== this.props.pageID ||
+      prevProps.isCaseStudyTemplate !== this.props.isCaseStudyTemplate
+    ) {
+      return true
+    }
+
+    return Object.keys(prevProps.filters).some(filter => {
+      return prevProps.filters[filter] !== this.props.filters[filter]
     })
   }
 }

@@ -64,7 +64,8 @@ $lightboxHeightPerc: $lightboxHeight + %;
   &.fitLightboxToContent {
     .lightboxWrapper {
       position: absolute;
-      top: (100 - $lightboxHeight - 5)/2 + %;
+      top: 50%;
+      transform: translateY(-50%);
       left: 0;
       width: 100%;
       height: auto;

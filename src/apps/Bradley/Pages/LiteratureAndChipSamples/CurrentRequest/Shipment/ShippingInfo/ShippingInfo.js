@@ -11,6 +11,7 @@ import type {
   ShippingInfoField
 } from '../../../LiteratureAndChipSamples'
 import { UserConsumer } from '../../../../../../../lib/contexts/UserContext'
+import ShippingRequestAPIClient from '../../../../../../../api/shippingRequest_client'
 import LightboxV2 from '../../../../../../../lib/containers/Lightbox/LightboxV2/LightboxV2'
 import LightboxTitleBannerContentBox from '../../../../../../../lib/containers/Lightbox/LightboxTitleBannerContentBox/LightboxTitleBannerContentBox'
 import ShipmentContent from '../ShipmentContent/ShipmentContent'
@@ -36,7 +37,8 @@ type stageTypes = 1 | 2 | 3
 
 type State = {
   stage: stageTypes,
-  highlightRequiredFields: boolean
+  highlightRequiredFields: boolean,
+  shippingId?: number
 }
 
 class ShippingInfo extends React.Component<Props, State> {
@@ -48,12 +50,12 @@ class ShippingInfo extends React.Component<Props, State> {
     this.state = { stage: 1, highlightRequiredFields: false }
 
     this.requiredFields = [
-      'fullName',
+      'full_name',
       'title',
-      'mailingAddress',
+      'mailing_address',
       'city',
-      'stateProvince',
-      'postCode',
+      'state_province',
+      'post_code',
       'country',
       'email'
     ]
@@ -66,9 +68,20 @@ class ShippingInfo extends React.Component<Props, State> {
     this.setState({ stage: newStage })
   }
 
-  sendOrder (): void {
+  resetOrderNumber (): void {
+    this.setState({ shippingId: 0 })
+  }
+
+  async sendOrder (): Promise<void> {
     if (this.validateForm()) {
-      return this.setState({ stage: 3 })
+      const shippingId = await this.sendShippingRequest()
+      if (!shippingId || shippingId === 0) {
+        console.warn(
+          'Received invalid shipping ID, or coudnt post shipping request'
+        )
+      } else {
+        return this.setState({ stage: 3, shippingId })
+      }
     } else {
       return this.setState({ highlightRequiredFields: true })
     }
@@ -126,7 +139,7 @@ class ShippingInfo extends React.Component<Props, State> {
     if (this.state.stage === 3) {
       return (
         <LightboxTitleBannerContentBox title={'Order processed!'}>
-          <ShippingInfoOrderProcessed />
+          <ShippingInfoOrderProcessed id={this.state.shippingId || 0} />
         </LightboxTitleBannerContentBox>
       )
     }
@@ -155,13 +168,43 @@ class ShippingInfo extends React.Component<Props, State> {
           return <div className={style.shippingInfo}>{this.getContent()}</div>
         }}
         onLightboxClose={() => {
-          return this.updateStage(1)
+          this.updateStage(1)
+          this.resetOrderNumber()
         }}
         fitLightboxToContent
         fullWidth={this.state.stage === 2}
         maxWidth={this.getMaxWidth()}
       />
     )
+  }
+
+  async sendShippingRequest (): Promise<number | void> {
+    try {
+      if (
+        !this.props.shipment ||
+        Object.keys(this.props.shipment).length === 0
+      ) {
+        return 0
+      }
+
+      const shippingRequest = {
+        /*
+        TODO: UPDATE THIS
+         */
+        userID: 1,
+        shippingInfo: this.props.shippingInfo,
+        items: this.props.shipment
+      }
+      const response = await ShippingRequestAPIClient.postNewShippingRequest(
+        shippingRequest
+      )
+
+      console.log(response)
+
+      return response.data
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   validateForm () {
