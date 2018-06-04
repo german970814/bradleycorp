@@ -186,18 +186,25 @@ class Products extends React.Component<Props, State> {
       ]
     }
 
-    /*
-    if (
-      metaFilters &&
-      metaFilters.includes('product_attributes')
-    ) {
-      metaQuery = [...metaQuery, {
-        key: 'product_attributes',
-        value: ,
-        compare: 'IN',
-      }]
+    if (metaFilters && metaFilters.product_attributes) {
+      const activeAttributes = metaFilters.product_attributes
+
+      Object.keys(activeAttributes).forEach(attName => {
+        activeAttributes[attName].forEach(attValue => {
+          const value = {}
+          value[attName] = attValue
+
+          metaQuery = [
+            ...metaQuery,
+            {
+              key: 'product_attributes',
+              value: value,
+              compare: 'IN'
+            }
+          ]
+        })
+      })
     }
-    */
 
     return metaQuery
   }
