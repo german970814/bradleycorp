@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import VerticalAlignHelper from '../VerticalAlignHelper/VerticalAlignHelper'
 import style from './FixedAspectRatioBox.scss'
 
@@ -37,10 +36,10 @@ class FixedAspectRatioBox extends React.Component<Props> {
     /**
       if we want to pass a calc() string, pass the contents of the calc only
       eg. 'calc(100vh - 20px)' => '100vh - 20px'
-     */
-    ;(this.maxHeight = '100vh'),
-    (this.aspectRatio = 56.25),
-    (this.verticalAlign = 'middle')
+    */
+    this.maxHeight = '100vh'
+    this.aspectRatio = 56.25
+    this.verticalAlign = 'middle'
   }
 
   render () {
