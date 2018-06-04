@@ -7,7 +7,9 @@ import style from './ContentTransformerClass.scss'
 
 type HTMLParser2Node = {
   attribs: {
-    href?: string
+    href?: string,
+    type?: string,
+    src?: string,
   },
   /**
    * The type of node (tag, text, style etc)

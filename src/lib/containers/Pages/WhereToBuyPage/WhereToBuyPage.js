@@ -2,11 +2,15 @@
 import * as React from 'react'
 import DefaultTemplate from '../../Templates/DefaultTemplate/DefaultTemplate'
 
-export default class WhereToBuyPage extends React.Component {
-	constructor( props ) {
+type Props = {
+  pageTitle: string,
+};
+
+export default class WhereToBuyPage extends React.Component<Props> {
+	constructor( props: Props ) {
 		super(props)
 
-		this.state = {}
+		// this.state = {}
 	}
 
 	render () {

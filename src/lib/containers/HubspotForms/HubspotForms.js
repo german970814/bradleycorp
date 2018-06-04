@@ -2,11 +2,16 @@
 import * as React from 'react'
 import DefaultTemplate from '../Templates/DefaultTemplate/DefaultTemplate'
 
-export default class HubspotForms extends React.Component {
-	constructor( props ) {
+type Props = {
+  pageTitle: string,
+  form: string,
+};
+
+export default class HubspotForms extends React.Component<Props> {
+	constructor( props: Props ) {
 		super(props)
 
-		this.state = {}
+		// this.state = {}
 	}
 
   componentDidMount() {
@@ -30,10 +35,13 @@ export default class HubspotForms extends React.Component {
               frameBorder="0"
               onLoad={() => {
                 const iframe = document.getElementById('where-to-buy')
-                const _window = iframe.contentWindow
+                const _window = iframe && iframe.contentWindow ? iframe.contentWindow : null
+
+                if ( ! _window )
+                  return
 
                 _window.postMessage({
-                  callback: this.setHeight.bind(this)
+
                 }, '*')
               }}
               ></iframe>
@@ -42,8 +50,4 @@ export default class HubspotForms extends React.Component {
         />
 		</div>
 	}
-
-  setHeight( h ) {
-    console.log( h )
-  }
 }
