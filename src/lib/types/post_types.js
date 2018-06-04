@@ -26,7 +26,7 @@ type BCorpPostHeirarchyResponse = {
 
 type BCorpPostTreeResponse = Array<BCorpPostHeirarchyResponse>
 
-type WPFeaturedImageArrayTypes = string | number | boolean
+type WPFeaturedImageArrayTypes = string
 
 type BCorpMeta = {
   video_gallery_video?: string,

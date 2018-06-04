@@ -1,17 +1,53 @@
-import React, { Component } from 'react'
+// @flow
+import * as React from 'react'
 import PropTypes from 'prop-types'
 import VerticalAlignHelper from '../VerticalAlignHelper/VerticalAlignHelper'
 import style from './FixedAspectRatioBox.scss'
 
+type Props = {
+  /**
+   * Content for the box.
+   * Usually this is something we want to give an aspect ratio, so it would have width and height 100%.
+   */
+  children: React.Node,
+  /**
+   * If we have strange screen sizes (very thin but wide) this ensures we keep the aspect ratio.
+   * Usually best to leave it as default.
+   */
+  maxHeight?: string,
+  /**
+   *  The aspect ratio as a decimal, or number between 1 and 100 representing a percentage
+   *  YouTube default is 56.25%
+   */
+  aspectRatio?: number,
+  verticalAlign?: 'top' | 'middle' | 'bottom'
+}
+
 /**
  * Creates a box that keeps the same aspect ratio regardless of screen size
  */
-class FixedAspectRatioBox extends Component {
+class FixedAspectRatioBox extends React.Component<Props> {
+  maxHeight: string
+  aspectRatio: number
+  verticalAlign: 'top' | 'middle' | 'bottom'
+
+  constructor (props: Props) {
+    super(props)
+
+    /**
+      if we want to pass a calc() string, pass the contents of the calc only
+      eg. 'calc(100vh - 20px)' => '100vh - 20px'
+     */
+    ;(this.maxHeight = '100vh'),
+    (this.aspectRatio = 56.25),
+    (this.verticalAlign = 'middle')
+  }
+
   render () {
     const aspectRatio100 =
-      this.props.aspectRatio < 1
+      this.props.aspectRatio && this.props.aspectRatio < 1
         ? this.props.aspectRatio * 100
-        : this.props.aspectRatio
+        : this.props.aspectRatio || this.aspectRatio
 
     const aspectRatio = `${aspectRatio100}%`
     const aspectRatioInverse = 100 / aspectRatio100
@@ -23,7 +59,7 @@ class FixedAspectRatioBox extends Component {
         <div
           style={{
             paddingTop: aspectRatio,
-            verticalAlign: this.props.verticalAlign
+            verticalAlign: this.props.verticalAlign || this.verticalAlign
           }}
           className={`${style.aspectRatioBox} aspect-ratio-box`}>
           <div
@@ -33,10 +69,9 @@ class FixedAspectRatioBox extends Component {
             {/* this height controller div takes over the sizing when window height becomes significantly smaller than width */}
             <div
               style={{
-                maxHeight: `calc(${this.props.maxHeight})`,
-                maxWidth: `calc((${
-                  this.props.maxHeight
-                }) * ${aspectRatioInverse})`
+                maxHeight: `calc(${this.props.maxHeight || this.maxHeight})`,
+                maxWidth: `calc((${this.props.maxHeight ||
+                  this.maxHeight}) * ${aspectRatioInverse})`
               }}
               className={`${
                 style.aspectRatioBoxHeightController
@@ -48,35 +83,6 @@ class FixedAspectRatioBox extends Component {
       </React.Fragment>
     )
   }
-}
-
-FixedAspectRatioBox.propTypes = {
-  /**
-   * Content for the box.
-   * Usually this is something we want to give an aspect ratio, so it would have width and height 100%.
-   */
-  children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
-  /**
-   * If we have strange screen sizes (very thin but wide) this ensures we keep the aspect ratio.
-   * Usually best to leave it as default.
-   */
-  maxHeight: PropTypes.string,
-  /**
-   *  The aspect ratio as a decimal, or number between 1 and 100 representing a percentage
-   *  YouTube default is 56.25%
-   */
-  aspectRatio: PropTypes.number,
-  verticalAlign: PropTypes.oneOf(['top', 'middle', 'bottom'])
-}
-
-FixedAspectRatioBox.defaultProps = {
-  /**
-    if we want to pass a calc() string, pass the contents of the calc only
-    eg. 'calc(100vh - 20px)' => '100vh - 20px'
-   */
-  maxHeight: '100vh',
-  aspectRatio: 56.25,
-  verticalAlign: 'middle'
 }
 
 export default FixedAspectRatioBox
