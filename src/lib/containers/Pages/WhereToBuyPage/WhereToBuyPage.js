@@ -9,12 +9,6 @@ export default class WhereToBuyPage extends React.Component {
 		this.state = {}
 	}
 
-	componentDidMount() {
-		const iframe = document.getElementById('locatorIframe')
-
-		console.log( iframe )
-	}
-
 	render () {
 		return <div className={'where-to-buy'}>
 			<DefaultTemplate
@@ -24,9 +18,13 @@ export default class WhereToBuyPage extends React.Component {
           renderModules={() => {
             return (
               <React.Fragment>
-              	<iframe id="locatorIframe" src="http://locator.test/" width="100%" height="800" frameBorder="0"></iframe>
-	              {/*<div id="locator-v2"></div>*/}
-								{/*<script async src="http://locator.test/locator-v2.js"></script>*/}
+              	<iframe
+              		id="locatorIframe"
+              		src="http://forms.bradleydev.twoxfour.com/where-to-buy/index.html"
+              		width="100%"
+              		height="800"
+              		frameBorder="0"
+              		></iframe>
 							</React.Fragment>
             )
           }}
