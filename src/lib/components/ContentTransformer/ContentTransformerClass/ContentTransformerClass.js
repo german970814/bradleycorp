@@ -49,10 +49,13 @@ class ContentTransformerClass {
   }
 
   transform () {
+
     if (this.node.type === 'tag') {
       return this.transformTag()
     } else if (this.node.type === 'text') {
       return this.transformText()
+    } else if (this.node.type === 'script') {
+      return this.transformScript()
     } else {
       // return the node if it is a valid react element
       return React.isValidElement(this.node) ? this.node : null
@@ -98,6 +101,18 @@ class ContentTransformerClass {
       <FixedAspectRatioBox>
         <BCorpVideo className={style.embed} url={url} />
       </FixedAspectRatioBox>
+    )
+  }
+
+  transformScript () {
+    // console.log( this.node )
+    return (
+      <script
+        key={this.index}
+        type={this.node.attribs.type}
+        src={this.node.attribs.src}
+        dangerouslySetInnerHTML={{__html: this.node.children.length ? this.node.children[0].data : null}}>
+      </script>
     )
   }
 }
