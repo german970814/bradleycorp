@@ -10,6 +10,7 @@ import TemplateFactory from '../../Templates/TemplateFactory'
 import ModuleBuilder from '../../Modules/ModuleBuilder'
 import WidgetBuilder from '../../Widgets/WidgetBuilder'
 import style from './Customizable.scss'
+import ErrorBoundary from '../../../contexts/ErrorBoundary'
 
 type Props = {
   match: Match
@@ -18,7 +19,7 @@ type Props = {
 type State = BCorpCustomPage & {
   requesting: boolean,
   ready: boolean
-}
+};
 
 /**
  *
@@ -132,19 +133,22 @@ class Customizable extends Component<Props, State> {
    * @return {void}
    */
   render () {
+    // console.log( this.state )
     if (this.state['page_template_data']['page_id'] === 0) {
       return null
     }
 
     return (
       <div className={style.customizable}>
-        <TemplateFactory
-          templateSlug={this.state['page_template_data'].template}
-          data={this.state['page_template_data']}
-          pagePath={this.props.match.url}
-          renderModules={this.renderModules.bind(this)}
-          renderRightSidebarWidgets={this.renderRightSidebarWidgets.bind(this)}
-        />
+        <ErrorBoundary>
+          <TemplateFactory
+            templateSlug={this.state['page_template_data'].template}
+            data={this.state['page_template_data']}
+            pagePath={this.props.match.url}
+            renderModules={this.renderModules.bind(this)}
+            renderRightSidebarWidgets={this.renderRightSidebarWidgets.bind(this)}
+          />
+        </ErrorBoundary>
       </div>
     )
   }

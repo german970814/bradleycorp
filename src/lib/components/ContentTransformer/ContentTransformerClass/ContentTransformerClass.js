@@ -37,7 +37,7 @@ type HTMLParser2Node = {
    * The text content, if the type is text
    */
   data: string
-}
+};
 
 class ContentTransformerClass {
   node: HTMLParser2Node
