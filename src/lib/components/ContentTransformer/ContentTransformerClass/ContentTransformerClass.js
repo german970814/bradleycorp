@@ -51,7 +51,6 @@ class ContentTransformerClass {
   }
 
   transform () {
-
     if (this.node.type === 'tag') {
       return this.transformTag()
     } else if (this.node.type === 'text') {

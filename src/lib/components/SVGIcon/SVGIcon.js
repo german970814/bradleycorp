@@ -35,7 +35,7 @@ const icons = {
       // transform: 'translate(2,2)'
     },
     viewBox: '0 0 40.7 21.6',
-    redrawDashArraySize: 40,
+    redrawDashArraySize: 40
   }
 }
 
@@ -67,8 +67,8 @@ class SVGIcon extends Component {
     }, 30)
   }
 
-  getRedrawStyles ( n ) {
-    console.log( n )
+  getRedrawStyles (n) {
+    console.log(n)
     if (!this.props.redrawOnHover) {
       return
     }
@@ -119,7 +119,7 @@ class SVGIcon extends Component {
             key={ind}
             style={{
               ...icons[this.props.icon].pathStyle,
-              ...this.getRedrawStyles( (line.x1 - line.x2) ),
+              ...this.getRedrawStyles((line.x1 - line.x2)),
               ...customStyles
             }}/>
         })}

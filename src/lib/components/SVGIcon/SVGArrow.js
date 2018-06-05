@@ -35,7 +35,7 @@ const icons = {
       // transform: 'translate(2,2)'
     },
     viewBox: '0 0 40.7 21.6',
-    redrawDashArraySize: 40,
+    redrawDashArraySize: 40
   }
 }
 
@@ -46,10 +46,9 @@ class SVGArrow extends Component {
   constructor (props) {
     super(props)
 
-
-    ns = 'http://www.w3.org/2000/svg'
-    viewBox = '0 0 40.7 21.6'
-    lines = [
+    this.ns = 'http://www.w3.org/2000/svg'
+    this.viewBox = '0 0 40.7 21.6'
+    this.lines = [
       {
         name: 'line1',
         dashOffset: 40,
@@ -76,13 +75,11 @@ class SVGArrow extends Component {
       }
     ]
 
-
     this.state = {
 
-      line1DashOffset: '0px'
-      line2DashOffset: '0px'
-      line3DashOffset: '0px'
-
+      // line1DashOffset: '0px'
+      // line2DashOffset: '0px'
+      // line3DashOffset: '0px'
 
       strokeDashoffset: '0px',
       transition: 'none'
@@ -91,12 +88,11 @@ class SVGArrow extends Component {
   }
 
   onMouseEnter (e) {
-
-    const dash = this.lines.find( line => {
+    const dash = this.lines.find(line => {
       return line.name === 'line1' && `${line.dashOffset}px`
     })
 
-    console.log( dash )
+    console.log(dash)
 
     this.setState({
       strokeDashoffset: `${icons[this.props.icon].redrawDashArraySize}px`,
@@ -111,8 +107,8 @@ class SVGArrow extends Component {
     }, 30)
   }
 
-  getRedrawStyles ( n ) {
-    console.log( n )
+  getRedrawStyles (n) {
+    console.log(n)
     if (!this.props.redrawOnHover) {
       return
     }
@@ -141,8 +137,8 @@ class SVGArrow extends Component {
     return (
       <svg
         className={this.props.className}
-        xmlns={icons[this.props.icon].ns}
-        viewBox={icons[this.props.icon].viewBox}
+        xmlns={this.ns}
+        viewBox={this.viewBox}
         onMouseEnter={
           this.props.redrawOnHover ? this.onMouseEnter.bind(this) : undefined
         }>
@@ -163,7 +159,7 @@ class SVGArrow extends Component {
             key={ind}
             style={{
               ...icons[this.props.icon].pathStyle,
-              ...this.getRedrawStyles( (line.x1 - line.x2) ),
+              ...this.getRedrawStyles((line.x1 - line.x2)),
               ...customStyles
             }}/>
         })}
