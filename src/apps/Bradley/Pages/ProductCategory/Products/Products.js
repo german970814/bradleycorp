@@ -5,7 +5,6 @@ import type { ScreenSize } from '../../../../../lib/contexts/ScreenSizeContext'
 import type { BCorpPost } from '../../../../../lib/types/post_types'
 import debounce from 'debounce'
 import CPTApiClient from '../../../../../api/cpt_client'
-import { filterPostsByMeta } from '../../../../../lib/bcorpPost'
 import { sortIntoRows } from '../../../../../lib/bcorpJSX'
 import Loading from '../../../../../lib/components/Loading/Loading'
 import NoResults from '../../../../../lib/components/NoResults/NoResults'
@@ -178,10 +177,10 @@ class Products extends React.Component<Props, State> {
       metaQuery = [
         ...metaQuery,
         {
-          key: 'product_new_until',
-          value: new Date(),
-          compare: '>',
-          type: 'DATETIME'
+          key: 'product_new_until_unix',
+          value: Date.now(),
+          compare: '<',
+          type: 'numeric'
         }
       ]
     }
@@ -191,15 +190,12 @@ class Products extends React.Component<Props, State> {
 
       Object.keys(activeAttributes).forEach(attName => {
         activeAttributes[attName].forEach(attValue => {
-          const value = {}
-          value[attName] = attValue
-
           metaQuery = [
             ...metaQuery,
             {
               key: 'product_attributes',
-              value: value,
-              compare: 'IN'
+              value: attValue,
+              compare: 'LIKE'
             }
           ]
         })
