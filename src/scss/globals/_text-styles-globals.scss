@@ -71,6 +71,42 @@ body {
   @extend %body;
 }
 
+table {
+  border-collapse: collapse;
+}
+
+thead, tfoot {
+  border-top: 1px solid $silver;
+  border-bottom: 1px solid $silver;
+}
+
+th {
+  @extend %h5-desktop;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  border-top: 1px solid $silver;
+  border-bottom: 1px solid $silver;
+}
+
+th, td {
+  margin: 0px;
+  line-height: 1;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 25px;
+  padding-left: 15px;
+  border-left: 0px;
+  border-right: 0px;
+}
+
+tr:nth-child(2n) {
+  background-color: $light-gray;
+}
+
+tr td:first-child {
+  font-weight: bold;
+}
+
 :global .small-body :local {
   @extend %small-body;
 }
