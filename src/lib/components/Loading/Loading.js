@@ -5,7 +5,6 @@ import styles from './Loading.scss'
  * Will be created in a future sprint with designs
  */
 const Loading = props => {
-  // return <div className={style.loadingContent}>Loading...</div>
   return <div className={styles.skFadingCircle}>
 	  <div className={styles.skCircle}></div>
 	  <div className={[styles.skCircle2, styles.skCircle].join(' ')}></div>

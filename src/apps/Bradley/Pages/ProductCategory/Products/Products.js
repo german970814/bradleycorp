@@ -5,7 +5,6 @@ import type { ScreenSize } from '../../../../../lib/contexts/ScreenSizeContext'
 import type { BCorpPost } from '../../../../../lib/types/post_types'
 import debounce from 'debounce'
 import CPTApiClient from '../../../../../api/cpt_client'
-import { filterPostsByMeta } from '../../../../../lib/bcorpPost'
 import { sortIntoRows } from '../../../../../lib/bcorpJSX'
 import Loading from '../../../../../lib/components/Loading/Loading'
 import NoResults from '../../../../../lib/components/NoResults/NoResults'
@@ -102,12 +101,15 @@ class Products extends React.Component<Props, State> {
 
     try {
       const nestedTaxQuery = this.buildNestedTaxQuery()
+      const metaQuery = this.buildMetaQuery()
 
-      console.log('sending', nestedTaxQuery, this.props.paged)
+      console.log('sending', nestedTaxQuery, metaQuery, this.props.paged)
 
       const client = new CPTApiClient('product')
-      const response = await client.getByNestedTaxQuery(
+      const response = await client.getByMetaAndTaxQuery(
         nestedTaxQuery,
+        metaQuery,
+        'OR',
         this.props.postsPerPage,
         this.props.paged,
         undefined,
@@ -116,20 +118,9 @@ class Products extends React.Component<Props, State> {
         true
       )
 
-      let products = response.data.posts
+      console.log(response)
 
-      // filter each meta value from returned products
-      if (
-        this.props.activeFilters.metaFilters &&
-        this.props.activeFilters.metaFilters.includes('product_new_until')
-      ) {
-        products = filterPostsByMeta(
-          products,
-          'product_new_until',
-          'now',
-          'DATEBEFORE'
-        )
-      }
+      const products = response.data.posts
 
       this.setState({ products, loading: false })
       this.props.updateNumberResults(response.data.found_posts)
@@ -172,6 +163,46 @@ class Products extends React.Component<Props, State> {
     }
 
     return nestedTaxQuery
+  }
+
+  buildMetaQuery () {
+    const { metaFilters } = this.props.activeFilters
+    let metaQuery = []
+
+    if (
+      metaFilters &&
+      metaFilters.other &&
+      metaFilters.other.includes('product_new_until')
+    ) {
+      metaQuery = [
+        ...metaQuery,
+        {
+          key: 'product_new_until_unix',
+          value: Date.now(),
+          compare: '<',
+          type: 'numeric'
+        }
+      ]
+    }
+
+    if (metaFilters && metaFilters.product_attributes) {
+      const activeAttributes = metaFilters.product_attributes
+
+      Object.keys(activeAttributes).forEach(attName => {
+        activeAttributes[attName].forEach(attValue => {
+          metaQuery = [
+            ...metaQuery,
+            {
+              key: 'product_attributes',
+              value: attValue,
+              compare: 'LIKE'
+            }
+          ]
+        })
+      })
+    }
+
+    return metaQuery
   }
 
   shouldResendRequest (prevProps: Props) {
