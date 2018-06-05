@@ -20,8 +20,17 @@ type CategoryData = {|
   count: number
 |}
 
+type ProductAttributesType = {
+  // attribute name
+  [string]: {
+    // attribute value: count
+    [string]: number
+  }
+}
+
 type MetaFilterGroup = {
-  [string]: number
+  product_new_until?: number,
+  product_attributes?: ProductAttributesType
 }
 
 type TaxFilterGroup = {
@@ -44,7 +53,12 @@ type FiltersType =
   | false
 
 type ActiveFilterType = {
-  metaFilters?: Array<string>,
+  metaFilters?: {
+    product_attributes?: {
+      [string]: Array<string>
+    },
+    other?: Array<string>
+  },
   taxFilters: {
     [string]: ?Array<string>
   }
@@ -80,7 +94,7 @@ class ProductCategory extends React.Component<Props, State> {
       categoryData: false,
       filters: false,
       activeFilters: {
-        metaFilters: [],
+        metaFilters: {},
         taxFilters: {}
       },
       numberResults: 0,
@@ -126,11 +140,36 @@ class ProductCategory extends React.Component<Props, State> {
     this.setState({ paged })
   }
 
-  updateMetaActiveFilters (newFilters: Array<string>) {
+  updateMetaProductAttributesActiveFilters (
+    attName: string,
+    newValues: Array<string>
+  ) {
+    const newProductAttributes = this.state.activeFilters.metaFilters
+      ? {
+        ...this.state.activeFilters.metaFilters.product_attributes
+      }
+      : {}
+    newProductAttributes[attName] = newValues
+
     return this.setState({
       activeFilters: {
         ...this.state.activeFilters,
-        metaFilters: newFilters
+        metaFilters: {
+          ...this.state.activeFilters.metaFilters,
+          product_attributes: newProductAttributes
+        }
+      }
+    })
+  }
+
+  updateMetaOtherActiveFilters (newFilters: Array<string>) {
+    return this.setState({
+      activeFilters: {
+        ...this.state.activeFilters,
+        metaFilters: {
+          ...this.state.activeFilters.metaFilters,
+          other: newFilters
+        }
       }
     })
   }
@@ -172,7 +211,12 @@ class ProductCategory extends React.Component<Props, State> {
           }
           filters={this.state.filters}
           activeFilters={this.state.activeFilters}
-          updateMetaActiveFilters={this.updateMetaActiveFilters.bind(this)}
+          updateMetaOtherActiveFilters={this.updateMetaOtherActiveFilters.bind(
+            this
+          )}
+          updateMetaProductAttributesActiveFilters={this.updateMetaProductAttributesActiveFilters.bind(
+            this
+          )}
           updateTaxActiveFilters={this.updateTaxActiveFilters.bind(this)}
         />
       </div>
@@ -275,12 +319,7 @@ class ProductCategory extends React.Component<Props, State> {
 
       const newState = {}
       newState.categoryData = response.data.category_data
-      newState.filters = response.data.filters
-        ? {
-          metaFilters: response.data.filters.meta_filters,
-          taxFilters: response.data.filters.tax_filters
-        }
-        : false
+      newState.filters = this.unwrapFiltersFromResponse(response.data.filters)
       newState.loading = false
       newState.numberResults =
         (response.data.category_data && response.data.category_data.count) || 0
@@ -289,6 +328,19 @@ class ProductCategory extends React.Component<Props, State> {
     } catch (error) {
       console.log(error)
     }
+  }
+
+  unwrapFiltersFromResponse (responseFilters): FiltersType {
+    let filters = false
+
+    if (responseFilters.meta_filters || responseFilters.tax_filters) {
+      filters = {}
+
+      filters.metaFilters = responseFilters.meta_filters
+      filters.taxFilters = responseFilters.tax_filters
+    }
+
+    return filters
   }
 }
 

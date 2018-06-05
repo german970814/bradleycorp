@@ -44,7 +44,9 @@ class DropDownTab extends Component<Props, State> {
       <div
         className={style.content}
         dangerouslySetInnerHTML={{
-          __html: decodeURIComponent(this.props.content)
+          __html: decodeURIComponent(
+            this.props.content.replace(/%/g, encodeURIComponent('%'))
+          )
         }}
       />
     ) : null

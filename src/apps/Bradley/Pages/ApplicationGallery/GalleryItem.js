@@ -35,26 +35,32 @@ export default class GalleryItem extends Component<Props, State> {
     const pathname = this.props.applicationGallery.post.post_name
       ? `/application-gallery/${this.props.applicationGallery.post.post_name}`
       : '#'
+
     return <div
-      className={`${style.imageContainer}`}
-      onMouseEnter={this.hoverOn.bind(this)}
-      onMouseLeave={this.hoverOff.bind(this)}>
-      <Link to={
-        { pathname, state: { post: this.props.applicationGallery }
-        }}>
-        <ImageFrame
-          src={this.props.applicationGallery.meta.app_gallery_img}
-          aspectRatio={180 / 301}
-          aspectRatioTablet={180 / 301}
-          aspectRatioDesktop={180 / 301}
-        />
-        <div className={`${style.arrowContainer} ${this.state.onHover ? style.showArrow : style.hideArrow}`}>
-          <img src={require('../../../../images/arrow/hover-corner.png')} />
-          <div className={`${style.arrowWrapper}`}>
-            <ArrowButton text={''} link={''} color={'white'}/>
+        className={`${style.imageContainer}`}
+        onMouseEnter={this.hoverOn.bind(this)}
+        onMouseLeave={this.hoverOff.bind(this)}>
+        <Link
+          to={{
+            pathname,
+            state: { post: this.props.applicationGallery }
+          }}>
+          <ImageFrame
+            src={this.props.applicationGallery.meta.app_gallery_img || ''}
+            aspectRatio={180 / 301}
+            aspectRatioTablet={180 / 301}
+            aspectRatioDesktop={180 / 301}
+          />
+          <div
+            className={`${style.arrowContainer} ${
+              this.state.onHover ? style.showArrow : style.hideArrow
+            }`}>
+            <img src={require('../../../../images/arrow/hover-corner.png')} />
+            <div className={`${style.arrowWrapper}`}>
+              <ArrowButton text={''} link={''} color={'white'} />
+            </div>
           </div>
-        </div>
-      </Link>
-    </div>
+        </Link>
+      </div>
   }
 }
