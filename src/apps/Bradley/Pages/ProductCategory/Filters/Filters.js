@@ -9,12 +9,16 @@ type Props = {
   activeFilters: ActiveFilterType,
   catParentTitle?: string,
   catSlug: string,
-  updateMetaActiveFilters: (newFilters: Array<string>) => void,
+  updateMetaProductAttributesActiveFilters: (
+    attName: string,
+    newValues: Array<string>
+  ) => void,
+  updateMetaOtherActiveFilters: (newFilters: Array<string>) => void,
   updateTaxActiveFilters: (tax: string, newFilters: Array<string>) => void
 }
 
 class Filters extends React.Component<Props> {
-  renderMetaFilters () {
+  renderNewMetaFilter () {
     const { filters } = this.props
     const { activeFilters } = this.props
 
@@ -22,13 +26,7 @@ class Filters extends React.Component<Props> {
       return null
     }
 
-    let MetaFiltersElements = []
-
-    // we have to do each meta filter as a special case
-    // since it isnt just a case of listing all of them
-    //
-    // each one needs its own title and option
-    if (Object.keys(filters.metaFilters).includes('product_new_until')) {
+    if (filters.metaFilters.product_new_until) {
       const option = {
         product_new_until: this.createLabelWithCount(
           'New Product',
@@ -38,24 +36,22 @@ class Filters extends React.Component<Props> {
 
       const filterState =
         activeFilters.metaFilters &&
-        activeFilters.metaFilters.includes('product_new_until')
+        activeFilters.metaFilters.other &&
+        activeFilters.metaFilters.other.includes('product_new_until')
           ? ['product_new_until']
           : []
 
-      MetaFiltersElements = [
-        ...MetaFiltersElements,
+      return (
         <LeftSidebarCheckboxGroup
-          key={'new'}
+          key={'New'}
           className={style.checkbox}
           options={option}
           title={'New'}
           filterState={filterState}
-          updateFilters={this.props.updateMetaActiveFilters}
+          updateFilters={this.props.updateMetaOtherActiveFilters}
         />
-      ]
+      )
     }
-
-    return MetaFiltersElements
   }
 
   renderTaxFilters () {
@@ -71,6 +67,9 @@ class Filters extends React.Component<Props> {
         {this.props.catParentTitle && (
           <h6 className={style.parentTitle}>{this.props.catParentTitle}</h6>
         )}
+
+        {this.renderProductAttributeFilters()}
+
         {Object.keys(filters.taxFilters).map((taxName, index) => {
           const options = {}
 
@@ -108,10 +107,64 @@ class Filters extends React.Component<Props> {
     )
   }
 
+  renderProductAttributeFilters () {
+    const { filters } = this.props
+    const { activeFilters } = this.props
+
+    if (!filters || !filters.metaFilters) {
+      return null
+    }
+
+    let FilterElements = []
+    // product attributes
+    if (filters.metaFilters.product_attributes) {
+      const productAttributes = filters.metaFilters.product_attributes
+
+      Object.keys(productAttributes).forEach(attName => {
+        const options = {}
+
+        if (productAttributes[attName]) {
+          Object.keys(productAttributes[attName]).forEach(attValue => {
+            options[attValue] = this.createLabelWithCount(
+              attValue,
+              productAttributes[attName][attValue]
+            )
+          })
+        }
+
+        const filterState =
+          activeFilters.metaFilters &&
+          activeFilters.metaFilters.product_attributes &&
+          activeFilters.metaFilters.product_attributes[attName]
+            ? activeFilters.metaFilters.product_attributes[attName]
+            : []
+
+        FilterElements = [
+          ...FilterElements,
+          <LeftSidebarCheckboxGroup
+            key={attName}
+            className={style.checkbox}
+            options={options}
+            title={attName}
+            filterState={filterState}
+            updateFilters={newFilters => {
+              this.props.updateMetaProductAttributesActiveFilters(
+                attName,
+                newFilters
+              )
+            }}
+          />
+        ]
+      })
+    }
+
+    return FilterElements
+  }
+
   render () {
     return (
       <div className={style.filters}>
-        {this.renderMetaFilters()}
+        {this.renderNewMetaFilter()}
         {this.renderTaxFilters()}
       </div>
     )
