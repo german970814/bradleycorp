@@ -201,7 +201,7 @@ class ScrollableList extends Component {
   }
 
   renderPositionCircles () {
-    if (!this.props.showPosition || this.props.numberToDisplay !== 1) {
+    if (!this.props.showPosition) {
       return
     }
 
@@ -348,12 +348,15 @@ class ScrollableList extends Component {
   }
 
   shouldRenderNavigation () {
-    return (
-      (this.props.numberOfPosts &&
-        this.props.numberToDisplay > this.props.numberOfPosts) ||
-      (this.state.children &&
-        this.state.children.length < this.props.numberToDisplay)
-    )
+    if (this.props.numberOfPosts) {
+      return this.props.numberToDisplay > this.props.numberOfPosts
+    }
+
+    if (this.state.children) {
+      return this.state.children.length < this.props.numberToDisplay
+    }
+
+    return true
   }
 }
 

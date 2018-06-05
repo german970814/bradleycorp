@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import ReactHtmlParser from 'react-html-parser'
-import ContentTransformer from './transformContent/transformContent'
+import ContentTransformer from '../../components/ContentTransformer/ContentTransformer'
 import ModuleFactory from './ModuleFactory'
 
 /**
@@ -14,7 +13,7 @@ import ModuleFactory from './ModuleFactory'
  * To do this we:
  *
  *  1. Render the structure of span nodes from the backend,
- *     making sure to use ReactHtmlParser rather than dangerouslySetInnerHtml.
+ *     making sure to use our ContentTransformer ather than dangerouslySetInnerHtml.
  *     Using dangerouslySetInnerHtml doesnt render to the React tree, just the actual DOM.
  *
  *  2. Run another render cycle once we've confirmed the span nodes exist in the DOM.
@@ -119,12 +118,7 @@ class ModuleBuilder extends Component {
 
     return (
       <React.Fragment>
-        {ReactHtmlParser(this.props.moduleData.content, {
-          transform: (node, index) => {
-            const contentTransformer = new ContentTransformer(node, index)
-            return contentTransformer.transform()
-          }
-        })}
+        <ContentTransformer content={this.props.moduleData.content} />
 
         {this.renderModulePortals()}
       </React.Fragment>

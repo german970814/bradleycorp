@@ -33,14 +33,14 @@ type NestedTaxQuery = {
       }
     | NestedTaxQuery
   >
-}
+};
 
 type Response = AxiosPromise<Array<BCorpPost>>
 
 type FoundPostsResponse = AxiosPromise<{
   posts: Array<BCorpPost>,
   found_posts: number
-}>
+}>;
 
 class CPTApiClient {
   cptName: CPTName
@@ -85,12 +85,15 @@ class CPTApiClient {
     return axios.get(url, { params })
   }
 
-  getByIdArray (idArray: Array<number>): AxiosPromise<Array<BCorpPost>> {
+  getByIdArray (
+    idArray: Array<number>,
+    postsPerPage?: number
+  ): AxiosPromise<Array<BCorpPost>> {
     const url = `${api.baseURL}${this.cptName}`
     const params = {
-      id_array: JSON.stringify(idArray)
+      id_array: JSON.stringify(idArray),
+      posts_per_page: postsPerPage
     }
-
     return axios.get(url, { params })
   }
 

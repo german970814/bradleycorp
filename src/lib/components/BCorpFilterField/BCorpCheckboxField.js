@@ -102,6 +102,8 @@ class BCorpCheckboxField extends React.Component<Props> {
         ? { disabled: false, style: '' }
         : { disabled: true, style: style.fill }
 
+    const id = `checked_${this.createHash()}`
+
     return this.props.showOtherField ? (
       <div
         className={`col1 ${this.props.otherCheckboxClassName || ''} ${
@@ -109,11 +111,12 @@ class BCorpCheckboxField extends React.Component<Props> {
         }`}>
         <div className={`other-checkbox-option ${style.checkboxOption}`}>
           <input
+            id={id}
             onChange={this.handleOtherCheckboxChange.bind(this)}
             type="checkbox"
             value={'checked'}
           />
-          <label htmlFor={'checked'}>{'Other (please specify)'}</label>
+          <label htmlFor={id}>{'Other (please specify)'}</label>
         </div>
         <BCorpInputField
           className={`${inputLocked.style}`}
@@ -138,6 +141,8 @@ class BCorpCheckboxField extends React.Component<Props> {
           ? this.props.options[optionName]
           : ''
 
+      const id = `${optionName}_${this.createHash()}`
+
       return (
         <div
           key={index}
@@ -148,13 +153,13 @@ class BCorpCheckboxField extends React.Component<Props> {
               onChange={this.handleChange.bind(this)}
               type="checkbox"
               value={optionName}
-              id={optionName}
+              id={id}
               checked={checked || false}
             />
           </div>
           <div>
             <label
-              htmlFor={optionName}
+              htmlFor={id}
               dangerouslySetInnerHTML={{ __html: label }}
             />
           </div>
@@ -179,6 +184,12 @@ class BCorpCheckboxField extends React.Component<Props> {
 
   render () {
     return this.renderCheckBoxes()
+  }
+
+  createHash () {
+    return Math.random()
+      .toString(36)
+      .substring(7)
   }
 }
 

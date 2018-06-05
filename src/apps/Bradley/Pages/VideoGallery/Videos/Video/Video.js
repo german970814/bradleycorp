@@ -1,13 +1,17 @@
 // @flow
 import * as React from 'react'
 import type { VideoGalleryPost } from '../../../../../../lib/types/cpt_types'
+import type { ScreenSize } from '../../../../../../lib/contexts/ScreenSizeContext'
+import { withScreenSize } from '../../../../../../lib/contexts/ScreenSizeContext'
 import LightboxV2 from '../../../../../../lib/containers/Lightbox/LightboxV2/LightboxV2'
 import BCorpVideo from '../../../../../../lib/components/BCorpVideo/BCorpVideo'
 import FixedAspectRatioBox from '../../../../../../lib/components/FixedAspectRatioBox/FixedAspectRatioBox'
 import style from './Video.scss'
 
 type Props = {
-  video: VideoGalleryPost
+  video: VideoGalleryPost,
+  // from withScreenSize HOC
+  screenSize: ScreenSize
 }
 
 type State = {
@@ -56,7 +60,21 @@ class Video extends React.Component<Props, State> {
   }
 
   render () {
-    return (
+    return this.props.screenSize === 'mobile' ? (
+      <div className={`col1 col2-tablet ${style.videoWrapper}`}>
+        <FixedAspectRatioBox>
+          <BCorpVideo
+            className={style.video}
+            url={this.url}
+            youtubeProps={{
+              opts: this.opts
+            }}
+            noVimeo
+          />
+        </FixedAspectRatioBox>
+        <h5 className={style.title}>{this.props.video.post.post_title}</h5>
+      </div>
+    ) : (
       <LightboxV2
         renderChildren={openLightbox => {
           return (
@@ -126,4 +144,4 @@ class Video extends React.Component<Props, State> {
 
 export type { YouTubeAPI, YouTubeIframe }
 export { opts }
-export default Video
+export default withScreenSize(Video)

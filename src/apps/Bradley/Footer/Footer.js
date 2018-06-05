@@ -198,7 +198,9 @@ class Footer extends React.Component<Props, State> {
 
     try {
       const footerMenuRequest = NavMenuApiClient.getNavMenuByLocation(
-        'footer_col_1'
+        'footer_col_1',
+        undefined,
+        true
       )
       const footerResponse = await footerMenuRequest
       footer.menu1 = footerResponse.data || []
@@ -208,7 +210,9 @@ class Footer extends React.Component<Props, State> {
 
     try {
       const footerMenuRequest2 = NavMenuApiClient.getNavMenuByLocation(
-        'footer_col_2'
+        'footer_col_2',
+        undefined,
+        true
       )
       const footerResponse2 = await footerMenuRequest2
       footer.menu2 = footerResponse2.data || []
@@ -218,7 +222,9 @@ class Footer extends React.Component<Props, State> {
 
     try {
       const footerMenuRequest3 = NavMenuApiClient.getNavMenuByLocation(
-        'footer_col_3'
+        'footer_col_3',
+        undefined,
+        true
       )
       const footerResponse3 = await footerMenuRequest3
       footer.menu3 = footerResponse3.data || []

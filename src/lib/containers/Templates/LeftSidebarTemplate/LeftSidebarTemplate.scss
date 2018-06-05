@@ -5,9 +5,11 @@ $leftSidebarWidth: 17%;
 
 .LeftSidebarTemplate {
   .sidebar {
-    margin-bottom: 40px;
+    margin-top: 10px;
+    margin-bottom: 25px;
 
     @include respond-to(tablet) {
+      margin-top: 0px;
       padding-right: 3%;
     }
 
@@ -17,7 +19,11 @@ $leftSidebarWidth: 17%;
     }
 
     .menuBlockWrapper {
-      margin-bottom: 35px;
+      margin-bottom: 15px;
+
+      @include respond-to(tablet) {
+        margin-bottom: 35px;
+      }
     }
   }
   .content {

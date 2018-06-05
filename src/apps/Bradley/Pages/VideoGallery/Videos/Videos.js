@@ -11,6 +11,7 @@ import { filterDefault } from '../VideoGallery'
 import { sortIntoRows } from '../../../../../lib/bcorpJSX'
 import LoadMore from '../../../../../lib/containers/LoadMore/LoadMore'
 import Video from './Video/Video'
+import NoResults from '../../../../../lib/components/NoResults/NoResults'
 import CPTApiClient from '../../../../../api/cpt_client'
 import style from './Videos.scss'
 
@@ -104,7 +105,12 @@ class VideosInner extends React.Component<VideosInnerProps> {
 
   renderVideos () {
     if (!this.props.posts || !this.props.posts.length) {
-      return null
+      return (
+        <NoResults
+          className={style.noResults}
+          message={'No videos matched your filter selections'}
+        />
+      )
     }
 
     let videos = []

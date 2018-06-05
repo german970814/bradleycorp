@@ -31,7 +31,7 @@ type Props = {
    * Used in the templates to know when to re run any init functions
    */
   pagePath: string
-}
+};
 
 /**
  * Given page template data, we pass it through to the correct template component

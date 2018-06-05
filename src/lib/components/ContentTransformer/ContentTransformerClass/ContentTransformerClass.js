@@ -3,7 +3,7 @@ import React from 'react'
 import FixedAspectRatioBox from '../../../components/FixedAspectRatioBox/FixedAspectRatioBox'
 import FileDownloadLink from '../../../components/FileDownloadLink/FileDownloadLink'
 import BCorpVideo from '../../../components/BCorpVideo/BCorpVideo'
-import style from './transformContent.scss'
+import style from './ContentTransformerClass.scss'
 
 type HTMLParser2Node = {
   attribs: {
@@ -39,7 +39,7 @@ type HTMLParser2Node = {
   data: string
 };
 
-class ContentTransformer {
+class ContentTransformerClass {
   node: HTMLParser2Node
   index: number
 
@@ -55,9 +55,7 @@ class ContentTransformer {
       return this.transformText()
     } else {
       // return the node if it is a valid react element
-      return React.isValidElement(this.node)
-        ? this.node
-        : null
+      return React.isValidElement(this.node) ? this.node : null
     }
   }
 
@@ -104,4 +102,4 @@ class ContentTransformer {
   }
 }
 
-export default ContentTransformer
+export default ContentTransformerClass

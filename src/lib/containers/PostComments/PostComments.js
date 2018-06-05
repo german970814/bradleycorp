@@ -2,10 +2,10 @@
 import * as React from 'react'
 import type { WPCreateComment, WPComment } from '../../types/comment_types'
 import type { WPPost } from '../../types/post_types'
-import LeaveACommentForm from './LeaveACommentForm/LeaveACommentForm'
+// import LeaveACommentForm from './LeaveACommentForm/LeaveACommentForm'
 import WPAPIClient from '../../../api/wp_client'
 import Comment from './Comment/Comment'
-import style from './PostComments.scss'
+// import style from './PostComments.scss'
 
 type NewComment = {
   comment?: string,
@@ -60,6 +60,10 @@ class PostComments extends React.Component<Props, State> {
   }
 
   render () {
+    return null
+    /*
+    comment out until we have user handling
+
     return (
       <div className={style.PostCommentsForm}>
         <LeaveACommentForm
@@ -70,6 +74,7 @@ class PostComments extends React.Component<Props, State> {
         {this.renderComments()}
       </div>
     )
+    */
   }
 
   async submitComment (newComment: NewComment) {

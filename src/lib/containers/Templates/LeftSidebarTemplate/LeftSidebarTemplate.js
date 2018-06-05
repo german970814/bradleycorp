@@ -5,8 +5,8 @@ import type {
   BCorpPostTreeResponse,
   BCorpPostHeirarchyResponse
 } from '../../../types/post_types'
-import Media from 'react-media'
-import { MOBILEMAXWIDTH } from '../../../../globals'
+import type { ScreenSize } from '../../../contexts/ScreenSizeContext'
+import { withScreenSize } from '../../../contexts/ScreenSizeContext'
 import CPTClient from '../../../../api/cpt_client'
 import { renderTitle } from '../DefaultTemplate/DefaultTemplate'
 import MenuBlock from '../../Modules/MenuModule/MenuBlock/MenuBlock'
@@ -25,7 +25,9 @@ type Props = {
    * A render function for the modules
    */
   renderModules: () => React.Node,
-  hideTitle?: boolean
+  hideTitle?: boolean,
+  // from withScreenSize HOC
+  screenSize: ScreenSize
 }
 
 type State = {
@@ -51,7 +53,9 @@ class LeftSidebarTemplate extends React.Component<Props, State> {
     }
   }
 
-  renderMenuBlocks (collapsible: boolean) {
+  renderMenuBlocks () {
+    const collapsible = this.props.screenSize === 'mobile'
+
     return this.state.menuBlocks.map((menuBlock, index) => {
       return (
         <div key={index} className={style.menuBlockWrapper}>
@@ -62,11 +66,7 @@ class LeftSidebarTemplate extends React.Component<Props, State> {
   }
 
   renderLeftSidebar () {
-    return (
-      <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
-        {match => this.renderMenuBlocks(match)}
-      </Media>
-    )
+    return this.renderMenuBlocks()
   }
 
   render () {
@@ -146,4 +146,4 @@ class LeftSidebarTemplate extends React.Component<Props, State> {
   }
 }
 
-export default LeftSidebarTemplate
+export default withScreenSize(LeftSidebarTemplate)
