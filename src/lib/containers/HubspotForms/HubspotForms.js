@@ -34,7 +34,7 @@ export default class HubspotForms extends React.Component<Props> {
               height="800"
               frameBorder="0"
               onLoad={() => {
-                const iframe = document.getElementById('where-to-buy')
+                const iframe = ((document.getElementById('where-to-buy') :any) :HTMLIFrameElement)
                 const _window = iframe && iframe.contentWindow ? iframe.contentWindow : null
 
                 if ( ! _window )
