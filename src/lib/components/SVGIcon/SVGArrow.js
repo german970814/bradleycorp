@@ -42,11 +42,45 @@ const icons = {
 /**
  * Wraps registered SVG files with an API to interact with it more easily
  */
-class SVGIcon extends Component {
+class SVGArrow extends Component {
   constructor (props) {
     super(props)
 
+    this.ns = 'http://www.w3.org/2000/svg'
+    this.viewBox = '0 0 40.7 21.6'
+    this.lines = [
+      {
+        name: 'line1',
+        dashOffset: 40,
+        x1: '39.7',
+        y1: '10.8',
+        x2: '1',
+        y2: '10.8'
+      },
+      {
+        name: 'line2',
+        dashOffset: 10,
+        x1: '39.7',
+        y1: '10.8',
+        x2: '29.9',
+        y2: '20.6'
+      },
+      {
+        name: 'line3',
+        dashOffset: 10,
+        x1: '39.7',
+        y1: '10.8',
+        x2: '29.9',
+        y2: '1'
+      }
+    ]
+
     this.state = {
+
+      // line1DashOffset: '0px'
+      // line2DashOffset: '0px'
+      // line3DashOffset: '0px'
+
       strokeDashoffset: '0px',
       transition: 'none'
     }
@@ -54,6 +88,12 @@ class SVGIcon extends Component {
   }
 
   onMouseEnter (e) {
+    const dash = this.lines.find(line => {
+      return line.name === 'line1' && `${line.dashOffset}px`
+    })
+
+    console.log(dash)
+
     this.setState({
       strokeDashoffset: `${icons[this.props.icon].redrawDashArraySize}px`,
       transition: 'none'
@@ -85,7 +125,7 @@ class SVGIcon extends Component {
   render () {
     if (!icons[this.props.icon]) {
       console.warn(
-        `icon ${this.props.icon} is not registered in the SVGIcon component`
+        `icon ${this.props.icon} is not registered in the SVGArrow component`
       )
       return null
     }
@@ -97,8 +137,8 @@ class SVGIcon extends Component {
     return (
       <svg
         className={this.props.className}
-        xmlns={icons[this.props.icon].ns}
-        viewBox={icons[this.props.icon].viewBox}
+        xmlns={this.ns}
+        viewBox={this.viewBox}
         onMouseEnter={
           this.props.redrawOnHover ? this.onMouseEnter.bind(this) : undefined
         }>
@@ -128,7 +168,7 @@ class SVGIcon extends Component {
   }
 }
 
-SVGIcon.propTypes = {
+SVGArrow.propTypes = {
   /**
    * The slug for the SVG icon to render.
    * Must be registered within the class
@@ -145,4 +185,4 @@ SVGIcon.propTypes = {
   color: PropTypes.string
 }
 
-export default SVGIcon
+export default SVGArrow

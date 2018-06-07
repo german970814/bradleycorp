@@ -52,6 +52,11 @@
         }
     
         @include respond-to(tablet) {
+            font-size: 28px;
+            margin-bottom: 33px;
+        }
+
+        @include respond-to(desktop) {
             font-size: 34px;
             margin-bottom: 33px;
         }
@@ -70,6 +75,11 @@
         }
     
         @include respond-to(tablet) {
+            font-size: 20px;
+            margin-bottom: 27px;
+        }
+
+        @include respond-to(desktop) {
             font-size: 24px;
             margin-bottom: 27px;
         }

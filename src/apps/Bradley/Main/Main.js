@@ -69,9 +69,19 @@ const ResultsLoadable = Loadable({
   loading: Loading
 })
 
+const WhereToBuyPageLoadable = Loadable({
+  loader: () => import('../../../lib/containers/Pages/WhereToBuyPage/WhereToBuyPage'),
+  loading: Loading
+})
+
+const HubspotFormsLoadable = Loadable({
+  loader: () => import('../../../lib/containers/HubspotForms/HubspotForms'),
+  loading: Loading
+})
+
 type Props = {
   cookies: Cookies
-}
+};
 
 /*
  * If we need the home page then we render it with a different header
@@ -148,6 +158,97 @@ const RouterInner = () => {
         exact
         path="/results/:query/:tab/page=:page"
         component={ResultsLoadable}
+      />
+      <Route
+        exact
+        path="/locator"
+        component={WhereToBuyPageLoadable}
+      />
+
+      {/* Hubspot Forms */}
+      <Route
+        exact
+        path="/verge/washbar-sales-contact"
+        render={({match}) => {
+          return (
+            <HubspotFormsLoadable
+              match={match}
+              pageTitle={'Washbar Sales Contact Request Form'}
+              form={'washbar-sales-contact'} />
+          )
+        }}
+      />
+      <Route
+        exact
+        path="/contactus"
+        render={({match}) => {
+          return (
+            <HubspotFormsLoadable
+              match={match}
+              pageTitle={'Contact Us Form'}
+              form={'contactus'} />
+          )
+        }}
+      />
+      <Route
+        exact
+        path="/advocate/salescontact"
+        render={({match}) => {
+          return (
+            <HubspotFormsLoadable
+              match={match}
+              pageTitle={'Advocate Sales Contact Request'}
+              form={'advocate-salescontact'} />
+          )
+        }}
+      />
+      <Route
+        exact
+        path="/design-on-demand"
+        render={({match}) => {
+          return (
+            <HubspotFormsLoadable
+              match={match}
+              pageTitle={'Design on Demand Consultation Request'}
+              form={'design-on-demand'} />
+          )
+        }}
+      />
+      <Route
+        exact
+        path="/bim-services-group"
+        render={({match}) => {
+          return (
+            <HubspotFormsLoadable
+              match={match}
+              pageTitle={'Bradley BIM Support Services Group'}
+              form={'bim-services-group'} />
+          )
+        }}
+      />
+      <Route
+        exact
+        path="/evero-natural-quartz-surface/brochure"
+        render={({match}) => {
+          return (
+            <HubspotFormsLoadable
+              match={match}
+              pageTitle={'Evero Cast-Formed Brochure Order Form'}
+              form={'evero-natural-quartz-surface'} />
+          )
+        }}
+      />
+      <Route
+        exact
+        path="/safety-shower-eyewash-site-survey/form"
+        render={({match}) => {
+          return (
+            <HubspotFormsLoadable
+              match={match}
+              pageTitle={'Safety Site Survey Request'}
+              form={'safety-shower-eyewash-site-survey'} />
+          )
+        }}
       />
 
       {/* Post Types With Custom Templates */}
