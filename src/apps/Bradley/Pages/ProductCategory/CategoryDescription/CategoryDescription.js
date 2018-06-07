@@ -14,7 +14,7 @@ type Props = {
   logoSrc?: string
 }
 
-class CategoryDescription extends React.Component<Props> {
+class CategoryDescription extends React.PureComponent<Props> {
   /* renderImage () {
     if (!this.props.logoSrc) {
       return
