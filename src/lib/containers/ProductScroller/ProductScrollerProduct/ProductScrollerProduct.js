@@ -81,7 +81,7 @@ class ProductScrollerProduct extends Component<Props> {
       <div
         className={`${style.productScrollerProduct} ${this.props.className ||
           ''}`}>
-        <Link to={`${createCPTUrl(this.props.product.post) || ''}`} replace>
+        <Link to={`${createCPTUrl(this.props.product.post) || ''}`}>
           <div className={style.topIcons}>
             {this.renderNew()}
             {this.renderCompliance()}

@@ -43,7 +43,8 @@ type Props = {
    * with an input field for inputting another option.
    */
   showOtherField?: boolean,
-  otherCheckboxClassName?: string
+  otherCheckboxClassName?: string,
+  labelTurnsBlackWhenChecked?: boolean
 }
 
 class BCorpCheckboxField extends React.Component<Props> {
@@ -161,6 +162,11 @@ class BCorpCheckboxField extends React.Component<Props> {
             <label
               htmlFor={id}
               dangerouslySetInnerHTML={{ __html: label }}
+              className={
+                this.props.labelTurnsBlackWhenChecked && checked
+                  ? style.labelChecked
+                  : ''
+              }
             />
           </div>
         </div>

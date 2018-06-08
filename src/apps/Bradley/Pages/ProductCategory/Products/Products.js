@@ -27,6 +27,8 @@ type State = {
 
 class Products extends React.Component<Props, State> {
   getFilteredProductsDebounced: () => void
+  productsNode: ?HTMLDivElement
+  productsMinHeight: ?number
 
   constructor (props: Props) {
     super(props)
@@ -51,6 +53,8 @@ class Products extends React.Component<Props, State> {
       this.setState({ loading: true })
       this.getFilteredProductsDebounced()
     }
+
+    this.updateMinHeight()
   }
 
   renderProducts () {
@@ -89,10 +93,10 @@ class Products extends React.Component<Props, State> {
   }
 
   render () {
-    return this.state.loading ? (
-      <Loading />
-    ) : (
-      <div className={style.products}>{this.renderProducts()}</div>
+    return (
+      <div className={style.products} ref={node => (this.productsNode = node)}>
+        {this.state.loading ? <Loading /> : this.renderProducts()}
+      </div>
     )
   }
 
@@ -239,6 +243,24 @@ class Products extends React.Component<Props, State> {
     }
 
     return false
+  }
+
+  updateMinHeight (): void {
+    if (!this.productsNode) {
+      return
+    }
+    const { productsNode } = this
+
+    const height = productsNode.getBoundingClientRect().height
+
+    if (height > (this.productsMinHeight || 0)) {
+      // update the min height,
+      // this will only ever increase as a new max height is reached
+      productsNode.style.minHeight = `${height}px`
+      // keep track of the last set min height
+      // so we dont always have to process the min height from the node to compare it to a number
+      this.productsMinHeight = height
+    }
   }
 }
 

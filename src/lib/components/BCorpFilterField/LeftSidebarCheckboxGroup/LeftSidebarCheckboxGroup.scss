@@ -8,8 +8,7 @@
   :global(.checkbox-title) {
     @extend %h6-desktop;
     margin-bottom: 5px;
-    color: $gray;
-    font-weight: 500;
+    color: $slate-grey;
   }
 
   &.collapsible {
