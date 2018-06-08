@@ -52,35 +52,31 @@ class PostGridItem extends Component {
       return
     }
 
-    return (
-      <Link to={`${this.postLink}`}>
-        <h5 className={style.title}>{post.post['post_title']}</h5>
-      </Link>
-    )
+    return <h5 className={style.title}>{post.post['post_title']}</h5>
   }
 
   renderArrow () {
     return (
-      <Link to={`${this.postLink}`}>
-        <div className={style.arrowWrapper}>
-          <SVGIcon
-            className={style.arrow}
-            icon={'arrow'}
-            color={'white'}
-            redrawOnHover
-          />
-        </div>
-      </Link>
+      <div className={style.arrowWrapper}>
+        <SVGIcon
+          className={style.arrow}
+          icon={'arrow'}
+          color={'white'}
+          redrawOnHover
+        />
+      </div>
     )
   }
 
   render () {
     return (
       <div className={`${style.postGridItem} ${this.props.containerClassName}`}>
-        {this.renderImage()}
+        <Link to={`${this.postLink}`}>
+          {this.renderImage()}
 
-        {this.renderTitle()}
-        {this.renderArrow()}
+          {this.renderTitle()}
+          {this.renderArrow()}
+        </Link>
       </div>
     )
   }
