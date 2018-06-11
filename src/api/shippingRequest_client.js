@@ -8,7 +8,7 @@ type ShippingRequest = {|
   userID: number,
   shippingInfo: ShippingInfoType,
   items: {}
-|}
+|};
 
 /**
  * API Client for using the default WP REST API
