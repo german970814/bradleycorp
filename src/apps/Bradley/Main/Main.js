@@ -75,7 +75,7 @@ const WhereToBuyPageLoadable = Loadable({
 })
 
 const HubspotFormsLoadable = Loadable({
-  loader: () => import('../../../lib/containers/HubspotForms/HubspotForms'),
+  loader: () => import('../../../lib/containers/Pages/HubspotFormPage/HubspotFormPage'),
   loading: Loading
 })
 
