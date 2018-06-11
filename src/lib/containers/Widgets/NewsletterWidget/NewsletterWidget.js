@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react'
 import ArrowButton from '../../../../lib/components/ArrowButton/ArrowButton'
+import HubspotForms from '../../../../lib/containers/HubspotForms/HubspotForms'
 import BCorpWidget from '../BCorpWidget'
 import style from './NewsletterWidget.scss'
 
@@ -14,7 +15,7 @@ type Props = {
 
 type State = {
   value?: string
-}
+};
 
 /**
  * The Newsletter Widget
@@ -42,9 +43,41 @@ class NewsletterWidget extends Component<Props, State> {
 
   handleClick (event: SyntheticEvent<HTMLFormElement>) {
     // simply calling this.form.submit() won't dispatch the submit event automatically, and the page will reload
-    if (this.form) {
-      this.form.dispatchEvent(new Event('submit'))
+    // if (this.form) {
+    //   this.form.dispatchEvent(new Event('submit'))
+    // }
+
+    //
+    //
+    const iframe = ((document.getElementById('newsletter_signup')
+      :any)
+      :HTMLIFrameElement)
+    const _window = iframe && iframe.contentWindow
+      ? iframe.contentWindow
+      : iframe.contentDocument
+
+    if (!_window) {
+      console.warn('Could not get iframe window.')
+      return;
     }
+
+    // when we post a message to the iframe window
+    // we will need to hear back from it. This adds
+    // the event listener to do so
+    // window.addEventListener(
+    //   "message",
+    //   this.updateIframeDimensions.bind(this),
+    //   false
+    // );
+
+    // console.log( _window )
+    // lets post a message to the iframe window
+    _window.postMessage({
+      action: 'submitForm',
+      iframeID: 'newsletter_signup',
+    }, 'http://forms.bradley.test')
+
+    console.log( 'setTheIframeHeight ran' )
   }
 
   renderDescription () {
@@ -85,15 +118,15 @@ class NewsletterWidget extends Component<Props, State> {
         title={this.props.title}
         twoColsOnTablet={this.props.twoColsOnTablet}>
         {this.renderDescription()}
-
-        <form
+        <HubspotForms form='newsletter-signup' />
+        {this.renderSubmitButton()}
+        {/*<form
           ref={node => {
             this.form = node
           }}
           onSubmit={this.handleSubmit.bind(this)}>
           {this.renderInput()}
-          {this.renderSubmitButton()}
-        </form>
+        </form>*/}
       </BCorpWidget>
     )
   }
