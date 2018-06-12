@@ -39,7 +39,7 @@ type State = {
   stage: stageTypes,
   highlightRequiredFields: boolean,
   shippingId?: number
-}
+};
 
 class ShippingInfo extends React.Component<Props, State> {
   requiredFields: Array<ShippingInfoField>

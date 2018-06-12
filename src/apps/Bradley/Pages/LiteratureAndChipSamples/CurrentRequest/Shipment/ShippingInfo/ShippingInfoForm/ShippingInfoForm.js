@@ -23,7 +23,7 @@ type Props = {
   highlightRequiredFields: boolean,
   isMobile: boolean,
   user: User
-}
+};
 
 class ShippingInfoForm extends React.Component<Props> {
   updateShippingInfoProperty (

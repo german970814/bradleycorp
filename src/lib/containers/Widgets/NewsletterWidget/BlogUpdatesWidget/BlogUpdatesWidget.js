@@ -9,7 +9,7 @@ type Props = {
   linkText?: string,
   blog: BlogName,
   twoColsOnTablet?: boolean
-}
+};
 
 /**
  * Class for the Blog Updates Widget
@@ -33,6 +33,7 @@ class BlogUpdatesWidget extends Component<Props> {
         blog={this.props.blog}
         handleSubmit={this.handleSubmit.bind(this)}
         twoColsOnTablet={this.props.twoColsOnTablet}
+        form={`bim-blog-notifications`}
       />
     )
   }

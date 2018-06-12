@@ -29,7 +29,7 @@ type Props = {
   ) => void,
   renderButton?: () => React.Node,
   isMobile: boolean
-}
+};
 
 class ShipmentContent extends React.Component<Props> {
   render () {

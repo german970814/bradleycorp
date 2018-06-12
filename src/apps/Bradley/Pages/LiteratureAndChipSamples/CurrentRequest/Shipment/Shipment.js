@@ -24,7 +24,7 @@ type Props = {
     postType: PostTypeOptions
   ) => void,
   isMobile: boolean
-}
+};
 
 class Shipment extends React.Component<Props> {
   render () {

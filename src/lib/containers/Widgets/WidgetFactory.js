@@ -9,7 +9,7 @@ import BlogUpdatesWidget from './NewsletterWidget/BlogUpdatesWidget/BlogUpdatesW
 type Props = Widget & {
   widgetClass?: string,
   twoColsOnTablet?: boolean
-}
+};
 
 /**
  * Given data about a widget, we return the correct component with the necessary props
@@ -53,6 +53,7 @@ const WidgetFactory = (props: Props): React.Node => {
           {...sharedProps}
           description={data['description']}
           linkText={data['link_text']}
+          form={'newsletter-signup'}
         />
       )
 

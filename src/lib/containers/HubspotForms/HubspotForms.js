@@ -1,52 +1,88 @@
 // @flow
 import * as React from 'react'
-import DefaultTemplate from '../Templates/DefaultTemplate/DefaultTemplate'
+// import DefaultTemplate from '../Templates/DefaultTemplate/DefaultTemplate'
 
 type Props = {
-  pageTitle: string,
+  // pageTitle: string,
   form: string,
+  initialHeight: int,
+  style: mixed
 };
 
 export default class HubspotForms extends React.Component<Props> {
-  // constructor (props: Props) {
-  //   super(props)
+  constructor (props: Props) {
+    super(props)
 
-  //   // this.state = {}
-  // }
+    this.formID = this.props.form.replace(/[^\w]/g, '_')
+    this.formUrl = `http://forms.bradleydev.twoxfour.com`
 
-  // componentDidMount () {
+    this.state = {
+      iframeWidth: '100%',
+      iframeHeight: this.props.initialHeight || 100
+    }
+  }
 
-  // }
+  updateIframeDimensions (event) {
+    console.log(event.data)
+    if (this.formID !== event.data.iframeID) {
+      return
+    }
+    const {height} = event.data
+
+    if (height && height > 0) {
+      this.setState({
+        iframeHeight: height
+      })
+    }
+  }
 
   render () {
-    console.log(this.props)
     return <div className={'hubspot-form'}>
-      <DefaultTemplate
-        data={{
-          page_title: this.props.pageTitle
+      <iframe
+        id={this.formID}
+        src={this.formUrl + `/${this.props.form}.html`}
+        width={this.state.iframeWidth}
+        height={this.state.iframeHeight}
+        frameBorder="0"
+        style={{
+          ...this.props.style,
+          height: `${this.state.iframeHeight}px`,
+          width: this.state.iframeWidth
         }}
-        renderModules={() => {
-          return (
-            <iframe
-              id="where-to-buy"
-              src={`http://forms.bradleydev.twoxfour.com/${this.props.form}.html`}
-              width="100%"
-              height="800"
-              frameBorder="0"
-              onLoad={() => {
-                const iframe = ((document.getElementById('where-to-buy') :any) :HTMLIFrameElement)
-                const _window = iframe && iframe.contentWindow ? iframe.contentWindow : null
-
-                if (!_window) { return }
-
-                _window.postMessage({
-
-                }, '*')
-              }}
-            ></iframe>
-          )
-        }}
-      />
+        onLoad={this.setTheIframeHeight.bind(this)}
+      ></iframe>
     </div>
+  }
+
+  setTheIframeHeight () {
+    const iframe = ((document.getElementById(this.formID)
+      :any)
+      :HTMLIFrameElement)
+    const _window = iframe && iframe.contentWindow
+      ? iframe.contentWindow
+      : iframe.contentDocument
+
+    if (!_window) {
+      console.warn('Could not get iframe window.')
+      return
+    }
+
+    // when we post a message to the iframe window
+    // we will need to hear back from it. This adds
+    // the event listener to do so
+    window.addEventListener(
+      'message',
+      this.updateIframeDimensions.bind(this),
+      false
+    )
+
+    // console.log( _window )
+    // lets post a message to the iframe window
+    _window.postMessage({
+      action: 'getDimensions',
+      iframeID: this.formID
+    }, this.formUrl)
+
+    console.log('setTheIframeHeight ran')
   }
 }

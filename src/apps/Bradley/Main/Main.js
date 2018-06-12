@@ -8,6 +8,7 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import { withCookies, Cookies } from 'react-cookie'
 import Loadable from 'react-loadable'
 import Loading from '../../../lib/components/Loading/Loading'
+import ScrollToTop from '../../../lib/components/ScrollToTop/ScrollToTop'
 import Header from '../Header/Header'
 
 const HomeLoadable = Loadable({
@@ -70,18 +71,20 @@ const ResultsLoadable = Loadable({
 })
 
 const WhereToBuyPageLoadable = Loadable({
-  loader: () => import('../../../lib/containers/Pages/WhereToBuyPage/WhereToBuyPage'),
+  loader: () =>
+    import('../../../lib/containers/Pages/WhereToBuyPage/WhereToBuyPage'),
   loading: Loading
 })
 
 const HubspotFormsLoadable = Loadable({
-  loader: () => import('../../../lib/containers/HubspotForms/HubspotForms'),
+  loader: () =>
+    import('../../../lib/containers/Pages/HubspotFormPage/HubspotFormPage'),
   loading: Loading
 })
 
 type Props = {
   cookies: Cookies
-};
+}
 
 /*
  * If we need the home page then we render it with a different header
@@ -94,36 +97,38 @@ type Props = {
  */
 const Main = (props: Props) => {
   return (
-    <Switch>
-      <Route
-        exact
-        path="/"
-        render={({ history }) => {
-          // check for cookies to take us to the correct home page
-          const cookieName: HomePageCookie = 'BcorpHomePage'
-          const homepage: HomePageCookieOption = props.cookies.get(cookieName)
+    <ScrollToTop>
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={({ history }) => {
+            // check for cookies to take us to the correct home page
+            const cookieName: HomePageCookie = 'BcorpHomePage'
+            const homepage: HomePageCookieOption = props.cookies.get(cookieName)
 
-          if (!homepage) {
-            return <HomeLoadable history={history} />
-          } else if (homepage === 'commercial') {
-            return <Redirect to="/commercial" />
-          } else if (homepage === 'industrial') {
-            return <Redirect to="/industrial" />
-          }
-        }}
-      />
+            if (!homepage) {
+              return <HomeLoadable history={history} />
+            } else if (homepage === 'commercial') {
+              return <Redirect to="/commercial" />
+            } else if (homepage === 'industrial') {
+              return <Redirect to="/industrial" />
+            }
+          }}
+        />
 
-      <Route
-        render={() => {
-          return (
-            <React.Fragment>
-              <Header />
-              <RouterInner />
-            </React.Fragment>
-          )
-        }}
-      />
-    </Switch>
+        <Route
+          render={() => {
+            return (
+              <React.Fragment>
+                <Header />
+                <RouterInner />
+              </React.Fragment>
+            )
+          }}
+        />
+      </Switch>
+    </ScrollToTop>
   )
 }
 
@@ -159,94 +164,97 @@ const RouterInner = () => {
         path="/results/:query/:tab/page=:page"
         component={ResultsLoadable}
       />
-      <Route
-        exact
-        path="/locator"
-        component={WhereToBuyPageLoadable}
-      />
+      <Route exact path="/locator" component={WhereToBuyPageLoadable} />
 
       {/* Hubspot Forms */}
       <Route
         exact
         path="/verge/washbar-sales-contact"
-        render={({match}) => {
+        render={({ match }) => {
           return (
             <HubspotFormsLoadable
               match={match}
               pageTitle={'Washbar Sales Contact Request Form'}
-              form={'washbar-sales-contact'} />
+              form={'washbar-sales-contact'}
+            />
           )
         }}
       />
       <Route
         exact
         path="/contactus"
-        render={({match}) => {
+        render={({ match }) => {
           return (
             <HubspotFormsLoadable
               match={match}
               pageTitle={'Contact Us Form'}
-              form={'contactus'} />
+              form={'contactus'}
+            />
           )
         }}
       />
       <Route
         exact
         path="/advocate/salescontact"
-        render={({match}) => {
+        render={({ match }) => {
           return (
             <HubspotFormsLoadable
               match={match}
               pageTitle={'Advocate Sales Contact Request'}
-              form={'advocate-salescontact'} />
+              form={'advocate-salescontact'}
+            />
           )
         }}
       />
       <Route
         exact
         path="/design-on-demand"
-        render={({match}) => {
+        render={({ match }) => {
           return (
             <HubspotFormsLoadable
               match={match}
               pageTitle={'Design on Demand Consultation Request'}
-              form={'design-on-demand'} />
+              form={'design-on-demand'}
+            />
           )
         }}
       />
       <Route
         exact
         path="/bim-services-group"
-        render={({match}) => {
+        render={({ match }) => {
           return (
             <HubspotFormsLoadable
               match={match}
               pageTitle={'Bradley BIM Support Services Group'}
-              form={'bim-services-group'} />
+              form={'bim-services-group'}
+            />
           )
         }}
       />
       <Route
         exact
         path="/evero-natural-quartz-surface/brochure"
-        render={({match}) => {
+        render={({ match }) => {
           return (
             <HubspotFormsLoadable
               match={match}
               pageTitle={'Evero Cast-Formed Brochure Order Form'}
-              form={'evero-natural-quartz-surface'} />
+              form={'evero-natural-quartz-surface'}
+            />
           )
         }}
       />
       <Route
         exact
         path="/safety-shower-eyewash-site-survey/form"
-        render={({match}) => {
+        render={({ match }) => {
           return (
             <HubspotFormsLoadable
               match={match}
               pageTitle={'Safety Site Survey Request'}
-              form={'safety-shower-eyewash-site-survey'} />
+              form={'safety-shower-eyewash-site-survey'}
+            />
           )
         }}
       />
@@ -346,6 +354,18 @@ const RouterInner = () => {
             <DefaultCPTLandingPageLoadable
               match={match}
               postType={'video-gallery'}
+            />
+          )
+        }}
+      />
+      <Route
+        exact
+        path="/warranty/:slug"
+        render={({ match }) => {
+          return (
+            <DefaultCPTLandingPageLoadable
+              match={match}
+              postType={'warranty'}
             />
           )
         }}
