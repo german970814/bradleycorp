@@ -350,6 +350,18 @@ const RouterInner = () => {
           )
         }}
       />
+      <Route
+        exact
+        path="/warranty/:slug"
+        render={({ match }) => {
+          return (
+            <DefaultCPTLandingPageLoadable
+              match={match}
+              postType={'warranty'}
+            />
+          )
+        }}
+      />
 
       {/* Any other route is sent to the Customizable Page */}
       <Route exact path="/*/page=:page" component={CustomizableLoadable} />
