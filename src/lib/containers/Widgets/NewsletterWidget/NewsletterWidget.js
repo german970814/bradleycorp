@@ -10,7 +10,8 @@ type Props = {
   description?: string,
   linkText?: string,
   handleSubmit?: (event: SyntheticEvent<HTMLFormElement>) => void,
-  twoColsOnTablet?: boolean
+  twoColsOnTablet?: boolean,
+  form: string,
 }
 
 type State = {
@@ -44,7 +45,8 @@ class NewsletterWidget extends Component<Props, State> {
   handleClick (event: SyntheticEvent<HTMLFormElement>) {
     //
     //
-    const iframe = ((document.getElementById(this.props.form.replace(/[^\w]/g, '_'))
+    const formName = this.props.form
+    const iframe = ((document.getElementById(formName.replace(/[^\w]/g, '_'))
       :any)
       :HTMLIFrameElement)
     const _window = iframe && iframe.contentWindow
@@ -53,14 +55,14 @@ class NewsletterWidget extends Component<Props, State> {
 
     if (!_window) {
       console.warn('Could not get iframe window.')
-      return;
+      return
     }
 
     // console.log( _window )
     // lets post a message to the iframe window
     _window.postMessage({
       action: 'submitForm',
-      form: this.props.form,
+      form: this.props.form
     }, 'http://forms.bradleydev.twoxfour.com')
   }
 
@@ -104,13 +106,13 @@ class NewsletterWidget extends Component<Props, State> {
         {this.renderDescription()}
         <HubspotForms form={this.props.form} />
         {this.renderSubmitButton()}
-        {/*<form
+        {/* <form
           ref={node => {
             this.form = node
           }}
           onSubmit={this.handleSubmit.bind(this)}>
           {this.renderInput()}
-        </form>*/}
+        </form> */}
       </BCorpWidget>
     )
   }
