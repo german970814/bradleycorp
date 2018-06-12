@@ -1,0 +1,22 @@
+.withThumbnailsWrapper {
+  width: 100%;
+  height: auto;
+  text-align: center;
+
+  .withThumbnailsInner {
+    display: inline-block;
+    padding-top: 40px;
+    padding-bottom: 75px;
+
+    .column {
+      width: 200px;
+      padding-right: 30px;
+      text-align: left;
+
+      &:last-child {
+        width: 170px;
+        padding-right: 0px;
+      }
+    }
+  }
+}

@@ -10,7 +10,8 @@ type WPTerm = {
   taxonomy: string,
   term_group: number,
   term_id: number,
-  term_taxonomy_id: number
+  term_taxonomy_id: number,
+  children?: Array<WPTerm>
 }
 
 type BCorpTermsResponse = {

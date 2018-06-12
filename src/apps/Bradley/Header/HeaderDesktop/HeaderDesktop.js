@@ -1,11 +1,16 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import * as React from 'react'
+import type { MegaMenuNavMenuItem } from '../../../../lib/types/megaMenu_types'
 import VerticalAlignHelper from '../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
-import MenuItems from './MenuItems'
+import MegaMenuItems from '../../../../lib/containers/MegaMenu/MegaMenuItems'
 import SearchIcon from '../SearchIcon/SearchIcon'
-import style from './HeaderDesktop.scss'
+import style, { bottombarheight, totalheight } from './HeaderDesktop.scss'
 
-const HeaderDesktop = props => {
+type Props = {
+  menuItems: Array<MegaMenuNavMenuItem>
+}
+
+const HeaderDesktop = (props: Props) => {
   return (
     <header className={style.header}>
       <div className={style.topBarColor}>
@@ -45,18 +50,20 @@ const HeaderDesktop = props => {
         </div>
 
         <div className={style.menuItems}>
-          <MenuItems menuItems={props.menuItems} />
-          <VerticalAlignHelper />
+          <MegaMenuItems
+            type={'hover'}
+            menuItems={props.menuItems}
+            itemHeight={bottombarheight}
+            hoverExpandedPosition={{
+              top: totalheight
+            }}
+          />
         </div>
 
         <SearchIcon />
       </div>
     </header>
   )
-}
-
-HeaderDesktop.propTypes = {
-  menuItems: PropTypes.array.isRequired
 }
 
 export default HeaderDesktop

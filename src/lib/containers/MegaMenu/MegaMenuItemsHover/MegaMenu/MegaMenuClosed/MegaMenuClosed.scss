@@ -1,0 +1,25 @@
+@import '../../../../../../scss/partials/variables';
+
+$spaceBetweenMenuItems: 34px;
+$spanPaddingSides: 5px;
+
+h6.menuItemLink {
+  text-decoration: none;
+  padding: {
+    left: $spaceBetweenMenuItems / 2;
+    right: $spaceBetweenMenuItems / 2;
+  }
+
+  &.hovered {
+    padding: {
+      left: ($spaceBetweenMenuItems / 2) - $spanPaddingSides;
+      right: ($spaceBetweenMenuItems / 2) - $spanPaddingSides;
+    }
+
+    span {
+      padding: 4px $spanPaddingSides 2px $spanPaddingSides;
+      background-color: $navy;
+      color: #fff;
+    }
+  }
+}

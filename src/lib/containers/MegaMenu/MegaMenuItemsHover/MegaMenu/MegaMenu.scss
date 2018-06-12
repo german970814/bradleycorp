@@ -1,0 +1,18 @@
+@import '../../../../../scss/partials/variables';
+
+.menuItem {
+  position: relative;
+  display: inline-block;
+}
+
+.menuItemExpandedArrow {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid $navy;
+}
