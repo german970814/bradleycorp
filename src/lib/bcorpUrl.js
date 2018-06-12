@@ -47,12 +47,17 @@ bcorpUrl.createArchiveUrl = (term: WPTerm): false | string => {
 
 /**
  * Removes host from the url ready for react-router Link
+ * If it receives a relative url then that is just returned
  * If it receives an external url then it returns false
  *
  * @param  {string} url A url that may or may not comtain the host
  * @return {string|boolean}     A url formatted for a react-router link or false
  */
 bcorpUrl.removeHostFromUrl = (url: string): false | string => {
+  if (url.charAt(0) === '/' && !url.includes(host)) {
+    return url
+  }
+
   if (!url.includes(host)) {
     return false
   }

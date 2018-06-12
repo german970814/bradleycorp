@@ -2,9 +2,9 @@
 import * as React from 'react'
 import type { MegaMenuNavMenuItem } from '../../../../lib/types/megaMenu_types'
 import VerticalAlignHelper from '../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
-import MegaMenu from '../../../../lib/containers/MegaMenu/MegaMenu'
+import MegaMenuItems from '../../../../lib/containers/MegaMenu/MegaMenuItems'
 import SearchIcon from '../SearchIcon/SearchIcon'
-import style from './HeaderDesktop.scss'
+import style, { bottombarheight } from './HeaderDesktop.scss'
 
 type Props = {
   menuItems: Array<MegaMenuNavMenuItem>
@@ -50,8 +50,11 @@ const HeaderDesktop = (props: Props) => {
         </div>
 
         <div className={style.menuItems}>
-          <MegaMenu type={'hover'} menuItems={props.menuItems} />
-          <VerticalAlignHelper />
+          <MegaMenuItems
+            type={'hover'}
+            menuItems={props.menuItems}
+            itemHeight={bottombarheight}
+          />
         </div>
 
         <SearchIcon />

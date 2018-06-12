@@ -1,8 +1,8 @@
 $spaceBetweenMenuItems: 34px;
 
 .menuItem {
+  position: relative;
   display: inline-block;
-  vertical-align: middle;
   margin: {
     left: $spaceBetweenMenuItems / 2;
     right: $spaceBetweenMenuItems / 2;
@@ -11,6 +11,11 @@ $spaceBetweenMenuItems: 34px;
   &:first-child {
     margin-left: 0;
   }
+}
+
+.menuItemExpanded {
+  position: absolute;
+  left: 0;
 }
 
 h6.menuItemLink {
