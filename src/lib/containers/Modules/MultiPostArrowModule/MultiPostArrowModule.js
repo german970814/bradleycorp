@@ -15,6 +15,11 @@ import style from './MultiPostArrowModule.scss'
 class MultiPostArrowModule extends PostGettingModule {
   constructor (props) {
     super(props, style, 'multiPostArrowModule', 100)
+
+    this.state = {
+      ...this.state,
+      contentVariableHeight: 0,
+    }
   }
 
   renderTitle () {
@@ -31,6 +36,7 @@ class MultiPostArrowModule extends PostGettingModule {
 
   renderPosts () {
     const arrow = (this.size === 'tablet' || this.size === 'desktop')
+    var height = this.state.contentVariableHeight
 
     return this.state.posts.map((post, index) => {
       return (
@@ -41,6 +47,17 @@ class MultiPostArrowModule extends PostGettingModule {
           skin={this.props.skin}
           accentColor={this.props.accentColor}
           skinClass={this.skinClass}
+          height={this.state.contentVariableHeight}
+          getHeight={container => {
+            if (height < container.current.clientHeight) {
+              height = container.current.clientHeight
+            }
+
+            if (index === this.state.posts.length - 1 && this.state.posts.length > 1) {
+              this.setState({ contentVariableHeight: height + 15 })
+            }
+
+          }}
           arrow={arrow} />
       )
     })
