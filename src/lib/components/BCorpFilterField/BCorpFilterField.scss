@@ -70,10 +70,6 @@ h5.title {
   color: $navy;
 }
 
-.checkBoxTitle {
-  color: $navy;
-}
-
 .select {
   position: relative;
   padding-bottom: 20px;
@@ -214,6 +210,10 @@ h5.title {
   }
 }
 
+.checkBoxTitle {
+  color: $navy;
+}
+
 .checkbox {
   .checkboxOption {
     position: relative;
@@ -238,6 +238,15 @@ h5.title {
         left: 3px;
         top: 5px;
         border-radius: 2px;
+      }
+    }
+
+    label.labelChecked {
+      color: $black;
+      font-weight: bold;
+
+      span {
+        font-weight: normal;
       }
     }
   }

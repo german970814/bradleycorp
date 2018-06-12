@@ -19,6 +19,7 @@ type Props = {
   updateFilters: (newFilters: CheckboxesType) => void,
   collapseOnMobile?: boolean,
   className?: string,
+  labelTurnsBlackWhenChecked?: boolean,
   // from withScreenSize HOC
   screenSize: ScreenSize
 }
@@ -51,6 +52,7 @@ class LeftSidebarCheckboxGroup extends React.Component<Props, State> {
         filterState={{ checkboxes: this.props.filterState }}
         handleChange={this.handleChange.bind(this)}
         options={this.props.options}
+        labelTurnsBlackWhenChecked={this.props.labelTurnsBlackWhenChecked}
       />
     )
   }
@@ -63,6 +65,7 @@ class LeftSidebarCheckboxGroup extends React.Component<Props, State> {
         filterState={{ checkboxes: this.props.filterState }}
         handleChange={this.handleChange.bind(this)}
         options={this.props.options}
+        labelTurnsBlackWhenChecked={this.props.labelTurnsBlackWhenChecked}
       />
     )
   }

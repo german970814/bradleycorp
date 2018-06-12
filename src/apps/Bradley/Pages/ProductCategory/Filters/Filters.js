@@ -49,62 +49,10 @@ class Filters extends React.Component<Props> {
           title={'New'}
           filterState={filterState}
           updateFilters={this.props.updateMetaOtherActiveFilters}
+          labelTurnsBlackWhenChecked
         />
       )
     }
-  }
-
-  renderTaxFilters () {
-    const { filters } = this.props
-    const { activeFilters } = this.props
-
-    if (!filters || !filters.taxFilters) {
-      return null
-    }
-
-    return (
-      <React.Fragment>
-        {this.props.catParentTitle && (
-          <h6 className={style.parentTitle}>{this.props.catParentTitle}</h6>
-        )}
-
-        {this.renderProductAttributeFilters()}
-
-        {Object.keys(filters.taxFilters).map((taxName, index) => {
-          const options = {}
-
-          if (filters.taxFilters[taxName].terms.length === 0) {
-            return null
-          }
-
-          Object.keys(filters.taxFilters[taxName].terms).forEach(term => {
-            // no need to show filter for actual category
-            if (taxName === 'product_category' && term === this.props.catSlug) {
-              return
-            }
-
-            const termObj = filters.taxFilters[taxName].terms[term]
-            options[term] = this.createLabelWithCount(
-              termObj.name,
-              termObj.count
-            )
-          })
-
-          return (
-            <LeftSidebarCheckboxGroup
-              key={index}
-              className={style.checkbox}
-              options={options}
-              title={filters.taxFilters[taxName].name}
-              filterState={activeFilters.taxFilters[taxName] || []}
-              updateFilters={newFilters => {
-                this.props.updateTaxActiveFilters(taxName, newFilters)
-              }}
-            />
-          )
-        })}
-      </React.Fragment>
-    )
   }
 
   renderProductAttributeFilters () {
@@ -153,12 +101,67 @@ class Filters extends React.Component<Props> {
                 newFilters
               )
             }}
+            labelTurnsBlackWhenChecked
           />
         ]
       })
     }
 
     return FilterElements
+  }
+
+  renderTaxFilters () {
+    const { filters } = this.props
+    const { activeFilters } = this.props
+
+    if (!filters || !filters.taxFilters) {
+      return null
+    }
+
+    return (
+      <React.Fragment>
+        {this.props.catParentTitle && (
+          <h6 className={style.parentTitle}>{this.props.catParentTitle}</h6>
+        )}
+
+        {this.renderProductAttributeFilters()}
+
+        {Object.keys(filters.taxFilters).map((taxName, index) => {
+          const options = {}
+
+          if (filters.taxFilters[taxName].terms.length === 0) {
+            return null
+          }
+
+          Object.keys(filters.taxFilters[taxName].terms).forEach(term => {
+            // no need to show filter for actual category
+            if (taxName === 'product_category' && term === this.props.catSlug) {
+              return
+            }
+
+            const termObj = filters.taxFilters[taxName].terms[term]
+            options[term] = this.createLabelWithCount(
+              termObj.name,
+              termObj.count
+            )
+          })
+
+          return (
+            <LeftSidebarCheckboxGroup
+              key={index}
+              className={style.checkbox}
+              options={options}
+              title={filters.taxFilters[taxName].name}
+              filterState={activeFilters.taxFilters[taxName] || []}
+              updateFilters={newFilters => {
+                this.props.updateTaxActiveFilters(taxName, newFilters)
+              }}
+              labelTurnsBlackWhenChecked
+            />
+          )
+        })}
+      </React.Fragment>
+    )
   }
 
   render () {

@@ -175,7 +175,13 @@ class Customizable extends Component<Props, State> {
       newState.ready = true
       newState.requesting = false
 
-      return this.setState(newState)
+      return this.setState(newState, () => {
+        if (this.state.page_template_data.page_title) {
+          document.title = `Bradley Corp: ${this.state.page_template_data.page_title}`
+        } else {
+          document.title = 'Bradley Corp'
+        }
+      })
     } catch (err) {
       this.setState({ requesting: false, ready: false })
       console.log(err)

@@ -83,7 +83,7 @@ class FAQTemplate extends React.Component<Props, State> {
       const client = new CPTApiClient('faq')
       const faqResponse =
         metaboxes.faq_category && metaboxes.faq_category.length > 0
-          ? await client.getByTax('faq_category', metaboxes.faq_category)
+          ? await client.getByTax('faq_category', metaboxes.faq_category, -1)
           : await client.getLatest(-1)
       const faqData: Array<BCorpPost> = faqResponse.data
 

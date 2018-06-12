@@ -68,7 +68,6 @@ class SVGIcon extends Component {
   }
 
   getRedrawStyles (n) {
-    console.log(n)
     if (!this.props.redrawOnHover) {
       return
     }
