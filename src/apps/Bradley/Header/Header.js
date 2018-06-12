@@ -1,27 +1,27 @@
 // @flow
 import React, { Component } from 'react'
-import type { NavMenuItem } from '../../../lib/types/cpt_types'
-import Media from 'react-media'
-import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../globals'
-import AppInitException from '../../../exceptions/AppInitException'
+import type { MegaMenuNavMenuItem } from '../../../lib/types/megaMenu_types'
+import type { ScreenSize } from '../../../lib/contexts/ScreenSizeContext'
+import { withScreenSize } from '../../../lib/contexts/ScreenSizeContext'
 import NavMenuApiClient from '../../../api/navMenu_client'
 import HeaderMobile from './HeaderMobile/HeaderMobile'
 import HeaderTablet from './HeaderTablet/HeaderTablet'
 import HeaderDesktop from './HeaderDesktop/HeaderDesktop'
 
-type Props = {}
+type Props = {
+  // from withScreenSizeHOC
+  screenSize: ScreenSize
+}
 
 type State = {
-  menuItems?: Array<NavMenuItem>
+  menuItems: Array<MegaMenuNavMenuItem>
 }
 
 class Header extends Component<Props, State> {
   constructor (props: Props) {
     super(props)
 
-    this.state = {
-      menuItems: []
-    }
+    this.state = { menuItems: [] }
   }
 
   componentDidMount () {
@@ -29,41 +29,26 @@ class Header extends Component<Props, State> {
   }
 
   render () {
-    return (
-      <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
-        {match =>
-          match ? (
-            // mobile
-            <HeaderMobile menuItems={this.state.menuItems} />
-          ) : (
-            <Media query={{ maxWidth: TABLETMAXWIDTH }}>
-              {match =>
-                match ? (
-                  // tablet
-                  <HeaderTablet menuItems={this.state.menuItems} />
-                ) : (
-                  // desktop
-                  <HeaderDesktop menuItems={this.state.menuItems} />
-                )
-              }
-            </Media>
-          )
-        }
-      </Media>
+    return this.props.screenSize === 'mobile' ? (
+      <HeaderMobile menuItems={this.state.menuItems} />
+    ) : this.props.screenSize === 'tablet' ? (
+      <HeaderTablet menuItems={this.state.menuItems} />
+    ) : (
+      <HeaderDesktop menuItems={this.state.menuItems} />
     )
   }
 
   async getMenuItems () {
     try {
-      const primaryMenuRequest = NavMenuApiClient.getNavMenuByLocation(
+      const menuResponse = await NavMenuApiClient.getNavMenuByLocation(
         'primary'
       )
-      const primaryMenuResponse = await primaryMenuRequest
-      this.setState({ menuItems: primaryMenuResponse.data })
+      this.setState({ menuItems: menuResponse.data })
     } catch (err) {
-      console.log(new AppInitException(err))
+      console.log(err)
+      this.setState({ menuItems: [] })
     }
   }
 }
 
-export default Header
+export default withScreenSize(Header)

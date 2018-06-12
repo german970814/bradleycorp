@@ -1,0 +1,18 @@
+$spaceBetweenMenuItems: 34px;
+
+.menuItem {
+  display: inline-block;
+  vertical-align: middle;
+  margin: {
+    left: $spaceBetweenMenuItems / 2;
+    right: $spaceBetweenMenuItems / 2;
+  }
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+h6.menuItemLink {
+  text-decoration: none;
+}

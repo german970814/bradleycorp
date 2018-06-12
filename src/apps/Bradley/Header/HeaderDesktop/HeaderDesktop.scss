@@ -1,7 +1,7 @@
-@import "../../../../scss/partials/layout";
-@import "../../../../scss/partials/variables";
+@import '../../../../scss/partials/layout';
+@import '../../../../scss/partials/variables';
 
-@import "../Header";
+@import '../Header';
 
 $avatarHeight: 12px;
 $flagHeight: 9px;
@@ -18,12 +18,16 @@ $topBarTextFontSize: 10px;
   background-color: $topBarColor;
 }
 
-.user, .country {
+.user,
+.country {
   display: inline-block;
   height: 100%;
 }
 
-.avatar, .userText, .flag, .countryText {
+.avatar,
+.userText,
+.flag,
+.countryText {
   display: inline-block;
   vertical-align: middle;
 }
@@ -58,8 +62,6 @@ $logoWidth: 65px;
 $magnifyingGlassWidth: 19px;
 $menuSideMargin: 127px;
 
-$spaceBetweenMenuItems: 34px;
-
 .bottomBar {
   @extend %BodyPaddingWithMediaQueries;
   max-width: 100%;
@@ -92,21 +94,4 @@ $spaceBetweenMenuItems: 34px;
   height: 100%;
   text-align: center;
   margin-left: 30px;
-}
-
-.menuItem {
-  display: inline-block;
-  vertical-align: middle;
-  margin: {
-    left: $spaceBetweenMenuItems / 2;
-    right: $spaceBetweenMenuItems / 2;
-  }
-
-  &:first-child {
-    margin-left: 0;
-  }
-}
-
-h6.menuItemLink {
-  text-decoration: none;
 }

@@ -1,16 +1,17 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import * as React from 'react'
+import type { MegaMenuNavMenuItem } from '../../../types/megaMenu_types'
 import { Link } from 'react-router-dom'
 import { removeHostFromUrl } from '../../../../lib/bcorpUrl'
-import style from './HeaderDesktop.scss'
+import style from './MegaMenuHover.scss'
 
-class MenuItems extends Component {
+type Props = {
+  menuItems: Array<MegaMenuNavMenuItem>
+}
+
+class MegaMenuHover extends React.Component<Props> {
   renderMenuItems () {
     return this.props.menuItems.map((menuItem, index) => {
-      if (!menuItem['title']) {
-        return
-      }
-
       return (
         <div key={index} className={style.menuItem}>
           <Link to={removeHostFromUrl(menuItem['url']) || '#'}>
@@ -30,8 +31,4 @@ class MenuItems extends Component {
   }
 }
 
-MenuItems.propTypes = {
-  menuItems: PropTypes.array
-}
-
-export default MenuItems
+export default MegaMenuHover

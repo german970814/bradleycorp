@@ -41,6 +41,7 @@ type MegaMenuType =
   | MegaMenuProductsProperties
   | MegaMenuWithThumbnailsProperties
   | MegaMenuWithoutThumbnailsProperties
+  | {}
 
 type MegaMenuNavMenuItem = NavMenuItemPost & MegaMenuType
 
