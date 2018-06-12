@@ -41,7 +41,8 @@ class Header extends Component<Props, State> {
   async getMenuItems () {
     try {
       const menuResponse = await NavMenuApiClient.getNavMenuByLocation(
-        'primary'
+        'primary',
+        true
       )
       this.setState({ menuItems: menuResponse.data })
     } catch (err) {

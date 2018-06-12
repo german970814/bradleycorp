@@ -34,6 +34,7 @@ type NavMenuItemPost = {
   type_label: string,
   title: string,
   url: string,
+  object_featured_image: string | false,
   children: Array<NavMenuItemPost>
 }
 

@@ -7,8 +7,8 @@
   width: 100vw;
 }
 
-.expanded {
+.megaMenuExpanded {
   border-top: 2px solid $navy;
-  min-height: 200px;
+  border-bottom: 10px solid $light-gray;
   background-color: #fff;
 }
