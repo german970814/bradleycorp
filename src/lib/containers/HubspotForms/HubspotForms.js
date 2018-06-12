@@ -12,7 +12,7 @@ export default class HubspotForms extends React.Component<Props> {
     super(props)
 
     this.formID = this.props.form.replace(/[^\w]/g, '_')
-    this.formUrl = `http://forms.bradley.test`
+    this.formUrl = `http://forms.bradleydev.twoxfour.com`
 
     this.state = {
       iframeWidth: '100%',

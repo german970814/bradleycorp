@@ -61,7 +61,7 @@ class NewsletterWidget extends Component<Props, State> {
     _window.postMessage({
       action: 'submitForm',
       form: this.props.form,
-    }, 'http://forms.bradley.test')
+    }, 'http://forms.bradleydev.twoxfour.com')
   }
 
   renderDescription () {
