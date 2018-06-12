@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import Header from '../../Header/Header'
 import Loadable from 'react-loadable'
 import Loading from '../../../../lib/components/Loading/Loading'
+import ScrollToTop from '../../../../lib/components/ScrollToTop/ScrollToTop'
 
 const BlogLandingPageLoadable = Loadable({
   loader: () =>
@@ -25,21 +26,27 @@ const Main = props => {
   return (
     <React.Fragment>
       <Header />
-      <Switch>
-        <Route exact path="/" component={BlogLandingPageLoadable} />
-        <Route
-          exact
-          path="/post/:slug"
-          component={BlogSinglePostPageLoadable}
-        />
-        <Route exact path="/results/:query" component={ResultsLoadable} />
-        <Route exact path="/results/:query/:tab" component={ResultsLoadable} />
-        <Route
-          exact
-          path="/results/:query/:tab/page=:page"
-          component={ResultsLoadable}
-        />
-      </Switch>
+      <ScrollToTop>
+        <Switch>
+          <Route exact path="/" component={BlogLandingPageLoadable} />
+          <Route
+            exact
+            path="/post/:slug"
+            component={BlogSinglePostPageLoadable}
+          />
+          <Route exact path="/results/:query" component={ResultsLoadable} />
+          <Route
+            exact
+            path="/results/:query/:tab"
+            component={ResultsLoadable}
+          />
+          <Route
+            exact
+            path="/results/:query/:tab/page=:page"
+            component={ResultsLoadable}
+          />
+        </Switch>
+      </ScrollToTop>
     </React.Fragment>
   )
 }
