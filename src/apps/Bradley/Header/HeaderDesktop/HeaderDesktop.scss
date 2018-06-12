@@ -3,6 +3,7 @@
 
 @import '../Header';
 
+$topBarHeight: 30;
 $avatarHeight: 12px;
 $flagHeight: 9px;
 $topBarTextFontSize: 10px;
@@ -10,7 +11,7 @@ $topBarTextFontSize: 10px;
 .topBar {
   @extend %BodyPaddingWithMediaQueries;
   max-width: 100%;
-  height: 30px;
+  height: $topBarHeight + px;
   text-align: right;
 }
 
@@ -99,4 +100,6 @@ $menuSideMargin: 127px;
 
 :export {
   bottombarheight: $bottomBarHeight;
+  topbarheight: $topBarHeight;
+  totalheight: $bottomBarHeight + $topBarHeight;
 }

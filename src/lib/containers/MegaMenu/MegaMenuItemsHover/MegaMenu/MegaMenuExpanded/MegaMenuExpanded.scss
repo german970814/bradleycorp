@@ -1,0 +1,14 @@
+@import '../../../../../../scss/partials/variables';
+
+:global(#mega-menu-expanded) {
+  position: absolute;
+  z-index: 100;
+  left: 0;
+  width: 100vw;
+}
+
+.expanded {
+  border-top: 2px solid $navy;
+  min-height: 200px;
+  background-color: #fff;
+}

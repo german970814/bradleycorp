@@ -1,20 +1,25 @@
 // @flow
 import * as React from 'react'
 import type { MegaMenuNavMenuItem } from '../../../../types/megaMenu_types'
-import { Link } from 'react-router-dom'
-import { removeHostFromUrl } from '../../../../../lib/bcorpUrl'
+import type { HoverExpandedPosition } from './MegaMenuExpanded/MegaMenuExpanded'
 import { itemIsMegaMenuItem } from '../../MegaMenuItems'
+import MegaMenuClosed from './MegaMenuClosed/MegaMenuClosed'
+import MegaMenuExpanded from './MegaMenuExpanded/MegaMenuExpanded'
 import style from './MegaMenu.scss'
 
 type Props = {
   menuItem: MegaMenuNavMenuItem,
-  itemHeight: number
+  itemHeight: number,
+  hoverExpandedPosition: HoverExpandedPosition
 }
 
 type State = {
   hovered: boolean
 }
 
+/**
+ * Handles the logic for displaying the expanded area of the mega menu
+ */
 class MegaMenu extends React.Component<Props, State> {
   constructor (props: Props) {
     super(props)
@@ -39,30 +44,15 @@ class MegaMenu extends React.Component<Props, State> {
     this.setState({ hovered: false })
   }
 
-  renderMegaMenuClosed () {
-    return (
-      <Link to={removeHostFromUrl(this.props.menuItem['url']) || '#'}>
-        <h6
-          style={{
-            lineHeight: `${this.props.itemHeight}px`
-          }}
-          className={style.menuItemLink}>
-          {this.props.menuItem['title']}
-        </h6>
-      </Link>
-    )
-  }
-
   renderMegaMenuExpanded () {
     return (
-      <div
-        style={{
-          top: `${this.props.itemHeight}px`
-        }}
-        onMouseOver={this.handleMouseEnter.bind(this)}
-        className={style.menuItemExpanded}>
-        {this.props.menuItem.bcorp_mega_menu_slug}
-      </div>
+      <React.Fragment>
+        <div className={style.menuItemExpandedArrow} />
+        <MegaMenuExpanded
+          menuItem={this.props.menuItem}
+          hoverExpandedPosition={this.props.hoverExpandedPosition}
+        />
+      </React.Fragment>
     )
   }
 
@@ -76,11 +66,20 @@ class MegaMenu extends React.Component<Props, State> {
         className={style.menuItem}
         onMouseEnter={this.handleMouseEnter.bind(this)}
         onMouseLeave={this.handleMouseLeave.bind(this)}>
-        {this.renderMegaMenuClosed()}
+        <MegaMenuClosed
+          menuItem={this.props.menuItem}
+          itemHeight={this.props.itemHeight}
+          hovered={this.state.hovered}
+        />
         {this.state.hovered && this.renderMegaMenuExpanded()}
       </div>
     ) : (
-      <div className={style.menuItem}>{this.renderMegaMenuClosed()}</div>
+      <div className={style.menuItem}>
+        <MegaMenuClosed
+          menuItem={this.props.menuItem}
+          itemHeight={this.props.itemHeight}
+        />
+      </div>
     )
   }
 }

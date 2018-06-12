@@ -4,7 +4,7 @@ import type { MegaMenuNavMenuItem } from '../../../../lib/types/megaMenu_types'
 import VerticalAlignHelper from '../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import MegaMenuItems from '../../../../lib/containers/MegaMenu/MegaMenuItems'
 import SearchIcon from '../SearchIcon/SearchIcon'
-import style, { bottombarheight } from './HeaderDesktop.scss'
+import style, { bottombarheight, totalheight } from './HeaderDesktop.scss'
 
 type Props = {
   menuItems: Array<MegaMenuNavMenuItem>
@@ -54,6 +54,9 @@ const HeaderDesktop = (props: Props) => {
             type={'hover'}
             menuItems={props.menuItems}
             itemHeight={bottombarheight}
+            hoverExpandedPosition={{
+              top: totalheight
+            }}
           />
         </div>
 

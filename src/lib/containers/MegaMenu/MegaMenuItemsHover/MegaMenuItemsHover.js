@@ -1,14 +1,20 @@
 // @flow
 import * as React from 'react'
 import type { MegaMenuNavMenuItem } from '../../../types/megaMenu_types'
+import type { HoverExpandedPosition } from './MegaMenu/MegaMenuExpanded/MegaMenuExpanded'
 import MegaMenu from './MegaMenu/MegaMenu'
 import style from './MegaMenuItemsHover.scss'
 
 type Props = {
   menuItems: Array<MegaMenuNavMenuItem>,
-  itemHeight: number
+  itemHeight: number,
+  hoverExpandedPosition: HoverExpandedPosition
 }
 
+/**
+ * Responsible for rendering the correct list of mega menu primary items
+ * given an array of nav menu item posts
+ */
 class MegaMenuItemsHover extends React.Component<Props> {
   renderMenuItems () {
     return this.props.menuItems.map((menuItem, index) => {
@@ -21,12 +27,14 @@ class MegaMenuItemsHover extends React.Component<Props> {
           key={index}
           menuItem={menuItem}
           itemHeight={this.props.itemHeight}
+          hoverExpandedPosition={this.props.hoverExpandedPosition}
         />
       )
     })
   }
 
   render () {
+    // no need to render anything if we have no menu items
     if (!this.props.menuItems || this.props.menuItems === []) {
       return null
     }

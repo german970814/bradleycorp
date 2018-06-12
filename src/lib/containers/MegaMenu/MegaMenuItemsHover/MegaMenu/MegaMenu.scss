@@ -1,23 +1,18 @@
-$spaceBetweenMenuItems: 34px;
+@import '../../../../../scss/partials/variables';
 
 .menuItem {
   position: relative;
   display: inline-block;
-  margin: {
-    left: $spaceBetweenMenuItems / 2;
-    right: $spaceBetweenMenuItems / 2;
-  }
-
-  &:first-child {
-    margin-left: 0;
-  }
 }
 
-.menuItemExpanded {
+.menuItemExpandedArrow {
   position: absolute;
-  left: 0;
-}
-
-h6.menuItemLink {
-  text-decoration: none;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid $navy;
 }
