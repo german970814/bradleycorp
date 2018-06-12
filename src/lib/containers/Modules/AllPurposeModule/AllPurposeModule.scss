@@ -1,7 +1,7 @@
 @import "../../../../scss/partials/text-styles";
 
 .content {
-	a {
+	a:not('.link-orange-with-arrow') {
 		@extend %link-navy;
 	}
 }
