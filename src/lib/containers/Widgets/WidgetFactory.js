@@ -53,6 +53,7 @@ const WidgetFactory = (props: Props): React.Node => {
           {...sharedProps}
           description={data['description']}
           linkText={data['link_text']}
+          form={'newsletter-signup'}
         />
       )
 
