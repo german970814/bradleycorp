@@ -15,9 +15,11 @@ class ProductCategoryBlock extends React.PureComponent<Props> {
       <div className={style.grandchildren}>
         {grandchildren.map((grandchild, index) => {
           return (
-            <span key={index} className={`small-body ${style.grandchild}`}>
-              {`${index !== 0 ? ', ' : ''}${grandchild.name}`}
-            </span>
+            <Link to={createArchiveUrl(grandchild) || '#'}>
+              <span key={index} className={`small-body ${style.grandchild}`}>
+                {`${index !== 0 ? ', ' : ''}${grandchild.name}`}
+              </span>
+            </Link>
           )
         })}
       </div>
@@ -40,7 +42,8 @@ class ProductCategoryBlock extends React.PureComponent<Props> {
 
     return (
       <React.Fragment>
-        {this.renderGrandchildLinks(childrenWithoutChildren)}
+        {childrenWithoutChildren.length > 0 &&
+          this.renderGrandchildLinks(childrenWithoutChildren)}
         {childrenWithChildren.map((childWithChildren, index) => {
           // keep flow happy
           if (!childWithChildren.children) {
@@ -49,10 +52,14 @@ class ProductCategoryBlock extends React.PureComponent<Props> {
 
           return (
             <React.Fragment key={index}>
-              <div className={style.childWithChildren}>
-                {childWithChildren.name}
-              </div>
-              {this.renderGrandchildLinks(childWithChildren.children)}
+              <Link to={createArchiveUrl(childWithChildren) || '#'}>
+                <div className={`post-meta-data ${style.childWithChildren}`}>
+                  {childWithChildren.name}
+                </div>
+              </Link>
+              {childWithChildren.children &&
+                childWithChildren.children.length > 0 &&
+                this.renderGrandchildLinks(childWithChildren.children)}
             </React.Fragment>
           )
         })}
@@ -63,13 +70,18 @@ class ProductCategoryBlock extends React.PureComponent<Props> {
   render () {
     return (
       <div className={`row ${style.productCategoryBlock}`}>
-        <div className={`col2 ${style.featuredImage}`}>
-          {this.props.productCategory.featured_image && (
-            <img src={this.props.productCategory.featured_image} />
-          )}
-        </div>
+        <Link to={createArchiveUrl(this.props.productCategory) || '#'}>
+          <div className={`col2 ${style.featuredImage}`}>
+            {this.props.productCategory.featured_image && (
+              <img src={this.props.productCategory.featured_image} />
+            )}
+          </div>
+        </Link>
         <div className={`col2 ${style.links}`}>
-          <h6 className={style.name}>{this.props.productCategory.name}</h6>
+          <Link to={createArchiveUrl(this.props.productCategory) || '#'}>
+            <h6 className={style.name}>{this.props.productCategory.name}</h6>
+          </Link>
+
           {this.renderChildLinks()}
         </div>
       </div>

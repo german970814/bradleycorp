@@ -111,6 +111,10 @@ bcorpUrl.processPathForRoute = (path: string): string => {
  */
 bcorpUrl.createArchiveUrl = (term: WPTerm): false | string => {
   if (term.taxonomy && term.slug) {
+    if (term.taxonomy === 'product_category') {
+      return `/product-category/${term.slug}`
+    }
+
     return `/${term.taxonomy}/${term.slug}`
   }
 
