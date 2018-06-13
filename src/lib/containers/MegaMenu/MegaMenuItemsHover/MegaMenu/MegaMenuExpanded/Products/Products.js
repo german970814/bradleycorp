@@ -2,6 +2,7 @@
 import * as React from 'react'
 import type { MegaMenuNavMenuItem } from '../../../../../../types/megaMenu_types'
 import ProductCategoryBlock from './ProductCategoryBlock/ProductCategoryBlock'
+import BottomBar from './BottomBar/BottomBar'
 import style from './Products.scss'
 
 type Props = {
@@ -10,7 +11,7 @@ type Props = {
 
 const numberColumns = 3
 
-class Products extends React.PureComponent<Props> {
+class Products extends React.Component<Props> {
   renderColumn (colIndex: number) {
     const { menuItem } = this.props
 
@@ -39,6 +40,7 @@ class Products extends React.PureComponent<Props> {
           {this.renderColumn(2)}
           {this.renderColumn(3)}
         </div>
+        <BottomBar menuItems={this.props.menuItem.children || []} />
       </div>
     )
   }

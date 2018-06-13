@@ -1,0 +1,16 @@
+@import '../../../../../../../../scss/partials/variables';
+
+.bottomBar {
+  padding: 35px 55px 30px 43px;
+  width: 100%;
+  background-color: $light-gray;
+
+  .searchWrapper {
+    padding-right: 118px;
+    text-align: left;
+
+    :global(.bcorp-search-field-icon-container) {
+      background-color: transparent;
+    }
+  }
+}

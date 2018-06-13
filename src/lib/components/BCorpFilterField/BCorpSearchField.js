@@ -11,7 +11,8 @@ type Props = {
   title?: string,
   className?: string,
   placeholder?: string,
-  initValue?: string
+  initValue?: string,
+  magnifyingGlassColor?: 'white' | 'grey'
 }
 
 type State = {
@@ -66,11 +67,20 @@ class BCorpSearchField extends React.Component<Props, State> {
             placeholder={this.props.placeholder || ''}
           />
           <div
-            className={style.iconContainer}
+            className={`bcorp-search-field-icon-container ${
+              style.iconContainer
+            }`}
             onClick={this.handleSearchIconClick.bind(this)}>
-            <img
-              src={require('../../../images/magnifying-glass/magnifying-glass-white@2x.png')}
-            />
+            {this.props.magnifyingGlassColor &&
+            this.props.magnifyingGlassColor === 'grey' ? (
+                <img
+                  src={require('../../../images/magnifying-glass/magnifying-glass@2x.png')}
+                />
+              ) : (
+                <img
+                  src={require('../../../images/magnifying-glass/magnifying-glass-white@2x.png')}
+                />
+              )}
           </div>
         </form>
       </div>
