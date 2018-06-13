@@ -30,7 +30,13 @@ const BlogSinglePostPageLoadable = Loadable({
 
 const DefaultCPTLandingPageLoadable = Loadable({
   loader: () =>
-    import('../../../lib/containers/Pages/DefaultCPTLandingPage/DefaultCPTLandingPage'),
+    import('../../../lib/containers/Pages/CPTLandingPages/DefaultCPTLandingPage/DefaultCPTLandingPage'),
+  loading: Loading
+})
+
+const CaseStudyLandingPageLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/CPTLandingPages/CustomLandingPages/CaseStudyLandingPage/CaseStudyLandingPage'),
   loading: Loading
 })
 
@@ -262,6 +268,11 @@ const RouterInner = () => {
       {/* Post Types With Custom Templates */}
       <Route exact path="/post/:slug" component={BlogSinglePostPageLoadable} />
       <Route exact path="/product/:slug" component={ProductDetailLoadable} />
+      <Route
+        exact
+        path="/case-study/:slug"
+        component={CaseStudyLandingPageLoadable}
+      />
 
       {/* Taxonomy pages */}
       <Route
