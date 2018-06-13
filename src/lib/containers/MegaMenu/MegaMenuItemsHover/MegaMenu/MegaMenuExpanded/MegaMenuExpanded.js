@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import type { MegaMenuNavMenuItem } from '../../../../../types/megaMenu_types'
 import WithThumbnails from './WithThumbnails/WithThumbnails'
 import WithoutThumbnails from './WithoutThumbnails/WithoutThumbnails'
+import Products from './Products/Products'
 import style from './MegaMenuExpanded.scss'
 
 /**
@@ -46,6 +47,10 @@ class MegaMenuExpanded extends React.PureComponent<Props> {
       'mega-menu-without-thumbnails'
     ) {
       return <WithoutThumbnails menuItem={this.props.menuItem} />
+    }
+
+    if (this.props.menuItem.bcorp_mega_menu_slug === 'mega-menu-products') {
+      return <Products menuItem={this.props.menuItem} />
     }
   }
 

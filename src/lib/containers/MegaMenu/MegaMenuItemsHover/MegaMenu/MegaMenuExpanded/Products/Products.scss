@@ -1,0 +1,24 @@
+@import '../../../../../../../scss/partials/variables';
+
+.productsWrapper {
+  width: 100%;
+  height: auto;
+  text-align: center;
+
+  .productsInner {
+    display: inline-block;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    .column {
+      border-right: 2px solid $silver;
+      width: 302px;
+      text-align: left;
+      box-sizing: border-box;
+
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+}

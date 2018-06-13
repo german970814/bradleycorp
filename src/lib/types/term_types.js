@@ -11,6 +11,7 @@ type WPTerm = {
   term_group: number,
   term_id: number,
   term_taxonomy_id: number,
+  featured_image?: string,
   children?: Array<WPTerm>
 }
 
