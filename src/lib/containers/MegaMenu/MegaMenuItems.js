@@ -2,7 +2,6 @@
 import * as React from 'react'
 import type { MegaMenuNavMenuItem } from '../../types/megaMenu_types'
 import type { HoverExpandedPosition } from './MegaMenuItemsHover/MegaMenu/MegaMenuExpanded/MegaMenuExpanded'
-import NavMenuApiClient from '../../../api/navMenu_client'
 import MegaMenuItemsHover from './MegaMenuItemsHover/MegaMenuItemsHover'
 
 type Props = {

@@ -15,6 +15,7 @@ class MenuBlock extends React.PureComponent<Props> {
     return this.props.menuItem.children.map((child, index) => {
       return (
         <BCorpLink
+          key={index}
           url={createNavMenuItemUrl(child) || '#'}
           renderInternal={url => {
             return (
