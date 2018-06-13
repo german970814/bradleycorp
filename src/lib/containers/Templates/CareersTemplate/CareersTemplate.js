@@ -20,6 +20,21 @@ type Props = {
 }
 
 class CareersTemplate extends React.Component<Props> {
+  contentScript: React.ElementRef
+
+  constructor(props: Props) {
+    super(props)
+
+    this.contentScript = React.createRef()
+  }
+
+  componentDidMount() {
+    const script = document.createElement('script')
+    script.src = 'https://thegoodjobs.com/widget/badges_js/e695217b43d6da8d479ab41cb3df9c5b?overlay=true&stack=false&fade=true'
+    script.type = 'text/javascript'
+    this.contentScript.current.appendChild(script)
+  }
+
   renderFullWidthTemplateModules () {
     if (
       !this.props.data.metaboxes ||
@@ -107,10 +122,7 @@ class CareersTemplate extends React.Component<Props> {
       <React.Fragment>
         {this.props.renderModules()}
         <div id="tgj-badges-container" />
-        <script
-          src="https://thegoodjobs.com/widget/badges_js/e695217b43d6da8d479ab41cb3df9c5b?overlay=true&stack=false&fade=true"
-          type="text/javascript"
-        />
+        <div ref={this.contentScript}></div>
       </React.Fragment>
     )
   }
