@@ -20,12 +20,12 @@ type Props = {
   accentColor?: BCorpColor,
   skinClass?: string,
   height?: number,
-  getHeight?: (HTMLElement) => void
+  getHeight?: ({ current: null | HTMLDivElement }) => void
 }
 
 class PostColumn extends Component<Props> {
   postLink: string
-  postColumn: React.ElementRef
+  postColumn: { current: null | HTMLDivElement }
 
   constructor (props: Props) {
     super(props)

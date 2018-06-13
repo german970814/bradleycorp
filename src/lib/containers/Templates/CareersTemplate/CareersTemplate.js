@@ -20,7 +20,7 @@ type Props = {
 }
 
 class CareersTemplate extends React.Component<Props> {
-  contentScript: React.ElementRef
+  contentScript: { current: null | HTMLDivElement }
 
   constructor(props: Props) {
     super(props)
@@ -32,7 +32,7 @@ class CareersTemplate extends React.Component<Props> {
     const script = document.createElement('script')
     script.src = 'https://thegoodjobs.com/widget/badges_js/e695217b43d6da8d479ab41cb3df9c5b?overlay=true&stack=false&fade=true'
     script.type = 'text/javascript'
-    this.contentScript.current.appendChild(script)
+    this.contentScript.current && this.contentScript.current.appendChild(script)
   }
 
   renderFullWidthTemplateModules () {
