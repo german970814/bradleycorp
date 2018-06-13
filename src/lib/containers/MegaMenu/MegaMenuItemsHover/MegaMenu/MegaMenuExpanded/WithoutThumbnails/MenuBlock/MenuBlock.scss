@@ -1,0 +1,15 @@
+@import '../../../../../../../../scss/partials/variables';
+
+.menuBlock {
+  margin-bottom: 30px;
+
+  .title {
+    margin-bottom: 20px;
+    color: $black;
+    text-transform: none;
+  }
+
+  .childItem {
+    margin-bottom: 20px;
+  }
+}

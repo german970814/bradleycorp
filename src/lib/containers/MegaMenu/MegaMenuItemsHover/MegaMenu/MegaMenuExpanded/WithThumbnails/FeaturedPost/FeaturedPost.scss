@@ -1,0 +1,25 @@
+@import '../../../../../../../../scss/partials/variables';
+
+.featuredPost {
+  padding-top: 21px;
+
+  .featuredPostType {
+    margin-bottom: 5px;
+    color: $gray;
+  }
+
+  .postTitle {
+    margin-bottom: 17px;
+    color: $navy;
+    text-transform: none;
+  }
+
+  .content {
+    margin-bottom: 20px;
+  }
+
+  .arrow {
+    width: 40px;
+    height: 21px;
+  }
+}
