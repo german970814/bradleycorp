@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react'
+import { Link } from 'react-router-dom'
 import type { MegaMenuNavMenuItem } from '../../../../lib/types/megaMenu_types'
 import VerticalAlignHelper from '../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import MegaMenuItems from '../../../../lib/containers/MegaMenu/MegaMenuItems'
@@ -42,10 +43,12 @@ const HeaderDesktop = (props: Props) => {
       <div className={style.bottomBar}>
         <div className={style.logoWrapper}>
           <div className={style.logo}>
-            <img
-              src={require('../../../../images/logo-color/logo-color@2x.png')}
-              className={style.logoImage}
-            />
+            <Link to={{ pathname: '/' }}>
+              <img
+                src={require('../../../../images/logo-color/logo-color@2x.png')}
+                className={style.logoImage}
+              />
+            </Link>
           </div>
         </div>
 

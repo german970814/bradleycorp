@@ -122,7 +122,6 @@ class ApplicationGallery extends Component<Props, State> {
   }
 
   render () {
-    console.log(this.state)
     return (
       <div className={`row ${defaultStyle.defaultTemplate}`}>
         {renderTitle('Application Gallery', 'col1')}

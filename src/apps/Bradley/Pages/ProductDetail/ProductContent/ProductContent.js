@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Loadable from 'react-loadable'
 import Loading from '../../../../../lib/components/Loading/Loading'
@@ -81,7 +82,8 @@ class ProductContent extends Component {
           key={1}
           className={wrapperStyle} >
           <button
-            className={styleClass} >
+            className={styleClass}
+            onClick={() => { this.props.history.push({pathname: '/techdata'}) }}>
             ADD TO SUBMITTAL
           </button>
         </div>
@@ -203,4 +205,4 @@ ProductContent.propTypes = {
   cta: PropTypes.object
 }
 
-export default ProductContent
+export default withRouter(ProductContent)

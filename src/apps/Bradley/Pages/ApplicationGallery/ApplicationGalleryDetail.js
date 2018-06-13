@@ -276,8 +276,12 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
     callback: (param: any) => void
   ) {
     const client = new CPTApiClient(cpt)
-    const response = await client.getByTaxAndTermArray(taxonomy, terms)
-    callback(response.data)
+    try {
+      const response = await client.getByTaxAndTermArray(taxonomy, terms)
+      callback(response.data)
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   render () {
