@@ -46,6 +46,12 @@ const LiteratureLandingPageLoadable = Loadable({
   loading: Loading
 })
 
+const NewsLandingPageLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/CPTLandingPages/CustomLandingPages/NewsLandingPage/NewsLandingPage'),
+  loading: Loading
+})
+
 const TechInfoLandingPageLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/CPTLandingPages/CustomLandingPages/TechInfoLandingPage/TechInfoLandingPage'),
@@ -290,6 +296,7 @@ const RouterInner = () => {
         path="/literature/:slug"
         component={LiteratureLandingPageLoadable}
       />
+      <Route exact path="/news/:slug" component={NewsLandingPageLoadable} />
       <Route
         exact
         path="/technical-info/:slug"
