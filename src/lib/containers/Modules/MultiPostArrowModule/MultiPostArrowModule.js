@@ -56,7 +56,6 @@ class MultiPostArrowModule extends PostGettingModule {
             if (index === this.state.posts.length - 1 && this.state.posts.length > 1) {
               this.setState({ contentVariableHeight: height + 15 })
             }
-
           }}
           arrow={arrow} />
       )

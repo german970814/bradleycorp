@@ -34,17 +34,6 @@ class Filters extends React.Component<Props> {
   render () {
     return (
       <div className={`row ${style.filters}`}>
-        <div className={`col2 col4-tablet ${style.videoType}`}>
-          <BCorpSelectField
-            title={'Video Type'}
-            className={style.select}
-            defaultOptionId={filterDefault}
-            defaultOptionName={filterDefaultName}
-            options={this.props.filterOptions.video_gallery_type_cat}
-            filterState={this.props.filters.video_gallery_type_cat}
-            handleChange={this.handleVideoTypeChange.bind(this)}
-          />
-        </div>
         <div className={`col2 col4-tablet ${style.productType}`}>
           <BCorpSelectField
             title={'Product Type'}
@@ -54,6 +43,17 @@ class Filters extends React.Component<Props> {
             options={this.props.filterOptions.video_gallery_product_tag}
             filterState={this.props.filters.video_gallery_product_tag}
             handleChange={this.handleProductTypeChange.bind(this)}
+          />
+        </div>
+        <div className={`col2 col4-tablet ${style.videoType}`}>
+          <BCorpSelectField
+            title={'Video Type'}
+            className={style.select}
+            defaultOptionId={filterDefault}
+            defaultOptionName={filterDefaultName}
+            options={this.props.filterOptions.video_gallery_type_cat}
+            filterState={this.props.filters.video_gallery_type_cat}
+            handleChange={this.handleVideoTypeChange.bind(this)}
           />
         </div>
         <div className={`col1 col2-tablet ${style.search}`}>
