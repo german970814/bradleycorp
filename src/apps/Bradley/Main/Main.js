@@ -64,6 +64,12 @@ const TechInfoLandingPageLoadable = Loadable({
   loading: Loading
 })
 
+const VideoGalleryLandingPageLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/CPTLandingPages/CustomLandingPages/VideoGalleryLandingPage/VideoGalleryLandingPage'),
+  loading: Loading
+})
+
 const ProductDetailLoadable = Loadable({
   loader: () => import('../Pages/ProductDetail/ProductDetail'),
   loading: Loading
@@ -313,6 +319,11 @@ const RouterInner = () => {
         path="/technical-info/:slug"
         component={TechInfoLandingPageLoadable}
       />
+      <Route
+        exact
+        path="/video-gallery/:slug"
+        component={VideoGalleryLandingPageLoadable}
+      />
 
       {/* Taxonomy pages */}
       <Route
@@ -361,18 +372,6 @@ const RouterInner = () => {
             <DefaultCPTLandingPageLoadable
               match={match}
               postType={'compliance'}
-            />
-          )
-        }}
-      />
-      <Route
-        exact
-        path="/video-gallery/:slug"
-        render={({ match }) => {
-          return (
-            <DefaultCPTLandingPageLoadable
-              match={match}
-              postType={'video-gallery'}
             />
           )
         }}

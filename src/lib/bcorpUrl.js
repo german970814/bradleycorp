@@ -73,6 +73,10 @@ bcorpUrl.getClientSideCPTPermalink = (
   }
 
   // we need to change two-word post type names
+  if (postType === 'application_gallery') {
+    return `/application-gallery/${postName}`
+  }
+
   if (postType === 'case_study') {
     return `/case-study/${postName}`
   }

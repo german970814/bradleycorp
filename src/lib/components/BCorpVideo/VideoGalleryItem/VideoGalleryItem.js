@@ -1,15 +1,16 @@
 // @flow
 import * as React from 'react'
-import type { VideoGalleryPost } from '../../../../../../lib/types/cpt_types'
-import type { ScreenSize } from '../../../../../../lib/contexts/ScreenSizeContext'
-import { withScreenSize } from '../../../../../../lib/contexts/ScreenSizeContext'
-import LightboxV2 from '../../../../../../lib/containers/Lightbox/LightboxV2/LightboxV2'
-import BCorpVideo from '../../../../../../lib/components/BCorpVideo/BCorpVideo'
-import FixedAspectRatioBox from '../../../../../../lib/components/FixedAspectRatioBox/FixedAspectRatioBox'
-import style from './Video.scss'
+import type { VideoGalleryPost } from '../../../types/cpt_types'
+import type { ScreenSize } from '../../../contexts/ScreenSizeContext'
+import { withScreenSize } from '../../../contexts/ScreenSizeContext'
+import LightboxV2 from '../../../containers/Lightbox/LightboxV2/LightboxV2'
+import BCorpVideo from '../../BCorpVideo/BCorpVideo'
+import FixedAspectRatioBox from '../../FixedAspectRatioBox/FixedAspectRatioBox'
+import style from './VideoGalleryItem.scss'
 
 type Props = {
   video: VideoGalleryPost,
+  showTitle?: boolean,
   // from withScreenSize HOC
   screenSize: ScreenSize
 }
@@ -42,7 +43,7 @@ const opts = {
   }
 }
 
-class Video extends React.Component<Props, State> {
+class VideoGalleryItem extends React.Component<Props, State> {
   url: string
   opts: {}
   youtubeAPIClosed: ?YouTubeAPI
@@ -72,7 +73,9 @@ class Video extends React.Component<Props, State> {
             noVimeo
           />
         </FixedAspectRatioBox>
-        <h5 className={style.title}>{this.props.video.post.post_title}</h5>
+        {this.props.showTitle && (
+          <h5 className={style.title}>{this.props.video.post.post_title}</h5>
+        )}
       </div>
     ) : (
       <LightboxV2
@@ -99,9 +102,11 @@ class Video extends React.Component<Props, State> {
                   noVimeo
                 />
               </FixedAspectRatioBox>
-              <h5 className={style.title}>
-                {this.props.video.post.post_title}
-              </h5>
+              {this.props.showTitle && (
+                <h5 className={style.title}>
+                  {this.props.video.post.post_title}
+                </h5>
+              )}
             </div>
           )
         }}
@@ -144,4 +149,4 @@ class Video extends React.Component<Props, State> {
 
 export type { YouTubeAPI, YouTubeIframe }
 export { opts }
-export default withScreenSize(Video)
+export default withScreenSize(VideoGalleryItem)

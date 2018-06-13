@@ -10,7 +10,7 @@ import { vimeoParser } from '../../../../../lib/components/BCorpVideo/BCorpVideo
 import { filterDefault } from '../VideoGallery'
 import { sortIntoRows } from '../../../../../lib/bcorpJSX'
 import LoadMore from '../../../../../lib/containers/LoadMore/LoadMore'
-import Video from './Video/Video'
+import VideoGalleryItem from '../../../../../lib/components/BCorpVideo/VideoGalleryItem/VideoGalleryItem'
 import NoResults from '../../../../../lib/components/NoResults/NoResults'
 import CPTApiClient from '../../../../../api/cpt_client'
 import style from './Videos.scss'
@@ -129,7 +129,10 @@ class VideosInner extends React.Component<VideosInnerProps> {
 
       // skip vimeo videos and videos without url
       if (!vimeoParser(url) && url !== '') {
-        videos = [...videos, <Video key={index} video={video} />]
+        videos = [
+          ...videos,
+          <VideoGalleryItem key={index} video={video} showTitle />
+        ]
       }
     })
 
