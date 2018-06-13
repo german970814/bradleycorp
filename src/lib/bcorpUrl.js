@@ -19,8 +19,23 @@ bcorpUrl.createCPTUrl = (post: WPPost): false | string => {
     return path.charAt(0) !== '/' ? `/${path}` : path
   }
 
-  if (post['post_type'] && post['post_name'] && post['post_type'] === 'page') {
-    return `/${post['post_name']}`
+  if (post['post_type'] && post['post_name']) {
+    if (post['post_type'] === 'page') {
+      return `/${post['post_name']}`
+    }
+
+    // we need to change two-word post type names
+    if (post['post_type'] === 'case_study') {
+      return `/case-study/${post['post_name']}`
+    }
+
+    if (post['post_type'] === 'technical_info') {
+      return `/technical-info/${post['post_name']}`
+    }
+
+    if (post['post_type'] === 'video_gallery') {
+      return `/video-gallery/${post['post_name']}`
+    }
   }
 
   if (post['post_type'] && post['post_name']) {

@@ -294,12 +294,12 @@ const RouterInner = () => {
       />
       <Route
         exact
-        path="/case-studies/:slug"
+        path="/case-study/:slug"
         render={({ match }) => {
           return (
             <DefaultCPTLandingPageLoadable
               match={match}
-              postType={'case-studies'}
+              postType={'case-study'}
             />
           )
         }}
