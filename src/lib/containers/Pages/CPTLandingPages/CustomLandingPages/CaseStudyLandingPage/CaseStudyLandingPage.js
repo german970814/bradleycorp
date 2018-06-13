@@ -13,10 +13,19 @@ class CaseStudyLandingPage extends React.Component<Props> {
   renderCaseStudySpecificContent (post: BCorpPost) {
     if (post.meta.case_study_pdf) {
       return (
-        <FileDownloadLink
-          title={post.post.post_title || 'Case Study'}
-          link={post.meta.case_study_pdf}
-        />
+        <div>
+          <h6
+            style={{
+              marginBottom: '10px',
+              paddingTop: '20px'
+            }}>
+            {'View Case Study Document:'}
+          </h6>
+          <FileDownloadLink
+            title={post.post.post_title || 'Case Study'}
+            link={post.meta.case_study_pdf}
+          />
+        </div>
       )
     }
   }

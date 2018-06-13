@@ -41,6 +41,7 @@ type BCorpMeta = {
     market: string,
     shape: string
   },
+  literature_pdf?: string,
   news_source?: {
     name: string,
     url: string
