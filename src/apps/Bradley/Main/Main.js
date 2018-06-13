@@ -46,6 +46,12 @@ const LiteratureLandingPageLoadable = Loadable({
   loading: Loading
 })
 
+const TechInfoLandingPageLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/CPTLandingPages/CustomLandingPages/TechInfoLandingPage/TechInfoLandingPage'),
+  loading: Loading
+})
+
 const ProductDetailLoadable = Loadable({
   loader: () => import('../Pages/ProductDetail/ProductDetail'),
   loading: Loading
@@ -284,6 +290,11 @@ const RouterInner = () => {
         path="/literature/:slug"
         component={LiteratureLandingPageLoadable}
       />
+      <Route
+        exact
+        path="/technical-info/:slug"
+        component={TechInfoLandingPageLoadable}
+      />
 
       {/* Taxonomy pages */}
       <Route
@@ -311,18 +322,6 @@ const RouterInner = () => {
             <DefaultCPTLandingPageLoadable
               match={match}
               postType={'case-study'}
-            />
-          )
-        }}
-      />
-      <Route
-        exact
-        path="/technical-info/:slug"
-        render={({ match }) => {
-          return (
-            <DefaultCPTLandingPageLoadable
-              match={match}
-              postType={'technical-info'}
             />
           )
         }}

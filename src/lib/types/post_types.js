@@ -48,7 +48,8 @@ type BCorpMeta = {
   },
   news_pdf?: string,
   case_study_pdf?: string,
-  meta_description?: string
+  meta_description?: string,
+  technical_info_pdf?: string
 }
 
 type BCorpPost = {
