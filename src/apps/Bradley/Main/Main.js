@@ -40,6 +40,12 @@ const CaseStudyLandingPageLoadable = Loadable({
   loading: Loading
 })
 
+const ChipSampleLandingPageLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/CPTLandingPages/CustomLandingPages/ChipSampleLandingPage/ChipSampleLandingPage'),
+  loading: Loading
+})
+
 const LiteratureLandingPageLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/CPTLandingPages/CustomLandingPages/LiteratureLandingPage/LiteratureLandingPage'),
@@ -293,6 +299,11 @@ const RouterInner = () => {
       />
       <Route
         exact
+        path="/chip/:slug"
+        component={ChipSampleLandingPageLoadable}
+      />
+      <Route
+        exact
         path="/literature/:slug"
         component={LiteratureLandingPageLoadable}
       />
@@ -312,15 +323,6 @@ const RouterInner = () => {
 
       {/* Post Types With Default Template */}
 
-      <Route
-        exact
-        path="/chip/:slug"
-        render={({ match }) => {
-          return (
-            <DefaultCPTLandingPageLoadable match={match} postType={'chip'} />
-          )
-        }}
-      />
       <Route
         exact
         path="/case-study/:slug"
