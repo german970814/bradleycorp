@@ -83,7 +83,7 @@ class ProductContent extends Component {
           className={wrapperStyle} >
           <button
             className={styleClass}
-            onClick={() => { this.props.history.push({pathname: '/techdata'}) }}>
+            onClick={() => { this.props.history.push({ pathname: '/techdata' }) }}>
             ADD TO SUBMITTAL
           </button>
         </div>
@@ -99,7 +99,8 @@ class ProductContent extends Component {
           key={2}
           className={`${wrapperStyle} ${style.surveyWrapper}`} >
           <button
-            className={`button-border-slate-grey ${styleClassSurvey}`} >
+            className={`button-border-slate-grey ${styleClassSurvey}`}
+            onClick={() => { this.props.history.push({ pathname: '/safety-shower-eyewash-site-survey' }) }}>
             REQUEST SITE SURVEY
           </button>
         </div>
