@@ -6,22 +6,22 @@ import style from './PDFWithFeaturedImage.scss'
  * For displaying links to PDFs with a preview image
  */
 const PDFWithFeaturedImage = props => {
-  const imageContainer = props.imageSrc ? (
-    <div className={style.imageContainer}>
-      <img className={style.image} src={props.imageSrc} />
-    </div>
-  ) : null
-
   return (
-    <a href={props.url} target="_blank">
-      <div className={style.pdfWithFeaturedImage}>
-        {imageContainer}
+    <div className={style.pdfWithFeaturedImage}>
+      {props.imageSrc && (
+        <div className={style.imageContainer}>
+          <a href={props.url} target="_blank">
+            <img className={style.image} src={props.imageSrc} />
+          </a>
+        </div>
+      )}
 
+      <a href={props.url} target="_blank">
         <div className={`${style.title} ${props.titleClassName}`}>
           {props.title}
         </div>
-      </div>
-    </a>
+      </a>
+    </div>
   )
 }
 

@@ -2,6 +2,7 @@
 import * as React from 'react'
 import type { MegaMenuNavMenuItem } from '../../../../../../../types/megaMenu_types'
 import { Link } from 'react-router-dom'
+import { createNavMenuItemUrl } from '../../../../../../../bcorpUrl'
 import BCorpLink from '../../../../../../../components/BCorpLink/BCorpLink'
 import style from './MenuBlock.scss'
 
@@ -14,7 +15,7 @@ class MenuBlock extends React.PureComponent<Props> {
     return this.props.menuItem.children.map((child, index) => {
       return (
         <BCorpLink
-          url={child.url}
+          url={createNavMenuItemUrl(child) || '#'}
           renderInternal={url => {
             return (
               <Link to={url}>
@@ -42,7 +43,7 @@ class MenuBlock extends React.PureComponent<Props> {
     return (
       <div className={style.menuBlock}>
         <BCorpLink
-          url={this.props.menuItem.url}
+          url={createNavMenuItemUrl(this.props.menuItem) || '#'}
           renderInternal={url => {
             return (
               <Link to={url}>

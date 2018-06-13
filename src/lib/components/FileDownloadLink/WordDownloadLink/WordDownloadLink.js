@@ -4,30 +4,21 @@ import sharedStyle from '../FileDownloadLink.scss'
 
 const WordDownloadLink = props => {
   return (
-    <div
-      className={sharedStyle.container} >
-
-      <a href={props.link}>
-
-        <div
-          className={sharedStyle.wrapper}>
-
-          <div
-            className={sharedStyle.iconWrapper}>
+    <div className={sharedStyle.container}>
+      <a href={props.link} target="_blank">
+        <div className={sharedStyle.wrapper}>
+          <div className={sharedStyle.iconWrapper}>
             <img
               className={[sharedStyle.icon, props.iconClass].join(' ')}
-              src={require('../../../../images/word-icon/word@2x.png')} />
+              src={require('../../../../images/word-icon/word@2x.png')}
+            />
           </div>
 
-          <span
-            className={[sharedStyle.title, props.titleClass].join(' ')} >
+          <span className={[sharedStyle.title, props.titleClass].join(' ')}>
             {props.title}
           </span>
-
         </div>
-
       </a>
-
     </div>
   )
 }

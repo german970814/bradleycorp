@@ -30,7 +30,25 @@ const BlogSinglePostPageLoadable = Loadable({
 
 const DefaultCPTLandingPageLoadable = Loadable({
   loader: () =>
-    import('../../../lib/containers/Pages/DefaultCPTLandingPage/DefaultCPTLandingPage'),
+    import('../../../lib/containers/Pages/CPTLandingPages/DefaultCPTLandingPage/DefaultCPTLandingPage'),
+  loading: Loading
+})
+
+const CaseStudyLandingPageLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/CPTLandingPages/CustomLandingPages/CaseStudyLandingPage/CaseStudyLandingPage'),
+  loading: Loading
+})
+
+const LiteratureLandingPageLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/CPTLandingPages/CustomLandingPages/LiteratureLandingPage/LiteratureLandingPage'),
+  loading: Loading
+})
+
+const TechInfoLandingPageLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/CPTLandingPages/CustomLandingPages/TechInfoLandingPage/TechInfoLandingPage'),
   loading: Loading
 })
 
@@ -262,6 +280,21 @@ const RouterInner = () => {
       {/* Post Types With Custom Templates */}
       <Route exact path="/post/:slug" component={BlogSinglePostPageLoadable} />
       <Route exact path="/product/:slug" component={ProductDetailLoadable} />
+      <Route
+        exact
+        path="/case-study/:slug"
+        component={CaseStudyLandingPageLoadable}
+      />
+      <Route
+        exact
+        path="/literature/:slug"
+        component={LiteratureLandingPageLoadable}
+      />
+      <Route
+        exact
+        path="/technical-info/:slug"
+        component={TechInfoLandingPageLoadable}
+      />
 
       {/* Taxonomy pages */}
       <Route
@@ -271,18 +304,7 @@ const RouterInner = () => {
       />
 
       {/* Post Types With Default Template */}
-      <Route
-        exact
-        path="/literature/:slug"
-        render={({ match }) => {
-          return (
-            <DefaultCPTLandingPageLoadable
-              match={match}
-              postType={'literature'}
-            />
-          )
-        }}
-      />
+
       <Route
         exact
         path="/chip/:slug"
@@ -300,18 +322,6 @@ const RouterInner = () => {
             <DefaultCPTLandingPageLoadable
               match={match}
               postType={'case-study'}
-            />
-          )
-        }}
-      />
-      <Route
-        exact
-        path="/technical-info/:slug"
-        render={({ match }) => {
-          return (
-            <DefaultCPTLandingPageLoadable
-              match={match}
-              postType={'technical-info'}
             />
           )
         }}
