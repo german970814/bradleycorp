@@ -146,7 +146,7 @@ class ApplicationGallery extends Component<Props, State> {
 
     try {
       const client = new CPTApiClient(PostType)
-      const response = await client.getByTaxNameAndTermSlugObject(filters, 'OR')
+      const response = await client.getByTaxNameAndTermSlugObject(filters, 'OR', -1)
 
       gallery = response.data.length ? response.data : null
     } catch (e) {

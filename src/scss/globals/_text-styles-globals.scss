@@ -137,6 +137,18 @@ tr td:first-child {
   background-repeat: no-repeat;
 }
 
+:global .link-pdf :local {
+  @extend %link-orange;
+  display: inline-block;
+  padding-left: 16px;
+  background-image: url('../../../images/pdf-icon/pdf@2x.png');
+  background-position: left 2px;
+  background-size: 13px 18px;
+  background-repeat: no-repeat;
+  line-height: 20px;
+  padding-top: 4px;
+}
+
 :global .small-link-gray :local {
   @extend %small-link-gray;
 }
