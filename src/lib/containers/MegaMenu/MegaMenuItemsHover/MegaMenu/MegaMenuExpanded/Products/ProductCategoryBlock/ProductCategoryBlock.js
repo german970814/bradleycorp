@@ -53,9 +53,9 @@ class ProductCategoryBlock extends React.PureComponent<Props> {
           return (
             <React.Fragment key={index}>
               <Link to={createArchiveUrl(childWithChildren) || '#'}>
-                <div className={`post-meta-data ${style.childWithChildren}`}>
+                <h6 className={`${style.childWithChildren}`}>
                   {childWithChildren.name}
-                </div>
+                </h6>
               </Link>
               {childWithChildren.children &&
                 childWithChildren.children.length > 0 &&
@@ -79,7 +79,7 @@ class ProductCategoryBlock extends React.PureComponent<Props> {
         </Link>
         <div className={`col2 ${style.links}`}>
           <Link to={createArchiveUrl(this.props.productCategory) || '#'}>
-            <h6 className={style.name}>{this.props.productCategory.name}</h6>
+            <h5 className={style.name}>{this.props.productCategory.name}</h5>
           </Link>
 
           {this.renderChildLinks()}

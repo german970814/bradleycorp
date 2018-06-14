@@ -1,4 +1,5 @@
 @import '../../../../../../../../scss/partials/variables';
+@import '../../../../../../../../scss/partials/text-styles';
 
 .bottomBar {
   padding: 35px 55px 30px 43px;
@@ -11,6 +12,13 @@
 
     :global(.bcorp-search-field-icon-container) {
       background-color: transparent;
+    }
+
+    h5 {
+      @extend %h6-desktop;
+      font-style: oblique;
+      text-transform: none;
+      color: $black;
     }
   }
 }

@@ -1,7 +1,7 @@
 @import '../../../../../../../../scss/partials/variables';
 
 .productCategoryBlock {
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 
   &:last-child {
     margin-bottom: 0px;
@@ -21,17 +21,21 @@
   .links {
     width: (100 / 3) * 2 + %;
 
-    h6.name {
+    h5.name {
       color: $navy;
       text-transform: none;
     }
 
-    .childWithChildren {
+    h6.childWithChildren {
+      color: $black;
       font-weight: bold;
+
+      font-style: oblique;
+      text-transform: none;
     }
 
     .grandchildren {
-      margin-bottom: 15px;
+      margin-bottom: 12px;
 
       &:last-child {
         margin-bottom: 0px;
