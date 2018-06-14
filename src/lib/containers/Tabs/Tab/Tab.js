@@ -9,6 +9,7 @@ type Props = {
   isOpen?: boolean,
   tabWidth?: string,
   iconStyle?: 'arrow' | 'plus',
+  cantOpen?: boolean,
   // passed by Tabs component
   onClick?: (tabIndex: number) => void,
   tabIndex?: number,
@@ -28,18 +29,22 @@ class Tab extends React.Component<Props> {
   handleClick (e: SyntheticEvent<HTMLDivElement>) {
     e.preventDefault()
 
+    if (this.props.cantOpen) {
+      return
+    }
+
     this.props.onClick && this.props.onClick(this.props.tabIndex || 0)
   }
 
   renderUpDownArrow () {
-    if (this.props.isDesktop) {
+    if (this.props.isDesktop || this.props.cantOpen) {
       return
     }
 
     if (this.props.iconStyle === 'plus') {
       return (
         <div className={`bcorp-tab-open-close-icon ${style.openCloseIcon}`}>
-          {this.props.isOpen ? '-' : '+'}
+          {this.props.isOpen ? '--' : '+'}
         </div>
       )
     } else {
@@ -56,7 +61,8 @@ class Tab extends React.Component<Props> {
   }
 
   render () {
-    const active = this.props.isActive ? style.active : ''
+    const active =
+      this.props.isActive && !this.props.cantOpen ? style.active : ''
     const inlineStyle = {
       width: this.props.tabWidth
     }

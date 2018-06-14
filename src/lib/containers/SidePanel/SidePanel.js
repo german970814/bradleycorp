@@ -13,12 +13,35 @@ type Props = {
 
 class SidePanel extends React.PureComponent<Props> {
   componentDidUpdate (prevProps: Props) {
-    if (this.props.show && !prevProps.show && this.props.onShow) {
-      this.props.onShow()
+    if (this.props.show && !prevProps.show) {
+      this.freezeBodyScroll(true)
+
+      if (this.props.onShow) {
+        this.props.onShow()
+      }
     }
 
-    if (!this.props.show && prevProps.show && this.props.onHide) {
-      this.props.onHide()
+    if (!this.props.show && prevProps.show) {
+      this.freezeBodyScroll(false)
+
+      if (this.props.onHide) {
+        this.props.onHide()
+      }
+    }
+  }
+
+  freezeBodyScroll (freeze: boolean) {
+    const body = document.getElementById('body')
+
+    if (body) {
+      // prevent scrolling behind the lightbox
+      if (freeze) {
+        body.style.position = 'relative'
+        body.style.overflow = 'hidden'
+      } else {
+        body.style.position = ''
+        body.style.overflow = ''
+      }
     }
   }
 

@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react'
 import type { MegaMenuNavMenuItem } from '../../../types/megaMenu_types'
+import { itemIsMegaMenuItem } from '../MegaMenuItems'
 import Tabs from '../../Tabs/Tabs/Tabs'
 import Tab from '../../Tabs/Tab/Tab'
 import style from './MegaMenuItemsTabs.scss'
@@ -21,7 +22,10 @@ class MegaMenuItemsTabs extends React.Component<Props> {
       }
 
       return (
-        <Tab key={index} text={menuItem.title}>
+        <Tab
+          text={menuItem.title}
+          iconStyle={'plus'}
+          cantOpen={!itemIsMegaMenuItem(menuItem)}>
           {menuItem.title}
         </Tab>
       )
@@ -36,7 +40,12 @@ class MegaMenuItemsTabs extends React.Component<Props> {
 
     return (
       <div className={style.megaMenuItems}>
-        <Tabs defaultActiveTabIndex={0}>{this.renderMenuItems()}</Tabs>
+        <Tabs
+          defaultActiveTabIndex={0}
+          tabsUlClassName={style.ul}
+          tabClassName={style.tab}>
+          {this.renderMenuItems()}
+        </Tabs>
       </div>
     )
   }

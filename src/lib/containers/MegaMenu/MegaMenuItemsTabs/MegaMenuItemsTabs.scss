@@ -1,0 +1,13 @@
+@import '../../../../scss/partials/variables';
+
+.ul {
+  margin-top: 0;
+}
+
+.tab {
+  text-align: left;
+
+  h5:global(.tab-text) {
+    color: $slate-grey;
+  }
+}

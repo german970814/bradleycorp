@@ -15,14 +15,6 @@ $tabHeight: 65px;
     border-top: 1px solid $silver;
   }
 
-  &.active {
-    background-color: $navy;
-
-    h5.tabText {
-      color: #ffffff;
-    }
-  }
-
   @include respond-to(tablet) {
     h5.tabText {
       font-size: 13px;
@@ -42,5 +34,21 @@ $tabHeight: 65px;
     width: 19px;
     height: 11px;
     margin: ($tabHeight - 11px)/2 0;
+  }
+
+  .openCloseIcon {
+    float: right;
+    font-size: 20px;
+    letter-spacing: -2px;
+    line-height: $tabHeight;
+    color: $gray;
+  }
+
+  &.active {
+    background-color: $navy;
+
+    h5.tabText {
+      color: #ffffff;
+    }
   }
 }
