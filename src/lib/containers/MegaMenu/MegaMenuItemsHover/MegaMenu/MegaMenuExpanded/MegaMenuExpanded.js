@@ -9,7 +9,8 @@ import style from './MegaMenuExpanded.scss'
 
 type Props = {
   menuItem: MegaMenuNavMenuItem,
-  top: number
+  top: number,
+  show?: boolean
 }
 
 /**
@@ -23,6 +24,12 @@ class MegaMenuExpanded extends React.PureComponent<Props> {
     super(props)
 
     this.portalNode = document.getElementById('mega-menu-expanded')
+  }
+
+  componentDidUpdate (prevProps: Props) {
+    if (this.portalNode && this.props.show) {
+      this.portalNode.style.maxHeight = '100vh'
+    }
   }
 
   renderMegaMenuConent () {
@@ -55,13 +62,20 @@ class MegaMenuExpanded extends React.PureComponent<Props> {
     // we need to give it a top value
     portalNode.style.top = `${this.props.top}px`
 
+    if (!this.props.show) {
+      portalNode.style.maxHeight = '0px'
+    }
+
     // then render it in a portal to break out of the DOM structure
     // and render relative to the document
-    return ReactDOM.createPortal(
-      <div className={style.megaMenuExpanded}>
-        {this.renderMegaMenuConent()}
-      </div>,
-      portalNode
+    return (
+      this.props.show &&
+      ReactDOM.createPortal(
+        <div className={style.megaMenuExpanded}>
+          {this.renderMegaMenuConent()}
+        </div>,
+        portalNode
+      )
     )
   }
 }

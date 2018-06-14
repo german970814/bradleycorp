@@ -46,8 +46,13 @@ class MegaMenu extends React.Component<Props, State> {
   renderMegaMenuExpanded () {
     return (
       <React.Fragment>
-        <div className={style.menuItemExpandedArrow} />
-        <MegaMenuExpanded menuItem={this.props.menuItem} top={this.props.top} />
+        {this.state.hovered && <div className={style.menuItemExpandedArrow} />}
+
+        <MegaMenuExpanded
+          menuItem={this.props.menuItem}
+          top={this.props.top}
+          show={this.state.hovered}
+        />
       </React.Fragment>
     )
   }
@@ -67,7 +72,7 @@ class MegaMenu extends React.Component<Props, State> {
           itemHeight={this.props.itemHeight}
           hovered={this.state.hovered}
         />
-        {this.state.hovered && this.renderMegaMenuExpanded()}
+        {this.renderMegaMenuExpanded()}
       </div>
     ) : (
       <div className={style.menuItem}>

@@ -5,6 +5,10 @@
   z-index: 100;
   left: 0;
   width: 100vw;
+  height: auto;
+  max-height: 0px;
+  overflow: hidden;
+  transition: max-height 0.5s;
 }
 
 .megaMenuExpanded {
