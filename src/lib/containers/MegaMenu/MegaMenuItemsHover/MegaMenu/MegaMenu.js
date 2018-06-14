@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react'
 import type { MegaMenuNavMenuItem } from '../../../../types/megaMenu_types'
-import type { HoverExpandedPosition } from './MegaMenuExpanded/MegaMenuExpanded'
 import { itemIsMegaMenuItem } from '../../MegaMenuItems'
 import MegaMenuClosed from './MegaMenuClosed/MegaMenuClosed'
 import MegaMenuExpanded from './MegaMenuExpanded/MegaMenuExpanded'
@@ -10,7 +9,7 @@ import style from './MegaMenu.scss'
 type Props = {
   menuItem: MegaMenuNavMenuItem,
   itemHeight: number,
-  hoverExpandedPosition: HoverExpandedPosition
+  top: number
 }
 
 type State = {
@@ -48,10 +47,7 @@ class MegaMenu extends React.Component<Props, State> {
     return (
       <React.Fragment>
         <div className={style.menuItemExpandedArrow} />
-        <MegaMenuExpanded
-          menuItem={this.props.menuItem}
-          hoverExpandedPosition={this.props.hoverExpandedPosition}
-        />
+        <MegaMenuExpanded menuItem={this.props.menuItem} top={this.props.top} />
       </React.Fragment>
     )
   }

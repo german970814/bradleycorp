@@ -54,9 +54,7 @@ const HeaderDesktop = (props: Props) => {
             type={'hover'}
             menuItems={props.menuItems}
             itemHeight={bottombarheight}
-            hoverExpandedPosition={{
-              top: totalheight
-            }}
+            top={totalheight}
           />
         </div>
 

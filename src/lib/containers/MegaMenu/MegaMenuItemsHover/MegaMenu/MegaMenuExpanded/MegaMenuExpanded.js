@@ -7,19 +7,9 @@ import WithoutThumbnails from './WithoutThumbnails/WithoutThumbnails'
 import Products from './Products/Products'
 import style from './MegaMenuExpanded.scss'
 
-/**
- * The hover expanded area renders in a portal relative to the document.
- * It will always be 100% of the document width,
- * but we need to give it the distance from the top
- * which will depend on where the menu is implemented
- */
-type HoverExpandedPosition = {
-  top: number
-}
-
 type Props = {
   menuItem: MegaMenuNavMenuItem,
-  hoverExpandedPosition: HoverExpandedPosition
+  top: number
 }
 
 /**
@@ -63,7 +53,7 @@ class MegaMenuExpanded extends React.PureComponent<Props> {
 
     // since the expanded area must be relative to the document,
     // we need to give it a top value
-    portalNode.style.top = `${this.props.hoverExpandedPosition.top}px`
+    portalNode.style.top = `${this.props.top}px`
 
     // then render it in a portal to break out of the DOM structure
     // and render relative to the document
@@ -77,4 +67,3 @@ class MegaMenuExpanded extends React.PureComponent<Props> {
 }
 
 export default MegaMenuExpanded
-export type { HoverExpandedPosition }

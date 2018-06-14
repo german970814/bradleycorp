@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react'
 import type { MegaMenuNavMenuItem } from '../../types/megaMenu_types'
-import type { HoverExpandedPosition } from './MegaMenuItemsHover/MegaMenu/MegaMenuExpanded/MegaMenuExpanded'
 import MegaMenuItemsHover from './MegaMenuItemsHover/MegaMenuItemsHover'
 
 type Props = {
@@ -9,21 +8,19 @@ type Props = {
   type: 'hover' | 'tabs',
   menuItems: Array<MegaMenuNavMenuItem>,
   itemHeight: number,
-  hoverExpandedPosition?: HoverExpandedPosition
+  // expanded mega menus render in a portal relative to the document.
+  // but we need to give it the distance from the top
+  // which will depend on where the menu is implemented
+  top: number
 }
 
 class MegaMenuItems extends React.Component<Props> {
   renderMegaMenuHovered () {
-    if (!this.props.hoverExpandedPosition) {
-      console.warn('Mega menu type hover expects a hoverExpandedPosition props')
-      return null
-    }
-
     return (
       <MegaMenuItemsHover
         menuItems={this.props.menuItems}
         itemHeight={this.props.itemHeight}
-        hoverExpandedPosition={this.props.hoverExpandedPosition}
+        top={this.props.top}
       />
     )
   }
