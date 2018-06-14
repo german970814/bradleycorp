@@ -1,11 +1,11 @@
 // @flow
 import * as React from 'react'
-import type { BCorpPost } from '../../../../../../../types/post_types'
+import type { BCorpPost } from '../../../../../types/post_types'
 import { Link } from 'react-router-dom'
-import ContentTransformer from '../../../../../../../components/ContentTransformer/ContentTransformer'
-import { getExcerpt } from '../../../../../../../bcorpPost'
-import { createCPTUrl } from '../../../../../../../bcorpUrl'
-import SVGArrow from '../../../../../../../components/SVGIcon/SVGArrow'
+import ContentTransformer from '../../../../../components/ContentTransformer/ContentTransformer'
+import { getExcerpt } from '../../../../../bcorpPost'
+import { createCPTUrl } from '../../../../../bcorpUrl'
+import SVGArrow from '../../../../../components/SVGIcon/SVGArrow'
 import style from './FeaturedPost.scss'
 
 type Props = {

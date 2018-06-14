@@ -35,6 +35,7 @@ class MegaMenuItemsTabs extends React.Component<Props> {
 
       return (
         <Tab
+          key={index}
           text={menuItem.title}
           iconStyle={'plus'}
           cantOpen={!itemIsMegaMenuItem(menuItem)}>

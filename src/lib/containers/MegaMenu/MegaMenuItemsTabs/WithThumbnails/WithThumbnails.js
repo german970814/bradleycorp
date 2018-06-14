@@ -4,6 +4,7 @@ import type { MegaMenuNavMenuItem } from '../../../../types/megaMenu_types'
 import FillColumns from '../../../../components/FillColumns/FillColumns'
 import { sortIntoRows } from '../../../../bcorpJSX'
 import Thumbnail from './Thumbnail/Thumbnail'
+import FeaturedPost from '../../lib/WithThumbnails/FeaturedPost/FeaturedPost'
 import style from './WithThumbnails.scss'
 
 type Props = {
@@ -14,7 +15,7 @@ class WithThumbnails extends React.PureComponent<Props> {
   renderThumbnails () {
     return this.props.menuItem.children.map((child, index) => {
       return (
-        <div className={`col2 ${style.column}`}>
+        <div key={index} className={`col2 ${style.column}`}>
           <Thumbnail menuItem={child} />
         </div>
       )
@@ -22,12 +23,21 @@ class WithThumbnails extends React.PureComponent<Props> {
   }
 
   render () {
+    const { menuItem } = this.props
     return (
       <div className={`row ${style.withoutThumbnails}`}>
         <div className={style.thumbnailsWrapper}>
           {sortIntoRows(this.renderThumbnails(), 2)}
         </div>
-        <div className={style.featuredPostWrapper} />
+        {menuItem.bcorp_mega_menu_featured_post &&
+          menuItem.bcorp_mega_menu_featured_post_type && (
+            <div className={style.featuredPostWrapper}>
+              <FeaturedPost
+                post={menuItem.bcorp_mega_menu_featured_post}
+                postTypePretty={menuItem.bcorp_mega_menu_featured_post_type}
+              />
+            </div>
+          )}
       </div>
     )
   }

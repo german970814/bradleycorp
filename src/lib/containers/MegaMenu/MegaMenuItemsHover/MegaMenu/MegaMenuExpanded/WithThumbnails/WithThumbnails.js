@@ -2,7 +2,7 @@
 import * as React from 'react'
 import type { MegaMenuNavMenuItem } from '../../../../../../types/megaMenu_types'
 import Thumbnail from './Thumbnail/Thumbnail'
-import FeaturedPost from './FeaturedPost/FeaturedPost'
+import FeaturedPost from '../../../../lib/WithThumbnails/FeaturedPost/FeaturedPost'
 import style from './WithThumbnails.scss'
 
 type Props = {
