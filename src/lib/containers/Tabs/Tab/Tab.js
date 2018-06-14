@@ -1,18 +1,33 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import * as React from 'react'
 import style from './Tab.scss'
 
-class Tab extends Component {
-  constructor (props) {
+type Props = {
+  children: React.Node,
+  isDesktop: boolean,
+  isOpen: boolean,
+  text: string,
+  tabWidth?: string,
+  // passed by Tabs component
+  onClick?: (tabIndex: number) => void,
+  tabIndex?: number,
+  isActive?: boolean,
+  tabClassName?: string
+}
+
+class Tab extends React.Component<Props> {
+  handleClick: (e: SyntheticEvent<HTMLDivElement>) => void
+
+  constructor (props: Props) {
     super(props)
 
     this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick (e) {
+  handleClick (e: SyntheticEvent<HTMLDivElement>) {
     e.preventDefault()
 
-    this.props.onClick(this.props.tabIndex)
+    this.props.onClick && this.props.onClick(this.props.tabIndex || 0)
   }
 
   renderUpDownArrow () {
@@ -20,9 +35,15 @@ class Tab extends Component {
       return
     }
 
-    return this.props.isOpen
-      ? <img src={require('../../../../images/icon-arrow/icon-arrow-up@2x.png')} />
-      : <img src={require('../../../../images/icon-arrow/icon-arrow-down@2x.png')} />
+    return this.props.isOpen ? (
+      <img
+        src={require('../../../../images/icon-arrow/icon-arrow-up@2x.png')}
+      />
+    ) : (
+      <img
+        src={require('../../../../images/icon-arrow/icon-arrow-down@2x.png')}
+      />
+    )
   }
 
   render () {
@@ -34,24 +55,15 @@ class Tab extends Component {
     return (
       <li
         style={inlineStyle}
-        className={`${style.tab} ${this.props.tabClassName} ${active}`}
-        onClick={(e) => { this.handleClick(e) }} >
+        className={`${style.tab} ${this.props.tabClassName || ''} ${active}`}
+        onClick={e => {
+          this.handleClick(e)
+        }}>
         <h5 className={`tab-text ${style.tabText}`}>{this.props.text}</h5>
         {this.renderUpDownArrow()}
       </li>
     )
   }
-}
-
-Tab.propTypes = {
-  onClick: PropTypes.func,
-  tabIndex: PropTypes.number,
-  isActive: PropTypes.bool.isRequired,
-  isDesktop: PropTypes.bool.isRequired,
-  isOpen: PropTypes.bool.isRequired,
-  text: PropTypes.string.isRequired,
-  tabClassName: PropTypes.string,
-  tabWidth: PropTypes.string
 }
 
 export default Tab

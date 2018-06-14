@@ -1,9 +1,27 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import * as React from 'react'
+import Tab from '../Tab/Tab'
 
-class Tabs extends Component {
-  constructor (props, context) {
-    super(props, context)
+type Props = {
+  defaultActiveTabIndex: number,
+  children: Array<React.Element<typeof Tab>>,
+  tabClassName?: string,
+  activeTabClassName?: string,
+  tabWrapperClassName?: string,
+  tabsUlClassName?: string
+}
+
+type State = {
+  activeTabIndex: number,
+  isOpen: boolean
+}
+
+class Tabs extends React.Component<Props, State> {
+  handleTabClick: (tabIndex: number) => void
+  openCloseTab: (tabIndex: number) => void
+
+  constructor (props: Props) {
+    super(props)
 
     this.state = {
       activeTabIndex: this.props.defaultActiveTabIndex,
@@ -14,19 +32,22 @@ class Tabs extends Component {
     this.openCloseTab = this.openCloseTab.bind(this)
   }
 
-  componentWillReceiveProps (nextProps) {
-    this.setState({ activeTabIndex: 0, isOpen: false })
+  static getDerivedStateFromProps (nextProps: Props) {
+    return {
+      activeTabIndex: nextProps.defaultActiveTabIndex,
+      isOpen: false
+    }
   }
 
-  handleTabClick (tabIndex) {
+  handleTabClick (tabIndex: number) {
     this.setState({
       activeTabIndex: tabIndex,
       isOpen: this.openCloseTab(tabIndex)
     })
   }
 
-  openCloseTab (tabIndex) {
-    if (this.state.isOpen && (tabIndex === this.state.activeTabIndex)) {
+  openCloseTab (tabIndex: number) {
+    if (this.state.isOpen && tabIndex === this.state.activeTabIndex) {
       return false
     }
     return true
@@ -49,11 +70,12 @@ class Tabs extends Component {
             key: 0,
             isOpen: true
           }),
-          (<div
+          <div
             key={1}
-            className={`tabs-active-content ${this.props.activeTabClassName}`}>
+            className={`tabs-active-content ${this.props.activeTabClassName ||
+              ''}`}>
             {this.renderActiveTabContent()}
-          </div>)
+          </div>
         ]
       }
       return React.cloneElement(tab, {
@@ -63,32 +85,29 @@ class Tabs extends Component {
   }
 
   // Render current active tab content
-  renderActiveTabContent () {
-    const {children} = this.props
-    const {activeTabIndex} = this.state
-    if (children[activeTabIndex]) {
+  renderActiveTabContent (): React.Node {
+    const { children } = this.props
+    const { activeTabIndex } = this.state
+    if (
+      children[activeTabIndex] &&
+      children[activeTabIndex].props &&
+      children[activeTabIndex].props.children
+    ) {
       return children[activeTabIndex].props.children
+    } else {
+      return null
     }
   }
 
   render () {
     return (
-      <div className={`tab-wrapper ${this.props.tabWrapperClassName}`}>
-        <ul className={`tab-nav ${this.props.tabsUlClassName}`}>
+      <div className={`tab-wrapper ${this.props.tabWrapperClassName || ''}`}>
+        <ul className={`tab-nav ${this.props.tabsUlClassName || ''}`}>
           {this.renderChildrenWithTabsApiAsProps()}
         </ul>
       </div>
     )
   }
-}
-
-Tabs.propTypes = {
-  defaultActiveTabIndex: PropTypes.number.isRequired,
-  children: PropTypes.array.isRequired,
-  tabClassName: PropTypes.string,
-  activeTabClassName: PropTypes.string,
-  tabWrapperClassName: PropTypes.string,
-  tabsUlClassName: PropTypes.string
 }
 
 export default Tabs

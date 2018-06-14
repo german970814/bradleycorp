@@ -11,7 +11,7 @@ import TabCompliance from './Tabs/TabCompliance/TabCompliance'
 import TabApplicationGallery from './Tabs/TabApplicationGallery/TabApplicationGallery'
 import TabBimRevit from './Tabs/TabBimRevit/TabBimRevit'
 
-function getTheTabs (tabsData: Object): Array<React.Element<Tab>> {
+function getTheTabs (tabsData: Object): Array<React.Element<typeof Tab>> {
   let tabs = []
 
   // 3 part spec and tech info
