@@ -4,6 +4,7 @@ import type { MegaMenuNavMenuItem } from '../../../../types/megaMenu_types'
 import { createArchiveUrl } from '../../../../bcorpUrl'
 import Tabs from '../../../Tabs/Tabs/Tabs'
 import Tab from '../../../Tabs/Tab/Tab'
+import BottomBar from '../../lib/Products/BottomBar/BottomBar'
 import ProductCategoryBlock from '../../lib/Products/ProductCategoryBlock/ProductCategoryBlock'
 import style from './Products.scss'
 
@@ -39,12 +40,17 @@ class Products extends React.Component<Props> {
   render () {
     return (
       <div className={`row ${style.productsWrapper}`}>
-        <Tabs
-          defaultActiveTabIndex={0}
-          tabClassName={style.productTab}
-          activeTabClassName={style.activeContent}>
-          {this.renderTabs()}
-        </Tabs>
+        <div className={style.categoriesWrapper}>
+          <Tabs
+            defaultActiveTabIndex={0}
+            tabClassName={style.productTab}
+            activeTabClassName={style.activeContent}>
+            {this.renderTabs()}
+          </Tabs>
+        </div>
+        <div className={style.bottomBarWrapper}>
+          <BottomBar menuItems={this.props.menuItem.children} stack />
+        </div>
       </div>
     )
   }

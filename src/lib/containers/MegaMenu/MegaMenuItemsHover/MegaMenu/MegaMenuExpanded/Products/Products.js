@@ -2,7 +2,7 @@
 import * as React from 'react'
 import type { MegaMenuNavMenuItem } from '../../../../../../types/megaMenu_types'
 import ProductCategoryBlock from '../../../../lib/Products/ProductCategoryBlock/ProductCategoryBlock'
-import BottomBar from './BottomBar/BottomBar'
+import BottomBar from '../../../../lib/Products/BottomBar/BottomBar'
 import style from './Products.scss'
 
 type Props = {
@@ -41,7 +41,7 @@ class Products extends React.Component<Props> {
           {this.renderColumn(2)}
           {this.renderColumn(3)}
         </div>
-        <BottomBar menuItems={this.props.menuItem.children || []} />
+        <BottomBar menuItems={this.props.menuItem.children || []} greyIcon />
       </div>
     )
   }

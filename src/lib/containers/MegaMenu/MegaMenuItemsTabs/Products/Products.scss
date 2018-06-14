@@ -1,33 +1,40 @@
 @import '../MegaMenuItemsTabs';
 
 .productsWrapper {
-  @extend %fillActiveContent;
-  padding: 0;
+  .categoriesWrapper {
+    @extend %fillActiveContent;
+    margin-bottom: 20px;
+    padding: 0;
 
-  .productTab {
-    padding-right: 35px;
-    background-color: #fff;
-    text-align: left;
-
-    h5 {
+    .productTab {
       padding-right: 20px;
-      line-height: normal;
-      box-sizing: border-box;
-    }
-
-    &:global(.active) {
       background-color: #fff;
+      text-align: left;
+
+      @include respond-to(tablet) {
+        padding-right: 35px;
+      }
 
       h5 {
-        color: $navy;
+        padding-right: 19px;
+        line-height: normal;
+        box-sizing: border-box;
+      }
+
+      &:global(.active) {
+        background-color: #fff;
+
+        h5 {
+          color: $navy;
+        }
       }
     }
-  }
 
-  .activeContent {
-    h6,
-    :global(.small-body) {
-      margin-bottom: 3px;
+    .activeContent {
+      h6,
+      :global(.small-body) {
+        margin-bottom: 3px;
+      }
     }
   }
 }

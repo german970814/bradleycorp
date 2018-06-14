@@ -1,0 +1,39 @@
+@import '../../../../../../scss/partials/variables';
+@import '../../../../../../scss/partials/text-styles';
+
+.bottomBar {
+  padding: 35px 55px 30px 43px;
+  width: 100%;
+  background-color: $light-gray;
+
+  .searchWrapper {
+    padding-right: 118px;
+    text-align: left;
+
+    h5 {
+      @extend %h6-desktop;
+      font-style: oblique;
+      text-transform: none;
+      color: $black;
+    }
+  }
+
+  &.stack {
+    padding: 0;
+
+    .searchWrapper {
+      padding-right: 0;
+    }
+
+    .productsSearch {
+      padding: 0;
+      padding-right: 12px;
+    }
+  }
+
+  &.greyIcon {
+    :global(.bcorp-search-field-icon-container) {
+      background-color: transparent;
+    }
+  }
+}
