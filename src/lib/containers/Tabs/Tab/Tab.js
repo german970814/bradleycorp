@@ -4,10 +4,11 @@ import style from './Tab.scss'
 
 type Props = {
   children: React.Node,
-  isDesktop: boolean,
-  isOpen: boolean,
   text: string,
+  isDesktop?: boolean,
+  isOpen?: boolean,
   tabWidth?: string,
+  iconStyle?: 'arrow' | 'plus',
   // passed by Tabs component
   onClick?: (tabIndex: number) => void,
   tabIndex?: number,
@@ -35,15 +36,23 @@ class Tab extends React.Component<Props> {
       return
     }
 
-    return this.props.isOpen ? (
-      <img
-        src={require('../../../../images/icon-arrow/icon-arrow-up@2x.png')}
-      />
-    ) : (
-      <img
-        src={require('../../../../images/icon-arrow/icon-arrow-down@2x.png')}
-      />
-    )
+    if (this.props.iconStyle === 'plus') {
+      return (
+        <div className={`bcorp-tab-open-close-icon ${style.openCloseIcon}`}>
+          {this.props.isOpen ? '-' : '+'}
+        </div>
+      )
+    } else {
+      return (
+        <img
+          src={
+            this.props.isOpen
+              ? require('../../../../images/icon-arrow/icon-arrow-up@2x.png')
+              : require('../../../../images/icon-arrow/icon-arrow-down@2x.png')
+          }
+        />
+      )
+    }
   }
 
   render () {

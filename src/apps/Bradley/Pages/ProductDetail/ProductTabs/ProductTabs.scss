@@ -1,57 +1,16 @@
-@import "../../../../../scss/partials/text-styles";
-@import "../../../../../scss/partials/variables";
-@import "../../../../../scss/partials/mixins";
-@import "../../../../../scss/partials/layout";
-@import "../../../../../scss/partials/grid";
+@import '../../../../../scss/partials/text-styles';
+@import '../../../../../scss/partials/variables';
+@import '../../../../../scss/partials/mixins';
+@import '../../../../../scss/partials/layout';
+@import '../../../../../scss/partials/grid';
 
 $tabHeight: 65px;
 
-.productDetailTabsUl {
-  margin-bottom: 0;
-  padding-left: 0;
-  width: 100%;
-  text-align: center;
-}
-
-.activeTabContent {
-  @extend %BodyPaddingWithMediaQueries;
-  border-bottom: solid 1px $silver;
-  padding-top: 30px;
-  padding-bottom: 25px;
-  background-color: $light-gray;
-  text-align: left;
-}
-
 .productDetailTabs {
-  @extend %BodyPaddingWithMediaQueries;
-  border-bottom: 1px solid $silver;
-  height: $tabHeight;
-  list-style: none;
-  cursor: pointer;
-
   &:first-child {
     margin-top: 62px;
-    border-top: 1px solid $silver;
   }
-
-  h5:global(.tab-text) {
-    display: inline-block;
-    vertical-align: middle;
-    width: calc(100% - 19px);
-    color: $navy;
-    line-height: $tabHeight;
-  }
-
-  img {
-    float: right;
-    width: 19px;
-    height: 11px;
-    margin: ($tabHeight - 11px)/2 0;
-  }
-
 }
-
-
 
 // Tablet-Desktop
 

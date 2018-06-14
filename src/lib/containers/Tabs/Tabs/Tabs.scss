@@ -1,0 +1,19 @@
+@import '../../../../scss/partials/variables';
+@import '../../../../scss/partials/mixins';
+@import '../../../../scss/partials/layout';
+
+.tabsUl {
+  margin-bottom: 0;
+  padding-left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.activeTabContent {
+  @extend %BodyPaddingWithMediaQueries;
+  border-bottom: solid 1px $silver;
+  padding-top: 30px;
+  padding-bottom: 25px;
+  background-color: $light-gray;
+  text-align: left;
+}

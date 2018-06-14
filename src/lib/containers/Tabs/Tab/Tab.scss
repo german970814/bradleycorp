@@ -1,9 +1,18 @@
-@import "../../../../scss/partials/variables";
-@import "../../../../scss/partials/mixins";
+@import '../../../../scss/partials/variables';
+@import '../../../../scss/partials/mixins';
+@import '../../../../scss/partials/layout';
+
+$tabHeight: 65px;
 
 .tab {
-  h5.tabText {
-    display: inline;
+  @extend %BodyPaddingWithMediaQueries;
+  border-bottom: 1px solid $silver;
+  height: $tabHeight;
+  list-style: none;
+  cursor: pointer;
+
+  &:first-child {
+    border-top: 1px solid $silver;
   }
 
   &.active {
@@ -18,5 +27,20 @@
     h5.tabText {
       font-size: 13px;
     }
+  }
+
+  h5.tabText {
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 19px);
+    color: $navy;
+    line-height: $tabHeight;
+  }
+
+  img {
+    float: right;
+    width: 19px;
+    height: 11px;
+    margin: ($tabHeight - 11px)/2 0;
   }
 }

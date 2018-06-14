@@ -2,6 +2,7 @@
 
 :global(#side-panel) {
   position: fixed;
+  z-index: 100;
   width: 100vw;
   height: 100vh;
   background-color: #fff;
@@ -9,6 +10,6 @@
   box-sizing: border-box;
 
   @include respond-to(tablet) {
-    max-width: 500px;
+    max-width: 400px;
   }
 }

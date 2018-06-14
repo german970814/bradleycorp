@@ -1,10 +1,11 @@
 // @flow
 import * as React from 'react'
 import Tab from '../Tab/Tab'
+import style from './Tabs.scss'
 
 type Props = {
   defaultActiveTabIndex: number,
-  children: Array<React.Element<typeof Tab>>,
+  children: Array<React.Element<typeof Tab> | null>,
   tabClassName?: string,
   activeTabClassName?: string,
   tabWrapperClassName?: string,
@@ -72,8 +73,8 @@ class Tabs extends React.Component<Props, State> {
           }),
           <div
             key={1}
-            className={`tabs-active-content ${this.props.activeTabClassName ||
-              ''}`}>
+            className={`tabs-active-content ${style.activeTabContent} ${this
+              .props.activeTabClassName || ''}`}>
             {this.renderActiveTabContent()}
           </div>
         ]
@@ -101,8 +102,12 @@ class Tabs extends React.Component<Props, State> {
 
   render () {
     return (
-      <div className={`tab-wrapper ${this.props.tabWrapperClassName || ''}`}>
-        <ul className={`tab-nav ${this.props.tabsUlClassName || ''}`}>
+      <div
+        className={`tab-wrapper ${style.tabWrapper} ${this.props
+          .tabWrapperClassName || ''}`}>
+        <ul
+          className={`tab-nav ${style.tabsUl} ${this.props.tabsUlClassName ||
+            ''}`}>
           {this.renderChildrenWithTabsApiAsProps()}
         </ul>
       </div>
