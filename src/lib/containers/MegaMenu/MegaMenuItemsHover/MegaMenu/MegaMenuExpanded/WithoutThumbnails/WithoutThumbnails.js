@@ -2,7 +2,7 @@
 import * as React from 'react'
 import type { MegaMenuNavMenuItem } from '../../../../../../types/megaMenu_types'
 import FillColumns from '../../../../../../components/FillColumns/FillColumns'
-import MenuBlock from './MenuBlock/MenuBlock'
+import MenuBlock from '../../../../lib/WithoutThumbnails/MenuBlock/MenuBlock'
 import style from './WithoutThumbnails.scss'
 
 type Props = {

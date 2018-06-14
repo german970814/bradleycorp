@@ -1,0 +1,21 @@
+.withoutThumbnails {
+  .columnLeft {
+    padding-right: 20px;
+  }
+
+  :global(.menu-block) {
+    margin-bottom: 15px;
+
+    h6:global(.menu-block-title) {
+      margin-bottom: 3px;
+    }
+
+    :global(.menu-block-child-item) {
+      margin-bottom: 3px;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

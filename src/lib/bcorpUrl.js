@@ -35,7 +35,6 @@ bcorpUrl.createCPTUrl = (post: WPPost): false | string => {
 bcorpUrl.createNavMenuItemUrl = (
   navMenuItem: MegaMenuNavMenuItem
 ): false | string => {
-  console.log(navMenuItem)
   if (navMenuItem.type === 'custom') {
     return navMenuItem.url
   }

@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react'
-import type { MegaMenuNavMenuItem } from '../../../../../../../types/megaMenu_types'
+import type { MegaMenuNavMenuItem } from '../../../../../types/megaMenu_types'
 import { Link } from 'react-router-dom'
-import { createNavMenuItemUrl } from '../../../../../../../bcorpUrl'
-import BCorpLink from '../../../../../../../components/BCorpLink/BCorpLink'
+import { createNavMenuItemUrl } from '../../../../../bcorpUrl'
+import BCorpLink from '../../../../../components/BCorpLink/BCorpLink'
 import style from './MenuBlock.scss'
 
 type Props = {
@@ -20,7 +20,11 @@ class MenuBlock extends React.PureComponent<Props> {
           renderInternal={url => {
             return (
               <Link to={url}>
-                <div key={index} className={`small-body ${style.childItem}`}>
+                <div
+                  key={index}
+                  className={`small-body menu-block-child-item ${
+                    style.childItem
+                  }`}>
                   {child.title}
                 </div>
               </Link>
@@ -29,7 +33,11 @@ class MenuBlock extends React.PureComponent<Props> {
           renderExternal={url => {
             return (
               <a href={url} target="_blank">
-                <div key={index} className={`small-body ${style.childItem}`}>
+                <div
+                  key={index}
+                  className={`small-body menu-block-child-item  ${
+                    style.childItem
+                  }`}>
                   {child.title}
                 </div>
               </a>
@@ -42,13 +50,15 @@ class MenuBlock extends React.PureComponent<Props> {
 
   render () {
     return (
-      <div className={style.menuBlock}>
+      <div className={`menu-block ${style.menuBlock}`}>
         <BCorpLink
           url={createNavMenuItemUrl(this.props.menuItem) || '#'}
           renderInternal={url => {
             return (
               <Link to={url}>
-                <h6 className={style.title}>{this.props.menuItem.title}</h6>
+                <h6 className={`menu-block-title ${style.title}`}>
+                  {this.props.menuItem.title}
+                </h6>
                 {this.renderChildItems()}
               </Link>
             )
@@ -56,7 +66,9 @@ class MenuBlock extends React.PureComponent<Props> {
           renderExternal={url => {
             return (
               <a href={url} target="_blank">
-                <h6 className={style.title}>{this.props.menuItem.title}</h6>
+                <h6 className={`menu-block-title ${style.title}`}>
+                  {this.props.menuItem.title}
+                </h6>
                 {this.renderChildItems()}
               </a>
             )

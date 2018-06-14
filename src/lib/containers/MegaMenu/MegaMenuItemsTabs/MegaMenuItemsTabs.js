@@ -4,6 +4,7 @@ import type { MegaMenuNavMenuItem } from '../../../types/megaMenu_types'
 import { itemIsMegaMenuItem } from '../MegaMenuItems'
 import Tabs from '../../Tabs/Tabs/Tabs'
 import Tab from '../../Tabs/Tab/Tab'
+import WithoutThumbnails from './WithoutThumbnails/WithoutThumbnails'
 import style from './MegaMenuItemsTabs.scss'
 
 type Props = {
@@ -11,10 +12,16 @@ type Props = {
 }
 
 /**
- * Responsible for rendering the correct list of mega menu primary items
+ * Responsible for rendering mega menu primary items tabs
  * given an array of nav menu item posts
  */
 class MegaMenuItemsTabs extends React.Component<Props> {
+  renderTabContent (menuItem: MegaMenuNavMenuItem) {
+    if (menuItem.bcorp_mega_menu_slug === 'mega-menu-without-thumbnails') {
+      return <WithoutThumbnails menuItem={menuItem} />
+    }
+  }
+
   renderMenuItems () {
     return this.props.menuItems.map((menuItem, index) => {
       if (menuItem.menu_item_parent !== '0') {
@@ -26,7 +33,7 @@ class MegaMenuItemsTabs extends React.Component<Props> {
           text={menuItem.title}
           iconStyle={'plus'}
           cantOpen={!itemIsMegaMenuItem(menuItem)}>
-          {menuItem.title}
+          {this.renderTabContent(menuItem)}
         </Tab>
       )
     })
@@ -43,7 +50,8 @@ class MegaMenuItemsTabs extends React.Component<Props> {
         <Tabs
           defaultActiveTabIndex={0}
           tabsUlClassName={style.ul}
-          tabClassName={style.tab}>
+          tabClassName={style.tab}
+          activeTabClassName={style.activeContent}>
           {this.renderMenuItems()}
         </Tabs>
       </div>

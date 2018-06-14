@@ -1,13 +1,28 @@
 @import '../../../../scss/partials/variables';
+@import '../../../../scss/partials/text-styles';
+
+$tabHeight: 50px;
 
 .ul {
   margin-top: 0;
 }
 
 .tab {
+  height: $tabHeight;
   text-align: left;
 
   h5:global(.tab-text) {
+    @extend %h6-desktop;
+    line-height: $tabHeight;
     color: $slate-grey;
   }
+
+  :global(.bcorp-tab-open-close-icon) {
+    line-height: $tabHeight;
+  }
+}
+
+.activeContent {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
