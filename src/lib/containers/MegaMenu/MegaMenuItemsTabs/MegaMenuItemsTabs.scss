@@ -33,3 +33,16 @@ $activeContentRightPaddingTablet: 20px;
     padding-right: $activeContentRightPaddingTablet;
   }
 }
+
+%fillActiveContent {
+  margin-top: -$activeContentTopPadding;
+  margin-left: -$MobileBodyPadding;
+  margin-right: -$MobileBodyPadding;
+  background-color: #fff;
+
+  @include respond-to(tablet) {
+    margin-left: -$TabletBodyPadding;
+    margin-right: -$activeContentRightPaddingTablet;
+    background-color: #fff;
+  }
+}

@@ -1,0 +1,25 @@
+@import '../MegaMenuItemsTabs';
+
+.productsWrapper {
+  @extend %fillActiveContent;
+  padding: 0;
+
+  .productTab {
+    background-color: #fff;
+    text-align: left;
+
+    h5 {
+      padding-right: 20px;
+      line-height: normal;
+      box-sizing: border-box;
+    }
+
+    &:global(.active) {
+      background-color: #fff;
+
+      h5 {
+        color: $navy;
+      }
+    }
+  }
+}

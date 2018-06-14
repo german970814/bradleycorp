@@ -6,6 +6,7 @@ import Tabs from '../../Tabs/Tabs/Tabs'
 import Tab from '../../Tabs/Tab/Tab'
 import WithoutThumbnails from './WithoutThumbnails/WithoutThumbnails'
 import WithThumbnails from './WithThumbnails/WithThumbnails'
+import Products from './Products/Products'
 import style from './MegaMenuItemsTabs.scss'
 
 type Props = {
@@ -24,6 +25,10 @@ class MegaMenuItemsTabs extends React.Component<Props> {
 
     if (menuItem.bcorp_mega_menu_slug === 'mega-menu-with-thumbnails') {
       return <WithThumbnails menuItem={menuItem} />
+    }
+
+    if (menuItem.bcorp_mega_menu_slug === 'mega-menu-products') {
+      return <Products menuItem={menuItem} />
     }
   }
 

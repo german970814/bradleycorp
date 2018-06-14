@@ -2,20 +2,14 @@
 
 .withoutThumbnails {
   .thumbnailsWrapper {
-    margin-top: -$activeContentTopPadding;
-    margin-left: -$MobileBodyPadding;
-    margin-right: -$MobileBodyPadding;
+    @extend %fillActiveContent;
     padding-top: $activeContentTopPadding;
     padding-left: $MobileBodyPadding;
     padding-right: $MobileBodyPadding;
-    background-color: #fff;
 
     @include respond-to(tablet) {
-      margin-left: -$TabletBodyPadding;
-      margin-right: -$activeContentRightPaddingTablet;
       padding-left: $TabletBodyPadding;
       padding-right: $activeContentRightPaddingTablet;
-      background-color: #fff;
     }
 
     .column {

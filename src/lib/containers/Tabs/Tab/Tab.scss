@@ -3,6 +3,7 @@
 @import '../../../../scss/partials/layout';
 
 $tabHeight: 65px;
+$imageHeight: $tabHeight - 20px;
 
 .tab {
   @extend %BodyPaddingWithMediaQueries;
@@ -21,15 +22,32 @@ $tabHeight: 65px;
     }
   }
 
+  .image {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: $imageHeight;
+    width: $imageHeight;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
   h5.tabText {
     display: inline-block;
     vertical-align: middle;
     width: calc(100% - 19px);
     color: $navy;
     line-height: $tabHeight;
+
+    &.hasImage {
+      width: calc(100% - 19px - #{$imageHeight} - 20px);
+    }
   }
 
-  img {
+  img.icon {
     float: right;
     width: 19px;
     height: 11px;

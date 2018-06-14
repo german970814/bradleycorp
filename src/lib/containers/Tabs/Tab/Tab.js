@@ -5,6 +5,7 @@ import style from './Tab.scss'
 type Props = {
   children: React.Node,
   text: string,
+  image?: string,
   isDesktop?: boolean,
   isOpen?: boolean,
   tabWidth?: string,
@@ -50,6 +51,7 @@ class Tab extends React.Component<Props> {
     } else {
       return (
         <img
+          className={style.icon}
           src={
             this.props.isOpen
               ? require('../../../../images/icon-arrow/icon-arrow-up@2x.png')
@@ -62,7 +64,9 @@ class Tab extends React.Component<Props> {
 
   render () {
     const active =
-      this.props.isActive && !this.props.cantOpen ? style.active : ''
+      this.props.isActive && !this.props.cantOpen
+        ? `active ${style.active}`
+        : ''
     const inlineStyle = {
       width: this.props.tabWidth
     }
@@ -74,7 +78,20 @@ class Tab extends React.Component<Props> {
         onClick={e => {
           this.handleClick(e)
         }}>
-        <h5 className={`tab-text ${style.tabText}`}>{this.props.text}</h5>
+        {this.props.image && (
+          <div
+            style={{
+              backgroundImage: `url('${this.props.image}')`
+            }}
+            className={style.image}
+          />
+        )}
+        <h5
+          className={`tab-text ${style.tabText} ${
+            this.props.image ? style.hasImage : ''
+          }`}>
+          {this.props.text}
+        </h5>
         {this.renderUpDownArrow()}
       </li>
     )
