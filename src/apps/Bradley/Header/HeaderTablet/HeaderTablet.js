@@ -1,59 +1,89 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import * as React from 'react'
+import type { MegaMenuNavMenuItem } from '../../../../lib/types/megaMenu_types'
 import BurgerMenu from '../../../../lib/components/BurgerMenu/BurgerMenu'
 import VerticalAlignHelper from '../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import SearchIcon from '../SearchIcon/SearchIcon'
-import style from './HeaderTablet.scss'
+import SideMenu from '../SideMenu/SideMenu'
+import style, { totalheight } from './HeaderTablet.scss'
 
-const HeaderTablet = props => {
-  return (
-    <header className={style.header}>
-      <div className={style.topBar}>
-        <VerticalAlignHelper />
+type Props = {
+  menuItems: Array<MegaMenuNavMenuItem>
+}
 
-        {/*
-        <div
-          className={style.user} >
-          <img
-            src={require('../../../../images/avatar/avatar@2x.png')}
-            className={style.avatar} />
-          <span className={style.userText}>{'LOGIN'}</span>
-        </div>
-        */}
+type State = {
+  showMenu: boolean
+}
 
-        <div className={style.country}>
-          <img
-            src={require('../../../../images/flag/flag@2x.png')}
-            className={style.flag}
-          />
-          <span className={style.countryText}>{'USA'}</span>
-        </div>
-      </div>
+class HeaderTablet extends React.Component<Props, State> {
+  constructor (props: Props) {
+    super(props)
 
-      <div className={style.bottomBar}>
-        <VerticalAlignHelper />
+    this.state = { showMenu: false }
+  }
 
-        <div className={style.burgerMenuWrapper}>
-          <BurgerMenu />
-        </div>
+  showMenu () {
+    this.setState({ showMenu: true })
+  }
 
-        <div className={style.logoWrapper}>
-          <div className={style.logo}>
+  hideMenu () {
+    this.setState({ showMenu: false })
+  }
+
+  render () {
+    return (
+      <header className={style.header}>
+        <div className={style.topBar}>
+          <VerticalAlignHelper />
+
+          {/*
+          <div
+            className={style.user} >
             <img
-              src={require('../../../../images/logo-color/logo-color@2x.png')}
-              className={style.logoImage}
+              src={require('../../../../images/avatar/avatar@2x.png')}
+              className={style.avatar} />
+            <span className={style.userText}>{'LOGIN'}</span>
+          </div>
+          */}
+
+          <div className={style.country}>
+            <img
+              src={require('../../../../images/flag/flag@2x.png')}
+              className={style.flag}
             />
+            <span className={style.countryText}>{'USA'}</span>
           </div>
         </div>
 
-        <SearchIcon />
-      </div>
-    </header>
-  )
-}
+        <div className={style.bottomBar}>
+          <VerticalAlignHelper />
 
-HeaderTablet.propTypes = {
-  menuItems: PropTypes.array
+          <div className={style.burgerMenuWrapper}>
+            <BurgerMenu
+              onActivate={this.showMenu.bind(this)}
+              onDeactivate={this.hideMenu.bind(this)}
+            />
+            <SideMenu
+              menuItems={this.props.menuItems}
+              top={totalheight}
+              show={this.state.showMenu}
+            />
+          </div>
+
+          <div className={style.logoWrapper}>
+            <div className={style.logo}>
+              <img
+                src={require('../../../../images/logo-color/logo-color@2x.png')}
+                className={style.logoImage}
+              />
+            </div>
+          </div>
+
+          <SearchIcon />
+        </div>
+      </header>
+    )
+  }
 }
 
 export default HeaderTablet

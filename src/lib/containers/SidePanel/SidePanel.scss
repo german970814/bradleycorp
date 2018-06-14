@@ -7,4 +7,8 @@
   background-color: #fff;
   transition: left 0.5s;
   box-sizing: border-box;
+
+  @include respond-to(tablet) {
+    max-width: 500px;
+  }
 }

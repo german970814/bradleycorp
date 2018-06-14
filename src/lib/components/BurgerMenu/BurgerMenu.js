@@ -1,17 +1,37 @@
-import React, { Component } from 'react'
+// @flow
+import * as React from 'react'
 import style from './BurgerMenu.scss'
+
+type Props = {
+  onActivate?: () => void,
+  onDeactivate?: () => void
+}
+
+type State = {
+  isActive: boolean
+}
 
 /**
  * Renders the Hamburger Squeeze icon from:
  *
  * @see https://jonsuh.com/hamburgers
  */
-class BurgerMenu extends Component {
-  constructor (props) {
+class BurgerMenu extends React.Component<Props, State> {
+  constructor (props: Props) {
     super(props)
 
     this.state = {
       isActive: false
+    }
+  }
+
+  componentDidUpdate (prevProps: Props, prevState: State) {
+    if (this.state.isActive && !prevState.isActive && this.props.onActivate) {
+      this.props.onActivate()
+    }
+
+    if (!this.state.isActive && prevState.isActive && this.props.onDeactivate) {
+      this.props.onDeactivate()
     }
   }
 

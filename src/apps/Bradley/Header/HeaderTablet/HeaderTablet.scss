@@ -1,14 +1,18 @@
-@import "../../../../scss/partials/layout";
-@import "../../../../scss/partials/variables";
+@import '../../../../scss/partials/layout';
+@import '../../../../scss/partials/variables';
 
-@import "../Header";
+@import '../Header';
+
+$topBarHeight: 27;
+$bottomBarHeight: 64;
+$totalHeight: $topBarHeight + $bottomBarHeight;
 
 $avatarHeight: 12px;
 $flagHeight: 10px;
 
 .topBar {
   @extend %BodyPaddingWithMediaQueries;
-  height: 27px;
+  height: $topBarHeight + px;
   background-color: $topBarColor;
   text-align: right;
 }
@@ -24,7 +28,8 @@ $flagHeight: 10px;
   color: $steel-grey;
 }
 
-.user, .country {
+.user,
+.country {
   display: inline-block;
   vertical-align: middle;
 }
@@ -62,7 +67,7 @@ $flagHeight: 10px;
 .bottomBar {
   @extend %BodyPaddingWithMediaQueries;
   position: relative;
-  height: 64px;
+  height: $bottomBarHeight + px;
 }
 
 .burgerMenuWrapper {
@@ -92,4 +97,8 @@ $flagHeight: 10px;
   margin-bottom: 17px;
   width: 56px;
   height: 56px;
+}
+
+:export {
+  totalheight: $totalHeight;
 }

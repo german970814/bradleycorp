@@ -1,8 +1,10 @@
-@import "../../../../scss/partials/layout";
+@import '../../../../scss/partials/layout';
+
+$height: 64;
 
 .header {
   @extend %BodyPaddingWithMediaQueries;
-  height: 64px;
+  height: $height + px;
 }
 
 .burgerMenuWrapper {
@@ -27,4 +29,8 @@
 .logoImage {
   width: 100%;
   height: 100%;
+}
+
+:export {
+  height: $height;
 }
