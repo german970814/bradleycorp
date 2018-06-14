@@ -1,0 +1,10 @@
+@import '../../../scss/partials/mixins';
+
+:global(#side-panel) {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+  transition: left 0.5s;
+  box-sizing: border-box;
+}
