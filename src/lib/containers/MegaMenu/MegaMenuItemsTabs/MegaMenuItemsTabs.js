@@ -2,6 +2,7 @@
 import * as React from 'react'
 import type { MegaMenuNavMenuItem } from '../../../types/megaMenu_types'
 import { itemIsMegaMenuItem } from '../MegaMenuItems'
+import { createNavMenuItemUrl } from '../../../bcorpUrl'
 import Tabs from '../../Tabs/Tabs/Tabs'
 import Tab from '../../Tabs/Tab/Tab'
 import WithoutThumbnails from './WithoutThumbnails/WithoutThumbnails'
@@ -38,12 +39,15 @@ class MegaMenuItemsTabs extends React.Component<Props> {
         return null
       }
 
+      const isMegaMenu = itemIsMegaMenuItem(menuItem)
+
       return (
         <Tab
           key={index}
           text={menuItem.title}
           iconStyle={'plus'}
-          cantOpen={!itemIsMegaMenuItem(menuItem)}>
+          cantOpen={!isMegaMenu}
+          link={createNavMenuItemUrl(menuItem) || undefined}>
           {this.renderTabContent(menuItem)}
         </Tab>
       )

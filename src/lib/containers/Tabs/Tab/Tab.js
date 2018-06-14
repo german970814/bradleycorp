@@ -1,5 +1,7 @@
 // @flow
 import * as React from 'react'
+import { Link } from 'react-router-dom'
+import BCorpLink from '../../../components/BCorpLink/BCorpLink'
 import style from './Tab.scss'
 
 type Props = {
@@ -10,7 +12,10 @@ type Props = {
   isOpen?: boolean,
   tabWidth?: string,
   iconStyle?: 'arrow' | 'plus',
+  // can render just a block instead
   cantOpen?: boolean,
+  // add a link to the header text
+  link?: string,
   // passed by Tabs component
   onClick?: (tabIndex: number) => void,
   tabIndex?: number,
@@ -62,6 +67,35 @@ class Tab extends React.Component<Props> {
     }
   }
 
+  renderHeader () {
+    return (
+      <h5
+        className={`tab-text ${style.tabText} ${
+          this.props.image ? style.hasImage : ''
+        }`}>
+        {this.props.text}
+      </h5>
+    )
+  }
+
+  renderHeaderLink (url: string) {
+    return (
+      <BCorpLink
+        url={url}
+        renderInternal={url => {
+          return <Link to={url}>{this.renderHeader()}</Link>
+        }}
+        renderExternal={url => {
+          return (
+            <a href={url} target="_blank">
+              {this.renderHeader()}
+            </a>
+          )
+        }}
+      />
+    )
+  }
+
   render () {
     const active =
       this.props.isActive && !this.props.cantOpen
@@ -86,12 +120,9 @@ class Tab extends React.Component<Props> {
             className={style.image}
           />
         )}
-        <h5
-          className={`tab-text ${style.tabText} ${
-            this.props.image ? style.hasImage : ''
-          }`}>
-          {this.props.text}
-        </h5>
+        {this.props.link
+          ? this.renderHeaderLink(this.props.link)
+          : this.renderHeader()}
         {this.renderUpDownArrow()}
       </li>
     )

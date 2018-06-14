@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react'
 import type { MegaMenuNavMenuItem } from '../../../../types/megaMenu_types'
+import { createArchiveUrl } from '../../../../bcorpUrl'
 import Tabs from '../../../Tabs/Tabs/Tabs'
 import Tab from '../../../Tabs/Tab/Tab'
 import ProductCategoryBlock from '../../lib/Products/ProductCategoryBlock/ProductCategoryBlock'
@@ -23,7 +24,8 @@ class Products extends React.Component<Props> {
             <Tab
               key={`${index1}_${index2}`}
               text={prodCat.name}
-              image={prodCat.featured_image}>
+              image={prodCat.featured_image}
+              link={createArchiveUrl(prodCat) || undefined}>
               <ProductCategoryBlock productCategory={prodCat} />
             </Tab>
           ]
