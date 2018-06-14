@@ -1,6 +1,8 @@
 // @flow
 import * as React from 'react'
 import type { MegaMenuNavMenuItem } from '../../../../lib/types/megaMenu_types'
+import type { Location } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import BurgerMenu from '../../../../lib/components/BurgerMenu/BurgerMenu'
 import VerticalAlignHelper from '../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import SearchIcon from '../SearchIcon/SearchIcon'
@@ -8,7 +10,9 @@ import SideMenu from '../SideMenu/SideMenu'
 import style, { totalheight } from './HeaderTablet.scss'
 
 type Props = {
-  menuItems: Array<MegaMenuNavMenuItem>
+  menuItems: Array<MegaMenuNavMenuItem>,
+  // from withRouter HOC
+  location: Location
 }
 
 type State = {
@@ -20,6 +24,13 @@ class HeaderTablet extends React.Component<Props, State> {
     super(props)
 
     this.state = { showMenu: false }
+  }
+
+  componentDidUpdate (prevProps: Props) {
+    // route change
+    if (prevProps.location !== this.props.location) {
+      this.hideMenu()
+    }
   }
 
   showMenu () {
@@ -60,6 +71,7 @@ class HeaderTablet extends React.Component<Props, State> {
 
           <div className={style.burgerMenuWrapper}>
             <BurgerMenu
+              active={this.state.showMenu}
               onActivate={this.showMenu.bind(this)}
               onDeactivate={this.hideMenu.bind(this)}
             />
@@ -86,4 +98,4 @@ class HeaderTablet extends React.Component<Props, State> {
   }
 }
 
-export default HeaderTablet
+export default withRouter(HeaderTablet)

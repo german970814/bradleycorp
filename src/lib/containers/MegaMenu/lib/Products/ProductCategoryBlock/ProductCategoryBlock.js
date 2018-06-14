@@ -16,9 +16,9 @@ class ProductCategoryBlock extends React.PureComponent<Props> {
       <div className={style.grandchildren}>
         {grandchildren.map((grandchild, index) => {
           return (
-            <Link to={createArchiveUrl(grandchild) || '#'}>
+            <Link key={index} to={createArchiveUrl(grandchild) || '#'}>
               {this.props.withImage ? (
-                <span key={index} className={`small-body ${style.grandchild}`}>
+                <span className={`small-body ${style.grandchild}`}>
                   {`${index !== 0 ? ', ' : ''}${grandchild.name}`}
                 </span>
               ) : (

@@ -3,6 +3,7 @@ import * as React from 'react'
 import style from './BurgerMenu.scss'
 
 type Props = {
+  active?: boolean,
   onActivate?: () => void,
   onDeactivate?: () => void
 }
@@ -23,6 +24,19 @@ class BurgerMenu extends React.Component<Props, State> {
     this.state = {
       isActive: false
     }
+  }
+
+  /**
+   * Allows us to also update the burger menu state from a higher level
+   */
+  static getDerivedStateFromProps (nextProps: Props, prevState: State) {
+    if (prevState.isActive !== nextProps.active) {
+      return {
+        isActive: nextProps.active
+      }
+    }
+
+    return null
   }
 
   componentDidUpdate (prevProps: Props, prevState: State) {
