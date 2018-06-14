@@ -3,6 +3,10 @@
 .productCategoryBlock {
   margin-bottom: 30px;
 
+  &:last-child {
+    margin-bottom: 0px;
+  }
+
   .featuredImage {
     padding-right: 15px;
     width: (100 / 3) + %;
@@ -28,6 +32,10 @@
 
     .grandchildren {
       margin-bottom: 15px;
+
+      &:last-child {
+        margin-bottom: 0px;
+      }
     }
   }
 }
