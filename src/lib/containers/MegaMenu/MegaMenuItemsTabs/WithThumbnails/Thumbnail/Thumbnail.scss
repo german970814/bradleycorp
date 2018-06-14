@@ -1,0 +1,11 @@
+@import '../../../../../../scss/partials/variables';
+
+.thumbnail {
+  margin-bottom: 10px;
+
+  h6 {
+    padding-top: 8px;
+    color: $black;
+    text-transform: none;
+  }
+}

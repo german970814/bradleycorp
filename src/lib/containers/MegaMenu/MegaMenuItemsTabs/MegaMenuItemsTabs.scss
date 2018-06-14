@@ -1,7 +1,10 @@
 @import '../../../../scss/partials/variables';
+@import '../../../../scss/partials/mixins';
 @import '../../../../scss/partials/text-styles';
 
 $tabHeight: 50px;
+$activeContentTopPadding: 20px;
+$activeContentRightPaddingTablet: 20px;
 
 .ul {
   margin-top: 0;
@@ -23,6 +26,10 @@ $tabHeight: 50px;
 }
 
 .activeContent {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: $activeContentTopPadding;
+  padding-bottom: $activeContentTopPadding;
+
+  @include respond-to(tablet) {
+    padding-right: $activeContentRightPaddingTablet;
+  }
 }

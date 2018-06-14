@@ -1,6 +1,10 @@
 .withoutThumbnails {
   .columnLeft {
-    padding-right: 20px;
+    padding-right: 10px;
+  }
+
+  .columnRight {
+    padding-left: 10px;
   }
 
   :global(.menu-block) {

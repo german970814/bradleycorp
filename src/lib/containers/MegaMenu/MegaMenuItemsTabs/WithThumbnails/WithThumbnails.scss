@@ -1,0 +1,41 @@
+@import '../MegaMenuItemsTabs';
+
+.withoutThumbnails {
+  .thumbnailsWrapper {
+    margin-top: -$activeContentTopPadding;
+    margin-left: -$MobileBodyPadding;
+    margin-right: -$MobileBodyPadding;
+    padding-top: $activeContentTopPadding;
+    padding-left: $MobileBodyPadding;
+    padding-right: $MobileBodyPadding;
+    background-color: #fff;
+
+    @include respond-to(tablet) {
+      margin-left: -$TabletBodyPadding;
+      margin-right: -$activeContentRightPaddingTablet;
+      padding-left: $TabletBodyPadding;
+      padding-right: $activeContentRightPaddingTablet;
+      background-color: #fff;
+    }
+
+    .column {
+      &:nth-child(1) {
+        padding-right: 10px;
+      }
+
+      &:nth-child(2) {
+        padding-left: 10px;
+      }
+
+      @include respond-to(tablet) {
+        &:nth-child(1) {
+          padding-right: 7px;
+        }
+
+        &:nth-child(2) {
+          padding-left: 7px;
+        }
+      }
+    }
+  }
+}

@@ -26,7 +26,11 @@ class WithoutThumbnails extends React.PureComponent<Props> {
         {this.props.screenSize === 'mobile' ? (
           this.renderMenuBlocks()
         ) : (
-          <FillColumns colClasses={[`col2 ${style.columnLeft}`, `col2`]}>
+          <FillColumns
+            colClasses={[
+              `col2 ${style.columnLeft}`,
+              `col2 ${style.columnRight}`
+            ]}>
             {this.renderMenuBlocks()}
           </FillColumns>
         )}
