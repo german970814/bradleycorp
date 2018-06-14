@@ -33,14 +33,11 @@ class WithThumbnails extends React.PureComponent<Props> {
     // if we have just the first post in the column
     // we can render the featured image after
     if (childMenuItems.length - 1 === startIndex) {
-      const post = childMenuItems[startIndex]
+      const childMenuItem = childMenuItems[startIndex]
 
       return (
         <div className={`col4 ${style.column}`}>
-          <Thumbnail
-            title={post.title}
-            imgSrc={post.object_featured_image || ''}
-          />
+          <Thumbnail menuItem={childMenuItem} />
           {this.renderFeaturedPost()}
         </div>
       )
@@ -64,13 +61,7 @@ class WithThumbnails extends React.PureComponent<Props> {
       <div className={`col4 ${style.column}`}>
         {childMenuItems.map((child, index) => {
           if (index >= startIndex && index < endIndex) {
-            return (
-              <Thumbnail
-                key={index}
-                title={child.title}
-                imgSrc={child.object_featured_image || ''}
-              />
-            )
+            return <Thumbnail key={index} menuItem={child} />
           }
         })}
       </div>

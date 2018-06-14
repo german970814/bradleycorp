@@ -2,47 +2,100 @@
 import type { Match } from 'react-router-dom'
 import type { WPPost } from './types/post_types'
 import type { WPTerm } from './types/term_types'
+import type { MegaMenuNavMenuItem } from './types/megaMenu_types'
 import { host } from '../api'
 
 const bcorpUrl = {}
 
 /**
- * Use this to create urls for custom post type pages.
- * If we update the permalinks structure in Wordpress we can just update this function to match.
+ * Get the route by pasing a WPPost object of any post type
+ * (excluding special types like nav_menu_item and attachment)
  *
  * @param  {object} post a fetched WP_Post object
  * @return {string|boolean}      The url ready for use with react-router
  */
 bcorpUrl.createCPTUrl = (post: WPPost): false | string => {
   if (post.path) {
-    const path = bcorpUrl.removeHostFromUrl(post.path) || post.path
-    return path.charAt(0) !== '/' ? `/${path}` : path
+    return bcorpUrl.processPathForRoute(post.path)
   }
 
   if (post['post_type'] && post['post_name']) {
-    if (post['post_type'] === 'page') {
-      return `/${post['post_name']}`
-    }
-
-    // we need to change two-word post type names
-    if (post['post_type'] === 'case_study') {
-      return `/case-study/${post['post_name']}`
-    }
-
-    if (post['post_type'] === 'technical_info') {
-      return `/technical-info/${post['post_name']}`
-    }
-
-    if (post['post_type'] === 'video_gallery') {
-      return `/video-gallery/${post['post_name']}`
-    }
-  }
-
-  if (post['post_type'] && post['post_name']) {
-    return `/${post['post_type']}/${post['post_name']}`
+    return bcorpUrl.getClientSideCPTPermalink(
+      post['post_type'],
+      post['post_name']
+    )
   }
 
   return false
+}
+
+/**
+ * Get the Url for a nav menu item
+ */
+bcorpUrl.createNavMenuItemUrl = (
+  navMenuItem: MegaMenuNavMenuItem
+): false | string => {
+  console.log(navMenuItem)
+  if (navMenuItem.type === 'custom') {
+    return navMenuItem.url
+  }
+
+  if (navMenuItem.object_post_type && navMenuItem.object_post_name) {
+    return bcorpUrl.getClientSideCPTPermalink(
+      navMenuItem.object_post_type,
+      navMenuItem.object_post_name
+    )
+  }
+
+  if (navMenuItem.url) {
+    return bcorpUrl.removeHostFromUrl(navMenuItem.url)
+  }
+
+  return false
+}
+
+/**
+ * Use this to create urls for custom post type pages.
+ * If we update the permalinks structure in Wordpress we can just update this function to match.
+ */
+bcorpUrl.getClientSideCPTPermalink = (
+  postType: string,
+  postName: string,
+  path?: string
+): string => {
+  // always prioritise path to allow for heirarchichal structures
+  if (path) {
+    return bcorpUrl.processPathForRoute(path)
+  }
+
+  if (postType === 'page') {
+    return `/${postName}`
+  }
+
+  // we need to change two-word post type names
+  if (postType === 'case_study') {
+    return `/case-study/${postName}`
+  }
+
+  if (postType === 'technical_info') {
+    return `/technical-info/${postName}`
+  }
+
+  if (postType === 'video_gallery') {
+    return `/video-gallery/${postName}`
+  }
+
+  // else keep back end permalink structure
+  return `/${postType}/${postName}`
+}
+
+/**
+ * If we have a post type with a heirarchichal structure we will need to use the path,
+ * so we prepare it for the router here.
+ */
+bcorpUrl.processPathForRoute = (path: string): string => {
+  const route = bcorpUrl.removeHostFromUrl(path) || path
+  return route.charAt(0) !== '/' ? `/${route}` : route
 }
 
 /**

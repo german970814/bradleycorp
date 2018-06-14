@@ -1,23 +1,24 @@
 // @flow
-import React, { Component } from 'react'
+import * as React from 'react'
 import type { Match } from 'react-router-dom'
-import type { CPTName } from '../../../types/cpt_types'
-import type { BCorpPost } from '../../../types/post_types'
-import ContentTransformer from '../../../components/ContentTransformer/ContentTransformer'
-import CPTApiClient from '../../../../api/cpt_client'
-import DefaultTemplate from '../../Templates/DefaultTemplate/DefaultTemplate'
+import type { CPTName } from '../../../../types/cpt_types'
+import type { BCorpPost } from '../../../../types/post_types'
+import ContentTransformer from '../../../../components/ContentTransformer/ContentTransformer'
+import CPTApiClient from '../../../../../api/cpt_client'
+import DefaultTemplate from '../../../Templates/DefaultTemplate/DefaultTemplate'
 import style from './DefaultCPTLandingPage.scss'
 
 type Props = {
   match: Match,
-  postType: CPTName
+  postType: CPTName,
+  renderPostTypeSpecificContent?: (post: BCorpPost) => React.Node
 }
 
 type State = {
   post?: BCorpPost
-};
+}
 
-class DefaultCPTLandingPage extends Component<Props, State> {
+class DefaultCPTLandingPage extends React.Component<Props, State> {
   constructor (props: Props) {
     super(props)
 
@@ -61,6 +62,8 @@ class DefaultCPTLandingPage extends Component<Props, State> {
               <div className={`row ${style.content}`}>
                 <div className={`col1`}>
                   <ContentTransformer content={post.post.post_content || ''} />
+                  {this.props.renderPostTypeSpecificContent &&
+                    this.props.renderPostTypeSpecificContent(post)}
                 </div>
               </div>
             )

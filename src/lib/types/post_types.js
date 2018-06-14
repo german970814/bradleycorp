@@ -41,13 +41,15 @@ type BCorpMeta = {
     market: string,
     shape: string
   },
+  literature_pdf?: string,
   news_source?: {
     name: string,
     url: string
   },
   news_pdf?: string,
   case_study_pdf?: string,
-  meta_description?: string
+  meta_description?: string,
+  technical_info_pdf?: string
 }
 
 type BCorpPost = {
