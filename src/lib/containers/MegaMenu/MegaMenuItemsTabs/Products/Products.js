@@ -3,6 +3,7 @@ import * as React from 'react'
 import type { MegaMenuNavMenuItem } from '../../../../types/megaMenu_types'
 import Tabs from '../../../Tabs/Tabs/Tabs'
 import Tab from '../../../Tabs/Tab/Tab'
+import ProductCategoryBlock from '../../lib/Products/ProductCategoryBlock/ProductCategoryBlock'
 import style from './Products.scss'
 
 type Props = {
@@ -23,7 +24,7 @@ class Products extends React.Component<Props> {
               key={`${index1}_${index2}`}
               text={prodCat.name}
               image={prodCat.featured_image}>
-              {'working'}
+              <ProductCategoryBlock productCategory={prodCat} />
             </Tab>
           ]
         })
@@ -36,7 +37,10 @@ class Products extends React.Component<Props> {
   render () {
     return (
       <div className={`row ${style.productsWrapper}`}>
-        <Tabs defaultActiveTabIndex={0} tabClassName={style.productTab}>
+        <Tabs
+          defaultActiveTabIndex={0}
+          tabClassName={style.productTab}
+          activeTabClassName={style.activeContent}>
           {this.renderTabs()}
         </Tabs>
       </div>

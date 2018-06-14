@@ -5,6 +5,7 @@
   padding: 0;
 
   .productTab {
+    padding-right: 35px;
     background-color: #fff;
     text-align: left;
 
@@ -20,6 +21,13 @@
       h5 {
         color: $navy;
       }
+    }
+  }
+
+  .activeContent {
+    h6,
+    :global(.small-body) {
+      margin-bottom: 3px;
     }
   }
 }

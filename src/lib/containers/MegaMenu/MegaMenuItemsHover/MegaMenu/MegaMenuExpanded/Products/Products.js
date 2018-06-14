@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react'
 import type { MegaMenuNavMenuItem } from '../../../../../../types/megaMenu_types'
-import ProductCategoryBlock from './ProductCategoryBlock/ProductCategoryBlock'
+import ProductCategoryBlock from '../../../../lib/Products/ProductCategoryBlock/ProductCategoryBlock'
 import BottomBar from './BottomBar/BottomBar'
 import style from './Products.scss'
 
@@ -24,6 +24,7 @@ class Products extends React.Component<Props> {
                 <ProductCategoryBlock
                   key={index}
                   productCategory={productCategory}
+                  withImage
                 />
               )
             }

@@ -1,12 +1,13 @@
 // @flow
 import * as React from 'react'
-import type { WPTerm } from '../../../../../../../types/term_types'
+import type { WPTerm } from '../../../../../types/term_types'
 import { Link } from 'react-router-dom'
-import { createArchiveUrl } from '../../../../../../../bcorpUrl'
+import { createArchiveUrl } from '../../../../../bcorpUrl'
 import style from './ProductCategoryBlock.scss'
 
 type Props = {
-  productCategory: WPTerm
+  productCategory: WPTerm,
+  withImage?: boolean
 }
 
 class ProductCategoryBlock extends React.PureComponent<Props> {
@@ -16,9 +17,15 @@ class ProductCategoryBlock extends React.PureComponent<Props> {
         {grandchildren.map((grandchild, index) => {
           return (
             <Link to={createArchiveUrl(grandchild) || '#'}>
-              <span key={index} className={`small-body ${style.grandchild}`}>
-                {`${index !== 0 ? ', ' : ''}${grandchild.name}`}
-              </span>
+              {this.props.withImage ? (
+                <span key={index} className={`small-body ${style.grandchild}`}>
+                  {`${index !== 0 ? ', ' : ''}${grandchild.name}`}
+                </span>
+              ) : (
+                <div className={`small-body ${style.grandchild}`}>
+                  {grandchild.name}
+                </div>
+              )}
             </Link>
           )
         })}
@@ -68,7 +75,7 @@ class ProductCategoryBlock extends React.PureComponent<Props> {
   }
 
   render () {
-    return (
+    return this.props.withImage ? (
       <div className={`row ${style.productCategoryBlock}`}>
         <Link to={createArchiveUrl(this.props.productCategory) || '#'}>
           <div className={`col2 ${style.featuredImage}`}>
@@ -84,6 +91,10 @@ class ProductCategoryBlock extends React.PureComponent<Props> {
 
           {this.renderChildLinks()}
         </div>
+      </div>
+    ) : (
+      <div className={`row ${style.productCategoryBlock}`}>
+        <div className={`col1 ${style.links}`}>{this.renderChildLinks()}</div>
       </div>
     )
   }

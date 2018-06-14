@@ -38,12 +38,12 @@ $imageHeight: $tabHeight - 20px;
   h5.tabText {
     display: inline-block;
     vertical-align: middle;
-    width: calc(100% - 19px);
+    max-width: calc(100% - 19px);
     color: $navy;
     line-height: $tabHeight;
 
     &.hasImage {
-      width: calc(100% - 19px - #{$imageHeight} - 20px);
+      max-width: calc(100% - 19px - #{$imageHeight} - 20px);
     }
   }
 
