@@ -16,10 +16,29 @@
 
 .productScrollerProduct {
   padding: 0 ($distanceBetweenItems / 2);
+  padding-top: 15px;
+  padding-bottom: 15px;
   text-align: center;
+  box-sizing: border-box;
 
   @include respond-to(tablet) {
-    padding: 0 ($distanceBetweenItemsTabletDesktop / 2);
+    padding-left: ($distanceBetweenItemsTabletDesktop / 2);
+    padding-right: ($distanceBetweenItemsTabletDesktop / 2);
+  }
+
+  &:hover {
+    box-shadow: 0px 8px 30px 0 rgba(209, 211, 212, 0.59);
+    background-color: #fff;
+    border: solid 1px #bfbfbf;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-left: ($distanceBetweenItems/ 2) - 1px;
+    padding-right: ($distanceBetweenItems / 2) - 1px;
+
+    @include respond-to(tablet) {
+      padding-left: ($distanceBetweenItemsTabletDesktop / 2) - 1px;
+      padding-right: ($distanceBetweenItemsTabletDesktop / 2) - 1px;
+    }
   }
 }
 

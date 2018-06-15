@@ -1,292 +1,256 @@
-@import "../../../../scss/partials/text-styles";
-@import "../../../../scss/partials/layout";
-@import "../../../../scss/partials/variables";
-@import "../../../../scss/partials/mixins";
+@import '../../../../scss/partials/text-styles';
+@import '../../../../scss/partials/layout';
+@import '../../../../scss/partials/variables';
+@import '../../../../scss/partials/mixins';
 
 .resultsSummary {
-    p {
-        font-family: $CentraleSansPro;
-        color: #000;
-        font-size: 16px;
-        font-weight: bold;
-    }
+  p {
+    font-family: $CentraleSansPro;
+    color: #000;
+    font-size: 16px;
+    font-weight: bold;
+  }
 }
 
 .resultsHeaderContainer {
+  @include respond-to(mobile) {
+    padding-top: 30px;
 
-    @include respond-to(mobile) {
-
-        padding-top: 30px;
-    
-        & > div {
-            margin-top: 0;
-        }
+    & > div {
+      margin-top: 0;
     }
-    
+  }
 }
 
 .itemsWrapper {
-    background: transparent;
-    clear: both;
+  background: transparent;
+  clear: both;
 }
 
 .mobileSelectWtapper {
-    background-color: #2e3c6e;
-    padding: 20px 22px;
-    min-height: 30px;
-
+  background-color: #2e3c6e;
+  padding: 20px 22px;
+  min-height: 30px;
 }
 .resultsOptionsWrapper {
-    margin: 0 auto;
-    padding: 0;
-    text-align: center;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
 
-    li {
-        list-style-type: none;
-        display: inline-block;
+  li {
+    list-style-type: none;
+    display: inline-block;
 
-        &.selected {
-            
-            a {
-                color: #fff;
-                background: #2f3d6f;
-            }
-        }
-        
-        a {
-            background: #f1f2f2;
-            padding: 25px 38px 21px;
-            border: 1px solid #d1d3d4;
-            font-family: 'CentraleSansPro';
-            font-size: 13px;
-            font-weight: bold;
-            color: #808285;
-            text-transform: uppercase;
-            display: inline-block;
-            margin-left: -1px;
-            margin-top: -1px;
-
-            &:hover {
-                color: #fff;
-                background: #2f3d6f;
-            }
-            
-        }
+    &.selected {
+      a {
+        color: #fff;
+        background: #2f3d6f;
+      }
     }
-    
+
+    a {
+      background: #f1f2f2;
+      padding: 25px 38px 21px;
+      border: 1px solid #d1d3d4;
+      font-family: 'CentraleSansPro';
+      font-size: 13px;
+      font-weight: bold;
+      color: #808285;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-left: -1px;
+      margin-top: -1px;
+
+      &:hover {
+        color: #fff;
+        background: #2f3d6f;
+      }
+    }
+  }
 }
 
 .contentWrapper {
-    min-height: 350px;
-    margin-bottom: 60px;
-    position: relative;
-
-    @include respond-to(mobile) {
-        padding: 0;
-    }
-
-    @include respond-to(tablet) {
-        padding: 0 40px;
-    }
+  @extend %BodyPaddingWithMediaQueries;
+  max-width: none;
+  min-height: 350px;
+  margin-bottom: 60px;
+  position: relative;
 }
 
 .resultsTextContentWrapper {
-    
-        @include respond-to(mobile) {
-            width: 100%;
-            margin: 0 0 30px;
-        }
-    
-        @include respond-to(desktop) {
-            width: 61%;
-            margin: 0 auto;
-        }
-        
+  @include respond-to(mobile) {
+    width: 100%;
+    margin: 0 0 30px;
+  }
+
+  @include respond-to(desktop) {
+    width: 61%;
+    margin: 0 auto;
+  }
 }
 
 .newsList {
+  margin: 0;
+  padding: 0;
 
-    margin: 0;
-    padding: 0;
+  li {
+    list-style-type: none;
 
-    li {
-
-        list-style-type: none;
-
-        @include respond-to(mobile) {
-            padding: 26px 22px;
-        }
-    
-        @include respond-to(tablet) {
-            padding: 35px 40px;
-        }
-
-        &:nth-child(odd) {
-            background-color: #fff;
-        }
-
-        &:nth-child(even) {
-            background-color: #f1f2f2;
-        }
-
-        h5 {
-            a {
-                font-family: 'CentraleSansPro';
-                color: #000;
-                font-size: 16px;
-                font-weight: bold;
-                line-height: normal;
-                cursor: pointer;
-            }
-        }
-
-        p {
-            font-family: 'Helvetica';
-            color: #58595b;
-            font-size: 14px;
-            line-height: 21px;
-            font-weight: 300;
-            margin-top: 8px;
-            margin-bottom: 0;
-        }
-
-        &:last-child {
-            margin-bottom: 35px;
-        }
-    }
-    
-}
-.searchTechInfoWrapper {
-    margin: 0;
-    
     @include respond-to(mobile) {
-        padding: 40px 20px 0;
+      padding: 26px 22px;
     }
 
     @include respond-to(tablet) {
-        padding: 40px 0 0;
+      padding: 35px 40px;
     }
+
+    &:nth-child(odd) {
+      background-color: #fff;
+    }
+
+    &:nth-child(even) {
+      background-color: #f1f2f2;
+    }
+
+    h5 {
+      a {
+        font-family: 'CentraleSansPro';
+        color: #000;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: normal;
+        cursor: pointer;
+      }
+    }
+
+    p {
+      font-family: 'Helvetica';
+      color: #58595b;
+      font-size: 14px;
+      line-height: 21px;
+      font-weight: 300;
+      margin-top: 8px;
+      margin-bottom: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 35px;
+    }
+  }
+}
+.searchTechInfoWrapper {
+  margin: 0;
+
+  @include respond-to(mobile) {
+    padding: 40px 20px 0;
+  }
+
+  @include respond-to(tablet) {
+    padding: 40px 0 0;
+  }
 }
 
 .techInfoItem {
-    display: block;
+  display: block;
 }
 
 .tabTextOrangeLink {
-    display: block;
-    padding-left: 26px;
-    position: relative;
-    .wordPDFIcon {
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-  }
-  
-  .tabTextOrange {
-    display: inline-block;
-    vertical-align: middle;
-    line-height: inherit;
-  }
-  
+  display: block;
+  padding-left: 26px;
+  position: relative;
   .wordPDFIcon {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 13px;
-    width: 13px;
-    height: 17px;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
+}
+
+.tabTextOrange {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: inherit;
+}
+
+.wordPDFIcon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 13px;
+  width: 13px;
+  height: 17px;
+}
 
 .resultsDate {
-    span {
-        font-family: 'Helvetica';
-        color: #58595b;
-        font-style: italic;
-        font-size: 12px;
-        line-height: normal;
-        display: inline-block;
-        margin-bottom: 5px;
-    }
+  span {
+    font-family: 'Helvetica';
+    color: #58595b;
+    font-style: italic;
+    font-size: 12px;
+    line-height: normal;
+    display: inline-block;
+    margin-bottom: 5px;
+  }
 }
 
 button.loadMore {
-    @include respond-to(tablet) {
-      padding: 2px 30px;
-      width: auto;
-    }
+  @include respond-to(tablet) {
+    padding: 2px 30px;
+    width: auto;
   }
+}
 
 .searchProductsWrapper {
-    margin: 0;
-    padding: 22px 0 0;
-
-    article {
-        padding: 15px 20px;
-        margin-bottom: 25px;
-        border: 1px solid transparent;
-
-        &:hover {
-            -moz-box-shadow:    0 0 22px #ece8e8;
-            -webkit-box-shadow: 0 0 22px #ece8e8;
-            box-shadow:         0 0 22px #ece8e8;
-            border: 1px solid #d1d3d4;
-        }
-
-        h6 {
-            overflow: hidden;
-            height: 95px;
-        }
-    }
+  margin: 0;
+  padding: 22px 0 0;
 }
-  
+
 .searchLiteratureWrapper {
-    margin: 0;
-    padding: 40px 0 0;
+  margin: 0;
+  padding: 40px 0 0;
 
-    article {
-        position: relative;
-        margin-bottom: 25px;
-        padding: 0 10px;
+  article {
+    position: relative;
+    margin-bottom: 25px;
+    padding: 0 10px;
 
-        .literatureImageContainer {
-            text-align: center;
-            margin: 0 auto 8px;
-            width: 162px;
-            height: 212px;
-            position: relative;
-            overflow: hidden;
+    .literatureImageContainer {
+      text-align: center;
+      margin: 0 auto 8px;
+      width: 162px;
+      height: 212px;
+      position: relative;
+      overflow: hidden;
 
-            img {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-        }
-
-        .literatureTitle {
-            color: #000;
-            font-family: 'CentraleSansPro';
-            font-weight: bold;
-            text-align: center;
-            text-transform: capitalize;
-            width: 50%;
-            margin: 0 auto;
-            overflow: hidden;
-            height: 32px;
-        }
+      img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
     }
+
+    .literatureTitle {
+      color: #000;
+      font-family: 'CentraleSansPro';
+      font-weight: bold;
+      text-align: center;
+      text-transform: capitalize;
+      width: 50%;
+      margin: 0 auto;
+      overflow: hidden;
+      height: 32px;
+    }
+  }
 }
 
 .searchLoadMore {
-    @include respond-to(mobile) {
-        width: 88%;
-        margin: 0 auto;
-        display: block;
-    }
-    @include respond-to(tablet) {
-        width: 144px;
-        margin: 50px auto 0;
-        display: block;
-    }   
+  @include respond-to(mobile) {
+    width: 88%;
+    margin: 0 auto;
+    display: block;
+  }
+  @include respond-to(tablet) {
+    width: 144px;
+    margin: 50px auto 0;
+    display: block;
+  }
 }
