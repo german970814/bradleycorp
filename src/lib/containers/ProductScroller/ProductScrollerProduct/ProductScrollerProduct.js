@@ -22,12 +22,11 @@ class ProductScrollerProduct extends Component<Props> {
     const src =
       (this.props.product.media &&
         this.props.product.media['featured_image'] &&
-        this.props.product.media['featured_image'] !== '' &&
-        typeof this.props.product.media['featured_image'][0] === 'string' &&
-        typeof this.props.product.media['featured_image'][0]) ||
+        this.props.product.media['featured_image'].length &&
+        this.props.product.media['featured_image'][0]) ||
       ''
     const imgStyle = {
-      backgroundImage: `url(${src})`
+      backgroundImage: `url('${src}')`
     }
     return <div className={style.image} style={imgStyle} />
   }
