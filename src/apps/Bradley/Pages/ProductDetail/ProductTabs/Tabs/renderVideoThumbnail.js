@@ -2,7 +2,7 @@ import React from 'react'
 import { youtubeParser } from '../../../../../../lib/bcorpUrl'
 import { clean } from '../../../../../../lib/bcorpArray'
 import LIGHTBOXSIZES from '../../../../../../lib/containers/Lightbox/lightboxVars'
-import LightboxYoutube from '../../../../../../lib/containers/Lightbox/LightboxYoutube'
+import LightboxV2 from '../../../../../../lib/containers/Lightbox/LightboxV2/LightboxV2'
 import BCorpVideo from '../../../../../../lib/components/BCorpVideo/BCorpVideo'
 import FixedAspectRatioBox from '../../../../../../lib/components/FixedAspectRatioBox/FixedAspectRatioBox'
 import tabStyle from './Tabs.scss'
@@ -14,7 +14,7 @@ export default function renderVideoThumbnail (videos) {
 
   const youtubeProps = {
     opts: {
-      width: '100%', /* width and height 100% to fit aspect ratio wrapper */
+      width: '100%' /* width and height 100% to fit aspect ratio wrapper */,
       height: '100%',
       playerVars: {
         showinfo: 0,
@@ -33,29 +33,40 @@ export default function renderVideoThumbnail (videos) {
     }
   }
 
-  const vimeoPropsLightbox = {...vimeoProps}
+  const vimeoPropsLightbox = { ...vimeoProps }
   vimeoPropsLightbox.autoplay = true
 
   const playerForSingleVideo = url => {
     return (
-      <LightboxYoutube>
-
-        <BCorpVideo
-          url={url}
-          className={tabStyle.videoIframe}
-          youtubeProps={youtubeProps}
-          vimeoProps={vimeoProps} />
-
-        <FixedAspectRatioBox
-          maxHeight={LIGHTBOXSIZES.heightMinusCloseButton} >
-          <BCorpVideo
-            url={url}
-            youtubeProps={youtubeProps}
-            vimeoProps={vimeoPropsLightbox}
-            autoplay />
-        </FixedAspectRatioBox>
-
-      </LightboxYoutube>
+      <LightboxV2
+        renderChildren={openLightbox => {
+          return (
+            <BCorpVideo
+              url={url}
+              className={tabStyle.videoIframe}
+              youtubeProps={youtubeProps}
+              vimeoProps={vimeoProps}
+              onPlay={event => {
+                event.target.pauseVideo()
+                openLightbox()
+              }}
+            />
+          )
+        }}
+        renderLightboxContents={() => {
+          return (
+            <FixedAspectRatioBox
+              maxHeight={LIGHTBOXSIZES.heightMinusCloseButton}>
+              <BCorpVideo
+                url={url}
+                youtubeProps={youtubeProps}
+                vimeoProps={vimeoPropsLightbox}
+                autoplay
+              />
+            </FixedAspectRatioBox>
+          )
+        }}
+      />
     )
   }
 
@@ -101,23 +112,33 @@ export default function renderVideoThumbnail (videos) {
   youtubeProps.opts.playerVars.controls = 1
 
   return (
-    <LightboxYoutube>
-
-      <BCorpVideo
-        url={videoIdPlayFirst}
-        className={tabStyle.videoIframe}
-        youtubeProps={youtubeProps}
-        noVimeo />
-
-      <FixedAspectRatioBox
-        maxHeight={LIGHTBOXSIZES.heightMinusCloseButton} >
-        <BCorpVideo
-          url={videoIdPlayFirst}
-          youtubeProps={youtubeProps}
-          noVimeo
-          autoplay />
-      </FixedAspectRatioBox>
-
-    </LightboxYoutube>
+    <LightboxV2
+      renderChildren={openLightbox => {
+        return (
+          <BCorpVideo
+            url={videoIdPlayFirst}
+            className={tabStyle.videoIframe}
+            youtubeProps={youtubeProps}
+            onPlay={event => {
+              event.target.pauseVideo()
+              openLightbox()
+            }}
+            noVimeo
+          />
+        )
+      }}
+      renderLightboxContents={() => {
+        return (
+          <FixedAspectRatioBox maxHeight={LIGHTBOXSIZES.heightMinusCloseButton}>
+            <BCorpVideo
+              url={videoIdPlayFirst}
+              youtubeProps={youtubeProps}
+              noVimeo
+              autoplay
+            />
+          </FixedAspectRatioBox>
+        )
+      }}
+    />
   )
 }

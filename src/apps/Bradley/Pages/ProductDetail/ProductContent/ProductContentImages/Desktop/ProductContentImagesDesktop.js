@@ -5,7 +5,7 @@ import { clean, cleanWithRegex } from '../../../../../../../lib/bcorpArray'
 import VerticalAlignHelper from '../../../../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import VerticalListItem from './VerticalListItem/VerticalListItem'
 import ScrollableList from '../../../../../../../lib/containers/ScrollableList/ScrollableList'
-import Lightbox from '../../../../../../../lib/containers/Lightbox/Lightbox'
+import LightboxV2 from '../../../../../../../lib/containers/Lightbox/LightboxV2/LightboxV2'
 import ButtonDown from './ButtonDown'
 import ButtonUp from './ButtonUp'
 import SelectedImageLightboxContent from './SelectedImageLightboxContent/SelectedImageLightboxContent'
@@ -26,19 +26,19 @@ class ProductContentImagesDesktop extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.images !== this.props.images ||
-    nextProps.featuredImageSrc !== this.props.featuredImageSrc) {
+    if (
+      nextProps.images !== this.props.images ||
+      nextProps.featuredImageSrc !== this.props.featuredImageSrc
+    ) {
       this.init(nextProps)
     }
   }
 
   init (props) {
-    let videosSrcList = (props.videos && props.videos.length)
-      ? props.videos.split(',')
-      : []
-    let imageSrcs = (props.images && props.images.length)
-      ? props.images.split(',')
-      : []
+    let videosSrcList =
+      props.videos && props.videos.length ? props.videos.split(',') : []
+    let imageSrcs =
+      props.images && props.images.length ? props.images.split(',') : []
 
     videosSrcList = clean(videosSrcList, '')
     videosSrcList = clean(videosSrcList, undefined)
@@ -93,16 +93,12 @@ class ProductContentImagesDesktop extends Component {
         <VerticalListItem
           key={index}
           onClick={this.handleImageListItemClick.bind(this)}
-          src={imageSrc} />
+          src={imageSrc}
+        />
       )
     })
     const videos = this.videosSrcList.map((videoSrc, index) => {
-      return (
-        <VerticalListItem
-          key={`video_${index}`}
-          src={videoSrc}
-          video />
-      )
+      return <VerticalListItem key={`video_${index}`} src={videoSrc} video />
     })
 
     return [...imgs, ...videos]
@@ -117,19 +113,10 @@ class ProductContentImagesDesktop extends Component {
 
     return orderedSrcs.map((src, index) => {
       if (this.imagesSrcList.indexOf(src) !== -1) {
-        return (
-          <ListItemLightbox
-            key={index}
-            src={src} />
-        )
+        return <ListItemLightbox key={index} src={src} />
       }
       if (this.videosSrcList.indexOf(src) !== -1) {
-        return (
-          <ListItemLightbox
-            key={index}
-            src={src}
-            video />
-        )
+        return <ListItemLightbox key={index} src={src} video />
       }
     })
   }
@@ -137,35 +124,40 @@ class ProductContentImagesDesktop extends Component {
   renderSelectedImage () {
     const items = this.renderImagesListLightbox()
 
-    const imageStyle = {
-      backgroundImage: `url(${this.state.selectedImageSrc})`
-    }
-
     return (
-      <Lightbox>
-
-        <div
-          style={imageStyle}
-          className={style.selectedImageDesktopImage} />
-
-        <SelectedImageLightboxContent
-          onPositionChange={this.handleSelectedImageScrollerPositionChange.bind(this)}
-          items={items}
-          firstItemSrc={this.state.selectedImageSrc} >
-        </SelectedImageLightboxContent>
-
-      </Lightbox>
+      <LightboxV2
+        renderChildren={openLightbox => {
+          return (
+            <div
+              onClick={openLightbox}
+              style={{
+                backgroundImage: `url(${this.state.selectedImageSrc})`
+              }}
+              className={style.selectedImageDesktopImage}
+            />
+          )
+        }}
+        renderLightboxContents={() => {
+          return (
+            <SelectedImageLightboxContent
+              onPositionChange={this.handleSelectedImageScrollerPositionChange.bind(
+                this
+              )}
+              items={items}
+              firstItemSrc={this.state.selectedImageSrc}
+            />
+          )
+        }}
+      />
     )
   }
 
   render () {
     return (
       <React.Fragment>
-
         <VerticalAlignHelper />
 
-        <div
-          className={style.selectedImageDesktop}>
+        <div className={style.selectedImageDesktop}>
           {this.renderSelectedImage()}
         </div>
 
@@ -176,10 +168,9 @@ class ProductContentImagesDesktop extends Component {
           buttonDown={<ButtonDown />}
           buttonUp={<ButtonUp />}
           reverseSwipeScroll
-          vertical >
+          vertical>
           {this.renderVerticalList()}
         </ScrollableList>
-
       </React.Fragment>
     )
   }
@@ -189,7 +180,7 @@ class ProductContentImagesDesktop extends Component {
     if (ix > -1) {
       imgSrcs.splice(ix, 1)
     }
-    return [ props.featuredImageSrc, ...imgSrcs ]
+    return [props.featuredImageSrc, ...imgSrcs]
   }
 }
 

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import VerticalAlignHelper from '../../../components/VerticalAlignHelper/VerticalAlignHelper'
 import ScrollableList from '../ScrollableList'
-import Lightbox from '../../Lightbox/Lightbox'
+import LightboxV2 from '../../Lightbox/LightboxV2/LightboxV2'
 import style from './ScrollableListOpensInLightbox.scss'
 
 /**
@@ -26,18 +26,21 @@ class ScrollableListOpensInLightbox extends ScrollableList {
   //
   render () {
     return (
-      <Lightbox
+      <LightboxV2
+        renderChildren={openLightbox => {
+          return <div onClick={openLightbox}>{super.render()}</div>
+        }}
+        renderLightboxContents={() => {
+          return (
+            <div className={style.scrollableListOpensInLightbox}>
+              <VerticalAlignHelper />
+              {super.render()}
+            </div>
+          )
+        }}
         onLightboxOpen={this.props.onLightboxOpen}
-        onLightboxClose={this.props.onLightboxClose} >
-
-        {super.render()}
-
-        <div className={style.scrollableListOpensInLightbox}>
-          <VerticalAlignHelper />
-          {super.render()}
-        </div>
-
-      </Lightbox>
+        onLightboxClose={this.props.onLightboxClose}
+      />
     )
   }
 }

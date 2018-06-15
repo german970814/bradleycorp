@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import BCorpVideo from '../../../../../../../../lib/components/BCorpVideo/BCorpVideo'
 import LIGHTBOXSIZES from '../../../../../../../../lib/containers/Lightbox/lightboxVars'
 import FixedAspectRatioBox from '../../../../../../../../lib/components/FixedAspectRatioBox/FixedAspectRatioBox'
-import Lightbox from '../../../../../../../../lib/containers/Lightbox/Lightbox'
+import LightboxV2 from '../../../../../../../../lib/containers/Lightbox/LightboxV2/LightboxV2'
 import style from './VerticalListItem.scss'
 
 class VerticalListItem extends Component {
@@ -14,10 +14,15 @@ class VerticalListItem extends Component {
 
     return (
       <div
-        onClick={(e) => { this.props.onClick(e, this.props.src) }}
-        onTouchEnd={(e) => { this.props.onClick(e, this.props.src) }}
+        onClick={e => {
+          this.props.onClick(e, this.props.src)
+        }}
+        onTouchEnd={e => {
+          this.props.onClick(e, this.props.src)
+        }}
         style={imageStyle}
-        className={style.listItem} />
+        className={style.listItem}
+      />
     )
   }
 
@@ -43,26 +48,33 @@ class VerticalListItem extends Component {
       }
     }
 
-    const videoStyle = {
-      backgroundImage: `url(${require('../../../../../../../../images/icon-video/icon-video@2x.png')})`
-    }
     return (
-      <Lightbox>
-
-        <div
-          style={videoStyle}
-          className={style.listItemVideo} />
-
-        <FixedAspectRatioBox
-          maxHeight={LIGHTBOXSIZES.heightMinusCloseButton} >
-          <BCorpVideo
-            url={this.props.src}
-            youtubeProps={youtubeProps}
-            vimeoProps={vimeoProps}
-            autoplay />
-        </FixedAspectRatioBox>
-
-      </Lightbox>
+      <LightboxV2
+        renderChildren={openLightbox => {
+          return (
+            <div
+              onClick={openLightbox}
+              style={{
+                backgroundImage: `url(${require('../../../../../../../../images/icon-video/icon-video@2x.png')})`
+              }}
+              className={style.listItemVideo}
+            />
+          )
+        }}
+        renderLightboxContents={() => {
+          return (
+            <FixedAspectRatioBox
+              maxHeight={LIGHTBOXSIZES.heightMinusCloseButton}>
+              <BCorpVideo
+                url={this.props.src}
+                youtubeProps={youtubeProps}
+                vimeoProps={vimeoProps}
+                autoplay
+              />
+            </FixedAspectRatioBox>
+          )
+        }}
+      />
     )
   }
 
