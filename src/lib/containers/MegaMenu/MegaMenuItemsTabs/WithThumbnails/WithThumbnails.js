@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react'
 import type { MegaMenuNavMenuItem } from '../../../../types/megaMenu_types'
-import FillColumns from '../../../../components/FillColumns/FillColumns'
 import { sortIntoRows } from '../../../../bcorpJSX'
 import { maxLength } from '../../MegaMenuItemsHover/MegaMenu/MegaMenuExpanded/WithThumbnails/WithThumbnails'
 import Thumbnail from './Thumbnail/Thumbnail'
