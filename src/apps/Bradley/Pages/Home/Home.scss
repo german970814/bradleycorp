@@ -11,6 +11,8 @@ $logoTopDesktop: 42px;
 $captionBottom: 30px;
 $captionBottomDesktop: 40px;
 
+$emergencySafetyOverlay: #5375ef;
+
 .Home {
   .headerMobile {
     $imageWidth: 45px;
@@ -113,7 +115,7 @@ $captionBottomDesktop: 40px;
     .emergencySafety {
       .videoOverlay {
         opacity: 0.33;
-        background-color: #2f3d70;
+        background-color: $emergencySafetyOverlay;
       }
     }
 
@@ -255,4 +257,8 @@ $captionBottomDesktop: 40px;
     opacity: 1;
     bottom: $captionBottomDesktop;
   }
+}
+
+:export {
+  emergencysafetyoverlay: $emergencySafetyOverlay;
 }

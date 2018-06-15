@@ -14,7 +14,7 @@ import emergencySafetyImageSrc from '../../../../images/home-images/water-splash
 import VideoBackground from '../../../../lib/components/BCorpVideo/VideoBackground/VideoBackground'
 import BCorpBackground from '../../../../lib/components/BCorpBackground/BCorpBackground'
 import VerticalAlignHelper from '../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
-import style from './Home.scss'
+import style, { emergencysafetyoverlay } from './Home.scss'
 
 type Props = {
   cookies: Cookies,
@@ -110,7 +110,7 @@ class Home extends React.Component<Props, State> {
       <React.Fragment>
         <BCorpBackground
           imageSrc={emergencySafetyImageSrc}
-          customOverlayColor={'#2f3d70'}
+          customOverlayColor={emergencysafetyoverlay}
           imageOpacity={0.33}
         />
         {content}
