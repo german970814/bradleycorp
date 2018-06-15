@@ -6,15 +6,17 @@ import style from './SocialMediaIcon.scss'
  * Renders one of the included social media icons
  */
 const SocialMediaIcon = ({ className, iconName }) => {
-  const iconSrc = getIconSrc(iconName)
+  const { src, href } = getIconConf(iconName)
 
-  if (!iconSrc) {
+  if (!src) {
     return null
   }
 
   return (
     <div className={`social-media-icon ${style.socialMediaIcon} ${className}`}>
-      <img src={iconSrc} />
+      <a href={href} target="_blank">
+        <img src={src} />
+      </a>
     </div>
   )
 }
@@ -31,25 +33,43 @@ SocialMediaIcon.propTypes = {
   className: PropTypes.string
 }
 
-const getIconSrc = iconName => {
+const getIconConf = iconName => {
   switch (iconName) {
     case 'facebook':
-      return require('../../../images/social-media-icons/facebook@2x.png')
+      return {
+        src: require('../../../images/social-media-icons/facebook@2x.png'),
+        href: 'https://www.facebook.com/BradleyCorporation'
+      }
 
     case 'google':
-      return require('../../../images/social-media-icons/google@2x.png')
+      return {
+        src: require('../../../images/social-media-icons/google@2x.png'),
+        href: 'https://plus.google.com/+Bradleycorp'
+      }
 
     case 'instagram':
-      return require('../../../images/social-media-icons/instagram@2x.png')
+      return {
+        src: require('../../../images/social-media-icons/instagram@2x.png'),
+        href: '#'
+      }
 
     case 'pinterest':
-      return require('../../../images/social-media-icons/pinterest@2x.png')
+      return {
+        src: require('../../../images/social-media-icons/pinterest@2x.png'),
+        href: 'https://www.pinterest.com/bradleycorp/'
+      }
 
     case 'twitter':
-      return require('../../../images/social-media-icons/twitter@2x.png')
+      return {
+        src: require('../../../images/social-media-icons/twitter@2x.png'),
+        href: 'https://twitter.com/bradleycorp'
+      }
 
     case 'youtube':
-      return require('../../../images/social-media-icons/you-tube@2x.png')
+      return {
+        src: require('../../../images/social-media-icons/you-tube@2x.png'),
+        href: 'https://www.youtube.com/user/BradleyCorporation'
+      }
 
     default:
       return false

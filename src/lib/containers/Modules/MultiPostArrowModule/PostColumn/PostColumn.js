@@ -18,16 +18,24 @@ type Props = {
   containerNode?: HTMLElement,
   skin?: BCorpSkin,
   accentColor?: BCorpColor,
-  skinClass?: string
+  skinClass?: string,
+  height?: number,
+  getHeight?: ({ current: null | HTMLDivElement }) => void
 }
 
 class PostColumn extends Component<Props> {
   postLink: string
+  postColumn: { current: null | HTMLDivElement }
 
   constructor (props: Props) {
     super(props)
 
+    this.postColumn = React.createRef()
     this.postLink = createCPTUrl(props.post.post) || '#'
+  }
+
+  componentDidMount () {
+    this.props.getHeight && this.props.getHeight(this.postColumn)
   }
 
   componentWillReceiveProps (nextProps: Props) {
@@ -81,6 +89,13 @@ class PostColumn extends Component<Props> {
 
   renderContent () {
     const { post } = this.props
+
+    if ('post' in post && 'post_type' in post.post && post.post.post_type == 'product') {
+      return <div className={`${style.smallBody}`}>
+        <span>{post.meta.product_sku}</span>
+      </div>
+    }
+
     const excerpt = getExcerpt(
       post.post['post_excerpt'],
       post.post['post_content'] || '',
@@ -123,8 +138,12 @@ class PostColumn extends Component<Props> {
   }
 
   render () {
+    const styleContainer = {}
+    if (this.props.height) {
+      styleContainer.height = `${this.props.height}px`;
+    }
     return (
-      <div className={style.postColumn}>
+      <div className={style.postColumn} ref={this.postColumn} style={styleContainer}>
         {this.renderImage()}
 
         {this.renderTitle()}

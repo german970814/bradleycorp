@@ -82,10 +82,11 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
             aspectRatioDesktop={169 / 370}
           />
         )}
-        <p className={`${style.appGalleryDetailText}`}>
-          {this.state.applicationGallery &&
-            this.state.applicationGallery.post.post_content}
-        </p>
+        <p className={`${style.appGalleryDetailText}`}
+          dangerouslySetInnerHTML={{
+            __html: this.state.applicationGallery && this.state.applicationGallery.post.post_content
+          }}
+        />
         <div className={`col1 ${style.appGalleryDetailTitle}`}>
           <h2>Featured Product Information</h2>
         </div>
@@ -276,8 +277,12 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
     callback: (param: any) => void
   ) {
     const client = new CPTApiClient(cpt)
-    const response = await client.getByTaxAndTermArray(taxonomy, terms)
-    callback(response.data)
+    try {
+      const response = await client.getByTaxAndTermArray(taxonomy, terms)
+      callback(response.data)
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   render () {

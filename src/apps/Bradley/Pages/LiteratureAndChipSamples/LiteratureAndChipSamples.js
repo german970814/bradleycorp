@@ -304,7 +304,6 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
   }
 
   renderOptions (isMobile: boolean) {
-    console.log(isMobile)
     return (
       <React.Fragment>
         <PostTypeSelector

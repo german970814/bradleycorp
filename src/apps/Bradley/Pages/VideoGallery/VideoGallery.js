@@ -59,7 +59,6 @@ class VideoGallery extends React.Component<Props, State> {
   }
 
   render () {
-    console.log(this.state)
     return (
       <DefaultTemplate
         data={{ page_title: 'Video Gallery' }}

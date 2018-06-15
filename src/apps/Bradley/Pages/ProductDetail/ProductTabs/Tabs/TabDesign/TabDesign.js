@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import PDFWithFeaturedImage from '../../../../../../../lib/components/PDFWithFeaturedImage/PDFWithFeaturedImage'
 import renderVideoThumbnail from '../renderVideoThumbnail'
 import ArrowThumbnail from '../../../../../../../lib/components/ArrowThumbnail/ArrowThumbnail'
+import FeaturedImage from '../../../../LiteratureAndChipSamples/Options/Option/FeaturedImage/FeaturedImage'
 import tabStyle from '../Tabs.scss'
 import style from './TabDesign.scss'
 
@@ -144,7 +145,9 @@ class TabDesign extends Component {
           : ''
       return (
         <li key={index} className={style.color}>
-          <img src={src} className={style.colorImage} />
+          <div className={style.colorImage}>
+            <FeaturedImage className={style.colorImage} post={color} isMobile={false} />
+          </div>
           <h6 className={style.colorTitle}>{color.post['post_title']}</h6>
         </li>
       )
