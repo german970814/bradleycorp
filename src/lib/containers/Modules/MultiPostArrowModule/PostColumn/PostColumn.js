@@ -90,10 +90,16 @@ class PostColumn extends Component<Props> {
   renderContent () {
     const { post } = this.props
 
-    if ('post' in post && 'post_type' in post.post && post.post.post_type == 'product') {
-      return <div className={`${style.smallBody}`}>
-        <span>{post.meta.product_sku}</span>
-      </div>
+    if (
+      'post' in post &&
+      'post_type' in post.post &&
+      post.post.post_type === 'product'
+    ) {
+      return (
+        <div className={`${style.smallBody}`}>
+          <span>{post.meta.product_sku}</span>
+        </div>
+      )
     }
 
     const excerpt = getExcerpt(
@@ -140,10 +146,13 @@ class PostColumn extends Component<Props> {
   render () {
     const styleContainer = {}
     if (this.props.height) {
-      styleContainer.height = `${this.props.height}px`;
+      styleContainer.height = `${this.props.height}px`
     }
     return (
-      <div className={style.postColumn} ref={this.postColumn} style={styleContainer}>
+      <div
+        className={style.postColumn}
+        ref={this.postColumn}
+        style={styleContainer}>
         {this.renderImage()}
 
         {this.renderTitle()}

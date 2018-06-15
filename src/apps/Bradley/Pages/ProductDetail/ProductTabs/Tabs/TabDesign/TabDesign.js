@@ -139,14 +139,14 @@ class TabDesign extends Component {
 
   renderColorsList (colors) {
     return colors.map((color, index) => {
-      const src =
-        color.media['featured_image'] && color.media['featured_image'].length
-          ? color.media['featured_image'][0]
-          : ''
       return (
         <li key={index} className={style.color}>
           <div className={style.colorImage}>
-            <FeaturedImage className={style.colorImage} post={color} isMobile={false} />
+            <FeaturedImage
+              className={style.colorImage}
+              post={color}
+              isMobile={false}
+            />
           </div>
           <h6 className={style.colorTitle}>{color.post['post_title']}</h6>
         </li>

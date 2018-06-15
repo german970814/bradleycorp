@@ -18,7 +18,7 @@ class MultiPostArrowModule extends PostGettingModule {
 
     this.state = {
       ...this.state,
-      contentVariableHeight: 0,
+      contentVariableHeight: 0
     }
   }
 

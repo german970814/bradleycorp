@@ -152,8 +152,8 @@ class BCorpModule extends Component {
 
     // we won't need to update the height if the module is full width
     // we just need to make sure the minHeight returns to (or already is) 0
-    if (this.state.node.offsetWidth === window.innerWidth
-      || (this.size && 'mobile' === this.size)) {
+    if (this.state.node.offsetWidth === window.innerWidth ||
+      (this.size && this.size === 'mobile')) {
       if (this.state.minHeight !== 0) {
         return this.setState({ minHeight: 0 })
       }

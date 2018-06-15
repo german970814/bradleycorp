@@ -22,13 +22,13 @@ type Props = {
 class CareersTemplate extends React.Component<Props> {
   contentScript: { current: null | HTMLDivElement }
 
-  constructor(props: Props) {
+  constructor (props: Props) {
     super(props)
 
     this.contentScript = React.createRef()
   }
 
-  componentDidMount() {
+  componentDidMount () {
     const script = document.createElement('script')
     script.src = 'https://thegoodjobs.com/widget/badges_js/e695217b43d6da8d479ab41cb3df9c5b?overlay=true&stack=false&fade=true'
     script.type = 'text/javascript'

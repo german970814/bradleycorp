@@ -3,7 +3,6 @@ import * as React from 'react'
 import DefaultTemplate from '../../Templates/DefaultTemplate/DefaultTemplate'
 import HubspotForms from '../../HubspotForms/HubspotForms'
 
-
 type Props = {
   pageTitle: string,
   form: string,
