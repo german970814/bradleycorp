@@ -5,6 +5,7 @@
   padding: 35px 55px 30px 43px;
   width: 100%;
   background-color: $light-gray;
+  box-sizing: border-box;
 
   .searchWrapper {
     padding-right: 118px;
@@ -18,10 +19,29 @@
     }
   }
 
+  .extraLinksWrapper {
+    .extraLinksColumn {
+      margin-bottom: 10px;
+      text-align: left;
+
+      &:last-child {
+        margin-bottom: 0px;
+      }
+
+      h6 {
+        padding-bottom: 8px;
+        font-style: oblique;
+        text-transform: none;
+        color: $black;
+      }
+    }
+  }
+
   &.stack {
     padding: 0;
 
     .searchWrapper {
+      margin-bottom: 10px;
       padding-right: 0;
     }
 

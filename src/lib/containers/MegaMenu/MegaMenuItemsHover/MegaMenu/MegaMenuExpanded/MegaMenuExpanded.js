@@ -28,7 +28,7 @@ class MegaMenuExpanded extends React.PureComponent<Props> {
 
   componentDidUpdate (prevProps: Props) {
     if (this.portalNode && this.props.show) {
-      this.portalNode.style.maxHeight = '100vh'
+      this.portalNode.style.maxHeight = '200vh'
     }
   }
 

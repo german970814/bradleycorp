@@ -49,7 +49,7 @@ class Products extends React.Component<Props> {
           </Tabs>
         </div>
         <div className={style.bottomBarWrapper}>
-          <BottomBar menuItems={this.props.menuItem.children} stack />
+          <BottomBar productMegaMenuItem={this.props.menuItem} stack />
         </div>
       </div>
     )

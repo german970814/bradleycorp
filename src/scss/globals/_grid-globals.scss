@@ -30,6 +30,10 @@
     @include col(3);
   }
 
+  .col3x2 {
+    @include col(3 / 2);
+  }
+
   .col4 {
     @include col(4);
   }

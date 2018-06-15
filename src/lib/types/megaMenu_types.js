@@ -1,11 +1,22 @@
 import type { WPPost } from './post_types'
 import type { WPTerm } from './term_types'
 
+type ExtraLinksType = {
+  name: string,
+  links: {
+    string: {
+      text: string,
+      url: string
+    }
+  }
+}
+
 type MegaMenuProductsProperties = {
   bcorp_mega_menu_slug: 'mega-menu-products',
   bcorp_mega_menu_product_categories_col_1: Array<WPTerm>,
   bcorp_mega_menu_product_categories_col_2: Array<WPTerm>,
-  bcorp_mega_menu_product_categories_col_3: Array<WPTerm>
+  bcorp_mega_menu_product_categories_col_3: Array<WPTerm>,
+  bcorp_mega_menu_extra_links_col_1: Array<ExtraLinksType>
 }
 
 type MegaMenuWithThumbnailsProperties = {

@@ -41,7 +41,7 @@ class Products extends React.Component<Props> {
           {this.renderColumn(2)}
           {this.renderColumn(3)}
         </div>
-        <BottomBar menuItems={this.props.menuItem.children || []} greyIcon />
+        <BottomBar productMegaMenuItem={this.props.menuItem} greyIcon />
       </div>
     )
   }
