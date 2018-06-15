@@ -9,6 +9,8 @@ type Props = {
   menuItem: MegaMenuNavMenuItem
 }
 
+const maxLength = 10
+
 class WithThumbnails extends React.PureComponent<Props> {
   renderFeaturedPost () {
     const featuredPost = this.props.menuItem.bcorp_mega_menu_featured_post
@@ -22,7 +24,6 @@ class WithThumbnails extends React.PureComponent<Props> {
 
   renderColumn (startIndex: number, endIndex: number) {
     // set max length of children
-    const maxLength = 10
     const childMenuItems =
       this.props.menuItem.children.length <= maxLength
         ? [...this.props.menuItem.children]
@@ -83,3 +84,4 @@ class WithThumbnails extends React.PureComponent<Props> {
 }
 
 export default WithThumbnails
+export { maxLength }

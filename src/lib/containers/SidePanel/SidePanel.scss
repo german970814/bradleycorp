@@ -4,7 +4,6 @@
 :global(#side-panel) {
   position: fixed;
   z-index: 100;
-  overflow-y: scroll;
   border-right: 1px solid $silver;
   border-left: 1px solid $silver;
   width: 100vw;
@@ -15,5 +14,10 @@
 
   @include respond-to(tablet) {
     max-width: 400px;
+  }
+
+  .sidePanelInner {
+    max-height: 100%;
+    overflow-y: auto;
   }
 }

@@ -6,6 +6,7 @@ import style from './SidePanel.scss'
 type Props = {
   children: React.Node,
   top: number,
+  paddingBottom?: number,
   show?: boolean,
   onShow?: () => void,
   onHide?: () => void
@@ -54,9 +55,11 @@ class SidePanel extends React.PureComponent<Props> {
     }
 
     // position correct distance from top of window
-    // and make sure it always ends at the bottom of the window
+    // and add bottom padding making sure it ends at the bottom of the screen
+    const paddingBottom =
+      parseInt(this.props.paddingBottom || 0) + parseInt(this.props.top)
     portalNode.style.top = `${this.props.top}px`
-    portalNode.style.paddingBottom = `${this.props.top}px`
+    portalNode.style.paddingBottom = `${paddingBottom}px`
     portalNode.style.left = this.props.show ? '0' : '-100%'
 
     return ReactDOM.createPortal(

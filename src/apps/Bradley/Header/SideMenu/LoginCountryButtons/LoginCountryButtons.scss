@@ -1,0 +1,50 @@
+@import '../../../../../scss/partials/variables';
+
+@import '../../Header';
+
+$height: 50;
+
+.loginCountryButton {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: $height + px;
+
+  .button {
+    text-align: center;
+    background-color: $topBarColor;
+
+    &.login {
+      border-right: 1px solid $silver;
+    }
+
+    img {
+      display: inline-block;
+      vertical-align: middle;
+
+      &.avatar {
+        width: 15px;
+        height: 18px;
+      }
+
+      &.flag {
+        width: 24px;
+        height: 14px;
+      }
+    }
+
+    h6 {
+      display: inline-block;
+      vertical-align: middle;
+      padding-top: 3px;
+      padding-left: 3px;
+      line-height: $height + px;
+      color: $slate-grey;
+    }
+  }
+}
+
+:export {
+  height: $height;
+}

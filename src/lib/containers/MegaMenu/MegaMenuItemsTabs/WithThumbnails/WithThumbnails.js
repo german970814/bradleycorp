@@ -3,6 +3,7 @@ import * as React from 'react'
 import type { MegaMenuNavMenuItem } from '../../../../types/megaMenu_types'
 import FillColumns from '../../../../components/FillColumns/FillColumns'
 import { sortIntoRows } from '../../../../bcorpJSX'
+import { maxLength } from '../../MegaMenuItemsHover/MegaMenu/MegaMenuExpanded/WithThumbnails/WithThumbnails'
 import Thumbnail from './Thumbnail/Thumbnail'
 import FeaturedPost from '../../lib/WithThumbnails/FeaturedPost/FeaturedPost'
 import style from './WithThumbnails.scss'
@@ -14,6 +15,10 @@ type Props = {
 class WithThumbnails extends React.PureComponent<Props> {
   renderThumbnails () {
     return this.props.menuItem.children.map((child, index) => {
+      if (index >= maxLength) {
+        return
+      }
+
       return (
         <div key={index} className={`col2 ${style.column}`}>
           <Thumbnail menuItem={child} />
