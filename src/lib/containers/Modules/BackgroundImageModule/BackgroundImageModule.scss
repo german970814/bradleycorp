@@ -1,0 +1,13 @@
+@import '../../../../scss/partials/variables';
+@import '../../../../scss/partials/mixins';
+@import '../../../../scss/partials/helpers';
+@import '../../../../scss/partials/grid';
+@import '../../../components/BCorpBackground/BCorpBackground';
+
+.backgroundImageModule {
+  @extend %bcorpBackgroundParent;
+
+  :global(.container-size-mobile) {
+    height: 50vh;
+  }
+}

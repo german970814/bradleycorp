@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import AllPurposeModule from './AllPurposeModule/AllPurposeModule'
+import BackgroundImageModule from './BackgroundImageModule/BackgroundImageModule'
 import SinglePostModule from './SinglePostModule/SinglePostModule'
 import SinglePostFeaturedModule from './SinglePostFeaturedModule/SinglePostFeaturedModule'
 import MultiPostButtonModule from './MultiPostButtonModule/MultiPostButtonModule'
@@ -28,10 +29,15 @@ const ModuleFactory = ({ data, rowNode }) => {
 
   switch (data.name) {
     case 'module_all_purpose':
+      return <AllPurposeModule {...sharedProps} content={data['content']} />
+
+    case 'module_background_image':
       return (
-        <AllPurposeModule
+        <BackgroundImageModule
           {...sharedProps}
-          content={data['content']} />
+          background={data['background']}
+          backgroundOverlay={data['background_overlay']}
+        />
       )
 
     case 'module_cta':
@@ -41,7 +47,8 @@ const ModuleFactory = ({ data, rowNode }) => {
           title={data['title']}
           text={data['content']}
           link={data['link_url']}
-          linkText={data['link_text']} />
+          linkText={data['link_text']}
+        />
       )
 
     case 'module_menu':
@@ -49,7 +56,8 @@ const ModuleFactory = ({ data, rowNode }) => {
         <MenuModule
           {...sharedProps}
           title={data['title']}
-          menuSlug={data['menu_slug']} />
+          menuSlug={data['menu_slug']}
+        />
       )
 
     case 'module_multi_post_no_excerpt':
@@ -57,7 +65,8 @@ const ModuleFactory = ({ data, rowNode }) => {
         <MultiPostNoExcerptModule
           {...sharedProps}
           postType={data['post_type']}
-          postIDs={data['posts'].split(',')} />
+          postIDs={data['posts'].split(',')}
+        />
       )
 
     case 'module_multi_post_button':
@@ -70,7 +79,8 @@ const ModuleFactory = ({ data, rowNode }) => {
           accentColor={data['accent_color']}
           background={data['background']}
           backgroundOverlay={data['background_overlay']}
-          skin={data['skin']} />
+          skin={data['skin']}
+        />
       )
 
     case 'module_multi_post_arrow':
@@ -83,7 +93,8 @@ const ModuleFactory = ({ data, rowNode }) => {
           accentColor={data['accent_color']}
           background={data['background']}
           backgroundOverlay={data['background_overlay']}
-          skin={data['skin']} />
+          skin={data['skin']}
+        />
       )
 
     case 'module_single_post':
@@ -97,7 +108,8 @@ const ModuleFactory = ({ data, rowNode }) => {
           accentColor={data['accent_color']}
           background={data['background']}
           backgroundOverlay={data['background_overlay']}
-          skin={data['skin']} />
+          skin={data['skin']}
+        />
       )
 
     case 'module_single_post_featured':
@@ -108,7 +120,8 @@ const ModuleFactory = ({ data, rowNode }) => {
           postType={data['post_type']}
           headline={data['headline']}
           background={data['background']}
-          backgroundOverlay={data['background_overlay']} />
+          backgroundOverlay={data['background_overlay']}
+        />
       )
 
     case 'module_slider':
@@ -119,7 +132,8 @@ const ModuleFactory = ({ data, rowNode }) => {
           postType={data['post_type']}
           postIDs={data['posts'].split(',')}
           accentColor={data['accent_color']}
-          skin={data['skin']} />
+          skin={data['skin']}
+        />
       )
 
     case 'module_text_background_peeler':
@@ -130,7 +144,8 @@ const ModuleFactory = ({ data, rowNode }) => {
           text={data['text']}
           backgroundColor={data['background_color']}
           backgroundPeeler={data['background_peeler']}
-          skin={data['skin']} />
+          skin={data['skin']}
+        />
       )
 
     default:
