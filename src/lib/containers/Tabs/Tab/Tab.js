@@ -98,7 +98,7 @@ class Tab extends React.Component<Props> {
 
   render () {
     const active =
-      this.props.isActive && !this.props.cantOpen
+      this.props.isActive && this.props.isOpen && !this.props.cantOpen
         ? `active ${style.active}`
         : ''
     const inlineStyle = {

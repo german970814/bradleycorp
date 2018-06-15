@@ -34,10 +34,6 @@ $tabContentPaddingRight: 11.5vw;
   overflow-x: scroll;
   text-align: left;
   white-space: nowrap;
-
-  @include respond-to(desktop) {
-    overflow-x: hidden;
-  }
 }
 
 .activeTabContentDesktop {
@@ -66,6 +62,7 @@ $tabContentPaddingRight: 11.5vw;
   line-height: $tabHeightDesktop;
   list-style: none;
   white-space: normal;
+  text-align: center;
   cursor: pointer;
 
   h5:global(.tab-text) {

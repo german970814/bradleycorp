@@ -33,8 +33,11 @@ class TabsDesktop extends Component {
         onClick: this.handleTabClick,
         tabIndex: index,
         isActive: index === this.state.activeTabIndex,
+        isOpen: index === this.state.activeTabIndex,
         isDesktop: true,
-        tabWidth: (child.props.style ? child.props.style.width : false) || this.props.tabWidth,
+        tabWidth:
+          (child.props.style ? child.props.style.width : false) ||
+          this.props.tabWidth,
         tabClassName: this.props.tabClassName
       })
     })
@@ -42,8 +45,8 @@ class TabsDesktop extends Component {
 
   // Render current active tab content
   renderActiveTabContent () {
-    const {children} = this.props
-    const {activeTabIndex} = this.state
+    const { children } = this.props
+    const { activeTabIndex } = this.state
     if (children[activeTabIndex]) {
       return children[activeTabIndex].props.children
     }
@@ -52,17 +55,16 @@ class TabsDesktop extends Component {
   render () {
     return (
       <div className={`tab-wrapper ${this.props.tabWrapperClassName}`}>
-
         <ul className={`tab-nav ${this.props.tabsUlClassName}`}>
           {this.renderChildrenWithTabsApiAsProps()}
         </ul>
 
-        <div className={'tabs-active-content-background-color'} >
-          <div className={`tabs-active-content ${this.props.activeTabClassName}`}>
+        <div className={'tabs-active-content-background-color'}>
+          <div
+            className={`tabs-active-content ${this.props.activeTabClassName}`}>
             {this.renderActiveTabContent()}
           </div>
         </div>
-
       </div>
     )
   }
