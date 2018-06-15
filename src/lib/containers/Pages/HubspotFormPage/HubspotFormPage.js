@@ -5,8 +5,8 @@ import HubspotForms from '../../HubspotForms/HubspotForms'
 
 type Props = {
   pageTitle: string,
-  form: string,
-};
+  form: string
+}
 
 export default class HubspotFormsPage extends React.Component<Props> {
   // constructor (props: Props) {
@@ -21,20 +21,17 @@ export default class HubspotFormsPage extends React.Component<Props> {
 
   render () {
     console.log(this.props)
-    return <div className={'hubspot-form'}>
-      <DefaultTemplate
-        data={{
-          page_title: this.props.pageTitle
-        }}
-        renderModules={() => {
-          return (
-            <HubspotForms
-              form={this.props.form}
-              initialHeight={`800`} />
-
-          )
-        }}
-      />
-    </div>
+    return (
+      <div className={'hubspot-form'}>
+        <DefaultTemplate
+          data={{
+            page_title: this.props.pageTitle
+          }}
+          renderModules={() => {
+            return <HubspotForms form={this.props.form} initialHeight={800} />
+          }}
+        />
+      </div>
+    )
   }
 }

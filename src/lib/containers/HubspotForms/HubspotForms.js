@@ -5,11 +5,19 @@ import * as React from 'react'
 type Props = {
   // pageTitle: string,
   form: string,
-  initialHeight?: int,
-  style: mixed
+  initialHeight?: number,
+  style?: {}
 }
 
-export default class HubspotForms extends React.Component<Props> {
+type State = {
+  iframeWidth: string,
+  iframeHeight: number
+}
+
+export default class HubspotForms extends React.Component<Props, State> {
+  formID: string
+  formUrl: string
+
   constructor (props: Props) {
     super(props)
 
