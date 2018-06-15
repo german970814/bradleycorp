@@ -1,4 +1,22 @@
+@import '../../../scss/partials/variables';
+
 .burgerMenuWrapper {
   display: inline-block;
   width: 28px;
+
+  :global(.hamburger-inner) {
+    background-color: $slate-grey;
+
+    &::before {
+      background-color: $slate-grey;
+    }
+
+    &::after {
+      background-color: $slate-grey;
+    }
+  }
+
+  :global(.hamburger):hover {
+    opacity: 1;
+  }
 }
