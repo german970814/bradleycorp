@@ -2,8 +2,7 @@
 import * as React from 'react'
 import type { RouterHistory } from 'react-router-dom'
 import type { MegaMenuNavMenuItem } from '../../../../../types/megaMenu_types'
-import { withRouter } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import BCorpLink from '../../../../../components/BCorpLink/BCorpLink'
 import FillColumns from '../../../../../components/FillColumns/FillColumns'
 import BCorpSearchField from '../../../../../components/BCorpFilterField/BCorpSearchField'
@@ -138,24 +137,18 @@ class BottomBar extends React.Component<Props> {
 
   extractExtraLinksColumnInfo (colId: string): false | ColType {
     if (
-      !this.props.productMegaMenuItem[
-        `bcorp_mega_menu_extra_links_col_${colId}`
-      ]
+      !this.props.productMegaMenuItem[`bcorp_mega_menu_extra_links_col_${colId}`]
     ) {
       return false
     }
 
-    const name = this.props.productMegaMenuItem[
-      `bcorp_mega_menu_extra_links_col_${colId}`
-    ].name
+    const name = this.props.productMegaMenuItem[`bcorp_mega_menu_extra_links_col_${colId}`].name
 
     const links = Object.keys(
       this.props.productMegaMenuItem[`bcorp_mega_menu_extra_links_col_${colId}`]
         .links
     ).map(index => {
-      return this.props.productMegaMenuItem[
-        `bcorp_mega_menu_extra_links_col_${colId}`
-      ].links[index]
+      return this.props.productMegaMenuItem[`bcorp_mega_menu_extra_links_col_${colId}`].links[index]
     })
 
     return { name, links }
