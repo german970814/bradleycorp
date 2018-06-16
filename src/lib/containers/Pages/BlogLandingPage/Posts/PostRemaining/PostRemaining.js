@@ -1,9 +1,9 @@
 // @flow
 import React, { Component } from 'react'
 import type { BCorpPost } from '../../../../../types/post_types'
+import type { ScreenSize } from '../../../../../contexts/ScreenSizeContext'
 import { Link } from 'react-router-dom'
-import Media from 'react-media'
-import { MOBILEMAXWIDTH } from '../../../../../../globals'
+import { withScreenSize } from '../../../../../contexts/ScreenSizeContext'
 import { getExcerpt } from '../../../../../bcorpPost'
 import { createCPTUrl } from '../../../../../bcorpUrl'
 import ImageFrame from '../../../../../components/FixedAspectRatioBox/ImageFrame/ImageFrame'
@@ -12,7 +12,9 @@ import PostTags from '../../../../../components/PostTags/PostTags'
 import style from './PostRemaining.scss'
 
 type Props = {
-  post: BCorpPost
+  post: BCorpPost,
+  // from withScreenSize HOC
+  screenSize: ScreenSize
 }
 
 class PostRemaining extends Component<Props> {
@@ -97,44 +99,38 @@ class PostRemaining extends Component<Props> {
   }
 
   render () {
-    return (
-      <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
-        {match =>
-          match ? (
-            <div className={`col1 ${style.postRemaining}`}>
-              <div className={'row'}>
-                <div className={`col4 ${style.imageContainer}`}>
-                  {this.renderImage()}
-                </div>
-                <div className={`col4x3 ${style.titleContainer}`}>
-                  {this.renderTitle()}
-                  {this.renderPostMeta()}
-                </div>
-                <div className={`col1`}>
-                  {this.renderContent()}
-                  {this.renderTags()}
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className={`col1 ${style.postRemaining}`}>
-              <div className={'row'}>
-                <div className={`col4 ${style.imageContainer}`}>
-                  {this.renderImage()}
-                </div>
-                <div className={`col4x3 ${style.contentContainer}`}>
-                  {this.renderTitle()}
-                  {this.renderPostMeta()}
-                  {this.renderContent()}
-                  {this.renderTags()}
-                </div>
-              </div>
-            </div>
-          )
-        }
-      </Media>
+    return this.props.screenSize === 'mobile' ? (
+      <div className={`col1 ${style.postRemaining}`}>
+        <div className={'row'}>
+          <div className={`col4 ${style.imageContainer}`}>
+            {this.renderImage()}
+          </div>
+          <div className={`col4x3 ${style.titleContainer}`}>
+            {this.renderTitle()}
+            {this.renderPostMeta()}
+          </div>
+          <div className={`col1`}>
+            {this.renderContent()}
+            {this.renderTags()}
+          </div>
+        </div>
+      </div>
+    ) : (
+      <div className={`col1 ${style.postRemaining}`}>
+        <div className={'row'}>
+          <div className={`col4 ${style.imageContainer}`}>
+            {this.renderImage()}
+          </div>
+          <div className={`col4x3 ${style.contentContainer}`}>
+            {this.renderTitle()}
+            {this.renderPostMeta()}
+            {this.renderContent()}
+            {this.renderTags()}
+          </div>
+        </div>
+      </div>
     )
   }
 }
 
-export default PostRemaining
+export default withScreenSize(PostRemaining)

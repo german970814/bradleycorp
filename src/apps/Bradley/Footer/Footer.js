@@ -1,19 +1,22 @@
 // @flow
 import * as React from 'react'
 import type { NavMenuItem } from '../../../lib/types/cpt_types'
+import type { ScreenSize } from '../../../lib/contexts/ScreenSizeContext'
 import { Link } from 'react-router-dom'
+import { withScreenSize } from '../../../lib/contexts/ScreenSizeContext'
 import { removeHostFromUrl } from '../../../lib/bcorpUrl'
 import NavMenuApiClient from '../../../api/navMenu_client'
 import AppInitException from '../../../exceptions/AppInitException'
 import Copyright from './Copyright/Copyright'
-import Media from 'react-media'
-import { MOBILEMAXWIDTH } from '../../../globals'
 import LoginItems from './FooterBottomSection/LoginItems'
 import BlogLinks from './FooterBottomSection/BlogLinks'
 import SocialMediaIcons from './FooterBottomSection/SocialMediaIcons'
 import style from './Footer.scss'
 
-type Props = {}
+type Props = {
+  // from withScreenSize HOC
+  screenSize: ScreenSize
+}
 
 type State = {
   footer: {
@@ -177,13 +180,9 @@ class Footer extends React.Component<Props, State> {
             {this.renderMenu1Col(this.state.footer.menu3)}
           </div>
 
-          <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
-            {match => {
-              return match
-                ? this.renderFooterBottomSectionMobile()
-                : this.renderFooterBottomSectionTabletDesktop()
-            }}
-          </Media>
+          {this.props.screenSize === 'mobile'
+            ? this.renderFooterBottomSectionMobile()
+            : this.renderFooterBottomSectionTabletDesktop()}
         </div>
 
         <div className={`row ${style.footerWrapper}`}>
@@ -236,4 +235,4 @@ class Footer extends React.Component<Props, State> {
   }
 }
 
-export default Footer
+export default withScreenSize(Footer)

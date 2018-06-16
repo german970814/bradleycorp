@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Media from 'react-media'
-import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../globals'
+import { withScreenSize } from '../../contexts/ScreenSizeContext'
 import ContainerMediaQuery from '../ContainerMediaQuery/ContainerMediaQuery'
 import ScrollableList from '../ScrollableList/ScrollableList'
 import ButtonNext from './ButtonNext'
@@ -104,21 +103,11 @@ class SimpleSlider extends Component {
         <React.Fragment>
           {this.renderTitle()}
 
-          <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
-            {match =>
-              match ? (
-                this.renderSliderMobile()
-              ) : (
-                <Media query={{ maxWidth: TABLETMAXWIDTH }}>
-                  {match =>
-                    match
-                      ? this.renderSliderTablet()
-                      : this.renderSliderDesktop()
-                  }
-                </Media>
-              )
-            }
-          </Media>
+          {this.props.screenSize === 'mobile'
+            ? this.renderSliderMobile()
+            : this.props.screenSize === 'tablet'
+              ? this.renderSliderTablet()
+              : this.renderSliderDesktop()}
         </React.Fragment>
       )
     } else {
@@ -219,7 +208,8 @@ SimpleSlider.propTypes = {
   /**
    * Custom class name for the scroller's wrapper node on tablet and desktop
    */
-  desktopWrapperClassName: PropTypes.string
+  desktopWrapperClassName: PropTypes.string,
+  screenSize: PropTypes.string
 }
 
 SimpleSlider.defaultProps = {
@@ -228,4 +218,4 @@ SimpleSlider.defaultProps = {
   numberDesktop: 5
 }
 
-export default SimpleSlider
+export default withScreenSize(SimpleSlider)

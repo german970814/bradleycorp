@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Media from 'react-media'
-import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../../globals'
+import { withScreenSize } from '../../../contexts/ScreenSizeContext'
 import ContainerMediaQuery from '../../../containers/ContainerMediaQuery/ContainerMediaQuery'
 import FixedAspectRatioBox from '../FixedAspectRatioBox'
 import style from './ImageFrame.scss'
@@ -71,21 +70,11 @@ class ImageFrame extends Component {
 
   render () {
     if (!this.props.respondToContainer) {
-      return (
-        <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
-          {match =>
-            match ? (
-              this.renderFrameMobile()
-            ) : (
-              <Media query={{ maxWidth: TABLETMAXWIDTH }}>
-                {match =>
-                  match ? this.renderFrameTablet() : this.renderFrameDesktop()
-                }
-              </Media>
-            )
-          }
-        </Media>
-      )
+      return this.props.screenSize === 'mobile'
+        ? this.renderFrameMobile()
+        : this.props.screenSize === 'tablet'
+          ? this.renderFrameTablet()
+          : this.renderFrameDesktop()
     } else {
       return (
         <div
@@ -147,11 +136,12 @@ ImageFrame.propTypes = {
   /**
    * How should the image fit inside the frame
    */
-  sizing: PropTypes.oneOf(['cover', 'contain'])
+  sizing: PropTypes.oneOf(['cover', 'contain']),
+  screenSize: PropTypes.string
 }
 
 ImageFrame.defaultProps = {
   sizing: 'cover'
 }
 
-export default ImageFrame
+export default withScreenSize(ImageFrame)

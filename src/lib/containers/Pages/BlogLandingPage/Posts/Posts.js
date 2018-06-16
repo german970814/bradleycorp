@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react'
 import type { BCorpPost } from '../../../../types/post_types'
-import Media from 'react-media'
-import { MOBILEMAXWIDTH } from '../../../../../globals'
+import type { ScreenSize } from '../../../../contexts/ScreenSizeContext'
+import { withScreenSize } from '../../../../contexts/ScreenSizeContext'
 import Divider from '../../../../components/Divider/Divider'
 import PostPrimary from './PostPrimary/PostPrimary'
 import PostSecondary from './PostSecondary/PostSecondary'
@@ -10,18 +10,24 @@ import PostRemaining from './PostRemaining/PostRemaining'
 import style from './Posts.scss'
 
 type Props = {
-  data: Array<BCorpPost>
+  data: Array<BCorpPost>,
+  // from withScreenSize HOC
+  screenSize: ScreenSize
 }
 
 const Posts: React.StatelessFunctionalComponent<Props> = (props: Props) => {
   const posts = props.data
 
   return posts.map((post: BCorpPost, index: number) => {
-    return getPostElement(post, index)
+    return getPostElement(post, index, props.screenSize)
   })
 }
 
-function getPostElement (post: BCorpPost, index: number): React.Node {
+function getPostElement (
+  post: BCorpPost,
+  index: number,
+  screenSize: ScreenSize
+): React.Node {
   if (index === 0) {
     return <PostPrimary key={index} post={post} />
   } else if (index === 1) {
@@ -41,21 +47,15 @@ function getPostElement (post: BCorpPost, index: number): React.Node {
       </React.Fragment>
     )
   } else {
-    return (
-      <Media key={index} query={{ maxWidth: MOBILEMAXWIDTH }}>
-        {match =>
-          match ? (
-            <React.Fragment>
-              <Divider className={`col1 ${style.divider}`} fullWidth />
-              <PostRemaining post={post} />
-            </React.Fragment>
-          ) : (
-            <PostRemaining post={post} />
-          )
-        }
-      </Media>
+    return screenSize === 'mobile' ? (
+      <React.Fragment>
+        <Divider className={`col1 ${style.divider}`} fullWidth />
+        <PostRemaining post={post} />
+      </React.Fragment>
+    ) : (
+      <PostRemaining post={post} />
     )
   }
 }
 
-export default Posts
+export default withScreenSize(Posts)

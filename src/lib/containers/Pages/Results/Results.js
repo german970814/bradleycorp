@@ -1,14 +1,14 @@
 // @flow
 import * as React from 'react'
 import type { Location, Match, RouterHistory } from 'react-router-dom'
+import type { ScreenSize } from '../../../contexts/ScreenSizeContext'
 import type { BCorpPost } from '../../../types/post_types'
 import type { PostType } from '../../../types/cpt_types'
 import type { ChildFunctionArgs, GetPostsArgs } from './LoadMore'
+import { withScreenSize } from '../../../contexts/ScreenSizeContext'
 import { site } from '../../../../api'
-import Media from 'react-media'
 import LoadMore from './LoadMore'
 import style from './Results.scss'
-import { MOBILEMAXWIDTH } from '../../../../globals'
 import SearchClient from './../../../../api/search_client'
 
 import Loading from '../../../components/Loading/Loading'
@@ -36,7 +36,9 @@ type Tab = {
 type Props = {
   location: Location,
   match: { params: { query: string, tab: TabOption, page?: number } } & Match,
-  history: RouterHistory
+  history: RouterHistory,
+  // from withScreenSize HOC
+  screenSize: ScreenSize
 }
 
 type State = {
@@ -54,7 +56,7 @@ type State = {
 
 const POSTS_PER_PAGE = 20
 
-export default class Results extends React.Component<Props, State> {
+class Results extends React.Component<Props, State> {
   constructor (props: Props) {
     super(props)
 
@@ -192,13 +194,9 @@ export default class Results extends React.Component<Props, State> {
   renderTabs () {
     return (
       <div className={`${style.itemsWrapper}`}>
-        <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
-          {match =>
-            match
-              ? this.renderOptionsMobile() // mobile
-              : this.renderOptions()
-          }
-        </Media>
+        {this.props.screenSize === 'mobile'
+          ? this.renderOptionsMobile()
+          : this.renderOptions()}
       </div>
     )
   }
@@ -385,3 +383,5 @@ export default class Results extends React.Component<Props, State> {
     )
   }
 }
+
+export default withScreenSize(Results)

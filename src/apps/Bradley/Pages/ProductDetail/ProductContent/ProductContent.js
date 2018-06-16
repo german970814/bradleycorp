@@ -1,11 +1,11 @@
 // @flow
 import * as React from 'react'
 import type { RouterHistory } from 'react-router-dom'
+import type { ScreenSize } from '../../../../../lib/contexts/ScreenSizeContext'
 import { withRouter } from 'react-router-dom'
 import Loadable from 'react-loadable'
+import { withScreenSize } from '../../../../../lib/contexts/ScreenSizeContext'
 import Loading from '../../../../../lib/components/Loading/Loading'
-import Media from 'react-media'
-import { TABLETMAXWIDTH } from '../../../../../globals'
 import { isNew } from '../../../../../lib/bcorpPost'
 import ProductContentText from './ProductContentText/ProductContentText'
 import ProductContentImages from './ProductContentImages/MobileTablet/ProductContentImagesMobileTablet'
@@ -36,7 +36,9 @@ type Props = {
       }
     | '',
   // from withRouter HOC
-  history: RouterHistory
+  history: RouterHistory,
+  // from withScreenSize HOC
+  screenSize: ScreenSize
 }
 
 /*
@@ -177,12 +179,13 @@ class ProductContent extends React.Component<Props> {
   render () {
     return (
       <div>
-        <Media query={{ maxWidth: TABLETMAXWIDTH }}>
-          {match => (match ? this.renderTablet() : this.renderDesktop())}
-        </Media>
+        {this.props.screenSize === 'tablet' ||
+        this.props.screenSize === 'mobile'
+          ? this.renderTablet()
+          : this.renderDesktop()}
       </div>
     )
   }
 }
 
-export default withRouter(ProductContent)
+export default withRouter(withScreenSize(ProductContent))

@@ -5,10 +5,10 @@ import type {
   HomePageCookieOption
 } from '../../../../lib/types/cookie_types'
 import type { RouterHistory } from 'react-router-dom'
+import type { ScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
 import { Link } from 'react-router-dom'
-import Media from 'react-media'
 import { withCookies, Cookies } from 'react-cookie'
-import { MOBILEMAXWIDTH } from '../../../../globals'
+import { withScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
 import commercialWashroomImageSrc from '../../../../images/home-images/water-falling/water-falling@2x.png'
 import emergencySafetyImageSrc from '../../../../images/home-images/water-splashing/water-splashing@2x.png'
 import VideoBackground from '../../../../lib/components/BCorpVideo/VideoBackground/VideoBackground'
@@ -18,7 +18,9 @@ import style, { emergencysafetyoverlay } from './Home.scss'
 
 type Props = {
   cookies: Cookies,
-  history: RouterHistory
+  history: RouterHistory,
+  // from withScreenSize HOC
+  screenSize: ScreenSize
 }
 
 type State = {
@@ -111,7 +113,7 @@ class Home extends React.Component<Props, State> {
         <BCorpBackground
           imageSrc={emergencySafetyImageSrc}
           customOverlayColor={emergencysafetyoverlay}
-          imageOpacity={0.33}
+          imageOpacity={0.66}
         />
         {content}
       </React.Fragment>
@@ -144,54 +146,49 @@ class Home extends React.Component<Props, State> {
   }
 
   render () {
+    const match = this.props.screenSize === 'mobile'
+
     return (
-      <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
-        {match => {
-          return (
-            <div className={`row ${style.Home}`}>
-              {this.renderHeader(match)}
+      <div className={`row ${style.Home}`}>
+        {this.renderHeader(match)}
 
-              <div
-                className={`${style.fadeInMobile} ${style.blackBlueContainer}`}>
-                <div
-                  ref={node => {
-                    if (!this.state.washroomNode && node) {
-                      this.setState({ washroomNode: node })
-                    }
-                  }}
-                  onClick={() => {
-                    return this.handleBlackBlueClick('commercial')
-                  }}
-                  className={`col1 col2-tablet ${style.commercialWashroom}`}>
-                  {this.renderCommercialWashroom(match)}
-                </div>
-                <div
-                  ref={node => {
-                    if (!this.state.emergencySafetyNode && node) {
-                      this.setState({ emergencySafetyNode: node })
-                    }
-                  }}
-                  onClick={() => {
-                    return this.handleBlackBlueClick('industrial')
-                  }}
-                  className={`col1 col2-tablet ${style.emergencySafety}`}>
-                  {this.renderEmergencySafety(match)}
-                </div>
+        <div className={`${style.fadeInMobile} ${style.blackBlueContainer}`}>
+          <div
+            ref={node => {
+              if (!this.state.washroomNode && node) {
+                this.setState({ washroomNode: node })
+              }
+            }}
+            onClick={() => {
+              return this.handleBlackBlueClick('commercial')
+            }}
+            className={`col1 col2-tablet ${style.commercialWashroom}`}>
+            {this.renderCommercialWashroom(match)}
+          </div>
+          <div
+            ref={node => {
+              if (!this.state.emergencySafetyNode && node) {
+                this.setState({ emergencySafetyNode: node })
+              }
+            }}
+            onClick={() => {
+              return this.handleBlackBlueClick('industrial')
+            }}
+            className={`col1 col2-tablet ${style.emergencySafety}`}>
+            {this.renderEmergencySafety(match)}
+          </div>
 
-                {!match && (
-                  <div className={'home-caption'}>
-                    {'every professional’s natural resource'}
-                  </div>
-                )}
-              </div>
-
-              <div className={`col1 ${style.cta}`}>{this.renderCTA()}</div>
+          {!match && (
+            <div className={'home-caption'}>
+              {'every professional’s natural resource'}
             </div>
-          )
-        }}
-      </Media>
+          )}
+        </div>
+
+        <div className={`col1 ${style.cta}`}>{this.renderCTA()}</div>
+      </div>
     )
   }
 }
 
-export default withCookies(Home)
+export default withScreenSize(withCookies(Home))
