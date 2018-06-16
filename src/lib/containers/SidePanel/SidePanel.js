@@ -13,6 +13,18 @@ type Props = {
 }
 
 class SidePanel extends React.PureComponent<Props> {
+  portalNode: ?HTMLElement
+
+  constructor (props: Props) {
+    super(props)
+
+    this.portalNode = document.getElementById('side-panel')
+
+    if (!this.portalNode) {
+      console.warn('SidePanel component expected node with id side-panel')
+    }
+  }
+
   componentDidUpdate (prevProps: Props) {
     if (this.props.show && !prevProps.show) {
       this.freezeBodyScroll(true)
@@ -31,6 +43,24 @@ class SidePanel extends React.PureComponent<Props> {
     }
   }
 
+  /**
+   * This is important.
+   *
+   * We make sure that if any components making use of the SidePanel
+   * finish using it, then it disappears.
+   */
+  componentWillUnmount () {
+    if (!this.portalNode) {
+      console.warn('SidePanel component expected node with id side-panel')
+      return null
+    }
+
+    this.portalNode.style.left = '-100%'
+  }
+
+  /**
+   * When the side panel is open we want to make sure that the rest of the body cant scroll
+   */
   freezeBodyScroll (freeze: boolean) {
     const body = document.getElementById('body')
 
@@ -47,12 +77,11 @@ class SidePanel extends React.PureComponent<Props> {
   }
 
   render () {
-    const portalNode = document.getElementById('side-panel')
-
-    if (!portalNode) {
+    if (!this.portalNode) {
       console.warn('SidePanel component expected node with id side-panel')
       return null
     }
+    const portalNode = this.portalNode
 
     // position correct distance from top of window
     // and add bottom padding making sure it ends at the bottom of the screen
