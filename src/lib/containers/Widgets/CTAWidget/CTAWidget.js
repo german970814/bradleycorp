@@ -11,7 +11,7 @@ type Props = {
   linkText?: string,
   mediaSrc?: string,
   twoColsOnTablet?: boolean
-}
+};
 
 /**
  * The CTA Widget
@@ -38,7 +38,7 @@ class CTAWidget extends Component<Props> {
       return
     }
 
-    return <div className={style.text}>{text}</div>
+    return <div className={style.text} dangerouslySetInnerHTML={{__html: text}}></div>
   }
 
   renderButton () {
