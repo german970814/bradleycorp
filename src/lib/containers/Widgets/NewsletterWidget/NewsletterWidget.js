@@ -49,7 +49,7 @@ class NewsletterWidget extends Component<Props, State> {
     const iframe = ((document.getElementById(formName.replace(/[^\w]/g, '_'))
       :any)
       :HTMLIFrameElement)
-    const _window = iframe && iframe.contentWindow
+    const _window: any = iframe && iframe.contentWindow
       ? iframe.contentWindow
       : iframe.contentDocument
 
