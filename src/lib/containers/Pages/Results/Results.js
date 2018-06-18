@@ -52,7 +52,7 @@ type State = {
       offset: number
     }
   }
-}
+};
 
 const POSTS_PER_PAGE = 20
 
@@ -101,7 +101,7 @@ class Results extends React.Component<Props, State> {
   }
 
   handleChangeTab (selected: TabOption) {
-    const regex = /\/(product|literature|technical_info|news|page)\/?/g
+    const regex = /\/((product|literature|technical_info|news|page)\/?)$/g
     const paged =
       selected in this.state.results ? this.state.results[selected].paged : null
     let url = this.props.match.url
@@ -318,6 +318,7 @@ class Results extends React.Component<Props, State> {
     offset
   }: GetPostsArgs): Promise<void> {
     const activeTab = this.activeTab
+    console.log(activeTab)
     try {
       const response = await SearchClient.getSearchResults(
         this.props.match.params.query,
