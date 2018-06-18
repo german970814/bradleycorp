@@ -24,8 +24,11 @@ class Tree extends React.PureComponent<Props> {
           style={{
             paddingLeft: `${offset * 5}px`
           }}
-          className={style.treeLink}>
-          {name}
+          className={style.offsetWrapper}>
+          <div
+            className={`${style.treeLink} ${hideArrow ? style.hideArrow : ''}`}>
+            {name}
+          </div>
         </div>
       </Link>
     )
