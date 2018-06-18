@@ -7,12 +7,19 @@ type Props = {
   form: string,
   initialHeight?: number,
   style?: {}
-}
+};
+
+type MessageEvent = {
+  data: {
+    iframeID?: number,
+    height: number,
+  }
+};
 
 type State = {
   iframeWidth: string,
   iframeHeight: number
-}
+};
 
 export default class HubspotForms extends React.Component<Props, State> {
   formID: string
@@ -30,7 +37,7 @@ export default class HubspotForms extends React.Component<Props, State> {
     }
   }
 
-  updateIframeDimensions (event) {
+  updateIframeDimensions (event: MessageEvent) {
     console.log(event.data)
     if (this.formID !== event.data.iframeID) {
       return
@@ -68,7 +75,7 @@ export default class HubspotForms extends React.Component<Props, State> {
     const iframe = ((document.getElementById(
       this.formID
     ): any): HTMLIFrameElement)
-    const _window =
+    const _window: any =
       iframe && iframe.contentWindow
         ? iframe.contentWindow
         : iframe.contentDocument
