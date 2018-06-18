@@ -349,11 +349,11 @@ class ScrollableList extends Component {
 
   shouldRenderNavigation () {
     if (this.props.numberOfPosts) {
-      return this.props.numberToDisplay > this.props.numberOfPosts
+      return this.props.numberToDisplay < this.props.numberOfPosts
     }
 
     if (this.state.children) {
-      return this.state.children.length < this.props.numberToDisplay
+      return this.state.children.length > this.props.numberToDisplay
     }
 
     return true
