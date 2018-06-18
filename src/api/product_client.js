@@ -19,6 +19,19 @@ type CategoryPageMetaFiltersResponse = {
   }
 }
 
+type TreeType = {
+  parents:
+    | false
+    | {
+        [string]: string
+      },
+  children:
+    | false
+    | {
+        [string]: string
+      }
+}
+
 class ProductApiClient extends CPTApiClient {
   constructor () {
     super('product')
@@ -46,7 +59,8 @@ class ProductApiClient extends CPTApiClient {
     filters: {
       meta_filters: CategoryPageMetaFiltersResponse,
       tax_filters: TaxFilterGroup
-    }
+    },
+    tree: TreeType
   }> {
     const url = `${api.baseURL}page/product-category`
     const params = { slug, data_part: dataPart }
@@ -56,3 +70,4 @@ class ProductApiClient extends CPTApiClient {
 }
 
 export default ProductApiClient
+export type { TreeType }
