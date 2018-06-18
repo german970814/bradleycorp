@@ -55,12 +55,12 @@
       padding-right: 100px;
     }
 
-    img {
-      width: ((160 / 270) * 100) + %;
-
-      @include respond-to(tablet) {
-        width: 100%;
-      }
+    .featuredImage {
+      width: 100%;
+      height: 150px;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
     }
   }
 }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import BCorpVideo from '../../../../../../../../../lib/components/BCorpVideo/BCorpVideo'
-import { youtubeParser } from '../../../../../../../../../lib/bcorpUrl'
 import LIGHTBOXSIZES from '../../../../../../../../../lib/containers/Lightbox/lightboxVars'
 import FixedAspectRatioBox from '../../../../../../../../../lib/components/FixedAspectRatioBox/FixedAspectRatioBox'
 import style from './ListItemLightbox.scss'
@@ -16,7 +15,6 @@ class ListItemLightbox extends Component {
   }
 
   renderVideo () {
-    const videoId = youtubeParser(this.props.src) || ''
     return (
       <FixedAspectRatioBox maxHeight={LIGHTBOXSIZES.heightMinusCloseButton}>
         <BCorpVideo
