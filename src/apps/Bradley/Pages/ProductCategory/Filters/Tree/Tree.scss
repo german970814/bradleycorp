@@ -1,0 +1,28 @@
+@import '../../../../../../scss/partials/variables';
+
+h6.parentTitle {
+  margin-bottom: 5px;
+  color: $gray;
+}
+
+.treeLink {
+  position: relative;
+  margin-bottom: 5px;
+
+  &:not(.hideArrow) {
+    padding-left: 10px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform: translateY(50%);
+      width: 0;
+      height: 0;
+      border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent;
+      border-left: 4px solid $steel-grey;
+    }
+  }
+}

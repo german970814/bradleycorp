@@ -1,6 +1,8 @@
 // @flow
 import * as React from 'react'
 import type { FiltersType, ActiveFilterType } from '../ProductCategory'
+import type { TreeType } from '../../../../../api/product_client'
+import Tree from './Tree/Tree'
 import LeftSidebarCheckboxGroup from '../../../../../lib/components/BCorpFilterField/LeftSidebarCheckboxGroup/LeftSidebarCheckboxGroup'
 import style from './Filters.scss'
 
@@ -9,6 +11,7 @@ type Props = {
   activeFilters: ActiveFilterType,
   catParentTitle?: string,
   catSlug: string,
+  tree: TreeType,
   updateMetaProductAttributesActiveFilters: (
     attName: string,
     newValues: Array<string>
@@ -169,6 +172,7 @@ class Filters extends React.Component<Props> {
       <div className={style.filters}>
         {this.renderNewMetaFilter()}
         {this.renderTaxFilters()}
+        <Tree tree={this.props.tree} />
       </div>
     )
   }

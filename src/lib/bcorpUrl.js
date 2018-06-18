@@ -102,22 +102,36 @@ bcorpUrl.processPathForRoute = (path: string): string => {
 }
 
 /**
- * Use this to create urls for terms linking to their archive page.
- * If we update the permalinks structure in Wordpress we can just update this function to match.
+ * Unwrap a WP_Term and get the permalink
  *
  * @param  {object} post a fetched WP_Term object
  * @return {string|boolean}      The url ready for use with react-router
  */
 bcorpUrl.createArchiveUrl = (term: WPTerm): false | string => {
   if (term.taxonomy && term.slug) {
-    if (term.taxonomy === 'product_category') {
-      return `/product-category/${term.slug}`
-    }
-
-    return `/${term.taxonomy}/${term.slug}`
+    return bcorpUrl.createArchiveUrlFromSlugAndTax(term.slug, term.taxonomy)
   }
 
   return false
+}
+
+/**
+ * Use this to create urls for terms linking to their archive page.
+ * If we update the permalinks structure in Wordpress we can just update this function to match.
+ *
+ * @param  {string} slug
+ * @param {string} taxonomy
+ * @return {string}      The url ready for use with react-router
+ */
+bcorpUrl.createArchiveUrlFromSlugAndTax = (
+  slug: string,
+  taxonomy: string
+): string => {
+  if (taxonomy === 'product_category') {
+    return `/product-category/${slug}`
+  }
+
+  return `/${taxonomy}/${slug}`
 }
 
 /**
