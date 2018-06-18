@@ -184,7 +184,6 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
   }
 
   render () {
-    console.log(this.state)
     return this.state.loading ? (
       <Loading />
     ) : (
@@ -203,11 +202,11 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
 
   async getPage (postsPerPage: number, paged: number, offset: number) {
     try {
-      console.log('sending', {
-        postsPerPage,
-        paged,
-        offset
-      })
+      // console.log('sending', {
+      //   postsPerPage,
+      //   paged,
+      //   offset
+      // })
 
       const args = {
         postsPerPage,
@@ -218,7 +217,7 @@ class LoadMoreWithRouter extends React.Component<Props, State> {
 
       let posts: Array<BCorpPost> = response.data
 
-      console.log(`got ${posts.length} posts`, paged)
+      // console.log(`got ${posts.length} posts`, paged)
 
       const prevPosts = this.state.posts || []
       posts = [...prevPosts, ...posts]

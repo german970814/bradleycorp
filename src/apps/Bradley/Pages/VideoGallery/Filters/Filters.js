@@ -40,8 +40,8 @@ class Filters extends React.Component<Props> {
             className={style.select}
             defaultOptionId={filterDefault}
             defaultOptionName={filterDefaultName}
-            options={this.props.filterOptions.video_gallery_product_tag}
-            filterState={this.props.filters.video_gallery_product_tag}
+            options={this.props.filterOptions.video_gallery_type_cat}
+            filterState={this.props.filters.video_gallery_type_cat}
             handleChange={this.handleProductTypeChange.bind(this)}
           />
         </div>
@@ -51,8 +51,8 @@ class Filters extends React.Component<Props> {
             className={style.select}
             defaultOptionId={filterDefault}
             defaultOptionName={filterDefaultName}
-            options={this.props.filterOptions.video_gallery_type_cat}
-            filterState={this.props.filters.video_gallery_type_cat}
+            options={this.props.filterOptions.video_gallery_cat}
+            filterState={this.props.filters.video_gallery_cat}
             handleChange={this.handleVideoTypeChange.bind(this)}
           />
         </div>
