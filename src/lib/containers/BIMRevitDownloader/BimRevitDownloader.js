@@ -26,11 +26,40 @@ class BimRevitDownloader extends React.Component<Props, State> {
   constructor (props: Props) {
     super(props)
 
-    this.state = { loading: true, productVariants: [], selected: [] }
+    this.state = {
+      loading: false,
+      productVariants: [
+        {
+          id: 304,
+          name: 'AV30',
+          description: null,
+          product: {
+            id: 274,
+            imageUrl:
+              '/image/6015/lavatories-bradley_corp-advocate-av30.jpg?size=w100_h100_f',
+            name: '1-Station Advocate Lavatory System',
+            description: ''
+          }
+        },
+        {
+          id: 305,
+          name: 'AV60',
+          description: null,
+          product: {
+            id: 275,
+            imageUrl:
+              '/image/6014/lavatories-bradley_corp-advocate-av60.jpg?size=w100_h100_f',
+            name: '2-Station Advocate Lavatory System',
+            description: ''
+          }
+        }
+      ],
+      selected: []
+    }
   }
 
   componentDidMount () {
-    this.getBimProductVariants()
+    // this.getBimProductVariants()
   }
 
   componentDidUpdate (prevProps: Props) {
@@ -38,7 +67,7 @@ class BimRevitDownloader extends React.Component<Props, State> {
       this.props.bimRevitTermIds !== prevProps.bimRevitTermIds ||
       this.props.showProductPageLinks !== prevProps.showProductPageLinks
     ) {
-      this.getBimProductVariants()
+      // this.getBimProductVariants()
     }
   }
 
