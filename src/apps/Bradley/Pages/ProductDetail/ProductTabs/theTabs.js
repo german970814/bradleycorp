@@ -139,7 +139,7 @@ function getTheTabs (tabsData: Object): Array<React.Element<typeof Tab>> {
       </Tab>
     ]
   }
-  console.log(tabsData.compliance)
+  // console.log(tabsData.compliance)
   // Compliance
   if (
     tabsData.compliance.compliance.length > 0 ||
