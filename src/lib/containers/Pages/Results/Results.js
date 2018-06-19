@@ -318,7 +318,6 @@ class Results extends React.Component<Props, State> {
     offset
   }: GetPostsArgs): Promise<void> {
     const activeTab = this.activeTab
-    console.log(activeTab)
     try {
       const response = await SearchClient.getSearchResults(
         this.props.match.params.query,
