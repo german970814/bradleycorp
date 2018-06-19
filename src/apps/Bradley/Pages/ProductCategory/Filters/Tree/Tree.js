@@ -5,10 +5,17 @@ import { Link } from 'react-router-dom'
 import { createArchiveUrlFromSlugAndTax } from '../../../../../../lib/bcorpUrl'
 import style from './Tree.scss'
 
+/**
+ * Note, parents array should contain the current element.
+ */
 type Props = {
   tree: TreeType
 }
 
+/**
+ * Given a tree object consisting of parent and children categories,
+ * we create an indented tree structure
+ */
 class Tree extends React.PureComponent<Props> {
   renderTreeLink (
     slug: string,

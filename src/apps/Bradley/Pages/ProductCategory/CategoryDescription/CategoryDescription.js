@@ -15,83 +15,26 @@ type Props = {
 }
 
 class CategoryDescription extends React.PureComponent<Props> {
-  /* renderImage () {
+  renderImage () {
     if (!this.props.logoSrc) {
       return
     }
 
-    return <img src={this.props.logoSrc} />
-  } */
-
-  /*
-  renderLinks () {
-    return this.props.links.map((link, index) => {
-      return (
-        <BCorpLink
-          key={index}
-          url={link.link}
-          renderInternal={url => {
-            const linkElement = (
-              <Link to={url} className={`link-orange`}>
-                {link.name}
-              </Link>
-            )
-
-            return this.props.isMobile ? (
-              <ArrowThumbnail className={style.arrowWrapper}>
-                {linkElement}
-              </ArrowThumbnail>
-            ) : (
-              linkElement
-            )
-          }}
-          renderExternal={url => {
-            const linkElement = (
-              <a href={url} className={`link-orange`}>
-                {link.name}
-              </a>
-            )
-            return this.props.isMobile ? (
-              <ArrowThumbnail className={style.arrowWrapper}>
-                {linkElement}
-              </ArrowThumbnail>
-            ) : (
-              linkElement
-            )
-          }}
-        />
-      )
-    })
-  } */
+    return (
+      <div
+        style={{ backgroundImage: `url('${this.props.logoSrc}')` }}
+        className={style.featuredImage}
+      />
+    )
+  }
 
   render () {
-    /*
     return (
       <div className={`row ${style.categoryDescription}`}>
-        <VerticalAlignHelper />
-        <div
-          className={`col1 inline-col3-middle-tablet ${style.descriptionIcon}`}>
+        <div className={`col1 col3-tablet ${style.descriptionIcon}`}>
           {this.renderImage()}
         </div>
-        <div
-          className={`col1 inline-col3x2-middle-tablet ${
-            style.descriptionWrapper
-          }`}>
-          <div className={style.description}>
-            <ContentTransformer content={this.props.description} />
-          </div>
-          <div className={style.descriptionLinks}>{this.renderLinks()}</div>
-        </div>
-      </div>
-    )
-    */
-
-    return (
-      <div className={`row ${style.categoryDescription}`}>
-        <div
-          className={`col1 inline-col3x2-middle-tablet ${
-            style.descriptionWrapper
-          }`}>
+        <div className={`col1 col3x2-tablet ${style.descriptionWrapper}`}>
           <div className={style.description}>
             <ContentTransformer content={this.props.description} />
           </div>

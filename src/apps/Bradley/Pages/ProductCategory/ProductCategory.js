@@ -11,14 +11,14 @@ import Pagination from './Pagination/Pagination'
 import Filters from './Filters/Filters'
 import Products from './Products/Products'
 import Loading from '../../../../lib/components/Loading/Loading'
-import NoResults from '../../../../lib/components/NoResults/NoResults'
 import style from './ProductCategory.scss'
 
 type CategoryData = {|
   parent_name?: string,
   name: string,
   description?: string,
-  count: number
+  count: number,
+  featured_image: string
 |}
 
 type ProductAttributesType = {
@@ -239,6 +239,11 @@ class ProductCategory extends React.Component<Props, State> {
           isMobile={isMobile}
           description={
             (this.state.categoryData && this.state.categoryData.description) ||
+            ''
+          }
+          logoSrc={
+            (this.state.categoryData &&
+              this.state.categoryData.featured_image) ||
             ''
           }
         />
