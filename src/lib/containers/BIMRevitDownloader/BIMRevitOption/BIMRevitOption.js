@@ -8,11 +8,16 @@ import style from './BIMRevitOption.scss'
 type Props = {
   productVariant: BimProductVariant,
   toggleSelect: (id: number) => void,
+  downloadFiles: (variantIds: Array<number>) => Promise<void>,
   selected: boolean,
   showProductPageLinks?: boolean
 }
 
-class BIMRevitOption extends React.Component<Props> {
+class BIMRevitOption extends React.PureComponent<Props> {
+  downloadFile () {
+    this.props.downloadFiles([this.props.productVariant.id])
+  }
+
   renderTitle () {
     return <h5 className={style.title}>{this.props.productVariant.name}</h5>
   }
@@ -74,6 +79,7 @@ class BIMRevitOption extends React.Component<Props> {
       <img
         src={require('../../../../images/download-arrow-icon/download@2x.png')}
         className={style.download}
+        onClick={this.downloadFile.bind(this)}
       />
     )
   }
