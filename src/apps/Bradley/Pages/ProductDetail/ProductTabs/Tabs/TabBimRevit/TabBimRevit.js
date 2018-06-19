@@ -10,9 +10,15 @@ type Props = {
 
 class TabBimRevit extends React.Component<Props> {
   render () {
+    const termIds = this.props.bimRevit.map(term => {
+      return term.name
+    })
+
+    console.log(this.props.bimRevit)
+
     return (
       <div className={tabStyle.fullWidthColDesktopTab}>
-        <BimRevitDownloader bimRevit={this.props.bimRevit} />
+        <BimRevitDownloader bimRevitTermIds={termIds} />
       </div>
     )
   }

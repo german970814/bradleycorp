@@ -1,11 +1,12 @@
 // @flow
 import * as React from 'react'
-import type { WPTerm } from '../../../types/term_types'
+import type { BimProductVariant } from '../../../../api/bradley-apis/documentPackager_client'
+import { bradleyApisHost } from '../../../../api/bradley-apis/index'
 import { Link } from 'react-router-dom'
 import style from './BIMRevitOption.scss'
 
 type Props = {
-  term: WPTerm,
+  productVariant: BimProductVariant,
   toggleSelect: (id: number) => void,
   selected: boolean,
   showProductPageLinks?: boolean
@@ -13,20 +14,22 @@ type Props = {
 
 class BIMRevitOption extends React.Component<Props> {
   renderTitle () {
-    return <h5 className={style.title}>{'s19-220bbf'}</h5>
+    return <h5 className={style.title}>{this.props.productVariant.name}</h5>
   }
 
   renderCheckbox () {
+    const id = this.props.productVariant.id
+
     return (
       <React.Fragment>
         <input
           className={style.checkbox}
           onChange={() => {
-            this.props.toggleSelect(this.props.term.term_id)
+            this.props.toggleSelect(id)
           }}
           type="checkbox"
-          value={this.props.term.term_id}
-          id={this.props.term.term_id}
+          value={id}
+          id={id}
           checked={this.props.selected || false}
         />
         {this.props.selected && (
@@ -44,7 +47,9 @@ class BIMRevitOption extends React.Component<Props> {
       <div className={style.image}>
         <div
           style={{
-            backgroundImage: `url('http://bradleydev.twoxfour.com/wp-content/uploads/2017/12/layer-19@3x.jpg')`
+            backgroundImage: `url('${bradleyApisHost}${
+              this.props.productVariant.product.imageUrl
+            }')`
           }}
           className={style.imageInner}
         />

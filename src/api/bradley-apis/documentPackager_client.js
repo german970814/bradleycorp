@@ -1,8 +1,9 @@
 // @flow
-import axios from 'axios'
 import type { AxiosPromise } from 'axios'
+import axios from 'axios'
+import { bradleyApisHost } from './index'
 
-const documentPackerRoot = 'https://www.bradleycorp.com/documentPackager/'
+export const documentPackerRoot = `${bradleyApisHost}/documentPackager`
 
 // a bim 'model' has a one to many relationship with products
 // model -> 1toMany -> product
@@ -53,7 +54,7 @@ class DocumentPackagerApiClient {
   getBimProductsAndVariantsFromModelIds (
     modelIds: Array<string>
   ): AxiosPromise<BimProductAndVariantsFromModelIdsResponse> {
-    const url = `${documentPackerRoot}bimProductsAndVariantsForModels`
+    const url = `${documentPackerRoot}/bimProductsAndVariantsForModels`
     const params = { model: modelIds.join(',') }
 
     return axios.get(url, { params })
@@ -62,7 +63,7 @@ class DocumentPackagerApiClient {
   getBimFileZipFromVariantIds (
     variantIds: Array<number>
   ): AxiosPromise<BimFileZipFromVariantIdsResponse> {
-    const url = `${documentPackerRoot}bimFile/bimProductVariants`
+    const url = `${documentPackerRoot}/bimFile/bimProductVariants`
     const params = { bimProductVariant: variantIds.join(',') }
 
     return axios.get(url, { params })
@@ -70,3 +71,10 @@ class DocumentPackagerApiClient {
 }
 
 export default DocumentPackagerApiClient
+export type {
+  BimModel,
+  BimProduct,
+  BimProductVariant,
+  BimProductAndVariantsFromModelIdsResponse,
+  BimFileZipFromVariantIdsResponse
+}
