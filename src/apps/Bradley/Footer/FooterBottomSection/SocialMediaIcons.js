@@ -7,7 +7,7 @@ const SocialMediaIcons = ({ tablet }) => {
   const includeIcons = [
     'facebook',
     'twitter',
-    'instagram',
+    'linkedin',
     'google',
     'pinterest',
     'youtube'
