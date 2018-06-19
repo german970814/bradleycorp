@@ -1,10 +1,6 @@
 // @flow
 import * as React from 'react'
-import type { WPTerm } from '../../types/term_types'
-import type {
-  BimProductAndVariantsFromModelIdsResponse,
-  BimProductVariant
-} from '../../../api/bradley-apis/documentPackager_client'
+import type { BimProductVariant } from '../../../api/bradley-apis/documentPackager_client'
 import DocumentPackagerApiClient from '../../../api/bradley-apis/documentPackager_client'
 import { bradleyApisHost } from '../../../api/bradley-apis/index'
 import BIMRevitOption from './BIMRevitOption/BIMRevitOption'
