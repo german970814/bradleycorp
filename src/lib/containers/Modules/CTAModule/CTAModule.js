@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import BCorpModule from '../BCorpModule'
 import { Link } from 'react-router-dom'
 import BCorpLink from '../../../components/BCorpLink/BCorpLink'
+import ContentTransformer from '../../../components/ContentTransformer/ContentTransformer'
 import style from './CTAModule.scss'
 
 class CTAModule extends BCorpModule {
@@ -32,10 +33,9 @@ class CTAModule extends BCorpModule {
     }
 
     return (
-      <div
-        className={style.text}
-        dangerouslySetInnerHTML={{ __html: decodeURIComponent(text) }}
-      />
+      <div className={style.text}>
+        <ContentTransformer content={decodeURIComponent(text)} />
+      </div>
     )
   }
 

@@ -5,6 +5,7 @@ import Downloadables from './Downloadables'
 import { PostType } from './ApplicationGallery'
 import CPTApiClient from '../../../../api/cpt_client'
 import Loading from '../../../../lib/components/Loading/Loading'
+import ContentTransformer from '../../../../lib/components/ContentTransformer/ContentTransformer'
 import ImageFrame from '../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 
@@ -82,11 +83,15 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
             aspectRatioDesktop={169 / 370}
           />
         )}
-        <p className={`${style.appGalleryDetailText}`}
-          dangerouslySetInnerHTML={{
-            __html: this.state.applicationGallery && this.state.applicationGallery.post.post_content
-          }}
-        />
+        <p className={`${style.appGalleryDetailText}`}>
+          <ContentTransformer
+            content={
+              (this.state.applicationGallery &&
+                this.state.applicationGallery.post.post_content) ||
+              ''
+            }
+          />
+        </p>
         <div className={`col1 ${style.appGalleryDetailTitle}`}>
           <h2>Featured Product Information</h2>
         </div>

@@ -9,6 +9,7 @@ import { createCPTUrl } from '../../../../../bcorpUrl'
 import ImageFrame from '../../../../../components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import PostMetaData from '../../../../../components/PostMetaData/PostMetaData'
 import PostTags from '../../../../../components/PostTags/PostTags'
+import ContentTransformer from '../../../../../components/ContentTransformer/ContentTransformer'
 import style from './PostRemaining.scss'
 
 type Props = {
@@ -75,10 +76,9 @@ class PostRemaining extends Component<Props> {
     }
 
     return (
-      <div
-        className={style.content}
-        dangerouslySetInnerHTML={{ __html: excerpt }}
-      />
+      <div className={style.content}>
+        <ContentTransformer content={excerpt} />
+      </div>
     )
   }
 
