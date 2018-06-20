@@ -8,6 +8,7 @@ import { getExcerpt } from '../../../../bcorpPost'
 import { lookupColor } from '../../../../bcorpStyles'
 import Divider from '../../../../components/Divider/Divider'
 import ImageFrame from '../../../../components/FixedAspectRatioBox/ImageFrame/ImageFrame'
+import ContentTransformer from '../../../../components/ContentTransformer/ContentTransformer'
 import style from './PostColumn.scss'
 
 type Props = {
@@ -91,10 +92,9 @@ class PostColumn extends Component<Props> {
     }
 
     return (
-      <div
-        className={`${style.content} ${this.props.skinClass || ''}`}
-        dangerouslySetInnerHTML={{ __html: excerpt }}
-      />
+      <div className={`${style.content} ${this.props.skinClass || ''}`}>
+        <ContentTransformer content={excerpt} />
+      </div>
     )
   }
 

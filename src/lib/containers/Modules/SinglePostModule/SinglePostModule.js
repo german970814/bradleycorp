@@ -7,6 +7,7 @@ import BCorpBackground from '../../../components/BCorpBackground/BCorpBackground
 import PostGettingModule from '../PostGettingModule'
 import ImageFrame from '../../../components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import BCorpLink from '../../../components/BCorpLink/BCorpLink'
+import ContentTransformer from '../../../components/ContentTransformer/ContentTransformer'
 import style from './SinglePostModule.scss'
 
 /**
@@ -79,10 +80,9 @@ class SinglePostModule extends PostGettingModule {
     }
 
     return (
-      <div
-        className={`${style.content} ${this.skinClass}`}
-        dangerouslySetInnerHTML={{ __html: excerpt }}
-      />
+      <div className={`${style.content} ${this.skinClass}`}>
+        <ContentTransformer content={excerpt} />
+      </div>
     )
   }
 
