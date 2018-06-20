@@ -26,6 +26,7 @@ class BimRevitDownloader extends React.Component<Props, State> {
     this.state = {
       loading: false,
       productVariants: [
+        /*
         {
           id: 304,
           name: 'AV30',
@@ -50,18 +51,19 @@ class BimRevitDownloader extends React.Component<Props, State> {
             description: ''
           }
         }
+      */
       ],
       selected: []
     }
   }
 
   componentDidMount () {
-    // this.getBimProductVariants()
+    this.getBimProductVariants()
   }
 
   componentDidUpdate (prevProps: Props) {
     if (this.props.bimRevitTermIds !== prevProps.bimRevitTermIds) {
-      // this.getBimProductVariants()
+      this.getBimProductVariants()
     }
   }
 
@@ -167,6 +169,8 @@ class BimRevitDownloader extends React.Component<Props, State> {
         this.props.bimRevitTermIds
       )
 
+      console.log(response)
+
       const productVariants: Array<BimProductVariant> =
         response.data.bimProductVariants
 
@@ -177,21 +181,28 @@ class BimRevitDownloader extends React.Component<Props, State> {
     }
   }
 
-  async downloadFiles (variantIds: Array<number>): Promise<void> {
-    const downloadUrl = await this.getBimZipDownloadLink(variantIds)
+  async downloadFiles (variantIds: Array<number>, name?: string): Promise<void> {
+    const filename = await this.getBimZipFilename(variantIds)
+
+    if (!filename) {
+      console.warn('Couldnt get filename of zip from bradley server')
+      return
+    }
+
+    const givenName = name ? `${name}.zip` : filename
+
+    const downloadUrl = `${bradleyApisHost}/documentPackager/bimFile/${givenName}?name=${filename}`
 
     window.open(downloadUrl)
   }
 
-  async getBimZipDownloadLink (
-    variantIds: Array<number>
-  ): Promise<string | false> {
+  async getBimZipFilename (variantIds: Array<number>): Promise<string | false> {
     try {
       const client = new DocumentPackagerApiClient()
       const response = await client.getBimFileZipFromVariantIds(variantIds)
 
       if (response.data.success) {
-        return `${bradleyApisHost}${response.data.fileName}`
+        return response.data.fileName
       } else {
         return false
       }
