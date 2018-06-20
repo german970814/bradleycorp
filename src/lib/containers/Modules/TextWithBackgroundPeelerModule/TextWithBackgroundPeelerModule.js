@@ -30,6 +30,11 @@ class TextWithBackgroundPeelerModule extends BCorpModule {
     return (
       <div className={`${style.text} ${this.skinClass || ''}`}>
         <ContentTransformer content={text} />
+        {this.props.boldText && (
+          <p className={style.boldText}>
+            <strong>{this.props.boldText}</strong>
+          </p>
+        )}
       </div>
     )
   }
@@ -91,6 +96,7 @@ TextWithBackgroundPeelerModule.propTypes = {
 
   title: PropTypes.string,
   text: PropTypes.string,
+  boldText: PropTypes.string,
   backgroundColor: PropTypes.string,
   backgroundPeeler: PropTypes.string
 }
