@@ -37,10 +37,12 @@ const FileDownloadLink = props => {
 
     default:
       return (
-        <span
-          className={[style.title, style.noLink, props.titleClass].join(' ')}>
-          {props.title}
-        </span>
+        <a href={props.link} target="_blank">
+          <span
+            className={[style.title, style.noLink, props.titleClass].join(' ')}>
+            {props.title}
+          </span>
+        </a>
       )
   }
 }
