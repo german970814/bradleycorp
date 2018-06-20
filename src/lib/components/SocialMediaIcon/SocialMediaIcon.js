@@ -25,7 +25,7 @@ SocialMediaIcon.propTypes = {
   iconName: PropTypes.oneOf([
     'facebook',
     'google',
-    'instagram',
+    'linkedin',
     'pinterest',
     'twitter',
     'youtube'
@@ -47,10 +47,10 @@ const getIconConf = iconName => {
         href: 'https://plus.google.com/+Bradleycorp'
       }
 
-    case 'instagram':
+    case 'linkedin':
       return {
-        src: require('../../../images/social-media-icons/instagram@2x.png'),
-        href: '#'
+        src: require('../../../images/social-media-icons/linkedin@2x.png'),
+        href: 'https://www.linkedin.com/company/bradley-corporation/'
       }
 
     case 'pinterest':

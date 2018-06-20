@@ -63,16 +63,20 @@ class ModuleBuilder extends Component {
       const rowNode = document.querySelector(
         `[data-row-id="${row.atts['row_id']}"]`
       )
-      const columnNodes = Array.from(rowNode.querySelectorAll(`.bcorp-column`))
-      // make sure there is no space on the p element holding
-      // this row. This allows us to mix formatted text with our
-      // rows without disrupting the layout
-      rowNode.parentNode.style.marginBottom = 0
-      rowNode.parentNode.style.marginTop = 0
+      if (rowNode) {
+        const columnNodes = Array.from(
+          rowNode.querySelectorAll(`.bcorp-column`)
+        )
+        // make sure there is no space on the p element holding
+        // this row. This allows us to mix formatted text with our
+        // rows without disrupting the layout
+        rowNode.parentNode.style.marginBottom = 0
+        rowNode.parentNode.style.marginTop = 0
 
-      // rowNode.className += centerVertically ? ' align-vertically' : ''
+        // rowNode.className += centerVertically ? ' align-vertically' : ''
 
-      return this.renderColumns(columnNodes, row, rowNode)
+        return this.renderColumns(columnNodes, row, rowNode)
+      }
     })
   }
 

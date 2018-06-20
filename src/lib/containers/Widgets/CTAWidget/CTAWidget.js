@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import ArrowButton from '../../../../lib/components/ArrowButton/ArrowButton'
 import BCorpWidget from '../BCorpWidget'
+import ContentTransformer from '../../../components/ContentTransformer/ContentTransformer'
 import style from './CTAWidget.scss'
 
 type Props = {
@@ -11,7 +12,7 @@ type Props = {
   linkText?: string,
   mediaSrc?: string,
   twoColsOnTablet?: boolean
-};
+}
 
 /**
  * The CTA Widget
@@ -38,7 +39,11 @@ class CTAWidget extends Component<Props> {
       return
     }
 
-    return <div className={style.text} dangerouslySetInnerHTML={{__html: text}}></div>
+    return (
+      <div className={style.text}>
+        <ContentTransformer content={text} />
+      </div>
+    )
   }
 
   renderButton () {

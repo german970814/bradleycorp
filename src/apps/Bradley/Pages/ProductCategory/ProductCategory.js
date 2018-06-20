@@ -2,6 +2,7 @@
 import * as React from 'react'
 import type { Match } from 'react-router-dom'
 import type { ScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
+import type { TreeType } from '../../../../api/product_client'
 import { withScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
 import ProductApiClient from '../../../../api/product_client'
 import CategoryDescription from './CategoryDescription/CategoryDescription'
@@ -10,14 +11,14 @@ import Pagination from './Pagination/Pagination'
 import Filters from './Filters/Filters'
 import Products from './Products/Products'
 import Loading from '../../../../lib/components/Loading/Loading'
-import NoResults from '../../../../lib/components/NoResults/NoResults'
 import style from './ProductCategory.scss'
 
 type CategoryData = {|
   parent_name?: string,
   name: string,
   description?: string,
-  count: number
+  count: number,
+  featured_image: string
 |}
 
 type ProductAttributesType = {
@@ -74,6 +75,7 @@ type State = {
   categoryData: CategoryData | false,
   filters: FiltersType,
   activeFilters: ActiveFilterType,
+  tree: TreeType,
   numberResults: number,
   paged: number,
   showFiltersMobile: boolean,
@@ -96,6 +98,10 @@ class ProductCategory extends React.Component<Props, State> {
       activeFilters: {
         metaFilters: {},
         taxFilters: {}
+      },
+      tree: {
+        children: false,
+        parents: false
       },
       numberResults: 0,
       paged: 1,
@@ -211,6 +217,7 @@ class ProductCategory extends React.Component<Props, State> {
           }
           filters={this.state.filters}
           activeFilters={this.state.activeFilters}
+          tree={this.state.tree}
           updateMetaOtherActiveFilters={this.updateMetaOtherActiveFilters.bind(
             this
           )}
@@ -226,17 +233,17 @@ class ProductCategory extends React.Component<Props, State> {
   renderContent () {
     const isMobile = this.props.screenSize === 'mobile'
 
-    return this.state.categoryData.count === 0 ? (
-      <NoResults
-        className={style.noResults}
-        message={'No products were found in this category'}
-      />
-    ) : (
+    return (
       <div className={`row ${style.content}`}>
         <CategoryDescription
           isMobile={isMobile}
           description={
             (this.state.categoryData && this.state.categoryData.description) ||
+            ''
+          }
+          logoSrc={
+            (this.state.categoryData &&
+              this.state.categoryData.featured_image) ||
             ''
           }
         />
@@ -320,6 +327,7 @@ class ProductCategory extends React.Component<Props, State> {
       const newState = {}
       newState.categoryData = response.data.category_data
       newState.filters = this.unwrapFiltersFromResponse(response.data.filters)
+      newState.tree = response.data.tree
       newState.loading = false
       newState.numberResults =
         (response.data.category_data && response.data.category_data.count) || 0

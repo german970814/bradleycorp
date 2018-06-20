@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import BCorpModule from '../BCorpModule'
+import ContentTransformer from '../../../components/ContentTransformer/ContentTransformer'
 import style from './AllPurposeModule.scss'
 
 class AllPurposeModule extends BCorpModule {
@@ -9,14 +10,14 @@ class AllPurposeModule extends BCorpModule {
   }
 
   renderModule () {
+    console.log(this.props.content)
     return (
-      <div
-        className={this.containerClassName} >
-
-        <div
-          className={style.content}
-          dangerouslySetInnerHTML={{ __html: decodeURIComponent(this.props.content) }} />
-
+      <div className={this.containerClassName}>
+        <div className={style.content}>
+          <ContentTransformer
+            content={decodeURIComponent(this.props.content)}
+          />
+        </div>
       </div>
     )
   }

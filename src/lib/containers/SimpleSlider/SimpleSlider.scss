@@ -1,7 +1,7 @@
-@import "../../../scss/partials/variables";
-@import "../../../scss/partials/layout";
-@import "../../../scss/partials/helpers";
-@import "../../../scss/partials/mixins";
+@import '../../../scss/partials/variables';
+@import '../../../scss/partials/layout';
+@import '../../../scss/partials/helpers';
+@import '../../../scss/partials/mixins';
 
 // simple slider list items should use these as paddings
 $distanceBetweenItems: 20px;
@@ -73,7 +73,6 @@ h4.title {
 }
 
 .prevButton {
-
   img {
     float: left;
     display: inline-block;
@@ -92,7 +91,6 @@ h4.title {
 }
 
 .nextButton {
-
   img {
     float: right;
     display: inline-block;
@@ -110,7 +108,6 @@ h4.title {
   }
 }
 
-
 // Tablet-Desktop
 
 $arrowWidthTablet: 11px;
@@ -119,7 +116,6 @@ $arrowWidthTablet: 11px;
   @extend %BodyPaddingWithMediaQueries;
   position: relative;
   max-width: 1075px; /* override "BodyMaxWithMediaQueries" as per design */
-
 }
 
 .sliderTabletDesktop :global .track-wrapper {
@@ -142,14 +138,23 @@ $arrowWidthTablet: 11px;
 }
 
 .sliderTabletDesktop :global .button-up {
-  left: 55px;
+  left: 15px;
+
+  @include respond-to(desktop) {
+    left: 35px;
+  }
 }
 
 .sliderTabletDesktop :global .button-down {
-  right: 55px;
+  right: 15px;
+
+  @include respond-to(desktop) {
+    right: 35px;
+  }
 }
 
-.leftButton, .rightButton {
+.leftButton,
+.rightButton {
   width: 100%;
 
   img {

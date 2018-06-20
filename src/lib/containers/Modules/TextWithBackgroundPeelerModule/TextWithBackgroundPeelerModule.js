@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import BCorpModule from '../../Modules/BCorpModule'
 import BCorpBackground from '../../../components/BCorpBackground/BCorpBackground'
+import ContentTransformer from '../../../components/ContentTransformer/ContentTransformer'
 import style from './TextWithBackgroundPeelerModule.scss'
 
 class TextWithBackgroundPeelerModule extends BCorpModule {
@@ -27,10 +28,14 @@ class TextWithBackgroundPeelerModule extends BCorpModule {
     }
 
     return (
-      <div
-        className={`${style.text} ${this.skinClass || ''}`}
-        dangerouslySetInnerHTML={{ __html: text }}
-      />
+      <div className={`${style.text} ${this.skinClass || ''}`}>
+        <ContentTransformer content={text} />
+        {this.props.boldText && (
+          <p className={style.boldText}>
+            <strong>{this.props.boldText}</strong>
+          </p>
+        )}
+      </div>
     )
   }
 
@@ -91,6 +96,7 @@ TextWithBackgroundPeelerModule.propTypes = {
 
   title: PropTypes.string,
   text: PropTypes.string,
+  boldText: PropTypes.string,
   backgroundColor: PropTypes.string,
   backgroundPeeler: PropTypes.string
 }

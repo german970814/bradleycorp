@@ -1,15 +1,18 @@
 // @flow
 import React from 'react'
+import { Link } from 'react-router-dom'
 import FixedAspectRatioBox from '../../../components/FixedAspectRatioBox/FixedAspectRatioBox'
 import FileDownloadLink from '../../../components/FileDownloadLink/FileDownloadLink'
+import ArrowButton from '../../ArrowButton/ArrowButton'
 import BCorpVideo from '../../../components/BCorpVideo/BCorpVideo'
+import BCorpLink from '../../BCorpLink/BCorpLink'
 import style from './ContentTransformerClass.scss'
 
 type HTMLParser2Node = {
   attribs: {
     href?: string,
     type?: string,
-    src?: string,
+    src?: string
   },
   /**
    * The type of node (tag, text, style etc)
@@ -39,7 +42,7 @@ type HTMLParser2Node = {
    * The text content, if the type is text
    */
   data: string
-};
+}
 
 class ContentTransformerClass {
   node: HTMLParser2Node
@@ -77,10 +80,18 @@ class ContentTransformerClass {
   }
 
   transformText () {
+    // assuming this is enough to identify shortcode,
+    // may need to be more rigorous
     if (this.node.data.indexOf('[embed]') !== -1) {
-      // assuming this is enough to identify shortcode,
-      // may need to be more rigorous
       return this.transformEmbedShortcode()
+    }
+
+    if (this.node.data.indexOf('[cta_button ') !== -1) {
+      return this.transformCTAButtonShortcode()
+    }
+
+    if (this.node.data.indexOf('[cta_arrow ') !== -1) {
+      return this.transformCTAArrowShortcode()
     }
   }
 
@@ -105,6 +116,46 @@ class ContentTransformerClass {
     )
   }
 
+  transformCTAButtonShortcode () {
+    const link = this.node.data.match(/link="(.*)"]/)
+    const text = this.node.data.match(/](.*)\[\/cta_button\]/)
+
+    if (link && link[1] && text && text[1]) {
+      return (
+        <BCorpLink
+          url={link[1]}
+          renderInternal={url => {
+            return (
+              <Link to={url}>
+                <button className={style.button}>{text[1]}</button>
+              </Link>
+            )
+          }}
+          renderExternal={url => {
+            return (
+              <a href={url} target="_blank">
+                <button className={style.button}>{text[1]}</button>
+              </a>
+            )
+          }}
+        />
+      )
+    }
+  }
+
+  transformCTAArrowShortcode () {
+    const link = this.node.data.match(/link="(.*)"]/)
+    const text = this.node.data.match(/](.*)\[\/cta_arrow\]/)
+
+    if (link && link[1] && text && text[1]) {
+      return (
+        <div className={style.arrowButton}>
+          <ArrowButton text={text[1]} link={link[1]} />
+        </div>
+      )
+    }
+  }
+
   transformScript () {
     // console.log( this.node )
     return (
@@ -112,8 +163,10 @@ class ContentTransformerClass {
         key={this.index}
         type={this.node.attribs.type}
         src={this.node.attribs.src}
-        dangerouslySetInnerHTML={{__html: this.node.children.length ? this.node.children[0].data : null}}>
-      </script>
+        dangerouslySetInnerHTML={{
+          __html: this.node.children.length ? this.node.children[0].data : null
+        }}
+      />
     )
   }
 }

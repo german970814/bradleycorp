@@ -1,16 +1,17 @@
 // @flow
 import React, { Component } from 'react'
 import Divider from '../../components/Divider/Divider'
+import ContentTransformer from '../../components/ContentTransformer/ContentTransformer'
 import style from './DropDownTab.scss'
 
 type Props = {
   title: string,
   content: string
-};
+}
 
 type State = {
   open: boolean
-};
+}
 
 class DropDownTab extends Component<Props, State> {
   constructor (props: Props) {
@@ -41,14 +42,13 @@ class DropDownTab extends Component<Props, State> {
 
   renderContent () {
     return this.state.open ? (
-      <div
-        className={style.content}
-        dangerouslySetInnerHTML={{
-          __html: decodeURIComponent(
+      <div className={style.content}>
+        <ContentTransformer
+          content={decodeURIComponent(
             this.props.content.replace(/%/g, encodeURIComponent('%'))
-          )
-        }}
-      />
+          )}
+        />
+      </div>
     ) : null
   }
 

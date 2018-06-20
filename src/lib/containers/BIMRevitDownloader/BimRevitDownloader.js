@@ -1,16 +1,21 @@
 // @flow
 import * as React from 'react'
-import type { WPTerm } from '../../types/term_types'
+import type { BimProductVariant } from '../../../api/bradley-apis/documentPackager_client'
+import DocumentPackagerApiClient from '../../../api/bradley-apis/documentPackager_client'
+import { bradleyApisHost } from '../../../api/bradley-apis/index'
 import BIMRevitOption from './BIMRevitOption/BIMRevitOption'
+import Loading from '../../components/Loading/Loading'
+import NoResults from '../../components/NoResults/NoResults'
 import style from './BimRevitDownloader.scss'
 
 type Props = {
-  bimRevit: Array<WPTerm>,
+  bimRevitTermIds: Array<string>,
   showProductPageLinks?: boolean
 }
 
 type State = {
-  // well just store ids here then get the actual posts from props when we need them
+  loading: boolean,
+  productVariants: Array<BimProductVariant>,
   selected: Array<number>
 }
 
@@ -18,7 +23,56 @@ class BimRevitDownloader extends React.Component<Props, State> {
   constructor (props: Props) {
     super(props)
 
-    this.state = { selected: [] }
+    this.state = {
+      loading: false,
+      productVariants: [
+        /*
+        {
+          id: 304,
+          name: 'AV30',
+          description: null,
+          product: {
+            id: 274,
+            imageUrl:
+              '/image/6015/lavatories-bradley_corp-advocate-av30.jpg?size=w100_h100_f',
+            name: '1-Station Advocate Lavatory System',
+            description: ''
+          }
+        },
+        {
+          id: 305,
+          name: 'AV60',
+          description: null,
+          product: {
+            id: 275,
+            imageUrl:
+              '/image/6014/lavatories-bradley_corp-advocate-av60.jpg?size=w100_h100_f',
+            name: '2-Station Advocate Lavatory System',
+            description: ''
+          }
+        }
+      */
+      ],
+      selected: []
+    }
+  }
+
+  componentDidMount () {
+    this.getBimProductVariants()
+  }
+
+  componentDidUpdate (prevProps: Props) {
+    if (this.props.bimRevitTermIds !== prevProps.bimRevitTermIds) {
+      this.getBimProductVariants()
+    }
+  }
+
+  downloadAll () {
+    this.downloadFiles(this.getAllIds())
+  }
+
+  downloadSelected () {
+    this.downloadFiles(this.state.selected)
   }
 
   toggleSelect (id: number) {
@@ -37,10 +91,7 @@ class BimRevitDownloader extends React.Component<Props, State> {
   }
 
   selectAll () {
-    const allIds = this.props.bimRevit.reduce((ids, term) => {
-      return [...ids, term.term_id]
-    }, [])
-    this.setState({ selected: allIds })
+    this.setState({ selected: this.getAllIds() })
   }
 
   unselectAll () {
@@ -48,13 +99,14 @@ class BimRevitDownloader extends React.Component<Props, State> {
   }
 
   renderBimRevitOptions () {
-    return this.props.bimRevit.map((term, index) => {
+    return this.state.productVariants.map((productVariant, index) => {
       return (
         <BIMRevitOption
           key={index}
-          term={term}
+          productVariant={productVariant}
           toggleSelect={this.toggleSelect.bind(this)}
-          selected={this.state.selected.includes(term.term_id)}
+          downloadFiles={this.downloadFiles.bind(this)}
+          selected={this.state.selected.includes(productVariant.id)}
           showProductPageLinks={this.props.showProductPageLinks}
         />
       )
@@ -74,20 +126,90 @@ class BimRevitDownloader extends React.Component<Props, State> {
           onClick={this.unselectAll.bind(this)}>
           {'UNSELECT ALL'}
         </button>
-        <button className={`${style.download}`}>{'DOWNLOAD SELECTED'}</button>
-        <button className={`${style.downloadAll}`}>{'DOWNLOAD ALL'}</button>
+        <button
+          className={`${style.download}`}
+          onClick={this.downloadSelected.bind(this)}>
+          {'DOWNLOAD SELECTED'}
+        </button>
+        <button
+          className={`${style.downloadAll}`}
+          onClick={this.downloadAll.bind(this)}>
+          {'DOWNLOAD ALL'}
+        </button>
       </div>
     )
   }
 
   render () {
     console.log(this.state)
-    return (
+    return this.state.loading ? (
+      <Loading />
+    ) : this.state.productVariants.length === 0 ? (
+      <NoResults message={'No related BIM files found.'} />
+    ) : (
       <div className={`row ${style.BimRevit}`}>
         <div>{this.renderBimRevitOptions()}</div>
         {this.renderButtons()}
       </div>
     )
+  }
+
+  getAllIds () {
+    return this.state.productVariants.reduce((ids, productVariant) => {
+      return [...ids, productVariant.id]
+    }, [])
+  }
+
+  async getBimProductVariants () {
+    this.setState({ loading: true })
+
+    try {
+      const client = new DocumentPackagerApiClient()
+      const response = await client.getBimProductsAndVariantsFromModelIds(
+        this.props.bimRevitTermIds
+      )
+
+      console.log(response)
+
+      const productVariants: Array<BimProductVariant> =
+        response.data.bimProductVariants
+
+      return this.setState({ productVariants, loading: false })
+    } catch (err) {
+      console.log(err)
+      this.setState({ loading: false })
+    }
+  }
+
+  async downloadFiles (variantIds: Array<number>, name?: string): Promise<void> {
+    const filename = await this.getBimZipFilename(variantIds)
+
+    if (!filename) {
+      console.warn('Couldnt get filename of zip from bradley server')
+      return
+    }
+
+    const givenName = name ? `${name}.zip` : filename
+
+    const downloadUrl = `${bradleyApisHost}/documentPackager/bimFile/${givenName}?name=${filename}`
+
+    window.open(downloadUrl)
+  }
+
+  async getBimZipFilename (variantIds: Array<number>): Promise<string | false> {
+    try {
+      const client = new DocumentPackagerApiClient()
+      const response = await client.getBimFileZipFromVariantIds(variantIds)
+
+      if (response.data.success) {
+        return response.data.fileName
+      } else {
+        return false
+      }
+    } catch (err) {
+      console.log(err)
+      return false
+    }
   }
 }
 

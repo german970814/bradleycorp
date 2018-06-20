@@ -149,6 +149,11 @@ tr td:first-child {
   padding-top: 4px;
 }
 
+:global button.is-open::after :local {
+  content: '-' !important;
+  padding: 2px 3px 1px !important;
+}
+
 :global .small-link-gray :local {
   @extend %small-link-gray;
 }

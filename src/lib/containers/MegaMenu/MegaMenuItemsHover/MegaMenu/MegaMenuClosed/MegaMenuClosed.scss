@@ -9,6 +9,7 @@ h6.menuItemLink {
     left: $spaceBetweenMenuItems / 2;
     right: $spaceBetweenMenuItems / 2;
   }
+  color: $slate-grey;
 
   &.hovered {
     padding: {

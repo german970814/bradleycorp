@@ -10,6 +10,7 @@ import style from './VideoGallery.scss'
 type FiltersType = {
   video_gallery_type_cat: string,
   video_gallery_product_tag: string,
+  video_gallery_cat: string,
   search?: string
 }
 
@@ -41,6 +42,7 @@ class VideoGallery extends React.Component<Props, State> {
       filters: {
         video_gallery_type_cat: filterDefault,
         video_gallery_product_tag: filterDefault,
+        video_gallery_cat: filterDefault,
         search: ''
       },
       filterOptions: {

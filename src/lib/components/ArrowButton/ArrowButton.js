@@ -23,7 +23,7 @@ const ArrowButton = props => {
   ) : null
 
   const button = (
-    <div className={style.arrowButton}>
+    <div className={`${style.arrowButton} arrow-button`}>
       {textDiv}
       <div className={style.arrowWrapper}>
         <SVGIcon

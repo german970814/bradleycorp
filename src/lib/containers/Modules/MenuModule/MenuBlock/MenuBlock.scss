@@ -6,6 +6,13 @@ $iconHeight: 20px;
 .title {
   position: relative;
   min-height: $iconHeight;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+
+  a.blockDataTitle {
+    flex: 1;
+  }
 
   &.noParent {
     min-height: $parentTitleMarginBottom + $iconHeight;
@@ -22,10 +29,11 @@ $iconHeight: 20px;
   }
 
   img.collapsibleIcon {
-    position: absolute;
-    top: -20px;
-    right: -20px;
-    padding: 20px;
+    // position: absolute;
+    // top: -20px;
+    // right: -20px;
+    // padding: 20px;
+    padding: 0 5px 0 30px;
     width: $iconHeight;
     height: $iconHeight;
     cursor: pointer;

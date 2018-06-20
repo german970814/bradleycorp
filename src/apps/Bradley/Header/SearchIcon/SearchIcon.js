@@ -75,7 +75,7 @@ class SearchIcon extends React.Component<Props, State> {
                     onInput={e => {
                       this.setState({ search: e.target.value })
                     }}
-                    placeholder={site !== 'bcorp' && 'Search The Blog'}
+                    placeholder={site !== 'bcorp' ? 'Search The Blog' : ''}
                   />
 
                   <input

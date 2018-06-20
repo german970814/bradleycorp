@@ -10,6 +10,7 @@ import { createCPTUrl } from '../../../../bcorpUrl'
 import { getExcerpt } from '../../../../bcorpPost'
 import SVGIcon from '../../../../components/SVGIcon/SVGIcon'
 import ImageFrame from '../../../../components/FixedAspectRatioBox/ImageFrame/ImageFrame'
+import ContentTransformer from '../../../../components/ContentTransformer/ContentTransformer'
 import style from '../MultiPostArrowModule.scss'
 
 type Props = {
@@ -113,10 +114,9 @@ class PostColumn extends Component<Props> {
     }
 
     return (
-      <div
-        className={`${style.content} ${this.props.skinClass || ''}`}
-        dangerouslySetInnerHTML={{ __html: excerpt }}
-      />
+      <div className={`${style.content} ${this.props.skinClass || ''}`}>
+        <ContentTransformer content={excerpt} />
+      </div>
     )
   }
 
