@@ -3,6 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import FixedAspectRatioBox from '../../../components/FixedAspectRatioBox/FixedAspectRatioBox'
 import FileDownloadLink from '../../../components/FileDownloadLink/FileDownloadLink'
+import ArrowButton from '../../ArrowButton/ArrowButton'
 import BCorpVideo from '../../../components/BCorpVideo/BCorpVideo'
 import BCorpLink from '../../BCorpLink/BCorpLink'
 import style from './ContentTransformerClass.scss'
@@ -88,6 +89,10 @@ class ContentTransformerClass {
     if (this.node.data.indexOf('[cta_button ') !== -1) {
       return this.transformCTAButtonShortcode()
     }
+
+    if (this.node.data.indexOf('[cta_arrow ') !== -1) {
+      return this.transformCTAArrowShortcode()
+    }
   }
 
   transformFileDownloadLink () {
@@ -134,6 +139,19 @@ class ContentTransformerClass {
             )
           }}
         />
+      )
+    }
+  }
+
+  transformCTAArrowShortcode () {
+    const link = this.node.data.match(/link="(.*)"]/)
+    const text = this.node.data.match(/](.*)\[\/cta_arrow\]/)
+
+    if (link && link[1] && text && text[1]) {
+      return (
+        <div className={style.arrowButton}>
+          <ArrowButton text={text[1]} link={link[1]} />
+        </div>
       )
     }
   }

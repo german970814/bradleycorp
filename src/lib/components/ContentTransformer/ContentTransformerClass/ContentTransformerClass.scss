@@ -18,3 +18,12 @@ button.button {
     padding-right: 30px;
   }
 }
+
+.arrowButton {
+  :global(.arrow-button) {
+    // aware that this is invalid css,
+    // its just to cancel out the default text align center that arrow button has
+    // and allow the parent to control it
+    text-align: none;
+  }
+}
