@@ -3,8 +3,9 @@ import React, { Component } from 'react'
 import LightboxV2 from '../../../../lib/containers/Lightbox/LightboxV2/LightboxV2'
 import LightboxTitleBannerContentBox from '../../../../lib/containers/Lightbox/LightboxTitleBannerContentBox/LightboxTitleBannerContentBox'
 import DownloadIconImage from './DownloadIconImage'
+import DocumentPackagerApiClient from '../../../../api/bradley-apis/documentPackager_client'
 import style from './ApplicationGalleryDetail.scss'
-
+import type { BimRevitProductVariants } from './ApplicationGalleryDetail'
 import type { TechnicalInfo } from '../../../../lib/types/cpt_types'
 
 type DownloadabeType = {
@@ -14,7 +15,7 @@ type DownloadabeType = {
 
 type Props = {
   techs: Array<TechnicalInfo>,
-  bim: Array<TechnicalInfo>
+  bim: Array<BimRevitProductVariants>
 }
 
 type State = {
@@ -49,6 +50,15 @@ export default class Downloadables extends Component<Props, State> {
         title: 'All BIM/Revit',
         files: this.props.bim.length ? this.props.bim.map(el => el.meta.technical_info_pdf) : []
       }
+    }
+  }
+
+  async getBimRevitFiles() {
+    if (this.props.bim.length) {
+      const client = new DocumentPackagerApiClient()
+      const ids = this.props.bim.map(el => el.id)
+      const response = await client.getBimFileZipFromVariantIds(ids)
+      // response.data
     }
   }
 
