@@ -10,7 +10,6 @@ class AllPurposeModule extends BCorpModule {
   }
 
   renderModule () {
-    console.log(this.props.content)
     return (
       <div className={this.containerClassName}>
         <div className={style.content}>
