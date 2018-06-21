@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react'
-import type { TreeType } from '../../../../../../api/product_client'
+import type { TreeType } from '../../../../../../lib/types/response_types'
 import { Link } from 'react-router-dom'
 import { createArchiveUrlFromSlugAndTax } from '../../../../../../lib/bcorpUrl'
 import style from './Tree.scss'

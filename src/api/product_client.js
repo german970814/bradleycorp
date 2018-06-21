@@ -1,5 +1,6 @@
 // @flow
 import type { AxiosPromise } from 'axios'
+import type { TreeType } from '../lib/types/response_types'
 import type {
   CategoryData,
   TaxFilterGroup
@@ -17,19 +18,6 @@ type CategoryPageMetaFiltersResponse = {
       [string]: number
     }
   }
-}
-
-type TreeType = {
-  parents:
-    | false
-    | {
-        [string]: string
-      },
-  children:
-    | false
-    | {
-        [string]: string
-      }
 }
 
 class ProductApiClient extends CPTApiClient {
@@ -70,4 +58,3 @@ class ProductApiClient extends CPTApiClient {
 }
 
 export default ProductApiClient
-export type { TreeType }

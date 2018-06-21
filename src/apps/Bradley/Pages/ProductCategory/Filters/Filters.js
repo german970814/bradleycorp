@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react'
 import type { FiltersType, ActiveFilterType } from '../ProductCategory'
-import type { TreeType } from '../../../../../api/product_client'
+import type { TreeType } from '../../../../../lib/types/response_types'
 import Tree from './Tree/Tree'
 import LeftSidebarCheckboxGroup from '../../../../../lib/components/BCorpFilterField/LeftSidebarCheckboxGroup/LeftSidebarCheckboxGroup'
 import style from './Filters.scss'

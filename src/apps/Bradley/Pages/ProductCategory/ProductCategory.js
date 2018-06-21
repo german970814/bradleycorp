@@ -2,7 +2,7 @@
 import * as React from 'react'
 import type { Match } from 'react-router-dom'
 import type { ScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
-import type { TreeType } from '../../../../api/product_client'
+import type { TreeType } from '../../../../lib/types/response_types'
 import { withScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
 import ProductApiClient from '../../../../api/product_client'
 import CategoryDescription from './CategoryDescription/CategoryDescription'
