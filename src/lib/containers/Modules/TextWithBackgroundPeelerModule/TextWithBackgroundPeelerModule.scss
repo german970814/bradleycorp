@@ -1,6 +1,6 @@
-@import "../../../../scss/partials/variables";
-@import "../../../../scss/partials/helpers";
-@import "../../../components/BCorpBackground/BCorpBackground";
+@import '../../../../scss/partials/variables';
+@import '../../../../scss/partials/helpers';
+@import '../../../components/BCorpBackground/BCorpBackground';
 
 $backgroundColor: $charcoal-grey;
 
@@ -21,6 +21,11 @@ $backgroundColor: $charcoal-grey;
     .text {
       position: relative; // to float it in front of the texture image
       z-index: 1;
+
+      p.boldText {
+        margin-top: 13px;
+        margin-bottom: 0px;
+      }
     }
 
     // 120 px top distance
@@ -30,8 +35,8 @@ $backgroundColor: $charcoal-grey;
 
     .texture {
       position: absolute;
-      top: - $textureSize / 2;
-      right: - $textureSize / 2;
+      top: -$textureSize / 2;
+      right: -$textureSize / 2;
       width: $textureSize;
       height: $textureSize;
       transform: rotate(45deg);
@@ -45,10 +50,14 @@ $backgroundColor: $charcoal-grey;
     $textureSize: 426px;
 
     .texture {
-      top: - $textureSize / 2;
-      right: - $textureSize / 2;
+      top: -$textureSize / 2;
+      right: -$textureSize / 2;
       width: $textureSize;
       height: $textureSize;
+    }
+
+    p.boldText {
+      margin-top: 18px;
     }
   }
 
@@ -59,8 +68,8 @@ $backgroundColor: $charcoal-grey;
     $textureSize: 708px;
 
     .texture {
-      top: - $textureSize / 2;
-      right: - $textureSize / 2;
+      top: -$textureSize / 2;
+      right: -$textureSize / 2;
       width: $textureSize;
       height: $textureSize;
     }

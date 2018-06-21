@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 
 const icons = {
   arrow: {
-    // d: 'M90.5,57 L117.8,27.3 L90.5,0 M117.8,27.3 L0,27.3',
     lines: [
       {
         x1: '39.7',

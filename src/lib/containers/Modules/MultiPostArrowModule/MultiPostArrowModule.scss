@@ -62,7 +62,7 @@ $arrowWidth: 11px;
     }
 
     .postColumn {
-      padding: 0 $distanceBetweenItems / 2;
+      padding: 0 ($distanceBetweenItems / 2) 10px;
 
       .imageWrapper {
         margin-bottom: 20px;
@@ -116,7 +116,7 @@ $arrowWidth: 11px;
     }
 
     .postColumn {
-      padding: 0 $distanceBetweenItemsTablet / 2;
+      padding: 0 ($distanceBetweenItemsTablet / 2) 10px;
       position: relative;
 
       h4.title {
@@ -171,7 +171,7 @@ $arrowWidth: 11px;
     }
 
     .postColumn {
-      padding: 0 $distanceBetweenItemsDesktop / 2;
+      padding: 0 ($distanceBetweenItemsDesktop / 2) 10px;
       position: relative;
 
       h4.title {

@@ -142,6 +142,7 @@ const ModuleFactory = ({ data, rowNode }) => {
           {...sharedProps}
           title={data['title']}
           text={data['text']}
+          boldText={data['bold_text']}
           backgroundColor={data['background_color']}
           backgroundPeeler={data['background_peeler']}
           skin={data['skin']}

@@ -14,6 +14,11 @@ const maxLength = 10
 class WithThumbnails extends React.PureComponent<Props> {
   renderFeaturedPost () {
     const featuredPost = this.props.menuItem.bcorp_mega_menu_featured_post
+
+    if (!featuredPost) {
+      return null
+    }
+
     const featuredPostType = this.props.menuItem
       .bcorp_mega_menu_featured_post_type
 
@@ -28,8 +33,6 @@ class WithThumbnails extends React.PureComponent<Props> {
       this.props.menuItem.children.length <= maxLength
         ? [...this.props.menuItem.children]
         : [...this.props.menuItem.children.slice(0, maxLength)]
-
-    console.log(childMenuItems.length)
 
     // if we have just the first post in the column
     // we can render the featured image after

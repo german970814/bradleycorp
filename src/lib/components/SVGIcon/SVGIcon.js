@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { lookupColor } from '../../bcorpStyles'
 import PropTypes from 'prop-types'
+import SVGArrow from './SVGArrow'
 
 const icons = {
   arrow: {
@@ -93,6 +94,7 @@ class SVGIcon extends Component {
       stroke: this.props.color ? lookupColor(this.props.color) : undefined
     }
 
+
     return (
       <svg
         className={this.props.className}
@@ -124,6 +126,10 @@ class SVGIcon extends Component {
         })}
       </svg>
     )
+    // move this above the return statement when arrow svg is ready
+    if (this.props.icon === 'arrow') {
+      return <SVGArrow {...this.props} />
+    }
   }
 }
 
