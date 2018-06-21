@@ -16,13 +16,14 @@ type Props = {
 class FeaturedPost extends React.PureComponent<Props> {
   render () {
     const post = this.props.post.post
+    const cptUrl = createCPTUrl(post) || '#'
 
     return (
       <div className={style.featuredPost}>
         <h6 className={style.featuredPostType}>{`Featured ${
           this.props.postTypePretty
         }`}</h6>
-        <Link to={createCPTUrl(post) || '#'}>
+        <Link to={cptUrl}>
           <h6 className={style.postTitle}>{post.post_title}</h6>
         </Link>
         <div className={`small-body ${style.content}`}>
@@ -34,7 +35,7 @@ class FeaturedPost extends React.PureComponent<Props> {
             )}
           />
         </div>
-        <Link to={createCPTUrl(post) || '#'}>
+        <Link to={cptUrl}>
           <div className={style.arrow}>
             <SVGArrow icon={'arrow'} color={'silver'} redrawOnHover />
           </div>

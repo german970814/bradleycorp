@@ -48,6 +48,7 @@ type NavMenuItemPost = {
   object_featured_image: string | false,
   object_post_type?: string,
   object_post_name?: string,
+  object_path?: string,
   children: Array<NavMenuItemPost>
 }
 

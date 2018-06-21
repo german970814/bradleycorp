@@ -42,7 +42,8 @@ bcorpUrl.createNavMenuItemUrl = (
   if (navMenuItem.object_post_type && navMenuItem.object_post_name) {
     return bcorpUrl.getClientSideCPTPermalink(
       navMenuItem.object_post_type,
-      navMenuItem.object_post_name
+      navMenuItem.object_post_name,
+      navMenuItem.object_path
     )
   }
 
