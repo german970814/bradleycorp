@@ -1,0 +1,37 @@
+@import '../../../scss/partials/variables';
+
+h6.breadcrumbs {
+  text-transform: none;
+
+  a {
+    color: $slate-grey;
+
+    .breadcrumbItem {
+      position: relative;
+      padding-left: 25px;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 0;
+        height: 0;
+        border-top: 4px solid transparent;
+        border-bottom: 4px solid transparent;
+        border-left: 4px solid $steel-grey;
+      }
+    }
+
+    &:first-child {
+      .breadcrumbItem {
+        padding-left: 0px;
+
+        &::before {
+          display: none;
+        }
+      }
+    }
+  }
+}
