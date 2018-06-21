@@ -66,3 +66,25 @@ export function sortAlphabeticallyArrayOfObjects (
     return valA < valB ? -1 : valA > valB ? 1 : 0
   })
 }
+
+export function sortAlphabeticallyArrayOfTwoLevelObjects (
+  // note sortByKey should be the same as S, flow wouldnt let me enforce that
+  sortByKey: string,
+  sortByKeySecondLevel: string,
+  arrayOfObjects: Array<{
+    [string]: {
+      [string]: string
+    }
+  }>
+): Array<{
+  [string]: {
+    [string]: string
+  }
+}> {
+  return arrayOfObjects.sort((a, b) => {
+    const valA = a[sortByKey][sortByKeySecondLevel].toUpperCase()
+    const valB = b[sortByKey][sortByKeySecondLevel].toUpperCase()
+
+    return valA < valB ? -1 : valA > valB ? 1 : 0
+  })
+}

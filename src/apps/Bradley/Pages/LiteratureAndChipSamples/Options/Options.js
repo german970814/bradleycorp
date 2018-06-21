@@ -9,6 +9,7 @@ import type {
   FiltersTypes,
   PostTypeOptions
 } from '../LiteratureAndChipSamples'
+import { sortAlphabeticallyArrayOfTwoLevelObjects } from '../../../../../lib/bcorpArray'
 import {
   productLineFilterDefault,
   languageFilterDefault,
@@ -232,7 +233,12 @@ class Options extends React.Component<Props> {
 
     // if we havent filtered by material type we just return them all in noChild
     if (parentTermID === materialTypeFilterDefault) {
-      sortedChipSamples.noChild = chipSamples
+      console.log(chipSamples)
+      sortedChipSamples.noChild = sortAlphabeticallyArrayOfTwoLevelObjects(
+        'post',
+        'post_title',
+        chipSamples
+      )
       return sortedChipSamples
     }
 
@@ -268,6 +274,17 @@ class Options extends React.Component<Props> {
       if (counter === 0) {
         sortedChipSamples.noChild = [...sortedChipSamples.noChild, chipSample]
       }
+    })
+
+    // sort chip samples within each category
+    Object.keys(sortedChipSamples).forEach(materialType => {
+      sortedChipSamples[
+        materialType
+      ] = sortAlphabeticallyArrayOfTwoLevelObjects(
+        'post',
+        'post_title',
+        sortedChipSamples[materialType]
+      )
     })
 
     return sortedChipSamples
