@@ -9,7 +9,6 @@ import style from './CategoryDescription.scss'
 
 type Props = {
   isMobile?: boolean,
-  links?: Array<{ name: string, link: string }>,
   description: string,
   logoSrc?: string
 }
@@ -29,6 +28,12 @@ class CategoryDescription extends React.PureComponent<Props> {
   }
 
   render () {
+    // we dont show it at all if there is no description,
+    // not even if there is still an image
+    if (!this.props.description) {
+      return null
+    }
+
     return (
       <div className={`row ${style.categoryDescription}`}>
         <div className={`col1 col3-tablet ${style.descriptionIcon}`}>
