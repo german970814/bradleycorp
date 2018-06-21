@@ -5,21 +5,34 @@ import LightboxTitleBannerContentBox from '../../../../lib/containers/Lightbox/L
 import DownloadIconImage from './DownloadIconImage'
 import DocumentPackagerApiClient from '../../../../api/bradley-apis/documentPackager_client'
 import style from './ApplicationGalleryDetail.scss'
-import type { BimRevitProductVariants } from './ApplicationGalleryDetail'
+import type { BimProductVariant } from '../../../../api/bradley-apis/documentPackager_client'
 import type { TechnicalInfo } from '../../../../lib/types/cpt_types'
 
 type DownloadabeType = {
   title: string,
-  files: Array<string>
+  files: Array<string>,
+  handler: () => void
+}
+
+type DownloadableBimRevit = {
+  title: string,
+  files: Array<number>,
+  handler: () => void
+}
+
+type DownloadableFormat = {
+  tech: DownloadabeType,
+  bim: { title: string, files: Array<number>, handler: () => void },
+  all: DownloadabeType
 }
 
 type Props = {
   techs: Array<TechnicalInfo>,
-  bim: Array<BimRevitProductVariants>
+  bim: Array<BimProductVariant>
 }
 
 type State = {
-  selected: ?DownloadabeType
+  selected: ?DownloadabeType | ?DownloadableBimRevit
 }
 
 export default class Downloadables extends Component<Props, State> {
@@ -36,47 +49,62 @@ export default class Downloadables extends Component<Props, State> {
     }
   }
 
-  get downloadables () {
+  get downloadables (): DownloadableFormat {
     return {
       all: {
         title: 'All Documents',
-        files: this.props.techs.length ? [this.props.techs[0].meta.technical_info_pdf] : []
+        files: [],
+        handler: () => {}
       },
       tech: {
         title: 'All Tech Data',
-        files: this.props.techs.length ? this.props.techs.map(el => el.meta.technical_info_pdf) : []
+        files: this.props.techs.length ? this.props.techs.map(el => el.meta.technical_info_pdf) : [],
+        handler: this.downloadTechData.bind(this)
       },
       bim: {
         title: 'All BIM/Revit',
-        files: this.props.bim.length ? this.props.bim.map(el => el.meta.technical_info_pdf) : []
+        files: this.props.bim.length ? this.props.bim.map(el => el.id) : [],
+        handler: this.downloadBimRevit.bind(this)
       }
     }
   }
 
-  async getBimRevitFiles() {
-    if (this.props.bim.length) {
-      const client = new DocumentPackagerApiClient()
-      const ids = this.props.bim.map(el => el.id)
-      const response = await client.getBimFileZipFromVariantIds(ids)
-      // response.data
-    }
-  }
-
   renderFileList () {
-    return this.state.selected ? <ul>{this.state.selected.files.map((el, ind) => {
-      return <li key={ind}>{el}</li>
-    })}</ul> : null
+    if (!this.state.selected) {
+      return
+    }
+    return <p>Do you want download {this.state.selected.title}?</p>
   }
 
-  wrapperFunction (func: () => void, selected: DownloadabeType) {
-    this.setState({ selected })
-    func()
+  wrapperFunction (func: () => void, selected: DownloadabeType | DownloadableBimRevit) {
+    this.setState({ selected }, func)
+  }
+
+  downloadBimRevit () {
+    if (!this.state.selected) {
+      return
+    }
+    const client = new DocumentPackagerApiClient()
+    const files = this.downloadables.bim.files
+    client.downloadFiles(files)
+  }
+
+  downloadTechData () {
+    if (!this.state.selected) {
+      return
+    }
+    this.downloadables.tech.files.forEach(file => {
+      window.open(file, '_blank')
+    })
+  }
+
+  downloadAll () {
+    this.downloadBimRevit()
+    this.downloadAll()
   }
 
   downloadFiles () {
-    if (this.state.selected) {
-      window.location.href = this.state.selected.files[0]
-    }
+    this.state.selected && this.state.selected.handler()
   }
 
   render () {

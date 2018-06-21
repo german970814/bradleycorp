@@ -68,6 +68,35 @@ class DocumentPackagerApiClient {
 
     return axios.get(url, { params })
   }
+
+  async downloadFiles (variantIds: Array<number>, name?: string): Promise<void> {
+    const filename = await this.getBimZipFilename(variantIds)
+
+    if (!filename) {
+      console.warn('Couldnt get filename of zip from bradley server')
+      return
+    }
+
+    const givenName = name ? `${name}.zip` : filename
+    const downloadUrl = `${bradleyApisHost}/documentPackager/bimFile/${givenName}?name=${filename}`
+
+    window.open(downloadUrl, '_blank')
+  }
+
+  async getBimZipFilename (variantIds: Array<number>): Promise<string | false> {
+    try {
+      const response = await this.getBimFileZipFromVariantIds(variantIds)
+
+      if (response.data.success) {
+        return response.data.fileName
+      } else {
+        return false
+      }
+    } catch (err) {
+      console.log(err)
+      return false
+    }
+  }
 }
 
 export default DocumentPackagerApiClient
