@@ -24,8 +24,8 @@ class AddToOrderButton extends React.Component<Props, State> {
   constructor (props: Props) {
     super(props)
 
-    this.isPrintable = this.isOptionPrintable()
     this.postType = this.props.post.post.post_type
+    this.isPrintable = this.isOptionPrintable()
 
     this.state = { isClicked: false }
   }
