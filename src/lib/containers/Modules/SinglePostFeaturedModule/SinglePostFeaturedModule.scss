@@ -3,6 +3,7 @@
 @import '../../../../scss/partials/helpers';
 @import '../../../../scss/partials/grid';
 @import '../../../components/BCorpBackground/BCorpBackground';
+@import '../Modules.scss';
 
 .singlePostFeaturedModule {
   @extend %bcorpBackgroundParent;
@@ -18,7 +19,7 @@
   :global(.container-size-mobile) {
     $paddingBottom: 30px;
 
-    padding-top: 60px;
+    padding-top: $modulePaddingTopBottomMobile;
     padding-bottom: $paddingBottom;
 
     .headline {
@@ -64,7 +65,7 @@
     $padding: 30px;
 
     padding: $padding;
-    padding-top: 80px;
+    padding-top: $modulePaddingTopBottomTablet;
 
     .headline {
       margin-bottom: 70px;
@@ -90,6 +91,7 @@
     $padding: 40px;
 
     padding: $padding;
+    padding-top: $modulePaddingTopBottomDesktop;
 
     .headline {
       margin-bottom: 0;
