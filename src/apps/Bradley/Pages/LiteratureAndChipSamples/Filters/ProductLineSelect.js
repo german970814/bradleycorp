@@ -42,6 +42,7 @@ class ProductLineSelect extends React.Component<Props> {
         handleChange={this.handleChange.bind(this)}
         title={'Product Line'}
         className={`col2 col4-tablet ${style.productLine}`}
+        sortAlphabetically
       />
     )
   }

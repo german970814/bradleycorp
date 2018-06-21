@@ -42,6 +42,7 @@ class LanguageSelect extends React.Component<Props> {
         handleChange={this.handleChange.bind(this)}
         title={'Language'}
         className={`col2 col4-tablet ${style.language}`}
+        sortAlphabetically
       />
     )
   }

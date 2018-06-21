@@ -43,6 +43,7 @@ class Filters extends React.Component<Props> {
             options={this.props.filterOptions.video_gallery_type_cat}
             filterState={this.props.filters.video_gallery_type_cat}
             handleChange={this.handleProductTypeChange.bind(this)}
+            sortAlphabetically
           />
         </div>
         <div className={`col2 col4-tablet ${style.videoType}`}>
@@ -54,6 +55,7 @@ class Filters extends React.Component<Props> {
             options={this.props.filterOptions.video_gallery_cat}
             filterState={this.props.filters.video_gallery_cat}
             handleChange={this.handleVideoTypeChange.bind(this)}
+            sortAlphabetically
           />
         </div>
         <div className={`col1 col2-tablet ${style.search}`}>
