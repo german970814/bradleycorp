@@ -15,6 +15,10 @@
     }
   }
 
+  a {
+    font-weight: bold;
+  }
+
   button.button {
     @include respond-to(tablet) {
       width: auto;
