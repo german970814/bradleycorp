@@ -9,6 +9,7 @@ import ContentTransformer from '../../../../lib/components/ContentTransformer/Co
 import ImageFrame from '../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import DocumentPackagerApiClient from '../../../../api/bradley-apis/documentPackager_client'
+import type { BimProductAndVariantsFromModelIdsResponse, BimProductVariant } from '../../../../api/bradley-apis/documentPackager_client'
 import style from './ApplicationGalleryDetail.scss'
 import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
 
@@ -21,30 +22,6 @@ import type {
   TechnicalInfo
 } from '../../../../lib/types/cpt_types'
 
-type BimRevitModels = {
-  product: string,
-  model: string
-}
-
-type BimRevitProduct = {
-  id: number,
-  imageUrl: string,
-  name: string,
-  description: ?string
-}
-
-type BimRevitProductVariants = {
-  id: number,
-  name: string,
-  description: ?string,
-  product: BimRevitProduct
-}
-
-type BimRevit = {
-  models: Array<BimRevitModels>,
-  bimProductVariants: Array<BimRevitProductVariants>
-}
-
 type Props = {
   location: Location,
   match: Match
@@ -56,7 +33,7 @@ type State = {
   products: Array<ProductPost>,
   literatures: ?Array<LiteraturePost>,
   techs: ?Array<TechnicalInfo>,
-  bimRevit: ?BimRevit
+  bimRevit: ?Array<BimProductVariant>
 }
 
 export default class ApplicationGalleryDetail extends Component<Props, State> {
@@ -64,7 +41,7 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
   CPT_TAXONOMY = {
     literature: 'product_tag',
     product: 'application_gallery',
-    'technical-info': 'technical_info_product_tag',
+    'technical-info': 'technical_info_product_tag'
   }
 
   constructor (props: Props) {
@@ -109,7 +86,7 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
             aspectRatioDesktop={169 / 370}
           />
         )}
-        <p className={`${style.appGalleryDetailText}`}>
+        <div className={`${style.appGalleryDetailText}`}>
           <ContentTransformer
             content={
               (this.state.applicationGallery &&
@@ -117,7 +94,7 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
               ''
             }
           />
-        </p>
+        </div>
         <div className={`col1 ${style.appGalleryDetailTitle}`}>
           <h2>Featured Product Information</h2>
         </div>
@@ -125,7 +102,7 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
           <div
             className={`col1 col2-tablet ${style.featureProductInformation}`}>
             <h3>Document Downloads</h3>
-            {this.downloadableContainer}
+            {this.getDownloadableContainer()}
           </div>
           <div
             className={`col1 col2-tablet ${style.featureProductInformation}`}>
@@ -140,16 +117,20 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
   /**
    * Wrapper of downloadables with loading
    */
-  get downloadableContainer () {
+  getDownloadableContainer () {
     const { techs, bimRevit } = this.state
-    if (techs) {
-      return techs.length ? (
-        <Downloadables techs={techs} bim={bimRevit ? bimRevit.bimProductVariants : []} />
-      ) : (
-        <Loading />
-      )
+
+    if (!techs && !bimRevit) {
+      return null
     }
-    return null
+    const existsBimRevit = bimRevit && bimRevit.length
+    const existsTechs = techs && techs.length
+
+    return (existsBimRevit || existsTechs) ? (
+      <Downloadables techs={(techs && techs.length) ? techs : []} bim={(bimRevit && bimRevit.length) ? bimRevit : []} />
+    ) : (
+      <Loading />
+    )
   }
 
   /**
@@ -240,10 +221,11 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
     const terms = this.getProductTermsByTaxonomy(cpt)
 
     try {
-      const client = new DocumentPackagerApiClient();
+      const client = new DocumentPackagerApiClient()
       const response = await client.getBimProductsAndVariantsFromModelIds(terms)
-      console.log(response.data)
-      if ('bimProductVariants' in response.data) {
+      const bimRevit: BimProductAndVariantsFromModelIdsResponse = response.data
+
+      if ('bimProductVariants' in bimRevit) {
         this.setState({ bimRevit: response.data.bimProductVariants })
       } else {
         throw new Error("Response doesn't has `bimProductVariants` key")
@@ -298,7 +280,7 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
         productTerms,
         (products: Array<ProductPost>) => {
           this.setState({ products }, () => {
-            this.getLiteratures()
+            // this.getLiteratures()
             this.getTechInfo()
             this.getBimRevit()
           })
@@ -340,5 +322,3 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
     )
   }
 }
-
-export type { BimRevit, BimRevitProductVariants }

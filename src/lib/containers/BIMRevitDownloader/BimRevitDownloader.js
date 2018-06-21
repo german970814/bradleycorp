@@ -2,7 +2,6 @@
 import * as React from 'react'
 import type { BimProductVariant } from '../../../api/bradley-apis/documentPackager_client'
 import DocumentPackagerApiClient from '../../../api/bradley-apis/documentPackager_client'
-import { bradleyApisHost } from '../../../api/bradley-apis/index'
 import BIMRevitOption from './BIMRevitOption/BIMRevitOption'
 import Loading from '../../components/Loading/Loading'
 import NoResults from '../../components/NoResults/NoResults'
@@ -181,35 +180,9 @@ class BimRevitDownloader extends React.Component<Props, State> {
     }
   }
 
-  async downloadFiles (variantIds: Array<number>, name?: string): Promise<void> {
-    const filename = await this.getBimZipFilename(variantIds)
-
-    if (!filename) {
-      console.warn('Couldnt get filename of zip from bradley server')
-      return
-    }
-
-    const givenName = name ? `${name}.zip` : filename
-
-    const downloadUrl = `${bradleyApisHost}/documentPackager/bimFile/${givenName}?name=${filename}`
-
-    window.open(downloadUrl)
-  }
-
-  async getBimZipFilename (variantIds: Array<number>): Promise<string | false> {
-    try {
-      const client = new DocumentPackagerApiClient()
-      const response = await client.getBimFileZipFromVariantIds(variantIds)
-
-      if (response.data.success) {
-        return response.data.fileName
-      } else {
-        return false
-      }
-    } catch (err) {
-      console.log(err)
-      return false
-    }
+  downloadFiles (variantIds: Array<number>, name?: string): Promise<void> {
+    const client = new DocumentPackagerApiClient()
+    return client.downloadFiles(variantIds, name)
   }
 }
 

@@ -1,14 +1,16 @@
 // @flow
 import React from 'react'
-import LightboxV2 from '../../../../lib/containers/Lightbox/LightboxV2/LightboxV2'
-import { Link } from 'react-router-dom'
+// import LightboxV2 from '../../../../lib/containers/Lightbox/LightboxV2/LightboxV2'
+import { Link, withRouter } from 'react-router-dom'
+import type { RouterHistory } from 'react-router-dom'
 import style from './ApplicationGalleryDetail.scss'
-import LightboxTitleBannerContentBox from '../../../../lib/containers/Lightbox/LightboxTitleBannerContentBox/LightboxTitleBannerContentBox'
+// import LightboxTitleBannerContentBox from '../../../../lib/containers/Lightbox/LightboxTitleBannerContentBox/LightboxTitleBannerContentBox'
 import type { ProductPost, LiteraturePost } from '../../../../lib/types/cpt_types'
 
 type Props = {
   products: Array<ProductPost>,
-  literatures: Array<LiteraturePost>
+  literatures: Array<LiteraturePost>,
+  history: RouterHistory
 }
 
 /**
@@ -34,7 +36,8 @@ const ProductList = (props: Props) => (
         </li>
       })}
     </ul>
-    {Boolean(props.literatures.length) && <LightboxV2
+    <button onClick={() => props.history.push('/literature-and-chip-samples')} className={`${style.productListButton}`}>Product Literature</button>
+    {/* {Boolean(props.literatures.length) && <LightboxV2
       renderChildren={openLightbox => {
         return <button onClick={openLightbox} className={`${style.productListButton}`}>Product Literature</button>
       }}
@@ -63,8 +66,8 @@ const ProductList = (props: Props) => (
       fullWidth
       fitLightboxToContent
       maxWidth={'370px'}
-    />}
+    />} */}
   </div>
 )
 
-export default ProductList
+export default withRouter(ProductList)
