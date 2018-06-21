@@ -103,6 +103,7 @@ class BCorpModule extends Component {
       )}`
       this.rowUpdateEvent = new CustomEvent(this.rowUpdateEventName)
 
+      this.initUpdateModuleHeight()
       window.addEventListener(this.rowUpdateEventName, this.updateModuleHeight)
       // window.addEventListener('resize', this.updateModuleHeight)
     }
@@ -152,8 +153,7 @@ class BCorpModule extends Component {
 
     // we won't need to update the height if the module is full width
     // we just need to make sure the minHeight returns to (or already is) 0
-    if (this.state.node.offsetWidth === window.innerWidth ||
-      (this.size && this.size === 'mobile')) {
+    if (this.state.node.offsetWidth === window.innerWidth) {
       if (this.state.minHeight !== 0) {
         return this.setState({ minHeight: 0 })
       }
