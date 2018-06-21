@@ -2,7 +2,7 @@
 import * as React from 'react'
 import type { MegaMenuNavMenuItem } from '../../../../../types/megaMenu_types'
 import { Link } from 'react-router-dom'
-import { removeHostFromUrl } from '../../../../../../lib/bcorpUrl'
+import { createNavMenuItemUrl } from '../../../../../../lib/bcorpUrl'
 import style from './MegaMenuClosed.scss'
 
 type Props = {
@@ -17,7 +17,7 @@ type Props = {
 class MegaMenuClosed extends React.PureComponent<Props> {
   render () {
     return (
-      <Link to={removeHostFromUrl(this.props.menuItem['url']) || '#'}>
+      <Link to={createNavMenuItemUrl(this.props.menuItem) || '#'}>
         <h6
           style={{
             lineHeight: `${this.props.itemHeight}px`

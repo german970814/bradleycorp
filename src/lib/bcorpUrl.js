@@ -40,6 +40,12 @@ bcorpUrl.createNavMenuItemUrl = (
   }
 
   if (navMenuItem.object_post_type && navMenuItem.object_post_name) {
+    if (navMenuItem.object_post_type === '_mega_menu') {
+      return navMenuItem.url
+        ? bcorpUrl.removeHostFromUrl(navMenuItem.url)
+        : false
+    }
+
     return bcorpUrl.getClientSideCPTPermalink(
       navMenuItem.object_post_type,
       navMenuItem.object_post_name,
@@ -47,11 +53,7 @@ bcorpUrl.createNavMenuItemUrl = (
     )
   }
 
-  if (navMenuItem.url) {
-    return bcorpUrl.removeHostFromUrl(navMenuItem.url)
-  }
-
-  return false
+  return navMenuItem.url ? bcorpUrl.removeHostFromUrl(navMenuItem.url) : false
 }
 
 /**
