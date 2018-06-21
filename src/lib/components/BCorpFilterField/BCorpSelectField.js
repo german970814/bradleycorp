@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react'
+import { sortAlphabeticallyArrayOfObjects } from '../../bcorpArray'
 import style from './BCorpFilterField.scss'
 
 type Options = {
@@ -19,7 +20,8 @@ type Props = {
   handleChange: (event: SyntheticInputEvent<HTMLSelectElement>) => void,
   title?: string,
   className?: string,
-  required?: boolean
+  required?: boolean,
+  sortAlphabetically?: boolean
 }
 
 /**
@@ -37,10 +39,23 @@ class BCorpSelectField extends React.Component<Props> {
       return
     }
 
-    return Object.keys(options).map((optionId, index) => {
+    let optionsArray = Object.keys(options).map(optionId => {
+      return {
+        id: optionId,
+        // had to add this default value even though it shouldnt ever be used
+        // we've checked above for empty options object but flow cant seem to recognise it
+        value: options[optionId] || '0'
+      }
+    })
+
+    if (this.props.sortAlphabetically) {
+      optionsArray = sortAlphabeticallyArrayOfObjects('value', optionsArray)
+    }
+
+    return optionsArray.map((optionObj, index) => {
       return (
-        <option key={index} value={optionId}>
-          {options[optionId]}
+        <option key={index} value={optionObj.id}>
+          {optionObj.value}
         </option>
       )
     })
@@ -63,9 +78,11 @@ class BCorpSelectField extends React.Component<Props> {
         <select
           value={this.props.filterState}
           onChange={this.handleChange.bind(this)}>
-          {!this.props.notShowDefault && <option value={this.props.defaultOptionId}>
-            {this.props.defaultOptionName}
-          </option>}
+          {!this.props.notShowDefault && (
+            <option value={this.props.defaultOptionId}>
+              {this.props.defaultOptionName}
+            </option>
+          )}
           {this.renderOptions()}
         </select>
         {requiredClassName !== '' ? (

@@ -37,6 +37,7 @@ class MaterialTypeSelect extends React.Component<Props> {
         handleChange={this.handleChange.bind(this)}
         title={'Material Type'}
         className={`col4x3 col3-tablet ${style.materialType}`}
+        sortAlphabetically
       />
     )
   }
