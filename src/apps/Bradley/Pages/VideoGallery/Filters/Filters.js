@@ -32,6 +32,7 @@ class Filters extends React.Component<Props> {
   }
 
   render () {
+    console.log(this.props.filters)
     return (
       <div className={`row ${style.filters}`}>
         <div className={`col2 col4-tablet ${style.productType}`}>
@@ -40,8 +41,8 @@ class Filters extends React.Component<Props> {
             className={style.select}
             defaultOptionId={filterDefault}
             defaultOptionName={filterDefaultName}
-            options={this.props.filterOptions.video_gallery_type_cat}
-            filterState={this.props.filters.video_gallery_type_cat}
+            options={this.props.filterOptions.video_gallery_product_tag}
+            filterState={this.props.filters.video_gallery_product_tag}
             handleChange={this.handleProductTypeChange.bind(this)}
             sortAlphabetically
           />
@@ -52,8 +53,8 @@ class Filters extends React.Component<Props> {
             className={style.select}
             defaultOptionId={filterDefault}
             defaultOptionName={filterDefaultName}
-            options={this.props.filterOptions.video_gallery_cat}
-            filterState={this.props.filters.video_gallery_cat}
+            options={this.props.filterOptions.video_gallery_type_cat}
+            filterState={this.props.filters.video_gallery_type_cat}
             handleChange={this.handleVideoTypeChange.bind(this)}
             sortAlphabetically
           />
