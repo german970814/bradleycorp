@@ -4,12 +4,14 @@ import type { Match } from 'react-router-dom'
 import type { ScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
 import type { TreeType } from '../../../../lib/types/response_types'
 import { withScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
+import { createBreadcrumbsObjectFromTermTree } from '../../../../lib/components/Breadcrumbs/Breadcrumbs'
 import ProductApiClient from '../../../../api/product_client'
 import CategoryDescription from './CategoryDescription/CategoryDescription'
 import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import Pagination from './Pagination/Pagination'
 import Filters from './Filters/Filters'
 import Products from './Products/Products'
+import Breadcrumbs from '../../../../lib/components/Breadcrumbs/Breadcrumbs'
 import Loading from '../../../../lib/components/Loading/Loading'
 import style from './ProductCategory.scss'
 
@@ -81,6 +83,8 @@ type State = {
   showFiltersMobile: boolean,
   loading: boolean
 }
+
+export const allCategoriesSlug = 'all-categories'
 
 class ProductCategory extends React.Component<Props, State> {
   postsPerPage: number
@@ -233,8 +237,32 @@ class ProductCategory extends React.Component<Props, State> {
   renderContent () {
     const isMobile = this.props.screenSize === 'mobile'
 
+    // add all categories to tree for breadcrumbs
+    // we dont do this for the filters because
+    // the all categories link actually gets displayed outside the flow
+    const extraParents = {}
+    extraParents[allCategoriesSlug] = 'All Categories'
+    const tree = {
+      children: false,
+      parents: {
+        ...extraParents,
+        ...(this.state.tree.parents || {})
+      }
+    }
+
     return (
       <div className={`row ${style.content}`}>
+        {!isMobile && (
+          <div className={`col1 ${style.breadcrumbs}`}>
+            <Breadcrumbs
+              breadcrumbs={createBreadcrumbsObjectFromTermTree(
+                tree,
+                'product_category'
+              )}
+            />
+          </div>
+        )}
+
         <CategoryDescription
           isMobile={isMobile}
           description={

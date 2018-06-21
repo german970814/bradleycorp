@@ -25,11 +25,20 @@
 
     @include respond-to(tablet) {
       margin-top: 16px;
-      margin-bottom: 45px;
+      margin-bottom: 18px;
     }
 
     @include respond-to(desktop) {
       margin-top: 14px;
+    }
+  }
+
+  .breadcrumbs {
+    margin-bottom: 45px;
+    border-bottom: 1px solid $silver;
+    padding-bottom: 18px;
+
+    @include respond-to(desktop) {
       margin-bottom: 60px;
     }
   }

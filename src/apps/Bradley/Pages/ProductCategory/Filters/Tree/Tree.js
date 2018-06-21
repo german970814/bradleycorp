@@ -3,6 +3,7 @@ import * as React from 'react'
 import type { TreeType } from '../../../../../../lib/types/response_types'
 import { Link } from 'react-router-dom'
 import { createArchiveUrlFromSlugAndTax } from '../../../../../../lib/bcorpUrl'
+import { allCategoriesSlug } from '../../ProductCategory'
 import style from './Tree.scss'
 
 /**
@@ -71,7 +72,7 @@ class Tree extends React.PureComponent<Props> {
     return (
       <div className={style.tree}>
         <h6 className={style.parentTitle}>{'Categories'}</h6>
-        {this.renderTreeLink('all-categories', 'All Categories', 0, true)}
+        {this.renderTreeLink(allCategoriesSlug, 'All Categories', 0, true)}
         {this.renderParents()}
         {this.renderChildren()}
       </div>

@@ -5,6 +5,9 @@ h6.breadcrumbs {
 
   a {
     color: $slate-grey;
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: inherit;
 
     .breadcrumbItem {
       position: relative;
