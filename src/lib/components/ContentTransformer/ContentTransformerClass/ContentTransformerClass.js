@@ -6,7 +6,7 @@ import FileDownloadLink from '../../../components/FileDownloadLink/FileDownloadL
 import ArrowButton from '../../ArrowButton/ArrowButton'
 import BCorpVideo from '../../../components/BCorpVideo/BCorpVideo'
 import BCorpLink from '../../BCorpLink/BCorpLink'
-import style from './ContentTransformerClass.scss'
+import style from '../ContentTransformer.scss'
 
 type HTMLParser2Node = {
   attribs: {
