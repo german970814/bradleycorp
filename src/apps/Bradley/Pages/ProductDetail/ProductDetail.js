@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Helmet } from 'react-helmet'
+import { METATITLEPREFIX } from '../../../../globals'
+import { cleanMetaDescription } from '../../../../lib/bcorpString'
 import Divider from '../../../../lib/components/Divider/Divider'
 import ProductApiClient from '../../../../api/product_client'
 import productObjectShape from './productObjectShape'
@@ -73,8 +76,24 @@ class ProductDetail extends Component {
 
   render () {
     console.log(this.state.productDetail)
+
+    // defaults to post title
+    const pageTitle =
+      this.state.productDetail.product.post.meta_title ||
+      this.state.productDetail.product.post.post_title
+    const pageDescription =
+      this.state.productDetail.product.post.meta_description || ''
+
     return (
       <div className={style.productDetailPage}>
+        <Helmet>
+          <title>{`${METATITLEPREFIX}${pageTitle}`}</title>
+          <meta
+            name="description"
+            content={cleanMetaDescription(pageDescription)}
+          />
+        </Helmet>
+
         <section className={style.content}>
           <ProductContent
             title={this.state.productDetail.product.post['post_title']}

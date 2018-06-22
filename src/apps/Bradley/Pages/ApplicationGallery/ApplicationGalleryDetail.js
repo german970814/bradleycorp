@@ -1,5 +1,8 @@
 // @flow
 import React, { Component } from 'react'
+import { Helmet } from 'react-helmet'
+import { METATITLEPREFIX } from '../../../../globals'
+import { cleanMetaDescription } from '../../../../lib/bcorpString'
 import ProductList from './ProductList'
 import Downloadables from './Downloadables'
 import { PostType } from './ApplicationGallery'
@@ -9,7 +12,11 @@ import ContentTransformer from '../../../../lib/components/ContentTransformer/Co
 import ImageFrame from '../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import DocumentPackagerApiClient from '../../../../api/bradley-apis/documentPackager_client'
-import type { BimProductAndVariantsFromModelIdsResponse, BimProductVariant } from '../../../../api/bradley-apis/documentPackager_client'
+import type {
+  BimProductAndVariantsFromModelIdsResponse,
+  BimProductVariant
+} from '../../../../api/bradley-apis/documentPackager_client'
+import { pageTitle, pageDescription } from './ApplicationGallery'
 import style from './ApplicationGalleryDetail.scss'
 import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
 
@@ -126,8 +133,11 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
     const existsBimRevit = bimRevit && bimRevit.length
     const existsTechs = techs && techs.length
 
-    return (existsBimRevit || existsTechs) ? (
-      <Downloadables techs={(techs && techs.length) ? techs : []} bim={(bimRevit && bimRevit.length) ? bimRevit : []} />
+    return existsBimRevit || existsTechs ? (
+      <Downloadables
+        techs={techs && techs.length ? techs : []}
+        bim={bimRevit && bimRevit.length ? bimRevit : []}
+      />
     ) : (
       <Loading />
     )
@@ -314,9 +324,28 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
   }
 
   render () {
+    // defaults to application gallery top level title
+    const detailPageTitle =
+      (this.state.applicationGallery &&
+        this.state.applicationGallery.post.meta_title) ||
+      pageTitle
+    // defaults to application gallery top level description
+    const detailPageDescription =
+      (this.state.applicationGallery &&
+        this.state.applicationGallery.post.meta_description) ||
+      pageDescription
+
     return (
       <div className={`row ${defaultStyle.defaultTemplate}`}>
-        {renderTitle('Application Gallery', 'col1')}
+        <Helmet>
+          <title>{`${METATITLEPREFIX}${detailPageTitle}`}</title>
+          <meta
+            name="description"
+            content={cleanMetaDescription(detailPageDescription)}
+          />
+        </Helmet>
+
+        {renderTitle(pageTitle, 'col1')}
         {this.renderContent()}
       </div>
     )

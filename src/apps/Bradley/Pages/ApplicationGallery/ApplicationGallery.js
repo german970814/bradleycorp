@@ -50,8 +50,8 @@ type State = {
 
 const PostType: CPTName = 'application-gallery'
 
-const pageTitle = 'Application Gallery'
-const pageDescription = ''
+export const pageTitle = 'Application Gallery'
+export const pageDescription = ''
 
 class ApplicationGallery extends Component<Props, State> {
   getApplicationGalleryDebounced: (filters: TaxAndTermSlugObject) => void
