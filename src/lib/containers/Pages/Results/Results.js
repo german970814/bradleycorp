@@ -12,6 +12,7 @@ import style from './Results.scss'
 import SearchClient from './../../../../api/search_client'
 
 import Loading from '../../../components/Loading/Loading'
+import BCorpHead from '../../../components/BCorpHead/BCorpHead'
 
 import NoResults from '../../../components/NoResults/NoResults'
 import defaultStyle from '../../../containers/Templates/Templates.scss'
@@ -52,7 +53,10 @@ type State = {
       offset: number
     }
   }
-};
+}
+
+const pageTitle = 'Search Results'
+const pageDescription = ''
 
 const POSTS_PER_PAGE = 20
 
@@ -371,6 +375,8 @@ class Results extends React.Component<Props, State> {
   render () {
     return (
       <div>
+        <BCorpHead title={pageTitle} description={pageDescription} />
+
         {this.renderHeader()}
         <div className={`${style.itemsWrapper}`}>{this.renderTabs()}</div>
         <div

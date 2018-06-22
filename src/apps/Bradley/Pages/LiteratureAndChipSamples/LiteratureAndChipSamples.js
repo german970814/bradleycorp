@@ -7,9 +7,6 @@ import type {
 import type { ScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
 import type { WPMaterialTypeTerm } from '../../../../lib/types/term_types'
 import type { CheckboxObject } from '../../../../lib/components/BCorpFilterField/BCorpCheckboxField'
-import { Helmet } from 'react-helmet'
-import { METATITLEPREFIX } from '../../../../globals'
-import { cleanMetaDescription } from '../../../../lib/bcorpString'
 import { withScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
 import CPTApiClient from '../../../../api/cpt_client'
 import RightSidebarTemplate from '../../../../lib/containers/Templates/RightSidebarTemplate/RightSidebarTemplate'
@@ -19,6 +16,7 @@ import Shipment from './CurrentRequest/Shipment/Shipment'
 import Downloads from './CurrentRequest/Downloads/Downloads'
 import Options from './Options/Options'
 import Filters from './Filters/Filters'
+import BCorpHead from '../../../../lib/components/BCorpHead/BCorpHead'
 // import style from './LiteratureAndChipSamples.scss'
 
 type PostTypeOptions = 'literature' | 'chip'
@@ -390,13 +388,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
   render () {
     return (
       <React.Fragment>
-        <Helmet>
-          <title>{`${METATITLEPREFIX}${pageTitle}`}</title>
-          <meta
-            name="description"
-            content={cleanMetaDescription(pageDescription)}
-          />
-        </Helmet>
+        <BCorpHead title={pageTitle} description={pageDescription} />
 
         <RightSidebarTemplate
           data={{ page_title: pageTitle }}

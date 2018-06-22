@@ -1,8 +1,6 @@
 // @flow
 import React, { Component } from 'react'
-import { Helmet } from 'react-helmet'
-import { METATITLEPREFIX } from '../../../../globals'
-import { cleanMetaDescription } from '../../../../lib/bcorpString'
+import BCorpHead from '../../../../lib/components/BCorpHead/BCorpHead'
 import ProductList from './ProductList'
 import Downloadables from './Downloadables'
 import { PostType } from './ApplicationGallery'
@@ -337,13 +335,10 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
 
     return (
       <div className={`row ${defaultStyle.defaultTemplate}`}>
-        <Helmet>
-          <title>{`${METATITLEPREFIX}${detailPageTitle}`}</title>
-          <meta
-            name="description"
-            content={cleanMetaDescription(detailPageDescription)}
-          />
-        </Helmet>
+        <BCorpHead
+          title={detailPageTitle}
+          description={detailPageDescription}
+        />
 
         {renderTitle(pageTitle, 'col1')}
         {this.renderContent()}

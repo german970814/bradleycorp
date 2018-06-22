@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Helmet } from 'react-helmet'
-import { METATITLEPREFIX } from '../../../../globals'
-import { cleanMetaDescription } from '../../../../lib/bcorpString'
 import Divider from '../../../../lib/components/Divider/Divider'
 import ProductApiClient from '../../../../api/product_client'
 import productObjectShape from './productObjectShape'
@@ -10,6 +7,7 @@ import ProductDetailException from '../../../../exceptions/ProductDetailExceptio
 import ProductContent from './ProductContent/ProductContent'
 import ProductTabs from './ProductTabs/ProductTabs'
 import ProductScroller from '../../../../lib/containers/ProductScroller/ProductScroller'
+import BCorpHead from '../../../../lib/components/BCorpHead/BCorpHead'
 import style from './ProductDetail.scss'
 
 class ProductDetail extends Component {
@@ -86,13 +84,7 @@ class ProductDetail extends Component {
 
     return (
       <div className={style.productDetailPage}>
-        <Helmet>
-          <title>{`${METATITLEPREFIX}${pageTitle}`}</title>
-          <meta
-            name="description"
-            content={cleanMetaDescription(pageDescription)}
-          />
-        </Helmet>
+        <BCorpHead title={pageTitle} description={pageDescription} />
 
         <section className={style.content}>
           <ProductContent

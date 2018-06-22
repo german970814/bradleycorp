@@ -1,13 +1,11 @@
 // @flow
 import * as React from 'react'
 import type { BCorpTermsResponse } from '../../../../lib/types/term_types'
-import { Helmet } from 'react-helmet'
-import { METATITLEPREFIX } from '../../../../globals'
 import CPTApiClient from '../../../../api/cpt_client'
-import { cleanMetaDescription } from '../../../../lib/bcorpString'
 import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import Videos from './Videos/Videos'
 import Filters from './Filters/Filters'
+import BCorpHead from '../../../../lib/components/BCorpHead/BCorpHead'
 import style from './VideoGallery.scss'
 
 type FiltersType = {
@@ -69,13 +67,7 @@ class VideoGallery extends React.Component<Props, State> {
   render () {
     return (
       <React.Fragment>
-        <Helmet>
-          <title>{`${METATITLEPREFIX}${pageTitle}`}</title>
-          <meta
-            name="description"
-            content={cleanMetaDescription(pageDescription)}
-          />
-        </Helmet>
+        <BCorpHead title={pageTitle} description={pageDescription} />
 
         <DefaultTemplate
           data={{ page_title: pageTitle }}
