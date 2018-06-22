@@ -7,6 +7,7 @@ import BlogPageTemplate from '../../Templates/BlogPageTemplate/BlogPageTemplate'
 import Divider from '../../../components/Divider/Divider'
 import PostComments from '../../PostComments/PostComments'
 import Post from './Post/Post'
+import BCorpHead from '../../../components/BCorpHead/BCorpHead'
 import style from './BlogSinglePostPage.scss'
 
 type Props = {
@@ -47,8 +48,18 @@ class BlogSinglePostPage extends Component<Props, State> {
   }
 
   render () {
+    // defaults to post title
+    const pageTitle =
+      (this.state.post &&
+        (this.state.post.post.meta_title || this.state.post.post.post_title)) ||
+      ''
+    const pageDescription =
+      (this.state.post && this.state.post.post.meta_description) || ''
+
     return (
       <div className={`Blog-Landing-Page`}>
+        <BCorpHead title={pageTitle} description={pageDescription} />
+
         <BlogPageTemplate
           renderContent={() => {
             if (!this.state.post) {

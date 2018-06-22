@@ -32,6 +32,7 @@ type API = {
   urlTheWashfountain: URLTheWashfountainType,
   urlBIMRevit: URLBIMRevitType,
   site: SiteType,
+  sitePrettyNameDefault: string,
   sitePrettyName: BlogPrettyName | 'Bradley Corp',
   namespace: string,
   baseURL: string,
@@ -47,7 +48,8 @@ const dev: boolean = false
 
 let site: SiteType = 'bcorp'
 
-let sitePrettyName: BlogPrettyName | 'Bradley Corp' = 'Bradley Corp'
+const sitePrettyNameDefault = 'Bradley Corp'
+let sitePrettyName: BlogPrettyName | 'Bradley Corp' = sitePrettyNameDefault
 
 let host: HostType = dev
   ? 'http://bradley.test'
@@ -116,6 +118,8 @@ const api: API = {
   urlBIMRevit,
 
   site,
+
+  sitePrettyNameDefault,
 
   sitePrettyName,
 

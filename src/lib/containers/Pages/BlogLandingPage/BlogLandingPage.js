@@ -2,8 +2,10 @@
 import React, { Component } from 'react'
 import type { Match } from 'react-router-dom'
 import type { BCorpPost } from '../../../types/post_types'
+import { sitePrettyName } from '../../../../api'
 import CPTApiClient from '../../../../api/cpt_client'
 import BlogPageTemplate from '../../Templates/BlogPageTemplate/BlogPageTemplate'
+import BCorpHead from '../../../components/BCorpHead/BCorpHead'
 import Posts from './Posts/Posts'
 
 type Props = {
@@ -13,6 +15,9 @@ type Props = {
 type State = {
   posts?: Array<BCorpPost>
 }
+
+const pageTitle = `Blog Home`
+const pageDescription = ''
 
 class BlogLandingPage extends Component<Props, State> {
   defaultPostState: BCorpPost
@@ -47,6 +52,8 @@ class BlogLandingPage extends Component<Props, State> {
   render () {
     return (
       <div className={`Blog-Landing-Page`}>
+        <BCorpHead title={pageTitle} description={pageDescription} />
+
         <BlogPageTemplate
           renderContent={() => {
             if (!this.state.posts) {
