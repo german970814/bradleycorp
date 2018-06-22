@@ -22,7 +22,7 @@ class Breadcrumbs extends React.PureComponent<Props> {
       <h6 className={style.breadcrumbs}>
         {Object.keys(this.props.breadcrumbs).map((parentSlug, index) => {
           return (
-            <Link to={this.props.breadcrumbs[parentSlug].link}>
+            <Link key={index} to={this.props.breadcrumbs[parentSlug].link}>
               <span className={style.breadcrumbItem}>
                 {this.props.breadcrumbs[parentSlug].name}
               </span>

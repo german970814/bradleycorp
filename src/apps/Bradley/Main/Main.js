@@ -112,15 +112,9 @@ const WhereToBuyPageLoadable = Loadable({
   loading: Loading
 })
 
-const HubspotFormsLoadable = Loadable({
-  loader: () =>
-    import('../../../lib/containers/Pages/HubspotFormPage/HubspotFormPage'),
-  loading: Loading
-})
-
 type Props = {
   cookies: Cookies
-};
+}
 
 /*
  * If we need the home page then we render it with a different header
@@ -203,7 +197,7 @@ const RouterInner = () => {
       <Route exact path="/locator" component={WhereToBuyPageLoadable} />
 
       {/* Hubspot Forms */}
-      {/*<Route
+      {/* <Route
         exact
         path="/verge/washbar-sales-contact"
         render={({ match }) => {
@@ -293,7 +287,7 @@ const RouterInner = () => {
             />
           )
         }}
-      />*/}
+      /> */}
 
       {/* Post Types With Custom Templates */}
       <Route exact path="/post/:slug" component={BlogSinglePostPageLoadable} />

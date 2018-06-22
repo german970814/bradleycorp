@@ -4,14 +4,15 @@ import type { Match } from 'react-router-dom'
 import type { ScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
 import type { TreeType } from '../../../../lib/types/response_types'
 import { withScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
-import { createBreadcrumbsObjectFromTermTree } from '../../../../lib/components/Breadcrumbs/Breadcrumbs'
 import ProductApiClient from '../../../../api/product_client'
 import CategoryDescription from './CategoryDescription/CategoryDescription'
 import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import Pagination from './Pagination/Pagination'
 import Filters from './Filters/Filters'
 import Products from './Products/Products'
-import Breadcrumbs from '../../../../lib/components/Breadcrumbs/Breadcrumbs'
+import Breadcrumbs, {
+  createBreadcrumbsObjectFromTermTree
+} from '../../../../lib/components/Breadcrumbs/Breadcrumbs'
 import Loading from '../../../../lib/components/Loading/Loading'
 import style from './ProductCategory.scss'
 
