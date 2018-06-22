@@ -1,7 +1,10 @@
 // @flow
 import * as React from 'react'
 import type { BCorpTermsResponse } from '../../../../lib/types/term_types'
+import { Helmet } from 'react-helmet'
+import { METATITLEPREFIX } from '../../../../globals'
 import CPTApiClient from '../../../../api/cpt_client'
+import { cleanMetaDescription } from '../../../../lib/bcorpString'
 import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import Videos from './Videos/Videos'
 import Filters from './Filters/Filters'
@@ -28,6 +31,9 @@ type State = {
   filters: FiltersType,
   filterOptions: FilterOptionsState
 }
+
+const pageTitle = 'Video Gallery'
+const pageDescription = ''
 
 const filterDefault: 'all' = 'all'
 const filterDefaultName: 'All' = 'All'
@@ -62,21 +68,31 @@ class VideoGallery extends React.Component<Props, State> {
 
   render () {
     return (
-      <DefaultTemplate
-        data={{ page_title: 'Video Gallery' }}
-        renderModules={() => {
-          return (
-            <div className={style.VideoGallery}>
-              <Filters
-                filters={this.state.filters}
-                filterOptions={this.state.filterOptions}
-                updateFilters={this.updateFilters.bind(this)}
-              />
-              <Videos filters={this.state.filters} />
-            </div>
-          )
-        }}
-      />
+      <React.Fragment>
+        <Helmet>
+          <title>{`${METATITLEPREFIX}${pageTitle}`}</title>
+          <meta
+            name="description"
+            content={cleanMetaDescription(pageDescription)}
+          />
+        </Helmet>
+
+        <DefaultTemplate
+          data={{ page_title: pageTitle }}
+          renderModules={() => {
+            return (
+              <div className={style.VideoGallery}>
+                <Filters
+                  filters={this.state.filters}
+                  filterOptions={this.state.filterOptions}
+                  updateFilters={this.updateFilters.bind(this)}
+                />
+                <Videos filters={this.state.filters} />
+              </div>
+            )
+          }}
+        />
+      </React.Fragment>
     )
   }
 

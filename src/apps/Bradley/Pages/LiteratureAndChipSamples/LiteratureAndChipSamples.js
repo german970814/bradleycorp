@@ -7,6 +7,9 @@ import type {
 import type { ScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
 import type { WPMaterialTypeTerm } from '../../../../lib/types/term_types'
 import type { CheckboxObject } from '../../../../lib/components/BCorpFilterField/BCorpCheckboxField'
+import { Helmet } from 'react-helmet'
+import { METATITLEPREFIX } from '../../../../globals'
+import { cleanMetaDescription } from '../../../../lib/bcorpString'
 import { withScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
 import CPTApiClient from '../../../../api/cpt_client'
 import RightSidebarTemplate from '../../../../lib/containers/Templates/RightSidebarTemplate/RightSidebarTemplate'
@@ -122,6 +125,9 @@ type State = {
   showCurrentRequestMobile: boolean,
   loading: boolean
 }
+
+const pageTitle = 'Literature & Chip Samples'
+const pageDescription = ''
 
 const productLineFilterDefault: string = 'product-line'
 const languageFilterDefault: string = 'language'
@@ -383,12 +389,22 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
 
   render () {
     return (
-      <RightSidebarTemplate
-        data={{ page_title: 'Literature & Chip Samples' }}
-        renderModules={() => this.renderContent()}
-        renderRightSidebarWidgets={() => this.renderRightSidebarWidgets()}
-        widgetsMoveWithScroll
-      />
+      <React.Fragment>
+        <Helmet>
+          <title>{`${METATITLEPREFIX}${pageTitle}`}</title>
+          <meta
+            name="description"
+            content={cleanMetaDescription(pageDescription)}
+          />
+        </Helmet>
+
+        <RightSidebarTemplate
+          data={{ page_title: pageTitle }}
+          renderModules={() => this.renderContent()}
+          renderRightSidebarWidgets={() => this.renderRightSidebarWidgets()}
+          widgetsMoveWithScroll
+        />
+      </React.Fragment>
     )
   }
 

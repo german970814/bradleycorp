@@ -8,6 +8,9 @@ import type { RouterHistory } from 'react-router-dom'
 import type { ScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
 import { Link } from 'react-router-dom'
 import { withCookies, Cookies } from 'react-cookie'
+import { Helmet } from 'react-helmet'
+import { METATITLEPREFIX } from '../../../../globals'
+import { cleanMetaDescription } from '../../../../lib/bcorpString'
 import { withScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
 import commercialWashroomImageSrc from '../../../../images/home-images/water-falling/water-falling@2x.png'
 import emergencySafetyImageSrc from '../../../../images/home-images/water-splashing/water-splashing@2x.png'
@@ -27,6 +30,9 @@ type State = {
   washroomNode?: HTMLDivElement,
   emergencySafetyNode?: HTMLDivElement
 }
+
+const pageTitle = 'Home'
+const pageDescription = ''
 
 class Home extends React.Component<Props, State> {
   constructor (props: Props) {
@@ -150,6 +156,14 @@ class Home extends React.Component<Props, State> {
 
     return (
       <div className={`row ${style.Home}`}>
+        <Helmet>
+          <title>{`${METATITLEPREFIX}${pageTitle}`}</title>
+          <meta
+            name="description"
+            content={cleanMetaDescription(pageDescription)}
+          />
+        </Helmet>
+
         {this.renderHeader(match)}
 
         <div className={`${style.fadeInMobile} ${style.blackBlueContainer}`}>

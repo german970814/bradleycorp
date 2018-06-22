@@ -9,6 +9,9 @@ import type {
 import type { TaxAndTermSlugObject } from '../../../../api/cpt_client'
 import type { CheckboxesType } from '../../../../lib/components/BCorpFilterField/BCorpCheckboxField'
 import debounce from 'debounce'
+import { Helmet } from 'react-helmet'
+import { METATITLEPREFIX } from '../../../../globals'
+import { cleanMetaDescription } from '../../../../lib/bcorpString'
 import { withScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
 import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import CPTApiClient from '../../../../api/cpt_client'
@@ -19,8 +22,6 @@ import style from './ApplicationGallery.scss'
 import GalleryItem from './GalleryItem'
 import Loading from '../../../../lib/components/Loading/Loading'
 import NoResults from '../../../../lib/components/NoResults/NoResults'
-
-const PostType: CPTName = 'application-gallery'
 
 type MetaType = BCorpMeta & {
   app_gallery_img?: string,
@@ -46,6 +47,11 @@ type State = {
   activeFilters: TaxAndTermSlugObject,
   loading: boolean
 }
+
+const PostType: CPTName = 'application-gallery'
+
+const pageTitle = 'Application Gallery'
+const pageDescription = ''
 
 class ApplicationGallery extends Component<Props, State> {
   getApplicationGalleryDebounced: (filters: TaxAndTermSlugObject) => void
@@ -124,7 +130,15 @@ class ApplicationGallery extends Component<Props, State> {
   render () {
     return (
       <div className={`row ${defaultStyle.defaultTemplate}`}>
-        {renderTitle('Application Gallery', 'col1')}
+        <Helmet>
+          <title>{`${METATITLEPREFIX}${pageTitle}`}</title>
+          <meta
+            name="description"
+            content={cleanMetaDescription(pageDescription)}
+          />
+        </Helmet>
+
+        {renderTitle(pageTitle, 'col1')}
         <div className={`col1 col4-tablet ${style.appGallerySidebar}`}>
           <Filters
             activeFilters={this.state.activeFilters}
@@ -146,7 +160,11 @@ class ApplicationGallery extends Component<Props, State> {
 
     try {
       const client = new CPTApiClient(PostType)
-      const response = await client.getByTaxNameAndTermSlugObject(filters, 'OR', -1)
+      const response = await client.getByTaxNameAndTermSlugObject(
+        filters,
+        'OR',
+        -1
+      )
 
       gallery = response.data.length ? response.data : null
     } catch (e) {
