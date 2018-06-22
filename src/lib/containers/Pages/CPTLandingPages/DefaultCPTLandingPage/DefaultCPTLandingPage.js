@@ -6,6 +6,7 @@ import type { BCorpPost } from '../../../../types/post_types'
 import ContentTransformer from '../../../../components/ContentTransformer/ContentTransformer'
 import CPTApiClient from '../../../../../api/cpt_client'
 import DefaultTemplate from '../../../Templates/DefaultTemplate/DefaultTemplate'
+import BCorpHead from '../../../../components/BCorpHead/BCorpHead'
 import style from './DefaultCPTLandingPage.scss'
 
 type Props = {
@@ -51,8 +52,14 @@ class DefaultCPTLandingPage extends React.Component<Props, State> {
     }
     const { post } = this.state
 
+    // defaults to post title
+    const pageTitle = post.post.post_title || ''
+    const pageDescription = ''
+
     return (
       <div className={`Default-CPT-Landing-Page`}>
+        <BCorpHead title={pageTitle} description={pageDescription} />
+
         <DefaultTemplate
           data={{
             page_title: post.post.post_title || ''

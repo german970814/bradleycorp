@@ -14,6 +14,7 @@ import Breadcrumbs, {
   createBreadcrumbsObjectFromTermTree
 } from '../../../../lib/components/Breadcrumbs/Breadcrumbs'
 import Loading from '../../../../lib/components/Loading/Loading'
+import BCorpHead from '../../../../lib/components/BCorpHead/BCorpHead'
 import style from './ProductCategory.scss'
 
 type CategoryData = {|
@@ -331,8 +332,14 @@ class ProductCategory extends React.Component<Props, State> {
     }
     const { categoryData } = this.state
 
+    const pageTitle =
+      (this.state.categoryData && this.state.categoryData.name) || ''
+    const pageDescription = ''
+
     return (
       <div className={style.ProductCategory}>
+        <BCorpHead title={pageTitle} description={pageDescription} />
+
         {categoryData.parent_name && (
           <h5 className={style.topCategoryTitle}>{categoryData.parent_name}</h5>
         )}
