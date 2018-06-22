@@ -2,7 +2,10 @@
 import React, { Component } from 'react'
 import type { Match } from 'react-router-dom'
 import type { BCorpCustomPage } from '../../../types/customPage_types'
+import { Helmet } from 'react-helmet'
+import { METATITLEPREFIX } from '../../../../globals'
 import CustomPageApiClient from '../../../../api/customPage_client'
+import { cleanMetaDescription } from '../../../bcorpString'
 import { getUrlWithoutPageParam } from '../../../bcorpUrl'
 import { validChain } from '../../../bcorpObject'
 import Loading from '../../../components/Loading/Loading'
@@ -19,7 +22,7 @@ type Props = {
 type State = BCorpCustomPage & {
   requesting: boolean,
   ready: boolean
-};
+}
 
 /**
  *
@@ -138,15 +141,33 @@ class Customizable extends Component<Props, State> {
       return null
     }
 
+    // currently defaults to page title
+    const pageTitle =
+      this.state.page_template_data.meta_title ||
+      this.state.page_template_data.page_title ||
+      ''
+    // defaults to empty
+    const pageDescription = this.state.page_template_data.meta_description || ''
+
     return (
       <div className={style.customizable}>
         <ErrorBoundary>
+          <Helmet>
+            <title>{`${METATITLEPREFIX}${pageTitle}`}</title>
+            <meta
+              name="description"
+              content={cleanMetaDescription(pageDescription)}
+            />
+          </Helmet>
+
           <TemplateFactory
             templateSlug={this.state['page_template_data'].template}
             data={this.state['page_template_data']}
             pagePath={this.props.match.url}
             renderModules={this.renderModules.bind(this)}
-            renderRightSidebarWidgets={this.renderRightSidebarWidgets.bind(this)}
+            renderRightSidebarWidgets={this.renderRightSidebarWidgets.bind(
+              this
+            )}
           />
         </ErrorBoundary>
       </div>
@@ -177,7 +198,9 @@ class Customizable extends Component<Props, State> {
 
       return this.setState(newState, () => {
         if (this.state.page_template_data.page_title) {
-          document.title = `Bradley Corp: ${this.state.page_template_data.page_title}`
+          document.title = `Bradley Corp: ${
+            this.state.page_template_data.page_title
+          }`
         } else {
           document.title = 'Bradley Corp'
         }
