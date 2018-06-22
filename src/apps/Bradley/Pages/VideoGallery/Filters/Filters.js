@@ -15,13 +15,13 @@ type Props = {
 class Filters extends React.Component<Props> {
   handleVideoTypeChange (event: SyntheticInputEvent<HTMLSelectElement>): void {
     const newFilters = { ...this.props.filters }
-    newFilters.video_gallery_type_cat = event.target.value
+    newFilters.video_gallery_cat = event.target.value
     return this.props.updateFilters(newFilters)
   }
 
   handleProductTypeChange (event: SyntheticInputEvent<HTMLSelectElement>): void {
     const newFilters = { ...this.props.filters }
-    newFilters.video_gallery_product_tag = event.target.value
+    newFilters.video_gallery_type_cat = event.target.value
     return this.props.updateFilters(newFilters)
   }
 
@@ -41,8 +41,8 @@ class Filters extends React.Component<Props> {
             className={style.select}
             defaultOptionId={filterDefault}
             defaultOptionName={filterDefaultName}
-            options={this.props.filterOptions.video_gallery_product_tag}
-            filterState={this.props.filters.video_gallery_product_tag}
+            options={this.props.filterOptions.video_gallery_type_cat}
+            filterState={this.props.filters.video_gallery_type_cat}
             handleChange={this.handleProductTypeChange.bind(this)}
             sortAlphabetically
           />
@@ -53,8 +53,8 @@ class Filters extends React.Component<Props> {
             className={style.select}
             defaultOptionId={filterDefault}
             defaultOptionName={filterDefaultName}
-            options={this.props.filterOptions.video_gallery_type_cat}
-            filterState={this.props.filters.video_gallery_type_cat}
+            options={this.props.filterOptions.video_gallery_cat}
+            filterState={this.props.filters.video_gallery_cat}
             handleChange={this.handleVideoTypeChange.bind(this)}
             sortAlphabetically
           />
