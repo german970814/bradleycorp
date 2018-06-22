@@ -27,7 +27,7 @@ type Props = {
 type State = {
   washroomNode?: HTMLDivElement,
   emergencySafetyNode?: HTMLDivElement
-}
+};
 
 const pageTitle = 'Home'
 const pageDescription = ''
@@ -54,7 +54,7 @@ class Home extends React.Component<Props, State> {
           <VerticalAlignHelper />
           <img src={require('../../../../images/logo-white/logo@2x.png')} />
           <div className={`home-caption ${style.headerCaption}`}>
-            {'every professional’s natural resource'}
+            {'every professional’s natural resource'}
           </div>
         </div>
       )
@@ -109,7 +109,7 @@ class Home extends React.Component<Props, State> {
 
     const content = (
       <h1 className={`row ${style.fadeIn} ${style.emergencySafetyContent}`}>
-        {'Emergency Safety & Industrial Solutions'}
+        {'Emergency Safety & Industrial Solutions'}
       </h1>
     )
     return isMobile ? (
@@ -186,7 +186,7 @@ class Home extends React.Component<Props, State> {
 
           {!match && (
             <div className={'home-caption'}>
-              {'every professional’s natural resource'}
+              {'every professional’s natural resource'}
             </div>
           )}
         </div>
