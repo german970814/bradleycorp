@@ -14,6 +14,7 @@ import Main from '../Main/Main'
 import MainBIMRevit from '../BIMRevit/Main/Main'
 import MainTheWashfountain from '../TheWashfountain/Main/Main'
 import Footer from '../Footer/Footer'
+import CookiesBanner from '../Header/CookiesBanner/CookiesBanner'
 import style from './App.scss'
 
 type Props = {}
@@ -85,6 +86,8 @@ class App extends React.Component<Props, State> {
                     return (
                       <ScreenSizeProvider value={{ screenSize }}>
                         <div id={'app'} className={`${style.app}`}>
+                          <CookiesBanner />
+
                           {this.getMain()}
 
                           <Footer />
