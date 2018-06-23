@@ -3,7 +3,9 @@ import { Switch, Route } from 'react-router-dom'
 import Header from '../../Header/Header'
 import Loadable from 'react-loadable'
 import Loading from '../../../../lib/components/Loading/Loading'
+import ErrorBoundary from '../../../../lib/containers/ErrorBoundary/ErrorBoundary'
 import ScrollToTop from '../../../../lib/components/ScrollToTop/ScrollToTop'
+import Error404 from '../../../../lib/components/Error/Error404/Error404'
 
 const BlogLandingPageLoadable = Loadable({
   loader: () =>
@@ -27,25 +29,28 @@ const Main = props => {
     <React.Fragment>
       <Header />
       <ScrollToTop>
-        <Switch>
-          <Route exact path="/" component={BlogLandingPageLoadable} />
-          <Route
-            exact
-            path="/post/:slug"
-            component={BlogSinglePostPageLoadable}
-          />
-          <Route exact path="/results/:query" component={ResultsLoadable} />
-          <Route
-            exact
-            path="/results/:query/:tab"
-            component={ResultsLoadable}
-          />
-          <Route
-            exact
-            path="/results/:query/:tab/page=:page"
-            component={ResultsLoadable}
-          />
-        </Switch>
+        <ErrorBoundary>
+          <Switch>
+            <Route exact path="/" component={BlogLandingPageLoadable} />
+            <Route
+              exact
+              path="/post/:slug"
+              component={BlogSinglePostPageLoadable}
+            />
+            <Route exact path="/results/:query" component={ResultsLoadable} />
+            <Route
+              exact
+              path="/results/:query/:tab"
+              component={ResultsLoadable}
+            />
+            <Route
+              exact
+              path="/results/:query/:tab/page=:page"
+              component={ResultsLoadable}
+            />
+            <Route component={Error404} />
+          </Switch>
+        </ErrorBoundary>
       </ScrollToTop>
     </React.Fragment>
   )
