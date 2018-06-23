@@ -109,7 +109,37 @@ const ResultsLoadable = Loadable({
 
 const WhereToBuyPageLoadable = Loadable({
   loader: () =>
-    import('../../../lib/containers/Pages/WhereToBuyPage/WhereToBuyPage'),
+    import('../../../lib/containers/Pages/IframedPages/WhereToBuyPage/WhereToBuyPage'),
+  loading: LoadingPageSize
+})
+
+const TechDataPageLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/IframedPages/TechDataPage/TechDataPage'),
+  loading: LoadingPageSize
+})
+
+const NavigatorValveSizingGuidePageLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/IframedPages/NavigatorValveSizingGuidePage/NavigatorValveSizingGuidePage'),
+  loading: LoadingPageSize
+})
+
+const PartSourcePageLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/IframedPages/PartSourcePage/PartSourcePage'),
+  loading: LoadingPageSize
+})
+
+const BimRevitPageLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/IframedPages/BimRevitPage/BimRevitPage'),
+  loading: LoadingPageSize
+})
+
+const ServicePartsPageLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/IframedPages/ServicePartsPage/ServicePartsPage'),
   loading: LoadingPageSize
 })
 
@@ -207,7 +237,18 @@ const RouterInner = () => {
         path="/results/:query/:tab/page=:page"
         component={ResultsLoadable}
       />
+
+      {/* Iframed Pages */}
       <Route exact path="/locator" component={WhereToBuyPageLoadable} />
+      <Route exact path="/techdata" component={TechDataPageLoadable} />
+      <Route
+        exact
+        path="/navigatorvalves/sizing-guide"
+        component={NavigatorValveSizingGuidePageLoadable}
+      />
+      <Route exact path="/partsource" component={PartSourcePageLoadable} />
+      <Route exact path="/bim" component={BimRevitPageLoadable} />
+      <Route exact path="/serviceparts" component={ServicePartsPageLoadable} />
 
       {/* Hubspot Forms */}
       {/* <Route
