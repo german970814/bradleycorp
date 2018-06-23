@@ -1,9 +1,13 @@
 // @flow
 import * as React from 'react'
 import { Link } from 'react-router-dom'
+import BCorpHead from '../../BCorpHead/BCorpHead'
 import Error from '../Error'
 
 type Props = {}
+
+const pageTitle = 'Error'
+const pageDescription = ''
 
 class Error404 extends React.PureComponent<Props> {
   renderMessageSecondary () {
@@ -24,13 +28,17 @@ class Error404 extends React.PureComponent<Props> {
 
   render () {
     return (
-      <Error
-        message={'404 Error: Page Not Found'}
-        messageSecondary={this.renderMessageSecondary()}
-        cta={'Return To The Bradley Home Page'}
-        ctaLink={'/'}
-        pageSize
-      />
+      <React.Fragment>
+        <BCorpHead title={pageTitle} description={pageDescription} />
+
+        <Error
+          message={'404 Error: Page Not Found'}
+          messageSecondary={this.renderMessageSecondary()}
+          cta={'Return To The Bradley Home Page'}
+          ctaLink={'/'}
+          pageSize
+        />
+      </React.Fragment>
     )
   }
 }
