@@ -52,7 +52,7 @@ class DefaultCPTLandingPage extends React.Component<Props, State> {
   render () {
     if (this.state.loading) {
       console.log('loading')
-      return <Loading />
+      return <Loading pageSize />
     }
 
     if (!this.state.post) {

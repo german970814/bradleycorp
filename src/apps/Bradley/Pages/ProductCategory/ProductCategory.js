@@ -329,7 +329,7 @@ class ProductCategory extends React.Component<Props, State> {
     console.log(this.state)
 
     if (this.state.loading) {
-      return <Loading />
+      return <Loading pageSize />
     }
 
     if (!this.state.categoryData) {

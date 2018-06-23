@@ -7,116 +7,116 @@ import type {
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { withCookies, Cookies } from 'react-cookie'
 import Loadable from 'react-loadable'
-import Loading from '../../../lib/components/Loading/Loading'
+import LoadingPageSize from '../../../lib/components/Loading/LoadingPageSize/LoadingPageSize'
 import ScrollToTop from '../../../lib/components/ScrollToTop/ScrollToTop'
 import ErrorBoundary from '../../../lib/containers/ErrorBoundary/ErrorBoundary'
 import Header from '../Header/Header'
 
 const HomeLoadable = Loadable({
   loader: () => import('../Pages/Home/Home'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const CustomizableLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/Customizable/Customizable'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const BlogSinglePostPageLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/BlogSinglePostPage/BlogSinglePostPage'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const DefaultCPTLandingPageLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/CPTLandingPages/DefaultCPTLandingPage/DefaultCPTLandingPage'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const CaseStudyLandingPageLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/CPTLandingPages/CustomLandingPages/CaseStudyLandingPage/CaseStudyLandingPage'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const ChipSampleLandingPageLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/CPTLandingPages/CustomLandingPages/ChipSampleLandingPage/ChipSampleLandingPage'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const LiteratureLandingPageLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/CPTLandingPages/CustomLandingPages/LiteratureLandingPage/LiteratureLandingPage'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const NewsLandingPageLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/CPTLandingPages/CustomLandingPages/NewsLandingPage/NewsLandingPage'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const TechInfoLandingPageLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/CPTLandingPages/CustomLandingPages/TechInfoLandingPage/TechInfoLandingPage'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const VideoGalleryLandingPageLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/CPTLandingPages/CustomLandingPages/VideoGalleryLandingPage/VideoGalleryLandingPage'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const ProductDetailLoadable = Loadable({
   loader: () => import('../Pages/ProductDetail/ProductDetail'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const ProductCategoryLoadable = Loadable({
   loader: () => import('../Pages/ProductCategory/ProductCategory'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const LiteratureAndChipSamplesLoadable = Loadable({
   loader: () =>
     import('../Pages/LiteratureAndChipSamples/LiteratureAndChipSamples'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const VideoGalleryLoadable = Loadable({
   loader: () => import('../Pages/VideoGallery/VideoGallery'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const ApplicationGalleryLoadable = Loadable({
   loader: () => import('../Pages/ApplicationGallery/ApplicationGallery'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const ApplicationGalleryDetailLoadable = Loadable({
   loader: () => import('../Pages/ApplicationGallery/ApplicationGalleryDetail'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const ResultsLoadable = Loadable({
   loader: () => import('../../../lib/containers/Pages/Results/Results'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const WhereToBuyPageLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/WhereToBuyPage/WhereToBuyPage'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 // const HubspotFormsLoadable = Loadable({
 //   loader: () =>
 //     import('../../../lib/containers/Pages/HubspotFormPage/HubspotFormPage'),
-//   loading: Loading
+//   loading: LoadingPageSize
 // })
 
 type Props = {

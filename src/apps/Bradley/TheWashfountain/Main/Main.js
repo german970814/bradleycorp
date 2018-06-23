@@ -2,7 +2,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Header from '../../Header/Header'
 import Loadable from 'react-loadable'
-import Loading from '../../../../lib/components/Loading/Loading'
+import LoadingPageSize from '../../../../lib/components/Loading/LoadingPageSize/LoadingPageSize'
 import ErrorBoundary from '../../../../lib/containers/ErrorBoundary/ErrorBoundary'
 import ScrollToTop from '../../../../lib/components/ScrollToTop/ScrollToTop'
 import Error404 from '../../../../lib/components/Error/Error404/Error404'
@@ -10,18 +10,18 @@ import Error404 from '../../../../lib/components/Error/Error404/Error404'
 const BlogLandingPageLoadable = Loadable({
   loader: () =>
     import('../../../../lib/containers/Pages/BlogLandingPage/BlogLandingPage'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const BlogSinglePostPageLoadable = Loadable({
   loader: () =>
     import('../../../../lib/containers/Pages/BlogSinglePostPage/BlogSinglePostPage'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const ResultsLoadable = Loadable({
   loader: () => import('../../../../lib/containers/Pages/Results/Results'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const Main = props => {

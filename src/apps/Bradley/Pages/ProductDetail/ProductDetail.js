@@ -79,7 +79,7 @@ class ProductDetail extends Component {
     console.log(this.state.productDetail)
 
     if (this.state.loading) {
-      return <Loading />
+      return <Loading pageSize />
     }
 
     if (this.state.productDetail.product.post.ID === 0) {

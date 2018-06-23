@@ -52,7 +52,7 @@ class BlogSinglePostPage extends Component<Props, State> {
 
   render () {
     if (this.state.loading) {
-      return <Loading />
+      return <Loading pageSize />
     }
 
     if (!this.state.post) {

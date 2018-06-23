@@ -137,7 +137,7 @@ class Customizable extends Component<Props, State> {
     console.log(this.state)
 
     if (this.state.requesting) {
-      return <Loading />
+      return <Loading pageSize />
     }
 
     if (this.state['page_template_data']['page_id'] === 0) {

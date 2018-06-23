@@ -335,7 +335,7 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
       pageDescription
 
     if (this.state.loading) {
-      return <Loading />
+      return <Loading pageSize />
     }
 
     if (!this.state.applicationGallery) {
