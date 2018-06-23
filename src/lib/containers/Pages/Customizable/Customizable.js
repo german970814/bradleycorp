@@ -5,6 +5,7 @@ import type { BCorpCustomPage } from '../../../types/customPage_types'
 import CustomPageApiClient from '../../../../api/customPage_client'
 import { getUrlWithoutPageParam } from '../../../bcorpUrl'
 import { validChain } from '../../../bcorpObject'
+import ContentTransformer from '../../../components/ContentTransformer/ContentTransformer'
 import Error404 from '../../../components/Error/Error404/Error404'
 import Loading from '../../../components/Loading/Loading'
 import TemplateFactory from '../../Templates/TemplateFactory'
@@ -117,13 +118,25 @@ class Customizable extends Component<Props, State> {
   }
 
   renderModules () {
-    return this.state.ready ? (
+    if (!this.state.ready) {
+      return <Loading />
+    }
+
+    // no need to pass through the module builder if we have no modules
+    if (
+      !this.state.module_data.rows ||
+      this.state.module_data.rows.length === 0
+    ) {
+      return (
+        <ContentTransformer content={this.state.module_data.content || ''} />
+      )
+    }
+
+    return (
       <ModuleBuilder
         moduleData={this.state['module_data']}
         pagePath={this.props.match.url}
       />
-    ) : (
-      <Loading />
     )
   }
 
