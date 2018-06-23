@@ -9,6 +9,7 @@ import { withCookies, Cookies } from 'react-cookie'
 import Loadable from 'react-loadable'
 import Loading from '../../../lib/components/Loading/Loading'
 import ScrollToTop from '../../../lib/components/ScrollToTop/ScrollToTop'
+import ErrorBoundary from '../../../lib/containers/ErrorBoundary/ErrorBoundary'
 import Header from '../Header/Header'
 
 const HomeLoadable = Loadable({
@@ -143,13 +144,16 @@ const Main = (props: Props) => {
             const cookieName: HomePageCookie = 'BcorpHomePage'
             const homepage: HomePageCookieOption = props.cookies.get(cookieName)
 
+            let home = null
             if (!homepage) {
-              return <HomeLoadable history={history} />
+              home = <HomeLoadable history={history} />
             } else if (homepage === 'commercial') {
-              return <Redirect to="/commercial" />
+              home = <Redirect to="/commercial" />
             } else if (homepage === 'industrial') {
-              return <Redirect to="/industrial" />
+              home = <Redirect to="/industrial" />
             }
+
+            return <ErrorBoundary>{home}</ErrorBoundary>
           }}
         />
 
@@ -158,7 +162,10 @@ const Main = (props: Props) => {
             return (
               <React.Fragment>
                 <Header />
-                <RouterInner />
+
+                <ErrorBoundary>
+                  <RouterInner />
+                </ErrorBoundary>
               </React.Fragment>
             )
           }}

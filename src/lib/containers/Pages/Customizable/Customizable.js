@@ -13,7 +13,6 @@ import TemplateFactory from '../../Templates/TemplateFactory'
 import ModuleBuilder from '../../Modules/ModuleBuilder'
 import WidgetBuilder from '../../Widgets/WidgetBuilder'
 import style from './Customizable.scss'
-import ErrorBoundary from '../../../contexts/ErrorBoundary'
 
 type Props = {
   match: Match
@@ -151,25 +150,21 @@ class Customizable extends Component<Props, State> {
 
     return (
       <div className={style.customizable}>
-        <ErrorBoundary>
-          <Helmet>
-            <title>{`${METATITLEPREFIX}${pageTitle}`}</title>
-            <meta
-              name="description"
-              content={cleanMetaDescription(pageDescription)}
-            />
-          </Helmet>
-
-          <TemplateFactory
-            templateSlug={this.state['page_template_data'].template}
-            data={this.state['page_template_data']}
-            pagePath={this.props.match.url}
-            renderModules={this.renderModules.bind(this)}
-            renderRightSidebarWidgets={this.renderRightSidebarWidgets.bind(
-              this
-            )}
+        <Helmet>
+          <title>{`${METATITLEPREFIX}${pageTitle}`}</title>
+          <meta
+            name="description"
+            content={cleanMetaDescription(pageDescription)}
           />
-        </ErrorBoundary>
+        </Helmet>
+
+        <TemplateFactory
+          templateSlug={this.state['page_template_data'].template}
+          data={this.state['page_template_data']}
+          pagePath={this.props.match.url}
+          renderModules={this.renderModules.bind(this)}
+          renderRightSidebarWidgets={this.renderRightSidebarWidgets.bind(this)}
+        />
       </div>
     )
   }

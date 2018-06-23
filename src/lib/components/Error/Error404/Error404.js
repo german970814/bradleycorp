@@ -1,11 +1,11 @@
 // @flow
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import Error404 from '../Error404'
+import Error from '../Error'
 
 type Props = {}
 
-class Default404 extends React.PureComponent<Props> {
+class Error404 extends React.PureComponent<Props> {
   renderMessageSecondary () {
     return (
       <div>
@@ -24,14 +24,15 @@ class Default404 extends React.PureComponent<Props> {
 
   render () {
     return (
-      <Error404
+      <Error
         message={'404 Error: Page Not Found'}
         messageSecondary={this.renderMessageSecondary()}
         cta={'Return To The Bradley Home Page'}
         ctaLink={'/'}
+        pageSize
       />
     )
   }
 }
 
-export default Default404
+export default Error404

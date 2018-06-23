@@ -1,9 +1,10 @@
 import * as React from 'react'
+import Error500 from '../../components/Error/Error500/Error500'
 
 type Props = {
   defaultUI?: mixed,
-  children: mixed,
-};
+  children: mixed
+}
 
 export default class ErrorBoundary extends React.Component<Props> {
   constructor (props: Props) {
@@ -24,7 +25,7 @@ export default class ErrorBoundary extends React.Component<Props> {
       if (this.props.defaultUI && typeof this.props.defaultUI === 'function') {
         return this.props.defaultUI()
       } else {
-        return <h3>Something went wrong.</h3>
+        return <Error500 />
       }
     }
     return this.props.children

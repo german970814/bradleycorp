@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react'
-import Error404 from '../Error404'
+import Error from '../Error'
 
 type Props = {
   message: string,
@@ -10,7 +10,7 @@ type Props = {
 class NoResults extends React.PureComponent<Props> {
   render () {
     return (
-      <Error404
+      <Error
         message={this.props.message}
         className={this.props.className}
         cta={'Please Try Again'}

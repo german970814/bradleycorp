@@ -19,7 +19,7 @@ import style from './ApplicationGallery.scss'
 import GalleryItem from './GalleryItem'
 import BCorpHead from '../../../../lib/components/BCorpHead/BCorpHead'
 import Loading from '../../../../lib/components/Loading/Loading'
-import NoResults from '../../../../lib/components/Error404/NoResults/NoResults'
+import NoResults from '../../../../lib/components/Error/NoResults/NoResults'
 
 type MetaType = BCorpMeta & {
   app_gallery_img?: string,

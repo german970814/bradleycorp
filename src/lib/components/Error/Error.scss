@@ -2,12 +2,9 @@
 @import '../../../scss/partials/variables';
 @import '../../../scss/partials/mixins';
 
-.noResultsWrapper {
+.errorWrapper {
+  width: 100%;
   text-align: center;
-
-  @include respond-to(mobile) {
-    width: 100%;
-  }
 
   @include respond-to(tablet) {
     width: 90%;
@@ -25,5 +22,20 @@
   h6 {
     color: $gray;
     text-transform: uppercase;
+  }
+
+  &.pageSize {
+    margin-top: 105px;
+    margin-bottom: 105px;
+
+    @include respond-to(tablet) {
+      margin-top: 155px;
+      margin-bottom: 155px;
+    }
+
+    @include respond-to(desktop) {
+      margin-top: 185px;
+      margin-bottom: 215px;
+    }
   }
 }

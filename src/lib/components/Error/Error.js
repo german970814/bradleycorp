@@ -3,17 +3,18 @@ import * as React from 'react'
 import { Link } from 'react-router-dom'
 import BCorpLink from '../BCorpLink/BCorpLink'
 import ContentTransformer from '../ContentTransformer/ContentTransformer'
-import style from './Error404.scss'
+import style from './Error.scss'
 
 type Props = {
   message: string,
   messageSecondary?: React.Node,
   cta?: string,
   ctaLink?: string,
-  className?: string
+  className?: string,
+  pageSize?: boolean
 }
 
-class Error404 extends React.PureComponent<Props> {
+class Error extends React.PureComponent<Props> {
   renderCTA () {
     if (!this.props.cta) {
       return null
@@ -25,7 +26,10 @@ class Error404 extends React.PureComponent<Props> {
   render () {
     return (
       <div className={`row ${this.props.className || ''}`}>
-        <div className={`col1 ${style.noResultsWrapper}`}>
+        <div
+          className={`col1 ${style.errorWrapper} ${
+            this.props.pageSize ? style.pageSize : ''
+          }`}>
           <img src={require('../../../images/warning-icon/warning-icon.png')} />
 
           <h1>{this.props.message}</h1>
@@ -59,4 +63,4 @@ class Error404 extends React.PureComponent<Props> {
   }
 }
 
-export default Error404
+export default Error

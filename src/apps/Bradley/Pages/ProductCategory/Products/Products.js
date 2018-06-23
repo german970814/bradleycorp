@@ -7,7 +7,7 @@ import debounce from 'debounce'
 import CPTApiClient from '../../../../../api/cpt_client'
 import { sortIntoRows } from '../../../../../lib/bcorpJSX'
 import Loading from '../../../../../lib/components/Loading/Loading'
-import NoResults from '../../../../../lib/components/Error404/NoResults/NoResults'
+import NoResults from '../../../../../lib/components/Error/NoResults/NoResults'
 import ProductScrollerProduct from '../../../../../lib/containers/ProductScroller/ProductScrollerProduct/ProductScrollerProduct'
 import style from './Products.scss'
 

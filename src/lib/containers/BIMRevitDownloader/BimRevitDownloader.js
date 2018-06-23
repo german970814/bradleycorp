@@ -4,7 +4,7 @@ import type { BimProductVariant } from '../../../api/bradley-apis/documentPackag
 import DocumentPackagerApiClient from '../../../api/bradley-apis/documentPackager_client'
 import BIMRevitOption from './BIMRevitOption/BIMRevitOption'
 import Loading from '../../components/Loading/Loading'
-import NoResults from '../../components/Error404/NoResults/NoResults'
+import NoResults from '../../components/Error/NoResults/NoResults'
 import style from './BimRevitDownloader.scss'
 
 type Props = {
