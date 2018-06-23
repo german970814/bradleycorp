@@ -5,6 +5,7 @@ import type { BCorpCustomPage } from '../../../types/customPage_types'
 import CustomPageApiClient from '../../../../api/customPage_client'
 import { getUrlWithoutPageParam } from '../../../bcorpUrl'
 import { validChain } from '../../../bcorpObject'
+import Error404 from '../../../components/Error/Error404/Error404'
 import Loading from '../../../components/Loading/Loading'
 import TemplateFactory from '../../Templates/TemplateFactory'
 import ModuleBuilder from '../../Modules/ModuleBuilder'
@@ -133,9 +134,14 @@ class Customizable extends Component<Props, State> {
    * @return {void}
    */
   render () {
-    // console.log( this.state )
+    console.log(this.state)
+
+    if (this.state.requesting) {
+      return <Loading />
+    }
+
     if (this.state['page_template_data']['page_id'] === 0) {
-      return null
+      return <Error404 />
     }
 
     // currently defaults to page title
@@ -193,7 +199,11 @@ class Customizable extends Component<Props, State> {
         }
       })
     } catch (err) {
-      this.setState({ requesting: false, ready: false })
+      this.setState({
+        requesting: false,
+        ready: false,
+        page_template_data: this.defaultState.page_template_data
+      })
       console.log(err)
     }
   }

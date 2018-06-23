@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react'
 import BCorpHead from '../../../../lib/components/BCorpHead/BCorpHead'
+import Error404 from '../../../../lib/components/Error/Error404/Error404'
 import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import ProductList from './ProductList'
 import Downloadables from './Downloadables'
@@ -269,6 +270,7 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
         applicationGallery = response.data
       } catch (exception) {
         console.log(exception)
+        this.setState({ loading: false })
         return
       }
     }
@@ -293,6 +295,7 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
         }
       )
     })
+    this.setState({ loading: false })
   }
 
   /**
@@ -330,6 +333,14 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
       (this.state.applicationGallery &&
         this.state.applicationGallery.post.meta_description) ||
       pageDescription
+
+    if (this.state.loading) {
+      return <Loading />
+    }
+
+    if (!this.state.applicationGallery) {
+      return <Error404 />
+    }
 
     return (
       <div className={style.ApplicationGalleryDetail}>

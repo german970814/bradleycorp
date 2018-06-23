@@ -6,7 +6,7 @@ import Error from '../Error'
 
 type Props = {}
 
-const pageTitle = 'Error'
+const pageTitle = '404 Error'
 const pageDescription = ''
 
 class Error404 extends React.PureComponent<Props> {
