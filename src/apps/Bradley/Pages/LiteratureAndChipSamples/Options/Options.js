@@ -278,9 +278,7 @@ class Options extends React.Component<Props> {
 
     // sort chip samples within each category
     Object.keys(sortedChipSamples).forEach(materialType => {
-      sortedChipSamples[
-        materialType
-      ] = sortAlphabeticallyArrayOfTwoLevelObjects(
+      sortedChipSamples[materialType] = sortAlphabeticallyArrayOfTwoLevelObjects(
         'post',
         'post_title',
         sortedChipSamples[materialType]

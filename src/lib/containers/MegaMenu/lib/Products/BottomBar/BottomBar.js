@@ -137,26 +137,20 @@ class BottomBar extends React.Component<Props> {
 
   extractExtraLinksColumnInfo (colId: string): false | ColType {
     if (
-      !this.props.productMegaMenuItem[
-        `bcorp_mega_menu_extra_links_col_${colId}`
-      ] ||
+      !this.props.productMegaMenuItem[`bcorp_mega_menu_extra_links_col_${colId}`] ||
       this.props.productMegaMenuItem[`bcorp_mega_menu_extra_links_col_${colId}`]
         .length === 0
     ) {
       return false
     }
 
-    const name = this.props.productMegaMenuItem[
-      `bcorp_mega_menu_extra_links_col_${colId}`
-    ].name
+    const name = this.props.productMegaMenuItem[`bcorp_mega_menu_extra_links_col_${colId}`].name
 
     const links = Object.keys(
       this.props.productMegaMenuItem[`bcorp_mega_menu_extra_links_col_${colId}`]
         .links
     ).map(index => {
-      return this.props.productMegaMenuItem[
-        `bcorp_mega_menu_extra_links_col_${colId}`
-      ].links[index]
+      return this.props.productMegaMenuItem[`bcorp_mega_menu_extra_links_col_${colId}`].links[index]
     })
 
     return { name, links }

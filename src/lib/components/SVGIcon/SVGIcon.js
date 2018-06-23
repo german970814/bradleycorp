@@ -94,7 +94,6 @@ class SVGIcon extends Component {
       stroke: this.props.color ? lookupColor(this.props.color) : undefined
     }
 
-
     return (
       <svg
         className={this.props.className}
