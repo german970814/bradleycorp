@@ -2,11 +2,12 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import BCorpLink from '../BCorpLink/BCorpLink'
+import ContentTransformer from '../ContentTransformer/ContentTransformer'
 import style from './Error404.scss'
 
 type Props = {
   message: string,
-  messageSecondary?: string,
+  messageSecondary?: React.Node,
   cta?: string,
   ctaLink?: string,
   className?: string
