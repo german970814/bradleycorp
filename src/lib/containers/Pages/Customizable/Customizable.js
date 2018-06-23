@@ -2,16 +2,14 @@
 import React, { Component } from 'react'
 import type { Match } from 'react-router-dom'
 import type { BCorpCustomPage } from '../../../types/customPage_types'
-import { Helmet } from 'react-helmet'
-import { METATITLEPREFIX } from '../../../../globals'
 import CustomPageApiClient from '../../../../api/customPage_client'
-import { cleanMetaDescription } from '../../../bcorpString'
 import { getUrlWithoutPageParam } from '../../../bcorpUrl'
 import { validChain } from '../../../bcorpObject'
 import Loading from '../../../components/Loading/Loading'
 import TemplateFactory from '../../Templates/TemplateFactory'
 import ModuleBuilder from '../../Modules/ModuleBuilder'
 import WidgetBuilder from '../../Widgets/WidgetBuilder'
+import BCorpHead from '../../../components/BCorpHead/BCorpHead'
 import style from './Customizable.scss'
 
 type Props = {
@@ -150,13 +148,7 @@ class Customizable extends Component<Props, State> {
 
     return (
       <div className={style.customizable}>
-        <Helmet>
-          <title>{`${METATITLEPREFIX}${pageTitle}`}</title>
-          <meta
-            name="description"
-            content={cleanMetaDescription(pageDescription)}
-          />
-        </Helmet>
+        <BCorpHead title={pageTitle} description={pageDescription} />
 
         <TemplateFactory
           templateSlug={this.state['page_template_data'].template}
