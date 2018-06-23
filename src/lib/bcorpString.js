@@ -11,5 +11,5 @@ export function stringIsNumeric (str: string): boolean {
 }
 
 export function cleanMetaDescription (metaDescription: string): string {
-  return metaDescription.replace(/\"/g, "'")
+  return metaDescription.replace(/"/g, "'")
 }

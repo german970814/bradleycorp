@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import BCorpHead from '../../../../lib/components/BCorpHead/BCorpHead'
 import ProductList from './ProductList'
 import Downloadables from './Downloadables'
-import { PostType } from './ApplicationGallery'
 import CPTApiClient from '../../../../api/cpt_client'
 import Loading from '../../../../lib/components/Loading/Loading'
 import ContentTransformer from '../../../../lib/components/ContentTransformer/ContentTransformer'
@@ -14,7 +13,7 @@ import type {
   BimProductAndVariantsFromModelIdsResponse,
   BimProductVariant
 } from '../../../../api/bradley-apis/documentPackager_client'
-import { pageTitle, pageDescription } from './ApplicationGallery'
+import { pageTitle, pageDescription, PostType } from './ApplicationGallery'
 import style from './ApplicationGalleryDetail.scss'
 import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
 
