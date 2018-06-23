@@ -1,7 +1,5 @@
 // @flow
 import * as React from 'react'
-import type { CookiesBannerCookie } from '../../../../lib/types/cookie_types'
-import { withCookies, Cookies } from 'react-cookie'
 import { Link } from 'react-router-dom'
 import type { MegaMenuNavMenuItem } from '../../../../lib/types/megaMenu_types'
 import VerticalAlignHelper from '../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
@@ -10,18 +8,10 @@ import SearchIcon from '../SearchIcon/SearchIcon'
 import style, { bottombarheight, totalheight } from './HeaderDesktop.scss'
 
 type Props = {
-  menuItems: Array<MegaMenuNavMenuItem>,
-  // from withCookies HOC
-  cookies: Cookies
+  menuItems: Array<MegaMenuNavMenuItem>
 }
 
 const HeaderDesktop = (props: Props) => {
-  // we have to add the height of the cookie banner if it exists on the page
-  const cookieName: CookiesBannerCookie = 'BcorpCookiesBanner'
-  const megaMenuTop = props.cookies.get(cookieName)
-    ? totalheight
-    : parseInt(47) + parseInt(totalheight)
-
   return (
     <header className={style.header}>
       <div className={style.topBarColor}>
@@ -67,7 +57,7 @@ const HeaderDesktop = (props: Props) => {
             type={'hover'}
             menuItems={props.menuItems}
             itemHeight={bottombarheight}
-            top={megaMenuTop}
+            top={totalheight}
           />
         </div>
 
@@ -77,4 +67,4 @@ const HeaderDesktop = (props: Props) => {
   )
 }
 
-export default withCookies(HeaderDesktop)
+export default HeaderDesktop

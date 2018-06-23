@@ -14,7 +14,7 @@ import Main from '../Main/Main'
 import MainBIMRevit from '../BIMRevit/Main/Main'
 import MainTheWashfountain from '../TheWashfountain/Main/Main'
 import Footer from '../Footer/Footer'
-import CookiesBanner from '../Header/CookiesBanner/CookiesBanner'
+import CookiesBanner from '../../../lib/containers/FooterPanel/CookiesBanner/CookiesBanner'
 import style from './App.scss'
 
 type Props = {}

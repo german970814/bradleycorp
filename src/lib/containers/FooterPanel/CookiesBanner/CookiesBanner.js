@@ -3,10 +3,11 @@ import * as React from 'react'
 import type {
   CookiesBannerCookie,
   CookiesBannerCookieOption
-} from '../../../../lib/types/cookie_types'
+} from '../../../types/cookie_types'
 import { withCookies, Cookies } from 'react-cookie'
 import { Link } from 'react-router-dom'
-import Cross from '../../../../lib/components/Cross/Cross'
+import Cross from '../../../components/Cross/Cross'
+import FooterPanel from '../../FooterPanel/FooterPanel'
 import style from './CookiesBanner.scss'
 
 type Props = {
@@ -37,22 +38,20 @@ class CookiesBanner extends React.Component<Props, State> {
   }
 
   render () {
-    if (this.bannerPreviouslyClosed() || this.state.hide) {
-      return null
-    }
-
     return (
-      <div className={`small-body ${style.CookiesBanner}`}>
-        {text}
-        <Link to="/privacy">
-          <span className={`small-body ${style.learnMore}`}>
-            {' Learn More'}
-          </span>
-        </Link>
-        <div className={style.crossWrapper}>
-          <Cross onClick={this.closeBanner.bind(this)} size={14} />
+      <FooterPanel show={!this.bannerPreviouslyClosed() && !this.state.hide}>
+        <div className={`small-body ${style.CookiesBanner}`}>
+          {text}
+          <Link to="/privacy">
+            <span className={`small-body ${style.learnMore}`}>
+              {' Learn More'}
+            </span>
+          </Link>
+          <div className={style.crossWrapper}>
+            <Cross onClick={this.closeBanner.bind(this)} size={14} />
+          </div>
         </div>
-      </div>
+      </FooterPanel>
     )
   }
 
