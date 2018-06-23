@@ -1,13 +1,13 @@
 // @flow
 import React, { Component } from 'react'
 import BCorpHead from '../../../../lib/components/BCorpHead/BCorpHead'
+import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import ProductList from './ProductList'
 import Downloadables from './Downloadables'
 import CPTApiClient from '../../../../api/cpt_client'
 import Loading from '../../../../lib/components/Loading/Loading'
 import ContentTransformer from '../../../../lib/components/ContentTransformer/ContentTransformer'
 import ImageFrame from '../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
-import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import DocumentPackagerApiClient from '../../../../api/bradley-apis/documentPackager_client'
 import type {
   BimProductAndVariantsFromModelIdsResponse,
@@ -15,7 +15,6 @@ import type {
 } from '../../../../api/bradley-apis/documentPackager_client'
 import { pageTitle, pageDescription, PostType } from './ApplicationGallery'
 import style from './ApplicationGalleryDetail.scss'
-import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
 
 import type { GalleryType } from './ApplicationGallery'
 import type { Location, Match } from 'react-router-dom'
@@ -333,14 +332,18 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
       pageDescription
 
     return (
-      <div className={`row ${defaultStyle.defaultTemplate}`}>
+      <div className={style.ApplicationGalleryDetail}>
         <BCorpHead
           title={detailPageTitle}
           description={detailPageDescription}
         />
 
-        {renderTitle(pageTitle, 'col1')}
-        {this.renderContent()}
+        <DefaultTemplate
+          data={{
+            page_title: pageTitle
+          }}
+          renderModules={this.renderContent.bind(this)}
+        />
       </div>
     )
   }

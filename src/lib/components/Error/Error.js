@@ -2,7 +2,6 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import BCorpLink from '../BCorpLink/BCorpLink'
-import ContentTransformer from '../ContentTransformer/ContentTransformer'
 import style from './Error.scss'
 
 type Props = {
