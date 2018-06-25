@@ -2,18 +2,17 @@
 import React, { Component } from 'react'
 import type { Match } from 'react-router-dom'
 import type { BCorpCustomPage } from '../../../types/customPage_types'
-import { Helmet } from 'react-helmet'
-import { METATITLEPREFIX } from '../../../../globals'
 import CustomPageApiClient from '../../../../api/customPage_client'
-import { cleanMetaDescription } from '../../../bcorpString'
 import { getUrlWithoutPageParam } from '../../../bcorpUrl'
 import { validChain } from '../../../bcorpObject'
+import ContentTransformer from '../../../components/ContentTransformer/ContentTransformer'
+import Error404 from '../../../components/Error/Error404/Error404'
 import Loading from '../../../components/Loading/Loading'
 import TemplateFactory from '../../Templates/TemplateFactory'
 import ModuleBuilder from '../../Modules/ModuleBuilder'
 import WidgetBuilder from '../../Widgets/WidgetBuilder'
+import BCorpHead from '../../../components/BCorpHead/BCorpHead'
 import style from './Customizable.scss'
-import ErrorBoundary from '../../../contexts/ErrorBoundary'
 
 type Props = {
   match: Match
@@ -119,13 +118,25 @@ class Customizable extends Component<Props, State> {
   }
 
   renderModules () {
-    return this.state.ready ? (
+    if (!this.state.ready) {
+      return <Loading />
+    }
+
+    // no need to pass through the module builder if we have no modules
+    if (
+      !this.state.module_data.rows ||
+      this.state.module_data.rows.length === 0
+    ) {
+      return (
+        <ContentTransformer content={this.state.module_data.content || ''} />
+      )
+    }
+
+    return (
       <ModuleBuilder
         moduleData={this.state['module_data']}
         pagePath={this.props.match.url}
       />
-    ) : (
-      <Loading />
     )
   }
 
@@ -136,9 +147,14 @@ class Customizable extends Component<Props, State> {
    * @return {void}
    */
   render () {
-    // console.log( this.state )
+    console.log(this.state)
+
+    if (this.state.requesting) {
+      return <Loading pageSize />
+    }
+
     if (this.state['page_template_data']['page_id'] === 0) {
-      return null
+      return <Error404 />
     }
 
     // currently defaults to page title
@@ -151,25 +167,15 @@ class Customizable extends Component<Props, State> {
 
     return (
       <div className={style.customizable}>
-        <ErrorBoundary>
-          <Helmet>
-            <title>{`${METATITLEPREFIX}${pageTitle}`}</title>
-            <meta
-              name="description"
-              content={cleanMetaDescription(pageDescription)}
-            />
-          </Helmet>
+        <BCorpHead title={pageTitle} description={pageDescription} />
 
-          <TemplateFactory
-            templateSlug={this.state['page_template_data'].template}
-            data={this.state['page_template_data']}
-            pagePath={this.props.match.url}
-            renderModules={this.renderModules.bind(this)}
-            renderRightSidebarWidgets={this.renderRightSidebarWidgets.bind(
-              this
-            )}
-          />
-        </ErrorBoundary>
+        <TemplateFactory
+          templateSlug={this.state['page_template_data'].template}
+          data={this.state['page_template_data']}
+          pagePath={this.props.match.url}
+          renderModules={this.renderModules.bind(this)}
+          renderRightSidebarWidgets={this.renderRightSidebarWidgets.bind(this)}
+        />
       </div>
     )
   }
@@ -206,7 +212,11 @@ class Customizable extends Component<Props, State> {
         }
       })
     } catch (err) {
-      this.setState({ requesting: false, ready: false })
+      this.setState({
+        requesting: false,
+        ready: false,
+        page_template_data: this.defaultState.page_template_data
+      })
       console.log(err)
     }
   }

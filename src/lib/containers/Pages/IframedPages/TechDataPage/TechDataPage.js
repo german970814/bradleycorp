@@ -1,25 +1,19 @@
 // @flow
 import * as React from 'react'
-import DefaultTemplate from '../../Templates/DefaultTemplate/DefaultTemplate'
-import BCorpHead from '../../../components/BCorpHead/BCorpHead'
+import DefaultTemplate from '../../../Templates/DefaultTemplate/DefaultTemplate'
+import BCorpHead from '../../../../components/BCorpHead/BCorpHead'
 
 type Props = {
   pageTitle: string
 }
 
-const pageTitle = 'Where To Buy'
+const pageTitle = 'Technical Data Listing'
 const pageDescription = ''
 
-export default class WhereToBuyPage extends React.Component<Props> {
-  // constructor (props: Props) {
-  //   super(props)
-
-  //   // this.state = {}
-  // }
-
+export default class TechDataPage extends React.PureComponent<Props> {
   render () {
     return (
-      <div className={'where-to-buy'}>
+      <div className={'technical-data-listing'}>
         <BCorpHead title={pageTitle} description={pageDescription} />
 
         <DefaultTemplate
@@ -30,8 +24,8 @@ export default class WhereToBuyPage extends React.Component<Props> {
             return (
               <React.Fragment>
                 <iframe
-                  id="locatorIframe"
-                  src="http://forms.bradleydev.twoxfour.com/where-to-buy/index.html"
+                  id="techDataIframe"
+                  src="https://www.bradleycorp.com/techdata"
                   width="100%"
                   height="800"
                   frameBorder="0"

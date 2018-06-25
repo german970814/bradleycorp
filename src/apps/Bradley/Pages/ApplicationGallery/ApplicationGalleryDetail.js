@@ -1,22 +1,21 @@
 // @flow
 import React, { Component } from 'react'
 import BCorpHead from '../../../../lib/components/BCorpHead/BCorpHead'
+import Error404 from '../../../../lib/components/Error/Error404/Error404'
+import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import ProductList from './ProductList'
 import Downloadables from './Downloadables'
-import { PostType } from './ApplicationGallery'
 import CPTApiClient from '../../../../api/cpt_client'
 import Loading from '../../../../lib/components/Loading/Loading'
 import ContentTransformer from '../../../../lib/components/ContentTransformer/ContentTransformer'
 import ImageFrame from '../../../../lib/components/FixedAspectRatioBox/ImageFrame/ImageFrame'
-import { renderTitle } from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import DocumentPackagerApiClient from '../../../../api/bradley-apis/documentPackager_client'
 import type {
   BimProductAndVariantsFromModelIdsResponse,
   BimProductVariant
 } from '../../../../api/bradley-apis/documentPackager_client'
-import { pageTitle, pageDescription } from './ApplicationGallery'
+import { pageTitle, pageDescription, PostType } from './ApplicationGallery'
 import style from './ApplicationGalleryDetail.scss'
-import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
 
 import type { GalleryType } from './ApplicationGallery'
 import type { Location, Match } from 'react-router-dom'
@@ -271,6 +270,7 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
         applicationGallery = response.data
       } catch (exception) {
         console.log(exception)
+        this.setState({ loading: false })
         return
       }
     }
@@ -295,6 +295,7 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
         }
       )
     })
+    this.setState({ loading: false })
   }
 
   /**
@@ -333,15 +334,27 @@ export default class ApplicationGalleryDetail extends Component<Props, State> {
         this.state.applicationGallery.post.meta_description) ||
       pageDescription
 
+    if (this.state.loading) {
+      return <Loading pageSize />
+    }
+
+    if (!this.state.applicationGallery) {
+      return <Error404 />
+    }
+
     return (
-      <div className={`row ${defaultStyle.defaultTemplate}`}>
+      <div className={style.ApplicationGalleryDetail}>
         <BCorpHead
           title={detailPageTitle}
           description={detailPageDescription}
         />
 
-        {renderTitle(pageTitle, 'col1')}
-        {this.renderContent()}
+        <DefaultTemplate
+          data={{
+            page_title: pageTitle
+          }}
+          renderModules={this.renderContent.bind(this)}
+        />
       </div>
     )
   }

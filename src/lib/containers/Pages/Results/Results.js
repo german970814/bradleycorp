@@ -14,7 +14,7 @@ import SearchClient from './../../../../api/search_client'
 import Loading from '../../../components/Loading/Loading'
 import BCorpHead from '../../../components/BCorpHead/BCorpHead'
 
-import NoResults from '../../../components/NoResults/NoResults'
+import NoResults from '../../../components/Error/NoResults/NoResults'
 import defaultStyle from '../../../containers/Templates/Templates.scss'
 import BCorpSelectField from '../../../components/BCorpFilterField/BCorpSelectField'
 import { renderTitle } from '../../../containers/Templates/DefaultTemplate/DefaultTemplate'

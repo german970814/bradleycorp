@@ -3,6 +3,7 @@ import * as React from 'react'
 import type { Match } from 'react-router-dom'
 import type { ScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
 import type { TreeType } from '../../../../lib/types/response_types'
+import Error404 from '../../../../lib/components/Error/Error404/Error404'
 import { withScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
 import ProductApiClient from '../../../../api/product_client'
 import CategoryDescription from './CategoryDescription/CategoryDescription'
@@ -327,9 +328,14 @@ class ProductCategory extends React.Component<Props, State> {
   render () {
     console.log(this.state)
 
-    if (!this.state.categoryData || this.state.loading) {
-      return <Loading />
+    if (this.state.loading) {
+      return <Loading pageSize />
     }
+
+    if (!this.state.categoryData) {
+      return <Error404 />
+    }
+
     const { categoryData } = this.state
 
     const pageTitle =
@@ -371,6 +377,7 @@ class ProductCategory extends React.Component<Props, State> {
       return this.setState(newState)
     } catch (error) {
       console.log(error)
+      this.setState({ loading: false })
     }
   }
 

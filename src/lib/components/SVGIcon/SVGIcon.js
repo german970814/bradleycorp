@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { lookupColor } from '../../bcorpStyles'
 import PropTypes from 'prop-types'
-import SVGArrow from './SVGArrow'
+// import SVGArrow from './SVGArrow'
 
 const icons = {
   arrow: {
@@ -111,24 +111,27 @@ class SVGIcon extends Component {
           }}
         /> */}
         {icons[this.props.icon].lines.map((line, ind) => {
-          return <line
-            x1={line.x1}
-            y1={line.y1}
-            x2={line.x2}
-            y2={line.y2}
-            key={ind}
-            style={{
-              ...icons[this.props.icon].pathStyle,
-              ...this.getRedrawStyles((line.x1 - line.x2)),
-              ...customStyles
-            }}/>
+          return (
+            <line
+              x1={line.x1}
+              y1={line.y1}
+              x2={line.x2}
+              y2={line.y2}
+              key={ind}
+              style={{
+                ...icons[this.props.icon].pathStyle,
+                ...this.getRedrawStyles(line.x1 - line.x2),
+                ...customStyles
+              }}
+            />
+          )
         })}
       </svg>
     )
     // move this above the return statement when arrow svg is ready
-    if (this.props.icon === 'arrow') {
-      return <SVGArrow {...this.props} />
-    }
+    // if (this.props.icon === 'arrow') {
+    // return <SVGArrow {...this.props} />
+    // }
   }
 }
 

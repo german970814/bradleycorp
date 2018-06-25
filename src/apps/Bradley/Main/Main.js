@@ -7,114 +7,187 @@ import type {
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { withCookies, Cookies } from 'react-cookie'
 import Loadable from 'react-loadable'
-import Loading from '../../../lib/components/Loading/Loading'
+import LoadingPageSize from '../../../lib/components/Loading/LoadingPageSize/LoadingPageSize'
 import ScrollToTop from '../../../lib/components/ScrollToTop/ScrollToTop'
+import ErrorBoundary from '../../../lib/containers/ErrorBoundary/ErrorBoundary'
 import Header from '../Header/Header'
 
 const HomeLoadable = Loadable({
   loader: () => import('../Pages/Home/Home'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const CustomizableLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/Customizable/Customizable'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const BlogSinglePostPageLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/BlogSinglePostPage/BlogSinglePostPage'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const DefaultCPTLandingPageLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/CPTLandingPages/DefaultCPTLandingPage/DefaultCPTLandingPage'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const CaseStudyLandingPageLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/CPTLandingPages/CustomLandingPages/CaseStudyLandingPage/CaseStudyLandingPage'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const ChipSampleLandingPageLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/CPTLandingPages/CustomLandingPages/ChipSampleLandingPage/ChipSampleLandingPage'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const LiteratureLandingPageLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/CPTLandingPages/CustomLandingPages/LiteratureLandingPage/LiteratureLandingPage'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const NewsLandingPageLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/CPTLandingPages/CustomLandingPages/NewsLandingPage/NewsLandingPage'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const TechInfoLandingPageLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/CPTLandingPages/CustomLandingPages/TechInfoLandingPage/TechInfoLandingPage'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const VideoGalleryLandingPageLoadable = Loadable({
   loader: () =>
     import('../../../lib/containers/Pages/CPTLandingPages/CustomLandingPages/VideoGalleryLandingPage/VideoGalleryLandingPage'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const ProductDetailLoadable = Loadable({
   loader: () => import('../Pages/ProductDetail/ProductDetail'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const ProductCategoryLoadable = Loadable({
   loader: () => import('../Pages/ProductCategory/ProductCategory'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const LiteratureAndChipSamplesLoadable = Loadable({
   loader: () =>
     import('../Pages/LiteratureAndChipSamples/LiteratureAndChipSamples'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const VideoGalleryLoadable = Loadable({
   loader: () => import('../Pages/VideoGallery/VideoGallery'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const ApplicationGalleryLoadable = Loadable({
   loader: () => import('../Pages/ApplicationGallery/ApplicationGallery'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const ApplicationGalleryDetailLoadable = Loadable({
   loader: () => import('../Pages/ApplicationGallery/ApplicationGalleryDetail'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const ResultsLoadable = Loadable({
   loader: () => import('../../../lib/containers/Pages/Results/Results'),
-  loading: Loading
+  loading: LoadingPageSize
 })
 
 const WhereToBuyPageLoadable = Loadable({
   loader: () =>
-    import('../../../lib/containers/Pages/WhereToBuyPage/WhereToBuyPage'),
-  loading: Loading
+    import('../../../lib/containers/Pages/IframedPages/WhereToBuyPage/WhereToBuyPage'),
+  loading: LoadingPageSize
 })
+
+const TechDataPageLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/IframedPages/TechDataPage/TechDataPage'),
+  loading: LoadingPageSize
+})
+
+const NavigatorValveSizingGuidePageLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/IframedPages/NavigatorValveSizingGuidePage/NavigatorValveSizingGuidePage'),
+  loading: LoadingPageSize
+})
+
+const PartSourcePageLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/IframedPages/PartSourcePage/PartSourcePage'),
+  loading: LoadingPageSize
+})
+
+const BimRevitPageLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/IframedPages/BimRevitPage/BimRevitPage'),
+  loading: LoadingPageSize
+})
+
+const ServicePartsPageLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/IframedPages/ServicePartsPage/ServicePartsPage'),
+  loading: LoadingPageSize
+})
+
+const EfxConfiguratorLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/IframedPages/EfxConfigurator/EfxConfigurator'),
+  loading: LoadingPageSize
+})
+
+const EmergencyValveSizingGuideLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/IframedPages/EmergencyValveSizingGuide/EmergencyValveSizingGuide'),
+  loading: LoadingPageSize
+})
+
+const KeltechSizingGuideLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/IframedPages/KeltechSizingGuide/KeltechSizingGuide'),
+  loading: LoadingPageSize
+})
+
+const HotWaterValvesLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/IframedPages/HotWaterValves/HotWaterValves'),
+  loading: LoadingPageSize
+})
+
+const VirtualDesignToolLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/IframedPages/VirtualDesignTool/VirtualDesignTool'),
+  loading: LoadingPageSize
+})
+
+const CurrentJobOpeningsLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/IframedPages/CurrentJobOpenings/CurrentJobOpenings'),
+  loading: LoadingPageSize
+})
+
+// const HubspotFormsLoadable = Loadable({
+//   loader: () =>
+//     import('../../../lib/containers/Pages/HubspotFormPage/HubspotFormPage'),
+//   loading: LoadingPageSize
+// })
 
 type Props = {
   cookies: Cookies
-}
+};
 
 /*
  * If we need the home page then we render it with a different header
@@ -137,13 +210,16 @@ const Main = (props: Props) => {
             const cookieName: HomePageCookie = 'BcorpHomePage'
             const homepage: HomePageCookieOption = props.cookies.get(cookieName)
 
+            let home = null
             if (!homepage) {
-              return <HomeLoadable history={history} />
+              home = <HomeLoadable history={history} />
             } else if (homepage === 'commercial') {
-              return <Redirect to="/commercial" />
+              home = <Redirect to="/commercial" />
             } else if (homepage === 'industrial') {
-              return <Redirect to="/industrial" />
+              home = <Redirect to="/industrial" />
             }
+
+            return <ErrorBoundary>{home}</ErrorBoundary>
           }}
         />
 
@@ -152,7 +228,10 @@ const Main = (props: Props) => {
             return (
               <React.Fragment>
                 <Header />
-                <RouterInner />
+
+                <ErrorBoundary>
+                  <RouterInner />
+                </ErrorBoundary>
               </React.Fragment>
             )
           }}
@@ -194,7 +273,26 @@ const RouterInner = () => {
         path="/results/:query/:tab/page=:page"
         component={ResultsLoadable}
       />
+
+      {/* Iframed Pages */}
       <Route exact path="/locator" component={WhereToBuyPageLoadable} />
+      <Route exact path="/techdata" component={TechDataPageLoadable} />
+      <Route
+        exact
+        path="/navigatorvalves/sizing-guide"
+        component={NavigatorValveSizingGuidePageLoadable}
+      />
+      <Route exact path="/partsource" component={PartSourcePageLoadable} />
+      <Route exact path="/bim" component={BimRevitPageLoadable} />
+      <Route exact path="/serviceparts" component={ServicePartsPageLoadable} />
+      <Route exact path="/efxconfigurator" component={EfxConfiguratorLoadable} />
+      <Route exact path="/navigatorvalves/efxsize" component={EmergencyValveSizingGuideLoadable} />
+      <Route exact path="/websizingguide" component={KeltechSizingGuideLoadable} />
+      <Route exact path="/sizing-tankless-water-heaters" component={KeltechSizingGuideLoadable} />
+      <Route exact path="/navigatorvalves/tools/EFXflow" component={HotWaterValvesLoadable} />
+      <Route exact path="/virtual-design-tool" component={VirtualDesignToolLoadable} />
+      <Route exact path="/careers/current-openings" component={CurrentJobOpeningsLoadable} />
+
 
       {/* Hubspot Forms */}
       {/* <Route

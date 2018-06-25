@@ -2,7 +2,6 @@
 import React, { Component } from 'react'
 import type { Match } from 'react-router-dom'
 import type { BCorpPost } from '../../../types/post_types'
-import { sitePrettyName } from '../../../../api'
 import CPTApiClient from '../../../../api/cpt_client'
 import BlogPageTemplate from '../../Templates/BlogPageTemplate/BlogPageTemplate'
 import BCorpHead from '../../../components/BCorpHead/BCorpHead'

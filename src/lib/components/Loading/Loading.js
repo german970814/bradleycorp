@@ -1,23 +1,20 @@
 // @flow
 import React from 'react'
-import {ReactPropTypes} from 'prop-types'
-import styles from './Loading.scss'
+import style from './Loading.scss'
 
 type Props = {
-  center?: boolean,
-  style?: ReactPropTypes.object,
-};
+  pageSize?: boolean,
+  style?: {}
+}
 
 type State = {
-  message?: string,
-};
+  message?: string
+}
 
 /**
  * Will be created in a future sprint with designs
  */
 class Loading extends React.Component<Props, State> {
-  state: State
-
   constructor (props: Props) {
     super(props)
 
@@ -27,26 +24,26 @@ class Loading extends React.Component<Props, State> {
   }
 
   render () {
-    let __styles = {}
-
-    if (this.props.center) {
-      __styles = {...__styles, display: 'block', margin: '30px auto'}
-    }
-
-    return <div className={styles.skFadingCircle} style={{...__styles, ...this.props.style}}>
-      <div className={styles.skCircle}></div>
-      <div className={[styles.skCircle2, styles.skCircle].join(' ')}></div>
-      <div className={[styles.skCircle3, styles.skCircle].join(' ')}></div>
-      <div className={[styles.skCircle4, styles.skCircle].join(' ')}></div>
-      <div className={[styles.skCircle5, styles.skCircle].join(' ')}></div>
-      <div className={[styles.skCircle6, styles.skCircle].join(' ')}></div>
-      <div className={[styles.skCircle7, styles.skCircle].join(' ')}></div>
-      <div className={[styles.skCircle8, styles.skCircle].join(' ')}></div>
-      <div className={[styles.skCircle9, styles.skCircle].join(' ')}></div>
-      <div className={[styles.skCircle10, styles.skCircle].join(' ')}></div>
-      <div className={[styles.skCircle11, styles.skCircle].join(' ')}></div>
-      <div className={[styles.skCircle12, styles.skCircle].join(' ')}></div>
-    </div>
+    return (
+      <div
+        className={`${style.skFadingCircle} ${
+          this.props.pageSize ? style.pageSize : ''
+        }`}
+        style={this.props.style}>
+        <div className={style.skCircle} />
+        <div className={[style.skCircle2, style.skCircle].join(' ')} />
+        <div className={[style.skCircle3, style.skCircle].join(' ')} />
+        <div className={[style.skCircle4, style.skCircle].join(' ')} />
+        <div className={[style.skCircle5, style.skCircle].join(' ')} />
+        <div className={[style.skCircle6, style.skCircle].join(' ')} />
+        <div className={[style.skCircle7, style.skCircle].join(' ')} />
+        <div className={[style.skCircle8, style.skCircle].join(' ')} />
+        <div className={[style.skCircle9, style.skCircle].join(' ')} />
+        <div className={[style.skCircle10, style.skCircle].join(' ')} />
+        <div className={[style.skCircle11, style.skCircle].join(' ')} />
+        <div className={[style.skCircle12, style.skCircle].join(' ')} />
+      </div>
+    )
   }
 }
 

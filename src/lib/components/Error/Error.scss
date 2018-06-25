@@ -1,0 +1,69 @@
+@import '../../../scss/partials/layout';
+@import '../../../scss/partials/variables';
+@import '../../../scss/partials/mixins';
+
+.errorWrapper {
+  width: 100%;
+  text-align: center;
+
+  @include respond-to(tablet) {
+    width: 90%;
+  }
+
+  @include respond-to(desktop) {
+    width: 100%;
+  }
+
+  img {
+    margin-bottom: 35px;
+  }
+
+  h1 {
+    color: $navy;
+    margin-bottom: 35px;
+    padding: 0 10px;
+  }
+
+  .messageSecondary {
+    margin-bottom: 35px;
+    padding: 0 20px;
+
+    @include respond-to(tablet) {
+      padding: 0 15%;
+    }
+
+    @include respond-to(desktop) {
+      padding: 0 30%;
+    }
+  }
+
+  h6 {
+    padding: 0 20px;
+    color: $gray;
+    text-transform: uppercase;
+    text-align: center;
+
+    @include respond-to(tablet) {
+      padding: 0 15%;
+    }
+
+    @include respond-to(desktop) {
+      padding: 0 30%;
+    }
+  }
+
+  &.pageSize {
+    margin-top: 105px;
+    margin-bottom: 105px;
+
+    @include respond-to(tablet) {
+      margin-top: 155px;
+      margin-bottom: 155px;
+    }
+
+    @include respond-to(desktop) {
+      margin-top: 185px;
+      margin-bottom: 215px;
+    }
+  }
+}

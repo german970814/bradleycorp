@@ -1,4 +1,5 @@
-type HomePageCookieOption = 'commercial' | 'industrial'
-type HomePageCookie = 'BcorpHomePage'
+export type HomePageCookie = 'BcorpHomePage'
+export type HomePageCookieOption = 'commercial' | 'industrial'
 
-export type { HomePageCookieOption, HomePageCookie }
+export type CookiesBannerCookie = 'BcorpCookiesBanner'
+export type CookiesBannerCookieOption = boolean

@@ -21,7 +21,7 @@ import {
   filterPostsByMeta
 } from '../../../../../lib/bcorpPost'
 import Loading from '../../../../../lib/components/Loading/Loading'
-import NoResults from '../../../../../lib/components/NoResults/NoResults'
+import NoResults from '../../../../../lib/components/Error/NoResults/NoResults'
 import Option from './Option/Option'
 import style from './Options.scss'
 
