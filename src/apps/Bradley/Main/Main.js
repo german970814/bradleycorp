@@ -143,6 +143,42 @@ const ServicePartsPageLoadable = Loadable({
   loading: LoadingPageSize
 })
 
+const EfxConfiguratorLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/IframedPages/EfxConfigurator/EfxConfigurator'),
+  loading: LoadingPageSize
+})
+
+const EmergencyValveSizingGuideLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/IframedPages/EmergencyValveSizingGuide/EmergencyValveSizingGuide'),
+  loading: LoadingPageSize
+})
+
+const KeltechSizingGuideLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/IframedPages/KeltechSizingGuide/KeltechSizingGuide'),
+  loading: LoadingPageSize
+})
+
+const HotWaterValvesLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/IframedPages/HotWaterValves/HotWaterValves'),
+  loading: LoadingPageSize
+})
+
+const VirtualDesignToolLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/IframedPages/VirtualDesignTool/VirtualDesignTool'),
+  loading: LoadingPageSize
+})
+
+const CurrentJobOpeningsLoadable = Loadable({
+  loader: () =>
+    import('../../../lib/containers/Pages/IframedPages/CurrentJobOpenings/CurrentJobOpenings'),
+  loading: LoadingPageSize
+})
+
 // const HubspotFormsLoadable = Loadable({
 //   loader: () =>
 //     import('../../../lib/containers/Pages/HubspotFormPage/HubspotFormPage'),
@@ -151,7 +187,7 @@ const ServicePartsPageLoadable = Loadable({
 
 type Props = {
   cookies: Cookies
-}
+};
 
 /*
  * If we need the home page then we render it with a different header
@@ -249,6 +285,14 @@ const RouterInner = () => {
       <Route exact path="/partsource" component={PartSourcePageLoadable} />
       <Route exact path="/bim" component={BimRevitPageLoadable} />
       <Route exact path="/serviceparts" component={ServicePartsPageLoadable} />
+      <Route exact path="/efxconfigurator" component={EfxConfiguratorLoadable} />
+      <Route exact path="/navigatorvalves/efxsize" component={EmergencyValveSizingGuideLoadable} />
+      <Route exact path="/websizingguide" component={KeltechSizingGuideLoadable} />
+      <Route exact path="/sizing-tankless-water-heaters" component={KeltechSizingGuideLoadable} />
+      <Route exact path="/navigatorvalves/tools/EFXflow" component={HotWaterValvesLoadable} />
+      <Route exact path="/virtual-design-tool" component={VirtualDesignToolLoadable} />
+      <Route exact path="/careers/current-openings" component={CurrentJobOpeningsLoadable} />
+
 
       {/* Hubspot Forms */}
       {/* <Route
