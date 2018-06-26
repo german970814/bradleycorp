@@ -139,7 +139,10 @@ class UserArea extends React.Component<Props, State> {
             <div className={'col4-tablet'} />
           </div>
 
-          <div className={`row ${style.repSelect}`}>
+          {/* Commented this area:
+            https://trello.com/c/8bnTB3fV/159-chip-sample-page-order-form-hide-rep-select-drop-down-and-request-email-address-as-these-require-users-and-will-need-to-be-broug
+          */}
+          {/* <div className={`row ${style.repSelect}`}>
             <BCorpSelectField
               className={`col1 col3-tablet ${sharedStyle.selectField}`}
               defaultOptionId={0}
@@ -164,7 +167,7 @@ class UserArea extends React.Component<Props, State> {
               }}
               placeholder={'Request Email Address'}
             />
-          </div>
+          </div> */}
 
           <div className={`row`}>
             <BCorpTextareaField
