@@ -11,6 +11,7 @@ $titleMarginBottomDesktop: $titleMarginBottomMobile + 20;
 
   @include respond-to(desktop) {
     max-width: 1170px;
+    padding-bottom: 46px;
   }
 }
 

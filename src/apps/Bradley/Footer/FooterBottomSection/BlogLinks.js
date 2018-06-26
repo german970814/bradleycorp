@@ -6,11 +6,11 @@ const BlogLinks = props => {
     <React.Fragment>
 
       <FooterBottomSectionItem
-        link={'#'}
+        link={'http://bimrevit.site.bradleydev.twoxfour.com/'}
         title={'BIM REVIT BLOG'} />
 
       <FooterBottomSectionItem
-        link={'#'}
+        link={'http://thewashfountain.site.bradleydev.twoxfour.com/'}
         title={'THE WASHFOUNTAIN BLOG'} />
 
     </React.Fragment>
