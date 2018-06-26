@@ -13,8 +13,10 @@ type WPPost = {
   /**
    * Added manually in the back end to the WP_Post object for some responses
    */
-  author_display_name?: '',
-  path?: ''
+  author_display_name?: string,
+  path?: string,
+  meta_title?: string,
+  meta_description?: string
 }
 
 type WPPostWithPath = WPPost & { path: string }

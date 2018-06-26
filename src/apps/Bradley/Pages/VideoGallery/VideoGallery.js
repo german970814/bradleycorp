@@ -5,6 +5,7 @@ import CPTApiClient from '../../../../api/cpt_client'
 import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import Videos from './Videos/Videos'
 import Filters from './Filters/Filters'
+import BCorpHead from '../../../../lib/components/BCorpHead/BCorpHead'
 import style from './VideoGallery.scss'
 
 type FiltersType = {
@@ -28,6 +29,9 @@ type State = {
   filters: FiltersType,
   filterOptions: FilterOptionsState
 }
+
+const pageTitle = 'Video Gallery'
+const pageDescription = ''
 
 const filterDefault: 'all' = 'all'
 const filterDefaultName: 'All' = 'All'
@@ -62,21 +66,25 @@ class VideoGallery extends React.Component<Props, State> {
 
   render () {
     return (
-      <DefaultTemplate
-        data={{ page_title: 'Video Gallery' }}
-        renderModules={() => {
-          return (
-            <div className={style.VideoGallery}>
-              <Filters
-                filters={this.state.filters}
-                filterOptions={this.state.filterOptions}
-                updateFilters={this.updateFilters.bind(this)}
-              />
-              <Videos filters={this.state.filters} />
-            </div>
-          )
-        }}
-      />
+      <React.Fragment>
+        <BCorpHead title={pageTitle} description={pageDescription} />
+
+        <DefaultTemplate
+          data={{ page_title: pageTitle }}
+          renderModules={() => {
+            return (
+              <div className={style.VideoGallery}>
+                <Filters
+                  filters={this.state.filters}
+                  filterOptions={this.state.filterOptions}
+                  updateFilters={this.updateFilters.bind(this)}
+                />
+                <Videos filters={this.state.filters} />
+              </div>
+            )
+          }}
+        />
+      </React.Fragment>
     )
   }
 

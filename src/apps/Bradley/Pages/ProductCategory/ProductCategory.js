@@ -3,16 +3,19 @@ import * as React from 'react'
 import type { Match } from 'react-router-dom'
 import type { ScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
 import type { TreeType } from '../../../../lib/types/response_types'
+import Error404 from '../../../../lib/components/Error/Error404/Error404'
 import { withScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
-import { createBreadcrumbsObjectFromTermTree } from '../../../../lib/components/Breadcrumbs/Breadcrumbs'
 import ProductApiClient from '../../../../api/product_client'
 import CategoryDescription from './CategoryDescription/CategoryDescription'
 import DefaultTemplate from '../../../../lib/containers/Templates/DefaultTemplate/DefaultTemplate'
 import Pagination from './Pagination/Pagination'
 import Filters from './Filters/Filters'
 import Products from './Products/Products'
-import Breadcrumbs from '../../../../lib/components/Breadcrumbs/Breadcrumbs'
+import Breadcrumbs, {
+  createBreadcrumbsObjectFromTermTree
+} from '../../../../lib/components/Breadcrumbs/Breadcrumbs'
 import Loading from '../../../../lib/components/Loading/Loading'
+import BCorpHead from '../../../../lib/components/BCorpHead/BCorpHead'
 import style from './ProductCategory.scss'
 
 type CategoryData = {|
@@ -325,13 +328,24 @@ class ProductCategory extends React.Component<Props, State> {
   render () {
     console.log(this.state)
 
-    if (!this.state.categoryData || this.state.loading) {
-      return <Loading />
+    if (this.state.loading) {
+      return <Loading pageSize />
     }
+
+    if (!this.state.categoryData) {
+      return <Error404 />
+    }
+
     const { categoryData } = this.state
+
+    const pageTitle =
+      (this.state.categoryData && this.state.categoryData.name) || ''
+    const pageDescription = ''
 
     return (
       <div className={style.ProductCategory}>
+        <BCorpHead title={pageTitle} description={pageDescription} />
+
         {categoryData.parent_name && (
           <h5 className={style.topCategoryTitle}>{categoryData.parent_name}</h5>
         )}
@@ -363,6 +377,7 @@ class ProductCategory extends React.Component<Props, State> {
       return this.setState(newState)
     } catch (error) {
       console.log(error)
+      this.setState({ loading: false })
     }
   }
 

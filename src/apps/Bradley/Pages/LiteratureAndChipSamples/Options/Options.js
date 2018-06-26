@@ -21,7 +21,7 @@ import {
   filterPostsByMeta
 } from '../../../../../lib/bcorpPost'
 import Loading from '../../../../../lib/components/Loading/Loading'
-import NoResults from '../../../../../lib/components/NoResults/NoResults'
+import NoResults from '../../../../../lib/components/Error/NoResults/NoResults'
 import Option from './Option/Option'
 import style from './Options.scss'
 
@@ -278,9 +278,8 @@ class Options extends React.Component<Props> {
 
     // sort chip samples within each category
     Object.keys(sortedChipSamples).forEach(materialType => {
-      sortedChipSamples[
-        materialType
-      ] = sortAlphabeticallyArrayOfTwoLevelObjects(
+      // prettier-ignore
+      sortedChipSamples[materialType] = sortAlphabeticallyArrayOfTwoLevelObjects(
         'post',
         'post_title',
         sortedChipSamples[materialType]

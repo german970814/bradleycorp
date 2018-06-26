@@ -61,7 +61,9 @@ type BCorpPageTemplateData = {
   metaboxes: false | BCorpMetaboxes,
   featured_image: false | Array<WPFeaturedImageArrayTypes>,
   has_parent: boolean,
-  has_children: boolean
+  has_children: boolean,
+  meta_title?: string,
+  meta_description?: string
 }
 
 type BCorpCustomPage = {

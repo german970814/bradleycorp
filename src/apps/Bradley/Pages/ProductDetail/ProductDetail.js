@@ -2,11 +2,14 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Divider from '../../../../lib/components/Divider/Divider'
 import ProductApiClient from '../../../../api/product_client'
+import Error404 from '../../../../lib/components/Error/Error404/Error404'
+import Loading from '../../../../lib/components/Loading/Loading'
 import productObjectShape from './productObjectShape'
 import ProductDetailException from '../../../../exceptions/ProductDetailException'
 import ProductContent from './ProductContent/ProductContent'
 import ProductTabs from './ProductTabs/ProductTabs'
 import ProductScroller from '../../../../lib/containers/ProductScroller/ProductScroller'
+import BCorpHead from '../../../../lib/components/BCorpHead/BCorpHead'
 import style from './ProductDetail.scss'
 
 class ProductDetail extends Component {
@@ -14,6 +17,7 @@ class ProductDetail extends Component {
     super(props)
 
     this.state = {
+      loading: true,
       productDetail: productObjectShape
     }
 
@@ -73,8 +77,26 @@ class ProductDetail extends Component {
 
   render () {
     console.log(this.state.productDetail)
+
+    if (this.state.loading) {
+      return <Loading pageSize />
+    }
+
+    if (this.state.productDetail.product.post.ID === 0) {
+      return <Error404 />
+    }
+
+    // defaults to post title
+    const pageTitle =
+      this.state.productDetail.product.post.meta_title ||
+      this.state.productDetail.product.post.post_title
+    const pageDescription =
+      this.state.productDetail.product.post.meta_description || ''
+
     return (
       <div className={style.productDetailPage}>
+        <BCorpHead title={pageTitle} description={pageDescription} />
+
         <section className={style.content}>
           <ProductContent
             title={this.state.productDetail.product.post['post_title']}
@@ -121,6 +143,7 @@ class ProductDetail extends Component {
   }
 
   async getProductInfo (props) {
+    this.setState({ loading: true })
     try {
       const productSlug = props.match.params.slug
       const productDetail = await this.getProductDetailPage(productSlug)
@@ -128,10 +151,12 @@ class ProductDetail extends Component {
 
       // set state leaving defaults where there exists no data in the request
       return this.setState({
+        loading: false,
         productDetail: Object.assign({}, productObjectShape, productDetailData)
       })
     } catch (err) {
       console.log(new ProductDetailException(err))
+      this.setState({ loading: false })
     }
   }
 

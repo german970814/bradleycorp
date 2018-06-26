@@ -11,7 +11,7 @@ import { filterDefault } from '../VideoGallery'
 import { sortIntoRows } from '../../../../../lib/bcorpJSX'
 import LoadMore from '../../../../../lib/containers/LoadMore/LoadMore'
 import VideoGalleryItem from '../../../../../lib/components/BCorpVideo/VideoGalleryItem/VideoGalleryItem'
-import NoResults from '../../../../../lib/components/NoResults/NoResults'
+import NoResults from '../../../../../lib/components/Error/NoResults/NoResults'
 import CPTApiClient from '../../../../../api/cpt_client'
 import style from './Videos.scss'
 

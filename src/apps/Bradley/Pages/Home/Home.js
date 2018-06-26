@@ -14,6 +14,7 @@ import emergencySafetyImageSrc from '../../../../images/home-images/water-splash
 import VideoBackground from '../../../../lib/components/BCorpVideo/VideoBackground/VideoBackground'
 import BCorpBackground from '../../../../lib/components/BCorpBackground/BCorpBackground'
 import VerticalAlignHelper from '../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
+import BCorpHead from '../../../../lib/components/BCorpHead/BCorpHead'
 import style, { emergencysafetyoverlay } from './Home.scss'
 
 type Props = {
@@ -27,6 +28,9 @@ type State = {
   washroomNode?: HTMLDivElement,
   emergencySafetyNode?: HTMLDivElement
 };
+
+const pageTitle = 'Home'
+const pageDescription = ''
 
 class Home extends React.Component<Props, State> {
   constructor (props: Props) {
@@ -150,6 +154,8 @@ class Home extends React.Component<Props, State> {
 
     return (
       <div className={`row ${style.Home}`}>
+        <BCorpHead title={pageTitle} description={pageDescription} />
+
         {this.renderHeader(match)}
 
         <div className={`${style.fadeInMobile} ${style.blackBlueContainer}`}>

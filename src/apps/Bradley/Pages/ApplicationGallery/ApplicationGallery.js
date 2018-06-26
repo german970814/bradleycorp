@@ -17,10 +17,9 @@ import Filters from './Filters/Filters'
 import defaultStyle from '../../../../lib/containers/Templates/Templates.scss'
 import style from './ApplicationGallery.scss'
 import GalleryItem from './GalleryItem'
+import BCorpHead from '../../../../lib/components/BCorpHead/BCorpHead'
 import Loading from '../../../../lib/components/Loading/Loading'
-import NoResults from '../../../../lib/components/NoResults/NoResults'
-
-const PostType: CPTName = 'application-gallery'
+import NoResults from '../../../../lib/components/Error/NoResults/NoResults'
 
 type MetaType = BCorpMeta & {
   app_gallery_img?: string,
@@ -46,6 +45,11 @@ type State = {
   activeFilters: TaxAndTermSlugObject,
   loading: boolean
 }
+
+const PostType: CPTName = 'application-gallery'
+
+export const pageTitle = 'Application Gallery'
+export const pageDescription = ''
 
 class ApplicationGallery extends Component<Props, State> {
   getApplicationGalleryDebounced: (filters: TaxAndTermSlugObject) => void
@@ -88,12 +92,11 @@ class ApplicationGallery extends Component<Props, State> {
   }
 
   renderGallery () {
-    return this.state.gallery && !this.state.loading ? (
+    return (
+      this.state.gallery &&
       this.state.gallery.map((appGallery, idx) => {
         return <GalleryItem key={idx} applicationGallery={appGallery} />
       })
-    ) : (
-      <Loading />
     )
   }
 
@@ -107,24 +110,38 @@ class ApplicationGallery extends Component<Props, State> {
   }
 
   renderColumns (classes: string) {
-    return this.state.gallery === null ? (
-      this.renderNoResults()
-    ) : (
-      <FillColumns
-        colClasses={[
-          `${classes} ${style.appGalleryItem} ${style.appMinHeightGalleryItem}`,
-          `${classes} ${style.appGalleryItem}`,
-          `${classes} ${style.appGalleryItem}`
-        ]}>
-        {this.renderGallery()}
-      </FillColumns>
-    )
+    if (this.state.loading) {
+      return <Loading />
+    }
+
+    if (!this.state.gallery) {
+      return this.renderNoResults()
+    }
+
+    const gallery = this.renderGallery()
+
+    if (gallery) {
+      return (
+        <FillColumns
+          colClasses={[
+            `${classes} ${style.appGalleryItem} ${
+              style.appMinHeightGalleryItem
+            }`,
+            `${classes} ${style.appGalleryItem}`,
+            `${classes} ${style.appGalleryItem}`
+          ]}>
+          {gallery}
+        </FillColumns>
+      )
+    }
   }
 
   render () {
     return (
       <div className={`row ${defaultStyle.defaultTemplate}`}>
-        {renderTitle('Application Gallery', 'col1')}
+        <BCorpHead title={pageTitle} description={pageDescription} />
+
+        {renderTitle(pageTitle, 'col1')}
         <div className={`col1 col4-tablet ${style.appGallerySidebar}`}>
           <Filters
             activeFilters={this.state.activeFilters}
@@ -146,7 +163,11 @@ class ApplicationGallery extends Component<Props, State> {
 
     try {
       const client = new CPTApiClient(PostType)
-      const response = await client.getByTaxNameAndTermSlugObject(filters, 'OR', -1)
+      const response = await client.getByTaxNameAndTermSlugObject(
+        filters,
+        'OR',
+        -1
+      )
 
       gallery = response.data.length ? response.data : null
     } catch (e) {

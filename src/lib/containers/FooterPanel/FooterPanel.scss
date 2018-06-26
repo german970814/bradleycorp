@@ -1,0 +1,6 @@
+:global(#footer-panel) {
+  position: fixed;
+  bottom: -100%;
+  width: 100%;
+  transition: bottom 0.5s;
+}

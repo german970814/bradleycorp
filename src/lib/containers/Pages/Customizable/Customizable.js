@@ -5,12 +5,14 @@ import type { BCorpCustomPage } from '../../../types/customPage_types'
 import CustomPageApiClient from '../../../../api/customPage_client'
 import { getUrlWithoutPageParam } from '../../../bcorpUrl'
 import { validChain } from '../../../bcorpObject'
+import ContentTransformer from '../../../components/ContentTransformer/ContentTransformer'
+import Error404 from '../../../components/Error/Error404/Error404'
 import Loading from '../../../components/Loading/Loading'
 import TemplateFactory from '../../Templates/TemplateFactory'
 import ModuleBuilder from '../../Modules/ModuleBuilder'
 import WidgetBuilder from '../../Widgets/WidgetBuilder'
+import BCorpHead from '../../../components/BCorpHead/BCorpHead'
 import style from './Customizable.scss'
-import ErrorBoundary from '../../../contexts/ErrorBoundary'
 
 type Props = {
   match: Match
@@ -19,7 +21,7 @@ type Props = {
 type State = BCorpCustomPage & {
   requesting: boolean,
   ready: boolean
-};
+}
 
 /**
  *
@@ -116,13 +118,25 @@ class Customizable extends Component<Props, State> {
   }
 
   renderModules () {
-    return this.state.ready ? (
+    if (!this.state.ready) {
+      return <Loading />
+    }
+
+    // no need to pass through the module builder if we have no modules
+    if (
+      !this.state.module_data.rows ||
+      this.state.module_data.rows.length === 0
+    ) {
+      return (
+        <ContentTransformer content={this.state.module_data.content || ''} />
+      )
+    }
+
+    return (
       <ModuleBuilder
         moduleData={this.state['module_data']}
         pagePath={this.props.match.url}
       />
-    ) : (
-      <Loading />
     )
   }
 
@@ -133,22 +147,35 @@ class Customizable extends Component<Props, State> {
    * @return {void}
    */
   render () {
-    // console.log( this.state )
-    if (this.state['page_template_data']['page_id'] === 0) {
-      return null
+    console.log(this.state)
+
+    if (this.state.requesting) {
+      return <Loading pageSize />
     }
+
+    if (this.state['page_template_data']['page_id'] === 0) {
+      return <Error404 />
+    }
+
+    // currently defaults to page title
+    const pageTitle =
+      this.state.page_template_data.meta_title ||
+      this.state.page_template_data.page_title ||
+      ''
+    // defaults to empty
+    const pageDescription = this.state.page_template_data.meta_description || ''
 
     return (
       <div className={style.customizable}>
-        <ErrorBoundary>
-          <TemplateFactory
-            templateSlug={this.state['page_template_data'].template}
-            data={this.state['page_template_data']}
-            pagePath={this.props.match.url}
-            renderModules={this.renderModules.bind(this)}
-            renderRightSidebarWidgets={this.renderRightSidebarWidgets.bind(this)}
-          />
-        </ErrorBoundary>
+        <BCorpHead title={pageTitle} description={pageDescription} />
+
+        <TemplateFactory
+          templateSlug={this.state['page_template_data'].template}
+          data={this.state['page_template_data']}
+          pagePath={this.props.match.url}
+          renderModules={this.renderModules.bind(this)}
+          renderRightSidebarWidgets={this.renderRightSidebarWidgets.bind(this)}
+        />
       </div>
     )
   }
@@ -177,13 +204,19 @@ class Customizable extends Component<Props, State> {
 
       return this.setState(newState, () => {
         if (this.state.page_template_data.page_title) {
-          document.title = `Bradley Corp: ${this.state.page_template_data.page_title}`
+          document.title = `Bradley Corp: ${
+            this.state.page_template_data.page_title
+          }`
         } else {
           document.title = 'Bradley Corp'
         }
       })
     } catch (err) {
-      this.setState({ requesting: false, ready: false })
+      this.setState({
+        requesting: false,
+        ready: false,
+        page_template_data: this.defaultState.page_template_data
+      })
       console.log(err)
     }
   }

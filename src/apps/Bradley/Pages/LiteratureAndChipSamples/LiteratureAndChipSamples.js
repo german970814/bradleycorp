@@ -16,6 +16,7 @@ import Shipment from './CurrentRequest/Shipment/Shipment'
 import Downloads from './CurrentRequest/Downloads/Downloads'
 import Options from './Options/Options'
 import Filters from './Filters/Filters'
+import BCorpHead from '../../../../lib/components/BCorpHead/BCorpHead'
 // import style from './LiteratureAndChipSamples.scss'
 
 type PostTypeOptions = 'literature' | 'chip'
@@ -122,6 +123,9 @@ type State = {
   showCurrentRequestMobile: boolean,
   loading: boolean
 }
+
+const pageTitle = 'Literature & Chip Samples'
+const pageDescription = ''
 
 const productLineFilterDefault: string = 'product-line'
 const languageFilterDefault: string = 'language'
@@ -383,12 +387,16 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
 
   render () {
     return (
-      <RightSidebarTemplate
-        data={{ page_title: 'Literature & Chip Samples' }}
-        renderModules={() => this.renderContent()}
-        renderRightSidebarWidgets={() => this.renderRightSidebarWidgets()}
-        widgetsMoveWithScroll
-      />
+      <React.Fragment>
+        <BCorpHead title={pageTitle} description={pageDescription} />
+
+        <RightSidebarTemplate
+          data={{ page_title: pageTitle }}
+          renderModules={() => this.renderContent()}
+          renderRightSidebarWidgets={() => this.renderRightSidebarWidgets()}
+          widgetsMoveWithScroll
+        />
+      </React.Fragment>
     )
   }
 

@@ -5,7 +5,10 @@ import type { CPTName } from '../../../../types/cpt_types'
 import type { BCorpPost } from '../../../../types/post_types'
 import ContentTransformer from '../../../../components/ContentTransformer/ContentTransformer'
 import CPTApiClient from '../../../../../api/cpt_client'
+import Error404 from '../../../../components/Error/Error404/Error404'
+import Loading from '../../../../components/Loading/Loading'
 import DefaultTemplate from '../../../Templates/DefaultTemplate/DefaultTemplate'
+import BCorpHead from '../../../../components/BCorpHead/BCorpHead'
 import style from './DefaultCPTLandingPage.scss'
 
 type Props = {
@@ -15,6 +18,7 @@ type Props = {
 }
 
 type State = {
+  loading: boolean,
   post?: BCorpPost
 }
 
@@ -22,7 +26,7 @@ class DefaultCPTLandingPage extends React.Component<Props, State> {
   constructor (props: Props) {
     super(props)
 
-    this.state = {}
+    this.state = { loading: true }
   }
 
   componentDidMount () {
@@ -46,13 +50,26 @@ class DefaultCPTLandingPage extends React.Component<Props, State> {
   }
 
   render () {
-    if (!this.state.post) {
-      return null
+    if (this.state.loading) {
+      console.log('loading')
+      return <Loading pageSize />
     }
+
+    if (!this.state.post) {
+      console.log('here')
+      return <Error404 />
+    }
+
     const { post } = this.state
+
+    // defaults to post title
+    const pageTitle = post.post.post_title || ''
+    const pageDescription = ''
 
     return (
       <div className={`Default-CPT-Landing-Page`}>
+        <BCorpHead title={pageTitle} description={pageDescription} />
+
         <DefaultTemplate
           data={{
             page_title: post.post.post_title || ''
@@ -74,14 +91,16 @@ class DefaultCPTLandingPage extends React.Component<Props, State> {
   }
 
   async getPost (postType: CPTName, slug: string) {
+    this.setState({ loading: true })
     try {
       const client = new CPTApiClient(postType)
       const response = await client.getBySlug(slug)
       const post: BCorpPost = response.data
 
-      return this.setState({ post })
+      return this.setState({ post, loading: false })
     } catch (err) {
       console.log(err)
+      return this.setState({ loading: false })
     }
   }
 }
