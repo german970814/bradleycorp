@@ -17,13 +17,17 @@ type State = {
 }
 
 class SearchIcon extends React.Component<Props, State> {
+  input: { current: null | HTMLInputElement }
+
   constructor (props: Props) {
     super(props)
 
     this.state = {
       search: ''
     }
+    this.input = React.createRef()
   }
+
   handleClick (e) {
     e.stopPropagation()
   }
@@ -59,6 +63,11 @@ class SearchIcon extends React.Component<Props, State> {
             return updateBlur(false)
           }}
           onLightboxOpen={() => {
+            setTimeout(() => {
+              if (this.input.current) {
+                this.input.current.focus()
+              }
+            })
             return updateBlur(true)
           }}
           renderLightboxContents={closeLightbox => {
@@ -70,6 +79,7 @@ class SearchIcon extends React.Component<Props, State> {
                   <input
                     type={'text'}
                     name={'search'}
+                    ref={this.input}
                     className={style.lightboxSearchFormInput}
                     onClick={this.handleClick.bind(this)}
                     onInput={e => {
