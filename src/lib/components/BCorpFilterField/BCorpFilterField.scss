@@ -54,8 +54,9 @@ $tabletGapBetweenFilters: 24px;
     position: absolute;
     content: '*';
     right: 10px;
-    bottom: 13px;
+    bottom: 5px;
     color: $red;
+    font-size: 18px;
   }
 
   &.lengthen {
