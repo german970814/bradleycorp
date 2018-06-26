@@ -1,21 +1,24 @@
 import React from 'react'
 import FooterBottomSectionItem from './FooterBottomSectionItem'
+import style from '../Footer.scss'
 
 const LoginItems = props => {
   return (
     <React.Fragment>
 
-      <FooterBottomSectionItem
-        link={'#'}
-        title={'LOGIN'} />
+      <div className={'col1'}>
+        <div className={`${style.menuItem} ${style.menuItemBottomSection}`}>
+          <div className={`small-link-gray ${style.menuItemLinkGray}`}>LOGIN</div>
+        </div>
+      </div>
 
       <FooterBottomSectionItem
-        link={'#'}
+        link={'https://answernet.bradleycorp.com/'}
         title={'ANSWERNET'}
         padlock />
 
       <FooterBottomSectionItem
-        link={'#'}
+        link={'http://bradzone.bradleycorp.com/'}
         title={'BRADZONE'}
         padlock />
 
