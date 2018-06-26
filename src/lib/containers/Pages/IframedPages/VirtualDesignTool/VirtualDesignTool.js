@@ -24,7 +24,7 @@ export default class VirtualDesignTool extends React.PureComponent<Props> {
             return (
               <React.Fragment>
                 <iframe
-                  id="hotWaterValves"
+                  id="virtualDesignTool"
                   src="https://www.bradleycorp.com/virtual-design-tool/#/"
                   width="100%"
                   height="800"
