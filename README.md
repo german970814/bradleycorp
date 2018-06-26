@@ -20,6 +20,14 @@ $ yarn build                          # generate client distribution (npm run bu
 
 Make sure to set the api.baseURL property to point to your local installation of bradley.corp
 
+## Iframed Pages
+
+All iframed pages such as Where To Buy and others are pulled from `src/lib/containers/Pages/iframedPages/`.
+
+## Hubspot Forms
+
+All Hubspot forms are being pulled from `src/lib/containers/HubspotForms`.
+
 ## Styleguide
 
 See [React Styleguidist](https://react-styleguidist.js.org/)
