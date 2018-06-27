@@ -53,7 +53,7 @@ export default class Downloadables extends Component<Props, State> {
     return {
       all: {
         title: 'All Documents',
-        files: [],
+        files: ['0'],
         handler: () => {}
       },
       tech: {
@@ -73,7 +73,7 @@ export default class Downloadables extends Component<Props, State> {
     if (!this.state.selected) {
       return
     }
-    return <p>Do you want download {this.state.selected.title}?</p>
+    return <p>Do you want to download {this.state.selected.title}?</p>
   }
 
   wrapperFunction (func: () => void, selected: DownloadabeType | DownloadableBimRevit) {

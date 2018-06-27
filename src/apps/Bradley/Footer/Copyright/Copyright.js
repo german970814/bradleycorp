@@ -16,13 +16,13 @@ const Copyright = props => {
           </div>
           <div className={`legal ${style.menuItem}`} >
             <Link
-              to={'#'} >
+              to={'/legal'} >
               {'Legal Statement'}
             </Link>
           </div>
           <div className={`legal ${style.menuItem}`} >
             <Link
-              to={'#'} >
+              to={'/privacy'} >
               {'Privacy Policy'}
             </Link>
           </div>
