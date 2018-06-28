@@ -76,8 +76,6 @@ class ProductDetail extends Component {
   }
 
   render () {
-    console.log(this.state.productDetail)
-
     if (this.state.loading) {
       return <Loading pageSize />
     }
