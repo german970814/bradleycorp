@@ -70,7 +70,10 @@ class Tree extends React.PureComponent<Props> {
       : 1
 
     return Object.keys(children).map((childSlug, index) => {
-      const slugString = Object.keys(this.props.tree.parents).join('/') + '/' + childSlug
+      const parentsUrl = this.props.tree.parents
+        ? Object.keys(this.props.tree.parents).join('/')
+        : ''
+      const slugString = parentsUrl + '/' + childSlug
       return this.renderTreeLink(slugString, children[childSlug], offset)
     })
   }

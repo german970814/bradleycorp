@@ -96,7 +96,7 @@ class DocumentPackagerApiClient {
       //do something with response
     } catch (err) {
       console.log(err)
-      return false
+      return undefined
     }
   }
 
