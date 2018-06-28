@@ -107,8 +107,6 @@ class Products extends React.Component<Props, State> {
       const nestedTaxQuery = this.buildNestedTaxQuery()
       const metaQuery = this.buildMetaQuery()
 
-      console.log('sending', nestedTaxQuery, metaQuery, this.props.paged)
-
       const client = new CPTApiClient('product')
       const response = await client.getByMetaAndTaxQuery(
         nestedTaxQuery,
@@ -121,8 +119,6 @@ class Products extends React.Component<Props, State> {
         '',
         true
       )
-
-      console.log(response)
 
       const products = response.data.posts
 

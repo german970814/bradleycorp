@@ -326,8 +326,6 @@ class ProductCategory extends React.Component<Props, State> {
   }
 
   render () {
-    console.log(this.state)
-
     if (this.state.loading) {
       return <Loading pageSize />
     }
