@@ -91,9 +91,14 @@ class DocumentPackagerApiClient {
 
     try {
       const response = await axios.get(downloadUrl)
+      if ( response.data
+        && response.data.success
+        && true === response.data.success ) {
+        const zipFile = response.data.zipFile
+        window.location.href = bradleyApisHost + zipFile.fileUrl
+      }
 
-      console.log( response )
-      //do something with response
+      throw new Error( 'Theere was an error getting the download link for the compressed files.')
     } catch (err) {
       console.log(err)
       return undefined

@@ -19,22 +19,19 @@ class Downloads extends React.Component<Props> {
     }
     let _downloads = []
     this.props.downloads.forEach(literature => {
-      if ( !literature.meta && !literature.meta.literature_pdf )
-        return null;
+      if (!literature.meta && !literature.meta.literature_pdf) { return null }
 
-      const pdfUrlHasId = literature.meta.literature_pdf.match(/[0-9]*$/);
-      const pdfId  = (null !== pdfUrlHasId) ? pdfUrlHasId[0] : 0
+      const pdfUrlHasId = literature.meta.literature_pdf.match(/[0-9]*$/)
+      const pdfId = (pdfUrlHasId !== null) ? pdfUrlHasId[0] : 0
 
       _downloads = [..._downloads, pdfId]
-
     })
 
-    const docPackager = new DocumentPackagerApiClient();
-    docPackager.downloadMediaFiles( _downloads )
+    const docPackager = new DocumentPackagerApiClient()
+    docPackager.downloadMediaFiles(_downloads)
   }
 
   renderLiterature () {
-
     if (
       !this.props.downloads ||
       !this.props.downloads.constructor === Array ||
