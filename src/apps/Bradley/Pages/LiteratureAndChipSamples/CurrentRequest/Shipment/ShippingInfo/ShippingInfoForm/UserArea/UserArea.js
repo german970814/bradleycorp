@@ -19,7 +19,19 @@ type Props = {
   updateUserArea: (newUserArea: ShippingInfoUserAreaType) => void
 }
 
-class UserArea extends React.Component<Props> {
+type State = {
+  required: boolean
+}
+
+class UserArea extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props)
+
+    this.state = {
+      required: false
+    }
+  }
+
   updateUserAreaProperty (
     propertyName: ShippingInfoUserAreaField,
     value: string
@@ -43,6 +55,7 @@ class UserArea extends React.Component<Props> {
   }
 
   handleOvernightDeliveryChange (newOvernightDelivery: CheckboxObject): void {
+    this.setState({ required: newOvernightDelivery.checkboxes ? newOvernightDelivery.checkboxes.length >= 1 : false })
     const userArea = { ...this.props.shippingInfoUserArea }
     userArea.overnight = newOvernightDelivery
     this.props.updateUserArea(userArea)
@@ -109,6 +122,7 @@ class UserArea extends React.Component<Props> {
                   )
                 }}
                 placeholder={'Carrier'}
+                required={this.state.required}
               />
               <BCorpInputField
                 filterState={this.props.shippingInfoUserArea.account || ''}
@@ -119,12 +133,16 @@ class UserArea extends React.Component<Props> {
                   )
                 }}
                 placeholder={'Account Number'}
+                required={this.state.required}
               />
             </div>
             <div className={'col4-tablet'} />
           </div>
 
-          <div className={`row ${style.repSelect}`}>
+          {/* Commented this area:
+            https://trello.com/c/8bnTB3fV/159-chip-sample-page-order-form-hide-rep-select-drop-down-and-request-email-address-as-these-require-users-and-will-need-to-be-broug
+          */}
+          {/* <div className={`row ${style.repSelect}`}>
             <BCorpSelectField
               className={`col1 col3-tablet ${sharedStyle.selectField}`}
               defaultOptionId={0}
@@ -149,7 +167,7 @@ class UserArea extends React.Component<Props> {
               }}
               placeholder={'Request Email Address'}
             />
-          </div>
+          </div> */}
 
           <div className={`row`}>
             <BCorpTextareaField

@@ -18,9 +18,8 @@ class ProductCategoryBlock extends React.PureComponent<Props> {
           return (
             <Link key={index} to={createArchiveUrl(grandchild) || '#'}>
               {this.props.withImage ? (
-                <span className={`small-body ${style.grandchild}`}>
-                  {`${index !== 0 ? ', ' : ''}${grandchild.name}`}
-                </span>
+                <span className={`small-body ${style.grandchild}`}
+                  dangerouslySetInnerHTML={{ __html: `${index !== 0 ? ', ' : ''}${grandchild.name}` }} />
               ) : (
                 <div className={`small-body ${style.grandchild}`}>
                   {grandchild.name}
@@ -60,9 +59,8 @@ class ProductCategoryBlock extends React.PureComponent<Props> {
           return (
             <React.Fragment key={index}>
               <Link to={createArchiveUrl(childWithChildren) || '#'}>
-                <h6 className={`${style.childWithChildren}`}>
-                  {childWithChildren.name}
-                </h6>
+                <h6 className={`${style.childWithChildren}`}
+                  dangerouslySetInnerHTML={{ __html: childWithChildren.name }} />
               </Link>
               {childWithChildren.children &&
                 childWithChildren.children.length > 0 &&

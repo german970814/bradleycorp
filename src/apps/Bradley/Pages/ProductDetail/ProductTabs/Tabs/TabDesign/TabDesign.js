@@ -40,12 +40,19 @@ class TabDesign extends Component {
       return (
         <li key={index}>
           <ArrowThumbnail>
-            <Link
-              to={link.url}
-              className={`link-orange ${tabStyle.tabTextOrange}`}
-              replace>
-              {link.text}
-            </Link>
+            {!link.url.startsWith('http') ? <Link
+                to={link.url}
+                className={`link-orange ${tabStyle.tabTextOrange}`}
+                replace>
+                {link.text}
+              </Link> :
+              <a
+                href={link.url}
+                target="_blank"
+                className={`link-orange ${tabStyle.tabTextOrange}`}>
+                {link.text}
+              </a>
+            }
           </ArrowThumbnail>
         </li>
       )
