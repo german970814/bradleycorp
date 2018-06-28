@@ -18,11 +18,11 @@ const FooterBottomSectionItem = props => {
         className={`${style.menuItem} ${style.menuItemBottomSection}`} >
         {lock}
         {!props.link.startsWith('http') ? <Link
-            to={props.link}
-            replace >
-            <div className={`small-link-gray ${style.menuItemLinkGray}`} >{props.title}</div>
-          </Link> :
-          <a href={props.link}>
+          to={props.link}
+          replace >
+          <div className={`small-link-gray ${style.menuItemLinkGray}`} >{props.title}</div>
+        </Link>
+          : <a href={props.link}>
             <div className={`small-link-gray ${style.menuItemLinkGray}`} >{props.title}</div>
           </a>
         }

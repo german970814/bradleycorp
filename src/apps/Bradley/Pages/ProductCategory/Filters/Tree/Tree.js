@@ -48,9 +48,9 @@ class Tree extends React.PureComponent<Props> {
     }
     const { parents } = this.props.tree
 
-    let slugString = '';
+    let slugString = ''
     return Object.keys(parents).map((parentSlug, index) => {
-      if ( 0 < index ) {
+      if (index > 0) {
         slugString += '/' + parentSlug
       } else {
         slugString = parentSlug

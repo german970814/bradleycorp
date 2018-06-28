@@ -208,12 +208,12 @@ class ShippingInfo extends React.Component<Props, State> {
   }
 
   validateForm () {
-    const validateUserArea = (this.props.shippingInfo.userArea.overnight && this.props.shippingInfo.userArea.overnight.checkboxes) ?
-      this.props.shippingInfo.userArea.overnight.checkboxes.length >= 1 : false
+    const validateUserArea = (this.props.shippingInfo.userArea.overnight && this.props.shippingInfo.userArea.overnight.checkboxes)
+      ? this.props.shippingInfo.userArea.overnight.checkboxes.length >= 1 : false
     const requiredFields = validateUserArea ? [
       'userArea.carrier', 'userArea.account',
       ...this.requiredFields
-    ] :  this.requiredFields
+    ] : this.requiredFields
 
     return requiredFields.every(requiredField => {
       let shippingInfo = this.props.shippingInfo
