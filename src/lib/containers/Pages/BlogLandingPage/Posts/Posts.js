@@ -48,12 +48,12 @@ function getPostElement (
     )
   } else {
     return screenSize === 'mobile' ? (
-      <React.Fragment>
+      <React.Fragment key={index}>
         <Divider className={`col1 ${style.divider}`} fullWidth />
         <PostRemaining post={post} />
       </React.Fragment>
     ) : (
-      <PostRemaining post={post} />
+      <PostRemaining post={post} key={index} />
     )
   }
 }
