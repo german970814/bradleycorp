@@ -3,26 +3,38 @@ import * as React from 'react'
 import type { DownloadTypes } from '../../LiteratureAndChipSamples'
 import { download } from '../../LiteratureAndChipSamples'
 import BCorpWidget from '../../../../../../lib/containers/Widgets/BCorpWidget'
+import DocumentPackagerApiClient from '../../../../../../api/bradley-apis/documentPackager_client'
 import sharedStyle from '../CurrentRequest.scss'
 import style from './Downloads.scss'
 
 type Props = {
   downloads?: DownloadTypes,
   removeFromDownloads: (idToRemove: number) => void
-}
+};
 
 class Downloads extends React.Component<Props> {
   onClickButton () {
     if (!this.props.downloads || !this.props.downloads.constructor === Array) {
       return
     }
+    let _downloads = []
+    this.props.downloads.forEach(literature => {
+      if ( !literature.meta && !literature.meta.literature_pdf )
+        return null;
 
-    return this.props.downloads.forEach(literature => {
-      return download(literature)
+      const pdfUrlHasId = literature.meta.literature_pdf.match(/[0-9]*$/);
+      const pdfId  = (null !== pdfUrlHasId) ? pdfUrlHasId[0] : 0
+
+      _downloads = [..._downloads, pdfId]
+
     })
+
+    const docPackager = new DocumentPackagerApiClient();
+    docPackager.downloadMediaFiles( _downloads )
   }
 
   renderLiterature () {
+
     if (
       !this.props.downloads ||
       !this.props.downloads.constructor === Array ||

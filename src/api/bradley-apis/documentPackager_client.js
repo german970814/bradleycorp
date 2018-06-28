@@ -48,7 +48,7 @@ type BimFileZipFromVariantIdsResponse = {
   fileName: string,
   fileSize: string,
   success: boolean
-}
+};
 
 class DocumentPackagerApiClient {
   getBimProductsAndVariantsFromModelIds (
@@ -81,6 +81,23 @@ class DocumentPackagerApiClient {
     const downloadUrl = `${bradleyApisHost}/documentPackager/bimFile/${givenName}?name=${filename}`
 
     window.open(downloadUrl, '_blank')
+  }
+
+  async downloadMediaFiles (mediaIds: Array<number>, name?: string): Promise<void> {
+    const filename = 'Bradley_Download.zip'
+
+    const givenName = name ? `${name}.zip` : filename
+    const downloadUrl = `${bradleyApisHost}/documentPackager/mediaFile/?mediaFile=${mediaIds.join(',')}`
+
+    try {
+      const response = await axios.get(downloadUrl)
+
+      console.log( response )
+      //do something with response
+    } catch (err) {
+      console.log(err)
+      return false
+    }
   }
 
   async getBimZipFilename (variantIds: Array<number>): Promise<string | false> {
