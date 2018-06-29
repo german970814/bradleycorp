@@ -11,7 +11,7 @@ import style from './Tree.scss'
  */
 type Props = {
   tree: TreeType
-}
+};
 
 /**
  * Given a tree object consisting of parent and children categories,
@@ -48,8 +48,14 @@ class Tree extends React.PureComponent<Props> {
     }
     const { parents } = this.props.tree
 
+    let slugString = ''
     return Object.keys(parents).map((parentSlug, index) => {
-      return this.renderTreeLink(parentSlug, parents[parentSlug], index)
+      if (index > 0) {
+        slugString += '/' + parentSlug
+      } else {
+        slugString = parentSlug
+      }
+      return this.renderTreeLink(slugString, parents[parentSlug], index)
     })
   }
 
@@ -64,7 +70,11 @@ class Tree extends React.PureComponent<Props> {
       : 1
 
     return Object.keys(children).map((childSlug, index) => {
-      return this.renderTreeLink(childSlug, children[childSlug], offset)
+      const parentsUrl = this.props.tree.parents
+        ? Object.keys(this.props.tree.parents).join('/')
+        : ''
+      const slugString = parentsUrl + '/' + childSlug
+      return this.renderTreeLink(slugString, children[childSlug], offset)
     })
   }
 

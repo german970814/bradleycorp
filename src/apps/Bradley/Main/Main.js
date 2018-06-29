@@ -293,7 +293,6 @@ const RouterInner = () => {
       <Route exact path="/virtual-design-tool" component={VirtualDesignToolLoadable} />
       <Route exact path="/careers/current-openings" component={CurrentJobOpeningsLoadable} />
 
-
       {/* Hubspot Forms */}
       {/* <Route
         exact
@@ -389,7 +388,7 @@ const RouterInner = () => {
 
       {/* Post Types With Custom Templates */}
       <Route exact path="/post/:slug" component={BlogSinglePostPageLoadable} />
-      <Route exact path="/product/:slug" component={ProductDetailLoadable} />
+      <Route exact path="/product/(.*)?/:slug" component={ProductDetailLoadable} />
       <Route
         exact
         path="/case-study/:slug"
@@ -420,7 +419,7 @@ const RouterInner = () => {
       {/* Taxonomy pages */}
       <Route
         exact
-        path="/product-category/:slug"
+        path="/product-category/(.*)?/:slug"
         component={ProductCategoryLoadable}
       />
 

@@ -208,7 +208,7 @@ class Results extends React.Component<Props, State> {
   renderResults () {
     const selected = this.activeTab
     if (this.getTotalResults() === 0) {
-      return <NoResults message={'No results match your search'} />
+      return <NoResults message={'No results match your search.'} />
     }
     const loadMoreProps = {
       posts: this.getPosts(selected)

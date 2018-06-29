@@ -91,8 +91,6 @@ class SVGArrow extends Component {
       return line.name === 'line1' && `${line.dashOffset}px`
     })
 
-    console.log(dash)
-
     this.setState({
       strokeDashoffset: `${icons[this.props.icon].redrawDashArraySize}px`,
       transition: 'none'
@@ -107,7 +105,6 @@ class SVGArrow extends Component {
   }
 
   getRedrawStyles (n) {
-    console.log(n)
     if (!this.props.redrawOnHover) {
       return
     }

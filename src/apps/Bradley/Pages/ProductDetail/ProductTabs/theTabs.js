@@ -10,10 +10,11 @@ import TabMaintenance from './Tabs/TabMaintenance/TabMaintenance'
 import TabCompliance from './Tabs/TabCompliance/TabCompliance'
 import TabApplicationGallery from './Tabs/TabApplicationGallery/TabApplicationGallery'
 import TabBimRevit from './Tabs/TabBimRevit/TabBimRevit'
+import TabCad from './Tabs/TabCad/TabCad'
 
 function getTheTabs (tabsData: Object): Array<React.Element<typeof Tab>> {
   let tabs = []
-
+console.log( tabsData )
   // 3 part spec and tech info
   if (
     tabsData['three_part_spec']['three_part_spec'].length > 0 ||
@@ -186,6 +187,20 @@ function getTheTabs (tabsData: Object): Array<React.Element<typeof Tab>> {
         isDesktop={false}
         isOpen={false}>
         <TabBimRevit bimRevit={tabsData['bim_revit']} />
+      </Tab>
+    ]
+  }
+
+  if (tabsData['cad'] && tabsData['cad'].length > 0) {
+    tabs = [
+      ...tabs,
+      <Tab
+        key={10}
+        text={`CAD`}
+        isActive={false}
+        isDesktop={false}
+        isOpen={false}>
+        <TabCad cad={tabsData['cad']} />
       </Tab>
     ]
   }

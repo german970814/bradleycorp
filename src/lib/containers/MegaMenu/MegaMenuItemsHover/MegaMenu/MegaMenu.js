@@ -34,12 +34,10 @@ class MegaMenu extends React.Component<Props, State> {
   }
 
   handleMouseEnter () {
-    console.log(this.props.menuItem, 'open')
     this.setState({ hovered: true })
   }
 
   handleMouseLeave () {
-    console.log(this.props.menuItem, 'close')
     this.setState({ hovered: false })
   }
 

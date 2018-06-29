@@ -208,8 +208,22 @@ class ShippingInfo extends React.Component<Props, State> {
   }
 
   validateForm () {
-    return this.requiredFields.every(requiredField => {
-      return !!this.props.shippingInfo[requiredField]
+    const validateUserArea = (this.props.shippingInfo.userArea.overnight && this.props.shippingInfo.userArea.overnight.checkboxes)
+      ? this.props.shippingInfo.userArea.overnight.checkboxes.length >= 1 : false
+    const requiredFields = validateUserArea ? [
+      'userArea.carrier', 'userArea.account',
+      ...this.requiredFields
+    ] : this.requiredFields
+
+    return requiredFields.every(requiredField => {
+      let shippingInfo = this.props.shippingInfo
+      requiredField.split('.').forEach((attribute) => {
+        if (shippingInfo) {
+          const descriptor = Object.getOwnPropertyDescriptor(shippingInfo, attribute)
+          shippingInfo = descriptor ? descriptor.value : descriptor
+        }
+      })
+      return !!shippingInfo
     })
   }
 }

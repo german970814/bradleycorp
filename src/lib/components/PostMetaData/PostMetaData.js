@@ -33,7 +33,7 @@ const PostMetaData = (props: Props) => {
 
   let dateInfo = ''
   if (props.date) {
-    const date = new Date(props.date)
+    const date = new Date(props.date.replace(/-/g, '/'))
     const prettyDate: string = moment(date).format('MMMM Do YYYY, h:mm a')
     dateInfo = props.date ? getDateByFormat(prettyDate, props.format) : ''
   }
