@@ -53,11 +53,11 @@ let sitePrettyName: BlogPrettyName | 'Bradley Corp' = sitePrettyNameDefault
 
 let host: HostType = dev
   ? 'http://bradley.test'
-  : 'http://bradleydev.twoxfour.com'
+  : 'https://bradleydev.twoxfour.com'
 
 const hostBradley: HostBradleyType = dev
   ? 'http://bradley.test'
-  : 'http://bradleydev.twoxfour.com'
+  : 'https://bradleydev.twoxfour.com'
 
 const hostTheWashfountain: HostTheWashfountainType = dev
   ? 'http://thewashfountain.bradley.test'
