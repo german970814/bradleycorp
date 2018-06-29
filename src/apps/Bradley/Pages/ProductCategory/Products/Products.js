@@ -155,15 +155,14 @@ console.log( nestedTaxQuery )
     const parentSlugs = this.props.catParents
       ? this.props.catParents.split('/')
       : [];
+      console.log( [...parentSlugs, this.props.catSlug] )
     const nestedTaxQuery = {
       relation: 'AND',
       queries: [
         {
-          relation: 'AND',
-          queries: [{
-            tax: 'product_category',
-            slugs: [...parentSlugs, this.props.catSlug]
-          }]
+          tax: 'product_category',
+          slugs: [...parentSlugs, this.props.catSlug],
+          // operator: 'AND',
         },
         {
           relation: 'OR',
