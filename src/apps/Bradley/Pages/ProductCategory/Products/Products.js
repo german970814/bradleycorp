@@ -162,7 +162,7 @@ console.log( nestedTaxQuery )
         {
           tax: 'product_category',
           slugs: [...parentSlugs, this.props.catSlug],
-          // operator: 'AND',
+          operator: 'AND',
         },
         {
           relation: 'OR',
