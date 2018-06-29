@@ -23,7 +23,7 @@ type Props = {
 type State = {
   products: Array<BCorpPost>,
   loading: boolean
-}
+};
 
 class Products extends React.Component<Props, State> {
   getFilteredProductsDebounced: () => void
@@ -108,7 +108,7 @@ class Products extends React.Component<Props, State> {
       const metaQuery = this.buildMetaQuery()
 
       console.log('sending', nestedTaxQuery, metaQuery, this.props.paged)
-
+console.log( nestedTaxQuery )
       const client = new CPTApiClient('product')
       const response = await client.getByMetaAndTaxQuery(
         nestedTaxQuery,
@@ -152,12 +152,18 @@ class Products extends React.Component<Props, State> {
       }
     })
 
+    const parentSlugs = this.props.catParents
+      ? this.props.catParents.split('/')
+      : [];
     const nestedTaxQuery = {
       relation: 'AND',
       queries: [
         {
-          tax: 'product_category',
-          slugs: [this.props.catSlug]
+          relation: 'AND',
+          queries: [{
+            tax: 'product_category',
+            slugs: [...parentSlugs, this.props.catSlug]
+          }]
         },
         {
           relation: 'OR',

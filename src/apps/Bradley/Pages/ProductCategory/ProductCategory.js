@@ -85,7 +85,7 @@ type State = {
   paged: number,
   showFiltersMobile: boolean,
   loading: boolean
-}
+};
 
 export const allCategoriesSlug = 'all-categories'
 
@@ -303,6 +303,7 @@ class ProductCategory extends React.Component<Props, State> {
             !this.state.showFiltersMobile) ? (
               <Products
                 catSlug={this.props.match.params.slug || ''}
+                catParents={this.props.match.params['0'] || ''}
                 activeFilters={this.state.activeFilters}
                 paged={this.state.paged}
                 postsPerPage={this.postsPerPage}
