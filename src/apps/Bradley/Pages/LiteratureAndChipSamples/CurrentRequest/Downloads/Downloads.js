@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react'
 import type { DownloadTypes } from '../../LiteratureAndChipSamples'
-import { download } from '../../LiteratureAndChipSamples'
 import BCorpWidget from '../../../../../../lib/containers/Widgets/BCorpWidget'
 import DocumentPackagerApiClient from '../../../../../../api/bradley-apis/documentPackager_client'
 import sharedStyle from '../CurrentRequest.scss'
@@ -10,7 +9,7 @@ import style from './Downloads.scss'
 type Props = {
   downloads?: DownloadTypes,
   removeFromDownloads: (idToRemove: number) => void
-};
+}
 
 class Downloads extends React.Component<Props> {
   onClickButton () {
@@ -19,10 +18,12 @@ class Downloads extends React.Component<Props> {
     }
     let _downloads = []
     this.props.downloads.forEach(literature => {
-      if (!literature.meta && !literature.meta.literature_pdf) { return null }
+      if (!literature.meta && !literature.meta.literature_pdf) {
+        return null
+      }
 
       const pdfUrlHasId = literature.meta.literature_pdf.match(/[0-9]*$/)
-      const pdfId = (pdfUrlHasId !== null) ? pdfUrlHasId[0] : 0
+      const pdfId = pdfUrlHasId !== null ? pdfUrlHasId[0] : 0
 
       _downloads = [..._downloads, pdfId]
     })

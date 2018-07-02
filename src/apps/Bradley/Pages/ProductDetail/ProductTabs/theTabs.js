@@ -14,7 +14,7 @@ import TabCad from './Tabs/TabCad/TabCad'
 
 function getTheTabs (tabsData: Object): Array<React.Element<typeof Tab>> {
   let tabs = []
-console.log( tabsData )
+  console.log(tabsData)
   // 3 part spec and tech info
   if (
     tabsData['three_part_spec']['three_part_spec'].length > 0 ||

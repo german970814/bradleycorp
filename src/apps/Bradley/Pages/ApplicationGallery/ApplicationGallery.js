@@ -80,7 +80,10 @@ class ApplicationGallery extends Component<Props, State> {
   }
 
   updateActiveFilters (tax: string, newFilters: CheckboxesType): void {
-    let activeFilters: TaxAndTermSlugObject = Object.assign({}, this.state.activeFilters)
+    let activeFilters: TaxAndTermSlugObject = Object.assign(
+      {},
+      this.state.activeFilters
+    )
     if (!newFilters.length) {
       delete activeFilters[tax]
     } else {
@@ -185,7 +188,7 @@ class ApplicationGallery extends Component<Props, State> {
     const activeFilters = Object.keys(this.state.activeFilters)
     const prevActiveFilters = Object.keys(prevState.activeFilters)
 
-    if (prevActiveFilters.length != activeFilters.length) return true
+    if (prevActiveFilters.length !== activeFilters.length) return true
     return activeFilters.some(filter => {
       return (
         prevState.activeFilters[filter] !== this.state.activeFilters[filter]

@@ -85,7 +85,7 @@ type State = {
   paged: number,
   showFiltersMobile: boolean,
   loading: boolean
-};
+}
 
 export const allCategoriesSlug = 'all-categories'
 
@@ -253,6 +253,9 @@ class ProductCategory extends React.Component<Props, State> {
       }
     }
 
+    // products component needs the parent slugs for the next tax query
+    const catParentsForTaxQuery = Object.keys(this.state.tree.parents || {})
+
     return (
       <div className={`row ${style.content}`}>
         {!isMobile && (
@@ -303,7 +306,7 @@ class ProductCategory extends React.Component<Props, State> {
             !this.state.showFiltersMobile) ? (
               <Products
                 catSlug={this.props.match.params.slug || ''}
-                catParents={this.props.match.params['0'] || ''}
+                catParents={catParentsForTaxQuery}
                 activeFilters={this.state.activeFilters}
                 paged={this.state.paged}
                 postsPerPage={this.postsPerPage}

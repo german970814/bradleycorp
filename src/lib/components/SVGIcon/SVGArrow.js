@@ -75,7 +75,6 @@ class SVGArrow extends Component {
     ]
 
     this.state = {
-
       // line1DashOffset: '0px'
       // line2DashOffset: '0px'
       // line3DashOffset: '0px'
@@ -87,9 +86,9 @@ class SVGArrow extends Component {
   }
 
   onMouseEnter (e) {
-    const dash = this.lines.find(line => {
+    /* const dash = this.lines.find(line => {
       return line.name === 'line1' && `${line.dashOffset}px`
-    })
+    }) */
 
     this.setState({
       strokeDashoffset: `${icons[this.props.icon].redrawDashArraySize}px`,
@@ -147,17 +146,20 @@ class SVGArrow extends Component {
           }}
         /> */}
         {icons[this.props.icon].lines.map((line, ind) => {
-          return <line
-            x1={line.x1}
-            y1={line.y1}
-            x2={line.x2}
-            y2={line.y2}
-            key={ind}
-            style={{
-              ...icons[this.props.icon].pathStyle,
-              ...this.getRedrawStyles((line.x1 - line.x2)),
-              ...customStyles
-            }}/>
+          return (
+            <line
+              x1={line.x1}
+              y1={line.y1}
+              x2={line.x2}
+              y2={line.y2}
+              key={ind}
+              style={{
+                ...icons[this.props.icon].pathStyle,
+                ...this.getRedrawStyles(line.x1 - line.x2),
+                ...customStyles
+              }}
+            />
+          )
         })}
       </svg>
     )

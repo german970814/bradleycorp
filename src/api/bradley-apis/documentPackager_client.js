@@ -48,7 +48,7 @@ type BimFileZipFromVariantIdsResponse = {
   fileName: string,
   fileSize: string,
   success: boolean
-};
+}
 
 class DocumentPackagerApiClient {
   getBimProductsAndVariantsFromModelIds (
@@ -83,22 +83,29 @@ class DocumentPackagerApiClient {
     window.open(downloadUrl, '_blank')
   }
 
-  async downloadMediaFiles (mediaIds: Array<number>, name?: string): Promise<void> {
-    const filename = 'Bradley_Download.zip'
-
-    const givenName = name ? `${name}.zip` : filename
-    const downloadUrl = `${bradleyApisHost}/documentPackager/mediaFile/?mediaFile=${mediaIds.join(',')}`
+  async downloadMediaFiles (
+    mediaIds: Array<number>,
+    name?: string
+  ): Promise<void> {
+    // const filename = 'Bradley_Download.zip'
+    const downloadUrl = `${bradleyApisHost}/documentPackager/mediaFile/?mediaFile=${mediaIds.join(
+      ','
+    )}`
 
     try {
       const response = await axios.get(downloadUrl)
-      if ( response.data
-        && response.data.success
-        && true === response.data.success ) {
+      if (
+        response.data &&
+        response.data.success &&
+        response.data.success === true
+      ) {
         const zipFile = response.data.zipFile
         window.location.href = bradleyApisHost + zipFile.fileUrl
       }
 
-      throw new Error( 'Theere was an error getting the download link for the compressed files.')
+      throw new Error(
+        'Theere was an error getting the download link for the compressed files.'
+      )
     } catch (err) {
       console.log(err)
       return undefined

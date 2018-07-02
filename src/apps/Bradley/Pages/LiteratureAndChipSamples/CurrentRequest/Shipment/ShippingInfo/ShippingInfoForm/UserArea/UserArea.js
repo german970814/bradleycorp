@@ -8,7 +8,6 @@ import type {
 import type { CheckboxObject } from '../../../../../../../../../lib/components/BCorpFilterField/BCorpCheckboxField'
 import BCorpCheckboxField from '../../../../../../../../../lib/components/BCorpFilterField/BCorpCheckboxField'
 import BCorpInputField from '../../../../../../../../../lib/components/BCorpFilterField/BCorpInputField'
-import BCorpSelectField from '../../../../../../../../../lib/components/BCorpFilterField/BCorpSelectField'
 import BCorpTextareaField from '../../../../../../../../../lib/components/BCorpFilterField/BCorpTextareaField'
 import sharedStyle from '../ShippingInfoForm.scss'
 import style from './UserArea.scss'
@@ -55,7 +54,11 @@ class UserArea extends React.Component<Props, State> {
   }
 
   handleOvernightDeliveryChange (newOvernightDelivery: CheckboxObject): void {
-    this.setState({ required: newOvernightDelivery.checkboxes ? newOvernightDelivery.checkboxes.length >= 1 : false })
+    this.setState({
+      required: newOvernightDelivery.checkboxes
+        ? newOvernightDelivery.checkboxes.length >= 1
+        : false
+    })
     const userArea = { ...this.props.shippingInfoUserArea }
     userArea.overnight = newOvernightDelivery
     this.props.updateUserArea(userArea)

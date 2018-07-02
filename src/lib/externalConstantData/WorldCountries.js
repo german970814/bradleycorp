@@ -247,10 +247,18 @@ const countries = [
 
 function getCountriesForSelectFieldOptions () {
   const countriesFormatted = {}
-  const USA = countries.find(country => country.abbreviation === 'US') || { country: 'United States', abbreviation: 'US' }
-  const orderedCountries = [USA, ...countries.filter(country => country != USA).sort((countryA, countryB) => {
-    return countryA.country.localeCompare(countryB.country, 'us')
-  })]
+  const USA = countries.find(country => country.abbreviation === 'US') || {
+    country: 'United States',
+    abbreviation: 'US'
+  }
+  const orderedCountries = [
+    USA,
+    ...countries
+      .filter(country => country !== USA)
+      .sort((countryA, countryB) => {
+        return countryA.country.localeCompare(countryB.country, 'us')
+      })
+  ]
 
   orderedCountries.forEach(country => {
     countriesFormatted[country.abbreviation] = country.country

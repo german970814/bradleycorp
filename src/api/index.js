@@ -2,7 +2,7 @@
 import type { BlogName, BlogPrettyName } from '../lib/types/blog_types'
 import axios from 'axios'
 
-type HostBradleyType = 'http://bradley.test' | 'http://bradleydev.twoxfour.com'
+type HostBradleyType = 'http://bradley.test' | 'https://bradleydev.twoxfour.com'
 
 type HostTheWashfountainType =
   | 'http://thewashfountain.bradley.test'
