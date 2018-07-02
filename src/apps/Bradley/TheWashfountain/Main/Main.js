@@ -24,6 +24,12 @@ const ResultsLoadable = Loadable({
   loading: LoadingPageSize
 })
 
+const CustomizableLoadable = Loadable({
+  loader: () =>
+    import('../../../../lib/containers/Pages/Customizable/Customizable'),
+  loading: LoadingPageSize
+})
+
 const Main = props => {
   return (
     <React.Fragment>
@@ -48,6 +54,7 @@ const Main = props => {
               path="/results/:query/:tab/page=:page"
               component={ResultsLoadable}
             />
+            <Route path="/*" component={CustomizableLoadable} />
             <Route component={Error404} />
           </Switch>
         </ErrorBoundary>
