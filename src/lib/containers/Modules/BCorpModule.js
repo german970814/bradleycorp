@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import { withScreenSize } from '../../contexts/ScreenSizeContext'
 import PropTypes from 'prop-types'
 import debounce from 'debounce'
 import ContainerMediaQuery from '../ContainerMediaQuery/ContainerMediaQuery'
+import { numberSubstringInstances } from '../../bcorpString'
 import moduleStyle from './Modules.scss'
 
 /**
@@ -132,7 +134,7 @@ class BCorpModule extends Component {
    * We dispatch an event that will only be listened for by other modules in the row
    *
    */
-  componentDidUpdate () {
+  componentDidUpdate (prevProps, prevState) {
     if (this.props.rowNode) {
       this.updateModuleHeight()
       window.dispatchEvent(this.rowUpdateEvent)
@@ -148,17 +150,43 @@ class BCorpModule extends Component {
       return
     }
 
+    const rowLayout = this.props.rowNode.getAttribute('data-row')
+    const rowNumberColumns = numberSubstringInstances(rowLayout, '\\|') + 1
     const rowHeight = this.props.rowNode.offsetHeight
     const moduleHeight = this.state.node.offsetHeight
 
     // we won't need to update the height if the module is full width
     // we just need to make sure the minHeight returns to (or already is) 0
-    if (this.state.node.offsetWidth === window.innerWidth) {
+    //
+    // moduls always stack on mobile for all column sizes
+    if (
+      this.state.node.offsetWidth === window.innerWidth ||
+      this.props.screenSize === 'mobile'
+    ) {
       if (this.state.minHeight !== 0) {
         return this.setState({ minHeight: 0 })
       }
-    } else if (moduleHeight < rowHeight) {
-      return this.setState({ minHeight: rowHeight })
+    }
+
+    // if the screen size is less than desktop then modules could stack
+    // within rows, meaning the row will always be higher than a module
+    // => causing an infinite loop
+
+    // combinations that dont stack
+    if (
+      this.props.screenSize === 'desktop' ||
+      (this.props.screenSize === 'tablet' && rowNumberColumns < 4)
+    ) {
+      if (moduleHeight < rowHeight) {
+        return this.setState({ minHeight: rowHeight })
+      }
+    }
+
+    // combinations that stack once
+    if (this.props.screenSize === 'tablet' && rowNumberColumns >= 4) {
+      if (moduleHeight < rowHeight / 2) {
+        return this.setState({ minHeight: rowHeight / 2 })
+      }
     }
   }
 
@@ -285,7 +313,8 @@ BCorpModule.propTypes = {
    *
    * @type {[object]}
    */
-  rowNode: PropTypes.object.isRequired
+  rowNode: PropTypes.object.isRequired,
+  screenSize: PropTypes.string
 }
 
 export default BCorpModule

@@ -13,3 +13,10 @@ export function stringIsNumeric (str: string): boolean {
 export function cleanMetaDescription (metaDescription: string): string {
   return metaDescription.replace(/"/g, "'")
 }
+
+export function numberSubstringInstances (
+  str: string,
+  substring: string
+): number {
+  return (str.match(new RegExp(substring, 'g')) || []).length
+}

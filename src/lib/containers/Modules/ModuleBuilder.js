@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
+import { withScreenSize } from '../../contexts/ScreenSizeContext'
 import PropTypes from 'prop-types'
 import ContentTransformer from '../../components/ContentTransformer/ContentTransformer'
 import ModuleFactory from './ModuleFactory'
@@ -99,7 +100,11 @@ class ModuleBuilder extends Component {
       const moduleData = colData.modules[index]
 
       return ReactDOM.createPortal(
-        <ModuleFactory data={moduleData} rowNode={rowNode} />,
+        <ModuleFactory
+          data={moduleData}
+          rowNode={rowNode}
+          screenSize={this.props.screenSize}
+        />,
         moduleNode
       )
     })
@@ -150,7 +155,9 @@ ModuleBuilder.propTypes = {
    *
    * @type {[string]}
    */
-  pagePath: PropTypes.string
+  pagePath: PropTypes.string,
+  // from withScreenSize HOC
+  screenSize: PropTypes.string
 }
 
-export default ModuleBuilder
+export default withScreenSize(ModuleBuilder)

@@ -18,13 +18,14 @@ import TextWithBackgroundPeelerModule from './TextWithBackgroundPeelerModule/Tex
  * @param {[object]} props
  * @return {[component]}
  */
-const ModuleFactory = ({ data, rowNode }) => {
+const ModuleFactory = ({ data, rowNode, screenSize }) => {
   if (!data.name) {
     return null
   }
 
   const sharedProps = {
-    rowNode
+    rowNode,
+    screenSize
   }
 
   switch (data.name) {
@@ -156,7 +157,8 @@ const ModuleFactory = ({ data, rowNode }) => {
 
 ModuleFactory.propTypes = {
   data: PropTypes.object.isRequired,
-  rowNode: PropTypes.object.isRequired
+  rowNode: PropTypes.object.isRequired,
+  screenSize: PropTypes.string
 }
 
 export default ModuleFactory
