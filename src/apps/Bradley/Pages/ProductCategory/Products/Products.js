@@ -149,8 +149,6 @@ class Products extends React.Component<Props, State> {
       }
     })
 
-    console.log(this.props.catParents)
-
     const parentSlugs = this.props.catParents
     // console.log( [...parentSlugs, this.props.catSlug] )
     const nestedTaxQuery = {
@@ -169,8 +167,6 @@ class Products extends React.Component<Props, State> {
         }
       ]
     }
-
-    console.log(nestedTaxQuery)
 
     return nestedTaxQuery
   }
