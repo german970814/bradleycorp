@@ -107,8 +107,6 @@ class Products extends React.Component<Props, State> {
       const nestedTaxQuery = this.buildNestedTaxQuery()
       const metaQuery = this.buildMetaQuery()
 
-      console.log('sending', nestedTaxQuery, metaQuery, this.props.paged)
-console.log( nestedTaxQuery )
       const client = new CPTApiClient('product')
       const response = await client.getByMetaAndTaxQuery(
         nestedTaxQuery,
@@ -121,8 +119,6 @@ console.log( nestedTaxQuery )
         '',
         true
       )
-
-      console.log(response)
 
       const products = response.data.posts
 
@@ -155,7 +151,7 @@ console.log( nestedTaxQuery )
     const parentSlugs = this.props.catParents
       ? this.props.catParents.split('/')
       : [];
-      console.log( [...parentSlugs, this.props.catSlug] )
+      // console.log( [...parentSlugs, this.props.catSlug] )
     const nestedTaxQuery = {
       relation: 'AND',
       queries: [

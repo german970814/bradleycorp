@@ -272,10 +272,11 @@ class ScrollableList extends Component {
   }
 
   renderScroller () {
+    const numberOfPosts = this.props.numberOfPosts || ('children' in this.props ? this.props.children.length : 0)
+
     return (
       <div className={this.props.wrapperClassName}>
-        {this.props.numberToDisplay < this.props.numberOfPosts &&
-          this.renderButtonUp()}
+        {this.props.numberToDisplay < numberOfPosts && this.renderButtonUp()}
 
         <ScrollableListTrack
           moveList={this.moveList.bind(this)}
@@ -352,8 +353,8 @@ class ScrollableList extends Component {
       return this.props.numberToDisplay < this.props.numberOfPosts
     }
 
-    if (this.state.children) {
-      return this.state.children.length > this.props.numberToDisplay
+    if (this.props.children) {
+      return this.props.children.length > this.props.numberToDisplay
     }
 
     return true

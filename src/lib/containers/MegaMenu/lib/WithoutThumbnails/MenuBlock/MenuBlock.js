@@ -55,22 +55,26 @@ class MenuBlock extends React.PureComponent<Props> {
           url={createNavMenuItemUrl(this.props.menuItem) || '#'}
           renderInternal={url => {
             return (
-              <Link to={url}>
-                <h6 className={`menu-block-title ${style.title}`}>
-                  {this.props.menuItem.title}
-                </h6>
+              <React.Fragment>
+                <Link to={url}>
+                  <h6 className={`menu-block-title ${style.title}`}>
+                    {this.props.menuItem.title}
+                  </h6>
+                </Link>
                 {this.renderChildItems()}
-              </Link>
+              </React.Fragment>
             )
           }}
           renderExternal={url => {
             return (
-              <a href={url} target="_blank">
-                <h6 className={`menu-block-title ${style.title}`}>
-                  {this.props.menuItem.title}
-                </h6>
+              <React.Fragment>
+                <a href={url} target="_blank">
+                  <h6 className={`menu-block-title ${style.title}`}>
+                    {this.props.menuItem.title}
+                  </h6>
+                </a>
                 {this.renderChildItems()}
-              </a>
+              </React.Fragment>
             )
           }}
         />
