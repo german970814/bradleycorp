@@ -14,6 +14,7 @@ $tabHeight: 65px;
 
 // Tablet-Desktop
 
+$tabWidth: 115;
 $tabHeightDesktop: 60px;
 $tabContentPaddingLeft: 11.5vw;
 $tabContentPaddingRight: 11.5vw;
@@ -55,22 +56,27 @@ $tabContentPaddingRight: 11.5vw;
   display: inline-block;
   border: solid 1px $silver;
   border-bottom: none;
-  min-width: 118px;
-  width: 120px;
-  max-width: 240px;
+  padding: 0 7px;
+  width: $tabWidth + px;
   height: $tabHeightDesktop;
   line-height: $tabHeightDesktop;
   list-style: none;
   white-space: normal;
   text-align: center;
   cursor: pointer;
+  box-sizing: border-box;
 
   h5:global(.tab-text) {
     display: inline-block;
     vertical-align: middle;
-    width: 118px;
+    width: 100%;
+    max-width: none;
     color: $black;
     line-height: normal;
     text-align: center;
   }
+}
+
+:export {
+  tabwidth: $tabWidth;
 }
