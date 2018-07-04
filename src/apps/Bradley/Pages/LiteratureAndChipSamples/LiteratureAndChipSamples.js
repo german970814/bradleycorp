@@ -4,9 +4,11 @@ import type {
   LiteraturePost,
   ChipSamplePost
 } from '../../../../lib/types/cpt_types'
+import type { MaterialTypes } from '../../../../api/litAndChipSamplePage_client'
 import type { ScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
 import type { WPMaterialTypeTerm } from '../../../../lib/types/term_types'
 import type { CheckboxObject } from '../../../../lib/components/BCorpFilterField/BCorpCheckboxField'
+import LiteratureAndChipSamplePageClient from '../../../../api/litAndChipSamplePage_client'
 import { withScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
 import CPTApiClient from '../../../../api/cpt_client'
 import RightSidebarTemplate from '../../../../lib/containers/Templates/RightSidebarTemplate/RightSidebarTemplate'
@@ -20,10 +22,6 @@ import BCorpHead from '../../../../lib/components/BCorpHead/BCorpHead'
 // import style from './LiteratureAndChipSamples.scss'
 
 type PostTypeOptions = 'literature' | 'chip'
-
-type MaterialTypes = {
-  [number | string]: ?string
-}
 
 /* Filter Types */
 
@@ -157,7 +155,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
   }
 
   componentDidMount () {
-    this.getOptions('literature')
+    this.getLiterature()
   }
 
   componentDidUpdate (prevProps: Props, prevState: State) {
@@ -166,7 +164,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
       prevState.filters.literature.search !==
       this.state.filters.literature.search
     ) {
-      this.getOptions('literature')
+      this.getLiterature()
     }
   }
 
@@ -302,8 +300,7 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
       (!this.state.options.chipSamples ||
         !this.state.options.chipSamples.length)
     ) {
-      this.getOptions('chip')
-      this.getMaterialTypes()
+      this.getChipSamplesPage()
     }
   }
 
@@ -400,83 +397,50 @@ class LiteratureAndChipSamples extends React.Component<Props, State> {
     )
   }
 
-  async getOptions (postType: PostTypeOptions) {
+  async getLiterature () {
     this.setState({ loading: true })
     try {
-      if (postType === 'literature') {
-        const client = new CPTApiClient(postType)
-        const response = await client.getLatest(
-          -1,
-          0,
-          0,
-          null,
-          this.state.filters.literature.search
-        )
+      const client = new CPTApiClient('literature')
+      const response = await client.getLatest(
+        -1,
+        0,
+        0,
+        null,
+        this.state.filters.literature.search
+      )
 
-        const optionsData: Array<LiteraturePost> = response.data
+      const optionsData: Array<LiteraturePost> = response.data
 
-        const options = { ...this.state.options, literature: optionsData }
-        return this.setState({ options, loading: false })
-      } else if (postType === 'chip') {
-        const client = new CPTApiClient('chip')
-        const response = await client.getLatest(-1)
-
-        const optionsData: Array<ChipSamplePost> = response.data
-
-        const options = { ...this.state.options, chipSamples: optionsData }
-        return this.setState({ options, loading: false })
-      }
+      const options = { ...this.state.options, literature: optionsData }
+      return this.setState({ options, loading: false })
     } catch (err) {
       console.log(err)
-      const options = { ...this.state.options }
-      const optionPostType = postType === 'chip' ? 'chipSamples' : postType
-      options[optionPostType] = []
+      const options = { ...this.state.options, literature: [] }
       return this.setState({ options, loading: false })
     }
   }
 
-  async getMaterialTypes () {
+  async getChipSamplesPage () {
+    this.setState({ loading: true })
     try {
-      const client = new CPTApiClient('chip')
-      const response = await client.getTermsByTax('material_type')
+      const client = new LiteratureAndChipSamplePageClient()
+      const response = await client.getChipSamplePage()
 
-      if (!response.data.material_type) {
-        console.warn(
-          'couldnt find material_type tax in chip-terms GET response'
-        )
-        return
+      const options = {
+        ...this.state.options,
+        chipSamples: response.data.chip_samples
       }
 
-      const materialTypesData: Array<WPMaterialTypeTerm> =
-        response.data.material_type
-
       return this.setState({
-        materialTypes: this.createMaterialTypesObject(materialTypesData)
+        materialTypes: response.data.material_types,
+        options,
+        loading: false
       })
     } catch (err) {
       console.log(err)
+      const options = { ...this.state.options, chipSamples: [] }
+      return this.setState({ materialTypes: {}, options, loading: false })
     }
-  }
-
-  createMaterialTypesObject (
-    materialTypes: Array<WPMaterialTypeTerm>
-  ): MaterialTypes {
-    const materialTypesObject = {}
-
-    if (!materialTypes) {
-      return materialTypesObject
-    }
-
-    materialTypes.forEach(materialType => {
-      if (
-        !Object.keys(materialTypesObject).includes(materialType.term_id) &&
-        materialType.parent === 0
-      ) {
-        materialTypesObject[materialType.term_id] = materialType.name
-      }
-    })
-
-    return materialTypesObject
   }
 
   createNewShipmentWithPost (post: LiteraturePost | ChipSamplePost): void {
