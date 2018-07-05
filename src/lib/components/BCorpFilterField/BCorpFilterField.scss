@@ -17,7 +17,6 @@ $tabletGapBetweenFilters: 24px;
   background-color: #fff;
   color: $steel-grey;
   box-sizing: border-box;
-  cursor: pointer;
 }
 
 %downArrow {
@@ -84,6 +83,7 @@ h5.title {
   select {
     @extend %inputStyle;
     padding-right: 20px;
+    cursor: pointer;
 
     // remove browser defaults
     -moz-appearance: none;
@@ -173,6 +173,7 @@ h5.title {
     @extend %inputStyle;
     width: 100%;
     padding: 2px 5px;
+    cursor: pointer;
   }
 
   b:nth-child(2) {
@@ -229,6 +230,7 @@ h5.title {
       height: 12px;
       margin: 0;
       margin-right: 9px;
+      cursor: pointer;
 
       &:checked:before {
         content: '';
@@ -269,5 +271,6 @@ h5.title {
     @extend %body;
     color: $navy;
     line-height: normal;
+    cursor: pointer;
   }
 }

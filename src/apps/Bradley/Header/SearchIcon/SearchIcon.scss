@@ -1,7 +1,7 @@
-@import "../../../../scss/partials/variables";
-@import "../../../../scss/partials/mixins";
-@import "../../../../scss/partials/layout";
-@import "../../../../scss/partials/text-styles";
+@import '../../../../scss/partials/variables';
+@import '../../../../scss/partials/mixins';
+@import '../../../../scss/partials/layout';
+@import '../../../../scss/partials/text-styles';
 
 .magnifyingGlassWrapper {
   display: inline-block;
@@ -24,6 +24,7 @@
   display: inline-block;
   width: 22px;
   height: 22px;
+  cursor: pointer;
 }
 
 .magnifyingGlassImage {
