@@ -18,13 +18,13 @@ type Props = {
   postsPerPage: number,
   updateNumberResults: (numberResults: number) => void,
   screenSize: ScreenSize,
-  catParents: Array
+  catParents: Array<string>
 }
 
 type State = {
   products: Array<BCorpPost>,
   loading: boolean
-};
+}
 
 class Products extends React.Component<Props, State> {
   getFilteredProductsDebounced: () => void
@@ -149,10 +149,8 @@ class Products extends React.Component<Props, State> {
       }
     })
 
-    const parentSlugs = this.props.catParents
-      ? this.props.catParents
-      : []
-      // console.log( [...parentSlugs, this.props.catSlug] )
+    const parentSlugs = this.props.catParents ? this.props.catParents : []
+    // console.log( [...parentSlugs, this.props.catSlug] )
     const nestedTaxQuery = {
       relation: 'AND',
       queries: [
