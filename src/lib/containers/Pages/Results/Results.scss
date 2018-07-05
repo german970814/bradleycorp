@@ -55,36 +55,31 @@
 .resultsOptionsWrapper {
   margin: 0 auto;
   margin-bottom: 40px;
-  padding: 0;
+  padding: 0 40px;
   text-align: center;
 
   li {
     display: inline-block;
+    border: 1px solid $silver;
+    padding: 0 15px;
+    width: 200px;
+    height: 60px;
     list-style-type: none;
+    background-color: $light-gray;
+    box-sizing: border-box;
 
-    &.selected {
-      a {
-        color: #fff;
-        background: $navy;
-      }
+    h6 {
+      color: $steel-grey;
+      line-height: 60px;
+      text-align: center;
     }
 
-    a {
-      background: #f1f2f2;
-      padding: 25px 38px 21px;
-      border: 1px solid #d1d3d4;
-      font-family: 'CentraleSansPro';
-      font-size: 13px;
-      font-weight: bold;
-      color: #808285;
-      text-transform: uppercase;
-      display: inline-block;
-      margin-left: -1px;
-      margin-top: -1px;
+    &.selected,
+    &:hover {
+      background: $navy;
 
-      &:hover {
+      h6 {
         color: #fff;
-        background: #2f3d6f;
       }
     }
   }
@@ -138,14 +133,7 @@
     }
 
     h5 {
-      a {
-        font-family: 'CentraleSansPro';
-        color: #000;
-        font-size: 16px;
-        font-weight: bold;
-        line-height: normal;
-        cursor: pointer;
-      }
+      color: $black;
     }
 
     p {
@@ -170,14 +158,7 @@
 
 .searchTechInfoWrapper {
   margin: 0;
-
-  @include respond-to(mobile) {
-    padding: 40px 20px 0;
-  }
-
-  @include respond-to(tablet) {
-    padding: 40px 0 0;
-  }
+  padding: 0;
 }
 
 .techInfoItem {
@@ -230,7 +211,7 @@ button.loadMore {
 
 .searchProductsWrapper {
   margin: 0;
-  padding: 22px 0 0;
+  padding: 0;
 }
 
 /*

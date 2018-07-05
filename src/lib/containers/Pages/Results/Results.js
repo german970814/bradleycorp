@@ -160,16 +160,16 @@ class Results extends React.Component<Props, State> {
         {Object.keys(this.getTabs).map((tab, index) => {
           const count = this.state.resultCount[tab]
           return count ? (
-            <li
-              className={tab === this.activeTab ? `${style.selected}` : ''}
-              key={index}>
-              <a
-                onClick={() => {
-                  this.handleChangeTab(tab)
-                }}>
-                {`${this.getTabs[tab]} (${count.toString()})`}
-              </a>
-            </li>
+            <a
+              onClick={() => {
+                this.handleChangeTab(tab)
+              }}>
+              <li
+                className={tab === this.activeTab ? `${style.selected}` : ''}
+                key={index}>
+                <h6>{`${this.getTabs[tab]} (${count.toString()})`}</h6>
+              </li>
+            </a>
           ) : null
         })}
       </ul>
