@@ -204,41 +204,14 @@ button.loadMore {
 }
 
 .searchLiteratureWrapper {
-  margin: 0;
-  padding: 40px 0 0;
-
   article {
-    position: relative;
-    margin-bottom: 25px;
-    padding: 0 10px;
-
-    .literatureImageContainer {
-      text-align: center;
-      margin: 0 auto 8px;
-      width: 162px;
-      height: 212px;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid #cecece;
-
-      img {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-    }
+    margin-bottom: 30px;
 
     .literatureTitle {
-      color: #000;
-      font-family: 'CentraleSansPro';
-      font-weight: bold;
+      margin-top: 10px;
       text-align: center;
-      text-transform: capitalize;
-      width: 50%;
-      margin: 0 auto;
-      overflow: hidden;
-      height: 32px;
+      text-transform: none;
+      color: $black;
     }
   }
 }

@@ -4,7 +4,9 @@ import { sortIntoRows } from '../../bcorpJSX'
 
 type Props = {
   children: React.ChildrenArray<React.Element<any>>,
-  colClasses: Array<string>
+  colClasses: Array<string>,
+  // number of pixels to make the gutter between columns
+  gutter?: number
 }
 
 /**
@@ -22,8 +24,16 @@ class FillGrid extends React.Component<Props> {
       // makes sure we loop through the colClasses if length of children if bigger
       const colClass = colClasses[index % colClasses.length]
 
+      const padding = this.props.gutter ? `${this.props.gutter / 2}px` : 0
+
       return (
-        <div key={index} className={colClass}>
+        <div
+          style={{
+            paddingLeft: padding,
+            paddingRight: padding
+          }}
+          key={index}
+          className={colClass}>
           {child}
         </div>
       )
@@ -31,7 +41,18 @@ class FillGrid extends React.Component<Props> {
   }
 
   render () {
-    return sortIntoRows(this.renderColumns(), this.props.colClasses.length)
+    // offset the whole row by half the gutter size so we're still flush with the edges
+    const margin = this.props.gutter ? `${-this.props.gutter / 2}px` : 0
+
+    return (
+      <div
+        style={{
+          marginLeft: margin,
+          marginRight: margin
+        }}>
+        {sortIntoRows(this.renderColumns(), this.props.colClasses.length)}
+      </div>
+    )
   }
 }
 
