@@ -17,7 +17,9 @@ import BCorpHead from '../../../components/BCorpHead/BCorpHead'
 import NoResults from '../../../components/Error/NoResults/NoResults'
 import defaultStyle from '../../../containers/Templates/Templates.scss'
 import BCorpSelectField from '../../../components/BCorpFilterField/BCorpSelectField'
-import { renderTitle } from '../../../containers/Templates/DefaultTemplate/DefaultTemplate'
+import DefaultTemplate, {
+  renderTitle
+} from '../../../containers/Templates/DefaultTemplate/DefaultTemplate'
 
 import {
   SearchLiterature,
@@ -154,28 +156,23 @@ class Results extends React.Component<Props, State> {
 
   renderOptions () {
     return (
-      <div
-        className={`row ${defaultStyle.defaultTemplate} ${
-          style.resultsHeaderContainer
-        }`}>
-        <ul className={`${style.resultsOptionsWrapper}`}>
-          {Object.keys(this.getTabs).map((tab, index) => {
-            const count = this.state.resultCount[tab]
-            return count ? (
-              <li
-                className={tab === this.activeTab ? `${style.selected}` : ''}
-                key={index}>
-                <a
-                  onClick={() => {
-                    this.handleChangeTab(tab)
-                  }}>
-                  {`${this.getTabs[tab]} (${count.toString()})`}
-                </a>
-              </li>
-            ) : null
-          })}
-        </ul>
-      </div>
+      <ul className={`row ${style.resultsOptionsWrapper}`}>
+        {Object.keys(this.getTabs).map((tab, index) => {
+          const count = this.state.resultCount[tab]
+          return count ? (
+            <li
+              className={tab === this.activeTab ? `${style.selected}` : ''}
+              key={index}>
+              <a
+                onClick={() => {
+                  this.handleChangeTab(tab)
+                }}>
+                {`${this.getTabs[tab]} (${count.toString()})`}
+              </a>
+            </li>
+          ) : null
+        })}
+      </ul>
     )
   }
 
@@ -186,11 +183,8 @@ class Results extends React.Component<Props, State> {
         className={`row ${defaultStyle.defaultTemplate} ${
           style.resultsHeaderContainer
         }`}>
-        <div className={`${style.resultsSummary}`}>
-          <p>{`You searched for "${query}" - ${this.getTotalResults() ||
-            0} Results`}</p>
-        </div>
-        {renderTitle('Search Results', 'col1')}
+        <h5>{`You searched for "${query}" - ${this.getTotalResults() ||
+          0} Results`}</h5>
       </div>
     )
   }
@@ -378,13 +372,19 @@ class Results extends React.Component<Props, State> {
         <BCorpHead title={pageTitle} description={pageDescription} />
 
         {this.renderHeader()}
-        <div className={`${style.itemsWrapper}`}>{this.renderTabs()}</div>
-        <div
-          className={`row ${defaultStyle.defaultTemplate} ${
-            style.contentWrapper
-          }`}>
-          {this.renderResults()}
-        </div>
+        <DefaultTemplate
+          data={{
+            page_title: 'Search Results'
+          }}
+          renderModules={() => {
+            return (
+              <React.Fragment>
+                {this.renderTabs()}
+                {this.renderResults()}
+              </React.Fragment>
+            )
+          }}
+        />
       </div>
     )
   }

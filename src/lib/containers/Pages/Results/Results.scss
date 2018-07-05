@@ -3,22 +3,36 @@
 @import '../../../../scss/partials/variables';
 @import '../../../../scss/partials/mixins';
 
-.resultsSummary {
-  p {
-    font-family: $CentraleSansPro;
-    color: #000;
-    font-size: 16px;
-    font-weight: bold;
+.resultsHeaderContainer {
+  margin-bottom: 5px;
+  padding-top: 40px;
+  padding-bottom: 0px;
+
+  @include respond-to(tablet) {
+    margin-bottom: 10px;
+    padding-top: 35px;
+  }
+
+  @include respond-to(desktop) {
+    padding-top: 60px;
+  }
+
+  h5 {
+    margin: 0;
+    color: $black;
   }
 }
 
-.resultsHeaderContainer {
-  @include respond-to(mobile) {
-    padding-top: 30px;
+:global(.default-template-title) {
+  margin-top: 0px;
+  margin-bottom: 20px;
 
-    & > div {
-      margin-top: 0;
-    }
+  @include respond-to(tablet) {
+    margin-bottom: 30px;
+  }
+
+  @include respond-to(desktop) {
+    margin-bottom: 40px;
   }
 }
 
@@ -28,23 +42,30 @@
 }
 
 .mobileSelectWtapper {
-  background-color: #2e3c6e;
+  margin-bottom: 30px;
   padding: 20px 22px;
   min-height: 30px;
+  background-color: #2e3c6e;
 }
+
+.resultsHeaderContainer {
+  padding-top: 0px;
+}
+
 .resultsOptionsWrapper {
   margin: 0 auto;
+  margin-bottom: 40px;
   padding: 0;
   text-align: center;
 
   li {
-    list-style-type: none;
     display: inline-block;
+    list-style-type: none;
 
     &.selected {
       a {
         color: #fff;
-        background: #2f3d6f;
+        background: $navy;
       }
     }
 
@@ -88,6 +109,10 @@
     margin: 0 auto;
   }
 }
+
+/*
+  NEWS
+ */
 
 .newsList {
   margin: 0;
@@ -138,6 +163,11 @@
     }
   }
 }
+
+/*
+  TECH INFO
+ */
+
 .searchTechInfoWrapper {
   margin: 0;
 
@@ -203,6 +233,10 @@ button.loadMore {
   padding: 22px 0 0;
 }
 
+/*
+  LITERATURE
+ */
+
 .searchLiteratureWrapper {
   article {
     margin-bottom: 30px;
@@ -215,6 +249,10 @@ button.loadMore {
     }
   }
 }
+
+/*
+  LOAD MORE
+ */
 
 .searchLoadMore {
   @include respond-to(mobile) {
