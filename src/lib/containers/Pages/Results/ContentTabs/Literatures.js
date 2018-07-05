@@ -4,7 +4,9 @@ import type { ScreenSize } from '../../../../contexts/ScreenSizeContext'
 import type { TemplateProps } from './Default'
 import type { LiteraturePost } from '../../../../../lib/types/cpt_types'
 import { withScreenSize } from '../../../../contexts/ScreenSizeContext'
-import FillColumns from '../../../../../lib/components/FillColumns/FillColumns'
+import FillGrid, {
+  getColumnClassesForGrid
+} from '../../../../components/FillGrid/FillGrid'
 import style from './../Results.scss'
 import Default from './Default'
 
@@ -37,20 +39,12 @@ class SearchLiterature extends React.Component<Props> {
     )
   }
 
-  renderColumns (classes: string) {
+  renderColumns (colClass: string, rowLength: number) {
+    const colClasses = getColumnClassesForGrid(colClass, rowLength)
+
     return (
-      <div className={`${style.searchLiteratureWrapper}`}>
-        <FillColumns
-          colClasses={[
-            `${classes}`,
-            `${classes}`,
-            `${classes}`,
-            `${classes}`,
-            `${classes}`,
-            `${classes}`
-          ]}>
-          {this.renderLiterature()}
-        </FillColumns>
+      <div className={`${style.searchProductsWrapper}`}>
+        <FillGrid colClasses={colClasses}>{this.renderLiterature()}</FillGrid>
       </div>
     )
   }
@@ -59,10 +53,10 @@ class SearchLiterature extends React.Component<Props> {
     return (
       <div>
         {this.props.screenSize === 'mobile'
-          ? this.renderColumns('col2')
+          ? this.renderColumns('col2', 2)
           : this.props.screenSize === 'tablet'
-            ? this.renderColumns('col4-tablet')
-            : this.renderColumns('col6-desktop')}
+            ? this.renderColumns('col4-tablet', 4)
+            : this.renderColumns('col6-desktop', 6)}
       </div>
     )
   }

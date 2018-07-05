@@ -35,4 +35,21 @@ class FillGrid extends React.Component<Props> {
   }
 }
 
+/**
+ * Helper function for creating a grid when cols are all the same size
+ *
+ * @param  {string} colClass
+ * @param  {number} rowLength
+ * @return {[type]}             [description]
+ */
+export function getColumnClassesForGrid (colClass: string, rowLength: number) {
+  const colClasses = []
+
+  for (let i = 0; i < rowLength; i++) {
+    colClasses.push(colClass)
+  }
+
+  return colClasses
+}
+
 export default FillGrid

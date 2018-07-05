@@ -5,7 +5,9 @@ import type { TemplateProps } from './Default'
 import { withScreenSize } from '../../../../contexts/ScreenSizeContext'
 import Default from './Default'
 import style from './../Results.scss'
-import FillColumns from '../../../../../lib/components/FillColumns/FillColumns'
+import FillGrid, {
+  getColumnClassesForGrid
+} from '../../../../../lib/components/FillGrid/FillGrid'
 import ProductScrollerProduct from '../../../../../lib/containers/ProductScroller/ProductScrollerProduct/ProductScrollerProduct'
 
 type Props = {
@@ -27,20 +29,12 @@ class SearchProducts extends React.Component<Props> {
     )
   }
 
-  renderColumns (classes: string) {
+  renderColumns (colClass: string, rowLength: number) {
+    const colClasses = getColumnClassesForGrid(colClass, rowLength)
+
     return (
       <div className={`${style.searchProductsWrapper}`}>
-        <FillColumns
-          colClasses={[
-            `${classes}`,
-            `${classes}`,
-            `${classes}`,
-            `${classes}`,
-            `${classes}`,
-            `${classes}`
-          ]}>
-          {this.renderProducts()}
-        </FillColumns>
+        <FillGrid colClasses={colClasses}>{this.renderProducts()}</FillGrid>
       </div>
     )
   }
@@ -49,10 +43,10 @@ class SearchProducts extends React.Component<Props> {
     return (
       <div>
         {this.props.screenSize === 'mobile'
-          ? this.renderColumns('col2')
+          ? this.renderColumns('col2', 2)
           : this.props.screenSize === 'tablet'
-            ? this.renderColumns('col4-tablet')
-            : this.renderColumns('col6-desktop')}
+            ? this.renderColumns('col4-tablet', 4)
+            : this.renderColumns('col6-desktop', 6)}
       </div>
     )
   }
