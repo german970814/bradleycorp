@@ -1,8 +1,8 @@
-@import "../../../../scss/partials/helpers";
-@import "../../../../scss/partials/variables";
-@import "../../../../scss/partials/mixins";
-@import "../../../../scss/partials/grid";
-@import "../../../components/BCorpBackground/BCorpBackground";
+@import '../../../../scss/partials/helpers';
+@import '../../../../scss/partials/variables';
+@import '../../../../scss/partials/mixins';
+@import '../../../../scss/partials/grid';
+@import '../../../components/BCorpBackground/BCorpBackground';
 
 .stretchToHeight {
   height: 100%;
@@ -18,7 +18,7 @@
   > :global {
     &:not(.container-size-tablet) {
       &.module-skin-dark {
-        background-color: $black;
+        background-color: $darkSkinColor;
       }
 
       &.module-skin-light {
@@ -82,7 +82,6 @@
    */
 
   > :global(.container-size-tablet) {
-
     .imageCol {
       @include inline-col(2, middle);
       float: none;
@@ -120,7 +119,6 @@
    */
 
   > :global(.container-size-desktop) {
-
     .imageCol {
       width: 45.4% !important;
 

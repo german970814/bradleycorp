@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { lookupColor, styleguideColors } from '../../bcorpStyles'
 import style from './BCorpBackground.scss'
 
+export const darkSkinColour = lookupColor('charcoal-grey')
+
 /**
  * Adds a background to a parent div with some logic for combining images, overlays, and skin
  *
@@ -57,7 +59,7 @@ function getOverlay (props) {
   if (color) {
     return color
   }
-  return props.skin === 'dark' ? lookupColor('black') : lookupColor('white')
+  return props.skin === 'dark' ? darkSkinColour : lookupColor('white')
 }
 
 BCorpBackground.propTypes = {

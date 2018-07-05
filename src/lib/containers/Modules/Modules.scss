@@ -2,6 +2,8 @@
 @import '../../../scss/partials/mixins';
 @import '../../../scss/partials/variables';
 
+@import '../../components/BCorpBackground/BCorpBackground';
+
 $modulePaddingTopBottomMobile: 40px;
 $modulePaddingTopBottomTablet: 60px;
 $modulePaddingTopBottomDesktop: 60px;
@@ -101,7 +103,7 @@ $modulePaddingTopBottomDesktop: 60px;
     }
 
     &:global(.module-skin-dark-background-black) {
-      background-color: $black;
+      background-color: $darkSkinColor;
     }
 
     &:global(.module-skin-dark-background-navy) {
