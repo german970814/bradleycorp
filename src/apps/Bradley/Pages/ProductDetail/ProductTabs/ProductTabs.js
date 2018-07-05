@@ -5,7 +5,7 @@ import ProductDetailTabsException from '../../../../../exceptions/ProductDetailT
 import getTheTabs from './theTabs'
 import Tabs from '../../../../../lib/containers/Tabs/Tabs/Tabs'
 import TabsDesktop from '../../../../../lib/containers/Tabs/Tabs/TabsDesktop'
-import style from './ProductTabs.scss'
+import style, { tabwidth } from './ProductTabs.scss'
 
 class ProductTabs extends Component {
   getTabs () {
@@ -26,7 +26,6 @@ class ProductTabs extends Component {
       return <div style={{ height: '60px' }} />
     }
 
-    const tabWidth = `120px` // `calc(${100 / theTabs.length}% - 3px)`
     return this.props.screenSize === 'mobile' ? (
       <Tabs
         defaultActiveTabIndex={0}
@@ -39,7 +38,7 @@ class ProductTabs extends Component {
     ) : (
       <TabsDesktop
         defaultActiveTabIndex={0}
-        tabWidth={tabWidth}
+        tabWidth={tabwidth}
         tabWrapperClassName={style.tabsWrapperDesktop}
         activeTabClassName={`${style.activeTabContentDesktop} row`}
         tabClassName={style.productDetailTabsDesktop}

@@ -9,27 +9,10 @@ import tabStyle from '../Tabs.scss'
 import style from './TabDesign.scss'
 
 class TabDesign extends Component {
-  getColumnWidth () {
-    let count = 0
-    const propsArray = [
-      this.props.links,
-      this.props.videos,
-      this.props.literature
-    ]
-    propsArray.forEach(prop => {
-      if (prop.length) {
-        count++
-      }
-    })
+  constructor (props) {
+    super(props)
 
-    switch (count) {
-      case 1:
-        return tabStyle.fullWidthColDesktopTab
-      case 2:
-        return tabStyle.halfWidthColDesktopTab
-      case 3:
-        return tabStyle.thirdWidthColDesktopTab
-    }
+    this.columnsObject = this.getColumnsObject()
   }
 
   renderLinksList (linksArray) {
@@ -40,19 +23,21 @@ class TabDesign extends Component {
       return (
         <li key={index}>
           <ArrowThumbnail>
-            {!link.url.startsWith('http') ? <Link
-              to={link.url}
-              className={`link-orange ${tabStyle.tabTextOrange}`}
-              replace>
-              {link.text}
-            </Link>
-              : <a
+            {!link.url.startsWith('http') ? (
+              <Link
+                to={link.url}
+                className={`link-orange ${tabStyle.tabTextOrange}`}
+                replace>
+                {link.text}
+              </Link>
+            ) : (
+              <a
                 href={link.url}
                 target="_blank"
                 className={`link-orange ${tabStyle.tabTextOrange}`}>
                 {link.text}
               </a>
-            }
+            )}
           </ArrowThumbnail>
         </li>
       )
@@ -62,7 +47,7 @@ class TabDesign extends Component {
   renderLinks () {
     if (this.props.links.length) {
       return (
-        <div className={this.getColumnWidth()}>
+        <div className={this.columnsObject.class}>
           <h5 className={tabStyle.tabColTitle}>{'Links'}</h5>
           <ul className={tabStyle.tabColUl}>
             {this.renderLinksList(this.props.links)}
@@ -75,7 +60,7 @@ class TabDesign extends Component {
   renderVideos () {
     if (this.props.videos.length) {
       return (
-        <div className={this.getColumnWidth()}>
+        <div className={this.columnsObject.class}>
           <div className={tabStyle.videoColMaxWidth}>
             <h5 className={tabStyle.tabColTitle}>{'Videos'}</h5>
             <div className={tabStyle.videoApectRatioWrapper}>
@@ -112,7 +97,7 @@ class TabDesign extends Component {
   renderLiterature () {
     if (this.props.literature.length) {
       return (
-        <div className={this.getColumnWidth()}>
+        <div className={this.columnsObject.class}>
           <h5 className={`${tabStyle.tabColTitle} ${style.literatureTitle}`}>
             {'Literature'}
           </h5>
@@ -162,36 +147,75 @@ class TabDesign extends Component {
   }
 
   renderColors () {
-    if (this.props.colors.length) {
-      const colorsByMaterialType = this.getColorsByMaterialType()
-      return Object.keys(colorsByMaterialType).map((materialType, index) => {
-        return (
-          <div key={index} className={tabStyle.fullWidthColDesktopTab}>
-            <h5
-              className={`${tabStyle.tabColTitle} ${style.colorMaterialType}`}>
-              {materialType}
-            </h5>
-            <ul className={tabStyle.tabColUl}>
-              {this.renderColorsList(colorsByMaterialType[materialType])}
-            </ul>
-          </div>
-        )
-      })
-    }
+    const colorsByMaterialType = this.getColorsByMaterialType()
+    return Object.keys(colorsByMaterialType).map((materialType, index) => {
+      return (
+        <div
+          key={index}
+          className={`${tabStyle.fullWidthColDesktopTab} ${style.colorBlock}`}>
+          <h5 className={`${tabStyle.tabColTitle} ${style.colorMaterialType}`}>
+            {materialType}
+          </h5>
+          <ul className={tabStyle.tabColUl}>
+            {this.renderColorsList(colorsByMaterialType[materialType])}
+          </ul>
+        </div>
+      )
+    })
   }
 
+  // note we check for existence of at least one column for each row,
+  // otherwise we get an empty row with unecessary margin bottom
   render () {
     return (
       <div className={style.tabDesign}>
-        {this.renderLinks()}
+        {this.props.literature.length ||
+        this.props.videos.length ||
+        this.props.links.length ? (
+            <div className={`row ${tabStyle.row}`}>
+              {this.renderLinks()}
+              {this.renderVideos()}
+              {this.renderLiterature()}
+            </div>
+          ) : null}
 
-        {this.renderVideos()}
-
-        {this.renderLiterature()}
-
-        {this.renderColors()}
+        {this.props.colors.length && (
+          <div className={`row ${tabStyle.row}`}>{this.renderColors()}</div>
+        )}
       </div>
     )
+  }
+
+  getColumnsObject () {
+    let count = 0
+    const propsArray = [
+      this.props.links,
+      this.props.videos,
+      this.props.literature
+    ]
+    propsArray.forEach(prop => {
+      if (prop.length) {
+        count++
+      }
+    })
+
+    switch (count) {
+      case 1:
+        return {
+          class: tabStyle.fullWidthColDesktopTab,
+          number: count
+        }
+      case 2:
+        return {
+          class: tabStyle.halfWidthColDesktopTab,
+          number: count
+        }
+      case 3:
+        return {
+          class: tabStyle.thirdWidthColDesktopTab,
+          number: count
+        }
+    }
   }
 }
 

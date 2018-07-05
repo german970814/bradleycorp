@@ -1,16 +1,14 @@
-@import "../../../../../../scss/partials/text-styles";
-@import "../../../../../../scss/partials/variables";
-@import "../../../../../../scss/partials/mixins";
-@import "../../../../../../scss/partials/helpers";
-@import "../../../../../../scss/partials/layout";
-@import "../../../../../../scss/partials/grid";
+@import '../../../../../../scss/partials/text-styles';
+@import '../../../../../../scss/partials/variables';
+@import '../../../../../../scss/partials/mixins';
+@import '../../../../../../scss/partials/helpers';
+@import '../../../../../../scss/partials/layout';
+@import '../../../../../../scss/partials/grid';
 
-$titleMarginBottom: 35px;
 $marginBetweenColumns: 75px;
 $fullWidthColBreakpoint: 600px;
 
 %allCols {
-  margin-bottom: 35px;
   text-align: left;
   // display: inline-block;
   // vertical-align: top;
@@ -18,6 +16,22 @@ $fullWidthColBreakpoint: 600px;
   li {
     list-style: none;
   }
+}
+
+%rowMarginBottom {
+  margin-bottom: 40px;
+
+  @include respond-to(tablet) {
+    margin-bottom: 60px;
+  }
+
+  &:last-child {
+    margin-bottom: 0px;
+  }
+}
+
+.row {
+  @extend %rowMarginBottom;
 }
 
 .fullWidthColDesktopTab {
@@ -32,8 +46,6 @@ $fullWidthColBreakpoint: 600px;
   }
 
   @include respond-to-custom($fullWidthColBreakpoint) {
-    // width: calc((50% - (#{$marginBetweenColumns} / 2)) - 1px);
-
     &:nth-child(odd) {
       padding-right: $marginBetweenColumns / 2;
     }
@@ -52,8 +64,6 @@ $fullWidthColBreakpoint: 600px;
 
   // custom column breakpoint
   @include respond-to-custom($fullWidthColBreakpoint) {
-    // width: calc(((100% - #{$marginBetweenColumns}) / 2) - 1px);
-
     &:nth-child(3n + 1) {
       @include col(2) {
         padding-right: $marginBetweenColumns / 2;
@@ -66,7 +76,8 @@ $fullWidthColBreakpoint: 600px;
       }
     }
 
-    &:nth-child(3n + 0) { // every third column will be full width
+    &:nth-child(3n + 0) {
+      // every third column will be full width
       @include col(1) {
         padding-left: 0;
         padding-right: 0;
@@ -76,8 +87,6 @@ $fullWidthColBreakpoint: 600px;
 
   // desktop breakpoint
   @include respond-to(desktop) {
-    // width: calc(((100% - (#{$marginBetweenColumns} * 2)) / 3) - 1px);
-
     &:nth-child(3n + 1) {
       @include col(3) {
         padding-right: $marginBetweenColumns / 2;
@@ -102,12 +111,20 @@ $fullWidthColBreakpoint: 600px;
 
 .tabColUl {
   padding: 0;
+
+  &:last-child {
+    margin-bottom: 0px;
+  }
 }
 
 h5.tabColTitle {
   margin-top: 0;
-  margin-bottom: $titleMarginBottom;
+  margin-bottom: 25px;
   color: $navy;
+
+  @include respond-to(tablet) {
+    margin-bottom: 40px;
+  }
 }
 
 .tabTextOrangeLink {
@@ -119,12 +136,20 @@ h5.tabColTitle {
     top: 0;
     left: 0;
   }
+
+  &:last-child {
+    margin-bottom: 0px;
+  }
 }
 
 .tabTextOrange {
   display: inline-block;
   vertical-align: middle;
   line-height: inherit;
+
+  &:last-child {
+    margin-bottom: 0px;
+  }
 }
 
 .wordPDFIcon {
@@ -133,6 +158,10 @@ h5.tabColTitle {
   margin-right: 13px;
   width: 13px;
   height: 17px;
+
+  &:last-child {
+    margin-bottom: 0px;
+  }
 }
 
 .videoColMaxWidth {
@@ -142,14 +171,15 @@ h5.tabColTitle {
 }
 
 .videoApectRatioWrapper {
-    @extend %aspectRatioWrapper169;
+  @extend %aspectRatioWrapper169;
 }
 
 .videoAspectRatioInside {
-    @extend %aspectRatioInside;
+  @extend %aspectRatioInside;
 }
 
-.videoIframe, :global(.vimeo) {
+.videoIframe,
+:global(.vimeo) {
   width: 100%;
   height: 100%;
 

@@ -1,19 +1,26 @@
-@import "../../../../../../../scss/partials/variables";
-@import "../../../../../../../scss/partials/mixins";
-@import "../Tabs";
+@import '../../../../../../../scss/partials/variables';
+@import '../../../../../../../scss/partials/mixins';
+@import '../Tabs';
 
-$marginTopLiterature: 20px;
 $marginTopColor: 28px;
 
 .literature {
   display: inline-block;
   vertical-align: top;
   width: 86px;
-  margin: $marginTopLiterature 20px 0px 0px;
+  margin: 0px 20px 0px 0px;
 }
 
-.literatureTitle {
-  margin-bottom: $titleMarginBottom - $marginTopLiterature;
+h5.colorMaterialType {
+  margin-bottom: 0px;
+
+  @include respond-to(tablet) {
+    margin-bottom: 10px;
+  }
+}
+
+.colorBlock {
+  @extend %rowMarginBottom;
 }
 
 .color {
@@ -35,10 +42,6 @@ $marginTopColor: 28px;
   }
 }
 
-.colorMaterialType {
-  margin-bottom: $titleMarginBottom - $marginTopColor;
-}
-
 .colorImage {
   margin-bottom: 14px;
   width: 100%;
@@ -48,7 +51,7 @@ $marginTopColor: 28px;
   @include respond-to(mobile) {
     width: 100px;
     height: 100px;
-  };
+  }
 }
 
 .colorTitle {

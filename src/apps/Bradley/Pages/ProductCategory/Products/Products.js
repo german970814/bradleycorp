@@ -13,12 +13,12 @@ import style from './Products.scss'
 
 type Props = {
   catSlug: string,
-  catParents: Array<string>,
   activeFilters: ActiveFilterType,
   paged: number,
   postsPerPage: number,
   updateNumberResults: (numberResults: number) => void,
-  screenSize: ScreenSize
+  screenSize: ScreenSize,
+  catParents: Array<string>
 }
 
 type State = {
@@ -149,15 +149,13 @@ class Products extends React.Component<Props, State> {
       }
     })
 
-    const parentSlugs = this.props.catParents
+    const parentSlugs = this.props.catParents ? this.props.catParents : []
     // console.log( [...parentSlugs, this.props.catSlug] )
     const nestedTaxQuery = {
       relation: 'AND',
       queries: [
         {
           tax: 'product_category',
-          // parentSlugs should include catSlug,
-          // but just in case we add it anyway
           slugs: [...parentSlugs, this.props.catSlug],
           operator: 'AND'
         },

@@ -4,6 +4,7 @@
 @import '../../../../../scss/partials/layout';
 @import '../../../../../scss/partials/grid';
 
+// Mobile
 $tabHeight: 65px;
 
 .productDetailTabs {
@@ -12,8 +13,14 @@ $tabHeight: 65px;
   }
 }
 
+.activeTabContent {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
 // Tablet-Desktop
 
+$tabWidth: 115;
 $tabHeightDesktop: 60px;
 $tabContentPaddingLeft: 11.5vw;
 $tabContentPaddingRight: 11.5vw;
@@ -38,14 +45,14 @@ $tabContentPaddingRight: 11.5vw;
 
 .activeTabContentDesktop {
   @extend %BodyPaddingWithMediaQueries;
-  padding-top: 80px;
-  padding-bottom: 45px;
+  padding-top: 60px;
+  padding-bottom: 60px;
   text-align: left;
   box-sizing: border-box;
 
   @include respond-to(desktop) {
-    // padding-left: $tabContentPaddingLeft;
-    // padding-right: $tabContentPaddingRight;
+    padding-top: 80px;
+    padding-bottom: 80px;
     width: 100%;
   }
 }
@@ -55,22 +62,28 @@ $tabContentPaddingRight: 11.5vw;
   display: inline-block;
   border: solid 1px $silver;
   border-bottom: none;
-  min-width: 118px;
-  width: 120px;
-  max-width: 240px;
+  padding: 0 10px;
+  width: $tabWidth + px;
   height: $tabHeightDesktop;
   line-height: $tabHeightDesktop;
   list-style: none;
   white-space: normal;
   text-align: center;
   cursor: pointer;
+  box-sizing: border-box;
 
   h5:global(.tab-text) {
     display: inline-block;
     vertical-align: middle;
-    width: 118px;
+    width: 100%;
+    max-width: none;
     color: $black;
+    font-size: 12px;
     line-height: normal;
     text-align: center;
   }
+}
+
+:export {
+  tabwidth: $tabWidth;
 }

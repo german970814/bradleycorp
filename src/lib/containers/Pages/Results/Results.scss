@@ -3,22 +3,36 @@
 @import '../../../../scss/partials/variables';
 @import '../../../../scss/partials/mixins';
 
-.resultsSummary {
-  p {
-    font-family: $CentraleSansPro;
-    color: #000;
-    font-size: 16px;
-    font-weight: bold;
+.resultsHeaderContainer {
+  margin-bottom: 5px;
+  padding-top: 40px;
+  padding-bottom: 0px;
+
+  @include respond-to(tablet) {
+    margin-bottom: 10px;
+    padding-top: 35px;
+  }
+
+  @include respond-to(desktop) {
+    padding-top: 60px;
+  }
+
+  h5 {
+    margin: 0;
+    color: $black;
   }
 }
 
-.resultsHeaderContainer {
-  @include respond-to(mobile) {
-    padding-top: 30px;
+:global(.default-template-title) {
+  margin-top: 0px;
+  margin-bottom: 20px;
 
-    & > div {
-      margin-top: 0;
-    }
+  @include respond-to(tablet) {
+    margin-bottom: 30px;
+  }
+
+  @include respond-to(desktop) {
+    margin-bottom: 40px;
   }
 }
 
@@ -28,42 +42,40 @@
 }
 
 .mobileSelectWtapper {
-  background-color: #2e3c6e;
+  margin-bottom: 30px;
   padding: 20px 22px;
   min-height: 30px;
+  background-color: #2e3c6e;
 }
+
 .resultsOptionsWrapper {
   margin: 0 auto;
-  padding: 0;
+  margin-bottom: 40px;
+  padding: 0 40px;
   text-align: center;
 
   li {
-    list-style-type: none;
     display: inline-block;
+    border: 1px solid $silver;
+    padding: 0 15px;
+    width: 200px;
+    height: 60px;
+    list-style-type: none;
+    background-color: $light-gray;
+    box-sizing: border-box;
 
-    &.selected {
-      a {
-        color: #fff;
-        background: #2f3d6f;
-      }
+    h6 {
+      color: $steel-grey;
+      line-height: 60px;
+      text-align: center;
     }
 
-    a {
-      background: #f1f2f2;
-      padding: 25px 38px 21px;
-      border: 1px solid #d1d3d4;
-      font-family: 'CentraleSansPro';
-      font-size: 13px;
-      font-weight: bold;
-      color: #808285;
-      text-transform: uppercase;
-      display: inline-block;
-      margin-left: -1px;
-      margin-top: -1px;
+    &.selected,
+    &:hover {
+      background: $navy;
 
-      &:hover {
+      h6 {
         color: #fff;
-        background: #2f3d6f;
       }
     }
   }
@@ -89,6 +101,10 @@
   }
 }
 
+/*
+  NEWS
+ */
+
 .newsList {
   margin: 0;
   padding: 0;
@@ -113,14 +129,7 @@
     }
 
     h5 {
-      a {
-        font-family: 'CentraleSansPro';
-        color: #000;
-        font-size: 16px;
-        font-weight: bold;
-        line-height: normal;
-        cursor: pointer;
-      }
+      color: $black;
     }
 
     p {
@@ -138,16 +147,14 @@
     }
   }
 }
+
+/*
+  TECH INFO
+ */
+
 .searchTechInfoWrapper {
   margin: 0;
-
-  @include respond-to(mobile) {
-    padding: 40px 20px 0;
-  }
-
-  @include respond-to(tablet) {
-    padding: 40px 0 0;
-  }
+  padding: 0;
 }
 
 .techInfoItem {
@@ -200,48 +207,29 @@ button.loadMore {
 
 .searchProductsWrapper {
   margin: 0;
-  padding: 22px 0 0;
+  padding: 0;
 }
 
+/*
+  LITERATURE
+ */
+
 .searchLiteratureWrapper {
-  margin: 0;
-  padding: 40px 0 0;
-
   article {
-    position: relative;
-    margin-bottom: 25px;
-    padding: 0 10px;
-
-    .literatureImageContainer {
-      text-align: center;
-      margin: 0 auto 8px;
-      width: 162px;
-      height: 212px;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid #cecece;
-
-      img {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-    }
+    margin-bottom: 30px;
 
     .literatureTitle {
-      color: #000;
-      font-family: 'CentraleSansPro';
-      font-weight: bold;
+      margin-top: 10px;
       text-align: center;
-      text-transform: capitalize;
-      width: 50%;
-      margin: 0 auto;
-      overflow: hidden;
-      height: 32px;
+      text-transform: none;
+      color: $black;
     }
   }
 }
+
+/*
+  LOAD MORE
+ */
 
 .searchLoadMore {
   @include respond-to(mobile) {

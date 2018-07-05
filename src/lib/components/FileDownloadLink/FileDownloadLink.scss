@@ -1,19 +1,27 @@
-@import "../../../scss/partials/variables";
+@import '../../../scss/partials/variables';
 
 $iconWidth: 13px;
 $iconMargin: 13px;
 
-.container {
-  margin-bottom: 12px;
+li {
+  .container {
+    margin-bottom: 12px;
 
-  a {
-    text-decoration: none;
+    a {
+      text-decoration: none;
+    }
+  }
+
+  &:last-child {
+    .container {
+      margin-bottom: 0px;
+    }
   }
 }
 
 .wrapper {
   position: relative;
-    padding-left: $iconWidth + $iconMargin;
+  padding-left: $iconWidth + $iconMargin;
 }
 
 .iconWrapper {

@@ -3,8 +3,11 @@ import React from 'react'
 import type { ScreenSize } from '../../../../contexts/ScreenSizeContext'
 import type { TemplateProps } from './Default'
 import type { LiteraturePost } from '../../../../../lib/types/cpt_types'
+import ImageFrame from '../../../../components/FixedAspectRatioBox/ImageFrame/ImageFrame'
 import { withScreenSize } from '../../../../contexts/ScreenSizeContext'
-import FillColumns from '../../../../../lib/components/FillColumns/FillColumns'
+import FillGrid, {
+  getColumnClassesForGrid
+} from '../../../../components/FillGrid/FillGrid'
 import style from './../Results.scss'
 import Default from './Default'
 
@@ -20,37 +23,31 @@ class SearchLiterature extends React.Component<Props> {
       this.props.posts &&
       this.props.posts.map((post, index) => {
         return (
-          <article key={index}>
-            <div className={`${style.literatureImageContainer}`}>
-              <a href={post.meta.literature_pdf} target="_blank">
-                <img src={post.media.featured_image[0]} />
-              </a>
-            </div>
-            <a href={post.meta.literature_pdf} target="_blank">
+          <a href={post.meta.literature_pdf} target="_blank">
+            <article key={index} className={style.literature}>
+              <ImageFrame
+                src={post.media.featured_image[0]}
+                aspectRatio={211 / 170 * 100}
+                sizing={'contain'}
+              />
               <h6 className={`${style.literatureTitle}`}>
                 {post.post.post_title}
               </h6>
-            </a>
-          </article>
+            </article>
+          </a>
         )
       })
     )
   }
 
-  renderColumns (classes: string) {
+  renderColumns (colClass: string, rowLength: number, gutter?: number) {
+    const colClasses = getColumnClassesForGrid(colClass, rowLength)
+
     return (
       <div className={`${style.searchLiteratureWrapper}`}>
-        <FillColumns
-          colClasses={[
-            `${classes}`,
-            `${classes}`,
-            `${classes}`,
-            `${classes}`,
-            `${classes}`,
-            `${classes}`
-          ]}>
+        <FillGrid colClasses={colClasses} gutter={gutter}>
           {this.renderLiterature()}
-        </FillColumns>
+        </FillGrid>
       </div>
     )
   }
@@ -59,10 +56,10 @@ class SearchLiterature extends React.Component<Props> {
     return (
       <div>
         {this.props.screenSize === 'mobile'
-          ? this.renderColumns('col2')
+          ? this.renderColumns('col2', 2, 20)
           : this.props.screenSize === 'tablet'
-            ? this.renderColumns('col4-tablet')
-            : this.renderColumns('col6-desktop')}
+            ? this.renderColumns('col4-tablet', 4, 15)
+            : this.renderColumns('col6-desktop', 6, 30)}
       </div>
     )
   }

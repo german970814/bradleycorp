@@ -13,7 +13,13 @@ type Props = TemplateProps & {
 export default class SearchDefault extends React.Component<Props> {
   renderLoadMoreButton (): ?React.Node {
     if (this.props.canLoadMore) {
-      return <button onClick={this.props.loadNextPage} className={`${style.searchLoadMore}`}>Load More</button>
+      return (
+        <button
+          onClick={this.props.loadNextPage}
+          className={`${style.searchLoadMore}`}>
+          Load More
+        </button>
+      )
     }
   }
 
@@ -24,10 +30,10 @@ export default class SearchDefault extends React.Component<Props> {
         {this.props.loading && <Loading />}
         {this.renderLoadMoreButton()}
       </div>
-    ) : <Loading />
+    ) : (
+      <Loading />
+    )
   }
 }
 
-export type {
-  TemplateProps
-}
+export type { TemplateProps }
