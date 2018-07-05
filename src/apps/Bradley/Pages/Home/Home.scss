@@ -24,17 +24,20 @@ $emergencySafetyOverlay: #5375ef;
     img {
       position: absolute;
       left: 14px;
-      top: 10px;
+      top: 50%;
+      transform: translateY(-50%);
       width: $imageWidth;
       height: $imageWidth;
     }
 
     .headerCaption {
-      display: inline-block;
-      vertical-align: middle;
-      margin-top: 10px;
-      margin-bottom: 10px;
-      padding-left: $imageWidth + 14px;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      margin-top: 1px;
+      padding-left: $imageWidth + 14px + 15px;
+      padding-right: 15px;
       width: 100%;
       color: #fff;
       box-sizing: border-box;

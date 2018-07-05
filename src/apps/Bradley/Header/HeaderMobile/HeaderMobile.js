@@ -2,7 +2,7 @@
 import * as React from 'react'
 import type { MegaMenuNavMenuItem } from '../../../../lib/types/megaMenu_types'
 import type { Location } from 'react-router-dom'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import BurgerMenu from '../../../../lib/components/BurgerMenu/BurgerMenu'
 import VerticalAlignHelper from '../../../../lib/components/VerticalAlignHelper/VerticalAlignHelper'
 import SearchIcon from '../SearchIcon/SearchIcon'
@@ -62,10 +62,12 @@ class HeaderMobile extends React.Component<Props, State> {
 
         <div className={style.logoWrapper}>
           <div className={style.logo}>
-            <img
-              src={require('../../../../images/logo-color/logo-color@2x.png')}
-              className={style.logoImage}
-            />
+            <Link to={{ pathname: '/' }}>
+              <img
+                src={require('../../../../images/logo-color/logo-color@2x.png')}
+                className={style.logoImage}
+              />
+            </Link>
           </div>
         </div>
 

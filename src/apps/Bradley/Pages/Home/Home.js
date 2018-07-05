@@ -27,7 +27,7 @@ type Props = {
 type State = {
   washroomNode?: HTMLDivElement,
   emergencySafetyNode?: HTMLDivElement
-};
+}
 
 const pageTitle = 'Home'
 const pageDescription = ''
