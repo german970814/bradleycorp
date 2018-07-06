@@ -23,8 +23,8 @@ class SearchLiterature extends React.Component<Props> {
       this.props.posts &&
       this.props.posts.map((post, index) => {
         return (
-          <a href={post.meta.literature_pdf} target="_blank">
-            <article key={index} className={style.literature}>
+          <a key={index} href={post.meta.literature_pdf} target="_blank">
+            <article className={style.literature}>
               <ImageFrame
                 src={post.media.featured_image[0]}
                 aspectRatio={211 / 170 * 100}

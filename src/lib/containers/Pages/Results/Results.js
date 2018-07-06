@@ -17,9 +17,7 @@ import BCorpHead from '../../../components/BCorpHead/BCorpHead'
 import NoResults from '../../../components/Error/NoResults/NoResults'
 import defaultStyle from '../../../containers/Templates/Templates.scss'
 import BCorpSelectField from '../../../components/BCorpFilterField/BCorpSelectField'
-import DefaultTemplate, {
-  renderTitle
-} from '../../../containers/Templates/DefaultTemplate/DefaultTemplate'
+import DefaultTemplate from '../../../containers/Templates/DefaultTemplate/DefaultTemplate'
 
 import {
   SearchLiterature,

@@ -6,7 +6,6 @@ import type {
 } from '../../../../lib/types/cpt_types'
 import type { MaterialTypes } from '../../../../api/litAndChipSamplePage_client'
 import type { ScreenSize } from '../../../../lib/contexts/ScreenSizeContext'
-import type { WPMaterialTypeTerm } from '../../../../lib/types/term_types'
 import type { CheckboxObject } from '../../../../lib/components/BCorpFilterField/BCorpCheckboxField'
 import LiteratureAndChipSamplePageClient from '../../../../api/litAndChipSamplePage_client'
 import { withScreenSize } from '../../../../lib/contexts/ScreenSizeContext'

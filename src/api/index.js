@@ -1,5 +1,5 @@
 '' // @flow
-import type { BlogName, BlogPrettyName } from '../lib/types/blog_types'
+import type { BlogName } from '../lib/types/blog_types'
 import axios from 'axios'
 
 type HostBradleyType = 'http://bradley.test' | 'https://bradleydev.twoxfour.com'
