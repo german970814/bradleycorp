@@ -8,6 +8,7 @@ import FAQTemplate from './LeftSidebarTemplate/FAQTemplate/FAQTemplate'
 import NewsTemplate from './LeftSidebarTemplate/NewsTemplate/NewsTemplate'
 import CareersTemplate from './CareersTemplate/CareersTemplate'
 import ProductLandingPageTemplate from './FullWidthTemplate/ProductLandingPageTemplate/ProductLandingPageTemplate'
+import CustomWarrantyTemplate from './LeftSidebarTemplate/CustomWarrantyTemplate/CustomWarrantyTemplate'
 import DefaultTemplate from './DefaultTemplate/DefaultTemplate'
 
 type Props = {
@@ -71,6 +72,14 @@ const TemplateFactory = (props: Props): React.Node => {
 
     case 'case-studies':
       return <NewsTemplate data={props.data} isCaseStudyTemplate />
+
+    case 'custom-warranty':
+      return (
+        <CustomWarrantyTemplate
+          data={props.data}
+          renderModules={props.renderModules}
+        />
+      )
 
     case 'careers':
       return (
