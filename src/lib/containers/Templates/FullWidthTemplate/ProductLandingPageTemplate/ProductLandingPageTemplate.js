@@ -2,6 +2,7 @@
 import * as React from 'react'
 import type { BCorpPageTemplateData } from '../../../../types/customPage_types'
 import FullWidthTemplate from '../FullWidthTemplate'
+import ContentTransformer from '../../../../components/ContentTransformer/ContentTransformer'
 import style from './ProductLandingPageTemplate.scss'
 
 type Props = {
@@ -34,7 +35,9 @@ class ProductLandingPageTemplate extends React.Component<Props> {
 
     return (
       description && (
-        <div className={`col1 ${style.description}`}>{description}</div>
+        <div className={`col1 ${style.description}`}>
+          <ContentTransformer content={description} />
+        </div>
       )
     )
   }
