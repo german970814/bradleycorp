@@ -9,7 +9,9 @@ class ProductContentText extends Component {
     if (!this.props.content) {
       return
     }
-    return isOpen ? this.props.content : this.props.content.substring(0, 401)
+    return isOpen
+      ? this.props.content
+      : `${this.props.content.substring(0, 401)}...`
   }
 
   renderMoreDetailsButtonText (isOpen) {
