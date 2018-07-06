@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { withScreenSize } from '../../../../../../../lib/contexts/ScreenSizeContext'
 import PropTypes from 'prop-types'
 import PDFWithFeaturedImage from '../../../../../../../lib/components/PDFWithFeaturedImage/PDFWithFeaturedImage'
 import renderVideoThumbnail from '../renderVideoThumbnail'
@@ -199,6 +200,13 @@ class TabDesign extends Component {
       }
     })
 
+    if (this.props.screenSize === 'mobile') {
+      return {
+        class: tabStyle.fullWidthColDesktopTab,
+        number: count
+      }
+    }
+
     switch (count) {
       case 1:
         return {
@@ -223,7 +231,9 @@ TabDesign.propTypes = {
   videos: PropTypes.array.isRequired,
   links: PropTypes.array.isRequired,
   literature: PropTypes.array.isRequired,
-  colors: PropTypes.array.isRequired
+  colors: PropTypes.array.isRequired,
+  // from withScreenSize HOC
+  screenSize: PropTypes.string
 }
 
 export default TabDesign

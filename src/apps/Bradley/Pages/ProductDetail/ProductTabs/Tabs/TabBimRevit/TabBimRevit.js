@@ -14,8 +14,6 @@ class TabBimRevit extends React.Component<Props> {
       return term.name
     })
 
-    console.log(this.props.bimRevit)
-
     return (
       <div className={tabStyle.fullWidthColDesktopTab}>
         <BimRevitDownloader bimRevitTermIds={termIds} />
