@@ -46,11 +46,9 @@ export default class PostTabResults extends React.Component<Props> {
           {this.props.posts.map((post, index) => {
             return (
               <li key={index}>
-                <h5>
-                  <a href={createCPTUrl(post.post) || ''}>
-                    {post.post.post_title}
-                  </a>
-                </h5>
+                <a href={createCPTUrl(post.post) || ''}>
+                  <h5>{post.post.post_title}</h5>
+                </a>
                 {!this.props.hideExcerpt && <p>{this.getExcerpt(post)}</p>}
               </li>
             )

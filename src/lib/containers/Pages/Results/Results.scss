@@ -125,7 +125,7 @@
     }
 
     &:nth-child(even) {
-      background-color: #f1f2f2;
+      background-color: $light-gray;
     }
 
     h5 {
@@ -133,11 +133,6 @@
     }
 
     p {
-      font-family: 'Helvetica';
-      color: #58595b;
-      font-size: 14px;
-      line-height: 21px;
-      font-weight: 300;
       margin-top: 8px;
       margin-bottom: 0;
     }
