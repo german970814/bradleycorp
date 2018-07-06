@@ -1,44 +1,49 @@
+// @flow
 import React from 'react'
-import PropTypes from 'prop-types'
+import ImageFrame from '../FixedAspectRatioBox/ImageFrame/ImageFrame'
 import style from './PDFWithFeaturedImage.scss'
+
+type Props = {
+  /**
+   * Title of the PDF
+   */
+  title: string,
+  /**
+   * Link to the PDF
+   */
+  url: string,
+  /**
+   * A preview image for the PDF
+   */
+  imageSrc: string,
+  titleClassName?: string
+}
 
 /**
  * For displaying links to PDFs with a preview image
  */
-const PDFWithFeaturedImage = props => {
+const PDFWithFeaturedImage = (props: Props) => {
   return (
     <div className={style.pdfWithFeaturedImage}>
       {props.imageSrc && (
         <div className={style.imageContainer}>
           <a href={props.url} target="_blank">
-            <img className={style.image} src={props.imageSrc} />
+            <ImageFrame
+              src={props.imageSrc}
+              aspectRatio={116 / 93 * 100}
+              sizing={'contain'}
+            />
           </a>
         </div>
       )}
 
       <a href={props.url} target="_blank">
-        <div className={`${style.title} ${props.titleClassName}`}>
+        <div className={`${style.title} ${props.titleClassName || ''}`}>
           {props.title}
         </div>
       </a>
     </div>
   )
-}
-
-PDFWithFeaturedImage.propTypes = {
-  /**
-   * Title of the PDF
-   */
-  title: PropTypes.string.isRequired,
-  /**
-   * Link to the PDF
-   */
-  url: PropTypes.string.isRequired,
-  /**
-   * A preview image for the PDF
-   */
-  imageSrc: PropTypes.string.isRequired,
-  titleClassName: PropTypes.string
 }
 
 export default PDFWithFeaturedImage

@@ -22,11 +22,16 @@ class LiteratureLandingPage extends React.Component<Props> {
             {'View PDF:'}
           </h6>
           {post.media.featured_image && post.media.featured_image.length ? (
-            <PDFWithFeaturedImage
-              title={post.post.post_title || 'Literature PDF'}
-              url={post.meta.literature_pdf}
-              imageSrc={post.media.featured_image[0]}
-            />
+            <div
+              style={{
+                width: '120px'
+              }}>
+              <PDFWithFeaturedImage
+                title={post.post.post_title || 'Literature PDF'}
+                url={post.meta.literature_pdf}
+                imageSrc={post.media.featured_image[0]}
+              />
+            </div>
           ) : (
             <FileDownloadLink
               title={post.post.post_title || 'Literature PDF'}

@@ -45,11 +45,16 @@ class NewsLandingPage extends React.Component<Props> {
               {'View News Document: '}
             </h6>
             {post.media.featured_image && post.media.featured_image.length ? (
-              <PDFWithFeaturedImage
-                title={post.post.post_title || ''}
-                url={post.meta.news_pdf}
-                imageSrc={post.media.featured_image[0]}
-              />
+              <div
+                style={{
+                  width: '100px'
+                }}>
+                <PDFWithFeaturedImage
+                  title={post.post.post_title || ''}
+                  url={post.meta.news_pdf}
+                  imageSrc={post.media.featured_image[0]}
+                />
+              </div>
             ) : (
               <FileDownloadLink
                 title={post.post.post_title || 'News Document'}
