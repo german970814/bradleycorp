@@ -1,25 +1,31 @@
 // @flow
 import * as React from 'react'
 import type { SiteType } from '../../../api'
+import type { OptionsType } from '../../../lib/contexts/OptionsContext'
 import type { User } from '../../../lib/types/user_types'
 import type { UpdateUserType } from '../../../lib/contexts/UserContext'
 import type { ScreenSize } from '../../../lib/contexts/ScreenSizeContext'
 import Media from 'react-media'
 import { CookiesProvider } from 'react-cookie'
+import { OptionsProvider } from '../../../lib/contexts/OptionsContext'
 import { UserProvider } from '../../../lib/contexts/UserContext'
 import { ScreenSizeProvider } from '../../../lib/contexts/ScreenSizeContext'
 import { site } from '../../../api'
+import OptionsAPIClient from '../../../api/options_client'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../globals'
 import Main from '../Main/Main'
 import MainBIMRevit from '../BIMRevit/Main/Main'
 import MainTheWashfountain from '../TheWashfountain/Main/Main'
 import Footer from '../Footer/Footer'
 import CookiesBanner from '../../../lib/containers/FooterPanel/CookiesBanner/CookiesBanner'
+import Loading from '../../../lib/components/Loading/Loading'
 import style from './App.scss'
 
 type Props = {}
 
 type State = {
+  loading: boolean,
+  options: OptionsType,
   user: User,
   updateUser: UpdateUserType
 }
@@ -29,6 +35,10 @@ class App extends React.Component<Props, State> {
     super(props)
 
     this.state = {
+      loading: true,
+      options: {
+        shared: {}
+      },
       user: {
         id: 1,
         firstName: 'matt',
@@ -41,6 +51,16 @@ class App extends React.Component<Props, State> {
         this.setState({ user })
       }
     }
+  }
+
+  componentDidMount () {
+    this.init()
+  }
+
+  async init () {
+    this.setState({ loading: true })
+    await this.getOptions()
+    this.setState({ loading: false })
   }
 
   getMain () {
@@ -72,36 +92,54 @@ class App extends React.Component<Props, State> {
   }
 
   render () {
-    const { user, updateUser } = this.state
+    const { options, user, updateUser } = this.state
 
-    return (
-      <UserProvider value={{ user, updateUser }}>
-        <CookiesProvider>
-          <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
-            {isMobile => {
-              return (
-                <Media query={{ maxWidth: TABLETMAXWIDTH }}>
-                  {isTablet => {
-                    const screenSize = this.getScreenSize(isMobile, isTablet)
-                    return (
-                      <ScreenSizeProvider value={{ screenSize }}>
-                        <div id={'app'} className={`${style.app}`}>
-                          <CookiesBanner />
+    console.log(this.state)
 
-                          {this.getMain()}
+    return this.state.loading ? (
+      <Loading pageSize />
+    ) : (
+      <OptionsProvider value={{ options }}>
+        <UserProvider value={{ user, updateUser }}>
+          <CookiesProvider>
+            <Media query={{ maxWidth: MOBILEMAXWIDTH }}>
+              {isMobile => {
+                return (
+                  <Media query={{ maxWidth: TABLETMAXWIDTH }}>
+                    {isTablet => {
+                      const screenSize = this.getScreenSize(isMobile, isTablet)
+                      return (
+                        <ScreenSizeProvider value={{ screenSize }}>
+                          <div id={'app'} className={`${style.app}`}>
+                            <CookiesBanner />
 
-                          <Footer />
-                        </div>
-                      </ScreenSizeProvider>
-                    )
-                  }}
-                </Media>
-              )
-            }}
-          </Media>
-        </CookiesProvider>
-      </UserProvider>
+                            {this.getMain()}
+
+                            <Footer />
+                          </div>
+                        </ScreenSizeProvider>
+                      )
+                    }}
+                  </Media>
+                )
+              }}
+            </Media>
+          </CookiesProvider>
+        </UserProvider>
+      </OptionsProvider>
     )
+  }
+
+  async getOptions () {
+    try {
+      const client = new OptionsAPIClient()
+      const response = await client.getOptions()
+
+      this.setState({ options: response.data })
+    } catch (err) {
+      console.log(err)
+      this.setState({ options: { shared: {} } })
+    }
   }
 }
 
