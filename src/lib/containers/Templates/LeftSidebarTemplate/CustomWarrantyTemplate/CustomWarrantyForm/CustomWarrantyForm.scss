@@ -1,0 +1,34 @@
+@import '../../../../../../scss/partials/mixins';
+
+.customWarrantyForm {
+  input,
+  .selectWrapper {
+    margin-bottom: 15px;
+    width: 100%;
+
+    @include respond-to(tablet) {
+      max-width: 370px;
+    }
+  }
+
+  .selectWrapper {
+    margin-bottom: 40px;
+
+    .select {
+      padding-left: 0px;
+
+      &::before,
+      &::after {
+        right: 10px;
+      }
+    }
+  }
+
+  @include respond-to(tablet) {
+    button {
+      width: auto;
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+  }
+}

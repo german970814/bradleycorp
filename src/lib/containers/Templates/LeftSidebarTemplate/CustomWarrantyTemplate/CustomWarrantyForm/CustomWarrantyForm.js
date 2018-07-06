@@ -4,6 +4,7 @@ import type { PrintableType } from '../../../../../../api/warranty_client'
 import WarrantyAPIClient from '../../../../../../api/warranty_client'
 import BCorpInputField from '../../../../../components/BCorpFilterField/BCorpInputField'
 import BCorpSelectField from '../../../../../components/BCorpFilterField/BCorpSelectField'
+import style from './CustomWarrantyForm.scss'
 
 type Props = {}
 
@@ -55,7 +56,9 @@ class CustomWarrantyForm extends React.Component<Props, State> {
 
   render () {
     return (
-      <form onSubmit={this.getPrintableCustomWarranty.bind(this)}>
+      <form
+        onSubmit={this.getPrintableCustomWarranty.bind(this)}
+        className={style.customWarrantyForm}>
         <BCorpInputField
           filterState={this.state.form.customerName}
           handleChange={this.updateCustomerName.bind(this)}
@@ -69,26 +72,29 @@ class CustomWarrantyForm extends React.Component<Props, State> {
         <BCorpInputField
           filterState={this.state.form.purchaseOrder}
           handleChange={this.updatePurchaseOrder.bind(this)}
-          placeholder={'Purchase Order'}
+          placeholder={'Purchase Order #'}
         />
         <BCorpInputField
           filterState={this.state.form.invoice}
           handleChange={this.updateInvoice.bind(this)}
-          placeholder={'Invoice'}
+          placeholder={'Invoice #'}
         />
         <BCorpInputField
           filterState={this.state.form.invoiceDate}
           handleChange={this.updateInvoiceDate.bind(this)}
           placeholder={'Invoice Date'}
         />
-        <BCorpSelectField
-          options={this.state.warrantyOptions}
-          filterState={this.state.form.warrantyID || 0}
-          handleChange={this.updateWarrantyID.bind(this)}
-          title={'Choose Warranty'}
-          defaultOptionId={0}
-          defaultOptionName={'Select...'}
-        />
+        <div className={style.selectWrapper}>
+          <BCorpSelectField
+            options={this.state.warrantyOptions}
+            filterState={this.state.form.warrantyID || 0}
+            handleChange={this.updateWarrantyID.bind(this)}
+            title={'Choose Warranty'}
+            defaultOptionId={0}
+            defaultOptionName={'Select...'}
+            className={style.select}
+          />
+        </div>
 
         <button type={'submit'}>Create Warranty</button>
       </form>
