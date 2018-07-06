@@ -1,13 +1,16 @@
 // @flow
 import * as React from 'react'
 import type { Widget } from '../../../types/widget_types'
-import { sitePrettyName } from '../../../../api'
+import type { OptionsType } from '../../../contexts/OptionsContext'
+import { withOptions } from '../../../contexts/OptionsContext'
 import WidgetsClient from '../../../../api/widgets_client'
 import WidgetBuilder from '../../Widgets/WidgetBuilder'
 import RightSidebarTemplate from '../../Templates/RightSidebarTemplate/RightSidebarTemplate'
 
 type Props = {
-  renderContent: () => React.Node
+  renderContent: () => React.Node,
+  // from withOptions
+  options: OptionsType
 }
 
 type State = {
@@ -44,7 +47,7 @@ class BlogPageTemplate extends React.Component<Props, State> {
       <div className={`Blog-Page-Template`}>
         <RightSidebarTemplate
           data={{
-            page_title: sitePrettyName
+            page_title: this.props.options.blogname || ''
           }}
           renderModules={this.props.renderContent}
           renderRightSidebarWidgets={() => {
@@ -77,4 +80,4 @@ class BlogPageTemplate extends React.Component<Props, State> {
   }
 }
 
-export default BlogPageTemplate
+export default withOptions(BlogPageTemplate)

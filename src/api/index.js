@@ -32,8 +32,6 @@ type API = {
   urlTheWashfountain: URLTheWashfountainType,
   urlBIMRevit: URLBIMRevitType,
   site: SiteType,
-  sitePrettyNameDefault: string,
-  sitePrettyName: BlogPrettyName | 'Bradley Corp',
   namespace: string,
   baseURL: string,
   baseURLBradley: string,
@@ -47,9 +45,6 @@ type API = {
 const dev: boolean = false
 
 let site: SiteType = 'bcorp'
-
-const sitePrettyNameDefault = 'Bradley Corp'
-let sitePrettyName: BlogPrettyName | 'Bradley Corp' = sitePrettyNameDefault
 
 let host: HostType = dev
   ? 'http://bradley.test'
@@ -86,11 +81,9 @@ const urlBIMRevit: URLBIMRevitType = dev
  */
 if (location.href.includes(urlTheWashfountain)) {
   site = 'thewashfountain'
-  sitePrettyName = 'The Washfountain'
   host = hostTheWashfountain
 } else if (location.href.includes(urlBIMRevit)) {
   site = 'bim-revit'
-  sitePrettyName = 'BIM-Revit'
   host = hostBIMRevit
 }
 
@@ -118,10 +111,6 @@ const api: API = {
   urlBIMRevit,
 
   site,
-
-  sitePrettyNameDefault,
-
-  sitePrettyName,
 
   namespace,
 
