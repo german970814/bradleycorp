@@ -8,10 +8,21 @@ import { withScreenSize } from '../../../contexts/ScreenSizeContext'
 import BCorpCheckboxField from '../BCorpCheckboxField'
 import style from './LeftSidebarCheckboxGroup.scss'
 
+/**
+ * A wrapper component for the BCorpCheckboxField
+ * to add styles and collapsible functionality
+ * which are specific to filters appearing in the left sidebar.
+ */
+
 type Options = {
   [string]: ?string
 }
 
+/**
+ * See BCorpCheckboxField for descriptions of props,
+ * most of these are just passed through.
+ * @type {Object}
+ */
 type Props = {
   options: Options,
   title: string,
@@ -84,12 +95,16 @@ class LeftSidebarCheckboxGroup extends React.Component<Props, State> {
   }
 }
 
-export function getOptionsFromArrayOfTerms (terms: Array<WPTerm>) {
-  const object: Options = {}
+/**
+ * Create an options object which can be passed to BCorpCheckboxField
+ * from an array of WP Term objects
+ */
+export function getOptionsFromArrayOfTerms (terms: Array<WPTerm>): Options {
+  const obj: Options = {}
   terms.forEach(el => {
-    object[el.slug.toString()] = el.name
+    obj[el.slug.toString()] = el.name
   })
-  return object
+  return obj
 }
 
 export default withScreenSize(LeftSidebarCheckboxGroup)

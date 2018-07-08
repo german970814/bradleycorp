@@ -1,5 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+// @flow
+import * as React from 'react'
+import type { BCorpColor, BCorpSkin } from '../../types/styleguide_types'
 import { lookupColor, styleguideColors } from '../../bcorpStyles'
 import style from './BCorpBackground.scss'
 
@@ -20,7 +21,32 @@ export const darkSkinColour = lookupColor('charcoal-grey')
  *
  * NOTE: the parent div should extend the %bcorpBackgroundParent SCSS class.
  */
-const BCorpBackground = props => {
+
+type Props = {
+  /**
+   * The whole image src as a string
+   */
+  imageSrc?: string,
+  /**
+   * The name of the colour to use, as named in the styleguide. Colour must exists in the styleguide
+   */
+  overlay?: BCorpColor,
+  /**
+   * Can pass any other vlaid css colour as a string
+   */
+  customOverlayColor?: string,
+  /**
+   * This defines the default when no image or overlay are found.
+   */
+  skin?: BCorpSkin,
+  /**
+   * Opacity for the image between 0 and 1.
+   * Note: The image is on top of the overlay, so 0.2 here would equate to 80% opacity for the overlay.
+   */
+  imageOpacity?: number
+}
+
+const BCorpBackground = (props: Props) => {
   return (
     <div>
       <div
@@ -60,27 +86,6 @@ function getOverlay (props) {
     return color
   }
   return props.skin === 'dark' ? darkSkinColour : lookupColor('white')
-}
-
-BCorpBackground.propTypes = {
-  /**
-   * The whole image src as a string
-   */
-  imageSrc: PropTypes.string,
-  /**
-   * The name of the colour to use, as named in the styleguide. Colour must exists in the styleguide
-   */
-  overlay: PropTypes.oneOf(['', ...Object.keys(styleguideColors)]),
-  customOverlayColor: PropTypes.string,
-  /**
-   * This defines the default when no image or overlay are found.
-   */
-  skin: PropTypes.oneOf(['light', 'dark']),
-  /**
-   * Opacity for the image between 0 and 1.
-   * Note: The image is on top of the overlay, so 0.2 here would equate to 80% opacity for the overlay.
-   */
-  imageOpacity: PropTypes.number
 }
 
 BCorpBackground.defaultProps = {
