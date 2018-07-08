@@ -24,18 +24,22 @@ li {
   padding-left: $iconWidth + $iconMargin;
 }
 
+div.link {
+  line-height: 17px;
+}
+
 .iconWrapper {
   position: absolute;
   left: 0;
-  top: 0;
-  height: 100%;
+  top: 50%;
+  transform: translateY(-55%);
+  width: $iconWidth;
+  height: 17px;
 }
 
 .icon {
-  display: inline-block;
-  vertical-align: middle;
-  width: $iconWidth;
-  height: 17px;
+  height: 100%;
+  width: auto;
 }
 
 .wrapChildren {

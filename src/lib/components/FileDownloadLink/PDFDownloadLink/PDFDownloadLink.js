@@ -14,9 +14,14 @@ const PDFDownloadLink = props => {
             />
           </div>
 
-          <span className={[sharedStyle.title, props.titleClass].join(' ')}>
+          <div
+            className={[
+              sharedStyle.link,
+              sharedStyle.title,
+              props.titleClass
+            ].join(' ')}>
             {props.title}
-          </span>
+          </div>
         </div>
       </a>
     </div>

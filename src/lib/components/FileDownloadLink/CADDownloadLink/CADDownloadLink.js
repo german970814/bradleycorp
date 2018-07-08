@@ -8,16 +8,22 @@ const CADDownloadLink = props => {
     <div className={sharedStyle.container}>
       <a href={props.link} target="_blank">
         <div className={sharedStyle.wrapper}>
-          <div className={[sharedStyle.iconWrapper, style.iconWrapper].join(' ')}>
+          <div
+            className={[sharedStyle.iconWrapper, style.iconWrapper].join(' ')}>
             <img
               className={[sharedStyle.icon, props.iconClass].join(' ')}
               src={require('../../../../images/cad-icon/cad@2x.png')}
             />
           </div>
 
-          <span className={[sharedStyle.title, props.titleClass].join(' ')}>
+          <div
+            className={[
+              sharedStyle.link,
+              sharedStyle.title,
+              props.titleClass
+            ].join(' ')}>
             {props.title}
-          </span>
+          </div>
         </div>
       </a>
     </div>

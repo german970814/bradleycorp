@@ -10,17 +10,6 @@ import style from './FileDownloadLink.scss'
  */
 const FileDownloadLink = props => {
   switch (props.link.split('.').pop()) {
-    case 'pdf':
-      return (
-        <PDFDownloadLink
-          title={props.title}
-          link={props.link}
-          linkClass={props.linkClass}
-          titleClass={props.titleClass}
-          iconClass={props.iconClass}
-        />
-      )
-
     case 'doc':
     case 'docx':
     case 'docm':
@@ -35,15 +24,33 @@ const FileDownloadLink = props => {
         />
       )
 
+    case 'pdf':
     default:
       return (
+        <PDFDownloadLink
+          title={props.title}
+          link={props.link}
+          linkClass={props.linkClass}
+          titleClass={props.titleClass}
+          iconClass={props.iconClass}
+        />
+      )
+
+    /*
+      return (
         <a href={props.link} target="_blank">
-          <span
-            className={[style.title, style.noLink, props.titleClass].join(' ')}>
+          <div
+            className={[
+              style.title,
+              style.link,
+              style.noLink,
+              props.titleClass
+            ].join(' ')}>
             {props.title}
-          </span>
+          </div>
         </a>
       )
+      */
   }
 }
 
