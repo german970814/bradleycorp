@@ -21,8 +21,7 @@ class CustomWarrantyTemplate extends React.Component<Props> {
   renderContent () {
     return (
       <div className={style.customWarrantyTemplateContent}>
-        {this.props.renderModules && this.props.renderModules()}
-        <CustomWarrantyForm />
+        <CustomWarrantyForm renderDescription={this.props.renderModules} />
       </div>
     )
   }

@@ -4,9 +4,13 @@ import type { PrintableType } from '../../../../../../api/warranty_client'
 import WarrantyAPIClient from '../../../../../../api/warranty_client'
 import BCorpInputField from '../../../../../components/BCorpFilterField/BCorpInputField'
 import BCorpSelectField from '../../../../../components/BCorpFilterField/BCorpSelectField'
+import ContentTransformer from '../../../../../components/ContentTransformer/ContentTransformer'
 import style from './CustomWarrantyForm.scss'
 
-type Props = {}
+type Props = {
+  description?: string,
+  renderDescription?: () => React.Node
+}
 
 type State = {
   warrantyOptions: { [string | number]: ?string },
@@ -59,40 +63,54 @@ class CustomWarrantyForm extends React.Component<Props, State> {
       <form
         onSubmit={this.getPrintableCustomWarranty.bind(this)}
         className={style.customWarrantyForm}>
-        <BCorpInputField
-          filterState={this.state.form.customerName}
-          handleChange={this.updateCustomerName.bind(this)}
-          placeholder={'Customer Name'}
-        />
-        <BCorpInputField
-          filterState={this.state.form.jobName}
-          handleChange={this.updateJobName.bind(this)}
-          placeholder={'Job Name'}
-        />
-        <BCorpInputField
-          filterState={this.state.form.purchaseOrder}
-          handleChange={this.updatePurchaseOrder.bind(this)}
-          placeholder={'Purchase Order #'}
-        />
-        <BCorpInputField
-          filterState={this.state.form.invoice}
-          handleChange={this.updateInvoice.bind(this)}
-          placeholder={'Invoice #'}
-        />
-        <BCorpInputField
-          filterState={this.state.form.invoiceDate}
-          handleChange={this.updateInvoiceDate.bind(this)}
-          placeholder={'Invoice Date'}
-        />
         <div className={style.selectWrapper}>
           <BCorpSelectField
             options={this.state.warrantyOptions}
             filterState={this.state.form.warrantyID || 0}
             handleChange={this.updateWarrantyID.bind(this)}
-            title={'Choose Warranty'}
             defaultOptionId={0}
-            defaultOptionName={'Select...'}
+            defaultOptionName={'Select Warranty Type'}
             className={style.select}
+          />
+        </div>
+
+        <div className={style.description}>
+          {this.props.description && (
+            <ContentTransformer content={this.props.description} />
+          )}
+          {this.props.renderDescription && this.props.renderDescription()}
+        </div>
+
+        <div className={style.inputs}>
+          <BCorpInputField
+            filterState={this.state.form.customerName}
+            handleChange={this.updateCustomerName.bind(this)}
+            placeholder={'Customer Name'}
+            className={style.inputWrapper}
+          />
+          <BCorpInputField
+            filterState={this.state.form.jobName}
+            handleChange={this.updateJobName.bind(this)}
+            placeholder={'Job Name'}
+            className={style.inputWrapper}
+          />
+          <BCorpInputField
+            filterState={this.state.form.purchaseOrder}
+            handleChange={this.updatePurchaseOrder.bind(this)}
+            placeholder={'Purchase Order #'}
+            className={style.inputWrapper}
+          />
+          <BCorpInputField
+            filterState={this.state.form.invoice}
+            handleChange={this.updateInvoice.bind(this)}
+            placeholder={'Invoice #'}
+            className={style.inputWrapper}
+          />
+          <BCorpInputField
+            filterState={this.state.form.invoiceDate}
+            handleChange={this.updateInvoiceDate.bind(this)}
+            placeholder={'Invoice Date'}
+            className={style.inputWrapper}
           />
         </div>
 
