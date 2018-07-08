@@ -8,9 +8,11 @@ $titleMarginBottomDesktop: $titleMarginBottomMobile + 20;
 
 .defaultTemplate {
   @extend %BodyPaddingWithMediaQueries;
+  padding-top: 40px;
   padding-bottom: 60px;
 
   @include respond-to(desktop) {
+    padding-top: 60px;
     max-width: 1170px;
   }
 }
