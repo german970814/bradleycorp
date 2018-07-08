@@ -95,7 +95,9 @@ class TabCompliance extends Component {
 }
 
 TabCompliance.propTypes = {
-  compliance: PropTypes.object.isRequired
+  compliance: PropTypes.object.isRequired,
+  // from withScreenSize HOC
+  screenSize: PropTypes.string
 }
 
 export default withScreenSize(TabCompliance)

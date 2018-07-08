@@ -236,4 +236,4 @@ TabDesign.propTypes = {
   screenSize: PropTypes.string
 }
 
-export default TabDesign
+export default withScreenSize(TabDesign)

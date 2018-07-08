@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import PDFDownloadLink from './PDFDownloadLink/PDFDownloadLink'
 import WordDownloadLink from './WordDownloadLink/WordDownloadLink'
-import style from './FileDownloadLink.scss'
+// import style from './FileDownloadLink.scss'
 
 /**
  * Takes a link to either a PDF or Word file and, depending on the file type,
