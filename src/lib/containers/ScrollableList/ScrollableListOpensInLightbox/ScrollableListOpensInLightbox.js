@@ -11,19 +11,32 @@ import style from './ScrollableListOpensInLightbox.scss'
  * @extends ScrollableList
  */
 class ScrollableListOpensInLightbox extends ScrollableList {
-  // ScrollableListOpensInLightbox expects children to be a collection of elements like below:
-  // Two elements wrapped in a React Fragment
-  //
-  // <React.Fragment>
-  //
-  //  child to display outside of Lightbox
-  //  <Element 1 />
-  //
-  //  child to display inside Lightbox
-  //  <Element 2 />
-  //
-  // </React.Fragment>
-  //
+  constructor (props) {
+    super(props)
+
+    // bind it here so we create only one reference
+    // and we can remove it from the event later on,
+    // otherwise each time we open the lightbox a new listener is created.
+    // @see https://gist.github.com/Restuta/e400a555ba24daa396cc
+    this.onKeyDownBound = this.onKeyDown.bind(this)
+  }
+  /**
+   * Allows us to scroll the lightboxed scrollable list with the keys
+   */
+  onKeyDown (e) {
+    e.preventDefault()
+
+    // left key
+    if (e.keyCode === 37) {
+      this.moveList(e, -1)
+    }
+
+    // right key
+    if (e.keyCode === 39) {
+      this.moveList(e, 1)
+    }
+  }
+
   render () {
     return (
       <LightboxV2
@@ -38,8 +51,18 @@ class ScrollableListOpensInLightbox extends ScrollableList {
             </div>
           )
         }}
-        onLightboxOpen={this.props.onLightboxOpen}
-        onLightboxClose={this.props.onLightboxClose}
+        onLightboxOpen={() => {
+          document.addEventListener('keydown', this.onKeyDownBound)
+
+          // run any additional callbacks
+          this.props.onLightboxOpen && this.props.onLightboxOpen()
+        }}
+        onLightboxClose={() => {
+          document.removeEventListener('keydown', this.onKeyDownBound)
+
+          // run additional callbacks
+          this.props.onLightboxClose && this.props.onLightboxClose()
+        }}
       />
     )
   }
