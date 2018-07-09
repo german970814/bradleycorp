@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 import { Link } from 'react-router-dom'
 import FixedAspectRatioBox from '../../../components/FixedAspectRatioBox/FixedAspectRatioBox'
 import FileDownloadLink from '../../../components/FileDownloadLink/FileDownloadLink'
@@ -8,6 +8,13 @@ import BCorpVideo from '../../../components/BCorpVideo/BCorpVideo'
 import BCorpLink from '../../BCorpLink/BCorpLink'
 import style from '../ContentTransformer.scss'
 
+/**
+ * This class manages the transformation of a node from the ReactHtmlParser.
+ */
+
+/**
+ * Couldnt find a flow-typed definition for this, so made our own
+ */
 type HTMLParser2Node = {
   attribs: {
     href?: string,
@@ -48,11 +55,19 @@ class ContentTransformerClass {
   node: HTMLParser2Node
   index: number
 
+  /**
+   * We expect that the class will be constructed
+   * with a HTMLParser2Node and index.
+   */
   constructor (node: HTMLParser2Node, index: number) {
     this.node = node
     this.index = index
   }
 
+  /**
+   * With our constructed object, we can then run our transform function
+   * to return a node for the React tree.
+   */
   transform () {
     if (this.node.type === 'tag') {
       return this.transformTag()
@@ -61,7 +76,6 @@ class ContentTransformerClass {
     } else if (this.node.type === 'script') {
       return this.transformScript()
     } else {
-      // return the node if it is a valid react element
       return React.isValidElement(this.node) ? this.node : null
     }
   }
@@ -79,6 +93,11 @@ class ContentTransformerClass {
     }
   }
 
+  /**
+   * We can check for certain shortcodes in the node content
+   * and if there's a match,
+   * transform them to their respective React Element
+   */
   transformText () {
     // assuming this is enough to identify shortcode,
     // may need to be more rigorous

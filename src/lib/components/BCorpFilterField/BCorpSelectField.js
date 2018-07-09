@@ -72,13 +72,16 @@ class BCorpSelectField extends React.Component<Props> {
    *
    * Note that we unwrap the options object into an array.
    * We could skip this step and render directly from the object keys and values,
-   * but the issue is that JS objects are unordered, which means that
-   * the options would always be rendered alphabetically by KEY.
+   * but the issue is that JS objects are not always traversed by key
+   * in the order that they were added.
    *
-   * This causes issues and some funny orders when the keys are just ids
-   * with no relation to the values, so if we want to have any control over the
-   * order of what the user actually sees,
-   * we need to go via an array (which can be ordered)
+   * @see http://2ality.com/2015/10/property-traversal-order-es6.html
+   * for more info on traversing JS objects.
+   *
+   * This causes issues and some funny orders when the keys are unknown to us,
+   * so if we want to have full control over the order of the object values
+   * (what the user actually sees),
+   * we need to go via an array (which can be easily ordered)
    */
   renderOptions () {
     const { options } = this.props

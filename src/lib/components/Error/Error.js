@@ -4,12 +4,32 @@ import { Link } from 'react-router-dom'
 import BCorpLink from '../BCorpLink/BCorpLink'
 import style from './Error.scss'
 
+/**
+ * Renders a default Bradley error message
+ * which can be customised with messages and a CTA.
+ */
+
 type Props = {
+  /**
+   * Main H1 message, eg 404, or Not Found.
+   * @type {[type]}
+   */
   message: string,
+  /**
+   * Option to add a bit more information about the error
+   */
   messageSecondary?: React.Node,
+  /**
+   * Add a CTA below the messages to link back to a different page
+   */
   cta?: string,
   ctaLink?: string,
   className?: string,
+  /**
+   * Without this the error message should fit well in most components,
+   * this will add large top and bottom margins so the error message
+   * fits the whole page
+   */
   pageSize?: boolean
 }
 

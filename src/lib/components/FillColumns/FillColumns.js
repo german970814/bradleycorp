@@ -1,15 +1,16 @@
 // @flow
 import * as React from 'react'
 
+/**
+ * Given a number of child elements,
+ * this component renders them into columns of user defined width.
+ */
+
 type Props = {
   children: React.ChildrenArray<React.Element<any>>,
   colClasses: Array<string>
 }
 
-/**
- * Given a number of child elements,
- * this component renders them into columns of user defined width.
- */
 class FillColumns extends React.Component<Props> {
   renderColumns () {
     return this.props.colClasses.map((colClass, index) => {

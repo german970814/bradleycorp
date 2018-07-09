@@ -2,13 +2,6 @@
 import * as React from 'react'
 import { sortIntoRows } from '../../bcorpJSX'
 
-type Props = {
-  children: React.ChildrenArray<React.Element<any>>,
-  colClasses: Array<string>,
-  // number of pixels to make the gutter between columns
-  gutter?: number
-}
-
 /**
  * Given a number of child elements,
  * this component renders them into a grid with columns of user defined width.
@@ -16,6 +9,14 @@ type Props = {
  * We loop through the given element applying a column class from the array,
  * when we reach the end of the col class array we start a new row
  */
+
+type Props = {
+  children: React.ChildrenArray<React.Element<any>>,
+  colClasses: Array<string>,
+  // number of pixels to make the gutter between columns
+  gutter?: number
+}
+
 class FillGrid extends React.Component<Props> {
   renderColumns () {
     const { colClasses } = this.props

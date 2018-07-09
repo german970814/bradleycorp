@@ -5,6 +5,18 @@ import { Link } from 'react-router-dom'
 import { createArchiveUrlFromSlugAndTax } from '../../bcorpUrl'
 import style from './Breadcrumbs.scss'
 
+/**
+ * A component for displaying page breadcrumbs.
+ *
+ * Eg grandparent -> parent -> child
+ */
+
+/**
+ * The expected shape of the breadcrumbs object passed as props.
+ *
+ * Make sure to keep the object in the order you want to breadcrumbs to appear,
+ * using only plain non-numerical strings as object keys (to preserve order)
+ */
 type BreadcrumbsType = {
   [string]: {
     name: string,
@@ -38,6 +50,13 @@ class Breadcrumbs extends React.PureComponent<Props> {
  * Helper functions
  */
 
+/**
+ * A component which wishes to use the Breadcrumbs component,
+ * and already has a tree of child/parent terms of the shape TreeType,
+ * (the tree consisting of terms)
+ * can use this function to convert its' TreeType object to an object
+ * with shape expected by the breadcrumbs prop.
+ */
 export function createBreadcrumbsObjectFromTermTree (
   tree: TreeType,
   taxonomy: string

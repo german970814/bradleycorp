@@ -5,9 +5,12 @@ import WordDownloadLink from './WordDownloadLink/WordDownloadLink'
 // import style from './FileDownloadLink.scss'
 
 /**
- * Takes a link to either a PDF or Word file and, depending on the file type,
- * returns a PDF or Word icon next to the title
+ * Takes a link and, depending on the file type,
+ * returns a PDF or Word icon next to the title.
+ *
+ * Default (including media manager links) will be rendered with a PDF icon.
  */
+
 const FileDownloadLink = props => {
   switch (props.link.split('.').pop()) {
     case 'doc':
@@ -57,7 +60,7 @@ const FileDownloadLink = props => {
 FileDownloadLink.propTypes = {
   title: PropTypes.string.isRequired,
   /**
-   * Link to file, either PDF or Word
+   * Link to file, either PDF, Word or media manager
    */
   link: PropTypes.string.isRequired,
   titleClass: PropTypes.string,

@@ -11,9 +11,6 @@ type State = {
   message?: string
 }
 
-/**
- * Will be created in a future sprint with designs
- */
 class Loading extends React.Component<Props, State> {
   constructor (props: Props) {
     super(props)

@@ -2,6 +2,10 @@
 import * as React from 'react'
 import style from './Cross.scss'
 
+/**
+ * Renders a cross X with the option to add a callback on click.
+ */
+
 type Props = {
   onClick?: () => void,
   // height will be equal width,

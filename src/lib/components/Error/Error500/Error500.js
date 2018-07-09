@@ -3,6 +3,13 @@ import * as React from 'react'
 import BCorpHead from '../../BCorpHead/BCorpHead'
 import Error from '../Error'
 
+/**
+ * A wrapper for the Error component
+ * to be used for 500 errors
+ *
+ * Note we update the HTML head, so this is best used for page components.
+ */
+
 type Props = {}
 
 const pageTitle = 'Error'

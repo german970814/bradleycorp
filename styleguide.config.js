@@ -24,6 +24,8 @@ module.exports = {
     '**/ButtonRight.js',
     '**/ButtonPrev.js',
     '**/ButtonNext.js',
+    '**/BCorpFilterField/README.md',
+    '**/ContentTransformerClass.js',
     '**/Modules/**',
     '**/Pages/**',
     '**/Templates/**',
