@@ -52,7 +52,7 @@ class MenuBlock extends React.Component<Props, State> {
       return (
         <ArrowThumbnail key={index} className={style.arrowWrapper}>
           <BCorpLink
-            url={childLink.url}
+            url={childLink.url || '#'}
             renderInternal={url => {
               return (
                 <Link to={url}>

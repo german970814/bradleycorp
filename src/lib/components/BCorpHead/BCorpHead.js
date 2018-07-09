@@ -5,8 +5,21 @@ import { Helmet } from 'react-helmet'
 import { withOptions } from '../../contexts/OptionsContext'
 import { cleanMetaDescription } from '../../bcorpString'
 
+/**
+ * A wrapper for react-helmet,
+ * which manages the HTML document head.
+ *
+ * @see https://github.com/nfl/react-helmet
+ */
+
 type Props = {
+  /**
+   * Prefixed and passed to the <title> tags in the head
+   */
   title: string,
+  /**
+   * Cleaned and prepared and passed to the description meta tag
+   */
   description: string,
   // from withOptions HOC
   options: OptionsType

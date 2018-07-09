@@ -7,16 +7,19 @@ import style from './VideoBackground.scss'
 
 /**
  * Adds a video background to a relatively positioned contaner node.
- * There is the option to add a placeholder image that will fade out when the video is ready to play.
+ * There is the option to add a placeholder image
+ * that will fade out when the video is ready to play.
  *
  * Video backgrounds will autoplay and be muted.
  *
  * Note: although Vimeo is technically supported, YouTube is recommended.
- * Vimeo currently has no way to mute the video, and the autoplay argument also seems to have a bug.
+ * Vimeo currently has no way to mute the video,
+ * and the autoplay argument also seems to have a bug.
+ * (I have posted an issue on GitHub so may be resolved soon)
  *
- * Make sure video has a 0.5625 aspect ratio (standard for YouTube)
- *
+ * ** Make sure video has a 0.5625 aspect ratio (standard for YouTube) **
  */
+
 class VideoBackground extends Component {
   constructor (props) {
     super(props)
@@ -48,12 +51,11 @@ class VideoBackground extends Component {
   }
 
   /**
-   * Height and width are set such that,
-   * while keeping its' aspect ratio
-   * (important since youtube videos always keep aspect ratio of video regardless size of iframe),
+   * Height and width are set such that, while keeping its' aspect ratio
    * the video always covers its' container.
    *
-   * @return {[void]}
+   * (important since youtube videos always keep
+   * aspect ratio of video regardless of the size of the iframe),
    */
   updateBackgroundDimensions () {
     if (!this.props.node) {
@@ -81,8 +83,8 @@ class VideoBackground extends Component {
    * Autoplay currently doesnt work for youtube, so we need to do it here.
    * We can also mute the player.
    *
-   * @param  {[object]} event
-   * @return {[void]}
+   * @param  {object} event
+   * @return {void}
    */
   onPlayerReady (event) {
     event.target.mute()
