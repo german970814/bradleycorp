@@ -5,6 +5,7 @@ import style from './SocialMediaIcon.scss'
 /**
  * Renders one of the included social media icons
  */
+
 const SocialMediaIcon = ({ className, iconName }) => {
   const { src, href } = getIconConf(iconName)
 

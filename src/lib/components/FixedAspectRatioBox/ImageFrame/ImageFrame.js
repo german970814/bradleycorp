@@ -9,6 +9,7 @@ import style from './ImageFrame.scss'
  * Wrapper for FixedAspectRatioBox which takes
  * an image src and allows you to specify a different aspect ratio for each screen size
  */
+
 class ImageFrame extends Component {
   getAspectRatioTablet () {
     if (!this.props.aspectRatioTablet) {

@@ -3,6 +3,10 @@ import * as React from 'react'
 import VerticalAlignHelper from '../VerticalAlignHelper/VerticalAlignHelper'
 import style from './FixedAspectRatioBox.scss'
 
+/**
+ * Creates a box that keeps the same aspect ratio regardless of screen size
+ */
+
 type Props = {
   /**
    * Content for the box.
@@ -10,7 +14,7 @@ type Props = {
    */
   children: React.Node,
   /**
-   * If we have strange screen sizes (very thin but wide) this ensures we keep the aspect ratio.
+   * If we have strange screen sizes (very short but wide) this ensures we keep the aspect ratio.
    * Usually best to leave it as default.
    */
   maxHeight?: string,
@@ -22,9 +26,6 @@ type Props = {
   verticalAlign?: 'top' | 'middle' | 'bottom'
 }
 
-/**
- * Creates a box that keeps the same aspect ratio regardless of screen size
- */
 class FixedAspectRatioBox extends React.Component<Props> {
   maxHeight: string
   aspectRatio: number

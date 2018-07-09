@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import { lookupColor } from '../../bcorpStyles'
 import PropTypes from 'prop-types'
 
+/**
+ * Wraps registered SVG files with an API to interact with it more easily
+ */
+
 const icons = {
   arrow: {
     lines: [
@@ -38,9 +42,6 @@ const icons = {
   }
 }
 
-/**
- * Wraps registered SVG files with an API to interact with it more easily
- */
 class SVGArrow extends Component {
   constructor (props) {
     super(props)

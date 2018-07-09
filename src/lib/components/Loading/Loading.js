@@ -2,24 +2,19 @@
 import React from 'react'
 import style from './Loading.scss'
 
+/**
+ * Displays a spinner which can be used to indicate a component's loading state
+ */
+
 type Props = {
+  /**
+   * Adds a top and bottom margin to make the loading component fill a page
+   */
   pageSize?: boolean,
   style?: {}
 }
 
-type State = {
-  message?: string
-}
-
-class Loading extends React.Component<Props, State> {
-  constructor (props: Props) {
-    super(props)
-
-    this.state = {
-      message: ''
-    }
-  }
-
+class Loading extends React.Component<Props> {
   render () {
     return (
       <div

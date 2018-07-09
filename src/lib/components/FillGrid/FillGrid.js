@@ -62,7 +62,6 @@ class FillGrid extends React.Component<Props> {
  *
  * @param  {string} colClass
  * @param  {number} rowLength
- * @return {[type]}             [description]
  */
 export function getColumnClassesForGrid (colClass: string, rowLength: number) {
   const colClasses = []

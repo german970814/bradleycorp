@@ -3,6 +3,10 @@ import React from 'react'
 import ImageFrame from '../FixedAspectRatioBox/ImageFrame/ImageFrame'
 import style from './PDFWithFeaturedImage.scss'
 
+/**
+ * For displaying links to PDFs with a preview image
+ */
+
 type Props = {
   /**
    * Title of the PDF
@@ -19,9 +23,6 @@ type Props = {
   titleClassName?: string
 }
 
-/**
- * For displaying links to PDFs with a preview image
- */
 const PDFWithFeaturedImage = (props: Props) => {
   return (
     <div className={style.pdfWithFeaturedImage}>
