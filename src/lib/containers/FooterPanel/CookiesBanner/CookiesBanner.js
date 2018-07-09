@@ -10,13 +10,23 @@ import Cross from '../../../components/Cross/Cross'
 import FooterPanel from '../../FooterPanel/FooterPanel'
 import style from './CookiesBanner.scss'
 
+/**
+ * Diplays the cookies terms and conditions in the Footer Panel.
+ *
+ * When the user clicks 'agree' or the cross, we store a cookie.
+ * We only render if the cookie is not stored.
+ */
+
 type Props = {
+  // from the withCookies HOC
   cookies: Cookies
 }
 
 type State = {
   // cookies prop doesnt seem to update and rerender when we set the cookie,
   // so we'll just hide it with state instead
+  //
+  // next time the page loads the cookie will be stored and found from the start
   hide: boolean
 }
 

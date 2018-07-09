@@ -8,6 +8,40 @@ import debounce from 'debounce'
 import { getUrlWithoutPageParam } from '../../../lib/bcorpUrl'
 import Loading from '../../components/Loading/Loading'
 
+/**
+ *
+ * This component controls pagination
+ * and can be applied to any page/component which deals with an array of posts.
+ *
+ * To use it, pass it a function as children
+ * which accepts the ChildFunctionArgs (above) object as an argument.
+ *
+ * Using those passed variables and methods you will have everything you need
+ * to control the pagination and render the resulting posts
+ *
+ * This component keeps track of the current page in the url.
+ * Refreshing or entering at a certain page number will render all the posts
+ * that appear on pages up to and including that one.
+ * Any requests for further pages will paginate from there with the usual postsPerPage
+ *
+ * The component will always request the next page in the background
+ * ready for the user deciding to load more.
+ * This will make it seem instantaneous to load more posts.
+ * You have a boolean 'canLoadMore' passed to the child
+ * so you can know when you should or shouldnt hide the load more button
+ * and a shouldDisplayPost method (which takes an index) to make it easier
+ * to know which posts to render.
+ *
+ * NOTE: Bit of an annoying quirk.
+ * The paged state tracks behind by 1 when we have an offset.
+ * Without an offset, the paged state corresponds to the page that's being shown,
+ * but with an offset, it corresponds to how many new pages we've requested
+ * (after the first).
+ * It's because the first request doesnt technically count as a page
+ * since we're getting all posts up to the current page.
+ *
+ */
+
 // will need to pass LoadMore a function which deconstructs the
 // postsPerPage and paged object and passes it to an actual
 // function from the api client along with any other necessary arguments.
@@ -57,39 +91,6 @@ type GetPageFunctionType = (
   offset: number
 ) => void
 
-/**
- *
- * This component controls pagination
- * and can be applied to any page/component which deals with an array of posts.
- *
- * To use it, pass it a function as children
- * which accepts the ChildFunctionArgs (above) object as an argument.
- *
- * Using those passed variables and methods you will have everything you need
- * to control the pagination and render the resulting posts
- *
- * This component keeps track of the current page in the url.
- * Refreshing or entering at a certain page number will render all the posts
- * that appear on pages up to and including that one.
- * Any requests for further pages will paginate from there with the usual postsPerPage
- *
- * The component will always request the next page in the background
- * ready for the user deciding to load more.
- * This will make it seem instantaneous to load more posts.
- * You have a boolean 'canLoadMore' passed to the child
- * so you can know when you should or shouldnt hide the load more button
- * and a shouldDisplayPost method (which takes an index) to make it easier
- * to know which posts to render.
- *
- * NOTE: Bit of an annoying quirk.
- * The paged state tracks behind by 1 when we have an offset.
- * Without an offset, the paged state corresponds to the page that's being shown,
- * but with an offset, it corresponds to how many new pages we've requested
- * (after the first).
- * It's because the first request doesnt technically count as a page
- * since we're getting all posts up to the current page.
- *
- */
 class LoadMoreWithRouter extends React.Component<Props, State> {
   // we need this function twice
   // otherwise when fetching new posts on reset

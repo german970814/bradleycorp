@@ -4,29 +4,39 @@ import debounce from 'debounce'
 import { MOBILEMAXWIDTH, TABLETMAXWIDTH } from '../../../globals'
 
 /**
- * Allows components to respond to a container's size rather than just the window.
+ * Allows components to respond to a container's size
+ * rather than just the window.
  *
  * We pass as props the a node ref for the container we'd like to respond to
- * and a render function as children which will receive a class name and size variable
+ * and a render function as children
+ * which will receive a class name and size variable
  * which change in response to the container's size
  */
+
 class ContainerMediaQuery extends Component {
   constructor (props) {
     super(props)
 
     this.defaultState = { width: 0 }
-    this.state = Object.assign({}, this.defaultState, this.props.node.offsetWidth)
+    this.state = Object.assign(
+      {},
+      this.defaultState,
+      this.props.node.offsetWidth
+    )
 
     this.initUpdateWidth = this.updateWidth.bind(this)
     this.updateWidth = debounce(this.updateWidth.bind(this), 200)
   }
 
   /**
-   * Currently we can only support updating the container size in response to a change in the whole window
-   * This isnt very useful for when the DOM changes for other reasons,  eg a new network request is made
+   * Currently we can only support updating the container size
+   * in response to a change in the whole window
+   * This isnt very useful for when the DOM changes for other reasons,
+   * eg a new network request is made
    *
    * Google have released this ResizeObserver class
-   * but so far it doesnt support the browsers we need, and it is not 100% polyfillable
+   * but so far it doesnt support the browsers we need,
+   * and it is not 100% polyfillable
    *
    * @see https://developers.google.com/web/updates/2016/10/resizeobserver
    */
@@ -52,9 +62,16 @@ class ContainerMediaQuery extends Component {
     if (this.props.node.offsetWidth < MOBILEMAXWIDTH) {
       return { containerClassName: 'container-size-mobile', size: 'mobile' }
     } else if (this.props.node.offsetWidth < TABLETMAXWIDTH) {
-      return { containerClassName: 'container-size-mobile container-size-tablet', size: 'tablet' }
+      return {
+        containerClassName: 'container-size-mobile container-size-tablet',
+        size: 'tablet'
+      }
     } else {
-      return { containerClassName: 'container-size-mobile container-size-tablet container-size-desktop', size: 'desktop' }
+      return {
+        containerClassName:
+          'container-size-mobile container-size-tablet container-size-desktop',
+        size: 'desktop'
+      }
     }
   }
 
@@ -65,7 +82,14 @@ class ContainerMediaQuery extends Component {
 }
 
 ContainerMediaQuery.propTypes = {
+  /**
+   * A render function.
+   * We pass it the current container size and a classname relating to that size
+   */
   children: PropTypes.func.isRequired,
+  /**
+   * The DOM node that we want to respond to changes in the size of
+   */
   node: PropTypes.object.isRequired
 }
 

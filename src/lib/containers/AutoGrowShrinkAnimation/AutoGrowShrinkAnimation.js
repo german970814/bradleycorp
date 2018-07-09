@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 /**
  * Stage manager for animating elements with changeable heights
  */
+
 class AutoGrowShrinkAnimation extends Component {
   constructor (props) {
     super(props)
@@ -13,6 +14,14 @@ class AutoGrowShrinkAnimation extends Component {
     }
   }
 
+  /**
+   * To get the height transition we have to first set the height to auto,
+   * then within an animation frame find out what the new height would be,
+   * then actually set the new height to what it would be, rather than auto.
+   *
+   * Since we cant transition to height: auto,
+   * this allows us to create the animation.
+   */
   componentWillUpdate () {
     const oldHeight = `${this.node.clientHeight}px`
 

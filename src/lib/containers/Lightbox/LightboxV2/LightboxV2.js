@@ -4,6 +4,22 @@ import ReactDOM from 'react-dom'
 import { updateBlur } from '../../../../apps/Bradley/App/updateBlur'
 import style from './LightboxV2.scss'
 
+/**
+ * Updated version of the Lightbox Component.
+ * We should use this wherever possible going forward.
+ *
+ * Main difference is that this Lightbox component uses render props to
+ * display the entry to the lightbox and the actual lightbox content.
+ * It leads to a much smoother experience.
+ *
+ * We also have options such as 'fitLightboxToContent', 'fullWidth', and 'maxWidth' to give us
+ * full control over how the lightbox is actually displayed.
+ * Previously the lightbox was a fixed size with content filling the space
+ * Ths caused problems when, for example, the lightbox content needed to be smaller
+ * than the designated space and we wanted to close button to stay the same distance below.
+ * With these options all combinations should be possible.
+ */
+
 type Props = {
   /**
    * What to render as the entry to the lightbox.
@@ -51,23 +67,6 @@ type State = {
   isOpen: boolean
 }
 
-/**
- * Updated version of the Lightbox Component.
- * We should use this wherever possible going forward.
- * At some point I want to get round to updating all components using Lightbox V1
- * to use V2 instead.
- *
- * Main difference is that this Lightbox component uses render props to
- * display the entry to the lightbox and the actual lightbox content.
- * It leads to a much smoother experience.
- *
- * We also have options such as 'fitLightboxToContent', 'fullWidth', and 'maxWidth' to give us
- * full control over how the lightbox is actually displayed.
- * Previously the lightbox was a fixed size with content filling the space
- * Ths caused problems when, for example, the lightbox content needed to be smaller
- * than the designated space and we wanted to close button to stay the same distance below.
- * With these options all combinations should be possible.
- */
 class LightboxV2 extends React.Component<Props, State> {
   constructor (props: Props) {
     super(props)
@@ -78,6 +77,7 @@ class LightboxV2 extends React.Component<Props, State> {
   }
 
   componentWillUnmount () {
+    // blur the body background
     updateBlur(false)
   }
 
@@ -138,6 +138,8 @@ class LightboxV2 extends React.Component<Props, State> {
     const fullWidthClass = this.props.fullWidth ? style.fullWidth : ''
 
     if (this.state.isOpen) {
+      // we portal the lightbox into a node lying directly under body
+      // to allow us to easily display it over the top of the current page
       return ReactDOM.createPortal(
         <div
           className={`${style.background} ${this.props.backgroundClass ||

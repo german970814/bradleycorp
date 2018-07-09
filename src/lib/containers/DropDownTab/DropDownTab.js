@@ -4,6 +4,11 @@ import Divider from '../../components/Divider/Divider'
 import ContentTransformer from '../../components/ContentTransformer/ContentTransformer'
 import style from './DropDownTab.scss'
 
+/**
+ * A simple tab with just a title and an arrow that, when clicked,
+ * open and closes a div underneath containing a string.
+ */
+
 type Props = {
   title: string,
   content: string

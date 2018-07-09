@@ -5,9 +5,22 @@ import { bradleyApisHost } from '../../../../api/bradley-apis/index'
 import { Link } from 'react-router-dom'
 import style from './BIMRevitOption.scss'
 
+/**
+ * A Pure Component for displaying a BIM Revit product variant,
+ * with a check box and the ability to select the item.
+ *
+ * Its' selected state should be stored somewhere higher up the tree.
+ */
+
 type Props = {
   productVariant: BimProductVariant,
+  /**
+   * A function to pass the id of the option up the tree
+   */
   toggleSelect: (id: number) => void,
+  /**
+   * A callback for when the download icon is clicked
+   */
   downloadFiles: (variantIds: Array<number>) => Promise<void>,
   selected: boolean,
   showProductPageLinks?: boolean

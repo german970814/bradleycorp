@@ -7,14 +7,47 @@ import Loading from '../../components/Loading/Loading'
 import NoResults from '../../components/Error/NoResults/NoResults'
 import style from './BimRevitDownloader.scss'
 
+/**
+ * A micro app for displaying, selecting, and downloading BIM files.
+ *
+ * Given some bim revit term ids (called model IDs in Bradley's system),
+ * we query the documentPackager to get meta data
+ * for the avilable bim files of all related product variants.
+ * (preview thumbnail, title, id etc).
+ *
+ * The relation is like so:
+ * Bim Revit Term ID (one) => (many) Product Variants
+ *
+ * We display these in a small app, allowing the user to select the files
+ * they'd like to download.
+ *
+ * We send the selected product variant ids off to the documentPackager,
+ * which returns a link to download the actual BIM files packaged up as a zip
+ */
+
 type Props = {
+  /**
+   * These actually relate to 'model IDs' in Bradley's system,
+   * but for us they're usually input to the CMS as bim revit tags
+   * (eg on the product post type)
+   */
   bimRevitTermIds: Array<string>,
+  /**
+   * Show a 'Product Page' link in each displayed bim revit file option
+   */
   showProductPageLinks?: boolean
 }
 
 type State = {
   loading: boolean,
+  /**
+   * Once we get the requested product variants from the documentPackager
+   * we store them here on state
+   */
   productVariants: Array<BimProductVariant>,
+  /**
+   * Store the IDs of the selected product variants in an array
+   */
   selected: Array<number>
 }
 
@@ -24,34 +57,7 @@ class BimRevitDownloader extends React.Component<Props, State> {
 
     this.state = {
       loading: false,
-      productVariants: [
-        /*
-        {
-          id: 304,
-          name: 'AV30',
-          description: null,
-          product: {
-            id: 274,
-            imageUrl:
-              '/image/6015/lavatories-bradley_corp-advocate-av30.jpg?size=w100_h100_f',
-            name: '1-Station Advocate Lavatory System',
-            description: ''
-          }
-        },
-        {
-          id: 305,
-          name: 'AV60',
-          description: null,
-          product: {
-            id: 275,
-            imageUrl:
-              '/image/6014/lavatories-bradley_corp-advocate-av60.jpg?size=w100_h100_f',
-            name: '2-Station Advocate Lavatory System',
-            description: ''
-          }
-        }
-      */
-      ],
+      productVariants: [],
       selected: []
     }
   }

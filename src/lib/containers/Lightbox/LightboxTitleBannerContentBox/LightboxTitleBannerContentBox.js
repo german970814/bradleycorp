@@ -2,6 +2,11 @@
 import * as React from 'react'
 import style from './LightboxTitleBannerContentBox.scss'
 
+/**
+ * A component wrapping the styles for a certain type of box
+ * which appears repeatedly in lightboxes across the site.
+ */
+
 type Props = {
   title: string,
   children: React.Node

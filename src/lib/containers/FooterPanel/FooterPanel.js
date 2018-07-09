@@ -3,8 +3,18 @@ import * as React from 'react'
 import ReactDOM from 'react-dom'
 import style from './FooterPanel.scss'
 
+/**
+ * A component we can use to control a footer panel
+ * fixed to the bottom of the window.
+ *
+ * We can use this to portal in some nodes, show, and hide the panel.
+ */
+
 type Props = {
   children: React.Node,
+  /**
+   * State for the panel needs to be managed somewhere higher up the tree
+   */
   show?: boolean,
   onShow?: () => void,
   onHide?: () => void
