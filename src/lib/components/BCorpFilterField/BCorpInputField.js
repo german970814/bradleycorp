@@ -2,25 +2,44 @@
 import * as React from 'react'
 import style from './BCorpFilterField.scss'
 
+/**
+ * A utility component for creating an input field with the default Bradley style.
+ */
+
 type Props = {
+  /**
+   * The input field state, to be stored somewhere higher up the tree
+   */
   filterState?: string,
+  /**
+   * A function to update the state further up the tree when we get an input event
+   */
   handleChange: (event: SyntheticInputEvent<HTMLInputElement>) => void,
   title?: string,
   placeholder?: string,
   className?: string,
+  /**
+   * Disable the input field (adds HTML 'disabled' attribute)
+   */
   disabled?: boolean,
+  /**
+   * Add a red star to the field to indicate that it's requried
+   */
   required?: boolean,
+  /**
+   * Add the word 'required' to the red required star
+   */
   lengthenRequired?: boolean
 }
 
-/**
- * Class responsible for displaying and updating the input filter
- */
 class BCorpInputField extends React.Component<Props> {
   handleChange (event: SyntheticInputEvent<HTMLInputElement>) {
     this.props.handleChange(event)
   }
 
+  /**
+   * Note the 'required' styles are set in the scss as pseudo elements
+   */
   render () {
     const requiredClassName =
       this.props.required &&

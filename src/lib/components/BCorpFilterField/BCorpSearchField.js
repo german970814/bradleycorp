@@ -2,27 +2,50 @@
 import * as React from 'react'
 import style from './BCorpFilterField.scss'
 
+/**
+ * A utility component for creating an input field
+ * with the default Bradley Search field styling
+ * (with the magnifying glass at the end).
+ *
+ * Aside from the styling, the main difference between this and the Input Field
+ * is that it's designed to update the state only on submit,
+ * not on every input event.
+ */
+
 type Props = {
   /**
-   * Takes the search string as it is when the form is submitted.
-   * Should update some kind of higher level state or perform some network request.
+   * Takes the search string as it is when the field is submitted.
    */
   handleSubmit: string => void,
+  /**
+   * Appears above the field
+   */
   title?: string,
   className?: string,
   placeholder?: string,
+  /**
+   * We can give the search field an initial value
+   * rather than just a placeholder which will disappear when we type.
+   */
   initValue?: string,
   magnifyingGlassColor?: 'white' | 'grey'
 }
 
 type State = {
+  /**
+   * The Search Field is still a controlled component.
+   *
+   * We manage the state temporarily here then pass it up the tree via the
+   * handleSubmit function when the user submits.
+   */
   value?: string
 }
 
-/**
- * Class responsible for displaying and updating the search filter
- */
 class BCorpSearchField extends React.Component<Props, State> {
+  /**
+   * Store a ref to the form node so we can easily dispatch submit events
+   * @type {[type]}
+   */
   form: ?HTMLFormElement
 
   constructor (props: Props) {
@@ -31,22 +54,38 @@ class BCorpSearchField extends React.Component<Props, State> {
     this.state = { value: this.props.initValue || '' }
   }
 
+  /**
+   * Not to be confused with handleSubmit passed as props.
+   *
+   * Here we stop the page from reloading on submit
+   * and pass the current input state up the tree.
+   */
   handleSubmit (event: SyntheticInputEvent<HTMLFormElement>) {
+    // stops the page from reloading
     event.preventDefault()
 
     if (this.state.value || this.state.value === '') {
-      console.log(this.state.value)
       this.props.handleSubmit(this.state.value || '')
     }
   }
 
+  /**
+   * Adds submit functionality to the search icon
+   *
+   * Simply calling this.form.submit()
+   * won't dispatch the submit event automatically, and the page will reload.
+   * We need to manually dispatch the submit event.
+   */
   handleSearchIconClick () {
-    // simply calling this.form.submit() won't dispatch the submit event automatically, and the page will reload
     if (this.form) {
       this.form.dispatchEvent(new Event('submit'))
     }
   }
 
+  /**
+   * Handles a change to the input field, since this is a controlled component,
+   * we store the input state locally.
+   */
   handleChange (event: SyntheticInputEvent<HTMLInputElement>) {
     this.setState({ value: event.target.value })
   }

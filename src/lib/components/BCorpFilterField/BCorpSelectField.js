@@ -3,35 +3,83 @@ import * as React from 'react'
 import { sortAlphabeticallyArrayOfObjects } from '../../bcorpArray'
 import style from './BCorpFilterField.scss'
 
+/**
+ * A utility component for creating an select field
+ * with the default Bradley styling
+ */
+
+/**
+ * The select options should be passed as an object with this shape.
+ */
 type Options = {
   // some id for the option (eg term_id): option name
   [number | string]: ?string
 }
 
 type Props = {
+  /**
+   * Don't include the default option value defined here in props in the options
+   */
   notShowDefault?: boolean,
+  /**
+   * Add an ID for the default option to be added to the top
+   * (usually 0 or similar which wont actually refer to a post and is easy to check for)
+   */
   defaultOptionId: string | number,
+  /**
+   * Add a default option name to be added to the top with the default ID
+   * (usually something like 'Select...')
+   */
   defaultOptionName: string,
+  /**
+   * The object containing the select field options,
+   * see expected shape above
+   */
   options?: Options,
   /**
-   * We expect that the state is being managed and updated somewhere higher up the tree
+   * We expect that the state is being managed and updated higher up the tree
    */
   filterState: string | number,
+  /**
+   * Function to update state higher up the tree, receives whole input event
+   */
   handleChange: (event: SyntheticInputEvent<HTMLSelectElement>) => void,
+  /**
+   * Title will appear above the field
+   */
   title?: string,
   className?: string,
+  /**
+   * Add a red star to indicate required
+   */
   required?: boolean,
+  /**
+   * Sort the options alphabetically
+   */
   sortAlphabetically?: boolean
 }
 
-/**
- * Class really just holds the styling and structure for a select field of this type
- */
 class BCorpSelectField extends React.Component<Props> {
+  /**
+   * Call function to pass inout event up the tree
+   */
   handleChange (event: SyntheticInputEvent<HTMLSelectElement>) {
     this.props.handleChange(event)
   }
 
+  /**
+   * Renders the HTML option tags that will lie between the <select> tags.
+   *
+   * Note that we unwrap the options object into an array.
+   * We could skip this step and render directly from the object keys and values,
+   * but the issue is that JS objects are unordered, which means that
+   * the options would always be rendered alphabetically by KEY.
+   *
+   * This causes issues and some funny orders when the keys are just ids
+   * with no relation to the values, so if we want to have any control over the
+   * order of what the user actually sees,
+   * we need to go via an array (which can be ordered)
+   */
   renderOptions () {
     const { options } = this.props
 
@@ -62,6 +110,7 @@ class BCorpSelectField extends React.Component<Props> {
   }
 
   render () {
+    // required star style managed in scss as a pseudo element
     const requiredClassName =
       this.props.required &&
       (!this.props.filterState ||

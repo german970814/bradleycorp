@@ -64,6 +64,9 @@ const BCorpBackground = (props: Props) => {
   )
 }
 
+/**
+ * Combine the possible backround image and opacity  to get the background
+ */
 function getBackgroundStyle (props) {
   const backgroundStyle = {}
 
@@ -76,6 +79,10 @@ function getBackgroundStyle (props) {
   return backgroundStyle
 }
 
+/**
+ * Create the overlay, prioritising the custom overlay colour over
+ * the styleguide colour passed as the overlay props, over the skin.
+ */
 function getOverlay (props) {
   if (props.customOverlayColor) {
     return props.customOverlayColor
