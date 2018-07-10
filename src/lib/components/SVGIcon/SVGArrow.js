@@ -10,9 +10,9 @@ const icons = {
   arrow: {
     lines: [
       {
-        x1: '39.7',
+        x1: '1',
         y1: '10.8',
-        x2: '1',
+        x2: '39.7',
         y2: '10.8'
       },
       {
@@ -52,9 +52,9 @@ class SVGArrow extends Component {
       {
         name: 'line1',
         dashOffset: 40,
-        x1: '39.7',
+        x1: '1',
         y1: '10.8',
-        x2: '1',
+        x2: '39.7',
         y2: '10.8'
       },
       {
