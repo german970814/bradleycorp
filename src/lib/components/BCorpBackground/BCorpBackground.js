@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react'
 import type { BCorpColor, BCorpSkin } from '../../types/styleguide_types'
-import { lookupColor, styleguideColors } from '../../bcorpStyles'
+import { lookupColor } from '../../bcorpStyles'
 import style from './BCorpBackground.scss'
 
 export const darkSkinColour = lookupColor('charcoal-grey')

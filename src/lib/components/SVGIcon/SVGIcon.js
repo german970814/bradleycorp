@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react'
 import type { BCorpColor } from '../../types/styleguide_types'
-import { lookupColor } from '../../bcorpStyles'
 import SVGArrow from './SVGDefinitions/SVGArrow'
 
 /**
