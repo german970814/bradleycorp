@@ -1,6 +1,7 @@
 @import '../../../../scss/partials/variables';
 @import '../../../../scss/partials/text-styles';
 @import '../../../../scss/partials/mixins';
+@import '../../../../scss/partials/buttons';
 
 .checkbox {
   margin-bottom: 40px;
@@ -38,16 +39,6 @@
     padding-left: 0;
     padding-right: 0;
 
-    &::after {
-      content: '+';
-      font-size: 23px;
-      color: #fff;
-      background: #a8abad;
-      float: right;
-      margin-left: 5px;
-      line-height: 16px;
-      padding: 2px 1px 1px;
-      margin-top: -3px;
-    }
+    @extend %add-button-cross-closed-pseudo;
   }
 }

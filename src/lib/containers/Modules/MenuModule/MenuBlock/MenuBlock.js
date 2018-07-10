@@ -86,19 +86,7 @@ class MenuBlock extends React.Component<Props, State> {
       return
     }
 
-    return this.state.collapsed ? (
-      <img
-        src={require('../../../../../images/collapsible-icons/expand@3x.png')}
-        className={style.collapsibleIcon}
-        onClickCapture={this.expand.bind(this)}
-      />
-    ) : (
-      <img
-        src={require('../../../../../images/collapsible-icons/collapse@3x.png')}
-        className={style.collapsibleIcon}
-        onClickCapture={this.collapse.bind(this)}
-      />
-    )
+    return <div className={style.collapsibleIcon} />
   }
 
   /**
@@ -147,7 +135,10 @@ class MenuBlock extends React.Component<Props, State> {
 
   render () {
     return this.props.collapsible ? (
-      <Collapsible trigger={this.renderParentLink()}>
+      <Collapsible
+        trigger={this.renderParentLink()}
+        className={style.collapsible}
+        openedClassName={style.collapsible}>
         {this.renderChildLinks()}
       </Collapsible>
     ) : (

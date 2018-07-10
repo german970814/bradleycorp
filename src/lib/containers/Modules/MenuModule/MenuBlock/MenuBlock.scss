@@ -1,4 +1,5 @@
 @import '../../../../../scss/partials/variables';
+@import '../../../../../scss/partials/buttons';
 
 $parentTitleMarginBottom: 7px;
 $iconHeight: 20px;
@@ -45,5 +46,20 @@ $iconHeight: 20px;
 
   &:last-child {
     margin-bottom: 0px;
+  }
+}
+
+.collapsible {
+  :global(.Collapsible__trigger) {
+    .collapsibleIcon:after {
+      @extend %button-cross-closed-pseudo;
+      padding: 0px 1px 3px;
+    }
+
+    &:global(.is-open) {
+      .collapsibleIcon:after {
+        @extend %button-cross-open-pseudo;
+      }
+    }
   }
 }

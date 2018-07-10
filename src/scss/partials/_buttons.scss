@@ -55,3 +55,35 @@
   background-color: transparent;
   color: #e51616;
 }
+
+%button-cross-closed-pseudo {
+  content: '+';
+  float: right;
+  margin-top: -3px;
+  margin-left: 5px;
+  padding: 2px 1px 0px;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  font-size: 23px;
+  color: #fff;
+  background: $gray;
+  text-align: center;
+}
+
+%button-cross-open-pseudo {
+  content: '-' !important;
+  padding: 1px 1px 2px !important;
+}
+
+%add-button-cross-closed-pseudo {
+  &:after {
+    @extend %button-cross-closed-pseudo;
+  }
+
+  &:global(.is-open) {
+    &:after {
+      @extend %button-cross-open-pseudo;
+    }
+  }
+}
