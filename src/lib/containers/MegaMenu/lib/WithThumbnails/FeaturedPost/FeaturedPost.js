@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import ContentTransformer from '../../../../../components/ContentTransformer/ContentTransformer'
 import { getExcerpt } from '../../../../../bcorpPost'
 import { createCPTUrl } from '../../../../../bcorpUrl'
-import SVGArrow from '../../../../../components/SVGIcon/SVGArrow'
+import SVGIcon from '../../../../../components/SVGIcon/SVGIcon'
 import style from './FeaturedPost.scss'
 
 type Props = {
@@ -37,7 +37,7 @@ class FeaturedPost extends React.PureComponent<Props> {
         </div>
         <Link to={cptUrl}>
           <div className={style.arrow}>
-            <SVGArrow icon={'arrow'} color={'silver'} redrawOnHover />
+            <SVGIcon icon={'arrow'} color={'silver'} redrawOnHover />
           </div>
         </Link>
       </div>

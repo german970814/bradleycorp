@@ -1,5 +1,6 @@
 // @flow
 import React from 'react'
+import type { BCorpColor } from '../../types/styleguide_types'
 import { Link } from 'react-router-dom'
 import BCorpLink from '../BCorpLink/BCorpLink'
 import SVGIcon from '../SVGIcon/SVGIcon'
@@ -48,7 +49,7 @@ type Props = {
   /**
     The icon color (as a string referring to a color name from the styleguide)
    */
-  color?: string
+  color?: BCorpColor
 }
 
 const ArrowButton = (props: Props) => {
