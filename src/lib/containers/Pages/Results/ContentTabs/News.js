@@ -2,7 +2,7 @@
 import React from 'react'
 import type { TemplateProps } from './Default'
 import Default from './Default'
-import NewsItem from '../../../Templates/LeftSidebarTemplate/NewsTemplate/NewsItems/NewsItem/NewsItem'
+import NewsItem from '../../../Templates/LeftSidebarTemplate/ArchiveTemplate/NewsTemplate/NewsItems/NewsItem/NewsItem'
 import style from './../Results.scss'
 
 export default class SearchNews extends React.Component<TemplateProps> {

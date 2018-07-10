@@ -1,12 +1,13 @@
 // @flow
 import * as React from 'react'
-import type { FiltersType } from '../NewsTemplate'
+import type { FiltersType } from '../ArchiveTemplate'
 import BCorpSearchField from '../../../../../components/BCorpFilterField/BCorpSearchField'
 import BCorpSelectField from '../../../../../components/BCorpFilterField/BCorpSelectField'
 import style from './Filters.scss'
 
 type Props = {
-  title: string,
+  pageTitle: string,
+  searchPlaceholder?: string,
   filters: FiltersType,
   updateFilters: (filters: FiltersType) => void,
   yearOptions: {
@@ -51,7 +52,9 @@ class Filters extends React.Component<Props> {
           filterState={this.props.filters.search}
           handleSubmit={this.updateSearchFilter.bind(this)}
           className={style.search}
-          placeholder={`Search ${this.props.title}`}
+          placeholder={
+            this.props.searchPlaceholder || `Search ${this.props.pageTitle}`
+          }
         />
       </div>
     )

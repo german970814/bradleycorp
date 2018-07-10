@@ -1,14 +1,14 @@
 // @flow
 import * as React from 'react'
-import type { FiltersType } from '../NewsTemplate'
+import type { FiltersType } from '../../ArchiveTemplate'
 import type {
   ChildFunctionArgs,
   GetPostsArgs,
   GetPostsFunctionType
-} from '../../../../LoadMore/LoadMore'
-import CPTApiClient from '../../../../../../api/cpt_client'
-import LoadMore from '../../../../LoadMore/LoadMore'
-import NoResults from '../../../../../components/Error/NoResults/NoResults'
+} from '../../../../../LoadMore/LoadMore'
+import CPTApiClient from '../../../../../../../api/cpt_client'
+import LoadMore from '../../../../../LoadMore/LoadMore'
+import NoResults from '../../../../../../components/Error/NoResults/NoResults'
 import NewsItem from './NewsItem/NewsItem'
 import style from './NewsItems.scss'
 
@@ -143,6 +143,7 @@ class NewsItemsInner extends React.Component<InnerProps> {
   shouldResendRequest (prevProps: InnerProps) {
     if (
       prevProps.pageID !== this.props.pageID ||
+      prevProps.filters !== this.props.filters ||
       prevProps.isCaseStudyTemplate !== this.props.isCaseStudyTemplate
     ) {
       return true
