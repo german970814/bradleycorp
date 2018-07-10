@@ -43,6 +43,26 @@ class FooterPanel extends React.PureComponent<Props> {
     }
   }
 
+  show () {
+    if (!this.portalNode) {
+      console.warn('FooterPanel component expected node with id footer-panel')
+      return null
+    }
+
+    this.portalNode.style.bottom = '0'
+    this.portalNode.style.maxHeight = '100%'
+  }
+
+  hide () {
+    if (!this.portalNode) {
+      console.warn('FooterPanel component expected node with id footer-panel')
+      return null
+    }
+
+    this.portalNode.style.bottom = '-100%'
+    this.portalNode.style.maxHeight = '0px'
+  }
+
   /**
    * This is important.
    *
@@ -50,12 +70,7 @@ class FooterPanel extends React.PureComponent<Props> {
    * finish using it, then it disappears.
    */
   componentWillUnmount () {
-    if (!this.portalNode) {
-      console.warn('FooterPanel component expected node with id footer-panel')
-      return null
-    }
-
-    this.portalNode.style.bottom = '-100%'
+    this.hide()
   }
 
   render () {
@@ -63,14 +78,12 @@ class FooterPanel extends React.PureComponent<Props> {
       console.warn('FooterPanel component expected node with id footer-panel')
       return null
     }
-    const portalNode = this.portalNode
 
-    const bottom = this.props.show ? 0 : -100
-    portalNode.style.bottom = `${bottom}px`
+    this.props.show ? this.show() : this.hide()
 
     return ReactDOM.createPortal(
       <div className={style.footerPanelInner}>{this.props.children}</div>,
-      portalNode
+      this.portalNode
     )
   }
 }
