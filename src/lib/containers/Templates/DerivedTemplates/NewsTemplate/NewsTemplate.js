@@ -1,14 +1,14 @@
 // @flow
 import * as React from 'react'
 import type { BCorpMetaboxes } from '../../../../types/customPage_types'
-import type { FiltersType } from '../ArchiveTemplate'
-import ArchiveTemplate from '../ArchiveTemplate'
+import type { FiltersType } from '../../../ArchiveFilters/ArchiveFilters'
+import ArchiveFilters from '../../../ArchiveFilters/ArchiveFilters'
 import LeftSidebarTemplate from '../../LeftSidebarTemplate/LeftSidebarTemplate'
 import NewsItems from './NewsItems/NewsItems'
 import style from './NewsTemplate.scss'
 
 /**
- * Using the ArchiveTemplate as the filter state manager,
+ * Using the ArchiveFilters as the filter state manager,
  * we combine the filters with the list of news items,
  * and place them both into a Left Sidebar Template
  *
@@ -50,7 +50,7 @@ class NewsTemplate extends React.Component<Props> {
 
   renderContentWithFilters () {
     return (
-      <ArchiveTemplate
+      <ArchiveFilters
         data={this.props.data}
         yearStart={2000}
         renderContent={this.renderNewsItems.bind(this)}

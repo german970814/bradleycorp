@@ -5,11 +5,11 @@ import FullWidthTemplate from './FullWidthTemplate/FullWidthTemplate'
 import RightSidebarTemplate from './RightSidebarTemplate/RightSidebarTemplate'
 import LeftSidebarTemplate from './LeftSidebarTemplate/LeftSidebarTemplate'
 import FAQTemplate from './LeftSidebarTemplate/FAQTemplate/FAQTemplate'
-import NewsTemplate from './ArchiveTemplate/NewsTemplate/NewsTemplate'
+import NewsTemplate from './DerivedTemplates/NewsTemplate/NewsTemplate'
 import CareersTemplate from './CareersTemplate/CareersTemplate'
 import ProductLandingPageTemplate from './FullWidthTemplate/ProductLandingPageTemplate/ProductLandingPageTemplate'
 import CustomWarrantyTemplate from './LeftSidebarTemplate/CustomWarrantyTemplate/CustomWarrantyTemplate'
-import BlogArchiveTemplate from './ArchiveTemplate/BlogArchiveTemplate.js/BlogArchiveTemplate'
+import BlogArchiveTemplate from './DerivedTemplates/BlogArchiveTemplate.js/BlogArchiveTemplate'
 import DefaultTemplate from './DefaultTemplate/DefaultTemplate'
 
 type Props = {

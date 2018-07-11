@@ -1,13 +1,13 @@
 // @flow
 import * as React from 'react'
-import type { FiltersType } from '../ArchiveTemplate'
-import ArchiveTemplate from '../ArchiveTemplate'
+import type { FiltersType } from '../../../ArchiveFilters/ArchiveFilters'
+import ArchiveFilters from '../../../ArchiveFilters/ArchiveFilters'
 import BlogArchiveItems from './BlogArchiveItems/BlogArchiveItems'
 import CentredTemplate from '../../CentredTemplate/CentredTemplate'
 import style from './BlogArchiveTemplate.scss'
 
 /**
- * Using the ArchiveTemplate as the filter state manager,
+ * Using the ArchiveFilters as the filter state manager,
  * we combine the filters with the list of blog post items here.
  */
 
@@ -24,7 +24,7 @@ type Props = {
 class BlogArchiveTemplate extends React.Component<Props> {
   renderBlogArchiveItems (filters: FiltersType) {
     return (
-      <div className={style.blogArchiveTemplateContent}>
+      <div className={style.blogArchiveFiltersContent}>
         <BlogArchiveItems filters={filters} pageID={this.props.data.page_id} />
       </div>
     )
@@ -32,7 +32,7 @@ class BlogArchiveTemplate extends React.Component<Props> {
 
   renderContent () {
     return (
-      <ArchiveTemplate
+      <ArchiveFilters
         data={this.props.data}
         yearStart={2000}
         renderContent={this.renderBlogArchiveItems.bind(this)}

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react'
-import type { FiltersType } from '../../ArchiveTemplate'
+import type { FiltersType } from '../../../../ArchiveFilters/ArchiveFilters'
 import type {
   ChildFunctionArgs,
   GetPostsArgs,

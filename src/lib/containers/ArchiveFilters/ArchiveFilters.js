@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react'
 import Filters from './Filters/Filters'
-import style from './ArchiveTemplate.scss'
+import style from './ArchiveFilters.scss'
 
 /**
  * This component acts as a state manager for archive pages
@@ -48,7 +48,7 @@ type State = {
   filters: FiltersType
 }
 
-class ArchiveTemplate extends React.Component<Props, State> {
+class ArchiveFilters extends React.Component<Props, State> {
   yearEnd: number
   yearOptions: {
     [number | string]: ?string
@@ -108,5 +108,5 @@ class ArchiveTemplate extends React.Component<Props, State> {
   }
 }
 
-export default ArchiveTemplate
+export default ArchiveFilters
 export type { FiltersType }
