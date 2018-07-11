@@ -38,7 +38,7 @@ class BlogArchiveItems extends React.Component<Props> {
 
   render () {
     return (
-      <LoadMore postsPerPage={2} getPosts={this.getPosts.bind(this)}>
+      <LoadMore postsPerPage={10} getPosts={this.getPosts.bind(this)}>
         {({
           posts,
           postsPerPage,
