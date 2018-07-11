@@ -3,7 +3,7 @@ import * as React from 'react'
 import type { BCorpPost, WPPost } from '../../../../types/post_types'
 import type { BCorpMetaboxes } from '../../../../types/customPage_types'
 import CPTApiClient from '../../../../../api/cpt_client'
-import LeftSidebarTemplate from '../LeftSidebarTemplate'
+import LeftSidebarTemplate from '../../LeftSidebarTemplate/LeftSidebarTemplate'
 import DropDownTab from '../../../DropDownTab/DropDownTab'
 import Loading from '../../../../components/Loading/Loading'
 
@@ -21,7 +21,7 @@ type Props = {
 type State = {
   faqs: Array<WPPost>,
   processing: boolean
-};
+}
 
 class FAQTemplate extends React.Component<Props, State> {
   constructor (props: Props) {

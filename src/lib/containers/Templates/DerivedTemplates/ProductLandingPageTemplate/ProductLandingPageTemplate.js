@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react'
 import type { BCorpPageTemplateData } from '../../../../types/customPage_types'
-import FullWidthTemplate from '../FullWidthTemplate'
+import FullWidthTemplate from '../../FullWidthTemplate/FullWidthTemplate'
 import ContentTransformer from '../../../../components/ContentTransformer/ContentTransformer'
 import style from './ProductLandingPageTemplate.scss'
 

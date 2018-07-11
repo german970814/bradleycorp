@@ -1,14 +1,14 @@
 // @flow
 import * as React from 'react'
-import type { BCorpPageTemplateData } from '../../../types/customPage_types'
-import type { ScreenSize } from '../../../contexts/ScreenSizeContext'
-import { withScreenSize } from '../../../contexts/ScreenSizeContext'
-import FullWidthTemplate from '../FullWidthTemplate/FullWidthTemplate'
-import LeftSidebarTemplate from '../LeftSidebarTemplate/LeftSidebarTemplate'
-import CTAModule from '../../Modules/CTAModule/CTAModule'
-import ImageFrame from '../../../components/FixedAspectRatioBox/ImageFrame/ImageFrame'
-import FixedAspectRatioBox from '../../../components/FixedAspectRatioBox/FixedAspectRatioBox'
-import ScrollableList from '../../ScrollableList/ScrollableList'
+import type { BCorpPageTemplateData } from '../../../../types/customPage_types'
+import type { ScreenSize } from '../../../../contexts/ScreenSizeContext'
+import { withScreenSize } from '../../../../contexts/ScreenSizeContext'
+import FullWidthTemplate from '../../FullWidthTemplate/FullWidthTemplate'
+import LeftSidebarTemplate from '../../LeftSidebarTemplate/LeftSidebarTemplate'
+import CTAModule from '../../../Modules/CTAModule/CTAModule'
+import ImageFrame from '../../../../components/FixedAspectRatioBox/ImageFrame/ImageFrame'
+import FixedAspectRatioBox from '../../../../components/FixedAspectRatioBox/FixedAspectRatioBox'
+import ScrollableList from '../../../ScrollableList/ScrollableList'
 import style from './CareersTemplate.scss'
 
 type Props = {
@@ -30,7 +30,8 @@ class CareersTemplate extends React.Component<Props> {
 
   componentDidMount () {
     const script = document.createElement('script')
-    script.src = 'https://thegoodjobs.com/widget/badges_js/e695217b43d6da8d479ab41cb3df9c5b?overlay=true&stack=false&fade=true'
+    script.src =
+      'https://thegoodjobs.com/widget/badges_js/e695217b43d6da8d479ab41cb3df9c5b?overlay=true&stack=false&fade=true'
     script.type = 'text/javascript'
     this.contentScript.current && this.contentScript.current.appendChild(script)
   }
@@ -122,7 +123,7 @@ class CareersTemplate extends React.Component<Props> {
       <React.Fragment>
         {this.props.renderModules()}
         <div id="tgj-badges-container" />
-        <div ref={this.contentScript}></div>
+        <div ref={this.contentScript} />
       </React.Fragment>
     )
   }

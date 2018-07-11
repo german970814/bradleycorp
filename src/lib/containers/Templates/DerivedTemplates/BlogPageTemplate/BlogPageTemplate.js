@@ -1,11 +1,11 @@
 // @flow
 import * as React from 'react'
-import type { Widget } from '../../../types/widget_types'
-import type { OptionsType } from '../../../contexts/OptionsContext'
-import { withOptions } from '../../../contexts/OptionsContext'
-import WidgetsClient from '../../../../api/widgets_client'
-import WidgetBuilder from '../../Widgets/WidgetBuilder'
-import RightSidebarTemplate from '../../Templates/RightSidebarTemplate/RightSidebarTemplate'
+import type { Widget } from '../../../../types/widget_types'
+import type { OptionsType } from '../../../../contexts/OptionsContext'
+import { withOptions } from '../../../../contexts/OptionsContext'
+import WidgetsClient from '../../../../../api/widgets_client'
+import WidgetBuilder from '../../../Widgets/WidgetBuilder'
+import RightSidebarTemplate from '../../RightSidebarTemplate/RightSidebarTemplate'
 
 type Props = {
   renderContent: () => React.Node,

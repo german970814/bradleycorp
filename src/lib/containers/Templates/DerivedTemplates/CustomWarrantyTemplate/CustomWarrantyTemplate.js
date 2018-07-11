@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react'
 import type { BCorpMetaboxes } from '../../../../types/customPage_types'
-import LeftSidebarTemplate from '../LeftSidebarTemplate'
+import LeftSidebarTemplate from '../../LeftSidebarTemplate/LeftSidebarTemplate'
 import CustomWarrantyForm from './CustomWarrantyForm/CustomWarrantyForm'
 import style from './CustomWarrantyTemplate.scss'
 
