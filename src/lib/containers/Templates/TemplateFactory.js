@@ -9,6 +9,7 @@ import NewsTemplate from './LeftSidebarTemplate/ArchiveTemplate/NewsTemplate/New
 import CareersTemplate from './CareersTemplate/CareersTemplate'
 import ProductLandingPageTemplate from './FullWidthTemplate/ProductLandingPageTemplate/ProductLandingPageTemplate'
 import CustomWarrantyTemplate from './LeftSidebarTemplate/CustomWarrantyTemplate/CustomWarrantyTemplate'
+import BlogArchiveTemplate from './LeftSidebarTemplate/ArchiveTemplate/BlogArchiveTemplate.js/BlogArchiveTemplate'
 import DefaultTemplate from './DefaultTemplate/DefaultTemplate'
 
 type Props = {
@@ -66,6 +67,9 @@ const TemplateFactory = (props: Props): React.Node => {
 
     case 'faq':
       return <FAQTemplate data={props.data} />
+
+    case 'blog-archive':
+      return <BlogArchiveTemplate data={props.data} />
 
     case 'news':
       return <NewsTemplate data={props.data} />
