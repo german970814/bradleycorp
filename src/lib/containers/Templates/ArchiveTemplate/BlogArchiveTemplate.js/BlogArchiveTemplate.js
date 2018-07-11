@@ -3,6 +3,7 @@ import * as React from 'react'
 import type { FiltersType } from '../ArchiveTemplate'
 import ArchiveTemplate from '../ArchiveTemplate'
 import BlogArchiveItems from './BlogArchiveItems/BlogArchiveItems'
+import CentredTemplate from '../../CentredTemplate/CentredTemplate'
 import style from './BlogArchiveTemplate.scss'
 
 /**
@@ -21,7 +22,7 @@ type Props = {
 }
 
 class BlogArchiveTemplate extends React.Component<Props> {
-  renderContent (filters: FiltersType) {
+  renderBlogArchiveItems (filters: FiltersType) {
     return (
       <div className={style.blogArchiveTemplateContent}>
         <BlogArchiveItems filters={filters} pageID={this.props.data.page_id} />
@@ -29,14 +30,23 @@ class BlogArchiveTemplate extends React.Component<Props> {
     )
   }
 
+  renderContent () {
+    return (
+      <ArchiveTemplate
+        data={this.props.data}
+        yearStart={2000}
+        renderContent={this.renderBlogArchiveItems.bind(this)}
+      />
+    )
+  }
+
   render () {
     console.log(this.state)
     return (
       <div className={style.BlogArchiveTemplate}>
-        <ArchiveTemplate
+        <CentredTemplate
           data={this.props.data}
-          yearStart={2000}
-          renderContent={this.renderContent.bind(this)}
+          renderModules={this.renderContent.bind(this)}
         />
       </div>
     )

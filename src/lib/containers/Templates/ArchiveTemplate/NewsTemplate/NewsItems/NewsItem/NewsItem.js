@@ -1,11 +1,11 @@
 // @flow
 import * as React from 'react'
-import type { BCorpPost } from '../../../../../../../types/post_types'
+import type { BCorpPost } from '../../../../../../types/post_types'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
-import { createCPTUrl } from '../../../../../../../bcorpUrl'
-import { getExcerpt } from '../../../../../../../bcorpPost'
-import ContentTransformer from '../../../../../../../components/ContentTransformer/ContentTransformer'
+import { createCPTUrl } from '../../../../../../bcorpUrl'
+import { getExcerpt } from '../../../../../../bcorpPost'
+import ContentTransformer from '../../../../../../components/ContentTransformer/ContentTransformer'
 import style from './NewsItem.scss'
 
 type Props = {

@@ -5,11 +5,11 @@ import type {
   ChildFunctionArgs,
   GetPostsArgs,
   GetPostsFunctionType
-} from '../../../../../LoadMore/LoadMore'
-import CPTApiClient from '../../../../../../../api/cpt_client'
-import LoadMore from '../../../../../LoadMore/LoadMore'
-import NoResults from '../../../../../../components/Error/NoResults/NoResults'
-import PostRemaining from '../../../../../Pages/BlogLandingPage/Posts/PostRemaining/PostRemaining'
+} from '../../../../LoadMore/LoadMore'
+import CPTApiClient from '../../../../../../api/cpt_client'
+import LoadMore from '../../../../LoadMore/LoadMore'
+import NoResults from '../../../../../components/Error/NoResults/NoResults'
+import PostRemaining from '../../../../Pages/BlogLandingPage/Posts/PostRemaining/PostRemaining'
 import style from './BlogArchiveItems.scss'
 
 type Props = {

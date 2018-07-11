@@ -5,10 +5,10 @@ import type {
   ChildFunctionArgs,
   GetPostsArgs,
   GetPostsFunctionType
-} from '../../../../../LoadMore/LoadMore'
-import CPTApiClient from '../../../../../../../api/cpt_client'
-import LoadMore from '../../../../../LoadMore/LoadMore'
-import NoResults from '../../../../../../components/Error/NoResults/NoResults'
+} from '../../../../LoadMore/LoadMore'
+import CPTApiClient from '../../../../../../api/cpt_client'
+import LoadMore from '../../../../LoadMore/LoadMore'
+import NoResults from '../../../../../components/Error/NoResults/NoResults'
 import NewsItem from './NewsItem/NewsItem'
 import style from './NewsItems.scss'
 

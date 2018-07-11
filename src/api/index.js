@@ -42,7 +42,7 @@ type API = {
   query: ({ args?: {} }) => {}
 }
 
-const dev: boolean = true
+const dev: boolean = false
 
 let site: SiteType = 'bcorp'
 

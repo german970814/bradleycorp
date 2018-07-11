@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react'
-import LeftSidebarTemplate from '../LeftSidebarTemplate'
 import Filters from './Filters/Filters'
 import style from './ArchiveTemplate.scss'
 
@@ -74,7 +73,8 @@ class ArchiveTemplate extends React.Component<Props, State> {
     this.setState({ ...this.state, filters })
   }
 
-  renderContent () {
+  render () {
+    console.log(this.state)
     return (
       <div className={style.archiveTemplateContent}>
         <Filters
@@ -85,18 +85,6 @@ class ArchiveTemplate extends React.Component<Props, State> {
           yearOptions={this.yearOptions}
         />
         {this.props.renderContent(this.state.filters)}
-      </div>
-    )
-  }
-
-  render () {
-    console.log(this.state)
-    return (
-      <div className={style.ArchiveTemplate}>
-        <LeftSidebarTemplate
-          data={this.props.data}
-          renderModules={this.renderContent.bind(this)}
-        />
       </div>
     )
   }

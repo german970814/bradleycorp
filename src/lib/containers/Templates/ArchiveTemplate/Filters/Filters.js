@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react'
 import type { FiltersType } from '../ArchiveTemplate'
-import BCorpSearchField from '../../../../../components/BCorpFilterField/BCorpSearchField'
-import BCorpSelectField from '../../../../../components/BCorpFilterField/BCorpSelectField'
+import BCorpSearchField from '../../../../components/BCorpFilterField/BCorpSearchField'
+import BCorpSelectField from '../../../../components/BCorpFilterField/BCorpSelectField'
 import style from './Filters.scss'
 
 type Props = {
