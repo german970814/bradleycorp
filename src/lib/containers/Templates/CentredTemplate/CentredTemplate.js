@@ -4,6 +4,12 @@ import { renderTitle } from '../DefaultTemplate/DefaultTemplate'
 import style from './CentredTemplate.scss'
 import defaultStyle from '../Templates.scss'
 
+/**
+ * Defines a layout with a content area
+ * which is centred horizontally within the page,
+ * and does not fill the width
+ */
+
 type Props = {
   /**
    * The page template data

@@ -11,6 +11,15 @@ import FixedAspectRatioBox from '../../../../components/FixedAspectRatioBox/Fixe
 import ScrollableList from '../../../ScrollableList/ScrollableList'
 import style from './CareersTemplate.scss'
 
+/**
+ * We compose the FullWidthTemplate and LeftSidebarTemplate
+ * with a custom image slider in between the two
+ * to create the layout for the Careers page.
+ *
+ * We also append the goodjobs icons, rendered via an external script,
+ * to the bottom of the content section.
+ */
+
 type Props = {
   data: BCorpPageTemplateData,
   renderModules: () => React.Node,
@@ -28,6 +37,10 @@ class CareersTemplate extends React.Component<Props> {
     this.contentScript = React.createRef()
   }
 
+  /**
+   * We have to add the script after the component has mounted
+   * for it to actually run.
+   */
   componentDidMount () {
     const script = document.createElement('script')
     script.src =

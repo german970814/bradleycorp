@@ -7,6 +7,22 @@ import WidgetsClient from '../../../../../api/widgets_client'
 import WidgetBuilder from '../../../Widgets/WidgetBuilder'
 import RightSidebarTemplate from '../../RightSidebarTemplate/RightSidebarTemplate'
 
+/**
+ * All blog pages use the same right sidebar template with the same sidebar.
+ *
+ * To wrap this logic and avoid having to ever rerender the sidebar
+ * on each change of route,
+ * we define this template which composes the RightSidebarTemplate
+ * and gets the sidebar only on componentDidMount.
+ *
+ * If all blog pages compose this template, then only the content section
+ * will ever have to update.
+ *
+ * Note the title of the blog always remains the same at the top,
+ * regardless of the page,
+ * and this is set in the CMS.
+ */
+
 type Props = {
   renderContent: () => React.Node,
   // from withOptions

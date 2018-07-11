@@ -5,6 +5,11 @@ import FullWidthTemplate from '../../FullWidthTemplate/FullWidthTemplate'
 import ContentTransformer from '../../../../components/ContentTransformer/ContentTransformer'
 import style from './ProductLandingPageTemplate.scss'
 
+/**
+ * From various meta boxes filled in in the CMS, and custom content,
+ * we create a Product Landing Page composing the FullWidthTemplate
+ */
+
 type Props = {
   data: BCorpPageTemplateData,
   renderModules: () => React.Node,

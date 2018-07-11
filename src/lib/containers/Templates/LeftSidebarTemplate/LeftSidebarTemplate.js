@@ -13,6 +13,21 @@ import MenuBlock from '../../Modules/MenuModule/MenuBlock/MenuBlock'
 import style from './LeftSidebarTemplate.scss'
 import defaultStyle from '../Templates.scss'
 
+/**
+ * Defines a layout which includes a Left Sidebar.
+ *
+ * As per the designs,
+ * the Left Sidebar will always render a page tree for navigation
+ * showing the entire heirarchy of parents and children
+ * in which the current page lies.
+ *
+ * The tree is organised into blocks
+ * with parents as the title and children as the links below.
+ *
+ * If any child at any level in the tree has its own children,
+ * then it breaks out and creates a new block.
+ */
+
 type Props = {
   /**
    * The page template data

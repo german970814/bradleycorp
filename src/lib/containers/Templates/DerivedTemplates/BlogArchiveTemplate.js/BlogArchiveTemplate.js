@@ -8,7 +8,8 @@ import style from './BlogArchiveTemplate.scss'
 
 /**
  * Using the ArchiveFilters as the filter state manager,
- * we combine the filters with the list of blog post items here.
+ * we combine the filters with the list of blog post items
+ * and render them within a Centred Template.
  */
 
 type Props = {

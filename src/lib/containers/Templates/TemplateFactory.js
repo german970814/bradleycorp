@@ -12,6 +12,14 @@ import CustomWarrantyTemplate from './DerivedTemplates/CustomWarrantyTemplate/Cu
 import BlogArchiveTemplate from './DerivedTemplates/BlogArchiveTemplate.js/BlogArchiveTemplate'
 import DefaultTemplate from './DefaultTemplate/DefaultTemplate'
 
+/**
+ * Given page data,
+ * we pass it through to the correct template component
+ * along with render functions for the modules and widgets,
+ * if required by the template,
+ * to be inserted into the correct position by the template component
+ */
+
 type Props = {
   /*
     The slug of the template to render, eg full-width-page
@@ -35,14 +43,6 @@ type Props = {
   pagePath: string
 }
 
-/**
- * Given page template data, we pass it through to the correct template component
- * along with render functions for the modules and widgets, if required by the template,
- * to be inserted into the correct position by the template component
- *
- * @param {[object]} props
- * @return {[component]}
- */
 const TemplateFactory = (props: Props): React.Node => {
   const template = props.data.template
 

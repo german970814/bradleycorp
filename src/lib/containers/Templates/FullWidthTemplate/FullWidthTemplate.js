@@ -3,11 +3,17 @@ import * as React from 'react'
 import type { BCorpPageTemplateData } from '../../../types/customPage_types'
 import PageHero from '../../PageHero/PageHero'
 
+/**
+ * Defines a layout which always fills the width of the page
+ * and implements a page hero at the top
+ * with the content area sitting underneath
+ */
+
 type Props = {
   data: BCorpPageTemplateData,
   renderModules: () => React.Node,
   pagePath: string
-};
+}
 
 class FullWidthTemplate extends React.Component<Props> {
   renderHero () {

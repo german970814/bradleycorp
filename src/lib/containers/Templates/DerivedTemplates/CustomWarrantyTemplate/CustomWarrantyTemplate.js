@@ -5,6 +5,13 @@ import LeftSidebarTemplate from '../../LeftSidebarTemplate/LeftSidebarTemplate'
 import CustomWarrantyForm from './CustomWarrantyForm/CustomWarrantyForm'
 import style from './CustomWarrantyTemplate.scss'
 
+/**
+ * Renders the CustomWarrantyForm within a LeftSidebarTemplate.
+ *
+ * Custom content is allowed from the CMS but is passed through to form
+ * to be rendered there.
+ */
+
 type Props = {
   /**
    * The page template data

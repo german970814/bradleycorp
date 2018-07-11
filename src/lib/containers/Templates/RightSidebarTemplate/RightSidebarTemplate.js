@@ -7,6 +7,15 @@ import { renderTitle } from '../DefaultTemplate/DefaultTemplate'
 import style from './RightSidebarTemplate.scss'
 import defaultStyle, { titlemarginbottom } from '../Templates.scss'
 
+/**
+ * Defines a layout with a main content area and a right sidebar
+ * which both accept custom content.
+ *
+ * The real complexity here is fixing the sidebar ot the screen
+ * when we scroll on desktop,
+ * but also keeping it between the header and footer.
+ */
+
 type Props = {
   /**
    * The page template data

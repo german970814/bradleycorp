@@ -7,6 +7,15 @@ import LeftSidebarTemplate from '../../LeftSidebarTemplate/LeftSidebarTemplate'
 import DropDownTab from '../../../DropDownTab/DropDownTab'
 import Loading from '../../../../components/Loading/Loading'
 
+/**
+ * Gets and displays the FAQ posts from a given category
+ * in a LeftSidebarTemplate.
+ *
+ * Although it has no custom content sections,
+ * the template is customizable through the title
+ * and through passing a different FAW category.
+ */
+
 type Props = {
   /**
    * The page template data

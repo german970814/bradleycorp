@@ -12,6 +12,10 @@ import NoResults from '../../../../../components/Error/NoResults/NoResults'
 import PostRemaining from '../../../../Pages/BlogLandingPage/Posts/PostRemaining/PostRemaining'
 import style from './BlogArchiveItems.scss'
 
+/**
+ * Renders the items for the blog archive with pagination functionality.
+ */
+
 type Props = {
   filters: FiltersType,
   pageID: number

@@ -2,6 +2,13 @@
 import * as React from 'react'
 import defaultStyle from '../Templates.scss'
 
+/**
+ * Defines the most basic layout design
+ * which will be the base for almost every page.
+ *
+ * Here we are just defining the page padding and the title style.
+ */
+
 type Props = {
   data: {
     page_title: string
