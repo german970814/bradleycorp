@@ -1,0 +1,14 @@
+@import '../../../../../../scss/partials/mixins';
+
+.buttonWrapper {
+  width: 100%;
+  text-align: center;
+
+  button {
+    @include respond-to(tablet) {
+      width: auto;
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+  }
+}

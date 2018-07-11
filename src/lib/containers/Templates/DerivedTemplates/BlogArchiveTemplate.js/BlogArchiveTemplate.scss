@@ -1,0 +1,9 @@
+@import '../../../../../scss/partials/mixins';
+
+.blogArchiveFiltersContent {
+  margin-top: 30px;
+
+  @include respond-to(desktop) {
+    margin-top: 40px;
+  }
+}
