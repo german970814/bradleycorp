@@ -159,11 +159,16 @@ class Customizable extends Component<Props, State> {
 
     // currently defaults to page title
     const pageTitle =
-      this.state.page_template_data.meta_title ||
+      (this.state.page_template_data.metaboxes &&
+        this.state.page_template_data.metaboxes.page_meta &&
+        this.state.page_template_data.metaboxes.page_meta.title) ||
       this.state.page_template_data.page_title ||
       ''
-    // defaults to empty
-    const pageDescription = this.state.page_template_data.meta_description || ''
+    const pageDescription =
+      (this.state.page_template_data.metaboxes &&
+        this.state.page_template_data.metaboxes.page_meta &&
+        this.state.page_template_data.metaboxes.page_meta.description) ||
+      ''
 
     return (
       <div className={style.customizable}>
