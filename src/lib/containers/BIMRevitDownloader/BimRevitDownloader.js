@@ -150,7 +150,7 @@ class BimRevitDownloader extends React.Component<Props, State> {
     return this.state.loading ? (
       <Loading />
     ) : this.state.productVariants.length === 0 ? (
-      <NoResults message={'No related BIM files found.'} />
+      <NoResults message={'No related BIM files found.'} hideCTA />
     ) : (
       <div className={`row ${style.BimRevit}`}>
         <div>{this.renderBimRevitOptions()}</div>

@@ -9,7 +9,8 @@ import Error from '../Error'
 
 type Props = {
   message: string,
-  className?: string
+  className?: string,
+  hideCTA?: boolean
 }
 
 class NoResults extends React.PureComponent<Props> {
@@ -18,7 +19,7 @@ class NoResults extends React.PureComponent<Props> {
       <Error
         message={this.props.message}
         className={this.props.className}
-        cta={'Please Try Again'}
+        cta={!this.props.hideCTA ? 'Please Try Again' : undefined}
       />
     )
   }
