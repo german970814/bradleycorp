@@ -7,7 +7,7 @@ import style from './FooterPanel.scss'
  * A component we can use to control a footer panel
  * fixed to the bottom of the window.
  *
- * We can use this to portal in some nodes, show, and hide the panel.
+ * We can use this to portal in some nodes, and show and hide the panel.
  */
 
 type Props = {

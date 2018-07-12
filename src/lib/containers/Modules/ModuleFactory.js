@@ -13,11 +13,10 @@ import SliderModule from './SliderModule/SliderModule'
 import TextWithBackgroundPeelerModule from './TextWithBackgroundPeelerModule/TextWithBackgroundPeelerModule'
 
 /**
- * Given data about a module, we return the correct component with the necessary props
- *
- * @param {[object]} props
- * @return {[component]}
+ * Given data and a rowNode for a module,
+ * we return the correct component padding through the necessary props
  */
+
 const ModuleFactory = ({ data, rowNode, screenSize }) => {
   if (!data.name) {
     return null

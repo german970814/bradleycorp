@@ -24,6 +24,7 @@ import ModuleFactory from './ModuleFactory'
  *
  * We use the state htmlIsSet to keep track of the span nodes' existence.
  */
+
 class ModuleBuilder extends Component {
   constructor (props) {
     super(props)

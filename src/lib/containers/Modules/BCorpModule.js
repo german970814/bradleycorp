@@ -30,6 +30,7 @@ import moduleStyle from './Modules.scss'
  * Cycle 3+: Cycles again updating row height until the component is no longer updating
  *
  */
+
 class BCorpModule extends Component {
   constructor (props, localStyle, moduleName) {
     super(props)
