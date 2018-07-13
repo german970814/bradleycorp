@@ -39,13 +39,6 @@ class PostColumn extends Component<Props> {
     this.props.getHeight && this.props.getHeight(this.postColumn)
   }
 
-  componentWillReceiveProps (nextProps: Props) {
-    if (nextProps.post) {
-      const link = createCPTUrl(nextProps.post.post)
-      this.postLink = link || '#'
-    }
-  }
-
   renderImage () {
     const { post } = this.props
 
@@ -144,6 +137,8 @@ class PostColumn extends Component<Props> {
   }
 
   render () {
+    this.postLink = createCPTUrl(this.props.post.post) || '#'
+
     const styleContainer = {}
     if (this.props.height) {
       styleContainer.height = `${this.props.height}px`

@@ -30,13 +30,6 @@ class PostColumn extends Component<Props> {
     this.postLink = createCPTUrl(props.post.post) || '#'
   }
 
-  componentWillReceiveProps (nextProps: Props) {
-    if (nextProps.post) {
-      const link = createCPTUrl(nextProps.post.post)
-      this.postLink = link || '#'
-    }
-  }
-
   renderImage () {
     const { post } = this.props
 
@@ -119,6 +112,8 @@ class PostColumn extends Component<Props> {
   }
 
   render () {
+    this.postLink = createCPTUrl(this.props.post.post) || '#'
+
     const columnSizeClass = style[`post-column-${this.props.numColumns}`]
     return (
       <div

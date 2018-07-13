@@ -12,12 +12,6 @@ class PostGridItem extends Component {
     this.postLink = createCPTUrl(props.post.post) || '#'
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.post) {
-      this.postLink = createCPTUrl(nextProps.post.post) || '#'
-    }
-  }
-
   renderImage () {
     const { post } = this.props
 
@@ -69,6 +63,8 @@ class PostGridItem extends Component {
   }
 
   render () {
+    this.postLink = createCPTUrl(this.props.post.post) || '#'
+
     return (
       <div className={`${style.postGridItem} ${this.props.containerClassName}`}>
         <Link to={`${this.postLink}`}>

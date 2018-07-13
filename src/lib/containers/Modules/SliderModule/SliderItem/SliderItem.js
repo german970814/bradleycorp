@@ -16,12 +16,6 @@ class SliderItem extends Component {
     this.postLink = '#'
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.post) {
-      this.postLink = createCPTUrl(nextProps.post.post)
-    }
-  }
-
   renderImage () {
     const { post } = this.props
 
@@ -116,6 +110,8 @@ class SliderItem extends Component {
   }
 
   render () {
+    this.postLink = createCPTUrl(this.props.post.post) || '#'
+
     return (
       <div className={`row ${style.sliderItem}`}>
         <VerticalAlignHelper />

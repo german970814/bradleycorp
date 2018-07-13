@@ -26,14 +26,6 @@ class SinglePostFeaturedModule extends PostGettingModule {
     this.postLink = '#'
   }
 
-  componentDidUpdate (prevProps, prevState) {
-    if (
-      this.state.posts[0]['post_title'] !== prevState.posts[0]['post_title']
-    ) {
-      this.postLink = createCPTUrl(this.state.posts[0]) || '#'
-    }
-  }
-
   renderHeadline () {
     if (!this.props.headline) {
       return
@@ -113,6 +105,8 @@ class SinglePostFeaturedModule extends PostGettingModule {
   }
 
   renderModule () {
+    this.postLink = createCPTUrl(this.state.posts[0].post) || '#'
+
     return (
       <React.Fragment>
         {this.renderImage()}
