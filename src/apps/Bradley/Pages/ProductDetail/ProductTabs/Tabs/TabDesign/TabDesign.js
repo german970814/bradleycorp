@@ -108,11 +108,40 @@ class TabDesign extends Component {
     }
   }
 
+  filterParentsWithChildren (terms) {
+    let parentTermIds = []
+
+    // we first get all the parent ids for all the terms we have
+    terms.forEach(term => {
+      if (term.parent !== 0) {
+        parentTermIds = [...parentTermIds, term.parent]
+      }
+    })
+
+    // now we loop through terms again
+    // and this time if their ID matches a parent id
+    // from another term in the array
+    // then we can remove it
+    return terms.filter(term => {
+      return !parentTermIds.includes(term.term_id)
+    })
+  }
+
   getColorsByMaterialType () {
     const colorsByMaterialType = {}
 
     this.props.colors.forEach(color => {
-      color.terms['material_type'].forEach(materialType => {
+      // if a color belongs to multiple material types within the same
+      // parent/child tree
+      // then we only want to show it once,
+      // in the subcategory furthest down the tree
+      //
+      // here we remove the unwanted material types for each colour
+      const materialTypesFiltered = this.filterParentsWithChildren(
+        color.terms['material_type'] || []
+      )
+
+      materialTypesFiltered.forEach(materialType => {
         const termName = materialType.name
 
         if (Object.keys(colorsByMaterialType).includes(termName)) {
@@ -126,6 +155,8 @@ class TabDesign extends Component {
         colorsByMaterialType[termName] = [color]
       })
     })
+
+    console.log(colorsByMaterialType)
 
     return colorsByMaterialType
   }
