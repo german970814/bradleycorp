@@ -14,6 +14,35 @@ import WidgetBuilder from '../../Widgets/WidgetBuilder'
 import BCorpHead from '../../../components/BCorpHead/BCorpHead'
 import style from './Customizable.scss'
 
+/**
+ * The Customizable component is designed to render the 'Pages' post type
+ * from the CMS.
+ *
+ * If the route makes it to the end of the router without a match,
+ * the whole route will be sent to the page/custom-page endpoint
+ * as the 'path' parameter.
+ *
+ * If a page exists with that path, then we will get the data,
+ * otherwise we get a 404.
+ *
+ * Given that data, there are 4 stages to rendering a customizable page
+ * which potentially could include
+ * modules, widgets and a page template which needs input from various metaboxes.
+ *
+ * 1. Make network request for the page data (This file)
+ * 2. Render the page template with page meta (via the TemplateFactory)
+ * 2. Build module grid structure to be in line with the backend UI
+ *    (via the ModuleBuilder)
+ * 3. Build widgets
+ *    (via the WidgetBuilder)
+ *
+ * This component deals with making the page network request
+ * and combining the various resulting elements.
+ *
+ * This is also level at which we apply the global styling for the module grid
+ *
+ */
+
 type Props = {
   match: Match
 }
@@ -23,19 +52,6 @@ type State = BCorpCustomPage & {
   ready: boolean
 }
 
-/**
- *
- * There are 4 stages to rendering a customizable page with modules and widgets
- *
- * 1. Make network request for the page data (This file)
- * 2. Render the page template with page meta
- * 2. Build module grid structure to be in line with the backend UI (ModuleBuilder.js)
- * 3. Build widgets
- *
- * This component deals with making the page network request
- * This is also level at which we apply the global styling for the module grid
- *
- */
 class Customizable extends Component<Props, State> {
   defaultState: State
 
@@ -73,7 +89,9 @@ class Customizable extends Component<Props, State> {
   }
 
   /**
-   * If we go between urls that both render a customizable page, we need to make sure we're making a new network request
+   * If we go between urls that both render a customizable page,
+   * we need to make sure we're making a new network request
+   * and running the builds again
    *
    * @param  {object} nextProps
    * @return {void}
@@ -186,7 +204,7 @@ class Customizable extends Component<Props, State> {
   }
 
   /**
-   * We use the page slug in the url to request the correct page data
+   * We use the page path in the current route to request the page
    *
    * @param  {string}  match React-Router match object
    */

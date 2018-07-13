@@ -12,6 +12,10 @@ import Post from './Post/Post'
 import BCorpHead from '../../../components/BCorpHead/BCorpHead'
 import style from './BlogSinglePostPage.scss'
 
+/**
+ * Component for fetching data for and displaying a single blog post page.
+ */
+
 type Props = {
   match: Match
 }

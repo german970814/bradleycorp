@@ -7,6 +7,11 @@ import PostMetaData from '../../../../components/PostMetaData/PostMetaData'
 import PostTags from '../../../../components/PostTags/PostTags'
 import style from './Post.scss'
 
+/**
+ * Defines layout and styling of the post part
+ * of a single blog post page
+ */
+
 type Props = { post: BCorpPost }
 
 class Post extends React.Component<Props> {

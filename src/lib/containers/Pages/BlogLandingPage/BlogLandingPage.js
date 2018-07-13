@@ -7,6 +7,14 @@ import BlogPageTemplate from '../../Templates/DerivedTemplates/BlogPageTemplate/
 import BCorpHead from '../../../components/BCorpHead/BCorpHead'
 import Posts from './Posts/Posts'
 
+/**
+ * Defines the index route for our blogs.
+ *
+ * We create a list of the latest posts
+ * with differing styles depend on how recent the post is
+ * and render them into a BlogPageTemplate
+ */
+
 type Props = {
   match: Match
 }

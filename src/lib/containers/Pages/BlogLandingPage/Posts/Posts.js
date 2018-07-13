@@ -9,6 +9,11 @@ import PostSecondary from './PostSecondary/PostSecondary'
 import PostRemaining from './PostRemaining/PostRemaining'
 import style from './Posts.scss'
 
+/**
+ * A component to map the blog posts into their respective display styles
+ * depending on how recent they are
+ */
+
 type Props = {
   data: Array<BCorpPost>,
   // from withScreenSize HOC
