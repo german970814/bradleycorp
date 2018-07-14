@@ -79,7 +79,7 @@ class TabDesign extends Component {
     return this.props.literature.map((literature, index) => {
       const imageSrc =
         literature.media['featured_image'] &&
-        literature.media['featured_image'].length
+        literature.media['featured_image'].length > 0
           ? literature.media['featured_image'][0]
           : undefined
       return (
@@ -180,6 +180,7 @@ class TabDesign extends Component {
 
   renderColors () {
     const colorsByMaterialType = this.getColorsByMaterialType()
+    console.log(colorsByMaterialType)
     return Object.keys(colorsByMaterialType).map((materialType, index) => {
       return (
         <div
@@ -201,9 +202,9 @@ class TabDesign extends Component {
   render () {
     return (
       <div className={style.tabDesign}>
-        {this.props.literature.length ||
-        this.props.videos.length ||
-        this.props.links.length ? (
+        {this.props.literature.length > 0 ||
+        this.props.videos.length > 0 ||
+        this.props.links.length > 0 ? (
             <div className={`row ${tabStyle.row}`}>
               {this.renderLinks()}
               {this.renderVideos()}
@@ -211,7 +212,7 @@ class TabDesign extends Component {
             </div>
           ) : null}
 
-        {this.props.colors.length && (
+        {this.props.colors.length > 0 && (
           <div className={`row ${tabStyle.row}`}>{this.renderColors()}</div>
         )}
       </div>
