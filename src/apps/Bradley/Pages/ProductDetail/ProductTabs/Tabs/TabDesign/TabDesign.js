@@ -79,7 +79,7 @@ class TabDesign extends Component {
     return this.props.literature.map((literature, index) => {
       const imageSrc =
         literature.media['featured_image'] &&
-        literature.media['featured_image'].length
+        literature.media['featured_image'].length > 0
           ? literature.media['featured_image'][0]
           : undefined
       return (
@@ -108,11 +108,40 @@ class TabDesign extends Component {
     }
   }
 
+  filterParentsWithChildren (terms) {
+    let parentTermIds = []
+
+    // we first get all the parent ids for all the terms we have
+    terms.forEach(term => {
+      if (term.parent !== 0) {
+        parentTermIds = [...parentTermIds, term.parent]
+      }
+    })
+
+    // now we loop through terms again
+    // and this time if their ID matches a parent id
+    // from another term in the array
+    // then we can remove it
+    return terms.filter(term => {
+      return !parentTermIds.includes(term.term_id)
+    })
+  }
+
   getColorsByMaterialType () {
     const colorsByMaterialType = {}
 
     this.props.colors.forEach(color => {
-      color.terms['material_type'].forEach(materialType => {
+      // if a color belongs to multiple material types within the same
+      // parent/child tree
+      // then we only want to show it once,
+      // in the subcategory furthest down the tree
+      //
+      // here we remove the unwanted material types for each colour
+      const materialTypesFiltered = this.filterParentsWithChildren(
+        color.terms['material_type'] || []
+      )
+
+      materialTypesFiltered.forEach(materialType => {
         const termName = materialType.name
 
         if (Object.keys(colorsByMaterialType).includes(termName)) {
@@ -126,6 +155,8 @@ class TabDesign extends Component {
         colorsByMaterialType[termName] = [color]
       })
     })
+
+    console.log(colorsByMaterialType)
 
     return colorsByMaterialType
   }
@@ -149,6 +180,7 @@ class TabDesign extends Component {
 
   renderColors () {
     const colorsByMaterialType = this.getColorsByMaterialType()
+    console.log(colorsByMaterialType)
     return Object.keys(colorsByMaterialType).map((materialType, index) => {
       return (
         <div
@@ -170,9 +202,9 @@ class TabDesign extends Component {
   render () {
     return (
       <div className={style.tabDesign}>
-        {this.props.literature.length ||
-        this.props.videos.length ||
-        this.props.links.length ? (
+        {this.props.literature.length > 0 ||
+        this.props.videos.length > 0 ||
+        this.props.links.length > 0 ? (
             <div className={`row ${tabStyle.row}`}>
               {this.renderLinks()}
               {this.renderVideos()}
@@ -180,7 +212,7 @@ class TabDesign extends Component {
             </div>
           ) : null}
 
-        {this.props.colors.length && (
+        {this.props.colors.length > 0 && (
           <div className={`row ${tabStyle.row}`}>{this.renderColors()}</div>
         )}
       </div>

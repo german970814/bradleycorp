@@ -10,9 +10,8 @@ import { arraysAreEqual } from '../../bcorpArray'
  * As long as a child class has postIDs and postType props
  * the request for those posts will be made when postIDs update
  * and any found posts will be saved to state
- *
- * @extends Component
  */
+
 class PostGettingModule extends BCorpModule {
   constructor (props, localStyle, moduleName, maxPosts) {
     super(props, localStyle, moduleName)

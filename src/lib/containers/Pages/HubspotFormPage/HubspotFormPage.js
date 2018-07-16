@@ -4,6 +4,10 @@ import DefaultTemplate from '../../Templates/DefaultTemplate/DefaultTemplate'
 import HubspotForms from '../../HubspotForms/HubspotForms'
 import BCorpHead from '../../../components/BCorpHead/BCorpHead'
 
+/**
+ * Renders a Hubspot form into the default template
+ */
+
 type Props = {
   pageTitle: string,
   form: string

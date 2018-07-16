@@ -46,6 +46,10 @@ type BCorpProductLandingPageTemplateData = {
 }
 
 type BCorpMetaboxes = {
+  page_meta?: {
+    title: string,
+    description: string
+  },
   page_hero?: BCorpPageHeroData,
   sidebar_select?: string,
   careers_template?: BCorpCareersTemplateData,

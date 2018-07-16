@@ -26,7 +26,10 @@
       }
 
       :global(.position-circles) {
+        display: inline-block;
+        float: right;
         margin-top: -20px;
+        width: auto;
         text-align: right;
       }
 
@@ -133,6 +136,8 @@
 
     :global(.position-circles-vertical) {
       right: 30px;
+      // makes sure they stack vertically
+      width: 0px !important;
       @extend %verticalAlignMiddleAbsolutelyPositionedElement;
     }
   }

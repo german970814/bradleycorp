@@ -62,7 +62,7 @@ class TabCompliance extends Component {
       }
       return (
         <li key={index} className={style.complianceIcon}>
-          {icon.meta && icon.meta.compliance_link.length ? (
+          {icon.meta && icon.meta.compliance_link.length > 0 ? (
             <a
               href={icon.meta.compliance_link}
               className={style.complianceLink}

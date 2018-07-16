@@ -12,3 +12,12 @@
   width: 100%;
   text-align: left;
 }
+
+.title {
+  word-wrap: break-word;
+  // unofficially supported by most browsers
+  word-break: break-word;
+  // add a tiny bit extra margin to let a few more words pass
+  // without breaking
+  margin-right: -10px;
+}

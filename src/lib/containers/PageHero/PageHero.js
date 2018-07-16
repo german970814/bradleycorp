@@ -6,10 +6,25 @@ import VideoBackground from '../../components/BCorpVideo/VideoBackground/VideoBa
 import BCorpBackground from '../../components/BCorpBackground/BCorpBackground'
 import style from './PageHero.scss'
 
+/**
+ * Renders a full width 'Hero' element
+ * consisting of tagline (medium), title (large), and copy (small) text,
+ * and a silent loooping video background.
+ *
+ * The tagline title and copy fade in after a set amount of time
+ */
+
 type Props = {
   tagline?: string,
   title?: string,
   copy?: string,
+  /**
+   * Uses combination of VideoBackground and BCorpBackground logic
+   * for displaying the video image and overlay.
+   *
+   * If valid videoURL is given we use VideoBackground,
+   * otherwise BCorpBackground
+   */
   videoUrl?: string,
   imgSrc?: string,
   overlay?: BCorpColor
@@ -43,6 +58,10 @@ class PageHero extends React.Component<Props, State> {
     this.fadeTextIn()
   }
 
+  /**
+   * Make sure if we switch to a new page which also has a PageHero,
+   * then we reset the timers for the text so they can fade in again.
+   */
   componentWillReceiveProps (nextProps: Props) {
     if (
       nextProps.title !== this.props.title ||
